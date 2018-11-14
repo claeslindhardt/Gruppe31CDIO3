@@ -1,0 +1,7 @@
+Her ligger alle de ting som formelt set er spillet, altså alle aktioner og data, vi har
+tilstrebet at dele alle klasserne i denne pakke op så de enten er data klasser, der kun holder data
+og dermed har ikke statiske gettere og settere. Og så controller klasser som kun behandler data men
+ikke holder noget. Alt sammen inden for rimlighedens grænser
+Denne pakke er maskinrummet der oversætter alt det controlleren ber den om til aktion.
+Den indeholder protokolder for hvordan man gør tingene ikke regler om hvornår hvad må ske,
+det er spillets regler og ligger i SpilLogik.
