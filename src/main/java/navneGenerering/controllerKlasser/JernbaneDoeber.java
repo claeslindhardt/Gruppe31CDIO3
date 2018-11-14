@@ -3,12 +3,7 @@ package navneGenerering.controllerKlasser;
 import navneGenerering.DataKlasser.NavneGenerator;
 
 public class JernbaneDoeber extends NavneGenerator {
-    int vejnavn;
-
-    {
-        vejnavn = getRand().nextInt(getVejNavn().length);
-    }
-
+    int vejnavn = getRand().nextInt(getVejNavn().length);
     public JernbaneDoeber(){
         setGeneretNavn(getVejNavn()[vejnavn].concat(" Station"));
         for(int i = 0; i<getAlleNavne().size(); i++){
