@@ -1,4 +1,4 @@
-package navneGenerering.DataKlasser;
+package ModelEnteties.navneGenerering.DataKlasser;
 
 import java.util.ArrayList;
 import java.util.Random;

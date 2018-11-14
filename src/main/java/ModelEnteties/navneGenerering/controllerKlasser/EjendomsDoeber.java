@@ -1,6 +1,6 @@
-package navneGenerering.controllerKlasser;
+package ModelEnteties.navneGenerering.controllerKlasser;
 
-import navneGenerering.DataKlasser.NavneGenerator;
+import ModelEnteties.navneGenerering.DataKlasser.NavneGenerator;
 
 public class EjendomsDoeber extends NavneGenerator {
     public EjendomsDoeber(){
