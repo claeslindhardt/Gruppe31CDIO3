@@ -1,6 +1,7 @@
 package BaundaryView.TUI;
 
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.controllerKlasser.Faengsel;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class TUI {
         System.out.println("I er: " + getAntalSpillere + " spillere.");
         System.out.println("Brettet har "+getAntalFelter+" Felter,");
         System.out.println("med "+getAntalTerninger+" terninger på brettet");
-        System.out.println("og Spiller "+getSpillerTur + " Starter!");
+        System.out.println("og SpillerData "+getSpillerTur + " Starter!");
         System.out.println("Man går banke rådt og taber dermed hvis man har mindre end: "+getBankeraadGraense+" Penge");
     }
     public void startSpilGrundFejl(){
@@ -60,7 +61,7 @@ public class TUI {
         System.out.println("NB!: Hvis ikke brettet har 3 braet, spilles der ikke monololy lengere");
     }
     public void instilingsSporgsmaall(){
-        System.out.print("Indtast antal ønskede Spiller som int: ");
+        System.out.print("Indtast antal ønskede SpillerData som int: ");
     }
     public void instilingsSporgsmaal2(){
         System.out.println("Hvor mange terninger vil i spille med?: ");
@@ -80,7 +81,7 @@ public class TUI {
         );
     }
     public void spillerUdgår(int udgaaetSpiller){
-        System.out.println("Spiller "+udgaaetSpiller+" er nu udgået");
+        System.out.println("SpillerData "+udgaaetSpiller+" er nu udgået");
     }
     public void terminalLinje(){
         System.out.println("_________________________________________________________________");
@@ -94,7 +95,7 @@ public class TUI {
     }
 
     public void anketStraffeDom(int spillerTur){
-        System.out.println("Tillykke, Spiller "+spillerTur +" din straffedom er blevet anket og du får nu et forsøg til at komme ud af fængsel" +
+        System.out.println("Tillykke, SpillerData "+spillerTur +" din straffedom er blevet anket og du får nu et forsøg til at komme ud af fængsel" +
                 "\nDu skal blot slå to ens med terningerne"
         );
     }
@@ -137,5 +138,10 @@ public class TUI {
                 "\n_________________________________"
         );
     }
-
+    public void printFaenselInfo(){
+        //System.out.println("| Felt nr: " + getPlacering() +" | Felt Navn:" + getNavn()+" | Felt type:"+ getFeltType()+" |");
+    }
+    public void paaBesoegIFaengsel(){
+        System.out.println("Du er nu på besøg ved fængslet.");
+    }
 }

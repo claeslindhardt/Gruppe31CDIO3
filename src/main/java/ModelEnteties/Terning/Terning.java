@@ -1,5 +1,5 @@
 package ModelEnteties.Terning;
-
+//TODO: del denne op i en data og en kontroller klasse
 import ModelEnteties.singletoner.RandomSingleton;
 /**___________________________________________________________________________________________________________________
  * PROGRAMDOKUMENTATION: Terning

@@ -1,7 +1,7 @@
 package ModelEnteties.Terning;
 
 import java.util.ArrayList;
-
+//TODO: del denne op i en data og en kontroller klasse
 public class RafleBaeger {
     //|--------- Variabler:-----------------
     private Terning[] terninger;

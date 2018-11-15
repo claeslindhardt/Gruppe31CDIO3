@@ -1,4 +1,11 @@
 package ModelEnteties.braet.controllerKlasser;
 
-public class Ejendom {
+import ModelEnteties.braet.dataKlasser.EjeligtFelt;
+
+/**__________________________________________________________________________________________________________________________________________________________
+ *  PROGRAMDOKUMENTATION: Ejendom
+ *
+ */
+public class Ejendom extends EjeligtFelt {
+
 }
