@@ -1,4 +1,9 @@
 package BaundaryView.TUI;
+
+import ModelEnteties.Terning.RafleBaeger;
+
+import java.util.ArrayList;
+
 /**
  * __________________________________________________________________________________________________________________________________________________________
  * PROGRAMDOKUMENTATION: TUI
@@ -110,11 +115,18 @@ public class TUI {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
-    /*public void spillerRykkerGrundetTerningslag(Raflebaeger terningsKrus){
+    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
         System.out.print("Du slog: ");
-        terningsKrus.printTerninger();
+        printTerninger(terningsKrus);
         System.out.print("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
-    }*/
+    }
+
+    public void printTerninger(RafleBaeger terningsKrus){
+        ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
+        for(int i =0; i<tern.size();i++) {
+            System.out.print(tern.get(i)+ ", ");
+        }
+    }
     public void ensTerninger(){
         System.out.println("Alle de terninger du slog, havde samme værdi! Du får lov til at slå en ekstra gang!");
     }
