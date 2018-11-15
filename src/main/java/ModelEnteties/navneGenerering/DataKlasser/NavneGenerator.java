@@ -1,12 +1,24 @@
 package ModelEnteties.navneGenerering.DataKlasser;
 
+import ModelEnteties.singletoner.RandomSingleton;
+
 import java.util.ArrayList;
-import java.util.Random;
 
+/**__________________________________________________________________________________________________________________________________________________________
+ *  PROGRAMDOKUMENTATION: NavneGenerator
+ *
+ * @author Claes
+ *  Denne klasse er lavet til at genere navne til braet, derfor bliver den brugt
+ *  i BretGeneratoren til at give braet navne når de bliver lavet på et bret.
+ *  Den fungere på den måde at den concatinaterer et tilfældigt vejNavn med en
+ *  tilfældig vejtype eller "station". Så ledes kan et stort antal vej navne. Generes
+ *  uden de store problemer ønkes et stort bret. Eller et lille antal hurtigt. Således
+ *  er disse klasser kodet skalerbart. Forældre klassen hedder NavneGenerator og den har
+ *  2 børn:
+ *          1. Ejendomsdoeber
+ *          2. Jernbanedoeber
+ */
 public abstract class NavneGenerator {
-    //|-------initiering af objekter: -----------
-    private Random rand = new Random();
-
     //|--------- Variabler:----------------------
     private String generetNavn;
     private ArrayList<String> alleNavne = new  ArrayList<String>();
@@ -22,15 +34,18 @@ public abstract class NavneGenerator {
             "Bond", "Pennsylvania", "Park", "Park", "Mayfair", "Boardwalk"};
     private String[] vejType = {" Avenue"," Road", " Lane", " Boulevard", " Park", " Venue", " SideStreet",
             " place", " Street", " promonade", " beach", " Square", " Gardens"};
+
+    //Singleton Variabler;
+    private RandomSingleton randomTal = RandomSingleton.getInstance();
+
     //|--------- Getters og Setters:-------------
-    public Random getRand() {
-        return rand;
+    public RandomSingleton getRandomTal() {
+        return randomTal;
     }
 
-    public void setRand(Random rand) {
-        this.rand = rand;
+    public void setRandomTal(RandomSingleton randomTal) {
+        this.randomTal = randomTal;
     }
-
     public String getGeneretNavn() {
         return generetNavn;
     }

@@ -4,8 +4,8 @@ import ModelEnteties.navneGenerering.DataKlasser.NavneGenerator;
 
 public class EjendomsDoeber extends NavneGenerator {
     public EjendomsDoeber(){
-        int vejnavn = getRand().nextInt(getVejNavn().length);
-        int vejtype = getRand().nextInt(getVejType().length);
+        int vejnavn =  getRandomTal().nextInt(getVejNavn().length);
+        int vejtype =  getRandomTal().nextInt(getVejType().length);
         setGeneretNavn(getVejNavn()[vejnavn].concat(getVejType()[vejtype]));
         for(int i = 0; i<getAlleNavne().size(); i++){
             if(getGeneretNavn()==getAlleNavne().get(i)){

@@ -1,4 +1,4 @@
-package ModelEnteties;
+package ModelEnteties.braet;
 
 public class SpilleBraet {
 
