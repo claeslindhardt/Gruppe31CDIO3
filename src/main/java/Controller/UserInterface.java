@@ -68,4 +68,5 @@ public interface UserInterface {
     void duErLandetPå();
     void badErrorMessage();
     void ejendomsBud();
+    void spillerEjendele(SpillerController spiller);
 }

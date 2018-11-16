@@ -81,17 +81,9 @@ public class SpillerController extends SpillerData {
     public void printSpillerStats(UserInterface userInterface){
         userInterface.spillerStat(this);
     }
-    /*
-    public void visEjendeFelter(UserInterface userInterface){
-        System.out.println("Ejendeomme: ");
-        for(int i = 0; i<spillerEjendomme.size();i++){
-            spillerEjendomme.get(i).printInfo();
-        }
-        System.out.println("Jernbaner: ");
-        for(int i = 0; i<spillerJernbaner.size();i++){
-            spillerJernbaner.get(i).printInfo();
 
-        }
+    public void visEjendeFelter(UserInterface userInterface){
+        userInterface.spillerEjendele(this);
     }
     /*
     public void bygPaaEjendom(){

@@ -288,4 +288,15 @@ public class TUI implements UserInterface {
                 "\nJa(1), nej(2)"
         );
     }
+    public void spillerEjendele(SpillerController spiller){
+        System.out.println("Ejendeomme: ");
+        for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
+            spiller.getSpillerEjendomme().get(i).printInfo();
+        }
+        System.out.println("Jernbaner: ");
+        for(int i = 0; i<spiller.getSpillerJernbaner().size();i++){
+            spiller.getSpillerJernbaner().get(i).printInfo();
+
+        }
+    }
 }
