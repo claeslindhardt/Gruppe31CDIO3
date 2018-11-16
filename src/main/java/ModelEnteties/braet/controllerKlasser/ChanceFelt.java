@@ -1,4 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-public class ChanceFelt {
+import ModelEnteties.braet.dataKlasser.AktionsFelter;
+
+public class ChanceFelt extends AktionsFelter {
 }

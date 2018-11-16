@@ -134,7 +134,8 @@ public class SpillerController extends SpillerData {
         } else {
             userInterface.monetosMangel();
         }
-    }/*
+    }
+    /*
     public void handelMedEjendomme(){
         /*
                 her skal man kunne:

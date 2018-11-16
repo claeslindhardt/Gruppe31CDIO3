@@ -1,4 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-public class GaaIFaengsel {
+import ModelEnteties.braet.dataKlasser.AktionsFelter;
+
+public class GaaIFaengsel extends AktionsFelter {
 }

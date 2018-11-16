@@ -1,5 +1,6 @@
 package ModelEnteties.braet;
 
+import ModelEnteties.braet.controllerKlasser.ChanceFelt;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.braet.dataKlasser.Felt;
 
@@ -25,6 +26,10 @@ public class SpilleBraetData {
 
     public void setBret(ArrayList<Felt> bret) {
         this.bret = bret;
+    }
+
+    public void addBret(Felt felt){
+        this.bret.add(felt);
     }
 
     public int getStartGrundPris() {

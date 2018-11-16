@@ -1,4 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-public class Start {
+import ModelEnteties.braet.dataKlasser.AktionsFelter;
+
+public class Start extends AktionsFelter {
 }
