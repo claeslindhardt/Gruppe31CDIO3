@@ -1,4 +1,6 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-public class GratisUdAfFaengsel {
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+
+public class GratisUdAfFaengsel extends ChanceAktion {
 }

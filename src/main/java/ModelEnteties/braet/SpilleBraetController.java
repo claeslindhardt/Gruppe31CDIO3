@@ -1,25 +1,34 @@
 package ModelEnteties.braet;
 
+import Controller.UserInterface;
+import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.braet.dataKlasser.Felt;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.EjendomsDoeber;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.JernbaneDoeber;
+import ModelEnteties.chanceKort.controllerKlasser.GiverPenge;
+import ModelEnteties.chanceKort.controllerKlasser.GratisUdAfFaengsel;
+import ModelEnteties.chanceKort.controllerKlasser.RykkerSpiller;
+import ModelEnteties.chanceKort.controllerKlasser.TagerPenge;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 import java.util.ArrayList;
 
 public class SpilleBraetController extends SpilleBraetData {
-    /*
-    //|----------- Metoder:------------------
-    public static void printBret(BretGenerator RelevantBret){
 
-        for(int i = 0; i < RelevantBret.bret.size() ;i++){
-            Felt felt = RelevantBret.bret.get(i);
-            System.out.println("______________________________________________________________________________");
-            felt.getFeltType();//printInfo();
+    //|----------- Metoder:------------------
+    public void printBret(UserInterface userInterface){
+
+        for(int i = 0; i < this.getBret().size() ;i++){
+            Felt felt = this.getBret().get(i);
+            String felttyp = felt.getFeltType();//printInfo();
+            userInterface.bretPrinter(felttyp);
         }
-        System.out.println("______________________________________________________________________________");
+        userInterface.terminalLine();
     }
-    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort){
-        ArrayList<ChanceAktion> chanceKortTilFelt = new ArrayList<>();
+
+    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterface userInterface){
+        ArrayList<ChanceAktion> chanceKortTilFelt = new ArrayList<ChanceAktion>();
 
         //ændre dette:
         ChanceAktion some = new GiverPenge();
@@ -49,18 +58,18 @@ public class SpilleBraetController extends SpilleBraetData {
                 //_______________________________________________
                 // Du kan slippe for fængsel
                 case 4:
-                    GratisUdafFeangsel kaution = new GratisUdafFeangsel();
+                    GratisUdAfFaengsel kaution = new GratisUdAfFaengsel();
                     chanceKortTilFelt.add(kaution);
                     break;
                 default:
-                    System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
+                userInterface.chanceKortGenereringsFejl();
             }
         }
 
         return chanceKortTilFelt;
 
     }
-    */
+
     /** Latent code under construction
     //|--------- Constructor:-----------------
     public SpilleBraetController(int antalFelter){

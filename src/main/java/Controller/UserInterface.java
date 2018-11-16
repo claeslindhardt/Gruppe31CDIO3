@@ -69,4 +69,7 @@ public interface UserInterface {
     void badErrorMessage();
     void ejendomsBud();
     void spillerEjendele(SpillerController spiller);
+    void bretPrinter(String felt);
+    void terminalLine();
+    void chanceKortGenereringsFejl();
 }

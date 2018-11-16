@@ -1,4 +1,6 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-public class TagerPenge {
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+
+public class TagerPenge extends ChanceAktion {
 }

@@ -1,4 +1,6 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-public class RykkerSpiller {
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+
+public class RykkerSpiller extends ChanceAktion {
 }

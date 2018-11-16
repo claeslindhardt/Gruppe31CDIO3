@@ -299,4 +299,14 @@ public class TUI implements UserInterface {
 
         }
     }
+    public void bretPrinter(String felt){
+        System.out.println("______________________________________________________________________________");
+        System.out.println(felt);
+    }
+    public void terminalLine(){
+        System.out.println("______________________________________________________________________________");
+    }
+    public void chanceKortGenereringsFejl(){
+        System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
+    }
 }
