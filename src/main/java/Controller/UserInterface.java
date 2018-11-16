@@ -1,4 +1,4 @@
-package BaundaryView;
+package Controller;
 
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
@@ -39,4 +39,9 @@ public interface UserInterface {
     void chanceKortNr(int i, SpillerController spiller);
     void chanceKortsVejledning();
     void ingenChanceKort();
+    void hvorHen(int pos);
+    void holdDigPaaBrettet();
+    void overStart(int pos);
+    void spillerStat(SpillerController spiller);
+    void alleredeEjer();
 }

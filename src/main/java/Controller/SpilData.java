@@ -2,7 +2,7 @@ package Controller;
 
 import BaundaryView.TUI.TUI;
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.SpilleBraet;
+import ModelEnteties.braet.SpilleBraetData;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public abstract class SpilData {
     public int bankeraadGraense = 15;
     public boolean kør = true;
     public boolean vinderFindes = false;
-    public SpilleBraet bretGeneretForSpil;
+    public SpilleBraetData bretGeneretForSpil;
     public TUI UserInterface = new TUI();
 
     //|--------- Getters og Setters:-----------------
@@ -121,11 +121,11 @@ public abstract class SpilData {
     public void setBankeraadGraense(int bankeraadsgraense) {
         this.bankeraadGraense = bankeraadsgraense;
     }
-    public SpilleBraet getBretGeneretForSpil() {
+    public SpilleBraetData getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }
 
-    public void setBretGeneretForSpil(SpilleBraet generetBretForSpil) {
+    public void setBretGeneretForSpil(SpilleBraetData generetBretForSpil) {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 

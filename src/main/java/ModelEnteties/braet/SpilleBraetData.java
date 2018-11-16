@@ -6,7 +6,7 @@ import ModelEnteties.braet.dataKlasser.Felt;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SpilleBraet {
+public class SpilleBraetData {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 

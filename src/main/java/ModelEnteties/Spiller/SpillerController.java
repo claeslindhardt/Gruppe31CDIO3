@@ -1,8 +1,8 @@
 package ModelEnteties.Spiller;
 
-import BaundaryView.TUI.TUI;
-import BaundaryView.UserInterface;
+import Controller.UserInterface;
 import Controller.SpilController;
+import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
@@ -56,32 +56,31 @@ public class SpillerController extends SpillerData {
         }else{
             userInterface.ingenChanceKort();
         }
-    }/*
-    public void tagTaxi(SpilController spil){
+    }
+    public void tagTaxi(SpilController spil,UserInterface userInterface){
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
         this.setHarSlaaetForTuren(true);
-        System.out.println("Din nuværende position er: "+ this.getSpillerPosition());
-        System.out.println("Hvor vil de hen?: ");
+        userInterface.hvorHen(this.getSpillerPosition());
         destination = getScanner().nextInt();
         if(destination>spil.getAntalFelter() || destination< 1 ){
-            System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
+            userInterface.holdDigPaaBrettet();
         }else{
             this.setSpillerPosition(destination);
-            System.out.println("Din position er: "+ this.getSpillerPosition());
-            System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
+            userInterface.overStart(this.getSpillerPosition());
             this.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
             spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
         }
-    }*//*
+    }
     //_____________________________________
     //Vis og print funktinoer:
-    public void printSpillerStats(){
-        System.out.println("Navn: "+getNavn()+" ID:"+getId()+" getPlacering(): "+getSpillerPosition()+" Penge: "+getPenge());
+    public void printSpillerStats(UserInterface userInterface){
+        userInterface.spillerStat(this);
     }
-    public void visEjendeFelter(){
+    /*
+    public void visEjendeFelter(UserInterface userInterface){
         System.out.println("Ejendeomme: ");
         for(int i = 0; i<spillerEjendomme.size();i++){
             spillerEjendomme.get(i).printInfo();
@@ -100,7 +99,7 @@ public class SpillerController extends SpillerData {
     //Koebe og salg funktioner:
 
     //Todo: generaliser køb af ejelige braet således at de får den samme funktion og koden bliver lettere skalerbar.
-    public void koebEjendom(Ejendom ønsketEjendom) {
+    public void koebEjendom(Ejendom ønsketEjendom,UserInterface userInterface) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         Spiller relevantSpiller = SpilData.getSpillerMedTur();
         if (ønsketEjendom.getEjer() == relevantSpiller) {
@@ -119,25 +118,23 @@ public class SpillerController extends SpillerData {
             System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
         }
     }
-
-    public void koebJernbane(Jernbane relevantJernbane){
+    */
+    public void koebJernbane(Jernbane relevantJernbane, UserInterface userInterface,SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
-        Spiller spillerMedTur = SpilData.getSpillerMedTur();
-        if (relevantJernbane.getEjer() == spillerMedTur) {
-            System.out.println("Du er allerede ejer");
-        } else if (penge > relevantJernbane.getPris()) {
-            //Todo: fix enkapsulering her
-            penge -= relevantJernbane.getPris();
+        if (relevantJernbane.getEjer() == this) {
+            userInterface.alleredeEjer();
+        } else if (getPenge() > relevantJernbane.getPris()) {
+            setPenge(getPenge()-relevantJernbane.getPris());
             System.out.println("Jernbanen er nu din!");
-
+            //Todo: fix enkapsulering herunder:
             //skifte ejerskab
-            relevantJernbane.setEjer(spillerMedTur);;
+            relevantJernbane.setEjer(this);;
             spillerJernbaner.add(relevantJernbane);
-            relevantJernbane.tagTog();
+            relevantJernbane.tagTog(spil);
         } else {
             System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
         }
-    }
+    }/*
     public void handelMedEjendomme(){
         /*
                 her skal man kunne:

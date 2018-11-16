@@ -1,6 +1,6 @@
 package BaundaryView.TUI;
 
-import BaundaryView.UserInterface;
+import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
@@ -179,5 +179,24 @@ public class TUI implements UserInterface {
 
     public void jernBaneInfo(Jernbane stadtion){
         System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+stadtion.getEjer()+"|");
+    }
+    public void hvorHen(int pos){
+        System.out.println("Din nuværende position er: "+ pos);
+        System.out.println("Hvor vil de hen?: ");
+    }
+    public void holdDigPaaBrettet(){
+        System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
+    }
+    public void overStart(int pos){
+        System.out.println("Din position er: "+ pos);
+        System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
+    }
+    public void spillerStat(SpillerController spiller){
+        System.out.println("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
+
+    }
+
+    public void alleredeEjer(){
+        System.out.println("Du er allerede ejer");
     }
 }

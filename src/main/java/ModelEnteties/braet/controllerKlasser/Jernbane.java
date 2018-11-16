@@ -47,8 +47,8 @@ public class Jernbane extends EjeligtFelt {
         }
     }
     /*
-    public void aktionPaaFelt(){
-        Spiller spillerMedTur = SpilLeder.getSpillerMedTur();
+    public void aktionPaaFelt(SpilController spil){
+        SpillerController spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {
             System.out.println("Du er landet på et jernbanefelt, og ingen ejer det - vil du købe det?" +
@@ -69,7 +69,7 @@ public class Jernbane extends EjeligtFelt {
             System.out.println("en anden Spiller ejer dette felt, Du kan derfor ikke købe det");
         }else{
             System.out.println("du er landet på en jernbane du ejer, nermer du dig et monopoly?");
-            this.tagTog();
+            this.tagTog(spil);
 
         }
     }*/
