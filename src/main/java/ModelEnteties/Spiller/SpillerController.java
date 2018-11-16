@@ -21,15 +21,15 @@ public class SpillerController extends SpillerData {
             UserInterface.duGavIkkeOp();
         }
 
-    }/*
-    public void passeringAfStart (int terningvalg) {
+    }
+    public int passeringAfStart (int terningvalg, SpilController spil, TUI UserInterface) {
 
-        getSpillerPosition() = (getSpillerPosition()+ terningvalg)%SpilData.getAntalFelter();
-        int gangeOverStart = (spillerPosition+terningvalg)/SpilData.getAntalFelter();
+        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
+        int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
 
         penge += 200*gangeOverStart;
-        System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
-
+        UserInterface.passeringAfStart(gangeOverStart);
+        return gangeOverStart;
     }/*
     public void chanceKortMuligheder(){
         /*

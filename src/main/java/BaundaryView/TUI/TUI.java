@@ -154,4 +154,7 @@ public class TUI {
     public void duGavIkkeOp(){
         System.out.println("Du valgte ikke at give op. ");
     }
+    public void passeringAfStart(int gangeOverStart){
+        System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
+    }
 }
