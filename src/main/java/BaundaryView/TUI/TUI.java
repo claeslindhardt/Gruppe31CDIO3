@@ -4,6 +4,7 @@ import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 import java.util.ArrayList;
 
@@ -308,5 +309,17 @@ public class TUI implements UserInterface {
     }
     public void chanceKortGenereringsFejl(){
         System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
+    }
+    public void printChanceKortDirekte(ChanceAktion di){
+        System.out.println(di.getBeskrivelse());
+
+    }
+    public void chanceKortTilføjet(){
+        System.out.println("Dette kort vil blive tilføjet til dine chance kort," +
+                "\ndu kan bruge det når du ønsker."
+        );
+    }
+    public void chanceKortBrugt(){
+        System.out.println("Du har nu brugt dit Taxi chance kort");
     }
 }

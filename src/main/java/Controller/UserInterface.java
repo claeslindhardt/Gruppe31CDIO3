@@ -3,6 +3,7 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 public interface UserInterface {
     void TurMenu(int getSpillerTur);
@@ -72,4 +73,7 @@ public interface UserInterface {
     void bretPrinter(String felt);
     void terminalLine();
     void chanceKortGenereringsFejl();
+    void printChanceKortDirekte(ChanceAktion di);
+    void chanceKortTilføjet();
+    void chanceKortBrugt();
 }
