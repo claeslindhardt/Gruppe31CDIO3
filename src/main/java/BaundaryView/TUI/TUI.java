@@ -227,4 +227,32 @@ public class TUI implements UserInterface {
         System.out.println("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
 
     }
+    public void muligeDestinationer(){
+        System.out.println("Du kan rejse til ");
+    }
+    public void stationsMuligheder(){
+        System.out.println("hvis du ønkser ikke at rejse tast 0, " +
+                "\nellers intast den destination du ønsker at rejse til:");
+    }
+    public void turEfterJernbane(){
+        System.out.println("Du kan nu forsætte din tur men får ikke muligheden for at tage jernbanen igen i denne tur," +
+                "\n Det tog er kørt!");
+    }
+    public void manglerJernbaner(){
+        System.out.println("Du ejer ikke nok jernabaner til at rejse:");
+
+    }
+    public void jernBaneTilbud(){
+        System.out.println("Du er landet på et jernbanefelt, og ingen ejer det - vil du købe det?" +
+                "\nJa(1), nej(2)");
+    }
+    public void forsetTur(){
+        System.out.println("fotrsæt din tur");
+    }
+    public void ejetAfEnAnden(){
+        System.out.println("en anden Spiller ejer dette felt, Du kan derfor ikke købe det");
+    }
+    public void tetPaaMonopol(){
+        System.out.println("du er landet på en jernbane du ejer, nermer du dig et monopoly?");
+    }
 }
