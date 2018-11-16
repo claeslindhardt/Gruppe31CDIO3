@@ -1,34 +1,36 @@
 package ModelEnteties.Spiller;
 
+import BaundaryView.TUI.TUI;
+import Controller.SpilController;
+
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
-   /* public void givOp(){
+    public void givOp(SpilController spil, TUI UserInterface){
         int svar;
-        Spiller relevantSpiller = SpilLeder.getSpillerMedTur();
-        System.out.println("Er du sikker på at du vil udgå fra spillet?: (1) for ja, (2) for nej" );
+        UserInterface.vilDuGiveOp();
         svar = sc.nextInt();
         if(svar==1) {
-            relevantSpiller.harGivetOp=true;
-            relevantSpiller.spillerEjendomme.clear();
-            System.out.println("Tak for spillet:)\nDine penge vil gå til skattefar");
-            SpilLeder.slutSpillerTur();
+            setHarGivetOp(true);
+            getSpillerEjendomme().clear();
+            UserInterface.takForSpillet();
+            spil.slutSpillerTur();
         }
         else {
-            System.out.println("Du valgte ikke at give op. ");
+            UserInterface.duGavIkkeOp();
         }
 
-    }
+    }/*
     public void passeringAfStart (int terningvalg) {
 
-        spillerPosition = (spillerPosition+ terningvalg)%SpilLeder.getAntalFelter();
-        int gangeOverStart = (spillerPosition+terningvalg)/SpilLeder.getAntalFelter();
+        getSpillerPosition() = (getSpillerPosition()+ terningvalg)%SpilData.getAntalFelter();
+        int gangeOverStart = (spillerPosition+terningvalg)/SpilData.getAntalFelter();
 
         penge += 200*gangeOverStart;
         System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
 
-    }
+    }/*
     public void chanceKortMuligheder(){
         /*
         Her skal spilleren kunne:
@@ -61,13 +63,13 @@ public class SpillerController extends SpillerData {
     public void tagTaxi(){
         //Todo omskriv denne funktion så den gør brug af den ligger i spiller og ikke behøver hente SpillerMedTur
         int destination;
-        Spiller relavantSpiller = SpilLeder.getSpillerMedTur();
+        Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
         relavantSpiller.setHarSlaaetForTuren(true);
         System.out.println("Din nuværende position er: "+ relavantSpiller.getSpillerPosition());
         System.out.println("Hvor vil de hen?: ");
         destination = sc.nextInt();
-        if(destination>SpilLeder.getAntalFelter() || destination< 1 ){
+        if(destination>SpilData.getAntalFelter() || destination< 1 ){
             System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
         }else{
             relavantSpiller.setSpillerPosition(destination);
@@ -75,7 +77,7 @@ public class SpillerController extends SpillerData {
             System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
             relavantSpiller.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
-            SpilLeder.getBretGeneretForSpil().getBret().get(SpilLeder.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+            SpilData.getBretGeneretForSpil().getBret().get(SpilData.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
         }
     }
     //_____________________________________
@@ -103,7 +105,7 @@ public class SpillerController extends SpillerData {
     //Todo: generaliser køb af ejelige braet således at de får den samme funktion og koden bliver lettere skalerbar.
     public void koebEjendom(Ejendom ønsketEjendom) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
-        Spiller relevantSpiller = SpilLeder.getSpillerMedTur();
+        Spiller relevantSpiller = SpilData.getSpillerMedTur();
         if (ønsketEjendom.getEjer() == relevantSpiller) {
             System.out.println("Du er allerede ejer");
         }
@@ -123,7 +125,7 @@ public class SpillerController extends SpillerData {
 
     public void koebJernbane(Jernbane relevantJernbane){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
-        Spiller spillerMedTur = SpilLeder.getSpillerMedTur();
+        Spiller spillerMedTur = SpilData.getSpillerMedTur();
         if (relevantJernbane.getEjer() == spillerMedTur) {
             System.out.println("Du er allerede ejer");
         } else if (penge > relevantJernbane.getPris()) {

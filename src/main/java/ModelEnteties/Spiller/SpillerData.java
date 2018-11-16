@@ -15,7 +15,7 @@ import java.util.Scanner;
  *  Den bliver brugt i SpilLederen, til at genere en liste med spillerObjekter
  *  som indholder alle de spillere der indgår i et givet spil.
  */
-public class SpillerData {
+public abstract class SpillerData {
     //|-------initiering af objekter: -----------
     Scanner sc =new Scanner(System.in);
 

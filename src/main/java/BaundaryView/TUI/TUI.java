@@ -144,4 +144,14 @@ public class TUI {
     public void paaBesoegIFaengsel(){
         System.out.println("Du er nu på besøg ved fængslet.");
     }
+    public void vilDuGiveOp(){
+        System.out.println("Er du sikker på at du vil udgå fra spillet?: (1) for ja, (2) for nej" );
+    }
+
+    public void takForSpillet(){
+        System.out.println("Tak for spillet:)\nDine penge vil gå til skattefar");
+    }
+    public void duGavIkkeOp(){
+        System.out.println("Du valgte ikke at give op. ");
+    }
 }
