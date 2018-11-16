@@ -4,6 +4,7 @@ import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.Start;
 import ModelEnteties.braet.controllerKlasser.Taxi;
 
 import java.util.ArrayList;
@@ -212,5 +213,8 @@ public class TUI implements UserInterface {
     }
     public void overStartAnimation(){
         System.out.println("Aktion som følger af Start");
+    }
+    public void startsFeltsInfo(Start felt){
+        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
     }
 }

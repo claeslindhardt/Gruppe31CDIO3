@@ -20,8 +20,8 @@ public class Start extends AktionsFelter {
     public void aktionPaaFelt(UserInterface userInterface){
         userInterface.overStartAnimation();
     }
-    public void printInfo(){
-        System.out.println("| Felt nr: " + getPlacering() +" | Felt Navn:" + getNavn()+" | Felt type:"+ getFeltType()+" |");
+    public void printInfo(UserInterface userInterface){
+        userInterface.startsFeltsInfo(this);
     }
     //|--------- Constructor:-----------------
     public Start(int startPasseringsInkomst, int placering){

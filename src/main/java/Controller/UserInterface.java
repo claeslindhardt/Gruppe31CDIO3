@@ -2,6 +2,7 @@ package Controller;
 
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.controllerKlasser.Start;
 import ModelEnteties.braet.controllerKlasser.Taxi;
 
 public interface UserInterface {
@@ -49,4 +50,5 @@ public interface UserInterface {
     void monetosMangel();
     void taxiInfo(Taxi vogn);
     void overStartAnimation();
+    void startsFeltsInfo(Start felt);
 }

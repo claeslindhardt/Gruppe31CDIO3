@@ -2,6 +2,7 @@ package ModelEnteties.braet.controllerKlasser;
 
 import BaundaryView.TUI.TUI;
 import Controller.SpilController;
+import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class Jernbane extends EjeligtFelt {
     //|-------initiering af objekter: -----------
     Scanner sc = new Scanner(System.in);
-
+    //TODO: fix singleton og ryk alle sout op i TUI
     //|----------- Metoder:------------------
     public void printInfo(TUI UserInterface){
         UserInterface.jernBaneInfo(this);
@@ -46,8 +47,8 @@ public class Jernbane extends EjeligtFelt {
             System.out.println("Du ejer ikke nok jernabaner til at rejse:");
         }
     }
-    /*
-    public void aktionPaaFelt(SpilController spil){
+
+    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {
@@ -56,7 +57,7 @@ public class Jernbane extends EjeligtFelt {
             int kobsBeslutning = sc.nextInt();
             switch (kobsBeslutning) {
                 case 1:
-                    spillerMedTur.koebJernbane(this);
+                    spillerMedTur.koebJernbane(this, userInterface,spil);
                     break;
                 case 2:
                     System.out.println("fotrsæt din tur");
@@ -72,7 +73,7 @@ public class Jernbane extends EjeligtFelt {
             this.tagTog(spil);
 
         }
-    }*/
+    }
 
     //|--------- Constructor:-----------------
     public Jernbane(String whatName, int whatPrice,int placering){
