@@ -199,4 +199,11 @@ public class TUI implements UserInterface {
     public void alleredeEjer(){
         System.out.println("Du er allerede ejer");
     }
+
+    public void dinJernbane(){
+        System.out.println("Jernbanen er nu din!");
+    }
+    public void monetosMangel(){
+        System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+    }
 }

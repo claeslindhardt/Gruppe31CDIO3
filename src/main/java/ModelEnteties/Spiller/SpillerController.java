@@ -125,14 +125,14 @@ public class SpillerController extends SpillerData {
             userInterface.alleredeEjer();
         } else if (getPenge() > relevantJernbane.getPris()) {
             setPenge(getPenge()-relevantJernbane.getPris());
-            System.out.println("Jernbanen er nu din!");
+            userInterface.dinJernbane();
             //Todo: fix enkapsulering herunder:
             //skifte ejerskab
             relevantJernbane.setEjer(this);;
             spillerJernbaner.add(relevantJernbane);
             relevantJernbane.tagTog(spil);
         } else {
-            System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+            userInterface.monetosMangel();
         }
     }/*
     public void handelMedEjendomme(){

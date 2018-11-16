@@ -44,4 +44,6 @@ public interface UserInterface {
     void overStart(int pos);
     void spillerStat(SpillerController spiller);
     void alleredeEjer();
+    void dinJernbane();
+    void monetosMangel();
 }
