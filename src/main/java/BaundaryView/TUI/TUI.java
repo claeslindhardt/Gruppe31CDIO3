@@ -3,6 +3,7 @@ package BaundaryView.TUI;
 import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.controllerKlasser.GaaIFaengsel;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.braet.controllerKlasser.Start;
 import ModelEnteties.braet.controllerKlasser.Taxi;
@@ -216,5 +217,14 @@ public class TUI implements UserInterface {
     }
     public void startsFeltsInfo(Start felt){
         System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
+    }
+    public void iFaengselMedDig(){
+        System.out.println("HOV HOV HOV, meget kan man bøje men ikke loven!");
+        System.out.println("Fordi du er landet på et felt, hvor man bliver kriminel");
+        System.out.println("Skal du en tur i kashotten.");
+    }
+    public void faengselInfo(GaaIFaengsel Faengsel){
+        System.out.println("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
+
     }
 }
