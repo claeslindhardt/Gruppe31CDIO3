@@ -1,8 +1,9 @@
 package BaundaryView.TUI;
 
+import BaundaryView.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.Faengsel;
+import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
  * lave en GUI.
  */
-public class TUI {
+public class TUI implements UserInterface {
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -174,5 +175,9 @@ public class TUI {
     }
     public void ingenChanceKort(){
         System.out.println("Du har ikke nogen Chance Kort lige nu.");
+    }
+
+    public void jernBaneInfo(Jernbane stadtion){
+        System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+stadtion.getEjer()+"|");
     }
 }

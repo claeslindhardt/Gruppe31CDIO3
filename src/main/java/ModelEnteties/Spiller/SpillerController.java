@@ -1,6 +1,7 @@
 package ModelEnteties.Spiller;
 
 import BaundaryView.TUI.TUI;
+import BaundaryView.UserInterface;
 import Controller.SpilController;
 
 public class SpillerController extends SpillerData {
@@ -31,7 +32,7 @@ public class SpillerController extends SpillerData {
         UserInterface.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }
-    public void chanceKortMuligheder(TUI UserInterface){
+    public void chanceKortMuligheder(UserInterface userInterface){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFelt
@@ -39,13 +40,13 @@ public class SpillerController extends SpillerData {
          */
         if(spillerAktionsKort.size()>0){
             //Her printes de forskellige muligher:
-            UserInterface.chanceKortHar();
+            userInterface.chanceKortHar();
             for(int i = 0; i<getSpillerAktionsKort().size();i++){
-                UserInterface.chanceKortNr(i,this);
+                userInterface.chanceKortNr(i,this);
             }
 
             //Her er controlleren der lader en reagere på mulighederne
-            UserInterface.chanceKortsVejledning();
+            userInterface.chanceKortsVejledning();
             int valg = getScanner().nextInt();
             if(valg == -1){ }
             else if(valg != -1){
@@ -53,29 +54,28 @@ public class SpillerController extends SpillerData {
                 getSpillerAktionsKort().remove(valg);
             }
         }else{
-            UserInterface.ingenChanceKort();
+            userInterface.ingenChanceKort();
         }
     }/*
-    public void tagTaxi(){
-        //Todo omskriv denne funktion så den gør brug af den ligger i spiller og ikke behøver hente SpillerMedTur
+    public void tagTaxi(SpilController spil){
         int destination;
-        Spiller relavantSpiller = SpilData.getSpillerMedTur();
+        //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
-        relavantSpiller.setHarSlaaetForTuren(true);
-        System.out.println("Din nuværende position er: "+ relavantSpiller.getSpillerPosition());
+        this.setHarSlaaetForTuren(true);
+        System.out.println("Din nuværende position er: "+ this.getSpillerPosition());
         System.out.println("Hvor vil de hen?: ");
-        destination = sc.nextInt();
-        if(destination>SpilData.getAntalFelter() || destination< 1 ){
+        destination = getScanner().nextInt();
+        if(destination>spil.getAntalFelter() || destination< 1 ){
             System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
         }else{
-            relavantSpiller.setSpillerPosition(destination);
-            System.out.println("Din position er: "+ relavantSpiller.getSpillerPosition());
+            this.setSpillerPosition(destination);
+            System.out.println("Din position er: "+ this.getSpillerPosition());
             System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
-            relavantSpiller.addPenge(200);
+            this.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
-            SpilData.getBretGeneretForSpil().getBret().get(SpilData.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
         }
-    }
+    }*//*
     //_____________________________________
     //Vis og print funktinoer:
     public void printSpillerStats(){
@@ -92,6 +92,7 @@ public class SpillerController extends SpillerData {
 
         }
     }
+    /*
     public void bygPaaEjendom(){
 
     }
