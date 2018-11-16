@@ -30,36 +30,32 @@ public class SpillerController extends SpillerData {
         penge += 200*gangeOverStart;
         UserInterface.passeringAfStart(gangeOverStart);
         return gangeOverStart;
-    }/*
-    public void chanceKortMuligheder(){
+    }
+    public void chanceKortMuligheder(TUI UserInterface){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFelt
             aktivere et udvalgt ChanceFelt
-         *//*
+         */
         if(spillerAktionsKort.size()>0){
             //Her printes de forskellige muligher:
-            System.out.println("Du har følgende Chance Kort:");
+            UserInterface.chanceKortHar();
             for(int i = 0; i<getSpillerAktionsKort().size();i++){
-                System.out.println("Chance kort nr. "+i+": ");
-                System.out.println(getSpillerAktionsKort().get(i).getBeskrivelse());
+                UserInterface.chanceKortNr(i,this);
             }
 
             //Her er controlleren der lader en reagere på mulighederne
-            System.out.println("-------------------------------");
-            System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
-                    "\nEller hvis du vil tilbage til tur menuen (-1):"
-            );
-            int valg = sc.nextInt();
+            UserInterface.chanceKortsVejledning();
+            int valg = getScanner().nextInt();
             if(valg == -1){ }
             else if(valg != -1){
                 getSpillerAktionsKort().get(valg).BetingetAktion();
                 getSpillerAktionsKort().remove(valg);
             }
         }else{
-            System.out.println("Du har ikke nogen Chance Kort lige nu.");
+            UserInterface.ingenChanceKort();
         }
-    }
+    }/*
     public void tagTaxi(){
         //Todo omskriv denne funktion så den gør brug af den ligger i spiller og ikke behøver hente SpillerMedTur
         int destination;

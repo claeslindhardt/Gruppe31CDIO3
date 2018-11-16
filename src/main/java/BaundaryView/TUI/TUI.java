@@ -1,5 +1,6 @@
 package BaundaryView.TUI;
 
+import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.Faengsel;
 
@@ -156,5 +157,22 @@ public class TUI {
     }
     public void passeringAfStart(int gangeOverStart){
         System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
+    }
+    public void chanceKortHar(){
+        System.out.println("Du har følgende Chance Kort:");
+    }
+    public void chanceKortNr(int i, SpillerController spiller){
+        System.out.println("Chance kort nr. "+i+": ");
+        System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+
+    }
+    public void chanceKortsVejledning(){
+        System.out.println("-------------------------------");
+        System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
+                "\nEller hvis du vil tilbage til tur menuen (-1):"
+        );
+    }
+    public void ingenChanceKort(){
+        System.out.println("Du har ikke nogen Chance Kort lige nu.");
     }
 }
