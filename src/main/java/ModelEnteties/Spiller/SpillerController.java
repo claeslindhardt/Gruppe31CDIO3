@@ -10,7 +10,7 @@ public class SpillerController extends SpillerData {
     public void givOp(SpilController spil, TUI UserInterface){
         int svar;
         UserInterface.vilDuGiveOp();
-        svar = sc.nextInt();
+        svar = getScanner().nextInt();
         if(svar==1) {
             setHarGivetOp(true);
             getSpillerEjendomme().clear();
