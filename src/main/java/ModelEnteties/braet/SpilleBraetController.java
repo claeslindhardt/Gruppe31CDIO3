@@ -70,9 +70,8 @@ public class SpilleBraetController extends SpilleBraetData {
 
     }
 
-    /** Latent code under construction
     //|--------- Constructor:-----------------
-    public SpilleBraetController(int antalFelter){
+    public SpilleBraetController(int antalFelter, UserInterface userInterface){
 
         //-------Tilføjning af objekter til brettet---
         Start go = new Start(getStartGrundPris(),0);
@@ -95,7 +94,7 @@ public class SpilleBraetController extends SpilleBraetData {
                 //_______________________________________________
                 // ChanceFelt
                 else if(aktionsFeltType<=6) {//set til 6 når test er fertig
-                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt()));
+                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(),userInterface));
                     addBret(chance);
                 }
                 //_______________________________________________
@@ -123,5 +122,5 @@ public class SpilleBraetController extends SpilleBraetData {
         }
 
 
-    }*/
+    }
 }
