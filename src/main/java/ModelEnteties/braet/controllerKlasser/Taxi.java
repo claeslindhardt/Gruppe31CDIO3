@@ -10,10 +10,10 @@ public class Taxi extends AktionsFelter {
         spil.getSpillerMedTur().tagTaxi(spil, userInterface);
 
     }
-    /*
-    public void printInfo(){
-        System.out.println("| Felt nr: " + getPlacering() +" | Felt Navn:" + getNavn()+" | Felt type:"+ getFeltType()+" |");
-    }*/
+
+    public void printInfo(UserInterface userInterface){
+        userInterface.taxiInfo(this);
+    }
     //|--------- Constructor:-----------------
     public Taxi(int placering){
         setFeltType("Taxi");

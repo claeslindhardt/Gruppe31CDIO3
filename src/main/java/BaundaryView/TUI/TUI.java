@@ -4,6 +4,7 @@ import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.Taxi;
 
 import java.util.ArrayList;
 
@@ -205,5 +206,11 @@ public class TUI implements UserInterface {
     }
     public void monetosMangel(){
         System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+    }
+    public void taxiInfo(Taxi vogn){
+        System.out.println("| Felt nr: " + vogn.getPlacering() +" | Felt Navn:" + vogn.getNavn()+" | Felt type:"+ vogn.getFeltType()+" |");
+    }
+    public void overStartAnimation(){
+        System.out.println("Aktion som følger af Start");
     }
 }

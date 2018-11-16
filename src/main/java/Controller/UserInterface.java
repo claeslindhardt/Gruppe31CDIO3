@@ -2,6 +2,7 @@ package Controller;
 
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.controllerKlasser.Taxi;
 
 public interface UserInterface {
     void TurMenu(int getSpillerTur);
@@ -46,4 +47,6 @@ public interface UserInterface {
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
+    void taxiInfo(Taxi vogn);
+    void overStartAnimation();
 }
