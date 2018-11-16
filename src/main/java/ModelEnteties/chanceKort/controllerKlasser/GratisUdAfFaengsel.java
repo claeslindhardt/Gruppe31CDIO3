@@ -16,16 +16,14 @@ public class GratisUdAfFaengsel extends ChanceAktion {
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         userInterface.printChanceKortDirekte(this);
         userInterface.chanceKortTilføjet();
-        
         spillerMedTur.addSpillerAktionsKort(this);
     }
     public void BetingetAktion(SpilController spil, UserInterface userInterface){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);
         spillerMedTur.setHarSlaaetForTuren(false);
-        //todo:test and make sout's
-        System.out.println("Du har brugt din gratis ud af feangsel, var du bag trammer er du nu fri," +
-                "\nhvid du ikke var får du alligvel lov til at slå med terningerne igen.");
+        //todo:test
+        userInterface.brugtUdAfFaengsel();
     }
     //|----------- Constructor:------------------
     public GratisUdAfFaengsel(){

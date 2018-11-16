@@ -76,4 +76,5 @@ public interface UserInterface {
     void printChanceKortDirekte(ChanceAktion di);
     void chanceKortTilføjet();
     void chanceKortBrugt();
+    void brugtUdAfFaengsel();
 }

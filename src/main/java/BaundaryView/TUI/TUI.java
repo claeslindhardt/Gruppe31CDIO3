@@ -322,4 +322,8 @@ public class TUI implements UserInterface {
     public void chanceKortBrugt(){
         System.out.println("Du har nu brugt dit Taxi chance kort");
     }
+    public void brugtUdAfFaengsel(){
+        System.out.println("Du har brugt din gratis ud af feangsel, var du bag trammer er du nu fri," +
+                "\nhvid du ikke var får du alligvel lov til at slå med terningerne igen.");
+    }
 }
