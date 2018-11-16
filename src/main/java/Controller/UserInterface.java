@@ -66,4 +66,6 @@ public interface UserInterface {
     void ejendomsInfo(Ejendom ej);
     void betalRente();
     void duErLandetPå();
+    void badErrorMessage();
+    void ejendomsBud();
 }

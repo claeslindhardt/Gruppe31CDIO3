@@ -280,5 +280,12 @@ public class TUI implements UserInterface {
     public void duErLandetPå(){
         System.out.println("Du er landet på ");
     }
-
+    public void badErrorMessage(){
+        System.out.println("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
+    }
+    public void ejendomsBud(){
+        System.out.println("Det er en ejendom vil du købe den?"+
+                "\nJa(1), nej(2)"
+        );
+    }
 }

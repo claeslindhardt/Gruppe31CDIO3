@@ -117,7 +117,7 @@ public class SpillerController extends SpillerData {
             userInterface.monetosMangel();
         }
     }
-    /*
+
     public void koebJernbane(Jernbane relevantJernbane, UserInterface userInterface,SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {
@@ -129,7 +129,7 @@ public class SpillerController extends SpillerData {
             //skifte ejerskab
             relevantJernbane.setEjer(this);;
             spillerJernbaner.add(relevantJernbane);
-            relevantJernbane.tagTog(spil);
+            relevantJernbane.tagTog(spil, userInterface);
         } else {
             userInterface.monetosMangel();
         }

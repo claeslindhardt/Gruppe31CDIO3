@@ -63,12 +63,10 @@ public class Ejendom extends EjeligtFelt {
     public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
-
+            userInterface.duErLandetPå();
             this.printInfo();
 
-            System.out.println("Det er en ejendom vil du købe den?"+
-                    "\nJa(1), nej(2)"
-            );
+            userInterface.ejendomsBud();
             int kobsBeslutning = sc.nextInt();
             switch (kobsBeslutning){
                 case 1:
@@ -79,24 +77,24 @@ public class Ejendom extends EjeligtFelt {
 
                     break;
                 default:
-                    System.out.println("ikke en mulighed endnu, men skriv gerne til os hvis der er noget du vil have");
+                    userInterface.ikkeMuligt();
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterface.betalRente();
-            this.indsamleLeje(spillerMedTur);
+            this.indsamleLeje(spillerMedTur,userInterface);
         }else if(this.getEjer() == spillerMedTur){
             userInterface.tetPaaMonopol();
         }
     }
 
-    public void indsamleLeje(SpillerController spilleren){
+    public void indsamleLeje(SpillerController spilleren,UserInterface userInterface){
         SpillerController ejeren = this.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
             spilleren.setPenge(spilleren.getPenge()-getLeje());
             ejeren.addPenge(getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
         }else{
-            System.out.println("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
+            userInterface.badErrorMessage();
         }
     }
     //|--------- Constructor:-----------------
