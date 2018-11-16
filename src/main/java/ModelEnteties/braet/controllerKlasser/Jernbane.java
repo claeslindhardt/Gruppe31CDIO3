@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Jernbane extends EjeligtFelt {
     //|-------initiering af objekter: -----------
     Scanner sc = new Scanner(System.in);
-    //TODO: fix singleton og ryk alle sout op i TUI
+    //TODO: fix singleton
     //|----------- Metoder:------------------
     public void printInfo(UserInterface userInterface){
         userInterface.jernBaneInfo(this);

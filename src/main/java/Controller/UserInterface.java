@@ -2,10 +2,7 @@ package Controller;
 
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.GaaIFaengsel;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
-import ModelEnteties.braet.controllerKlasser.Start;
-import ModelEnteties.braet.controllerKlasser.Taxi;
+import ModelEnteties.braet.controllerKlasser.*;
 
 public interface UserInterface {
     void TurMenu(int getSpillerTur);
@@ -64,4 +61,9 @@ public interface UserInterface {
     void forsetTur();
     void ejetAfEnAnden();
     void tetPaaMonopol();
+    void chanceFeltsInfo(ChanceFelt felt);
+    void gennemfortKoeb();
+    void ejendomsInfo(Ejendom ej);
+    void betalRente();
+    void duErLandetPå();
 }

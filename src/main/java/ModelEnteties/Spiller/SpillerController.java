@@ -1,7 +1,9 @@
 package ModelEnteties.Spiller;
 
+import Controller.SpilData;
 import Controller.UserInterface;
 import Controller.SpilController;
+import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 public class SpillerController extends SpillerData {
@@ -94,31 +96,28 @@ public class SpillerController extends SpillerData {
     /*
     public void bygPaaEjendom(){
 
-    }
+    }*/
     //_____________________________________
     //Koebe og salg funktioner:
 
-    //Todo: generaliser køb af ejelige braet således at de får den samme funktion og koden bliver lettere skalerbar.
-    public void koebEjendom(Ejendom ønsketEjendom,UserInterface userInterface) {
+    public void koebEjendom(Ejendom ønsketEjendom, UserInterface userInterface) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
-        Spiller relevantSpiller = SpilData.getSpillerMedTur();
-        if (ønsketEjendom.getEjer() == relevantSpiller) {
-            System.out.println("Du er allerede ejer");
+        if (ønsketEjendom.getEjer() == this) {
+            userInterface.tetPaaMonopol();
         }
-        else if (relevantSpiller.penge > ønsketEjendom.getPris()) {
-            System.out.println("du kan købe grunden hurra!!");
+        else if (this.penge > ønsketEjendom.getPris()) {
+            userInterface.gennemfortKoeb();
             //Todo: fix enkapsulering her
-            relevantSpiller.penge -= ønsketEjendom.getPris();
-            System.out.println("Ejendommen er nu din!");
+            this.penge -= ønsketEjendom.getPris();
 
             //skifte ejerskab
-            ønsketEjendom.setEjer(relevantSpiller);
-            relevantSpiller.spillerEjendomme.add(ønsketEjendom);
+            ønsketEjendom.setEjer(this);
+            this.spillerEjendomme.add(ønsketEjendom);
         } else {
-            System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+            userInterface.monetosMangel();
         }
     }
-    */
+    /*
     public void koebJernbane(Jernbane relevantJernbane, UserInterface userInterface,SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {

@@ -3,10 +3,7 @@ package BaundaryView.TUI;
 import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.GaaIFaengsel;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
-import ModelEnteties.braet.controllerKlasser.Start;
-import ModelEnteties.braet.controllerKlasser.Taxi;
+import ModelEnteties.braet.controllerKlasser.*;
 
 import java.util.ArrayList;
 
@@ -25,6 +22,7 @@ import java.util.ArrayList;
  * lave en GUI.
  */
 public class TUI implements UserInterface {
+    //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -247,12 +245,40 @@ public class TUI implements UserInterface {
                 "\nJa(1), nej(2)");
     }
     public void forsetTur(){
-        System.out.println("fotrsæt din tur");
+        System.out.println("forsæt din tur");
     }
     public void ejetAfEnAnden(){
         System.out.println("en anden Spiller ejer dette felt, Du kan derfor ikke købe det");
     }
     public void tetPaaMonopol(){
-        System.out.println("du er landet på en jernbane du ejer, nermer du dig et monopoly?");
+        System.out.println("du er landet på et sted du ejer, nermer du dig et monopoly?");
     }
+    public void chanceFeltsInfo(ChanceFelt felt){
+        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
+                +"\nKort på felt:");
+        for(int i = 0; i<felt.getKortPaaFelt().size();i++){
+            System.out.print(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
+        }
+        System.out.print(" |");
+        System.out.println(" ");
+    }
+    public void gennemfortKoeb(){
+        System.out.println("du kan købe grunden hurra!!");
+        System.out.println("Ejendommen er nu din!");
+
+    }
+    public void ejendomsInfo(Ejendom ej){
+        System.out.println("| Felt nr: " + ej.getPlacering() +" | Felt Navn:" + ej.getNavn()+" | Felt type:"+ ej.getFeltType()+" |"+
+                "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
+                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ej.getEjer()+"|");
+    }
+
+    public void betalRente(){
+        System.out.println("en anden Spiller ejer dette felt, du betaler derfor rente til ham:");
+    }
+    public void duErLandetPå(){
+        System.out.println("Du er landet på ");
+    }
+
 }
