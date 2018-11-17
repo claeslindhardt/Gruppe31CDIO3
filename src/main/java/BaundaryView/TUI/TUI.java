@@ -1,7 +1,10 @@
 package BaundaryView.TUI;
 
+import Controller.UserInterface;
+import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.Faengsel;
+import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 import java.util.ArrayList;
 
@@ -19,7 +22,8 @@ import java.util.ArrayList;
  * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
  * lave en GUI.
  */
-public class TUI {
+public class TUI implements UserInterface {
+    //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -153,5 +157,173 @@ public class TUI {
     }
     public void duGavIkkeOp(){
         System.out.println("Du valgte ikke at give op. ");
+    }
+    public void passeringAfStart(int gangeOverStart){
+        System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
+    }
+    public void chanceKortHar(){
+        System.out.println("Du har følgende Chance Kort:");
+    }
+    public void chanceKortNr(int i, SpillerController spiller){
+        System.out.println("Chance kort nr. "+i+": ");
+        System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+
+    }
+    public void chanceKortsVejledning(){
+        System.out.println("-------------------------------");
+        System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
+                "\nEller hvis du vil tilbage til tur menuen (-1):"
+        );
+    }
+    public void ingenChanceKort(){
+        System.out.println("Du har ikke nogen Chance Kort lige nu.");
+    }
+
+    public void jernBaneInfo(Jernbane stadtion){
+        System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+stadtion.getEjer()+"|");
+    }
+    public void hvorHen(int pos){
+        System.out.println("Din nuværende position er: "+ pos);
+        System.out.println("Hvor vil de hen?: ");
+    }
+    public void holdDigPaaBrettet(){
+        System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
+    }
+    public void overStart(int pos){
+        System.out.println("Din position er: "+ pos);
+        System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
+    }
+    public void spillerStat(SpillerController spiller){
+        System.out.println("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
+
+    }
+
+    public void alleredeEjer(){
+        System.out.println("Du er allerede ejer");
+    }
+
+    public void dinJernbane(){
+        System.out.println("Jernbanen er nu din!");
+    }
+    public void monetosMangel(){
+        System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+    }
+    public void taxiInfo(Taxi vogn){
+        System.out.println("| Felt nr: " + vogn.getPlacering() +" | Felt Navn:" + vogn.getNavn()+" | Felt type:"+ vogn.getFeltType()+" |");
+    }
+    public void overStartAnimation(){
+        System.out.println("Aktion som følger af Start");
+    }
+    public void startsFeltsInfo(Start felt){
+        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
+    }
+    public void iFaengselMedDig(){
+        System.out.println("HOV HOV HOV, meget kan man bøje men ikke loven!");
+        System.out.println("Fordi du er landet på et felt, hvor man bliver kriminel");
+        System.out.println("Skal du en tur i kashotten.");
+    }
+    public void faengselInfo(GaaIFaengsel Faengsel){
+        System.out.println("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
+
+    }
+    public void muligeDestinationer(){
+        System.out.println("Du kan rejse til ");
+    }
+    public void stationsMuligheder(){
+        System.out.println("hvis du ønkser ikke at rejse tast 0, " +
+                "\nellers intast den destination du ønsker at rejse til:");
+    }
+    public void turEfterJernbane(){
+        System.out.println("Du kan nu forsætte din tur men får ikke muligheden for at tage jernbanen igen i denne tur," +
+                "\n Det tog er kørt!");
+    }
+    public void manglerJernbaner(){
+        System.out.println("Du ejer ikke nok jernabaner til at rejse:");
+
+    }
+    public void jernBaneTilbud(){
+        System.out.println("Du er landet på et jernbanefelt, og ingen ejer det - vil du købe det?" +
+                "\nJa(1), nej(2)");
+    }
+    public void forsetTur(){
+        System.out.println("forsæt din tur");
+    }
+    public void ejetAfEnAnden(){
+        System.out.println("en anden Spiller ejer dette felt, Du kan derfor ikke købe det");
+    }
+    public void tetPaaMonopol(){
+        System.out.println("du er landet på et sted du ejer, nermer du dig et monopoly?");
+    }
+    public void chanceFeltsInfo(ChanceFelt felt){
+        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
+                +"\nKort på felt:");
+        for(int i = 0; i<felt.getKortPaaFelt().size();i++){
+            System.out.print(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
+        }
+        System.out.print(" |");
+        System.out.println(" ");
+    }
+    public void gennemfortKoeb(){
+        System.out.println("du kan købe grunden hurra!!");
+        System.out.println("Ejendommen er nu din!");
+
+    }
+    public void ejendomsInfo(Ejendom ej){
+        System.out.println("| Felt nr: " + ej.getPlacering() +" | Felt Navn:" + ej.getNavn()+" | Felt type:"+ ej.getFeltType()+" |"+
+                "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
+                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ej.getEjer()+"|");
+    }
+
+    public void betalRente(){
+        System.out.println("en anden Spiller ejer dette felt, du betaler derfor rente til ham:");
+    }
+    public void duErLandetPå(){
+        System.out.println("Du er landet på ");
+    }
+    public void badErrorMessage(){
+        System.out.println("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
+    }
+    public void ejendomsBud(){
+        System.out.println("Det er en ejendom vil du købe den?"+
+                "\nJa(1), nej(2)"
+        );
+    }
+    public void spillerEjendele(SpillerController spiller){
+        System.out.println("Ejendeomme: ");
+        for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
+            spiller.getSpillerEjendomme().get(i).printInfo();
+        }
+        System.out.println("Jernbaner: ");
+        for(int i = 0; i<spiller.getSpillerJernbaner().size();i++){
+            spiller.getSpillerJernbaner().get(i).printInfo();
+
+        }
+    }
+    public void bretPrinter(String felt){
+        System.out.println("______________________________________________________________________________");
+        System.out.println(felt);
+    }
+    public void terminalLine(){
+        System.out.println("______________________________________________________________________________");
+    }
+    public void chanceKortGenereringsFejl(){
+        System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
+    }
+    public void printChanceKortDirekte(ChanceAktion di){
+        System.out.println(di.getBeskrivelse());
+
+    }
+    public void chanceKortTilføjet(){
+        System.out.println("Dette kort vil blive tilføjet til dine chance kort," +
+                "\ndu kan bruge det når du ønsker."
+        );
+    }
+    public void chanceKortBrugt(){
+        System.out.println("Du har nu brugt dit Taxi chance kort");
+    }
+    public void brugtUdAfFaengsel(){
+        System.out.println("Du har brugt din gratis ud af feangsel, var du bag trammer er du nu fri," +
+                "\nhvid du ikke var får du alligvel lov til at slå med terningerne igen.");
     }
 }

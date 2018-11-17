@@ -1,146 +1,132 @@
 package ModelEnteties.Spiller;
 
-import BaundaryView.TUI.TUI;
+import Controller.SpilData;
+import Controller.UserInterface;
 import Controller.SpilController;
+import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
-    public void givOp(SpilController spil, TUI UserInterface){
+    public void givOp(SpilController spil, UserInterface userInterface){
         int svar;
-        UserInterface.vilDuGiveOp();
-        svar = sc.nextInt();
+        userInterface.vilDuGiveOp();
+        svar = getScanner().nextInt();
         if(svar==1) {
             setHarGivetOp(true);
             getSpillerEjendomme().clear();
-            UserInterface.takForSpillet();
+            userInterface.takForSpillet();
             spil.slutSpillerTur();
         }
         else {
-            UserInterface.duGavIkkeOp();
+            userInterface.duGavIkkeOp();
         }
 
-    }/*
-    public void passeringAfStart (int terningvalg) {
+    }
+    public int passeringAfStart (int terningvalg, SpilController spil, UserInterface userInterface) {
 
-        getSpillerPosition() = (getSpillerPosition()+ terningvalg)%SpilData.getAntalFelter();
-        int gangeOverStart = (spillerPosition+terningvalg)/SpilData.getAntalFelter();
+        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
+        int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
 
         penge += 200*gangeOverStart;
-        System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
-
-    }/*
-    public void chanceKortMuligheder(){
+        userInterface.passeringAfStart(gangeOverStart);
+        return gangeOverStart;
+    }
+    public void chanceKortMuligheder(UserInterface userInterface){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFelt
             aktivere et udvalgt ChanceFelt
-         *//*
+         */
         if(spillerAktionsKort.size()>0){
             //Her printes de forskellige muligher:
-            System.out.println("Du har følgende Chance Kort:");
+            userInterface.chanceKortHar();
             for(int i = 0; i<getSpillerAktionsKort().size();i++){
-                System.out.println("Chance kort nr. "+i+": ");
-                System.out.println(getSpillerAktionsKort().get(i).getBeskrivelse());
+                userInterface.chanceKortNr(i,this);
             }
 
             //Her er controlleren der lader en reagere på mulighederne
-            System.out.println("-------------------------------");
-            System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
-                    "\nEller hvis du vil tilbage til tur menuen (-1):"
-            );
-            int valg = sc.nextInt();
+            userInterface.chanceKortsVejledning();
+            int valg = getScanner().nextInt();
             if(valg == -1){ }
             else if(valg != -1){
                 getSpillerAktionsKort().get(valg).BetingetAktion();
                 getSpillerAktionsKort().remove(valg);
             }
         }else{
-            System.out.println("Du har ikke nogen Chance Kort lige nu.");
+            userInterface.ingenChanceKort();
         }
     }
-    public void tagTaxi(){
-        //Todo omskriv denne funktion så den gør brug af den ligger i spiller og ikke behøver hente SpillerMedTur
+    public void tagTaxi(SpilController spil,UserInterface userInterface){
         int destination;
-        Spiller relavantSpiller = SpilData.getSpillerMedTur();
+        //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
-        relavantSpiller.setHarSlaaetForTuren(true);
-        System.out.println("Din nuværende position er: "+ relavantSpiller.getSpillerPosition());
-        System.out.println("Hvor vil de hen?: ");
-        destination = sc.nextInt();
-        if(destination>SpilData.getAntalFelter() || destination< 1 ){
-            System.out.println("Den går ikke, du skulle have valgt noget der ligger inden for brettets antal braet");
+        this.setHarSlaaetForTuren(true);
+        userInterface.hvorHen(this.getSpillerPosition());
+        destination = getScanner().nextInt();
+        if(destination>spil.getAntalFelter() || destination< 1 ){
+            userInterface.holdDigPaaBrettet();
         }else{
-            relavantSpiller.setSpillerPosition(destination);
-            System.out.println("Din position er: "+ relavantSpiller.getSpillerPosition());
-            System.out.println("Du har i den rundt fart med taxien kommet til at passere Start, modtag 200");
-            relavantSpiller.addPenge(200);
+            this.setSpillerPosition(destination);
+            userInterface.overStart(this.getSpillerPosition());
+            this.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
-            SpilData.getBretGeneretForSpil().getBret().get(SpilData.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
         }
     }
     //_____________________________________
     //Vis og print funktinoer:
-    public void printSpillerStats(){
-        System.out.println("Navn: "+getNavn()+" ID:"+getId()+" getPlacering(): "+getSpillerPosition()+" Penge: "+getPenge());
+    public void printSpillerStats(UserInterface userInterface){
+        userInterface.spillerStat(this);
     }
-    public void visEjendeFelter(){
-        System.out.println("Ejendeomme: ");
-        for(int i = 0; i<spillerEjendomme.size();i++){
-            spillerEjendomme.get(i).printInfo();
-        }
-        System.out.println("Jernbaner: ");
-        for(int i = 0; i<spillerJernbaner.size();i++){
-            spillerJernbaner.get(i).printInfo();
 
-        }
+    public void visEjendeFelter(UserInterface userInterface){
+        userInterface.spillerEjendele(this);
     }
+    /*
     public void bygPaaEjendom(){
 
-    }
+    }*/
     //_____________________________________
     //Koebe og salg funktioner:
 
-    //Todo: generaliser køb af ejelige braet således at de får den samme funktion og koden bliver lettere skalerbar.
-    public void koebEjendom(Ejendom ønsketEjendom) {
+    public void koebEjendom(Ejendom ønsketEjendom, UserInterface userInterface) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
-        Spiller relevantSpiller = SpilData.getSpillerMedTur();
-        if (ønsketEjendom.getEjer() == relevantSpiller) {
-            System.out.println("Du er allerede ejer");
+        if (ønsketEjendom.getEjer() == this) {
+            userInterface.tetPaaMonopol();
         }
-        else if (relevantSpiller.penge > ønsketEjendom.getPris()) {
-            System.out.println("du kan købe grunden hurra!!");
+        else if (this.penge > ønsketEjendom.getPris()) {
+            userInterface.gennemfortKoeb();
             //Todo: fix enkapsulering her
-            relevantSpiller.penge -= ønsketEjendom.getPris();
-            System.out.println("Ejendommen er nu din!");
+            this.penge -= ønsketEjendom.getPris();
 
             //skifte ejerskab
-            ønsketEjendom.setEjer(relevantSpiller);
-            relevantSpiller.spillerEjendomme.add(ønsketEjendom);
+            ønsketEjendom.setEjer(this);
+            this.spillerEjendomme.add(ønsketEjendom);
         } else {
-            System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+            userInterface.monetosMangel();
         }
     }
 
-    public void koebJernbane(Jernbane relevantJernbane){
+    public void koebJernbane(Jernbane relevantJernbane, UserInterface userInterface,SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
-        Spiller spillerMedTur = SpilData.getSpillerMedTur();
-        if (relevantJernbane.getEjer() == spillerMedTur) {
-            System.out.println("Du er allerede ejer");
-        } else if (penge > relevantJernbane.getPris()) {
-            //Todo: fix enkapsulering her
-            penge -= relevantJernbane.getPris();
-            System.out.println("Jernbanen er nu din!");
-
+        if (relevantJernbane.getEjer() == this) {
+            userInterface.alleredeEjer();
+        } else if (getPenge() > relevantJernbane.getPris()) {
+            setPenge(getPenge()-relevantJernbane.getPris());
+            userInterface.dinJernbane();
+            //Todo: fix enkapsulering herunder:
             //skifte ejerskab
-            relevantJernbane.setEjer(spillerMedTur);;
+            relevantJernbane.setEjer(this);;
             spillerJernbaner.add(relevantJernbane);
-            relevantJernbane.tagTog();
+            relevantJernbane.tagTog(spil, userInterface);
         } else {
-            System.out.println("Du har ikke råd på nuværende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
+            userInterface.monetosMangel();
         }
     }
+    /*
     public void handelMedEjendomme(){
         /*
                 her skal man kunne:

@@ -3,6 +3,8 @@ package ModelEnteties.Spiller;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,9 +18,6 @@ import java.util.Scanner;
  *  som indholder alle de spillere der indgår i et givet spil.
  */
 public abstract class SpillerData {
-    //|-------initiering af objekter: -----------
-    Scanner sc =new Scanner(System.in);
-
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;
@@ -32,7 +31,26 @@ public abstract class SpillerData {
     boolean harAnketDomDenneRunde = false;
     boolean harSlaaetForTuren = false;
 
+    //Singleton Variabler;
+    private RandomSingleton randomTal = RandomSingleton.getInstance();
+    private ScannerSingleton scanner = ScannerSingleton.getInstance();
+
     //|--------- Getters og Setters:-----------------
+    public RandomSingleton getRandomTal() {
+        return randomTal;
+    }
+
+    public void setRandomTal(RandomSingleton randomTal) {
+        this.randomTal = randomTal;
+    }
+
+    public ScannerSingleton getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(ScannerSingleton scanner) {
+        this.scanner = scanner;
+    }
     public int getSpillerPosition() {
         return spillerPosition;
     }
