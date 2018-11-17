@@ -15,14 +15,15 @@ public class SpilController extends SpilData {
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem.
      */
-    public SpilController(){
-
+    public SpilController(UserInterface gui){
+        this.userInterface =gui;
     }
-    public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense){
+    public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense,UserInterface gui){
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
         this.setAntalTerninger(antalTerninger);
         this.setBankeraadGraense(bankeRaadtGrense);
+        this.userInterface =gui;
     }
     //_____________________________________
     // Diverse:
