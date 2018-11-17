@@ -122,7 +122,7 @@ public class TUI implements UserInterface {
     }
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
         System.out.print("Du slog: ");
-        printTerninger(terningsKrus);
+        //printTerninger(terningsKrus);
         System.out.print("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
     }
 
