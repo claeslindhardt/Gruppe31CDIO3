@@ -103,7 +103,11 @@ public class Ejendom extends EjeligtFelt {
         setPris(whatPrice);
         setNavn(whatName);
         setLeje(whatRent);
-        setGruppe(EjendomsGruppe.get(this)); // Getting a group for this property
+
+        EjendomsGruppe ejendomsGruppe = EjendomsGruppe.getKlarGruppe();
+        setGruppe(ejendomsGruppe); // Getting a group for this property
+        ejendomsGruppe.tilfoejEjendom(this);
+
         addAlleEjendomme(this);
         setAntalHoteller(0);
         setAntalHuse(0);
