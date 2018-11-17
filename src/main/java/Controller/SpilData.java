@@ -44,9 +44,16 @@ public abstract class SpilData {
     public boolean kør = true;
     public boolean vinderFindes = false;
     public SpilleBraetData bretGeneretForSpil;
-    public TUI UserInterface = new TUI();
+    public UserInterface userInterface;
 
     //|--------- Getters og Setters:-----------------
+    public UserInterface getUserInterface() {
+        return userInterface;
+    }
+
+    public void setUserInterface(UserInterface userInterface) {
+        this.userInterface = userInterface;
+    }
     public SpillerController getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
     }
