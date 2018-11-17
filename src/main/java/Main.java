@@ -37,14 +37,10 @@ public class Main {
     9. hvis der kun er en spiller tilbage vil han blive erkleret vinder!!!!!
     10. ellers vil turen blive givet videre til den næste i række følgen.
     |============================================|
-     *//*
+     */
         TUI Ui = new TUI();
         SpilController spil = new SpilController(Ui);
-        spil.startMenu();
-        spil.genererSpillere(spil.getAntalSpillere());
-        spil.BretGenerator spilleBret = new BretGenerator(spil.getAntalFelter());
-        spil.RafleBaeger terningsKrus = new Raflebaeger(spil.antalTerninger);
-        spil.setBretGeneretForSpil(spilleBret);
+
 
         while(spil.isKør()){
             spil.tjekForVinder();
@@ -53,11 +49,11 @@ public class Main {
 
             //Kører kun hvis ikke der er en der har vundet spillet
             if(!spil.isVinderFindes()){
-                spil.turMenu(spilleBret,terningsKrus);
+                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
             }
 
         }
-        UserInterface.spilletErSlut();
+        spil.userInterface.spilletErSlut();
         /*
         SpillerController spiller = new SpillerController("bo",2,25);
         TUI UserInterface = new TUI();

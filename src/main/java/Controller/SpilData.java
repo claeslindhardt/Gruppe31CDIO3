@@ -2,6 +2,8 @@ package Controller;
 
 import BaundaryView.TUI.TUI;
 import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.SpilleBraetData;
 
 import java.util.ArrayList;
@@ -43,10 +45,18 @@ public abstract class SpilData {
     public int bankeraadGraense = 15;
     public boolean kør = true;
     public boolean vinderFindes = false;
-    public SpilleBraetData bretGeneretForSpil;
+    public SpilleBraetController bretGeneretForSpil;
     public UserInterface userInterface;
+    public RafleBaeger terningeKrus;
 
     //|--------- Getters og Setters:-----------------
+    public RafleBaeger getTerningeKrus() {
+        return terningeKrus;
+    }
+
+    public void setTerningeKrus(RafleBaeger terningeKrus) {
+        this.terningeKrus = terningeKrus;
+    }
     public UserInterface getUserInterface() {
         return userInterface;
     }
@@ -128,11 +138,11 @@ public abstract class SpilData {
     public void setBankeraadGraense(int bankeraadsgraense) {
         this.bankeraadGraense = bankeraadsgraense;
     }
-    public SpilleBraetData getBretGeneretForSpil() {
+    public SpilleBraetController getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }
 
-    public void setBretGeneretForSpil(SpilleBraetData generetBretForSpil) {
+    public void setBretGeneretForSpil(SpilleBraetController generetBretForSpil) {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 

@@ -17,6 +17,12 @@ public class SpilController extends SpilData {
      */
     public SpilController(UserInterface gui){
         this.userInterface =gui;
+        startMenu();
+        genererSpillere(getAntalSpillere());
+        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(),userInterface);
+        RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
+        setTerningeKrus(terningsKrus);
+        setBretGeneretForSpil(spilleBret);
     }
     public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense,UserInterface gui){
         this.setAntalSpillere(antalSpillere);
@@ -24,6 +30,11 @@ public class SpilController extends SpilData {
         this.setAntalTerninger(antalTerninger);
         this.setBankeraadGraense(bankeRaadtGrense);
         this.userInterface =gui;
+        genererSpillere(getAntalSpillere());
+        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(),userInterface);
+        RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
+        setTerningeKrus(terningsKrus);
+        setBretGeneretForSpil(spilleBret);
     }
     //_____________________________________
     // Diverse:
