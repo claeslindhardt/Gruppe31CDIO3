@@ -10,6 +10,8 @@
 
 .idea/libraries
 
+.idea/vcs.xml
+
 *.jar
 
 out/
