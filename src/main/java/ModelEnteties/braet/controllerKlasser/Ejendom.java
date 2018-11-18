@@ -65,7 +65,7 @@ public class Ejendom extends EjeligtFelt {
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             userInterface.duErLandetPå();
-            this.printInfo();
+            this.printInfo(userInterface);
 
             userInterface.ejendomsBud();
             int kobsBeslutning = sc.nextInt();

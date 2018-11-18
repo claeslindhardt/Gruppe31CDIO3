@@ -14,7 +14,7 @@ public class Jernbane extends EjeligtFelt {
     Scanner sc = new Scanner(System.in);
     //TODO: fix singleton
     //|----------- Metoder:------------------
-    public void printInfo(SpilController spil, UserInterface userInterface){
+    public void printInfo(UserInterface userInterface){
         userInterface.jernBaneInfo(this);
     }
     public void tagTog(SpilController spil,UserInterface userInterface){
@@ -31,7 +31,7 @@ public class Jernbane extends EjeligtFelt {
             userInterface.muligeDestinationer();
             for(int i = 0;i<muligeRejser.size();i++){
                 System.out.print(i+1+": ");
-                muligeRejser.get(i).printInfo();
+                muligeRejser.get(i).printInfo(userInterface);
             }
             userInterface.stationsMuligheder();
             int destination = sc.nextInt();

@@ -292,11 +292,11 @@ public class TUI implements UserInterface {
     public void spillerEjendele(SpillerController spiller){
         System.out.println("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
-            spiller.getSpillerEjendomme().get(i).printInfo();
+            spiller.getSpillerEjendomme().get(i).printInfo(this);
         }
         System.out.println("Jernbaner: ");
         for(int i = 0; i<spiller.getSpillerJernbaner().size();i++){
-            spiller.getSpillerJernbaner().get(i).printInfo();
+            spiller.getSpillerJernbaner().get(i).printInfo(this);
 
         }
     }

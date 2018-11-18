@@ -45,6 +45,6 @@ public abstract class Felt {
 
     //|----------- Metoder:------------------
     //Disse er ikke i brug i denne forældre klasse men alt afgørende for, klassens børn
-    public void printInfo(){ }
+    public void printInfo(UserInterface userInterface){ }
     public void aktionPaaFelt(SpilController spil, UserInterface userInterface){}
 }
