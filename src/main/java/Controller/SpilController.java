@@ -104,7 +104,7 @@ public class SpilController extends SpilData {
             }
             tjekForPasseringAfStartOgRykSpiller(terningsKrus);
             getUserInterface().midtTerminalLinje();
-            spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+           spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this,getUserInterface());
         }else{
             getUserInterface().harSlaaetMedTerningfor();
         }

@@ -26,7 +26,6 @@ public class SpillerController extends SpillerData {
 
     }
     public int passeringAfStart (int terningvalg, SpilController spil, UserInterface userInterface) {
-
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
@@ -74,7 +73,7 @@ public class SpillerController extends SpillerData {
             userInterface.overStart(this.getSpillerPosition());
             this.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
-            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(spil,userInterface);
         }
     }
     //_____________________________________

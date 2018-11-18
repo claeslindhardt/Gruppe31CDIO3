@@ -86,5 +86,4 @@ public abstract class EjeligtFelt extends Felt{
         EjeligtFelt.alleJernbaner.add(enJernbane);
     }
 
-
 }

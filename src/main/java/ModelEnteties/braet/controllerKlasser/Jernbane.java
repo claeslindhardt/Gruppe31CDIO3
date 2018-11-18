@@ -14,7 +14,7 @@ public class Jernbane extends EjeligtFelt {
     Scanner sc = new Scanner(System.in);
     //TODO: fix singleton
     //|----------- Metoder:------------------
-    public void printInfo(UserInterface userInterface){
+    public void printInfo(SpilController spil, UserInterface userInterface){
         userInterface.jernBaneInfo(this);
     }
     public void tagTog(SpilController spil,UserInterface userInterface){

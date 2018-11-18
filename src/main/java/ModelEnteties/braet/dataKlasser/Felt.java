@@ -1,4 +1,8 @@
 package ModelEnteties.braet.dataKlasser;
+
+import Controller.SpilController;
+import Controller.UserInterface;
+
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: Felt
  * @author Claes
@@ -42,5 +46,5 @@ public abstract class Felt {
     //|----------- Metoder:------------------
     //Disse er ikke i brug i denne forældre klasse men alt afgørende for, klassens børn
     public void printInfo(){ }
-    public void aktionPaaFelt(){ }
+    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){}
 }
