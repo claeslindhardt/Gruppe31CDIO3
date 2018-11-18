@@ -27,8 +27,9 @@ public class SpillerController extends SpillerData {
     }
     public int passeringAfStart (int terningvalg, SpilController spil, UserInterface userInterface) {
 
-        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
+        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
+
 
         penge += 200*gangeOverStart;
         userInterface.passeringAfStart(gangeOverStart);
