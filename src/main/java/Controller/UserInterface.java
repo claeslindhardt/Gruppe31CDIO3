@@ -4,7 +4,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-
+//todo: brug ordet kontrakt her
 public interface UserInterface {
     void TurMenu(int getSpillerTur);
     void ikkeMuligt();
