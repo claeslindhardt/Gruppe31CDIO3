@@ -22,6 +22,8 @@ public abstract class SpillerData {
     private int spillerPosition=0;
     private int id;
     private String navn;
+    //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
+    //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
     ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
     ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
@@ -30,6 +32,7 @@ public abstract class SpillerData {
     boolean harGivetOp=false;
     boolean harAnketDomDenneRunde = false;
     boolean harSlaaetForTuren = false;
+
 
     //Singleton Variabler;
     private RandomSingleton randomTal = RandomSingleton.getInstance();

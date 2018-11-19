@@ -24,6 +24,7 @@ public class SpilController extends SpilData {
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
     }
+
     public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense,UserInterface gui){
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
@@ -104,7 +105,7 @@ public class SpilController extends SpilData {
             }
             tjekForPasseringAfStartOgRykSpiller(terningsKrus);
             getUserInterface().midtTerminalLinje();
-            spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt();
+           spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this,getUserInterface());
         }else{
             getUserInterface().harSlaaetMedTerningfor();
         }

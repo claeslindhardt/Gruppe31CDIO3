@@ -60,11 +60,12 @@ public class Ejendom extends EjeligtFelt {
     public void printInfo(UserInterface userInterface){
         userInterface.ejendomsInfo(this);
     }
+
     public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             userInterface.duErLandetPå();
-            this.printInfo();
+            this.printInfo(userInterface);
 
             userInterface.ejendomsBud();
             int kobsBeslutning = sc.nextInt();
@@ -103,7 +104,11 @@ public class Ejendom extends EjeligtFelt {
         setPris(whatPrice);
         setNavn(whatName);
         setLeje(whatRent);
-        setGruppe(EjendomsGruppe.get(this)); // Getting a group for this property
+
+        EjendomsGruppe ejendomsGruppe = EjendomsGruppe.getKlarGruppe();
+        setGruppe(ejendomsGruppe); // Getting a group for this property
+        ejendomsGruppe.tilfoejEjendom(this);
+
         addAlleEjendomme(this);
         setAntalHoteller(0);
         setAntalHuse(0);
