@@ -110,7 +110,7 @@ public class RafleBaeger {
      * en slåning med Raflebagereret.
      */
     public ArrayList<Integer> FaaTerningVærdier(){
-        ArrayList<Integer> Terninger = null;
+        ArrayList<Integer> Terninger = new ArrayList<Integer>();
         for(int i= 0; i< getAntalTerninger();i++){
             Terninger.add(getTerning(i).getVaerdi());
         }
