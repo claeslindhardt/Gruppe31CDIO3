@@ -24,6 +24,7 @@ public class SpilController extends SpilData {
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
     }
+
     public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense,UserInterface gui){
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
