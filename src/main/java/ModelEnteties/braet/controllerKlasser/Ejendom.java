@@ -60,11 +60,12 @@ public class Ejendom extends EjeligtFelt {
     public void printInfo(UserInterface userInterface){
         userInterface.ejendomsInfo(this);
     }
+
     public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             userInterface.duErLandetPå();
-            this.printInfo();
+            this.printInfo(userInterface);
 
             userInterface.ejendomsBud();
             int kobsBeslutning = sc.nextInt();

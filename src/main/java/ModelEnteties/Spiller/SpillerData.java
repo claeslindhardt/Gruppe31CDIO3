@@ -33,6 +33,7 @@ public abstract class SpillerData {
     boolean harAnketDomDenneRunde = false;
     boolean harSlaaetForTuren = false;
 
+
     //Singleton Variabler;
     private RandomSingleton randomTal = RandomSingleton.getInstance();
     private ScannerSingleton scanner = ScannerSingleton.getInstance();

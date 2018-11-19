@@ -1,5 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
+import Controller.SpilController;
 import Controller.UserInterface;
 import ModelEnteties.braet.dataKlasser.AktionsFelter;
 
@@ -17,7 +18,7 @@ public class Start extends AktionsFelter {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(UserInterface userInterface){
+    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
         userInterface.overStartAnimation();
     }
     public void printInfo(UserInterface userInterface){
