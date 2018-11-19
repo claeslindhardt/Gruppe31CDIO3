@@ -269,10 +269,18 @@ public class TUI implements UserInterface {
 
     }
     public void ejendomsInfo(Ejendom ej){
+        String ejer;
+        if(ej.getEjer() == null){
+            ejer = "Ingen ejer endnu";
+        }else{
+            ejer = ej.getEjer().getNavn();
+        }
+
+
         System.out.println("| Felt nr: " + ej.getPlacering() +" | Felt Navn:" + ej.getNavn()+" | Felt type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
                 " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
-                "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ej.getEjer()+"|");
+                "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
     }
 
     public void betalRente(){
