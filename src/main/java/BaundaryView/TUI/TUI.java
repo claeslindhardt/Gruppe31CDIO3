@@ -180,7 +180,14 @@ public class TUI implements UserInterface {
     }
 
     public void jernBaneInfo(Jernbane stadtion){
-        System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+stadtion.getEjer()+"|");
+        String ejer;
+        if(stadtion.getEjer() == null){
+            ejer = "Ingen ejer endnu";
+        }else{
+            ejer = stadtion.getEjer().getNavn();
+        }
+
+        System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
     }
     public void hvorHen(int pos){
         System.out.println("Din nuvaerende position er: "+ pos);
