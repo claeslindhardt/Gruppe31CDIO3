@@ -1,6 +1,6 @@
 package BaundaryView.GUI;
 
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  *
  */
-public class GUI implements UserInterface {
+public class GUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");

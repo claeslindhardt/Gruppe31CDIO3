@@ -1,6 +1,5 @@
 import BaundaryView.TUI.TUI;
 import Controller.SpilController;
-import ModelEnteties.Spiller.SpillerController;
 
 public class Main {
     public static void main(String[] args) {
@@ -53,10 +52,10 @@ public class Main {
             }
 
         }
-        spil.userInterface.spilletErSlut();
+        spil.userInterfaceKontrakt.spilletErSlut();
         /*
         SpillerController spiller = new SpillerController("bo",2,25);
-        TUI UserInterface = new TUI();
-        spiller.chanceKortMuligheder(UserInterface);*/
+        TUI UserInterfaceKontrakt = new TUI();
+        spiller.chanceKortMuligheder(UserInterfaceKontrakt);*/
     }
 }

@@ -5,7 +5,7 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
-public interface UserInterface {
+public interface UserInterfaceKontrakt {
     void TurMenu(int getSpillerTur);
     void ikkeMuligt();
     void velkomstMenu();

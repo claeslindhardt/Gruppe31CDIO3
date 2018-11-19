@@ -1,6 +1,6 @@
 package BaundaryView.TUI;
 
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
  * lave en GUI.
  */
-public class TUI implements UserInterface {
+public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
