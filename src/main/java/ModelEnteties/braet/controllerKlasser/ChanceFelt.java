@@ -25,7 +25,7 @@ public class ChanceFelt extends AktionsFelter {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil){
+    public void aktionPaaFelt(SpilController spil,UserInterface userInterface){
         int muligeKort = spil.getBretGeneretForSpil().getStandardAntalChanceKortPrFelt();
         int vælgAktion = ra.nextInt(muligeKort)+1;
         ChanceAktion relavantKort = KortPaaFelt.get(vælgAktion);
