@@ -1,7 +1,6 @@
 package ModelEnteties.Spiller;
 
-import Controller.SpilData;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import Controller.SpilController;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
@@ -14,31 +13,31 @@ public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
-    public void givOp(SpilController spil, UserInterface userInterface){
+    public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
-        userInterface.vilDuGiveOp();
+        userInterfaceKontrakt.vilDuGiveOp();
         svar = getScanner().nextInt();
         if(svar==1) {
             setHarGivetOp(true);
             getSpillerEjendomme().clear();
-            userInterface.takForSpillet();
+            userInterfaceKontrakt.takForSpillet();
             spil.slutSpillerTur();
         }
         else {
-            userInterface.duGavIkkeOp();
+            userInterfaceKontrakt.duGavIkkeOp();
         }
 
     }
-    public int passeringAfStart (int terningvalg, SpilController spil, UserInterface userInterface) {
+    public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
 
         penge += 200*gangeOverStart;
-        userInterface.passeringAfStart(gangeOverStart);
+        userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }
-    public void chanceKortMuligheder(UserInterface userInterface){
+    public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFelt
@@ -46,13 +45,13 @@ public class SpillerController extends SpillerData {
          */
         if(spillerAktionsKort.size()>0){
             //Her printes de forskellige muligher:
-            userInterface.chanceKortHar();
+            userInterfaceKontrakt.chanceKortHar();
             for(int i = 0; i<getSpillerAktionsKort().size();i++){
-                userInterface.chanceKortNr(i,this);
+                userInterfaceKontrakt.chanceKortNr(i,this);
             }
 
             //Her er controlleren der lader en reagere på mulighederne
-            userInterface.chanceKortsVejledning();
+            userInterfaceKontrakt.chanceKortsVejledning();
             int valg = getScanner().nextInt();
             if(valg == -1){ }
             else if(valg != -1){
@@ -60,46 +59,46 @@ public class SpillerController extends SpillerData {
                 getSpillerAktionsKort().remove(valg);
             }
         }else{
-            userInterface.ingenChanceKort();
+            userInterfaceKontrakt.ingenChanceKort();
         }
     }
-    public void tagTaxi(SpilController spil,UserInterface userInterface){
+    public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
         this.setHarSlaaetForTuren(true);
-        userInterface.hvorHen(this.getSpillerPosition());
+        userInterfaceKontrakt.hvorHen(this.getSpillerPosition());
         destination = getScanner().nextInt();
         if(destination>spil.getAntalFelter() || destination< 1 ){
-            userInterface.holdDigPaaBrettet();
+            userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
             this.setSpillerPosition(destination);
-            userInterface.overStart(this.getSpillerPosition());
+            userInterfaceKontrakt.overStart(this.getSpillerPosition());
             this.addPenge(200);
             //kalder en aktion på det felt man tager til med taxien
-            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(spil,userInterface);
+            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(spil, userInterfaceKontrakt);
         }
     }
     //_____________________________________
     //Vis og print funktinoer:
-    public void printSpillerStats(UserInterface userInterface){
-        userInterface.spillerStat(this);
+    public void printSpillerStats(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.spillerStat(this);
     }
 
-    public void visEjendeFelter(UserInterface userInterface){
-        userInterface.spillerEjendele(this);
+    public void visEjendeFelter(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.spillerEjendele(this);
     }
 
     //_____________________________________
     //Koebe og salg funktioner:
 
-    public void koebEjendom(Ejendom ønsketEjendom, UserInterface userInterface) {
+    public void koebEjendom(Ejendom ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if (ønsketEjendom.getEjer() == this) {
-            userInterface.tetPaaMonopol();
+            userInterfaceKontrakt.tetPaaMonopol();
         }
         else if (this.penge > ønsketEjendom.getPris()) {
-            userInterface.gennemfortKoeb();
+            userInterfaceKontrakt.gennemfortKoeb();
             //Todo: fix enkapsulering her
             this.penge -= ønsketEjendom.getPris();
 
@@ -107,27 +106,27 @@ public class SpillerController extends SpillerData {
             ønsketEjendom.setEjer(this);
             this.spillerEjendomme.add(ønsketEjendom);
         } else {
-            userInterface.monetosMangel();
+            userInterfaceKontrakt.monetosMangel();
         }
     }
 
-    public void koebJernbane(Jernbane relevantJernbane, UserInterface userInterface,SpilController spil){
+    public void koebJernbane(Jernbane relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {
-            userInterface.alleredeEjer();
+            userInterfaceKontrakt.alleredeEjer();
         } else if (getPenge() > relevantJernbane.getPris()) {
             setPenge(getPenge()-relevantJernbane.getPris());
-            userInterface.dinJernbane();
+            userInterfaceKontrakt.dinJernbane();
             //Todo: fix enkapsulering herunder:
             //skifte ejerskab
             relevantJernbane.setEjer(this);;
             spillerJernbaner.add(relevantJernbane);
-            relevantJernbane.tagTog(spil, userInterface);
+            relevantJernbane.tagTog(spil, userInterfaceKontrakt);
         } else {
-            userInterface.monetosMangel();
+            userInterfaceKontrakt.monetosMangel();
         }
     }
-    /*
+
     public void handelMedEjendomme(){
         /*
                 her skal man kunne:
@@ -135,7 +134,8 @@ public class SpillerController extends SpillerData {
                     byde på andre ejendomme
                     sætte sine egne på auktion
                  */
-    //}
+
+    }
 
 
     /**
@@ -238,4 +238,6 @@ public class SpillerController extends SpillerData {
         setId(ID);
         setNavn(NAVN);
     }
+
+
 }

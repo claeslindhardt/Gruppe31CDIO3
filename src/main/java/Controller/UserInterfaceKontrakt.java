@@ -7,10 +7,10 @@ import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 import java.util.ArrayList;
 
-public interface UserInterface {
+public interface UserInterfaceKontrakt {
     void TurMenu(int getSpillerTur);
     void ikkeMuligt();
-    void velkomstMenu();
+    int velkomstMenu();
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
     void startSpilGrundFejl();
     void instilingsSporgsmaal0();

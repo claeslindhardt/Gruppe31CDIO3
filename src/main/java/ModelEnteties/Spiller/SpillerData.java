@@ -141,6 +141,7 @@ public abstract class SpillerData {
     public void setHarGivetOp(boolean harGivetOp) {
         this.harGivetOp = harGivetOp;
     }
+
     public String getNavn() {
         return navn;
     }

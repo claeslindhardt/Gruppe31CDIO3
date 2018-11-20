@@ -1,7 +1,7 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
@@ -12,8 +12,8 @@ public class GiverPenge extends ChanceAktion {
     Random ra = new Random();
 
     //|----------- Metoder:--------------------
-    public void DirketeAktion(SpilController spil, UserInterface userInterface){
-        userInterface.printChanceKortDirekte(this);
+    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.printChanceKortDirekte(this);
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()+getPengeVerdi());
     }

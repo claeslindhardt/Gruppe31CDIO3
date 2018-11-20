@@ -1,11 +1,22 @@
 import Boundary.TUI.TUI;
+import Boundary.GUI.GUIinterface;
 import Controller.SpilController;
+import Controller.UserInterfaceKontrakt;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 public class Main {
     public static void main(String[] args) {
-        /**==========================================
-         |                  MAIN                   |
-         ==========================================*/
+
+
+    //Variabler: ________________________________
+        UserInterfaceKontrakt Ui;
+        Ui = new TUI();
+
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+
+    /**==========================================
+    |                  MAIN                   |
+    ==========================================*/
     /*
     ______________________________________________
     |Et standard exempel spil forløber(USE-Case):|
@@ -37,9 +48,21 @@ public class Main {
     10. ellers vil turen blive givet videre til den næste i række følgen.
     |============================================|
      */
-        TUI Ui = new TUI();
-        SpilController spil = new SpilController(Ui);
+    // Metode kald ________________________________
+        System.out.println("Hjerteligt velkommen til Monopoly junior" +
+                "\n----|input (1) for at spille med TUI(Text User Interface)" +
+                "\n----|input (2) for at spille med GUIinterface(graphical User Interface)"
+        );
+        int input = scan.nextInt();
 
+        if(input == 1) {
+            System.out.println("Du valgte en TUI");
+            Ui = new TUI();
+        } else if(input == 2) {
+            System.out.println("Du valgte en GUIinterface");
+            Ui = new GUIinterface();
+        }
+        SpilController spil = new SpilController(Ui);
 
         while(spil.isKør()){
             spil.tjekForVinder();
@@ -52,10 +75,10 @@ public class Main {
             }
 
         }
-        spil.userInterface.spilletErSlut();
+        spil.userInterfaceKontrakt.spilletErSlut();
         /*
         SpillerController spiller = new SpillerController("bo",2,25);
-        TUI UserInterface = new TUI();
-        spiller.chanceKortMuligheder(UserInterface);*/
+        TUI UserInterfaceKontrakt = new TUI();
+        spiller.chanceKortMuligheder(UserInterfaceKontrakt);*/
     }
 }

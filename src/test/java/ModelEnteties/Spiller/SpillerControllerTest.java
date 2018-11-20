@@ -2,7 +2,7 @@ package ModelEnteties.Spiller;
 
 import Boundary.TUI.TUI;
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
@@ -19,8 +19,27 @@ class SpillerControllerTest {
     void givOp() {
     }
 
+    /**
+     * @author Andreas
+     * Formål: At teste om vi kan passere start og fortsat blive på spillepladen
+     * Metode: brættet har 4 felter, spillers, start position er 0 (start), terningværdi er 5.
+     * Forventet: spillerplacering efter slag 1.
+     * Statur: Testen er godkendt og bestået.
+     */
     @Test
-    void passeringAfStart() {
+    void tjekForPasseringAfStartRykSpiller() {
+        int spillerTur =1;
+
+        UserInterface userInterface = new TUI();
+        SpilController spil = new SpilController(1,4,2,0,userInterface);
+
+
+        spil.terningeKrus.setTotalVaerdi(5);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+
+        int forventetSpillerPosition=1;
+        int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
+        assertEquals(aktuelSpillerPosition,forventetSpillerPosition);
     }
 
     @Test
@@ -48,10 +67,10 @@ class SpillerControllerTest {
 
         Ejendom ejendom = new Ejendom("Hajgade",100,50,0);
         SpillerController spiller = new SpillerController("Jacob",30,0);
-        UserInterface userInterface = new TUI();
+        UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
         ArrayList<Ejendom> mineEjendomme = new ArrayList<Ejendom>();
-        spiller.koebEjendom(ejendom, userInterface);
+        spiller.koebEjendom(ejendom, userInterfaceKontrakt);
 
         assertEquals(spiller,ejendom.getEjer());
         assertEquals(pengebeholdning-ejendom.getPris(),spiller.getPenge());
@@ -66,7 +85,8 @@ class SpillerControllerTest {
     void koebJernbane() {
         Jernbane jernbane = new Jernbane("Hovedbanegården",500,0);
         SpillerController spiller = new SpillerController("Jacob",10,0);
-        UserInterface userinterface = new TUI();
+
+        UserInterfaceKontrakt userinterface = new TUI();
         GUI userInterface1 = new GUI();
         SpilController spil = new SpilController(2,10,2,0,userinterface);
         double pengebeholdning = spiller.getPenge();

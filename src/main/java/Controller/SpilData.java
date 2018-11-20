@@ -44,7 +44,7 @@ public abstract class SpilData {
     public boolean kør = true;
     public boolean vinderFindes = false;
     public SpilleBraetController bretGeneretForSpil;
-    public UserInterface userInterface;
+    public UserInterfaceKontrakt userInterfaceKontrakt;
     public RafleBaeger terningeKrus;
 
     //|--------- Getters og Setters:-----------------
@@ -55,12 +55,12 @@ public abstract class SpilData {
     public void setTerningeKrus(RafleBaeger terningeKrus) {
         this.terningeKrus = terningeKrus;
     }
-    public UserInterface getUserInterface() {
-        return userInterface;
+    public UserInterfaceKontrakt getUserInterfaceKontrakt() {
+        return userInterfaceKontrakt;
     }
 
-    public void setUserInterface(UserInterface userInterface) {
-        this.userInterface = userInterface;
+    public void setUserInterfaceKontrakt(UserInterfaceKontrakt userInterfaceKontrakt) {
+        this.userInterfaceKontrakt = userInterfaceKontrakt;
     }
     public SpillerController getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
