@@ -350,11 +350,11 @@ public class TUI implements UserInterface {
     }
 
     public void ejerIngenEjendomme() {
-
+        System.out.println("Du ejer ingen ejendomme");
     }
 
     public void ejerIngenBebyggeligeEjendomme() {
-
+        System.out.println("Du kan ikke bygge på nogen af dine ejendomme endnu.");
     }
 
     public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {

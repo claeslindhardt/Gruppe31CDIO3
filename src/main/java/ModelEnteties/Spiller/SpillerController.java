@@ -89,10 +89,7 @@ public class SpillerController extends SpillerData {
     public void visEjendeFelter(UserInterface userInterface){
         userInterface.spillerEjendele(this);
     }
-    /*
-    public void bygPaaEjendom(){
 
-    }*/
     //_____________________________________
     //Koebe og salg funktioner:
 
@@ -141,40 +138,70 @@ public class SpillerController extends SpillerData {
     //}
 
 
+    /**
+     * @author Malte
+     * Undersoege om man ejer en specifik ejendom, ved at sammenligne
+     * ejeren af ejendommen med spilleren.
+     * @param ejendom Ejendommen man oensker at undersoege.
+     * @return True: spilleren ejer den, False: spilleren ejer den ikke.
+     */
     boolean ejerEjendom(Ejendom ejendom){
         return ejendom.getEjer() == this;
     }
 
+    /**
+     * @author Malte
+     * Undersoeger om spilleren ejer alle ejendomme i en specifik
+     * ejendomsgruppe.
+     * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
+     * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
+     */
     boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
         for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this){
                 return false;
             }
         }
-        return true;
-    }
+        return true; }
 
+    /**
+     * @author Malte
+     * Undersøger, om man kan koebe et hus paa en vilkårlig ejendom.
+     * Her tjekkes for at
+     *  1) man ejer ejendommen
+     *  2) man ejer alle ejendomme i gruppen
+     *  3) der er ligelig fordeling af huse paa ejendommene i gruppen (ikke implementeret)
+     *  4) antallet af huse er under 4
+     *  5) spilleren har nok penge til at koebe ejendommen.
+     * @param ejendom: ejendommen man oensker at koebe et hus paa.
+     * @return true: man kan koebe et hus paa ejendommen, false: man kan ikke koebe et hus paa ejendommen.
+     */
     boolean kanKoebeHus(Ejendom ejendom){
-
         EjendomsGruppe ejendomsGruppe = ejendom.getGruppe();
-
         return( ejerEjendom(ejendom)
                 && ejerEjendomsGruppe(ejendomsGruppe)
                 && ejendomsGruppe.huseErLigeligtFordelt()
                 && ejendom.getAntalHuse() < 4
-                && getPenge()>ejendom.getHusPris() );
-    }
-
-    public void koebHus(Ejendom ejendom){
-        if( kanKoebeHus(ejendom) ){
-            ejendom.bygHuse(1);
-            addPenge(-ejendom.getHusPris());
-        }
-    }
+                && getPenge()>ejendom.getHusPris() ); }
 
     /**
      * @author Malte
-     * Forløbet i at købe et hus via UI.
+     * Metode der koeber et hus på en ejendom for spilleren.
+     * Dette inkluderer at bygge huset paa ejendom (ejendom.bygHuse),
+     * og trække penge fra spilleren.
+     * @param ejendom: hvilken ejendom man vil bygge et hus paa.
+     */
+    void koebHus(Ejendom ejendom){
+        if( kanKoebeHus(ejendom) ){
+            ejendom.bygHuse(1);
+            addPenge(-ejendom.getHusPris());
+        } }
+
+    /**
+     * @author Malte
+     * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
+     * om at vise ting og tage i mod inputs.
+     * @param ui: hvilket UserInterface der skal bruges.
      */
     public void koebHusPaaEjendom(UserInterface ui){
         Ejendom[] ejendomme = getEjendomme();
@@ -182,6 +209,10 @@ public class SpillerController extends SpillerData {
         if( ejendomme.length > 0 ){
             ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
 
+            /* Finder bebyggelige ejendomme og flytter dem over i en seperat liste.
+               Se kanKoebeHus() for at se, hvordan det vurderes om spilleren kan
+               bygge et hus paa en ejendom.
+             */
             for(int i = 0; i < ejendomme.length; i++){
                 if(kanKoebeHus(ejendomme[i])){
                     bebyggeligeEjendomme.add(ejendomme[i]);
@@ -190,15 +221,12 @@ public class SpillerController extends SpillerData {
 
             if(bebyggeligeEjendomme.size() > 0){
 
-                Scanner scn = new Scanner(System.in);
-
                 int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
                 koebHus(bebyggeligeEjendomme.get(ejendomsIndex));
                 ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
 
             }else {
-                ui.ejerIngenBebyggeligeEjendomme();
-            }
+                ui.ejerIngenBebyggeligeEjendomme(); }
 
         }else{
             ui.ejerIngenEjendomme();
