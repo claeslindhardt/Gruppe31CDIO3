@@ -4,6 +4,7 @@ import Controller.SpilData;
 import Controller.UserInterface;
 import Controller.SpilController;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 public class SpillerController extends SpillerData {
@@ -136,6 +137,33 @@ public class SpillerController extends SpillerData {
                  */
     //}
 
+
+    public boolean ejerEjendom(Ejendom ejendom){
+        return false;
+    }
+
+    public boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
+        return false;
+    }
+
+    public boolean huseErFordeltIGruppe(){
+        return false;
+    }
+
+    boolean kanKoebeHus(Ejendom ejendom){
+
+        return( ejerEjendom(ejendom)
+                && ejerEjendomsGruppe(ejendom.getGruppe())
+                && huseErFordeltIGruppe()
+                && getPenge()>ejendom.getHusPris() );
+
+    }
+
+    public void koebHus(Ejendom ejendom){
+        if( kanKoebeHus(ejendom) ){
+
+        }
+    }
 
     public SpillerController(String NAVN, int ID,int position){
         setSpillerPosition(position);
