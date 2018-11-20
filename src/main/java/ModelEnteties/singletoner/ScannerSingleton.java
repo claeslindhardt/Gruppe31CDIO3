@@ -1,5 +1,6 @@
 package ModelEnteties.singletoner;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ScannerSingleton {
@@ -18,6 +19,10 @@ public class ScannerSingleton {
         return instance;
     }
     public int nextInt() {
-        return scan.nextInt();
+        try {
+            return scan.nextInt();
+        }catch(InputMismatchException exception){
+            throw exception; // rethrowing the exception
+        }
     }
 }

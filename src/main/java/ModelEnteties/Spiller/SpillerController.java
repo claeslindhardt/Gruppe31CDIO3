@@ -8,6 +8,7 @@ import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
@@ -189,18 +190,19 @@ public class SpillerController extends SpillerData {
 
             if(bebyggeligeEjendomme.size() > 0){
 
-                // UI: Request Input: hvilken ejendomme (send liste over ejendomme)
-                int ejendomsIndex = 0;
+                Scanner scn = new Scanner(System.in);
+
+                int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
                 koebHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
 
             }else {
-                // du ejer ingen bebyggelige
+                ui.ejerIngenBebyggeligeEjendomme();
             }
 
         }else{
-            // Du ejer ikke nogen ejendomme
+            ui.ejerIngenEjendomme();
         }
-
     }
 
     public SpillerController(String NAVN, int ID,int position){
