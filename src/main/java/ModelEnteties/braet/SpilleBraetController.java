@@ -1,7 +1,6 @@
 package ModelEnteties.braet;
 
 import Controller.UserInterface;
-import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.Felt;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.EjendomsDoeber;
@@ -25,6 +24,24 @@ public class SpilleBraetController extends SpilleBraetData {
             userInterface.bretPrinter(felttyp);
         }
         userInterface.terminalLine();
+    }
+
+    public String toString(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{");
+
+        for (int i = 0; i < this.getBret().size(); i++){
+
+            if (i < 0){
+                stringBuilder.append(" , ");
+            }
+
+            Felt str = this.getBret().get(i);
+            stringBuilder.append(str);
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
     }
 
     public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterface userInterface){
