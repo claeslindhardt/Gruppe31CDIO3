@@ -78,7 +78,6 @@ class SpillerControllerTest {
         assertTrue(spiller.getSpillerJernbaner().contains(jernbane));
     }
 
-
     /** @author Malte
      *  Tester for at integrationen mellem koebHus() og metoderne der tester, om man kan koebe
      *  et hus, virker korrekt.

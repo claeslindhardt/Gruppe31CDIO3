@@ -7,6 +7,8 @@ import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
+import java.util.ArrayList;
+
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
     //_____________________________________
@@ -167,6 +169,38 @@ public class SpillerController extends SpillerData {
             ejendom.bygHuse(1);
             addPenge(-ejendom.getHusPris());
         }
+    }
+
+    /**
+     * @author Malte
+     * Forløbet i at købe et hus via UI.
+     */
+    public void koebHusPaaEjendom(UserInterface ui){
+        Ejendom[] ejendomme = getEjendomme();
+
+        if( ejendomme.length > 0 ){
+            ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
+
+            for(int i = 0; i < ejendomme.length; i++){
+                if(kanKoebeHus(ejendomme[i])){
+                    bebyggeligeEjendomme.add(ejendomme[i]);
+                }
+            }
+
+            if(bebyggeligeEjendomme.size() > 0){
+
+                // UI: Request Input: hvilken ejendomme (send liste over ejendomme)
+                int ejendomsIndex = 0;
+                koebHus(bebyggeligeEjendomme.get(ejendomsIndex));
+
+            }else {
+                // du ejer ingen bebyggelige
+            }
+
+        }else{
+            // Du ejer ikke nogen ejendomme
+        }
+
     }
 
     public SpillerController(String NAVN, int ID,int position){
