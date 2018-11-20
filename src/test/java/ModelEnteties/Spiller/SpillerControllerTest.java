@@ -4,6 +4,7 @@ import Boundary.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterface;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
@@ -76,4 +77,94 @@ class SpillerControllerTest {
         assertEquals(pengebeholdning-jernbane.getPris(),spiller.getPenge());
         assertTrue(spiller.getSpillerJernbaner().contains(jernbane));
     }
+
+
+    /** @author Malte
+     *  Tester for at integrationen mellem koebHus() og metoderne der tester, om man kan koebe
+     *  et hus, virker korrekt.
+     */
+    @Test
+    void koebHus() {
+
+        // Setup
+
+        SpillerController spiller = new SpillerController("Test", 0, 0);
+
+        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe();
+
+        Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
+        ejendomsGruppe.tilfoejEjendom(ejendom1);
+
+        Ejendom ejendom2 = new Ejendom("Ejendom2", 0, 0, 0);
+        ejendomsGruppe.tilfoejEjendom(ejendom2);
+
+        Ejendom ejendom3 = new Ejendom("Ejendom3", 0, 0, 0);
+        ejendomsGruppe.tilfoejEjendom(ejendom3);
+
+        double startPenge = spiller.getPenge();
+
+
+        // Tester om man kan koebe hus uden at eje nogen af ejendommene.
+
+        spiller.koebHus(ejendom1);
+        assertEquals(0, ejendom1.getAntalHuse() );
+
+        spiller.koebHus(ejendom2);
+        assertEquals(0, ejendom2.getAntalHuse() );
+
+        spiller.koebHus(ejendom3);
+        assertEquals(0, ejendom3.getAntalHuse() );
+
+        assertEquals(startPenge, spiller.getPenge());
+
+        ejendom1.setEjer(spiller);
+
+
+        // Tester om man kan koebe hus, når man ejer 1 ejendom
+
+        spiller.koebHus(ejendom1);
+        assertEquals(0, ejendom1.getAntalHuse() );
+
+        spiller.koebHus(ejendom2);
+        assertEquals(0, ejendom2.getAntalHuse() );
+
+        spiller.koebHus(ejendom3);
+        assertEquals(0, ejendom3.getAntalHuse() );
+        assertEquals(startPenge, spiller.getPenge());
+
+
+        // Tester om man kan koebe hus, når man ejer 2 ejendom
+
+        ejendom2.setEjer(spiller);
+
+        spiller.koebHus(ejendom1);
+        assertEquals(0, ejendom1.getAntalHuse() );
+
+        spiller.koebHus(ejendom2);
+        assertEquals(0, ejendom2.getAntalHuse() );
+
+        spiller.koebHus(ejendom3);
+        assertEquals(0, ejendom3.getAntalHuse() );
+        assertEquals(startPenge, spiller.getPenge());
+
+
+        // Tester om man kan koebe hus, når man ejer alle ejendomme i gruppe
+        ejendom3.setEjer(spiller);
+
+        spiller.koebHus(ejendom1);
+        assertEquals(1, ejendom1.getAntalHuse() );
+
+        spiller.koebHus(ejendom2);
+        assertEquals(1, ejendom2.getAntalHuse() );
+
+        spiller.koebHus(ejendom3);
+        assertEquals(1, ejendom3.getAntalHuse() );
+
+        // Tester at pengene er blevet trukket korrekt fra spillerens beholdning.
+        double pengeEfterKoeb = startPenge-ejendom1.getHusPris()-ejendom2.getHusPris()-ejendom3.getHusPris();
+        assertEquals(pengeEfterKoeb, spiller.getPenge());
+
+    }
+
+
 }

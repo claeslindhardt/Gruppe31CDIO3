@@ -160,7 +160,6 @@ public class SpillerController extends SpillerData {
                 && ejendomsGruppe.huseErLigeligtFordelt()
                 && ejendom.getAntalHuse() < 4
                 && getPenge()>ejendom.getHusPris() );
-
     }
 
     public void koebHus(Ejendom ejendom){
