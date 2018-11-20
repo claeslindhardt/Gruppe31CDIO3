@@ -30,7 +30,7 @@ class SpillerControllerTest {
     void tjekForPasseringAfStartRykSpiller() {
         int spillerTur =1;
 
-        UserInterface userInterface = new TUI();
+        UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1,4,2,0,userInterface);
 
 

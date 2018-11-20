@@ -5,6 +5,7 @@ import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 public class Main {
+
     public static void main(String[] args) {
 
 
