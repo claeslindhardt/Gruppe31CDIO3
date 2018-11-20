@@ -5,6 +5,8 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,7 @@ import java.util.ArrayList;
  */
 public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
+    //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -38,7 +41,9 @@ public class TUI implements UserInterfaceKontrakt {
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
     }
-    public void velkomstMenu(){
+    public int velkomstMenu(){
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+        RandomSingleton rand = RandomSingleton.getInstance();
         System.out.println("_________________________________________________");
         System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
         System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
@@ -47,6 +52,9 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("|== For at aendre spil instillinger input: 2 ===|");
         System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
         System.out.println("|===============================================|");
+
+        int menuOpt = scan.nextInt();
+        return menuOpt;
     }
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         System.out.println("_________________________________________________________________");

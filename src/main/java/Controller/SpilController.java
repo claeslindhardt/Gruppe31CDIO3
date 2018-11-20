@@ -3,6 +3,8 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -174,11 +176,11 @@ public class SpilController extends SpilData {
     //_____________________________________
     //Menuer:
     public void startMenu(){
-        Scanner scan = new Scanner(System.in);
-        Random rand = new Random();
-        getUserInterfaceKontrakt().velkomstMenu();
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+        RandomSingleton rand = RandomSingleton.getInstance();
+        int menuOpt = getUserInterfaceKontrakt().velkomstMenu();
 
-        int menuOpt = scan.nextInt();
+
         if(menuOpt == 2) {
             startInstillingsMenu();
         }else if(menuOpt == 3){
