@@ -357,7 +357,7 @@ class SpillerControllerTest {
         SpillerController spiller = new SpillerController("Jacob",30,0);
         UserInterface userInterface = new TUI();
         double pengebeholdning = spiller.getPenge();
-        ArrayList<Ejendom> mineEjendomme = new ArrayList<Ejendom>();
+
         spiller.koebEjendom(ejendom, userInterface);
 
         assertEquals(spiller,ejendom.getEjer());
@@ -374,8 +374,8 @@ class SpillerControllerTest {
         Jernbane jernbane = new Jernbane("Hovedbanegården",500,0);
         SpillerController spiller = new SpillerController("Jacob",10,0);
         UserInterface userinterface = new TUI();
-        GUI userInterface1 = new GUI();
         SpilController spil = new SpilController(2,10,2,0,userinterface);
+
         double pengebeholdning = spiller.getPenge();
 
         spiller.koebJernbane(jernbane,userinterface,spil);
