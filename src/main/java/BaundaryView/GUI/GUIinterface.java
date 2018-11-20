@@ -19,13 +19,15 @@ import java.util.ArrayList;
 public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     GUI gui = new GUI(new GUI_Field[0]);
+    IndputHaanteringGUI input = new IndputHaanteringGUI();
+
     //Hvordan får jeg den så til at retunere noget til back endet?
     public int velkomstMenu(){
         String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
         gui.showMessage(valg);
         //todo: fix this to return the right option
-        return 1;
+        return input.velkomstMenu(valg);
     }
 
     public void TurMenu(int getSpillerTur){
@@ -44,11 +46,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
-        gui.showMessage("I er: " + getAntalSpillere + " spillere.");
-        gui.showMessage("Braettet har "+getAntalFelter+" Felter,");
-        gui.showMessage("med "+getAntalTerninger+" terninger på braettet.");
-        gui.showMessage("Spiller "+getSpillerTur + " Starter!");
-        gui.showMessage("Man går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge.");
+        gui.showMessage("I er: " + getAntalSpillere + " spillere." +
+                "\nBraettet har "+getAntalFelter+" Felter," +
+                "\nmed "+getAntalTerninger+" terninger på braettet." +
+                "\nSpiller "+getSpillerTur + " Starter!" +
+                "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
     }
     public void startSpilGrundFejl(){
         System.out.println("Wooops ikke en mulighed endnu, spillet starter" +
