@@ -1,18 +1,18 @@
 package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelter;
 
 public class Taxi extends AktionsFelter {
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
-        spil.getSpillerMedTur().tagTaxi(spil, userInterface);
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
 
     }
 
-    public void printInfo(UserInterface userInterface){
-        userInterface.taxiInfo(this);
+    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.taxiInfo(this);
     }
     //|--------- Constructor:-----------------
     public Taxi(int placering){

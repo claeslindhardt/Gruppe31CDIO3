@@ -1,7 +1,7 @@
 package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelter;
 
 public class Start extends AktionsFelter {
@@ -18,11 +18,11 @@ public class Start extends AktionsFelter {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
-        userInterface.overStartAnimation();
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.overStartAnimation();
     }
-    public void printInfo(UserInterface userInterface){
-        userInterface.startsFeltsInfo(this);
+    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.startsFeltsInfo(this);
     }
     //|--------- Constructor:-----------------
     public Start(int startPasseringsInkomst, int placering){
