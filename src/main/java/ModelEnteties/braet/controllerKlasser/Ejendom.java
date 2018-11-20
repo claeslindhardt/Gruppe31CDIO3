@@ -98,6 +98,17 @@ public class Ejendom extends EjeligtFelt {
             userInterface.badErrorMessage();
         }
     }
+
+
+    /** @author Malte
+     *  Tilføjer huse til ejendommen. Den tjekker ikke for, om der
+     *  i følge reglerne kan bygges huse på ejendommen.
+     * @param antalHuse: Hvor mange huse, der skal bygges.
+     */
+    public void bygHuse(int antalHuse){
+        setAntalHuse(getAntalHuse()+antalHuse);
+    }
+
     //|--------- Constructor:-----------------
     public Ejendom(String whatName, int whatPrice, int whatRent, int placering){
         setPlacering(placering);
