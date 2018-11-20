@@ -5,8 +5,6 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-import ModelEnteties.singletoner.RandomSingleton;
-import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
 
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
-    IndputHaantering input = new IndputHaantering();
+    IndputHaanteringTUI input = new IndputHaanteringTUI();
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
