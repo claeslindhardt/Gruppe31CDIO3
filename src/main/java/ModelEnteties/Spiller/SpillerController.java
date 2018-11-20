@@ -126,15 +126,11 @@ public class SpillerController extends SpillerData {
             userInterface.monetosMangel();
         }
     }
-    /*
-    public void handelMedEjendomme(){
-        /*
-                her skal man kunne:
-                    Pansætte
-                    byde på andre ejendomme
-                    sætte sine egne på auktion
-                 */
-    //}
+
+    public void handelMedEjendomme( ){
+
+
+    }
 
 
     public SpillerController(String NAVN, int ID,int position){
@@ -142,4 +138,6 @@ public class SpillerController extends SpillerData {
         setId(ID);
         setNavn(NAVN);
     }
+
+
 }
