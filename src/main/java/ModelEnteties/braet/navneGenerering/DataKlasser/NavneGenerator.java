@@ -1,4 +1,4 @@
-package ModelEnteties.navneGenerering.DataKlasser;
+package ModelEnteties.braet.navneGenerering.DataKlasser;
 
 import ModelEnteties.singletoner.RandomSingleton;
 

@@ -3,6 +3,8 @@ package ModelEnteties.Spiller;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,13 +18,12 @@ import java.util.Scanner;
  *  som indholder alle de spillere der indgår i et givet spil.
  */
 public abstract class SpillerData {
-    //|-------initiering af objekter: -----------
-    Scanner sc =new Scanner(System.in);
-
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;
     private String navn;
+    //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
+    //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
     ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
     ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
@@ -32,7 +33,27 @@ public abstract class SpillerData {
     boolean harAnketDomDenneRunde = false;
     boolean harSlaaetForTuren = false;
 
+
+    //Singleton Variabler;
+    private RandomSingleton randomTal = RandomSingleton.getInstance();
+    private ScannerSingleton scanner = ScannerSingleton.getInstance();
+
     //|--------- Getters og Setters:-----------------
+    public RandomSingleton getRandomTal() {
+        return randomTal;
+    }
+
+    public void setRandomTal(RandomSingleton randomTal) {
+        this.randomTal = randomTal;
+    }
+
+    public ScannerSingleton getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(ScannerSingleton scanner) {
+        this.scanner = scanner;
+    }
     public int getSpillerPosition() {
         return spillerPosition;
     }
@@ -100,6 +121,7 @@ public abstract class SpillerData {
     public void setHarGivetOp(boolean harGivetOp) {
         this.harGivetOp = harGivetOp;
     }
+
     public String getNavn() {
         return navn;
     }
