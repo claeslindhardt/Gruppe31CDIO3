@@ -1,7 +1,7 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
@@ -12,18 +12,18 @@ public class GratisUdAfFaengsel extends ChanceAktion {
     Random ra = new Random();
 
     //|----------- Metoder:----------------------
-    public void DirketeAktion(SpilController spil, UserInterface userInterface){
+    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
-        userInterface.printChanceKortDirekte(this);
-        userInterface.chanceKortTilføjet();
+        userInterfaceKontrakt.printChanceKortDirekte(this);
+        userInterfaceKontrakt.chanceKortTilføjet();
         spillerMedTur.addSpillerAktionsKort(this);
     }
-    public void BetingetAktion(SpilController spil, UserInterface userInterface){
+    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);
         spillerMedTur.setHarSlaaetForTuren(false);
         //todo:test
-        userInterface.brugtUdAfFaengsel();
+        userInterfaceKontrakt.brugtUdAfFaengsel();
     }
     //|----------- Constructor:------------------
     public GratisUdAfFaengsel(){

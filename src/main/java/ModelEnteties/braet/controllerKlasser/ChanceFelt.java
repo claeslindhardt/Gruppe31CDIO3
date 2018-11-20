@@ -1,7 +1,7 @@
 package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelter;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
@@ -25,14 +25,14 @@ public class ChanceFelt extends AktionsFelter {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil,UserInterface userInterface){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int muligeKort = spil.getBretGeneretForSpil().getStandardAntalChanceKortPrFelt();
         int vælgAktion = ra.nextInt(muligeKort)+1;
         ChanceAktion relavantKort = KortPaaFelt.get(vælgAktion);
         relavantKort.DirketeAktion();
     }
-    public void printInfo(UserInterface userInterface){
-        userInterface.chanceFeltsInfo(this);
+    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.chanceFeltsInfo(this);
 
     }
     //|--------- Constructor:-----------------

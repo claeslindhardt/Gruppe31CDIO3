@@ -4,11 +4,11 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-//todo: brug ordet kontrakt her
-public interface UserInterface {
+
+public interface UserInterfaceKontrakt {
     void TurMenu(int getSpillerTur);
     void ikkeMuligt();
-    void velkomstMenu();
+    int velkomstMenu();
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
     void startSpilGrundFejl();
     void instilingsSporgsmaal0();
