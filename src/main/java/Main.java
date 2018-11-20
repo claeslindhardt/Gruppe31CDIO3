@@ -51,7 +51,7 @@ public class Main {
     // Metode kald ________________________________
         System.out.println("Hjerteligt velkommen til Monopoly junior" +
                 "\n----|input (1) for at spille med TUI(Text User Interface)" +
-                "\n----|input (2) for at spille med GUIinterface(graphical User Interface)"
+                "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
         );
         int input = scan.nextInt();
 
