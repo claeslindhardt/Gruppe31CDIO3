@@ -1,7 +1,5 @@
 package ModelEnteties.braet;
 
-import Controller.UserInterface;
-
 import Controller.UserInterfaceKontrakt;
 
 import ModelEnteties.braet.controllerKlasser.*;
@@ -46,8 +44,6 @@ public class SpilleBraetController extends SpilleBraetData {
         stringBuilder.append("}");
         return stringBuilder.toString();
     }
-
-    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterface userInterface){
 
     public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
 
