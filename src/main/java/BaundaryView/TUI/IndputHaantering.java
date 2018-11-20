@@ -19,9 +19,10 @@ public class IndputHaantering {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void velkomstMenu(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int velkomstMenu(){
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+        int menuOpt = scan.nextInt();
+        return menuOpt;
     }
     public void opretteInstillinger(){
         System.out.println("_________________________________________________________________");
@@ -230,47 +231,40 @@ public class IndputHaantering {
     }
 
     public void betalRente(){
-        System.out.println("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void duErLandetPå(){
-        System.out.println("Du er landet på ");
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void badErrorMessage(){
-        System.out.println("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void ejendomsBud(){
-        System.out.println("Det er en ejendom vil du købe den?"+
-                "\nJa(1), nej(2)"
-        );
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void spillerEjendele(SpillerController spiller){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void bretPrinter(String felt){
-        System.out.println("______________________________________________________________________________");
-        System.out.println(felt);
-    }
-    public void terminalLine(){
-        System.out.println("______________________________________________________________________________");
-    }
-    public void chanceKortGenereringsFejl(){
-        System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
-    }
-    public void printChanceKortDirekte(ChanceAktion di){
-        System.out.println(di.getBeskrivelse());
 
+    public void printChanceKortDirekte(){
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void chanceKortTilføjet(){
-        System.out.println("Dette kort vil blive tilfoejet til dine chance kort," +
-                "\ndu kan nu bruge det når du oensker."
-        );
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void chanceKortBrugt(){
-        System.out.println("Du har nu brugt dit Taxi chance kort");
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public void brugtUdAfFaengsel(){
-        System.out.println("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +
-                "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
 }

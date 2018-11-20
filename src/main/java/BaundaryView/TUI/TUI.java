@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
+    IndputHaantering input = new IndputHaantering();
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -42,8 +43,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
     }
     public int velkomstMenu(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
-        RandomSingleton rand = RandomSingleton.getInstance();
+
         System.out.println("_________________________________________________");
         System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
         System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
@@ -53,8 +53,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
         System.out.println("|===============================================|");
 
-        int menuOpt = scan.nextInt();
-        return menuOpt;
+        return input.velkomstMenu();
     }
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         System.out.println("_________________________________________________________________");
