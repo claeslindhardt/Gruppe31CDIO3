@@ -203,7 +203,7 @@ public class SpillerController extends SpillerData {
      * om at vise ting og tage i mod inputs.
      * @param ui: hvilket UserInterface der skal bruges.
      */
-    public void koebHusPaaEjendom(UserInterface ui){
+    public void koebHusPaaEjendom(UserInterfaceKontrakt ui){
         Ejendom[] ejendomme = getEjendomme();
 
         if( ejendomme.length > 0 ){
