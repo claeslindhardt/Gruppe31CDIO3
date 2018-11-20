@@ -30,6 +30,10 @@ public abstract class EjeligtFelt extends Felt{
     private EjendomsGruppe gruppe;
     //|--------- Getters og Setters:-----------------
 
+    public String getEjerNavn(){
+        return ejer.getNavn();
+    }
+
     public SpillerController getEjer() {
         return ejer;
     }
@@ -85,6 +89,5 @@ public abstract class EjeligtFelt extends Felt{
     public static void addAlleJernbaner(Jernbane enJernbane) {
         EjeligtFelt.alleJernbaner.add(enJernbane);
     }
-
 
 }

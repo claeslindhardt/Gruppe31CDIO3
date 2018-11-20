@@ -1,7 +1,7 @@
 package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 
@@ -57,44 +57,45 @@ public class Ejendom extends EjeligtFelt {
 
 
     //|----------- Metoder:------------------
-    public void printInfo(UserInterface userInterface){
-        userInterface.ejendomsInfo(this);
+    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.ejendomsInfo(this);
     }
-    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
+
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
-            userInterface.duErLandetPå();
-            this.printInfo();
+            userInterfaceKontrakt.duErLandetPå();
+            this.printInfo(userInterfaceKontrakt);
 
-            userInterface.ejendomsBud();
+            userInterfaceKontrakt.ejendomsBud();
             int kobsBeslutning = sc.nextInt();
             switch (kobsBeslutning){
                 case 1:
-                    spillerMedTur.koebEjendom(this, userInterface);
+                    spillerMedTur.koebEjendom(this, userInterfaceKontrakt);
                     break;
                 case 2:
-                    userInterface.forsetTur();
+                    userInterfaceKontrakt.forsetTur();
 
                     break;
                 default:
-                    userInterface.ikkeMuligt();
+                    userInterfaceKontrakt.ikkeMuligt();
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
-            userInterface.betalRente();
-            this.indsamleLeje(spillerMedTur,userInterface);
+            userInterfaceKontrakt.betalRente();
+            this.indsamleLeje(spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
-            userInterface.tetPaaMonopol();
+            userInterfaceKontrakt.tetPaaMonopol();
         }
     }
 
-    public void indsamleLeje(SpillerController spilleren,UserInterface userInterface){
+    public void indsamleLeje(SpillerController spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController ejeren = this.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
             spilleren.setPenge(spilleren.getPenge()-getLeje());
             ejeren.addPenge(getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
         }else{
-            userInterface.badErrorMessage();
+            userInterfaceKontrakt.badErrorMessage();
         }
     }
     //|--------- Constructor:-----------------
