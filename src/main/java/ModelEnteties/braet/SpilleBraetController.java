@@ -33,7 +33,7 @@ public class SpilleBraetController extends SpilleBraetData {
 
         for (int i = 0; i < this.getBret().size(); i++){
 
-            if (i < 0){
+            if (i > 0){
                 stringBuilder.append(" , ");
             }
 
