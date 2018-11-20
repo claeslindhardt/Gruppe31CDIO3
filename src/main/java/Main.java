@@ -1,6 +1,5 @@
-import BaundaryView.TUI.TUI;
+import Boundary.TUI.TUI;
 import Controller.SpilController;
-import ModelEnteties.Spiller.SpillerController;
 
 public class Main {
     public static void main(String[] args) {

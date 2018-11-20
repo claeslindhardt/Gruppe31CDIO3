@@ -1,4 +1,4 @@
-package BaundaryView.TUI;
+package Boundary.TUI;
 
 public class IndputHaantering {
 }

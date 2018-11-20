@@ -1,4 +1,4 @@
-package BaundaryView.TUI;
+package Boundary.TUI;
 
 import Controller.UserInterface;
 import ModelEnteties.Spiller.SpillerController;

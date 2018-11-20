@@ -1,4 +1,4 @@
-package BaundaryView.GUI;
+package Boundary.GUI;
 
 public class SomeGUIClassToBeReplaced {
 }

@@ -1,10 +1,8 @@
 package Controller;
 
-import BaundaryView.TUI.TUI;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
-import ModelEnteties.braet.SpilleBraetData;
 
 import java.util.ArrayList;
 
