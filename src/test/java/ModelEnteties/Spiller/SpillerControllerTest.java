@@ -2,10 +2,9 @@ package ModelEnteties.Spiller;
 
 import BaundaryView.TUI.TUI;
 import Controller.SpilController;
-import Controller.UserInterface;
-import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import Controller.UserInterfaceKontrakt;
+import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
@@ -355,10 +354,12 @@ class SpillerControllerTest {
 
         Ejendom ejendom = new Ejendom("Hajgade",100,50,0);
         SpillerController spiller = new SpillerController("Jacob",30,0);
-        UserInterface userInterface = new TUI();
+        UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
+      
+        ArrayList<Ejendom> mineEjendomme = new ArrayList<Ejendom>();
+        spiller.koebEjendom(ejendom, userInterfaceKontrakt);
 
-        spiller.koebEjendom(ejendom, userInterface);
 
         assertEquals(spiller,ejendom.getEjer());
         assertEquals(pengebeholdning-ejendom.getPris(),spiller.getPenge());
@@ -373,7 +374,10 @@ class SpillerControllerTest {
     void koebJernbane() {
         Jernbane jernbane = new Jernbane("Hovedbanegården",500,0);
         SpillerController spiller = new SpillerController("Jacob",10,0);
-        UserInterface userinterface = new TUI();
+    
+        UserInterfaceKontrakt userinterface = new TUI();
+        GUI userInterface1 = new GUI();
+
         SpilController spil = new SpilController(2,10,2,0,userinterface);
 
         double pengebeholdning = spiller.getPenge();

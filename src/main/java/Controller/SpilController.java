@@ -3,6 +3,8 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,24 +17,24 @@ public class SpilController extends SpilData {
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem.
      */
-    public SpilController(UserInterface gui){
-        this.userInterface =gui;
+    public SpilController(UserInterfaceKontrakt gui){
+        this.userInterfaceKontrakt =gui;
         startMenu();
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(),userInterface);
+        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), userInterfaceKontrakt);
         RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
     }
 
-    public SpilController(int antalSpillere,int antalFelter, int antalTerninger, int bankeRaadtGrense,UserInterface gui){
+    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui){
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
         this.setAntalTerninger(antalTerninger);
         this.setBankeraadGraense(bankeRaadtGrense);
-        this.userInterface =gui;
+        this.userInterfaceKontrakt =gui;
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(),userInterface);
+        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), userInterfaceKontrakt);
         RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
@@ -48,21 +50,21 @@ public class SpilController extends SpilData {
     }
     public void printSpilleresInfo(){
         for(int i = 0;i < getSpillerObjekter().size();i++){
-            getSpillerObjekter().get(i).printSpillerStats(getUserInterface());
+            getSpillerObjekter().get(i).printSpillerStats(getUserInterfaceKontrakt());
         }
     }
     public void anketDomsigelse(){
         Random ra = new Random();
         int domsAfsigelseDel1 = ra.nextInt(5)+1;
         int domsAfsigelseDel2 = ra.nextInt(5)+1;
-        getUserInterface().retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
+        getUserInterfaceKontrakt().retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
         if(domsAfsigelseDel1 == domsAfsigelseDel2){
-            getUserInterface().heldIRetten();
+            getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
             getSpillerMedTur().setSpillerPosition( domsAfsigelseDel1+domsAfsigelseDel2);
         }else if(domsAfsigelseDel1 != domsAfsigelseDel2){
             getSpillerMedTur().setFaengselsStraf(true);
-            getUserInterface().ingenHeldIRetten();
+            getUserInterfaceKontrakt().ingenHeldIRetten();
         }
 
     }
@@ -84,11 +86,11 @@ public class SpilController extends SpilData {
     public void tjekForBankeRaadt(){
 
         if(getSpillerMedTur().getPenge()<getBankeraadGraense()){
-            getUserInterface().bankeRaadtGrundetLiquditet(getBankeraadGraense());
+            getUserInterfaceKontrakt().bankeRaadtGrundetLiquditet(getBankeraadGraense());
             getSpillerMedTur().setHarGivetOp(true);
             getSpillerMedTur().getSpillerEjendomme().clear();
             int udgaaetSpiller = getSpillerMedTur().getId()+1;
-            getUserInterface().spillerUdgår(udgaaetSpiller);
+            getUserInterfaceKontrakt().spillerUdgår(udgaaetSpiller);
         }
 
     }
@@ -96,18 +98,18 @@ public class SpilController extends SpilData {
     public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetController spilleBret){
         if(!getSpillerMedTur().isHarSlaaetForTuren()) {
             terningsKrus.slaa();
-            getUserInterface().spillerRykkerGrundetTerningslag(terningsKrus);
+            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus);
             if (terningsKrus.erEns()) {
-                getUserInterface().ensTerninger();
+                getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
             } else {
                 getSpillerMedTur().setHarSlaaetForTuren(true);
             }
             tjekForPasseringAfStartOgRykSpiller(terningsKrus);
-            getUserInterface().midtTerminalLinje();
-           spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this,getUserInterface());
+            getUserInterfaceKontrakt().midtTerminalLinje();
+           spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this, getUserInterfaceKontrakt());
         }else{
-            getUserInterface().harSlaaetMedTerningfor();
+            getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }
     }
 
@@ -116,8 +118,8 @@ public class SpilController extends SpilData {
     public void tjekForFeangselsStraf(){
         if(getSpillerMedTur().isFaengselsStraf()){
             if(!getSpillerMedTur().isHarAnketDomDenneRunde()){
-                getUserInterface().terminalLinje();
-                getUserInterface().anketStraffeDom(getSpillerTur());
+                getUserInterfaceKontrakt().terminalLinje();
+                getUserInterfaceKontrakt().anketStraffeDom(getSpillerTur());
                 anketDomsigelse();
                 getSpillerMedTur().setHarAnketDomDenneRunde(true);
             }
@@ -137,12 +139,12 @@ public class SpilController extends SpilData {
 
     public void tjekForVinder(){
         if(antalSpillere-tjekAntalSpillereISpil() == 1){
-            getUserInterface().terminalLinje();
+            getUserInterfaceKontrakt().terminalLinje();
             SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
             if (!spillerMedTur.isHarGivetOp()){
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
                 int vinder =spillerMedTur.getId()+1;
-                getUserInterface().vinder(vinder);
+                getUserInterfaceKontrakt().vinder(vinder);
                 setVinderFindes(true);
                 kør = false;
             }
@@ -164,30 +166,30 @@ public class SpilController extends SpilData {
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
         if (nuvaerendeposition+rykVeardi>antalFelter){
-            getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this,getUserInterface());
+            getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this, getUserInterfaceKontrakt());
         }else{
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition()+rykVeardi);
         }
-        getUserInterface().spillerPosition(getSpillerMedTur().getSpillerPosition());
+        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
     }
 
     //_____________________________________
     //Menuer:
     public void startMenu(){
-        Scanner scan = new Scanner(System.in);
-        Random rand = new Random();
-        getUserInterface().velkomstMenu();
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+        RandomSingleton rand = RandomSingleton.getInstance();
+        int menuOpt = getUserInterfaceKontrakt().velkomstMenu();
 
-        int menuOpt = scan.nextInt();
+
         if(menuOpt == 2) {
             startInstillingsMenu();
         }else if(menuOpt == 3){
-            getUserInterface().startSpilGrundFejl();
+            getUserInterfaceKontrakt().startSpilGrundFejl();
         }else if(menuOpt == 1){
             int starter = rand.nextInt(antalSpillere)+1;
             spillerTur = starter;
         }
-        getUserInterface().opretteInstillinger(getAntalSpillere(),getAntalFelter(),getAntalTerninger(),getSpillerTur(),getBankeraadGraense());
+        getUserInterfaceKontrakt().opretteInstillinger(getAntalSpillere(),getAntalFelter(),getAntalTerninger(),getSpillerTur(),getBankeraadGraense());
 
 
     }
@@ -195,21 +197,21 @@ public class SpilController extends SpilData {
         //Todo: make it possible to choose a default option here:
         Scanner scan = new Scanner(System.in);
         Random rand = new Random();
-        getUserInterface().instilingsSporgsmaal0();
+        getUserInterfaceKontrakt().instilingsSporgsmaal0();
         int felter = scan.nextInt();
         setAntalFelter(felter);
 
-        getUserInterface().instilingsSporgsmaall();
+        getUserInterfaceKontrakt().instilingsSporgsmaall();
         int spillerMeangde = scan.nextInt();
         setAntalSpillere(spillerMeangde);
 
         int starter = rand.nextInt(antalSpillere)+1;
         spillerTur = starter;
-        getUserInterface().instilingsSporgsmaal2();
+        getUserInterfaceKontrakt().instilingsSporgsmaal2();
         int terninger = scan.nextInt();
         setAntalTerninger(terninger);
 
-        getUserInterface().instilingsSporgsmaal3();
+        getUserInterfaceKontrakt().instilingsSporgsmaal3();
         int driftsomkostninger = scan.nextInt();
         setBankeraadGraense(driftsomkostninger);
     }
@@ -217,7 +219,7 @@ public class SpilController extends SpilData {
     public void turMenu(SpilleBraetController spilleBret, RafleBaeger terningsKrus){
         Scanner scan = new Scanner(System.in);
 
-        getUserInterface().TurMenu(getSpillerTur());
+        getUserInterfaceKontrakt().TurMenu(getSpillerTur());
 
         int input = scan.nextInt();
         switch(input){
@@ -231,19 +233,19 @@ public class SpilController extends SpilData {
                 slutSpillerTur();
                 break;
             case 3:
-                getSpillerMedTur().chanceKortMuligheder(getUserInterface());
+                getSpillerMedTur().chanceKortMuligheder(getUserInterfaceKontrakt());
                 break;
             case 4:
-                getSpillerMedTur().visEjendeFelter(getUserInterface());
+                getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());
                 break;
             case 5:
-                spilleBret.printBret(getUserInterface());
+                spilleBret.printBret(getUserInterfaceKontrakt());
                 break;
             case 6:
                 printSpilleresInfo();
                 break;
             case 7:
-                getSpillerMedTur().givOp(this,getUserInterface());
+                getSpillerMedTur().givOp(this, getUserInterfaceKontrakt());
                 break;
             case 8:
                 //getSpillerMedTur().bygPaaEjendom();
@@ -255,7 +257,7 @@ public class SpilController extends SpilData {
                 kør = false;
                 break;
             default:
-                getUserInterface().ikkeMuligt();
+                getUserInterfaceKontrakt().ikkeMuligt();
         }
 
     }
