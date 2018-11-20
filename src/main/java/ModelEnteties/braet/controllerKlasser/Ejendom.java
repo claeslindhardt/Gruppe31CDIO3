@@ -17,10 +17,10 @@ public class Ejendom extends EjeligtFelt {
     //TODO: fix singleton
 
     //|--------- Variabler:-----------------
-    int antalHuse;
-    int antalHoteller;
-    double husPris = 50;
-    int leje = 50;
+    private int     antalHuse;
+    private int     antalHoteller;
+    private double  husPris = 50;
+    private int     leje = 50;
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
