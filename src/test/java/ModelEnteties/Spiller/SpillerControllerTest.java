@@ -20,7 +20,7 @@ class SpillerControllerTest {
     }
 
     /**
-     * @auther Andreas
+     * @author Andreas
      * Formål: At teste om vi kan passere start og fortsat blive på spillepladen
      * Metode: brættet har 4 felter, spillers, start position er 0 (start), terningværdi er 5.
      * Forventet: spillerplacering efter slag 1.

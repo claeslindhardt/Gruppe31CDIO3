@@ -46,7 +46,7 @@ public class SpilleBraetController extends SpilleBraetData {
                     break;
                 //_______________________________________________
                 // Tager penge fra dig
-                case 2:
+                case 2:0
                     TagerPenge mistPenge = new TagerPenge();
                     chanceKortTilFelt.add(mistPenge);
                     //_______________________________________________
