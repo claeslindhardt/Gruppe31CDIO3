@@ -7,7 +7,6 @@ import ModelEnteties.singletoner.RandomSingleton;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: Spiller
@@ -143,7 +142,7 @@ public abstract class SpillerData {
     public void setHarAnketDomDenneRunde(boolean harAnketDomDenneRunde) {
         this.harAnketDomDenneRunde = harAnketDomDenneRunde;
     }
-    public void addPenge(int beloeb) {
+    public void addPenge(double beloeb) {
         this.penge+=beloeb;
     }
 
