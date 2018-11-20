@@ -125,7 +125,7 @@ public class SpillerController extends SpillerData {
             userInterfaceKontrakt.monetosMangel();
         }
     }
-    /*
+
     public void handelMedEjendomme(){
         /*
                 her skal man kunne:
@@ -133,7 +133,7 @@ public class SpillerController extends SpillerData {
                     byde på andre ejendomme
                     sætte sine egne på auktion
                  */
-    //}
+    }
 
 
     public SpillerController(String NAVN, int ID,int position){

@@ -5,17 +5,27 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_fields.GUI_Field;
+import gui_main.GUI;
 
 import java.util.ArrayList;
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
- * PROGRAMDOKUMENTATION: GUI.
+ * PROGRAMDOKUMENTATION: GUIinterface.
  *
  *
  */
-public class GUI implements UserInterfaceKontrakt {
+public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
+    GUI gui = new GUI(new GUI_Field[0]);
+
+    public void velkomstMenu(){
+        String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
+                "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
+        gui.showMessage(valg);
+    }
+
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -30,16 +40,7 @@ public class GUI implements UserInterfaceKontrakt {
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
     }
-    public void velkomstMenu(){
-        System.out.println("_________________________________________________");
-        System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
-        System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
-        System.out.println("|===============================================|");
-        System.out.println("|====== For at starte nyt spil input: 1 ========|");
-        System.out.println("|== For at aendre spil instillinger input: 2 ===|");
-        System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
-        System.out.println("|===============================================|");
-    }
+
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         System.out.println("_________________________________________________________________");
         System.out.println("I er: " + getAntalSpillere + " spillere.");
@@ -129,7 +130,7 @@ public class GUI implements UserInterfaceKontrakt {
     }
     public void menuGUI(){
         System.out.println("Oensker du at kører spillet med:" +
-                "\n en html GUI input (1)" +
+                "\n en html GUIinterface input (1)" +
                 "\n i terminalen input (2)" +
                 "\n_________________________________"
         );

@@ -1,4 +1,4 @@
-import BaundaryView.GUI.GUI;
+import BaundaryView.GUI.GUIinterface;
 import BaundaryView.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
@@ -51,7 +51,7 @@ public class Main {
     // Metode kald ________________________________
         System.out.println("Hjerteligt velkommen til Monopoly junior" +
                 "\n----|input (1) for at spille med TUI(Text User Interface)" +
-                "\n----|input (2) for at spille med GUI(graphical User Interface)"
+                "\n----|input (2) for at spille med GUIinterface(graphical User Interface)"
         );
         int input = scan.nextInt();
 
@@ -59,8 +59,8 @@ public class Main {
             System.out.println("Du valgte en TUI");
             Ui = new TUI();
         } else if(input == 2) {
-            System.out.println("Du valgte en GUI");
-            Ui = new GUI();
+            System.out.println("Du valgte en GUIinterface");
+            Ui = new GUIinterface();
         }
         SpilController spil = new SpilController(Ui);
 

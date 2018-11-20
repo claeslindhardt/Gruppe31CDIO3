@@ -12,15 +12,15 @@ import java.util.ArrayList;
  * __________________________________________________________________________________________________________________________________________________________
  * PROGRAMDOKUMENTATION: TUI
  *
- * Dette er klassen der skal laves om til en GUI.
+ * Dette er klassen der skal laves om til en GUIinterface.
  * Her er alle System.out.println(""). Det vil sige at dette er klassen der står for alt som Useren ser
  * Det så kaldte Front-end puuuuhhh. Ikke et arbejde for back end funktionelt orienterede ordentlige mennesker.
  * Som ikke forstår sig på Ironi overhovet.
  *
- * Ideen med denne klasse er at gøre det let at bygge eller skifte GUI. fordi alt som skal ses af brugeren
- * kan ses her og alle funktioner der bruges er samlet i SpilleLeder. Ønsker man at lave en GUI skal den
+ * Ideen med denne klasse er at gøre det let at bygge eller skifte GUIinterface. fordi alt som skal ses af brugeren
+ * kan ses her og alle funktioner der bruges er samlet i SpilleLeder. Ønsker man at lave en GUIinterface skal den
  * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
- * lave en GUI.
+ * lave en GUIinterface.
  */
 public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
@@ -137,7 +137,7 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public void menuGUI(){
         System.out.println("Oensker du at kører spillet med:" +
-                "\n en html GUI input (1)" +
+                "\n en html GUIinterface input (1)" +
                 "\n i terminalen input (2)" +
                 "\n_________________________________"
         );

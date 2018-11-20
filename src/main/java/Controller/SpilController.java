@@ -249,7 +249,7 @@ public class SpilController extends SpilData {
                 //getSpillerMedTur().bygPaaEjendom();
                 break;
             case 9:
-                //getSpillerMedTur().handelMedEjendomme();
+                getSpillerMedTur().handelMedEjendomme();
                 break;
             case 99:
                 kør = false;
