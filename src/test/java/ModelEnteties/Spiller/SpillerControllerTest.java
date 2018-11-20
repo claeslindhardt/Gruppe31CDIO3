@@ -19,28 +19,7 @@ class SpillerControllerTest {
     void givOp() {
     }
 
-    /**
-     * @auther Andreas
-     * Formål: At teste om vi kan passere start og fortsat blive på spillepladen
-     * Metode: brættet har 4 felter, spillers, start position er 0 (start), terningværdi er 5.
-     * Forventet: spillerplacering efter slag 1.
-     * Statur: Testen er godkendt og bestået.
-     */
-    @Test
-    void tjekForPasseringAfStartRykSpiller() {
-        int spillerTur =1;
 
-        UserInterface userInterface = new TUI();
-        SpilController spil = new SpilController(1,4,2,0,userInterface);
-
-
-        spil.terningeKrus.setTotalVaerdi(5);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
-
-        int forventetSpillerPosition=1;
-        int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
-        assertEquals(aktuelSpillerPosition,forventetSpillerPosition);
-    }
     public void TurMenu(int getSpillerTur) {
 
     }

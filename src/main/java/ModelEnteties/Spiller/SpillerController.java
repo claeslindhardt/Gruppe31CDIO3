@@ -139,5 +139,5 @@ public class SpillerController extends SpillerData {
         setNavn(NAVN);
     }
 
-    public
+
 }
