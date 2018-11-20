@@ -133,6 +133,7 @@ public class SpillerController extends SpillerData {
                     byde på andre ejendomme
                     sætte sine egne på auktion
                  */
+
     }
 
 
@@ -141,4 +142,6 @@ public class SpillerController extends SpillerData {
         setId(ID);
         setNavn(NAVN);
     }
+
+
 }
