@@ -138,30 +138,35 @@ public class SpillerController extends SpillerData {
     //}
 
 
-    public boolean ejerEjendom(Ejendom ejendom){
-        return false;
+    boolean ejerEjendom(Ejendom ejendom){
+        return ejendom.getEjer() == this;
     }
 
-    public boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
-        return false;
-    }
-
-    public boolean huseErFordeltIGruppe(){
-        return false;
+    boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
+        for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
+            if( ejendom.getEjer() != this){
+                return false;
+            }
+        }
+        return true;
     }
 
     boolean kanKoebeHus(Ejendom ejendom){
 
+        EjendomsGruppe ejendomsGruppe = ejendom.getGruppe();
+
         return( ejerEjendom(ejendom)
-                && ejerEjendomsGruppe(ejendom.getGruppe())
-                && huseErFordeltIGruppe()
+                && ejerEjendomsGruppe(ejendomsGruppe)
+                && ejendomsGruppe.huseErLigeligtFordelt()
+                && ejendom.getAntalHuse() < 4
                 && getPenge()>ejendom.getHusPris() );
 
     }
 
     public void koebHus(Ejendom ejendom){
         if( kanKoebeHus(ejendom) ){
-
+            ejendom.bygHuse(1);
+            addPenge(-ejendom.getHusPris());
         }
     }
 
