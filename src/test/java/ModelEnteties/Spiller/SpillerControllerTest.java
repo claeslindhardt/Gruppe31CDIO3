@@ -6,8 +6,8 @@ import Controller.UserInterface;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-import gui_main.GUI;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 import java.util.ArrayList;
 
@@ -41,6 +41,40 @@ class SpillerControllerTest {
         int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
         assertEquals(aktuelSpillerPosition,forventetSpillerPosition);
     }
+    /**
+    @author Chua
+     Her vil jeg undersøge, om spilleren får penge på man lander på start igen.
+    */
+    @Test
+    void passeringAfStart(){
+        UserInterface userInterface = new TUI();
+        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
+
+        spil.terningeKrus.setTotalVaerdi(7);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+
+        double forventetSpillerBeholdning = 1700;
+        double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
+        assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
+    }
+
+    /**
+     * @author Chua
+     * Her vil jeg teste om spilleren får penge når man har passeret start.
+     */
+    @Test
+    void passeringAfStart(){
+        UserInterface userInterface = new TUI();
+        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
+
+        spil.terningeKrus.setTotalVaerdi(8);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+
+        double forventetSpillerBeholdning = 1700;
+        double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
+        assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
+    }
+
     public void TurMenu(int getSpillerTur) {
 
     }
@@ -162,6 +196,7 @@ class SpillerControllerTest {
     }
 
     public void passeringAfStart(int gangeOverStart) {
+
 
     }
 
