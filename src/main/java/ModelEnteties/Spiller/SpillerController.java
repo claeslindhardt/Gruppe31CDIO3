@@ -3,7 +3,11 @@ package ModelEnteties.Spiller;
 import Controller.UserInterfaceKontrakt;
 import Controller.SpilController;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------
@@ -84,10 +88,7 @@ public class SpillerController extends SpillerData {
     public void visEjendeFelter(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.spillerEjendele(this);
     }
-    /*
-    public void bygPaaEjendom(){
 
-    }*/
     //_____________________________________
     //Koebe og salg funktioner:
 
@@ -136,6 +137,101 @@ public class SpillerController extends SpillerData {
 
     }
 
+
+    /**
+     * @author Malte
+     * Undersoege om man ejer en specifik ejendom, ved at sammenligne
+     * ejeren af ejendommen med spilleren.
+     * @param ejendom Ejendommen man oensker at undersoege.
+     * @return True: spilleren ejer den, False: spilleren ejer den ikke.
+     */
+    boolean ejerEjendom(Ejendom ejendom){
+        return ejendom.getEjer() == this;
+    }
+
+    /**
+     * @author Malte
+     * Undersoeger om spilleren ejer alle ejendomme i en specifik
+     * ejendomsgruppe.
+     * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
+     * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
+     */
+    boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
+        for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
+            if( ejendom.getEjer() != this){
+                return false;
+            }
+        }
+        return true; }
+
+    /**
+     * @author Malte
+     * Undersøger, om man kan koebe et hus paa en vilkårlig ejendom.
+     * Her tjekkes for at
+     *  1) man ejer ejendommen
+     *  2) man ejer alle ejendomme i gruppen
+     *  3) der er ligelig fordeling af huse paa ejendommene i gruppen (ikke implementeret)
+     *  4) antallet af huse er under 4
+     *  5) spilleren har nok penge til at koebe ejendommen.
+     * @param ejendom: ejendommen man oensker at koebe et hus paa.
+     * @return true: man kan koebe et hus paa ejendommen, false: man kan ikke koebe et hus paa ejendommen.
+     */
+    boolean kanKoebeHus(Ejendom ejendom){
+        EjendomsGruppe ejendomsGruppe = ejendom.getGruppe();
+        return( ejerEjendom(ejendom)
+                && ejerEjendomsGruppe(ejendomsGruppe)
+                && ejendomsGruppe.huseErLigeligtFordelt()
+                && ejendom.getAntalHuse() < 4
+                && getPenge()>ejendom.getHusPris() ); }
+
+    /**
+     * @author Malte
+     * Metode der koeber et hus på en ejendom for spilleren.
+     * Dette inkluderer at bygge huset paa ejendom (ejendom.bygHuse),
+     * og trække penge fra spilleren.
+     * @param ejendom: hvilken ejendom man vil bygge et hus paa.
+     */
+    void koebHus(Ejendom ejendom){
+        if( kanKoebeHus(ejendom) ){
+            ejendom.bygHuse(1);
+            addPenge(-ejendom.getHusPris());
+        } }
+
+    /**
+     * @author Malte
+     * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
+     * om at vise ting og tage i mod inputs.
+     * @param ui: hvilket UserInterface der skal bruges.
+     */
+    public void koebHusPaaEjendom(UserInterfaceKontrakt ui){
+        Ejendom[] ejendomme = getEjendomme();
+
+        if( ejendomme.length > 0 ){
+            ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
+
+            /* Finder bebyggelige ejendomme og flytter dem over i en seperat liste.
+               Se kanKoebeHus() for at se, hvordan det vurderes om spilleren kan
+               bygge et hus paa en ejendom.
+             */
+            for(int i = 0; i < ejendomme.length; i++){
+                if(kanKoebeHus(ejendomme[i])){
+                    bebyggeligeEjendomme.add(ejendomme[i]);
+                }
+            }
+
+            if(bebyggeligeEjendomme.size() > 0){
+
+                int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
+                koebHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+
+            }else {
+                ui.ejerIngenBebyggeligeEjendomme(); }
+
+        }else{
+            ui.ejerIngenEjendomme();
+        }
+    }
 
     public SpillerController(String NAVN, int ID,int position){
         setSpillerPosition(position);

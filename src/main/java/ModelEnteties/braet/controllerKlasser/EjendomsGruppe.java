@@ -85,5 +85,10 @@ public class EjendomsGruppe {
         System.out.println();
     }
 
+    // TODO: Implementér logikken i denne. Kan være den skal flyttes.
+    public boolean huseErLigeligtFordelt(){
+        return true;
+    }
+
 
 }

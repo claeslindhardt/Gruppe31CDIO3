@@ -1,4 +1,4 @@
-package BaundaryView.GUI;
+package Boundary.GUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
@@ -336,5 +336,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void brugtUdAfFaengsel(){
         System.out.println("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
+    }
+
+    @Override
+    public void byggetHus(Ejendom ejendom) {
+
+    }
+
+    @Override
+    public void ejerIngenEjendomme() {
+
+    }
+
+    @Override
+    public void ejerIngenBebyggeligeEjendomme() {
+
+    }
+
+    @Override
+    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
+        return 0;
     }
 }

@@ -1,4 +1,4 @@
-package BaundaryView.TUI;
+package Boundary.TUI;
 
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;

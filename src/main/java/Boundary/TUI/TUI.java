@@ -1,12 +1,15 @@
-package BaundaryView.TUI;
+package Boundary.TUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.singletoner.ScannerSingleton;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
@@ -345,5 +348,44 @@ public class TUI implements UserInterfaceKontrakt {
     public void brugtUdAfFaengsel(){
         System.out.println("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
+    }
+
+    public void byggetHus(Ejendom ejendom) {
+        System.out.println("Du har bygget et hus paa "+ejendom.getNavn());
+    }
+
+    public void ejerIngenEjendomme() {
+        System.out.println("Du ejer ingen ejendomme");
+    }
+
+    public void ejerIngenBebyggeligeEjendomme() {
+        System.out.println("Du kan ikke bygge på nogen af dine ejendomme endnu.");
+    }
+
+    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
+
+        ScannerSingleton scanner = ScannerSingleton.getInstance();
+
+        System.out.println("Hvilken ejendom vil du bygge på?");
+
+        for(int i=0; i<ejendomme.size(); i++ ){
+            System.out.println(i+1 + ") "+ejendomme.get(i).getNavn());
+        }
+
+        int input = 0;
+        while(true) {
+            try {
+                input = scanner.nextInt();
+
+                if(input>0 && input < ejendomme.size()+1) {
+                    break;
+                }else{
+                    System.out.println("Forkert input!");
+                }
+            } catch (InputMismatchException exception) {
+                System.out.println("Forkert input!");
+            }
+        }
+        return (input-1);
     }
 }
