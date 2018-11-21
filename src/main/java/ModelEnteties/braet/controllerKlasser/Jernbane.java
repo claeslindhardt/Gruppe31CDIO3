@@ -1,8 +1,7 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import BaundaryView.TUI.TUI;
 import Controller.SpilController;
-import Controller.UserInterface;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 
@@ -14,10 +13,10 @@ public class Jernbane extends EjeligtFelt {
     Scanner sc = new Scanner(System.in);
     //TODO: fix singleton
     //|----------- Metoder:------------------
-    public void printInfo(UserInterface userInterface){
-        userInterface.jernBaneInfo(this);
+    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.jernBaneInfo(this);
     }
-    public void tagTog(SpilController spil,UserInterface userInterface){
+    public void tagTog(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         ArrayList<Jernbane> jernbaner = spil.getBretGeneretForSpil().getJernbaner();
         ArrayList<Jernbane> muligeRejser = new ArrayList<Jernbane>();
@@ -28,46 +27,46 @@ public class Jernbane extends EjeligtFelt {
             }
         }
         if(muligeRejser.size()>1){
-            userInterface.muligeDestinationer();
+            userInterfaceKontrakt.muligeDestinationer();
             for(int i = 0;i<muligeRejser.size();i++){
                 System.out.print(i+1+": ");
-                muligeRejser.get(i).printInfo(userInterface);
+                muligeRejser.get(i).printInfo(userInterfaceKontrakt);
             }
-            userInterface.stationsMuligheder();
+            userInterfaceKontrakt.stationsMuligheder();
             int destination = sc.nextInt();
             if(destination==0){
-                userInterface.turEfterJernbane();
+                userInterfaceKontrakt.turEfterJernbane();
             } else if(destination >= 0) {
                 int rykSpillerTil = muligeRejser.get(destination - 1).getPlacering();
                 spillerMedTur.setSpillerPosition(rykSpillerTil);
             }
         }else{
-            userInterface.manglerJernbaner();
+            userInterfaceKontrakt.manglerJernbaner();
         }
     }
 
-    public void aktionPaaFelt(SpilController spil, UserInterface userInterface){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {
-        userInterface.jernBaneTilbud();
+        userInterfaceKontrakt.jernBaneTilbud();
             int kobsBeslutning = sc.nextInt();
             switch (kobsBeslutning) {
                 case 1:
-                    spillerMedTur.koebJernbane(this, userInterface,spil);
+                    spillerMedTur.koebJernbane(this, userInterfaceKontrakt,spil);
                     break;
                 case 2:
-                    userInterface.forsetTur();
+                    userInterfaceKontrakt.forsetTur();
                     break;
                 default:
-                    userInterface.ikkeMuligt();
+                    userInterfaceKontrakt.ikkeMuligt();
             }
 
         }else if(this.getEjer() != spillerMedTur ){
-            userInterface.ejetAfEnAnden();
+            userInterfaceKontrakt.ejetAfEnAnden();
         }else{
-            userInterface.tetPaaMonopol();
-            this.tagTog(spil,userInterface);
+            userInterfaceKontrakt.tetPaaMonopol();
+            this.tagTog(spil, userInterfaceKontrakt);
 
         }
     }

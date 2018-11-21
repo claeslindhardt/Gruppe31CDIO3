@@ -1,31 +1,35 @@
-package BaundaryView.TUI;
+package BaundaryView.GUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_fields.GUI_Field;
+import gui_main.GUI;
 
 import java.util.ArrayList;
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
- * PROGRAMDOKUMENTATION: TUI
+ * PROGRAMDOKUMENTATION: GUIinterface.
  *
- * Dette er klassen der skal laves om til en GUIinterface.
- * Her er alle System.out.println(""). Det vil sige at dette er klassen der står for alt som Useren ser
- * Det så kaldte Front-end puuuuhhh. Ikke et arbejde for back end funktionelt orienterede ordentlige mennesker.
- * Som ikke forstår sig på Ironi overhovet.
  *
- * Ideen med denne klasse er at gøre det let at bygge eller skifte GUIinterface. fordi alt som skal ses af brugeren
- * kan ses her og alle funktioner der bruges er samlet i SpilleLeder. Ønsker man at lave en GUIinterface skal den
- * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
- * lave en GUIinterface.
  */
-public class TUI implements UserInterfaceKontrakt {
+public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
-    //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
-    IndputHaanteringTUI input = new IndputHaanteringTUI();
+    GUI gui = new GUI(new GUI_Field[0]);
+    IndputHaanteringGUI input = new IndputHaanteringGUI();
+
+    //Hvordan får jeg den så til at retunere noget til back endet?
+    public int velkomstMenu(){
+        String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
+                "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
+        gui.showMessage(valg);
+        //todo: fix this to return the right option
+        return input.velkomstMenu(valg);
+    }
+
     public void TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -40,26 +44,13 @@ public class TUI implements UserInterfaceKontrakt {
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
     }
-    public int velkomstMenu(){
 
-        System.out.println("_________________________________________________");
-        System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
-        System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
-        System.out.println("|===============================================|");
-        System.out.println("|====== For at starte nyt spil input: 1 ========|");
-        System.out.println("|== For at aendre spil instillinger input: 2 ===|");
-        System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
-        System.out.println("|===============================================|");
-
-        return input.velkomstMenu();
-    }
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
-        System.out.println("_________________________________________________________________");
-        System.out.println("I er: " + getAntalSpillere + " spillere.");
-        System.out.println("Braettet har "+getAntalFelter+" Felter,");
-        System.out.println("med "+getAntalTerninger+" terninger på braettet.");
-        System.out.println("Spiller "+getSpillerTur + " Starter!");
-        System.out.println("Man går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge.");
+        gui.showMessage("I er: " + getAntalSpillere + " spillere." +
+                "\nBraettet har "+getAntalFelter+" Felter," +
+                "\nmed "+getAntalTerninger+" terninger på braettet." +
+                "\nSpiller "+getSpillerTur + " Starter!" +
+                "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
     }
     public void startSpilGrundFejl(){
         System.out.println("Wooops ikke en mulighed endnu, spillet starter" +

@@ -1,7 +1,7 @@
 package ModelEnteties.braet;
 
-import Controller.UserInterface;
-import ModelEnteties.Spiller.SpillerController;
+import Controller.UserInterfaceKontrakt;
+
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.Felt;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.EjendomsDoeber;
@@ -17,17 +17,36 @@ import java.util.ArrayList;
 public class SpilleBraetController extends SpilleBraetData {
 
     //|----------- Metoder:------------------
-    public void printBret(UserInterface userInterface){
+    public void printBret(UserInterfaceKontrakt userInterfaceKontrakt){
 
         for(int i = 0; i < this.getBret().size() ;i++){
             Felt felt = this.getBret().get(i);
             String felttyp = felt.getFeltType();//printInfo();
-            userInterface.bretPrinter(felttyp);
+            userInterfaceKontrakt.bretPrinter(felttyp);
         }
-        userInterface.terminalLine();
+        userInterfaceKontrakt.terminalLine();
     }
 
-    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterface userInterface){
+    public String toString(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{");
+
+        for (int i = 0; i < this.getBret().size(); i++){
+
+            if (i > 0){
+                stringBuilder.append(" , ");
+            }
+
+            Felt str = this.getBret().get(i);
+            stringBuilder.append(str);
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
+
+    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
+
         ArrayList<ChanceAktion> chanceKortTilFelt = new ArrayList<ChanceAktion>();
 
         //ændre dette:
@@ -62,7 +81,7 @@ public class SpilleBraetController extends SpilleBraetData {
                     chanceKortTilFelt.add(kaution);
                     break;
                 default:
-                userInterface.chanceKortGenereringsFejl();
+                userInterfaceKontrakt.chanceKortGenereringsFejl();
             }
         }
 
@@ -71,7 +90,7 @@ public class SpilleBraetController extends SpilleBraetData {
     }
 
     //|--------- Constructor:-----------------
-    public SpilleBraetController(int antalFelter, UserInterface userInterface){
+    public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
         //-------Tilføjning af objekter til brettet---
         Start go = new Start(getStartGrundPris(),0);
@@ -94,7 +113,7 @@ public class SpilleBraetController extends SpilleBraetData {
                 //_______________________________________________
                 // ChanceFelt
                 else if(aktionsFeltType<=6) {//set til 6 når test er fertig
-                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(),userInterface));
+                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
                     addBret(chance);
                 }
                 //_______________________________________________
