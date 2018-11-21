@@ -248,7 +248,7 @@ public class SpilController extends SpilData {
                 getSpillerMedTur().givOp(this, getUserInterfaceKontrakt());
                 break;
             case 8:
-                getSpillerMedTur().koebHusPaaEjendom(getUserInterface());
+                getSpillerMedTur().koebHusPaaEjendom(getUserInterfaceKontrakt());
                 break;
             case 9:
                 getSpillerMedTur().handelMedEjendomme();

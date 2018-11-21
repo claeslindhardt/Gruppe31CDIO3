@@ -30,7 +30,7 @@ class SpillerControllerTest {
     void tjekForPasseringAfStartRykSpiller() {
         int spillerTur =1;
 
-        UserInterface userInterface = new TUI();
+        UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1,4,2,0,userInterface);
 
 
@@ -46,9 +46,9 @@ class SpillerControllerTest {
     @author Chua
      Her vil jeg undersøge, om spilleren får penge på man lander på start igen.
      */
-    @org.junit.Test
-    void passeringAfStart(){
-        UserInterface userInterface = new TUI();
+    @Test
+    void landerPaaStart(){
+        UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
         spil.terningeKrus.setTotalVaerdi(7);
@@ -63,9 +63,9 @@ class SpillerControllerTest {
      * @author Chua
      * Her vil jeg teste om spilleren får penge når man har passeret start.
      */
-    @org.junit.Test
+    @Test
     void passeringAfStart(){
-        UserInterface userInterface = new TUI();
+        UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
         spil.terningeKrus.setTotalVaerdi(8);

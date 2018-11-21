@@ -5,6 +5,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
