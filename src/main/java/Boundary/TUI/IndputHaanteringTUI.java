@@ -9,7 +9,7 @@ import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
 
-public class IndputHaantering {
+public class IndputHaanteringTUI {
     public void TurMenu(){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
