@@ -6,11 +6,9 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Jernbane extends EjeligtFelt {
     //|-------initiering af objekter: -----------
-    Scanner sc = new Scanner(System.in);
     //TODO: fix singleton
     //|----------- Metoder:------------------
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
@@ -32,8 +30,8 @@ public class Jernbane extends EjeligtFelt {
                 System.out.print(i+1+": ");
                 muligeRejser.get(i).printInfo(userInterfaceKontrakt);
             }
-            userInterfaceKontrakt.stationsMuligheder();
-            int destination = sc.nextInt();
+
+            int destination = userInterfaceKontrakt.stationsMuligheder();
             if(destination==0){
                 userInterfaceKontrakt.turEfterJernbane();
             } else if(destination >= 0) {
@@ -49,8 +47,8 @@ public class Jernbane extends EjeligtFelt {
         SpillerController spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {
-        userInterfaceKontrakt.jernBaneTilbud();
-            int kobsBeslutning = sc.nextInt();
+
+            int kobsBeslutning = userInterfaceKontrakt.jernBaneTilbud();
             switch (kobsBeslutning) {
                 case 1:
                     spillerMedTur.koebJernbane(this, userInterfaceKontrakt,spil);

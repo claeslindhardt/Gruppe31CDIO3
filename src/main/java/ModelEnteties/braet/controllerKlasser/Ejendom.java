@@ -5,7 +5,7 @@ import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 
-import java.util.Scanner;
+
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: Ejendom
@@ -13,8 +13,7 @@ import java.util.Scanner;
  */
 public class Ejendom extends EjeligtFelt {
     //|-------initiering af objekter: -----------
-    Scanner sc = new Scanner(System.in);
-    //TODO: fix singleton
+
 
     //|--------- Variabler:-----------------
     private int     antalHuse;

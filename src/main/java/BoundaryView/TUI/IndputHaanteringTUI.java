@@ -166,9 +166,9 @@ public class IndputHaanteringTUI {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void stationsMuligheder(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int stationsMuligheder(){
+        int destination = scan.nextInt();
+        return destination;
     }
     public void turEfterJernbane(){
         System.out.println("_________________________________________________________________");

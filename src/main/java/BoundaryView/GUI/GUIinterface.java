@@ -256,9 +256,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void muligeDestinationer(){
         gui.showMessage("Du kan rejse til ");
     }
-    public void stationsMuligheder(){
-        gui.showMessage("hvis du ikke onsker at rejse tast 0, " +
-                "\nellers intast den destination du ønsker at rejse til:");
+    public int stationsMuligheder(){
+        int valg = gui.getUserInteger("hvis du ikke onsker at rejse tast 0,\nellers intast den destination du ønsker at rejse til:");
+        return valg;
     }
     public void turEfterJernbane(){
         gui.showMessage("Du kan nu forsaette din tur men får ikke muligheden for at tage jernbanen igen i denne tur," +

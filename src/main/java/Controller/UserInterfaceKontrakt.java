@@ -57,7 +57,7 @@ public interface UserInterfaceKontrakt {
     void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
     void jernBaneInfo(Jernbane stadtion);
-    void stationsMuligheder();
+    int stationsMuligheder();
     void turEfterJernbane();
     void manglerJernbaner();
     int jernBaneTilbud();
