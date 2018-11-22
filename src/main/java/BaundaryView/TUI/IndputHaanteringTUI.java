@@ -8,12 +8,13 @@ import ModelEnteties.singletoner.RandomSingleton;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class IndputHaanteringTUI {
-    public void TurMenu(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-
+    public int TurMenu(){
+        ScannerSingleton scan = ScannerSingleton.getInstance();
+        int input = scan.nextInt();
+        return input;
     }
     public void ikkeMuligt(){
         System.out.println("_________________________________________________________________");

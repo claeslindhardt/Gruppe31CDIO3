@@ -217,11 +217,9 @@ public class SpilController extends SpilData {
     }
 
     public void turMenu(SpilleBraetController spilleBret, RafleBaeger terningsKrus){
-        Scanner scan = new Scanner(System.in);
 
-        getUserInterfaceKontrakt().TurMenu(getSpillerTur());
+        int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur());
 
-        int input = scan.nextInt();
         switch(input){
             case 1:
                 kastTerninger(terningsKrus,spilleBret);

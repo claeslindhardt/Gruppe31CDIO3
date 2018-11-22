@@ -14,4 +14,7 @@ public class IndputHaanteringGUI {
         }
         return menuOpt;
     }
+    public int TurMenu(String valg){
+        return 3;
+    }
 }

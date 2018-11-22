@@ -26,7 +26,7 @@ public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
     IndputHaanteringTUI input = new IndputHaanteringTUI();
-    public void TurMenu(int getSpillerTur){
+    public int TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
 
@@ -36,6 +36,7 @@ public class TUI implements UserInterfaceKontrakt {
                         "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
                         "\n 9 og 8 er ikke en mulighed endnu"
         );
+        return input.TurMenu();
     }
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");

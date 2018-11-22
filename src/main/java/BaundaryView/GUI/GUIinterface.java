@@ -30,16 +30,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return input.velkomstMenu(valg);
     }
 
-    public void TurMenu(int getSpillerTur){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
+    public int TurMenu(int getSpillerTur){
+        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
+                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
+        gui.showMessage(valg);
+        return input.TurMenu(valg);
 
-        System.out.println(
-                "|--Kast terninger (1)   | Slut din tur(2)    | Se chancekort (3)         --|" +
-                        "\n|--Se hvad du ejer(4)   | Se spilbraettet(5)| Se spiller stats(6)       --|" +
-                        "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
-                        "\n 9 og 8 er ikke en mulighed endnu"
-        );
     }
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
@@ -53,7 +49,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
     }
     public void startSpilGrundFejl(){
-        System.out.println("Wooops ikke en mulighed endnu, spillet starter" +
+        gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
     public void instilingsSporgsmaal0(){

@@ -6,7 +6,7 @@ import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 public interface UserInterfaceKontrakt {
-    void TurMenu(int getSpillerTur);
+    int TurMenu(int getSpillerTur);
     void ikkeMuligt();
     int velkomstMenu();
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
