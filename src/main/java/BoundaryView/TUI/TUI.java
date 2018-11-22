@@ -70,18 +70,22 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
-    public void instilingsSporgsmaal0(){
+    public int instilingsSporgsmaal0(){
         System.out.println("Hvor mange felter skal braettet have?: ");
         System.out.println("NB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere");
+        return input.instilingsSporgsmaal();
     }
-    public void instilingsSporgsmaall(){
+    public int instilingsSporgsmaall(){
         System.out.print("Indtast antal oenskede Spillere som int: ");
+        return input.instilingsSporgsmaal();
     }
-    public void instilingsSporgsmaal2(){
+    public int instilingsSporgsmaal2(){
         System.out.println("Hvor mange terninger vil i spille med?: ");
+        return input.instilingsSporgsmaal();
     }
-    public void instilingsSporgsmaal3(){
+    public int instilingsSporgsmaal3(){
         System.out.println("Hvor få penge må man have før man går bankerot?: ");
+        return input.instilingsSporgsmaal();
     }
 
     public void spillerPosition(int spillerPosition){
@@ -196,9 +200,10 @@ public class TUI implements UserInterfaceKontrakt {
 
         System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
     }
-    public void hvorHen(int pos){
+    public int hvorHen(int pos){
         System.out.println("Din nuvaerende position er: "+ pos);
         System.out.println("Hvor vil de hen?: ");
+        return input.hvorHen();
     }
     public void holdDigPaaBrettet(){
         System.out.println("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");

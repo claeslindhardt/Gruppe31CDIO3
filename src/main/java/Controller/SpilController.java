@@ -4,10 +4,8 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.singletoner.RandomSingleton;
-import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class SpilController extends SpilData {
 
@@ -178,7 +176,6 @@ public class SpilController extends SpilData {
     //_____________________________________
     //Menuer:
     public void startMenu(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
         RandomSingleton rand = RandomSingleton.getInstance();
         int menuOpt = getUserInterfaceKontrakt().velkomstMenu();
 
@@ -197,24 +194,23 @@ public class SpilController extends SpilData {
     }
     public void startInstillingsMenu(){
         //Todo: make it possible to choose a default option here:
-        Scanner scan = new Scanner(System.in);
         Random rand = new Random();
-        getUserInterfaceKontrakt().instilingsSporgsmaal0();
-        int felter = scan.nextInt();
+
+        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0();
         setAntalFelter(felter);
 
-        getUserInterfaceKontrakt().instilingsSporgsmaall();
-        int spillerMeangde = scan.nextInt();
+
+        int spillerMeangde = getUserInterfaceKontrakt().instilingsSporgsmaall();
         setAntalSpillere(spillerMeangde);
 
         int starter = rand.nextInt(antalSpillere)+1;
         spillerTur = starter;
-        getUserInterfaceKontrakt().instilingsSporgsmaal2();
-        int terninger = scan.nextInt();
+
+        int terninger = getUserInterfaceKontrakt().instilingsSporgsmaal2();
         setAntalTerninger(terninger);
 
         getUserInterfaceKontrakt().instilingsSporgsmaal3();
-        int driftsomkostninger = scan.nextInt();
+        int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal2();
         setBankeraadGraense(driftsomkostninger);
     }
 

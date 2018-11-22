@@ -18,22 +18,11 @@ public class IndputHaanteringTUI {
         return menuOpt;
     }
 
-    public void instilingsSporgsmaal0(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int instilingsSporgsmaal(){
+        int felter = scan.nextInt();
+        return felter;
     }
-    public void instilingsSporgsmaall(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
-    public void instilingsSporgsmaal2(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
-    public void instilingsSporgsmaal3(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
+
 
     public void spillerPosition(){
         System.out.println("_________________________________________________________________");
@@ -133,9 +122,9 @@ public class IndputHaanteringTUI {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void hvorHen(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int hvorHen(){
+        int destination = scan.nextInt();
+        return destination;
     }
     public void holdDigPaaBrettet(){
         System.out.println("_________________________________________________________________");

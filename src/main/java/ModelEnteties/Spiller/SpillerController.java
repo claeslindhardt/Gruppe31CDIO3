@@ -50,8 +50,8 @@ public class SpillerController extends SpillerData {
             }
 
             //Her er controlleren der lader en reagere på mulighederne
-            userInterfaceKontrakt.chanceKortsVejledning();
-            int valg = getScanner().nextInt();
+
+            int valg = userInterfaceKontrakt.chanceKortsVejledning();
             if(valg == -1){ }
             else if(valg != -1){
                 getSpillerAktionsKort().get(valg).BetingetAktion();
@@ -66,8 +66,8 @@ public class SpillerController extends SpillerData {
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
         this.setHarSlaaetForTuren(true);
-        userInterfaceKontrakt.hvorHen(this.getSpillerPosition());
-        destination = getScanner().nextInt();
+
+        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition());
         if(destination>spil.getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{

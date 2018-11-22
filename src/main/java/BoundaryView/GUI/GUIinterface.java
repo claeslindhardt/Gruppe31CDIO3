@@ -68,19 +68,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
-    public void instilingsSporgsmaal0(){
+    public int instilingsSporgsmaal0(){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
                 "\nNB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere"
         );
+        int valg = gui.getUserInteger("Intast antal felter på brettet");
+        return valg;
     }
-    public void instilingsSporgsmaall(){
-        gui.showMessage("Indtast antal oenskede Spillere som int: ");
+    public int instilingsSporgsmaall(){
+        int valg = gui.getUserInteger("Indtast antal oenskede Spillere ");
+        return valg;
+
     }
-    public void instilingsSporgsmaal2(){
-        gui.showMessage("Hvor mange terninger vil i spille med?: ");
+    public int instilingsSporgsmaal2(){
+        int valg = gui.getUserInteger("Hvor mange terninger vil i spille med?: Dette må kun være andet end 2 hvis man bruger TUI'en");
+        return valg;
     }
-    public void instilingsSporgsmaal3(){
-        gui.showMessage("Hvor få penge må man have før man går bankerot?: ");
+    public int instilingsSporgsmaal3(){
+        int valg = gui.getUserInteger("Hvor få penge må man have før man går bankerot?:");
+        return valg;
     }
 
     public void spillerPosition(int spillerPosition){
@@ -130,7 +136,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("Spillet er slut.");
     }
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
-        gui.showMessage("Du slog: "+
+        ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
+        //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
+        int terning1=tern.get(0);
+        int terning2=tern.get(1);
+        gui.setDice(terning1,terning2);
+        String ternin="";
+        for(int i =0; i<tern.size();i++) {
+            ternin = ternin.concat(tern.get(i)+ ", ");
+        }
+        gui.showMessage("Du slog: "+ternin+
                 "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.");
         //printTerninger(terningsKrus);
     }
@@ -193,8 +208,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         gui.showMessage("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
     }
-    public void hvorHen(int pos){
+    public int hvorHen(int pos){
         gui.showMessage("Din nuvaerende position er: "+ pos+"Hvor vil de hen?: ");
+        int valg = gui.getUserInteger("Intast nummeret på det felt du gerne vil hen til");
+        return valg;
     }
     public void holdDigPaaBrettet(){
         gui.showMessage("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");

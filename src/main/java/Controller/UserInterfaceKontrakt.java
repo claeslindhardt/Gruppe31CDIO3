@@ -14,10 +14,10 @@ public interface UserInterfaceKontrakt {
     int velkomstMenu();
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
     void startSpilGrundFejl();
-    void instilingsSporgsmaal0();
-    void instilingsSporgsmaall();
-    void instilingsSporgsmaal2();
-    void instilingsSporgsmaal3();
+    int instilingsSporgsmaal0();
+    int instilingsSporgsmaall();
+    int instilingsSporgsmaal2();
+    int instilingsSporgsmaal3();
     void spillerPosition(int spillerPosition);
     void bankeRaadtGrundetLiquditet(int getBankeraadGraense);
     void spillerUdgår(int udgaaetSpiller);
@@ -43,7 +43,7 @@ public interface UserInterfaceKontrakt {
     void chanceKortNr(int i, SpillerController spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
-    void hvorHen(int pos);
+    int hvorHen(int pos);
     void holdDigPaaBrettet();
     void overStart(int pos);
     void spillerStat(SpillerController spiller);
