@@ -1,55 +1,72 @@
-package BaundaryView.GUI;
+package Boundary.TUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-import gui_fields.GUI_Field;
-import gui_main.GUI;
+import ModelEnteties.singletoner.ScannerSingleton;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
- * PROGRAMDOKUMENTATION: GUIinterface.
+ * PROGRAMDOKUMENTATION: TUI
  *
+ * Dette er klassen der skal laves om til en GUIinterface.
+ * Her er alle System.out.println(""). Det vil sige at dette er klassen der står for alt som Useren ser
+ * Det så kaldte Front-end puuuuhhh. Ikke et arbejde for back end funktionelt orienterede ordentlige mennesker.
+ * Som ikke forstår sig på Ironi overhovet.
  *
+ * Ideen med denne klasse er at gøre det let at bygge eller skifte GUIinterface. fordi alt som skal ses af brugeren
+ * kan ses her og alle funktioner der bruges er samlet i SpilleLeder. Ønsker man at lave en GUIinterface skal den
+ * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
+ * lave en GUIinterface.
  */
-public class GUIinterface implements UserInterfaceKontrakt {
+public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
-    GUI gui = new GUI(new GUI_Field[0]);
-    IndputHaanteringGUI input = new IndputHaanteringGUI();
-
-    //Hvordan får jeg den så til at retunere noget til back endet?
-    public int velkomstMenu(){
-        String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
-                "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
-        gui.showMessage(valg);
-        //todo: fix this to return the right option
-        return input.velkomstMenu(valg);
-    }
-
+    //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
+    IndputHaanteringTUI input = new IndputHaanteringTUI();
     public int TurMenu(int getSpillerTur){
-        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
-        gui.showMessage(valg);
-        return input.TurMenu(valg);
+        System.out.println("_________________________________________________________________");
+        System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
 
+        System.out.println(
+                "|--Kast terninger (1)   | Slut din tur(2)    | Se chancekort (3)         --|" +
+                        "\n|--Se hvad du ejer(4)   | Se spilbraettet(5)| Se spiller stats(6)       --|" +
+                        "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
+                        "\n 9 og 8 er ikke en mulighed endnu"
+        );
+        return input.TurMenu();
     }
     public void ikkeMuligt(){
         System.out.println("Dette er ikke en mulighed endnu - prøv igen");
     }
+    public int velkomstMenu(){
 
+        System.out.println("_________________________________________________");
+        System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
+        System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
+        System.out.println("|===============================================|");
+        System.out.println("|====== For at starte nyt spil input: 1 ========|");
+        System.out.println("|== For at aendre spil instillinger input: 2 ===|");
+        System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
+        System.out.println("|===============================================|");
+
+        return input.velkomstMenu();
+    }
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
-        gui.showMessage("I er: " + getAntalSpillere + " spillere." +
-                "\nBraettet har "+getAntalFelter+" Felter," +
-                "\nmed "+getAntalTerninger+" terninger på braettet." +
-                "\nSpiller "+getSpillerTur + " Starter!" +
-                "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
+        System.out.println("_________________________________________________________________");
+        System.out.println("I er: " + getAntalSpillere + " spillere.");
+        System.out.println("Braettet har "+getAntalFelter+" Felter,");
+        System.out.println("med "+getAntalTerninger+" terninger på braettet.");
+        System.out.println("Spiller "+getSpillerTur + " Starter!");
+        System.out.println("Man går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge.");
     }
     public void startSpilGrundFejl(){
-        gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
+        System.out.println("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
     public void instilingsSporgsmaal0(){
@@ -332,5 +349,44 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void brugtUdAfFaengsel(){
         System.out.println("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
+    }
+
+    public void byggetHus(Ejendom ejendom) {
+        System.out.println("Du har bygget et hus paa "+ejendom.getNavn());
+    }
+
+    public void ejerIngenEjendomme() {
+        System.out.println("Du ejer ingen ejendomme");
+    }
+
+    public void ejerIngenBebyggeligeEjendomme() {
+        System.out.println("Du kan ikke bygge på nogen af dine ejendomme endnu.");
+    }
+
+    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
+
+        ScannerSingleton scanner = ScannerSingleton.getInstance();
+
+        System.out.println("Hvilken ejendom vil du bygge på?");
+
+        for(int i=0; i<ejendomme.size(); i++ ){
+            System.out.println(i+1 + ") "+ejendomme.get(i).getNavn());
+        }
+
+        int input = 0;
+        while(true) {
+            try {
+                input = scanner.nextInt();
+
+                if(input>0 && input < ejendomme.size()+1) {
+                    break;
+                }else{
+                    System.out.println("Forkert input!");
+                }
+            } catch (InputMismatchException exception) {
+                System.out.println("Forkert input!");
+            }
+        }
+        return (input-1);
     }
 }

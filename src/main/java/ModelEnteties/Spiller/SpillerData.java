@@ -7,7 +7,6 @@ import ModelEnteties.singletoner.RandomSingleton;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: Spiller
@@ -78,6 +77,27 @@ public abstract class SpillerData {
         this.spillerEjendomme = spillerEjendomme;
     }
 
+
+    /**
+     * @author Malte
+     * Henter liste over spillerens ejendomme.
+     * @return Listen over spillerens ejendomme som en Ejendom array. Er tom, hvis der ikke er nogen i listen.
+     */
+    public Ejendom[] getEjendomme() {
+        if(spillerEjendomme != null){
+
+            Ejendom[] ejendomme = new Ejendom[spillerEjendomme.size()];
+
+            for( int i = 0; i < ejendomme.length; i++){
+                ejendomme[i] = spillerEjendomme.get(i);
+            }
+
+            return ejendomme;
+        }else{
+            return null;
+        }
+    }
+
     public ArrayList<Jernbane> getSpillerJernbaner() {
         return spillerJernbaner;
     }
@@ -144,7 +164,7 @@ public abstract class SpillerData {
     public void setHarAnketDomDenneRunde(boolean harAnketDomDenneRunde) {
         this.harAnketDomDenneRunde = harAnketDomDenneRunde;
     }
-    public void addPenge(int beloeb) {
+    public void addPenge(double beloeb) {
         this.penge+=beloeb;
     }
 

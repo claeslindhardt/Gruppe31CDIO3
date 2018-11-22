@@ -1,5 +1,5 @@
-import BaundaryView.GUI.GUIinterface;
-import BaundaryView.TUI.TUI;
+import Boundary.TUI.TUI;
+import Boundary.GUI.GUIinterface;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;

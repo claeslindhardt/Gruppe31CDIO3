@@ -1,4 +1,4 @@
-package BaundaryView.GUI;
+package Boundary.GUI;
 
 import ModelEnteties.singletoner.ScannerSingleton;
 

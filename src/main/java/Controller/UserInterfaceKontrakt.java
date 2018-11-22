@@ -5,6 +5,8 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
+import java.util.ArrayList;
+
 public interface UserInterfaceKontrakt {
     int TurMenu(int getSpillerTur);
     void ikkeMuligt();
@@ -77,4 +79,8 @@ public interface UserInterfaceKontrakt {
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
+    void byggetHus(Ejendom ejendom);
+    void ejerIngenEjendomme();
+    void ejerIngenBebyggeligeEjendomme();
+    int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
 }

@@ -17,10 +17,10 @@ public class Ejendom extends EjeligtFelt {
     //TODO: fix singleton
 
     //|--------- Variabler:-----------------
-    int antalHuse;
-    int antalHoteller;
-    double husPris = 50;
-    int leje = 50;
+    private int     antalHuse;
+    private int     antalHoteller;
+    private double  husPris = 50;
+    private int     leje = 50;
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -98,6 +98,17 @@ public class Ejendom extends EjeligtFelt {
             userInterfaceKontrakt.badErrorMessage();
         }
     }
+
+
+    /** @author Malte
+     *  Tilføjer huse til ejendommen. Den tjekker ikke for, om der
+     *  i følge reglerne kan bygges huse på ejendommen.
+     * @param antalHuse: Hvor mange huse, der skal bygges.
+     */
+    public void bygHuse(int antalHuse){
+        setAntalHuse(getAntalHuse()+antalHuse);
+    }
+
     //|--------- Constructor:-----------------
     public Ejendom(String whatName, int whatPrice, int whatRent, int placering){
         setPlacering(placering);
