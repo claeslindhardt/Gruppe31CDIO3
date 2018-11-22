@@ -32,7 +32,6 @@ public interface UserInterfaceKontrakt {
     void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus);
     void printTerninger(RafleBaeger terningsKrus);
     void ensTerninger();
-    void menuGUI();
     void printFaenselInfo();
     void paaBesoegIFaengsel();
     void vilDuGiveOp();

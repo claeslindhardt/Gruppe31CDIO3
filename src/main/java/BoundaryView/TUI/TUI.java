@@ -143,13 +143,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void ensTerninger(){
         System.out.println("Alle de terninger du slog, havde samme vaerdi. Du får lov til at slå en ekstra gang.");
     }
-    public void menuGUI(){
-        System.out.println("Oensker du at kører spillet med:" +
-                "\n en html GUIinterface input (1)" +
-                "\n i terminalen input (2)" +
-                "\n_________________________________"
-        );
-    }
+
     public void printFaenselInfo(){
         //System.out.println("| Felt nr: " + getPlacering() +" | Felt Navn:" + getNavn()+" | Felt type:"+ getFeltType()+" |");
     }

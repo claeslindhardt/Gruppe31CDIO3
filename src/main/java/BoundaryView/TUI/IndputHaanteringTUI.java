@@ -11,23 +11,13 @@ public class IndputHaanteringTUI {
         int input = scan.nextInt();
         return input;
     }
-    public void ikkeMuligt(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
+
     public int velkomstMenu(){
         ScannerSingleton scan = ScannerSingleton.getInstance();
         int menuOpt = scan.nextInt();
         return menuOpt;
     }
-    public void opretteInstillinger(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
-    public void startSpilGrundFejl(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
-    }
+
     public void instilingsSporgsmaal0(){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
