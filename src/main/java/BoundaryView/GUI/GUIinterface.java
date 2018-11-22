@@ -9,6 +9,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Field[] fields = new GUI_Field[AntalFelter];
         //lav dette om til et for each loop
         for(int i = 0 ;i<fields.length; i++){
-            fields[i] = new GUI_Street();
+            GUI_Street testStreet= new GUI_Street();
+            testStreet.setTitle("Anker Engelundsvej");
+            testStreet.setBorder(Color.CYAN);
+            testStreet.setRent("600,-");
+            fields[i] = testStreet;
         }
         GUI guiMedBret = new GUI(fields);
 
