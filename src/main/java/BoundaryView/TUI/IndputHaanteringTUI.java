@@ -189,9 +189,10 @@ public class IndputHaanteringTUI {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void jernBaneTilbud(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int jernBaneTilbud(){
+        ScannerSingleton sc = ScannerSingleton.getInstance();
+        int kobsBeslutning = sc.nextInt();
+        return kobsBeslutning;
     }
     public void forsetTur(){
         System.out.println("_________________________________________________________________");
@@ -228,9 +229,10 @@ public class IndputHaanteringTUI {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
-    public void ejendomsBud(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int ejendomsBud(){
+        ScannerSingleton sc = ScannerSingleton.getInstance();
+        int kobsBeslutning = sc.nextInt();
+        return kobsBeslutning;
     }
     public void spillerEjendele(SpillerController spiller){
         System.out.println("_________________________________________________________________");

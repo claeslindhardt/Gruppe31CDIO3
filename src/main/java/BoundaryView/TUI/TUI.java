@@ -250,9 +250,10 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du ejer ikke nok jernabaner til at rejse:");
 
     }
-    public void jernBaneTilbud(){
+    public int jernBaneTilbud(){
         System.out.println("Du er landet på et jernbanefelt, og ingen ejer det - vil du koebe det?" +
                 "\nJa(1), Nej(2)");
+        return input.jernBaneTilbud();
     }
     public void forsetTur(){
         System.out.println("Forsaet din tur");
@@ -301,10 +302,12 @@ public class TUI implements UserInterfaceKontrakt {
     public void badErrorMessage(){
         System.out.println("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
     }
-    public void ejendomsBud(){
+    public int ejendomsBud(){
         System.out.println("Det er en ejendom vil du købe den?"+
                 "\nJa(1), nej(2)"
         );
+
+        return input.ejendomsBud();
     }
     public void spillerEjendele(SpillerController spiller){
         System.out.println("Ejendeomme: ");

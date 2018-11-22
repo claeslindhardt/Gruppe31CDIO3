@@ -233,9 +233,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du ejer ikke nok jernabaner til at rejse:");
 
     }
-    public void jernBaneTilbud(){
-        gui.showMessage("Du er landet på et jernbanefelt, og ingen ejer det - vil du koebe det?" +
-                "\nJa(1), Nej(2)");
+    public int jernBaneTilbud(){
+        String valg = gui.getUserSelection("|--|Det er en Jernbane vil du købe den?",
+                "ja", "nej");
+        gui.showMessage(valg);
+        return input.binartValg(valg);
     }
     public void forsetTur(){
         gui.showMessage("Forsaet din tur");
@@ -284,10 +286,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
     }
-    public void ejendomsBud(){
-        gui.showMessage("Det er en ejendom vil du købe den?"+
-                "\nJa(1), nej(2)"
-        );
+    public int ejendomsBud(){
+        String valg = gui.getUserSelection("|--|Det er en ejendom vil du købe den?",
+                "ja", "nej");
+        gui.showMessage(valg);
+
+        return input.binartValg(valg);
     }
     public void spillerEjendele(SpillerController spiller){
         gui.showMessage("Ejendeomme: ");

@@ -67,8 +67,8 @@ public class Ejendom extends EjeligtFelt {
             userInterfaceKontrakt.duErLandetPå();
             this.printInfo(userInterfaceKontrakt);
 
-            userInterfaceKontrakt.ejendomsBud();
-            int kobsBeslutning = sc.nextInt();
+            ;
+            int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
                 case 1:
                     spillerMedTur.koebEjendom(this, userInterfaceKontrakt);

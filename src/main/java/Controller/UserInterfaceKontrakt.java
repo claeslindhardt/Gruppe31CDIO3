@@ -59,7 +59,7 @@ public interface UserInterfaceKontrakt {
     void stationsMuligheder();
     void turEfterJernbane();
     void manglerJernbaner();
-    void jernBaneTilbud();
+    int jernBaneTilbud();
     void forsetTur();
     void ejetAfEnAnden();
     void tetPaaMonopol();
@@ -69,7 +69,7 @@ public interface UserInterfaceKontrakt {
     void betalRente();
     void duErLandetPå();
     void badErrorMessage();
-    void ejendomsBud();
+    int ejendomsBud();
     void spillerEjendele(SpillerController spiller);
     void bretPrinter(String felt);
     void terminalLine();
