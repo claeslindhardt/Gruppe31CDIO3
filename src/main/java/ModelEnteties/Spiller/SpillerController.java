@@ -15,8 +15,7 @@ public class SpillerController extends SpillerData {
     //Diverse:
     public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
-        userInterfaceKontrakt.vilDuGiveOp();
-        svar = getScanner().nextInt();
+        svar = userInterfaceKontrakt.vilDuGiveOp();
         if(svar==1) {
             setHarGivetOp(true);
             getSpillerEjendomme().clear();

@@ -23,13 +23,13 @@ public class IndputHaanteringGUI {
         }else if(valg == "Se hvad du ejer"){
             beslutning = 2;
         }else if(valg == "Se spiller stats"){
-            beslutning = 3;
+            beslutning = 6;
         }else if(valg == "Giv op"){
-            beslutning = 2;
+            beslutning = 7;
         }else if(valg == "Byg på ejendom"){
-            beslutning = 3;
+            beslutning = 8;
         }else if(valg == "Handel med Ejede ting"){
-            beslutning = 3;
+            beslutning = 9;
         }
         return beslutning;
     }

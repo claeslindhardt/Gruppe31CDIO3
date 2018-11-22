@@ -114,9 +114,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("Spillet er slut.");
     }
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
-        gui.showMessage("Du slog: ");
+        gui.showMessage("Du slog: "+
+                "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.");
         //printTerninger(terningsKrus);
-        gui.showMessage("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
     }
 
     public void printTerninger(RafleBaeger terningsKrus){
@@ -135,8 +135,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void paaBesoegIFaengsel(){
         System.out.println("Du er nu på besoeg i faengslet.");
     }
-    public void vilDuGiveOp(){
-        gui.showMessage("Er du sikker paa, at du vil udgaa fra spillet?: (1) for ja, (2) for nej" );
+    public int vilDuGiveOp(){
+        String valg = gui.getUserSelection("|--|Er du sikker på at du vil give op?",
+                "ja", "nej");
+        gui.showMessage(valg);
+       return input.binartValg(valg);
     }
 
     public void takForSpillet(){

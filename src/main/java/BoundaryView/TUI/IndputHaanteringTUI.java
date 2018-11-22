@@ -6,14 +6,14 @@ import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 public class IndputHaanteringTUI {
+    ScannerSingleton scan = ScannerSingleton.getInstance();
+
     public int TurMenu(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
         int input = scan.nextInt();
         return input;
     }
 
     public int velkomstMenu(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
         int menuOpt = scan.nextInt();
         return menuOpt;
     }
@@ -94,9 +94,9 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
 
-    public void vilDuGiveOp(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int vilDuGiveOp(){
+        int svar = scan.nextInt();
+        return svar;
     }
 
     public void takForSpillet(){
@@ -190,8 +190,7 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public int jernBaneTilbud(){
-        ScannerSingleton sc = ScannerSingleton.getInstance();
-        int kobsBeslutning = sc.nextInt();
+        int kobsBeslutning = scan.nextInt();
         return kobsBeslutning;
     }
     public void forsetTur(){

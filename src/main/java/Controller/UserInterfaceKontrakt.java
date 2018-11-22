@@ -34,7 +34,7 @@ public interface UserInterfaceKontrakt {
     void ensTerninger();
     void printFaenselInfo();
     void paaBesoegIFaengsel();
-    void vilDuGiveOp();
+    int vilDuGiveOp();
     void takForSpillet();
     void duGavIkkeOp();
     void passeringAfStart(int gangeOverStart);

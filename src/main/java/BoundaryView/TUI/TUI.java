@@ -150,8 +150,9 @@ public class TUI implements UserInterfaceKontrakt {
     public void paaBesoegIFaengsel(){
         System.out.println("Du er nu på besoeg i faengslet.");
     }
-    public void vilDuGiveOp(){
+    public int vilDuGiveOp(){
         System.out.println("Er du sikker paa, at du vil udgaa fra spillet?: (1) for ja, (2) for nej" );
+        return input.vilDuGiveOp();
     }
 
     public void takForSpillet(){
