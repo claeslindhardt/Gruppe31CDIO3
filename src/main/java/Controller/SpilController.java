@@ -23,7 +23,7 @@ public class SpilController extends SpilData {
         RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.generGUIBret(getAntalFelter());
+        gui.generGUIBret(getAntalFelter(), spilleBret);
     }
 
     public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui){
@@ -37,7 +37,7 @@ public class SpilController extends SpilData {
         RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.generGUIBret(getAntalFelter());
+        gui.generGUIBret(getAntalFelter(),spilleBret);
     }
     //_____________________________________
     // Diverse:

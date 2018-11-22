@@ -3,6 +3,7 @@ package BoundaryView.TUI;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.ScannerSingleton;
@@ -396,7 +397,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void generGUIBret(int AntalFelter){
+    public void generGUIBret(int AntalFelter, SpilleBraetController bret){
 
     }
 }
