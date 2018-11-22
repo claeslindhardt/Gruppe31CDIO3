@@ -1,6 +1,6 @@
 package ModelEnteties.Spiller;
 
-import Boundary.TUI.TUI;
+import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
