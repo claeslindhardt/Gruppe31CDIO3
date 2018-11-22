@@ -120,9 +120,9 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
 
     }
-    public void chanceKortsVejledning(){
-        System.out.println("_________________________________________________________________");
-        System.out.println("|--|Dette indput kan ikke hånteres endnu");
+    public int chanceKortsVejledning(){
+        int valg = scan.nextInt();
+        return valg;
     }
     public void ingenChanceKort(){
         System.out.println("_________________________________________________________________");

@@ -61,6 +61,7 @@ public class Main {
         } else if(input == 2) {
             System.out.println("Du valgte en GUIinterface");
             Ui = new GUIinterface();
+
         }
         SpilController spil = new SpilController(Ui);
 

@@ -4,6 +4,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_main.GUI;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public interface UserInterfaceKontrakt {
     void passeringAfStart(int gangeOverStart);
     void chanceKortHar();
     void chanceKortNr(int i, SpillerController spiller);
-    void chanceKortsVejledning();
+    int chanceKortsVejledning();
     void ingenChanceKort();
     void hvorHen(int pos);
     void holdDigPaaBrettet();
@@ -82,4 +83,5 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
+    void generGUIBret(int AntalFelter);
 }

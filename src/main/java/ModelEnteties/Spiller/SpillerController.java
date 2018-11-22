@@ -7,7 +7,7 @@ import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class SpillerController extends SpillerData {
     //|----------- Metoder:------------------

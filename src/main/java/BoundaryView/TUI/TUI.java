@@ -6,6 +6,8 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.ScannerSingleton;
+import gui_fields.GUI_Field;
+import gui_main.GUI;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -172,11 +174,13 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
 
     }
-    public void chanceKortsVejledning(){
+    public int chanceKortsVejledning(){
         System.out.println("-------------------------------");
         System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
                 "\nEller hvis du vil tilbage til tur menuen (-1):"
         );
+
+        return input.chanceKortsVejledning();
     }
     public void ingenChanceKort(){
         System.out.println("Du har ikke nogen Chance Kort lige nu.");
@@ -385,5 +389,8 @@ public class TUI implements UserInterfaceKontrakt {
             }
         }
         return (input-1);
+    }
+    public void generGUIBret(int AntalFelter){
+
     }
 }

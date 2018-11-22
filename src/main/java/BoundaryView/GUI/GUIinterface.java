@@ -6,6 +6,7 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 import java.util.ArrayList;
@@ -21,7 +22,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
 
-    //Hvordan får jeg den så til at retunere noget til back endet?
+    public void generGUIBret(int AntalFelter){
+        GUI_Field[] fields = new GUI_Field[AntalFelter];
+        //lav dette om til et for each loop
+        for(int i = 0 ;i<fields.length; i++){
+            fields[i] = new GUI_Street();
+        }
+        GUI guiMedBret = new GUI(fields);
+
+        gui = guiMedBret;
+    }
+
     public int velkomstMenu(){
         String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
@@ -143,26 +154,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void takForSpillet(){
-        System.out.println("Tak for spillet:)\nDine penge vil gå til skattefar");
+        gui.showMessage("Tak for spillet:)\nDine penge vil gå til skattefar");
     }
     public void duGavIkkeOp(){
-        System.out.println("Du valgte ikke at give op. ");
+        gui.showMessage("Du valgte ikke at give op. ");
     }
     public void passeringAfStart(int gangeOverStart){
         gui.showMessage("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
     }
     public void chanceKortHar(){
-        System.out.println("Du har foelgende Chance Kort:");
+        gui.showMessage("Du har foelgende Chance Kort:");
     }
     public void chanceKortNr(int i, SpillerController spiller){
         gui.showMessage("Chance kort nr. "+i+": ");
         gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
 
     }
-    public void chanceKortsVejledning(){
-        gui.showMessage("Intast nummeret på det chance kort du gerne vil aktiverer:" +
-                "\nEller hvis du vil tilbage til tur menuen (-1):"
-        );
+    public int chanceKortsVejledning(){
+        int valg = gui.getUserInteger("Intast nummeret på det chance kort du gerne vil aktiverer");
+        return valg;
     }
     public void ingenChanceKort(){
         System.out.println("Du har ikke nogen Chance Kort lige nu.");
