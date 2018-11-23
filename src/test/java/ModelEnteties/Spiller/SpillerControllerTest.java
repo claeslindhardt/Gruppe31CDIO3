@@ -6,10 +6,12 @@ import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
+import com.sun.tools.javac.comp.Todo;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.function.ToDoubleBiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,8 +46,10 @@ class SpillerControllerTest {
 
     /**
     @author Chua
-     Her vil jeg undersøge, om spilleren får penge på man lander på start igen.
+     Her vil jeg undersøge, om spilleren får penge på man lander på start igen. Dette er en kode som skal finde en fejl.
+     Testen bliver gennemført da den ikke går igennem går igennem :D
      */
+    //TODO: ret fejlen
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
@@ -62,6 +66,8 @@ class SpillerControllerTest {
     /**
      * @author Chua
      * Her vil jeg teste om spilleren får penge når man har passeret start.
+     * Testen viser at koden er programmeret så man får penge hvis man rykker forbi start.
+     * Positiv test
      */
     @Test
     void passeringAfStart(){
