@@ -8,8 +8,7 @@ import ModelEnteties.braet.dataKlasser.EjeligtFelt;
 import java.util.ArrayList;
 
 public class Jernbane extends EjeligtFelt {
-    //|-------initiering af objekter: -----------
-    //TODO: fix singleton
+
     //|----------- Metoder:------------------
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.jernBaneInfo(this);

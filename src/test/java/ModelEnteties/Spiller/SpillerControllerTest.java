@@ -6,7 +6,6 @@ import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
-import com.sun.tools.javac.comp.Todo;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
