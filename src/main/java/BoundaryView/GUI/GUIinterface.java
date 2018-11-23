@@ -6,7 +6,9 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
@@ -26,18 +28,33 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void generGUIBret(int AntalFelter, SpilleBraetController bret){
         GUI_Field[] fields = new GUI_Field[AntalFelter];
+        /**
+         * @param testStreet Her laves felternes grafiske elementer
+         */
         //lav dette om til et for each loop
         for(int i = 0 ;i<fields.length; i++){
             GUI_Street testStreet= new GUI_Street();
             testStreet.setTitle(bret.getBret().get(i).getNavn());
             testStreet.setSubText(bret.getBret().get(i).getFeltType());
             testStreet.setBorder(Color.CYAN);
-            testStreet.setRent("600,-");
+            //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
+
         GUI guiMedBret = new GUI(fields);
 
         gui = guiMedBret;
+
+        /**
+         * @param dunnoWhat Her laves spilelrnes grafiske elementer.
+         */
+        GUI_Car car = new GUI_Car(); //Opret en bil
+        car.setPrimaryColor(Color.YELLOW); //Lad den være gul
+        GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
+        gui.addPlayer(rambo); //Sæt spilleren på
+        fields[0].setCar(rambo, true);
+
+
     }
 
     public int velkomstMenu(){

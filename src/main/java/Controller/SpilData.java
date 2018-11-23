@@ -46,8 +46,16 @@ public abstract class SpilData {
     public SpilleBraetController bretGeneretForSpil;
     public UserInterfaceKontrakt userInterfaceKontrakt;
     public RafleBaeger terningeKrus;
+    int vinder=-1;
 
     //|--------- Getters og Setters:-----------------
+    public int getVinder() {
+        return vinder;
+    }
+
+    public void setVinder(int vinder) {
+        this.vinder = vinder;
+    }
     public RafleBaeger getTerningeKrus() {
         return terningeKrus;
     }

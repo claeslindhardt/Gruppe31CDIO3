@@ -140,11 +140,11 @@ public class SpilController extends SpilData {
     public void tjekForVinder(){
         if(antalSpillere-tjekAntalSpillereISpil() == 1){
             getUserInterfaceKontrakt().terminalLinje();
-            SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
-            if (!spillerMedTur.isHarGivetOp()){
+            //SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
+            if (!getSpillerMedTur().isHarGivetOp()){
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
-                int vinder =spillerMedTur.getId()+1;
-                getUserInterfaceKontrakt().vinder(vinder);
+                setVinder(getSpillerMedTur().getId()+1);
+                getUserInterfaceKontrakt().vinder(getVinder());
                 setVinderFindes(true);
                 kør = false;
             }
