@@ -137,20 +137,25 @@ public class SpilController extends SpilData {
         }
     }
 
-    public void tjekForVinder(){
+    public int tjekForVinder(){
+        int vinder1=0;
+
         if(antalSpillere-tjekAntalSpillereISpil() == 1){
             getUserInterfaceKontrakt().terminalLinje();
             SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
             if (!spillerMedTur.isHarGivetOp()){
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
                 int vinder =spillerMedTur.getId()+1;
+                vinder1=vinder;
                 getUserInterfaceKontrakt().vinder(vinder);
                 setVinderFindes(true);
                 kør = false;
             }
 
-        }
+        }return vinder1;
     }
+
+
     public int tjekAntalSpillereISpil() {
         int UdgaetSpillere = 0;
         for (int i = 0; i < spillerObjekter.size(); i++) {
