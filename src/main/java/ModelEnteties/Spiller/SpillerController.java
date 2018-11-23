@@ -32,7 +32,7 @@ public class SpillerController extends SpillerData {
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
 
-        penge += 200*gangeOverStart;
+        this.penge +=200*gangeOverStart;
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }
@@ -42,7 +42,7 @@ public class SpillerController extends SpillerData {
             Se sine ChanceFelt
             aktivere et udvalgt ChanceFelt
          */
-        if(spillerAktionsKort.size()>0){
+        if(getSpillerAktionsKort().size()>0){
             //Her printes de forskellige muligher:
             userInterfaceKontrakt.chanceKortHar();
             for(int i = 0; i<getSpillerAktionsKort().size();i++){
@@ -103,7 +103,7 @@ public class SpillerController extends SpillerData {
 
             //skifte ejerskab
             ønsketEjendom.setEjer(this);
-            this.spillerEjendomme.add(ønsketEjendom);
+            this.getSpillerEjendomme().add(ønsketEjendom);
         } else {
             userInterfaceKontrakt.monetosMangel();
         }
@@ -119,7 +119,7 @@ public class SpillerController extends SpillerData {
             //Todo: fix enkapsulering herunder:
             //skifte ejerskab
             relevantJernbane.setEjer(this);;
-            spillerJernbaner.add(relevantJernbane);
+            getSpillerJernbaner().add(relevantJernbane);
             relevantJernbane.tagTog(spil, userInterfaceKontrakt);
         } else {
             userInterfaceKontrakt.monetosMangel();
