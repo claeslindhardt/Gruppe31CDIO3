@@ -48,6 +48,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         /**
          * @param dunnoWhat Her laves spilelrnes grafiske elementer.
          */
+        //Todo: automatiser det her for spillere i spillerObjekter.
         GUI_Car car = new GUI_Car(); //Opret en bil
         car.setPrimaryColor(Color.YELLOW); //Lad den være gul
         GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
