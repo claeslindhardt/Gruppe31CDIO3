@@ -399,4 +399,8 @@ public class TUI implements UserInterfaceKontrakt {
     public void generGUIBret(int AntalFelter){
 
     }
+
+    public void spillerNanvne(int antalSpillere){
+        System.out.println("Indtast navnet på de "+antalSpillere+" der skal være med i spillet.\n Afslut med Enter efter hvert navn");
+    }
 }
