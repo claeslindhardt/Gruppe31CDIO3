@@ -27,6 +27,15 @@ public class EjendomsGruppeManager{
 
     /**
      * @author Malte
+     * Henter størrelsen på de grupper, som manageren opretter.
+     * @return Størrelsen på grupperne (gruppeStoerrelse)
+     */
+    public int getGruppeStoerelser() {
+        return gruppeStoerelser;
+    }
+
+    /**
+     * @author Malte
      * Opretter en ny Ejendomsgruppe, ved at give den specifik farve, og en stoerrelse med udgangspunkt i EGManageren.
      * @return Den nyopprettede gruppe.
      */
