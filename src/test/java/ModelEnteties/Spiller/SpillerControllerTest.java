@@ -100,7 +100,7 @@ class SpillerControllerTest {
 
     /**
      * @author Jacob, Malte
-     * Integration test, som tester om metoden koebEjendom virker.
+     * Unit test, som tester om metoden koebEjendom virker. Den tester
      */
     @Test
     void koebEjendom() {
@@ -119,7 +119,7 @@ class SpillerControllerTest {
 
     /**
      * @author Jacob
-     * Integration test, som tester om metoden koebJernbane
+     * Unit test, som tester om metoden koebJernbane
      */
     @Test
     void koebJernbane() {
