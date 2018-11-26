@@ -134,11 +134,56 @@ public class SpilleBraetController extends SpilleBraetData {
             else{
                 EjendomsDoeber navn = new EjendomsDoeber();
                 Ejendom grund = new Ejendom(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
+                EjendomsGruppe gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
+                grund.setGruppe(gruppe);
                 getBret().add(grund);
             }
             setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
             setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
         }
+            for (int i = 0; i < antalFelter - 1; i++) {
+                int feltType = ra.nextInt(8) + 1;
+                if (feltType <= 3) {//set til 3 når test er fertig
+                    int aktionsFeltType = ra.nextInt(8) + 1;
+                    //_______________________________________________
+                    // Jernbane
+                    if (aktionsFeltType <= 4) {//set til 4 når test er fertig
+                        JernbaneDoeber st = new JernbaneDoeber();
+                        Jernbane station = new Jernbane(st.getGeneretNavn(), getStartGrundPris(), i + 2);
+                        getBret().add(station);
+                        getJernbaner().add(station);
+                    }
+                    //_______________________________________________
+                    // ChanceFelt
+                    else if (aktionsFeltType <= 6) {//set til 6 når test er fertig
+                        ChanceFelt chance = new ChanceFelt(i + 2, ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                        addBret(chance);
+                    }
+                    //_______________________________________________
+                    // Taxi
+                   else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
+                        Taxi vogn = new Taxi(i + 2);
+                        getBret().add(vogn);
+                    }
+                    //_______________________________________________
+                    // GaaIFaengsel
+                    else {
+                        GaaIFaengsel forbrydelse = new GaaIFaengsel(i + 2);
+                        getBret().add(forbrydelse);
+                    }
+                }
+                //_______________________________________________
+                // Ejendom
+                else {
+                    EjendomsDoeber navn = new EjendomsDoeber();
+                    Ejendom grund = new Ejendom(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
+                    getBret().add(grund);
+                }
+                setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());
+                setStandardLeje(getStandardLeje() + getPrisStigningAfEjendomme());
+
+
+            }
 
 
     }

@@ -41,7 +41,7 @@ public class TUI implements UserInterfaceKontrakt {
                 "|--Kast terninger (1)   | Slut din tur(2)    | Se chancekort (3)         --|" +
                         "\n|--Se hvad du ejer(4)   | Se spilbraettet(5)| Se spiller stats(6)       --|" +
                         "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
-                        "\n 9 og 8 er ikke en mulighed endnu"
+                        "\n 9 er ikke en mulighed endnu"
         );
         return input.TurMenu();
     }
@@ -137,10 +137,10 @@ public class TUI implements UserInterfaceKontrakt {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
-    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
-        System.out.print("Du slog: ");
+    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
+        System.out.print("Du slog: " + terningsKrus.getTotalVaerdi());
         //printTerninger(terningsKrus);
-        System.out.print("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
+        System.out.print(" og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
     }
 
     public void printTerninger(RafleBaeger terningsKrus){
@@ -401,5 +401,9 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public void generGUIBret(int AntalFelter, SpilleBraetController bret,ArrayList<SpillerController> spillerObjekter){
 
+    }
+
+    public void spillerNavne(int antalSpillere){
+        System.out.println("Indtast navnet på de "+antalSpillere+" der skal være med i spillet.\n Afslut med Enter efter hvert navn");
     }
 }

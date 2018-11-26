@@ -22,11 +22,12 @@ public abstract class EjeligtFelt extends Felt{
     private static ArrayList<Ejendom> alleEjendomme = new ArrayList<Ejendom>();
     private static ArrayList<Jernbane> alleJernbaner = new ArrayList<Jernbane>();
 
-
     //  Dynamiske Variabler
     private SpillerController ejer;
     private int pris = 200;
     private boolean pantsat = false;
+
+    // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
     private EjendomsGruppe gruppe;
     //|--------- Getters og Setters:-----------------
 

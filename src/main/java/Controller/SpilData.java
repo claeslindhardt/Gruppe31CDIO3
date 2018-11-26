@@ -36,7 +36,7 @@ public abstract class SpilData {
     //|--------- Variabler:-----------------
     private int spillerTur=1;
     private int antalSpillere=3;
-    private  int antalFelter=25;
+    private   int antalFelter=25;
     private  ArrayList<SpillerController> spillerObjekter = new ArrayList<SpillerController>();
     private  int antalTerninger=2;
     private  int antalChancekortPrFelt = 10;
@@ -45,7 +45,7 @@ public abstract class SpilData {
     private  boolean vinderFindes = false;
     private  SpilleBraetController bretGeneretForSpil;
     private UserInterfaceKontrakt userInterfaceKontrakt;
-    private  RafleBaeger terningeKrus;
+    private RafleBaeger terningeKrus;
     private int vinder=-1;
 
     //|--------- Getters og Setters:-----------------
@@ -152,4 +152,7 @@ public abstract class SpilData {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 
+    public boolean getVinderFindes(){
+        return vinderFindes;
+    }
 }

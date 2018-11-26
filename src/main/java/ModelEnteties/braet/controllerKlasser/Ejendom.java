@@ -46,8 +46,13 @@ public class Ejendom extends EjeligtFelt {
         this.husPris = husPris;
     }
 
+
     public int getLeje() {
-        return leje;
+        /* Ejendommens leje er vurderet ved standard lejen (leje),
+            og antallet huse. Hvert hus øger lejen med halvdelen af den originale leje */
+        int lejePerHus = leje/2;
+        int totalLeje = leje + lejePerHus*antalHuse;
+        return totalLeje;
     }
 
     public void setLeje(int leje) {
@@ -66,7 +71,7 @@ public class Ejendom extends EjeligtFelt {
             userInterfaceKontrakt.duErLandetPå();
             this.printInfo(userInterfaceKontrakt);
 
-            ;
+
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
                 case 1:
@@ -114,10 +119,6 @@ public class Ejendom extends EjeligtFelt {
         setPris(whatPrice);
         setNavn(whatName);
         setLeje(whatRent);
-
-        EjendomsGruppe ejendomsGruppe = EjendomsGruppe.getKlarGruppe();
-        setGruppe(ejendomsGruppe); // Getting a group for this property
-        ejendomsGruppe.tilfoejEjendom(this);
 
         addAlleEjendomme(this);
         setAntalHoteller(0);
