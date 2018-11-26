@@ -31,6 +31,8 @@ public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
     IndputHaanteringTUI input = new IndputHaanteringTUI();
+
+
     public int TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");

@@ -33,9 +33,12 @@ public class SpillerController extends SpillerData {
 
 
         penge += 200*gangeOverStart;
+
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }
+
+
     public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:

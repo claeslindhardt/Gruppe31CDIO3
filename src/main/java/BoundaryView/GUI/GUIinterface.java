@@ -65,6 +65,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return input.velkomstMenu(valg);
     }
 
+
     public int TurMenu(int getSpillerTur){
         String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");

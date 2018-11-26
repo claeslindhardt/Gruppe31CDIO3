@@ -26,11 +26,11 @@ public abstract class SpillerData {
     ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
     ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
     ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
-    double penge = 1500;
-    boolean faengselsStraf = false;
-    boolean harGivetOp=false;
-    boolean harAnketDomDenneRunde = false;
-    boolean harSlaaetForTuren = false;
+    protected double penge = 1500;
+    protected boolean faengselsStraf = false;
+    protected boolean harGivetOp=false;
+    protected boolean harAnketDomDenneRunde = false;
+    protected boolean harSlaaetForTuren = false;
 
 
     //Singleton Variabler;
