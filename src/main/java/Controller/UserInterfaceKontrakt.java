@@ -85,6 +85,5 @@ public interface UserInterfaceKontrakt {
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
     void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter);
-    void generGUIBret(int AntalFelter);
     void spillerNavne(int AntalSpillere);
 }
