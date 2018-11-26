@@ -41,7 +41,7 @@ public class TUI implements UserInterfaceKontrakt {
                 "|--Kast terninger (1)   | Slut din tur(2)    | Se chancekort (3)         --|" +
                         "\n|--Se hvad du ejer(4)   | Se spilbraettet(5)| Se spiller stats(6)       --|" +
                         "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
-                        "\n 9 og 8 er ikke en mulighed endnu"
+                        "\n 9 er ikke en mulighed endnu"
         );
         return input.TurMenu();
     }
