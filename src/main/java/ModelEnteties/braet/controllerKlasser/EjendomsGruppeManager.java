@@ -7,6 +7,7 @@ package ModelEnteties.braet.controllerKlasser;
  * Den gør det ved at fylde en gruppe op først, og opretter kun en ny gruppe,
  * når den tidligere gruppe er fyldt.
  */
+
 public class EjendomsGruppeManager{
 
     private int gruppeStoerelser;
