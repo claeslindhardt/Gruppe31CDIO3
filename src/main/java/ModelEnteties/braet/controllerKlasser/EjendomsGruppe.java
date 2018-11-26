@@ -2,10 +2,8 @@ package ModelEnteties.braet.controllerKlasser;
 
 import java.util.ArrayList;
 
-/**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: EjendomsGruppe
- *
- * @author Claes
+/**
+ * @author Malte
  *  Dette er klassen der holder styr på grupper af ejendomme. En Ejendomsgruppe er et objekt, som identificeres
  *  ved sin farve.
  *  Når man laver et nyt Ejendoms-objekt, sættes den automatisk ind i en gruppe. Der laves en ny gruppe hvis:
@@ -17,44 +15,53 @@ import java.util.ArrayList;
 
 public class EjendomsGruppe {
 
-    //|--------- Variabler:-----------------
-
-    private static final int GRUPPESTØRRELSE = 3;
-    private static final String[] FARVELISTE = {"roed", "groen", "blaa","gul" ,"orange","lilla","lyseroed","sort"};
-
-    private static EjendomsGruppe klarGruppe;
-    private static ArrayList<EjendomsGruppe> alleGrupper = new ArrayList<EjendomsGruppe>(); //might come in handy
-
-    //Dynamiske variabler:
+    private int stoerrelse;
     private String farve;
     private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
 
-
-    public EjendomsGruppe() {
-        // A new EjendomsGruppe will get the next farve in the farveList
-        int groupIndex = alleGrupper.size(); // Putting this in a variable, so I don't have to call a method every time I need it (speeds up)
-        if (groupIndex >= FARVELISTE.length){
-            System.out.println("WARNING: No more EjendomsGruppe Colors available - reusing farves!");
-            farve = FARVELISTE[groupIndex%FARVELISTE.length]; // Using Modulus to "reset" color index counting
-        }else{
-            farve = FARVELISTE[groupIndex];
-        }
-        alleGrupper.add(this);
+    /**
+     * @author Malte
+     * Laver en ny tom ejendomsgruppe, der kan indeholde 'stoerrelse' antal ejendomme i sig.
+     * Gruppen kendetegnes derudover ved sin farve.
+     *
+     * @param farve Farven som skal kendetegne gruppen (givet kun en visuel sammenligning af gruppen,
+     *              og har ingen betydning for hvordan Ejendommene vurderes om de er i samme gruppe.
+     * @param stoerrelse Antallet af Ejendomme som gruppe skal indeholder.
+     */
+    public EjendomsGruppe(String farve, int stoerrelse) {
+        this.farve = farve;
+        this.stoerrelse = stoerrelse;
     }
 
-
-    //|--------- Getters og Setters:-----------------
-
-    public static ArrayList<EjendomsGruppe> getAlleGrupper() {
-        return alleGrupper;
-    }
+    //--------- Getters og Setters:-----------------
 
     public String getFarve() {
         return farve;
     }
 
+    /**
+     * @author Malte
+     * Ser om Ejendomsgruppen er fuld (dvs. der ikke bør være flere ejendomme i den).
+     * @return True: den er fuld, False: der er stadig plads.
+     */
+    public boolean erFuld(){
+        return ejendomme.size() >= stoerrelse;
+    }
+
     public ArrayList<Ejendom> getEjendomme() {
         return ejendomme;
+    }
+
+    public int getAntalEjendomme(){ return ejendomme.size(); }
+
+    /**
+     * @author Malte
+     * Undersoeger om gruppen indeholder en bestemt ejendom.
+     * @param ejendom Ejendommen som gruppen skal indeholder
+     * @return Om den indeholder 'ejendom' eller ej.
+     */
+    public boolean indeholderEjendom(Ejendom ejendom){
+        return ejendomme.contains(ejendom);
     }
 
     /** Tilføjer en ejendom til gruppen
@@ -65,17 +72,8 @@ public class EjendomsGruppe {
         ejendomme.add(ejendom);
     }
 
-    //|----------- Metoder:------------------
 
-    /** Henter en gruppe, hvori der er plads til en ejendom.
-     * @return en gruppe med plads til mindst én ejendom mere.
-     * @author Malte
-     */
-    public static EjendomsGruppe getKlarGruppe(){
-        if( klarGruppe == null || klarGruppe.ejendomme.size() >= GRUPPESTØRRELSE){
-            klarGruppe = new EjendomsGruppe();}
-        return klarGruppe;
-    }
+    //|----------- Metoder:------------------
 
     //Todo bed malte rykke den her til TUI
     public void printInfo(){
