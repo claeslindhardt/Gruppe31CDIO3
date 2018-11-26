@@ -76,8 +76,8 @@ class SpillerControllerTest {
         SpilController spil = new SpilController(1, 6, 1, 0,userInterface);
 
         spil.getSpillerMedTur().setSpillerPosition(4);
-        spil.terningeKrus.setTotalVaerdi(1);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(1);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         double forventetSpillerBeholdning = 1500;
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
