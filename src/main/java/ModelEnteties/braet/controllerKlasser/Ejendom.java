@@ -71,7 +71,7 @@ public class Ejendom extends EjeligtFelt {
             userInterfaceKontrakt.duErLandetPå();
             this.printInfo(userInterfaceKontrakt);
 
-            ;
+
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
                 case 1:

@@ -3,7 +3,6 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
-import ModelEnteties.braet.controllerKlasser.Start;
 import ModelEnteties.singletoner.RandomSingleton;
 
 import java.util.Random;
@@ -44,8 +43,10 @@ public class SpilController extends SpilData {
     // Diverse:
 
     public void genererSpillere(int antalSpillere){
-        for(int i = 0;i < antalSpillere;i++){
-            SpillerController deltager = new SpillerController("Jonny",i,0);
+        Scanner navnInput = new Scanner(System.in);
+        getUserInterfaceKontrakt().spillerNanvne(getAntalSpillere());
+        for (int i = 0; i < antalSpillere; i++) {
+            SpillerController deltager = new SpillerController(navnInput.nextLine(), i, 0);
             getSpillerObjekter().add(deltager);
         }
     }

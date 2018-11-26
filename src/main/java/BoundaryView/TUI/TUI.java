@@ -138,9 +138,9 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Spillet er slut.");
     }
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
-        System.out.print("Du slog: ");
+        System.out.print("Du slog: " + terningsKrus.getTotalVaerdi());
         //printTerninger(terningsKrus);
-        System.out.print("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
+        System.out.print(" og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");
     }
 
     public void printTerninger(RafleBaeger terningsKrus){
@@ -401,5 +401,9 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public void generGUIBret(int AntalFelter, SpilleBraetController bret,ArrayList<SpillerController> spillerObjekter){
 
+    }
+
+    public void spillerNanvne(int antalSpillere){
+        System.out.println("Indtast navnet på de "+antalSpillere+" der skal være med i spillet.\n Afslut med Enter efter hvert navn");
     }
 }
