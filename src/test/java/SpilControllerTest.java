@@ -1,7 +1,6 @@
-package Controller;
-
-
 import BoundaryView.TUI.TUI;
+import Controller.SpilController;
+import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
