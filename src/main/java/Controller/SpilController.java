@@ -3,6 +3,7 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.controllerKlasser.Start;
 import ModelEnteties.singletoner.RandomSingleton;
 
 import java.util.Random;
@@ -165,13 +166,14 @@ public class SpilController extends SpilData {
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus){
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition+rykVeardi>getAntalFelter()){
+        if (nuvaerendeposition+rykVeardi>antalFelter-1){
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this, getUserInterfaceKontrakt());
         }else{
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition()+rykVeardi);
         }
         getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
     }
+
 
     //_____________________________________
     //Menuer:

@@ -48,7 +48,6 @@ class SpillerControllerTest {
      Her vil jeg undersøge, om spilleren får penge på man lander på start igen. Dette er en kode som skal finde en fejl.
      Testen bliver gennemført da den ikke går igennem går igennem :D
      */
-    //TODO: ret fejlen
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
@@ -61,6 +60,30 @@ class SpillerControllerTest {
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
         assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
     }
+
+    /**
+     * @author Jacob & Chua
+     * Her tester vi, om der sker noget med ens pengebeholdning når spilleren lander på feltet lige inden start.
+     * DET GØR DER IKKE.
+     * Vi lavede testen på baggrund af testen "landerPaaStart", eftersom "landerPaaStart" testen giver 200 penge, når man har
+     * slået nogle terninger med øjne der adderes med spillerens placering resulterer i at spilleren rykker lige akkurat forbi
+     * start, men så subtraherede 1 fra antallet af felter man har, så får man 200 penge når man lander på start.
+     * Her tester vi, om man fra næstsidste position til sidste position, optjener point, på baggrund af "landerPaaStart"
+     */
+    @Test
+    void faarManPengeNaarManPassererSidsteFeltOgLanderPaaStart(){
+        UserInterfaceKontrakt userInterface = new TUI();
+        SpilController spil = new SpilController(1, 6, 1, 0,userInterface);
+
+        spil.getSpillerMedTur().setSpillerPosition(4);
+        spil.terningeKrus.setTotalVaerdi(1);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+
+        double forventetSpillerBeholdning = 1500;
+        double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
+        assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
+    }
+
 
     /**
      * @author Chua
