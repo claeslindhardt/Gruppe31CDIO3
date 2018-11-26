@@ -166,7 +166,7 @@ public class SpilController extends SpilData {
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus){
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition+rykVeardi>antalFelter-1){
+        if (nuvaerendeposition+rykVeardi>getAntalFelter()-1){
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this, getUserInterfaceKontrakt());
         }else{
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition()+rykVeardi);
