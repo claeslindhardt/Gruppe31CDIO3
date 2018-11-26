@@ -3,9 +3,12 @@ package BoundaryView.GUI;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
@@ -20,22 +23,72 @@ import java.util.ArrayList;
  */
 public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
+
+    //----------- Variabler: -------------------
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
+    ArrayList<GUISpillerData> GUISpillerDataObjekter;
 
-    public void generGUIBret(int AntalFelter){
+    //---------Getters og setters: -------------
+    public ArrayList<GUISpillerData> getGUISpillerDataObjekter() {
+        return GUISpillerDataObjekter;
+    }
+
+    public void setGUISpillerDataObjekter(ArrayList<GUISpillerData> GUISpillerDataObjekter) {
+        this.GUISpillerDataObjekter = GUISpillerDataObjekter;
+    }
+
+    public void addGUISpillerObjekter(GUISpillerData spiller) {
+        this.GUISpillerDataObjekter.add(spiller);
+    }
+
+    public void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter){
         GUI_Field[] fields = new GUI_Field[AntalFelter];
+        /**
+         * @param testStreet Her laves felternes grafiske elementer
+         */
         //lav dette om til et for each loop
         for(int i = 0 ;i<fields.length; i++){
             GUI_Street testStreet= new GUI_Street();
-            testStreet.setTitle("Anker Engelundsvej");
+            testStreet.setTitle(bret.getBret().get(i).getNavn());
+            testStreet.setSubText(bret.getBret().get(i).getFeltType());
             testStreet.setBorder(Color.CYAN);
-            testStreet.setRent("600,-");
+            //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
+
         GUI guiMedBret = new GUI(fields);
 
         gui = guiMedBret;
+
+        /**
+         * @param dunnoWhat Her laves spilelrnes grafiske elementer.
+         */
+
+        for(int i=0;i<spillerObjekter.size();i++){
+            GUI_Car bil = new GUI_Car(); //Opret en bil
+            bil.setPrimaryColor(Color.RED); //Lad den være gul
+            GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
+
+            GUISpillerData deltager = new GUISpillerData(bil,medspiller);
+            gui.addPlayer(medspiller); //Sæt spilleren på
+            fields[0].setCar(medspiller, true);
+
+        }
+        /*//Todo: automatiser det her for spillere i spillerObjekter.
+        GUI_Car car = new GUI_Car(); //Opret en bil
+        car.setPrimaryColor(Color.RED); //Lad den være gul
+        GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
+        gui.addPlayer(rambo); //Sæt spilleren på
+        fields[0].setCar(rambo, true);
+
+        GUI_Car car1 = new GUI_Car(); //Opret en bil
+        car1.setPrimaryColor(Color.YELLOW); //Lad den være gul
+        GUI_Player bambo = new GUI_Player("Nambo",1000, car1); //opret en spiller
+        gui.addPlayer(bambo); //Sæt spilleren på
+        fields[0].setCar(bambo, true);*/
+
+
     }
 
     public int velkomstMenu(){
@@ -45,6 +98,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         //todo: fix this to return the right option
         return input.velkomstMenu(valg);
     }
+
 
     public int TurMenu(int getSpillerTur){
         String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",

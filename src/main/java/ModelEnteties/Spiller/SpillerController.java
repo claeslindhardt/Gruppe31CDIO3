@@ -32,10 +32,13 @@ public class SpillerController extends SpillerData {
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
 
-        this.penge +=200*gangeOverStart;
+        penge += 200*gangeOverStart;
+
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }
+
+
     public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:

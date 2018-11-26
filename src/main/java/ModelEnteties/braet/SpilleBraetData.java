@@ -1,6 +1,7 @@
 package ModelEnteties.braet;
 
 import ModelEnteties.braet.controllerKlasser.ChanceFelt;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.braet.dataKlasser.Felt;
 
@@ -19,6 +20,10 @@ public class SpilleBraetData {
     private int standardAntalChanceKortPrFelt = 12;
     private ArrayList<Jernbane> jernbaner= new ArrayList<Jernbane>();
 
+
+
+    private EjendomsGruppeManager ejendomsGruppeManager = new EjendomsGruppeManager(3);
+
     //|--------- Getters og Setters:-----------------
     public ArrayList<Felt> getBret() {
         return bret;
@@ -26,6 +31,14 @@ public class SpilleBraetData {
 
     public void setBret(ArrayList<Felt> bret) {
         this.bret = bret;
+    }
+
+    public EjendomsGruppeManager getEjendomsGruppeManager() {
+        return ejendomsGruppeManager;
+    }
+
+    public void setEjendomsGruppeManager(EjendomsGruppeManager ejendomsGruppeManager) {
+        this.ejendomsGruppeManager = ejendomsGruppeManager;
     }
 
     public void addBret(Felt felt){
