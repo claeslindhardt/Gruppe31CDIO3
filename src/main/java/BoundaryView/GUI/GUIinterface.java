@@ -91,6 +91,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    @Override
+    public void spillerNavne(int AntalSpillere) {
+
+    }
+
     public int velkomstMenu(){
         String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
