@@ -15,7 +15,7 @@ public class EjendomsGruppeManager{
     private EjendomsGruppe klarGruppe;
 
 
-    private EjendomsGruppeManager(int gruppeStoerelser){
+    public EjendomsGruppeManager(int gruppeStoerelser){
         // Sikrer at man ikke har grupper der er mindre end de kan være.
         if(gruppeStoerelser < 1 ){
             this.gruppeStoerelser = 1;

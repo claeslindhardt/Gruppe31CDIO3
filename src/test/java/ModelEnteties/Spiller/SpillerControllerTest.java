@@ -5,6 +5,7 @@ import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
@@ -147,8 +148,7 @@ class SpillerControllerTest {
         // Setup
 
         SpillerController spiller = new SpillerController("Test", 0, 0);
-
-        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe();
+        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe("blaa", 3);
 
         Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom1);

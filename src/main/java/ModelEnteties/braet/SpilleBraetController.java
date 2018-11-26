@@ -134,6 +134,7 @@ public class SpilleBraetController extends SpilleBraetData {
             else{
                 EjendomsDoeber navn = new EjendomsDoeber();
                 Ejendom grund = new Ejendom(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
+                getEjendomsGruppeManager().tilfoejTilGruppe(grund);
                 getBret().add(grund);
             }
             setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
