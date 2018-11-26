@@ -46,8 +46,13 @@ public class Ejendom extends EjeligtFelt {
         this.husPris = husPris;
     }
 
+
     public int getLeje() {
-        return leje;
+        /* Ejendommens leje er vurderet ved standard lejen (leje),
+            og antallet huse. Hvert hus øger lejen med halvdelen af den originale leje */
+        int lejePerHus = leje/2;
+        int totalLeje = leje + lejePerHus*antalHuse;
+        return totalLeje;
     }
 
     public void setLeje(int leje) {
