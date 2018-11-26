@@ -50,10 +50,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
          */
         //Todo: automatiser det her for spillere i spillerObjekter.
         GUI_Car car = new GUI_Car(); //Opret en bil
-        car.setPrimaryColor(Color.YELLOW); //Lad den være gul
+        car.setPrimaryColor(Color.RED); //Lad den være gul
         GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
         gui.addPlayer(rambo); //Sæt spilleren på
         fields[0].setCar(rambo, true);
+
+        GUI_Car car1 = new GUI_Car(); //Opret en bil
+        car1.setPrimaryColor(Color.YELLOW); //Lad den være gul
+        GUI_Player bambo = new GUI_Player("Nambo",1000, car1); //opret en spiller
+        gui.addPlayer(bambo); //Sæt spilleren på
+        fields[0].setCar(bambo, true);
 
 
     }
