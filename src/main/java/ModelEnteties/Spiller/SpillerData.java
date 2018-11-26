@@ -23,14 +23,14 @@ public abstract class SpillerData {
     private String navn;
     //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
     //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
-    private ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
-    private ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
-    private ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
-    double penge = 1500;
-    private boolean faengselsStraf = false;
-    private boolean harGivetOp=false;
-    private boolean harAnketDomDenneRunde = false;
-    private boolean harSlaaetForTuren = false;
+    ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
+    ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
+    ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
+    protected double penge = 1500;
+    protected boolean faengselsStraf = false;
+    protected boolean harGivetOp=false;
+    protected boolean harAnketDomDenneRunde = false;
+    protected boolean harSlaaetForTuren = false;
 
 
     //Singleton Variabler;

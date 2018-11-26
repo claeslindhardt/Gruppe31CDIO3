@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class SpilleBraetController extends SpilleBraetData {
 
     //|----------- Metoder:------------------
-    public void printBret(UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void printBret(UserInterfaceKontrakt userInterfaceKontrakt){
 
-        for (int i = 0; i < this.getBret().size(); i++) {
+        for(int i = 0; i < this.getBret().size() ;i++){
             Felt felt = this.getBret().get(i);
             String felttyp = felt.getFeltType();//printInfo();
             userInterfaceKontrakt.bretPrinter(felttyp);
@@ -27,14 +27,14 @@ public class SpilleBraetController extends SpilleBraetData {
         userInterfaceKontrakt.terminalLine();
     }
 
-    public String toString() {
+    public String toString(){
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{");
 
-        for (int i = 0; i < this.getBret().size(); i++) {
+        for (int i = 0; i < this.getBret().size(); i++){
 
-            if (i > 0) {
+            if (i > 0){
                 stringBuilder.append(" , ");
             }
 
@@ -45,7 +45,7 @@ public class SpilleBraetController extends SpilleBraetData {
         return stringBuilder.toString();
     }
 
-    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
 
         ArrayList<ChanceAktion> chanceKortTilFelt = new ArrayList<ChanceAktion>();
 
@@ -54,9 +54,9 @@ public class SpilleBraetController extends SpilleBraetData {
         chanceKortTilFelt.add(some);
         //til dette
 
-        for (int i = 0; i < antalChancekort; i++) {
-            int valgAfKortType = ra.nextInt(4) + 1;
-            switch (valgAfKortType) {//ændre denne til valgAfKortType når du er fertig med at teste
+        for(int i = 0;i<antalChancekort;i++){
+            int valgAfKortType = ra.nextInt(4)+1;
+            switch (valgAfKortType){//ændre denne til valgAfKortType når du er fertig med at teste
                 //_______________________________________________
                 // Giver penge
                 case 1:
@@ -81,7 +81,7 @@ public class SpilleBraetController extends SpilleBraetData {
                     chanceKortTilFelt.add(kaution);
                     break;
                 default:
-                    userInterfaceKontrakt.chanceKortGenereringsFejl();
+                userInterfaceKontrakt.chanceKortGenereringsFejl();
             }
         }
 
@@ -90,19 +90,57 @@ public class SpilleBraetController extends SpilleBraetData {
     }
 
     //|--------- Constructor:-----------------
-    public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
         //-------Tilføjning af objekter til brettet---
-        int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
-        Faengsel kashotten = new Faengsel("Vester Fængsel", 1);
-        Start go = new Start(getStartGrundPris(), 0);
-
-
-        while(jernbane < 2&&jernbane<4){
+        Start go = new Start(getStartGrundPris(),0);
         getBret().add(go);
-
+        Faengsel kashotten = new Faengsel("Vester Fængsel",1);
         getBret().add(kashotten);
 
+        for(int i =0;i<antalFelter-1;i++){
+            int feltType = ra.nextInt(8)+1;
+            if (feltType<=3){//set til 3 når test er fertig
+                int aktionsFeltType = ra.nextInt(8)+1;
+                //_______________________________________________
+                // Jernbane
+                if(aktionsFeltType<=4){//set til 4 når test er fertig
+                    JernbaneDoeber st = new JernbaneDoeber();
+                    Jernbane station = new Jernbane(st.getGeneretNavn(),getStartGrundPris(),i+2);
+                    getBret().add(station);
+                    getJernbaner().add(station);
+                }
+                //_______________________________________________
+                // ChanceFelt
+                else if(aktionsFeltType<=6) {//set til 6 når test er fertig
+                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                    addBret(chance);
+                }
+                //_______________________________________________
+                // Taxi
+                else if(aktionsFeltType<=7) {//set til 7 når test er fertig
+                    Taxi vogn = new Taxi(i+2);
+                    getBret().add(vogn);
+                }
+                //_______________________________________________
+                // GaaIFaengsel
+                else {
+                    GaaIFaengsel forbrydelse = new GaaIFaengsel(i+2);
+                    getBret().add(forbrydelse);
+                }
+            }
+            //_______________________________________________
+            // Ejendom
+            else{
+                EjendomsDoeber navn = new EjendomsDoeber();
+                Ejendom grund = new Ejendom(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
+                EjendomsGruppe gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
+                grund.setGruppe(gruppe);
+                getBret().add(grund);
+            }
+            setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
+            setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
+        }
             for (int i = 0; i < antalFelter - 1; i++) {
                 int feltType = ra.nextInt(8) + 1;
                 if (feltType <= 3) {//set til 3 når test er fertig
@@ -148,26 +186,5 @@ public class SpilleBraetController extends SpilleBraetData {
             }
 
 
-
-            for (int j = 0; j < getBret().size(); j++) {
-                if (getBret().get(j) instanceof Start) {
-                    startfelt++;
-                } else if (getBret().get(j) instanceof Ejendom) {
-                    ejendom++;
-                } else if (getBret().get(j) instanceof ChanceFelt) {
-                    chancefelt++;
-                } else if (getBret().get(j) instanceof Faengsel) {
-                    faengsel++;
-                } else if (getBret().get(j) instanceof GaaIFaengsel) {
-                    gaaIFaengsel++;
-                } else if (getBret().get(j) instanceof Jernbane) {
-                    jernbane++;
-                } else if (getBret().get(j) instanceof Taxi) {
-                    taxi++;
-                }
-            }/*if(jernbane < 2&&jernbane>5 && gaaIFaengsel !=1 && taxi != 1&&chancefelt<3){
-                getBret().clear();
-            }*/
-        }
     }
 }

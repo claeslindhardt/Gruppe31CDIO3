@@ -5,6 +5,7 @@ import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.Ejendom;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
@@ -35,8 +36,8 @@ class SpillerControllerTest {
         SpilController spil = new SpilController(1,4,2,0,userInterface);
 
 
-        spil.terningeKrus.setTotalVaerdi(5);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(5);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         int forventetSpillerPosition=1;
         int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
@@ -48,19 +49,42 @@ class SpillerControllerTest {
      Her vil jeg undersøge, om spilleren får penge på man lander på start igen. Dette er en kode som skal finde en fejl.
      Testen bliver gennemført da den ikke går igennem går igennem :D
      */
-    //TODO: ret fejlen
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
-        spil.terningeKrus.setTotalVaerdi(7);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(7);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         double forventetSpillerBeholdning = 1700;
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
         assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
     }
+
+    /**
+     * @author Jacob & Chua
+     * Her tester vi, om der sker noget med ens pengebeholdning når spilleren lander på feltet lige inden start.
+     * DET GØR DER IKKE.
+     * Vi lavede testen på baggrund af testen "landerPaaStart", eftersom "landerPaaStart" testen giver 200 penge, når man har
+     * slået nogle terninger med øjne der adderes med spillerens placering resulterer i at spilleren rykker lige akkurat forbi
+     * start, men så subtraherede 1 fra antallet af felter man har, så får man 200 penge når man lander på start.
+     * Her tester vi, om man fra næstsidste position til sidste position, optjener point, på baggrund af "landerPaaStart"
+     */
+    @Test
+    void faarManPengeNaarManPassererSidsteFeltOgLanderPaaStart(){
+        UserInterfaceKontrakt userInterface = new TUI();
+        SpilController spil = new SpilController(1, 6, 1, 0,userInterface);
+
+        spil.getSpillerMedTur().setSpillerPosition(4);
+        spil.getTerningeKrus().setTotalVaerdi(1);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
+
+        double forventetSpillerBeholdning = 1500;
+        double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
+        assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
+    }
+
 
     /**
      * @author Chua
@@ -73,8 +97,8 @@ class SpillerControllerTest {
         UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
-        spil.terningeKrus.setTotalVaerdi(8);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(8);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         double forventetSpillerBeholdning = 1700;
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
@@ -99,7 +123,7 @@ class SpillerControllerTest {
 
     /**
      * @author Jacob, Malte
-     * Integration test, som tester om metoden koebEjendom virker.
+     * Unit test, som tester om metoden koebEjendom virker. Den tester
      */
     @Test
     void koebEjendom() {
@@ -118,7 +142,7 @@ class SpillerControllerTest {
 
     /**
      * @author Jacob
-     * Integration test, som tester om metoden koebJernbane
+     * Unit test, som tester om metoden koebJernbane
      */
     @Test
     void koebJernbane() {
@@ -147,8 +171,7 @@ class SpillerControllerTest {
         // Setup
 
         SpillerController spiller = new SpillerController("Test", 0, 0);
-
-        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe();
+        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe("blaa", 3);
 
         Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom1);

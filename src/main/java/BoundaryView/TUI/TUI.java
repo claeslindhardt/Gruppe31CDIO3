@@ -3,6 +3,7 @@ package BoundaryView.TUI;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.ScannerSingleton;
@@ -30,6 +31,8 @@ public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
     IndputHaanteringTUI input = new IndputHaanteringTUI();
+
+
     public int TurMenu(int getSpillerTur){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Det er spiller "+getSpillerTur+"'s tur.");
@@ -38,23 +41,23 @@ public class TUI implements UserInterfaceKontrakt {
                 "|--Kast terninger (1)   | Slut din tur(2)    | Se chancekort (3)         --|" +
                         "\n|--Se hvad du ejer(4)   | Se spilbraettet(5)| Se spiller stats(6)       --|" +
                         "\n|--Giv op (7)           | Byg på ejendom (8) | Handel med Ejede ting  (9)--|" +
-                        "\n 9 og 8 er ikke en mulighed endnu"
+                        "\n 9 er ikke en mulighed endnu"
         );
         return input.TurMenu();
     }
     public void ikkeMuligt(){
-        System.out.println("Dette er ikke en mulighed endnu - prøv igen");
+        System.out.println("Dette er ikke en mulighed endnu - proev igen");
     }
     public int velkomstMenu(){
 
-        System.out.println("_________________________________________________");
-        System.out.println("|=========| MONOPOL SPILLET MKIII |=============|");
-        System.out.println("|========VELKOMMEN TIL START MENUEN=============|");
-        System.out.println("|===============================================|");
-        System.out.println("|====== For at starte nyt spil input: 1 ========|");
-        System.out.println("|== For at aendre spil instillinger input: 2 ===|");
-        System.out.println("|==== For at forsaette sidste spil input: 3 ====|(Woops ikke en mulighed endnu, under construction though)");
-        System.out.println("|===============================================|");
+        System.out.println("__________________________________________________");
+        System.out.println("|=========| MONOPOLY SPILLET MKIII |=============|");
+        System.out.println("|========VELKOMMEN TIL START MENUEN==============|");
+        System.out.println("|================================================|");
+        System.out.println("|====== For at starte nyt spil input: 1 =========|");
+        System.out.println("|== For at aendre spil instillinger input: 2 ====|");
+        System.out.println("|==== For at forsaette sidste spil input: 3 =====|(Woops ikke en mulighed endnu, under construction though)");
+        System.out.println("|================================================|");
 
         return input.velkomstMenu();
     }
@@ -64,7 +67,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Braettet har "+getAntalFelter+" Felter,");
         System.out.println("med "+getAntalTerninger+" terninger på braettet.");
         System.out.println("Spiller "+getSpillerTur + " Starter!");
-        System.out.println("Man går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge.");
+        System.out.println("Man går bankerot og taber dermed, hvis man har mindre end: "+getBankeraadGraense+" penge.");
     }
     public void startSpilGrundFejl(){
         System.out.println("Wooops ikke en mulighed endnu, spillet starter" +
@@ -72,7 +75,7 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public int instilingsSporgsmaal0(){
         System.out.println("Hvor mange felter skal braettet have?: ");
-        System.out.println("NB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere");
+        System.out.println("NB!: Hvis ikke braettet har 3 felter, spilles der ikke monopoly laengere");
         return input.instilingsSporgsmaal();
     }
     public int instilingsSporgsmaall(){
@@ -84,7 +87,7 @@ public class TUI implements UserInterfaceKontrakt {
         return input.instilingsSporgsmaal();
     }
     public int instilingsSporgsmaal3(){
-        System.out.println("Hvor få penge må man have før man går bankerot?: ");
+        System.out.println("Hvor faa penge må man have forr man gaar bankerot?: ");
         return input.instilingsSporgsmaal();
     }
 
@@ -95,11 +98,11 @@ public class TUI implements UserInterfaceKontrakt {
 
     public void bankeRaadtGrundetLiquditet(int getBankeraadGraense){
         System.out.println("Woops du har mindre end "+getBankeraadGraense+" penge, " +
-                "\nog du har derfor ikke høj nok liquditet til at forsætte Spillet."
+                "\nog du har derfor ikke en hoej nok pengebholdning til at forsaette Spillet."
         );
     }
     public void spillerUdgår(int udgaaetSpiller){
-        System.out.println("Spiller "+udgaaetSpiller+" er nu udgået");
+        System.out.println("Spiller "+udgaaetSpiller+" er nu udgaaet");
     }
     public void terminalLinje(){
         System.out.println("_________________________________________________________________");
@@ -108,17 +111,17 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("-----------------------------------------------");
     }
     public void vinder(int vinder){
-        System.out.println("Hurra Vi har en vinder, vinder blev spiller "+(vinder));
+        System.out.println("Hurra Vi har en vinder. Vinderen blev spiller "+(vinder));
 
     }
 
     public void anketStraffeDom(int spillerTur){
-        System.out.println("Tillykke, Spiller "+spillerTur +" din straffedom er blevet anket og du får nu et forsøg til at komme ud af faengsel." +
-                "\nDu skal blot slå to ens med terningerne"
+        System.out.println("Tillykke, Spiller "+spillerTur +" din straffedom er blevet anket og du faar nu et forsoeg til at komme ud af faengsel." +
+                "\nDu skal blot slaa to ens med terningerne"
         );
     }
     public void harSlaaetMedTerningfor(){
-        System.out.println("Du har allerede slaeet alle de terninger du maa, den her tur.");
+        System.out.println("Du har allerede slaeet alle de terninger du maa, i den her tur.");
     }
     public void ingenHeldIRetten(){
         System.out.println("Ingen held i retten i dag, forbliv i faengsel." +
@@ -126,7 +129,7 @@ public class TUI implements UserInterfaceKontrakt {
         );
     }
     public void heldIRetten(){
-        System.out.println("Du havde held i retten i dag, og må defor slå med terningerne og rykke igen med det samme.");
+        System.out.println("Du havde held i retten i dag, og må defor slaa med terningerne og rykke igen med det samme.");
     }
     public void retsTerninger(int domsAfsigelseDel1, int domsAfsigelseDel2){
         System.out.println("Du slog "+domsAfsigelseDel1+" og "+domsAfsigelseDel2);
@@ -147,7 +150,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
     }
     public void ensTerninger(){
-        System.out.println("Alle de terninger du slog, havde samme vaerdi. Du får lov til at slå en ekstra gang.");
+        System.out.println("Alle de terninger du slog, havde samme vaerdi. Du faar lov til at slå en ekstra gang.");
     }
 
     public void printFaenselInfo(){
@@ -180,7 +183,7 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public int chanceKortsVejledning(){
         System.out.println("-------------------------------");
-        System.out.println("Intast nummeret på det chance kort du gerne vil aktiverer:" +
+        System.out.println("Intast nummeret på det chance kort du gerne vil aktivere:" +
                 "\nEller hvis du vil tilbage til tur menuen (-1):"
         );
 
@@ -198,7 +201,7 @@ public class TUI implements UserInterfaceKontrakt {
             ejer = stadtion.getEjer().getNavn();
         }
 
-        System.out.println("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
+        System.out.println("| Placering: "+stadtion.getPlacering()+" | Navn: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| Ejer:"+ejer+"|");
     }
     public int hvorHen(int pos){
         System.out.println("Din nuvaerende position er: "+ pos);
@@ -254,7 +257,7 @@ public class TUI implements UserInterfaceKontrakt {
         return input.stationsMuligheder();
     }
     public void turEfterJernbane(){
-        System.out.println("Du kan nu forsaette din tur men får ikke muligheden for at tage jernbanen igen i denne tur," +
+        System.out.println("Du kan nu forsaette din tur men faar ikke muligheden for at tage jernbanen igen i denne tur," +
                 "\n det tog er koert!");
     }
     public void manglerJernbaner(){
@@ -396,7 +399,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void generGUIBret(int AntalFelter){
+    public void generGUIBret(int AntalFelter, SpilleBraetController bret,ArrayList<SpillerController> spillerObjekter){
 
     }
 

@@ -34,19 +34,19 @@ public abstract class SpilData {
     //|-------initiering af objekter: -----------
     //TODO: make singleton of scanner and random here.
     //|--------- Variabler:-----------------
-    public int spillerTur=1;
-    public int antalSpillere=3;
-    public int antalFelter=25;
-    public ArrayList<SpillerController> spillerObjekter = new ArrayList<SpillerController>();
-    public int antalTerninger=2;
-    public int antalChancekortPrFelt = 10;
-    public int bankeraadGraense = 15;
-    public boolean kør = true;
-    public boolean vinderFindes = false;
-    public SpilleBraetController bretGeneretForSpil;
-    public UserInterfaceKontrakt userInterfaceKontrakt;
-    public RafleBaeger terningeKrus;
-    int vinder = -1;
+    private int spillerTur=1;
+    private int antalSpillere=3;
+    private   int antalFelter=25;
+    private  ArrayList<SpillerController> spillerObjekter = new ArrayList<SpillerController>();
+    private  int antalTerninger=2;
+    private  int antalChancekortPrFelt = 10;
+    private  int bankeraadGraense = 15;
+    private  boolean kør = true;
+    private  boolean vinderFindes = false;
+    private  SpilleBraetController bretGeneretForSpil;
+    private UserInterfaceKontrakt userInterfaceKontrakt;
+    private RafleBaeger terningeKrus;
+    private int vinder=-1;
 
     //|--------- Getters og Setters:-----------------
     public int getVinder() {
