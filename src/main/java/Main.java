@@ -76,7 +76,7 @@ public class Main {
             }
 
         }
-        spil.userInterfaceKontrakt.spilletErSlut();
+        spil.getUserInterfaceKontrakt().spilletErSlut();
         /*
         SpillerController spiller = new SpillerController("bo",2,25);
         TUI UserInterfaceKontrakt = new TUI();

@@ -35,8 +35,8 @@ class SpillerControllerTest {
         SpilController spil = new SpilController(1,4,2,0,userInterface);
 
 
-        spil.terningeKrus.setTotalVaerdi(5);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(5);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         int forventetSpillerPosition=1;
         int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
@@ -53,8 +53,8 @@ class SpillerControllerTest {
         UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
-        spil.terningeKrus.setTotalVaerdi(7);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(7);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         double forventetSpillerBeholdning = 1700;
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
@@ -96,8 +96,8 @@ class SpillerControllerTest {
         UserInterfaceKontrakt userInterface = new TUI();
         SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
-        spil.terningeKrus.setTotalVaerdi(8);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(8);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         double forventetSpillerBeholdning = 1700;
         double aktuelSpillerBeholdning = spil.getSpillerMedTur().getPenge();
