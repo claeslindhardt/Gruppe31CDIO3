@@ -3,9 +3,12 @@ package BoundaryView.GUI;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
@@ -23,19 +26,36 @@ public class GUIinterface implements UserInterfaceKontrakt {
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
 
-    public void generGUIBret(int AntalFelter){
+    public void generGUIBret(int AntalFelter, SpilleBraetController bret){
         GUI_Field[] fields = new GUI_Field[AntalFelter];
+        /**
+         * @param testStreet Her laves felternes grafiske elementer
+         */
         //lav dette om til et for each loop
         for(int i = 0 ;i<fields.length; i++){
             GUI_Street testStreet= new GUI_Street();
-            testStreet.setTitle("Anker Engelundsvej");
+            testStreet.setTitle(bret.getBret().get(i).getNavn());
+            testStreet.setSubText(bret.getBret().get(i).getFeltType());
             testStreet.setBorder(Color.CYAN);
-            testStreet.setRent("600,-");
+            //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
+
         GUI guiMedBret = new GUI(fields);
 
         gui = guiMedBret;
+
+        /**
+         * @param dunnoWhat Her laves spilelrnes grafiske elementer.
+         */
+        //Todo: automatiser det her for spillere i spillerObjekter.
+        GUI_Car car = new GUI_Car(); //Opret en bil
+        car.setPrimaryColor(Color.YELLOW); //Lad den være gul
+        GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
+        gui.addPlayer(rambo); //Sæt spilleren på
+        fields[0].setCar(rambo, true);
+
+
     }
 
     public int velkomstMenu(){
