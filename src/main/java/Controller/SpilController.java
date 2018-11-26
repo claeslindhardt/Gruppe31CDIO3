@@ -152,6 +152,8 @@ public class SpilController extends SpilData {
 
         }
     }
+
+
     public int tjekAntalSpillereISpil() {
         int UdgaetSpillere = 0;
         for (int i = 0; i < getSpillerObjekter().size(); i++) {

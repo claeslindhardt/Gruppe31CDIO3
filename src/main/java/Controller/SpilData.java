@@ -152,4 +152,7 @@ public abstract class SpilData {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 
+    public boolean getVinderFindes(){
+        return vinderFindes;
+    }
 }
