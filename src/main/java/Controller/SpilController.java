@@ -6,6 +6,7 @@ import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.singletoner.RandomSingleton;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class SpilController extends SpilData {
 
