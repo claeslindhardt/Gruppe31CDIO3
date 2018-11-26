@@ -137,7 +137,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
-    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
+    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
         System.out.print("Du slog: ");
         //printTerninger(terningsKrus);
         System.out.print("og rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.\n");

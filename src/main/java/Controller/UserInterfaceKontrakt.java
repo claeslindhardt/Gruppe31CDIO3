@@ -31,7 +31,7 @@ public interface UserInterfaceKontrakt {
     void heldIRetten();
     void retsTerninger(int domsAfsigelseDel1, int domsAfsigelseDel2);
     void spilletErSlut();
-    void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus);
+    void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur);
     void printTerninger(RafleBaeger terningsKrus);
     void ensTerninger();
     void printFaenselInfo();

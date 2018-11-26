@@ -27,8 +27,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    ArrayList<GUISpillerData> GUISpillerDataObjekter;
-
+    private ArrayList<GUISpillerData> GUISpillerDataObjekter;
+    GUI_Field[] Fields;
     //---------Getters og setters: -------------
     public ArrayList<GUISpillerData> getGUISpillerDataObjekter() {
         return GUISpillerDataObjekter;
@@ -56,7 +56,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
-
+        Fields = fields;
         GUI guiMedBret = new GUI(fields);
 
         gui = guiMedBret;
@@ -67,7 +67,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         for(int i=0;i<spillerObjekter.size();i++){
             GUI_Car bil = new GUI_Car(); //Opret en bil
-            bil.setPrimaryColor(Color.RED); //Lad den være gul
+            bil.setPrimaryColor(Color.ORANGE); //Lad den være gul
             GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
 
             GUISpillerData deltager = new GUISpillerData(bil,medspiller);
@@ -75,19 +75,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             fields[0].setCar(medspiller, true);
 
         }
-        /*//Todo: automatiser det her for spillere i spillerObjekter.
-        GUI_Car car = new GUI_Car(); //Opret en bil
-        car.setPrimaryColor(Color.RED); //Lad den være gul
-        GUI_Player rambo = new GUI_Player("Rambo",1000, car); //opret en spiller
-        gui.addPlayer(rambo); //Sæt spilleren på
-        fields[0].setCar(rambo, true);
-
-        GUI_Car car1 = new GUI_Car(); //Opret en bil
-        car1.setPrimaryColor(Color.YELLOW); //Lad den være gul
-        GUI_Player bambo = new GUI_Player("Nambo",1000, car1); //opret en spiller
-        gui.addPlayer(bambo); //Sæt spilleren på
-        fields[0].setCar(bambo, true);*/
-
+        //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
     }
 
@@ -189,7 +177,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
-    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus){
+    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
         ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
         int terning1=tern.get(0);
@@ -200,8 +188,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
             ternin = ternin.concat(tern.get(i)+ ", ");
         }
         gui.showMessage("Du slog: "+ternin+
-                "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter.");
+                "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter."
+        );
         //printTerninger(terningsKrus);
+
+        //GUISpillerData GUIspillerMedTur = getGUISpillerDataObjekter().get(spillerTur-1);
+        //(GUIspillerMedTur.bil);
+        //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
+
     }
 
     public void printTerninger(RafleBaeger terningsKrus){

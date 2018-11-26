@@ -45,7 +45,7 @@ public class SpilController extends SpilData {
 
     public void genererSpillere(int antalSpillere){
         for(int i = 0;i < antalSpillere;i++){
-            SpillerController deltager = new SpillerController("Jonny",i,0);
+            SpillerController deltager = new SpillerController("Jonny".concat(Integer.toString(i)),i,0);
             getSpillerObjekter().add(deltager);
         }
     }
@@ -99,7 +99,7 @@ public class SpilController extends SpilData {
     public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetController spilleBret){
         if(!getSpillerMedTur().isHarSlaaetForTuren()) {
             terningsKrus.slaa();
-            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus);
+            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus,getSpillerTur());
             if (terningsKrus.erEns()) {
                 getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
@@ -166,7 +166,7 @@ public class SpilController extends SpilData {
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus){
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition+rykVeardi>antalFelter-1){
+        if (nuvaerendeposition+rykVeardi>getAntalFelter()-1){
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this, getUserInterfaceKontrakt());
         }else{
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition()+rykVeardi);
