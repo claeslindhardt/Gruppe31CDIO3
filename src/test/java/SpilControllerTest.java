@@ -31,8 +31,8 @@ class SpilControllerTest {
         SpilController spil = new SpilController(1,4,2,0,pan);
 
 
-        spil.terningeKrus.setTotalVaerdi(3);
-        spil.tjekForPasseringAfStartOgRykSpiller(spil.terningeKrus);
+        spil.getTerningeKrus().setTotalVaerdi(3);
+        spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         int forventetSpillerPosition=1;
         int aktuelSpillerPosition=spil.getSpillerMedTur().getSpillerPosition();
