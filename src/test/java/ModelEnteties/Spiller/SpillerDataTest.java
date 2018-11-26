@@ -17,12 +17,4 @@ class SpillerDataTest {
         assertTrue(spillerController.getPenge() == 1000.0);
     }
 
-    /**
-     * @author Jacob
-     * Tester om en spillers pengebeholdning ved aendres ved koeb af Ejendom
-     */
-    @Test
-    void aendringAfPenge(){
-
-    }
 }

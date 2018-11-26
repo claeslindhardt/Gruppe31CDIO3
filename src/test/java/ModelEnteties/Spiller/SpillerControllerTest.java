@@ -100,7 +100,7 @@ class SpillerControllerTest {
 
     /**
      * @author Jacob, Malte
-     * Unit test, som tester om metoden koebEjendom virker.
+     * Unit test, som tester om metoden koebEjendom virker. Den tester
      */
     @Test
     void koebEjendom() {
