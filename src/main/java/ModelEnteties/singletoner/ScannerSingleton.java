@@ -19,6 +19,10 @@ public class ScannerSingleton {
         return instance;
     }
 
+    /**
+     * Fungerer ligesom en Scanners nextLine()
+     * @return Den String der er blevet inputtet
+     */
     public String nextLine(){
         return  scan.nextLine();
     }
