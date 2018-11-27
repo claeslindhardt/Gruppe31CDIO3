@@ -92,11 +92,15 @@ public class SpilleBraetController extends SpilleBraetData {
     //|--------- Constructor:-----------------
     public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
+        boolean lavFelter=true;
         //-------Tilføjning af objekter til brettet---
         Start go = new Start(getStartGrundPris(),0);
-        getBret().add(go);
         Faengsel kashotten = new Faengsel("Vester Fængsel",1);
-        getBret().add(kashotten);
+
+        do {int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
+            getBret().add(go);
+
+            getBret().add(kashotten);
 
         for(int i =0;i<antalFelter-1;i++){
             int feltType = ra.nextInt(8)+1;
@@ -141,7 +145,7 @@ public class SpilleBraetController extends SpilleBraetData {
             setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
             setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
         }
-            for (int i = 0; i < antalFelter - 1; i++) {
+           /* for (int i = 0; i < antalFelter - 1; i++) {
                 int feltType = ra.nextInt(8) + 1;
                 if (feltType <= 3) {//set til 3 når test er fertig
                     int aktionsFeltType = ra.nextInt(8) + 1;
@@ -161,7 +165,7 @@ public class SpilleBraetController extends SpilleBraetData {
                     }
                     //_______________________________________________
                     // Taxi
-                   else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
+                    else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
                         Taxi vogn = new Taxi(i + 2);
                         getBret().add(vogn);
                     }
@@ -171,20 +175,38 @@ public class SpilleBraetController extends SpilleBraetData {
                         GaaIFaengsel forbrydelse = new GaaIFaengsel(i + 2);
                         getBret().add(forbrydelse);
                     }
-                }
-                //_______________________________________________
-                // EjendomCO
+            }
+            //_______________________________________________
+            // Ejendom
                 else {
-                    EjendomsDoeber navn = new EjendomsDoeber();
-                    EjendomCO grund = new EjendomCO(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
-                    getBret().add(grund);
-                }
-                setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());
-                setStandardLeje(getStandardLeje() + getPrisStigningAfEjendomme());
+                EjendomsDoeber navn = new EjendomsDoeber();
+                Ejendom grund = new Ejendom(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
+                getBret().add(grund);
+            }
+            setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());
+            setStandardLeje(getStandardLeje() + getPrisStigningAfEjendomme());
 
+
+            }*/
+            for (int j = 0; j < getBret().size(); j++) {
+                if (getBret().get(j) instanceof Start) {
+                    startfelt++;
+                } else if (getBret().get(j) instanceof EjendomCO) {
+                    ejendom++;
+                } else if (getBret().get(j) instanceof ChanceFeltCO) {
+                    chancefelt++;
+                } else if (getBret().get(j) instanceof Faengsel) {
+                    faengsel++;
+                } else if (getBret().get(j) instanceof GaaIFaengsel) {
+                    gaaIFaengsel++;
+                } else if (getBret().get(j) instanceof Jernbane) {
+                    jernbane++;
+                } else if (getBret().get(j) instanceof Taxi) {
+                    taxi++;
+                }
 
             }
-
-
+            if(jernbane>2&&taxi==1&&gaaIFaengsel==1&&chancefelt>1){break;}else{getBret().clear();getJernbaner().clear();}
+        }while(lavFelter);
     }
 }
