@@ -5,23 +5,63 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
+
 public class IndputHaanteringTUI {
     ScannerSingleton scan = ScannerSingleton.getInstance();
 
-    public int TurMenu(){
-        int input = scan.nextInt();
-        return input;
+    public int TurMenu(int min, int max){
+        int resultat = inputTal(min, max);
+        return resultat;
     }
 
-    public int velkomstMenu(){
-        int menuOpt = scan.nextInt();
-        return menuOpt;
+    public int velkomstMenu(int minInput, int maxInput){
+        int resultat = inputTal(minInput, maxInput);
+        return resultat;
     }
 
-    public int instilingsSporgsmaal(){
-        int felter = scan.nextInt();
-        return felter;
+    public int instilingsSporgsmaal(int minInput, int maxInput){
+        int resultat = inputTal(minInput, maxInput);
+        return resultat;
     }
+
+    /**
+     * @author Jacob og Malte
+     * Denne metode Kører scanneren i et while loop. hvis det ikke er en gyldig int der bliver scannet, så vil try /catch
+     * fange den og fortælle at det er et forkert input og køre scanner igen.
+     * @return Den int der bliver scannet, hvis den er gyldig.
+     * @param max ekslkusiv denne parameter
+     * @param min inklusiv denne parameter
+     * Vi bruger denne min, max practice da det er den der bliver brugt i index og andre steder, hvor der bliver brugt minimum og maximum.
+     */
+    public int inputTal(int min, int max){
+
+        while (true) {
+            try {
+
+                int tal = scan.nextInt();
+                if (tal < max && tal >= min){
+                    return tal;
+                }
+                System.out.println("Forkert input, tallet skal være mellem "+min+" og "+(max-1));
+
+            }
+
+            catch (InputMismatchException i){
+               System.out.println("Dette er ikke et gyldigt input, proev igen!");
+               scan.nextLine();
+                // Man bliver nød til at tilføje denne nextLine() metode, da sout printet i kommando prompten
+                // bliver set på som et forkert input hver gang try kører og vil derfor blive fanget af catch.
+            }
+
+        }
+
+
+
+
+    }
+
 
 
     public void spillerPosition(){
@@ -84,8 +124,8 @@ public class IndputHaanteringTUI {
     }
 
     public int vilDuGiveOp(){
-        int svar = scan.nextInt();
-        return svar;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
 
     public void takForSpillet(){
@@ -110,7 +150,7 @@ public class IndputHaanteringTUI {
 
     }
     public int chanceKortsVejledning(){
-        int valg = scan.nextInt();
+        int valg = inputTal(-1,100);
         return valg;
     }
     public void ingenChanceKort(){
@@ -179,8 +219,8 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public int jernBaneTilbud(){
-        int kobsBeslutning = scan.nextInt();
-        return kobsBeslutning;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
     public void forsetTur(){
         System.out.println("_________________________________________________________________");
@@ -218,9 +258,8 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public int ejendomsBud(){
-        ScannerSingleton sc = ScannerSingleton.getInstance();
-        int kobsBeslutning = sc.nextInt();
-        return kobsBeslutning;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
     public void spillerEjendele(SpillerController spiller){
         System.out.println("_________________________________________________________________");

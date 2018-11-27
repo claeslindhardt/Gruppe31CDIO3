@@ -185,7 +185,7 @@ public class SpilController extends SpilData {
     //Menuer:
     public void startMenu() {
         RandomSingleton rand = RandomSingleton.getInstance();
-        int menuOpt = getUserInterfaceKontrakt().velkomstMenu();
+        int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,4);
 
 
         if (menuOpt == 2) {
@@ -205,27 +205,26 @@ public class SpilController extends SpilData {
         //Todo: make it possible to choose a default option here:
         Random rand = new Random();
 
-        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0();
+        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0(9, 21);
         setAntalFelter(felter);
 
 
-        int spillerMeangde = getUserInterfaceKontrakt().instilingsSporgsmaall();
+        int spillerMeangde = getUserInterfaceKontrakt().instilingsSporgsmaall(2,11);
         setAntalSpillere(spillerMeangde);
 
         int starter = rand.nextInt(getAntalSpillere()) + 1;
         setSpillerTur(starter);
 
-        int terninger = getUserInterfaceKontrakt().instilingsSporgsmaal2();
+        int terninger = getUserInterfaceKontrakt().instilingsSporgsmaal2(1,5);
         setAntalTerninger(terninger);
 
-        getUserInterfaceKontrakt().instilingsSporgsmaal3();
-        int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal2();
+        int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal3(0, 99999);
         setBankeraadGraense(driftsomkostninger);
     }
 
     public void turMenu(SpilleBraetController spilleBret, RafleBaeger terningsKrus) {
 
-        int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur());
+        int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
         switch (input) {
             case 1:

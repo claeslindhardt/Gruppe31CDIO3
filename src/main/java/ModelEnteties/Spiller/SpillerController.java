@@ -70,7 +70,7 @@ public class SpillerController extends SpillerData {
 
         this.setHarSlaaetForTuren(true);
 
-        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition());
+        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getAntalFelter());
         if(destination>spil.getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
