@@ -18,11 +18,19 @@ public class ScannerSingleton {
         }
         return instance;
     }
-    public int nextInt() {
-        try {
+
+
+    /**
+     * Fungerer ligesom Scanner-klassens egen nextInt()
+     * @return Det input som brugeren taster ind.
+     * @throws InputMismatchException Hvis det er et forkert input (ikke en int), smides denne exception ligesom en almindelig scanner
+     */
+    public int nextInt() throws InputMismatchException {
+        return scan.nextInt();
+        /*try {
             return scan.nextInt();
         }catch(InputMismatchException exception){
             throw exception; // rethrowing the exception
-        }
+        }*/
     }
 }
