@@ -243,4 +243,8 @@ public class IndputHaanteringTUI {
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
+    public String tagNavn(){
+       String navn = scan.nextLine();
+       return navn;
+    }
 }

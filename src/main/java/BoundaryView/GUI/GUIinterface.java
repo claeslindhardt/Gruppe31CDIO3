@@ -80,9 +80,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     @Override
-    public void spillerNavne(int AntalSpillere) {
+    public String spillerNavne() {
         String spillernavn = gui.getUserString("Indtast et navn");
-
+        return spillernavn;
     }
 
     public int velkomstMenu(){
