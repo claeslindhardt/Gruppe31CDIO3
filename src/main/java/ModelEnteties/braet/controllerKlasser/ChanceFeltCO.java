@@ -2,13 +2,13 @@ package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.dataKlasser.AktionsFelter;
+import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ChanceFelt extends AktionsFelter {
+public class ChanceFeltCO extends AktionsFelterDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
     //TODO: fix singleton
@@ -36,7 +36,7 @@ public class ChanceFelt extends AktionsFelter {
 
     }
     //|--------- Constructor:-----------------
-    public ChanceFelt(int placering, ArrayList<ChanceAktion> chanceKortTilFelt){
+    public ChanceFeltCO(int placering, ArrayList<ChanceAktion> chanceKortTilFelt){
         setFeltType("Chance Kort");
         setNavn("Prøv lykken");
         setPlacering(getPlacering());

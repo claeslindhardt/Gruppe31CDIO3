@@ -3,15 +3,14 @@ package ModelEnteties.braet.controllerKlasser;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.dataKlasser.EjeligtFelt;
-
+import ModelEnteties.braet.dataKlasser.EjeligtFeltDTODTO;
 
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: Ejendom
+ *  PROGRAMDOKUMENTATION: EjendomCO
  *
  */
-public class Ejendom extends EjeligtFelt {
+public class EjendomCO extends EjeligtFeltDTODTO {
     //|-------initiering af objekter: -----------
 
 
@@ -124,7 +123,7 @@ public class Ejendom extends EjeligtFelt {
     }
 
     //|--------- Constructor:-----------------
-    public Ejendom(String whatName, int whatPrice, int whatRent, int placering){
+    public EjendomCO(String whatName, int whatPrice, int whatRent, int placering){
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);
@@ -133,6 +132,6 @@ public class Ejendom extends EjeligtFelt {
         addAlleEjendomme(this);
         setAntalHoteller(0);
         setAntalHuse(0);
-        setFeltType("Ejendom");
+        setFeltType("EjendomCO");
     }
 }

@@ -3,9 +3,8 @@ package ModelEnteties.Spiller;
 import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.controllerKlasser.Ejendom;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
+import ModelEnteties.braet.controllerKlasser.EjendomCO;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
@@ -127,11 +126,11 @@ class SpillerControllerTest {
     @Test
     void koebEjendom() {
 
-        Ejendom ejendom = new Ejendom("Hajgade",100,50,0);
+        EjendomCO ejendom = new EjendomCO("Hajgade",100,50,0);
         SpillerController spiller = new SpillerController("Jacob",30,0);
         UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
-        ArrayList<Ejendom> mineEjendomme = new ArrayList<Ejendom>();
+        ArrayList<EjendomCO> mineEjendomme = new ArrayList<EjendomCO>();
         spiller.koebEjendom(ejendom, userInterfaceKontrakt);
 
         assertEquals(spiller,ejendom.getEjer());
@@ -170,18 +169,18 @@ class SpillerControllerTest {
         // Setup
 
         SpillerController spiller = new SpillerController("Test", 0, 0);
-        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe("blaa", 3);
+        EjendomsGruppeCO ejendomsGruppe = new EjendomsGruppeCO("blaa", 3);
 
 
-        Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
+        EjendomCO ejendom1 = new EjendomCO("Ejendom1", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom1);
         ejendom1.setGruppe(ejendomsGruppe);
 
-        Ejendom ejendom2 = new Ejendom("Ejendom2", 0, 0, 0);
+        EjendomCO ejendom2 = new EjendomCO("Ejendom2", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom2);
         ejendom2.setGruppe(ejendomsGruppe);
 
-        Ejendom ejendom3 = new Ejendom("Ejendom3", 0, 0, 0);
+        EjendomCO ejendom3 = new EjendomCO("Ejendom3", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom3);
         ejendom3.setGruppe(ejendomsGruppe);
 

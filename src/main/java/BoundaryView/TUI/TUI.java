@@ -7,8 +7,6 @@ import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.ScannerSingleton;
-import gui_fields.GUI_Field;
-import gui_main.GUI;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -154,7 +152,7 @@ public class TUI implements UserInterfaceKontrakt {
     }
 
     public void printFaenselInfo(){
-        //System.out.println("| Felt nr: " + getPlacering() +" | Felt Navn:" + getNavn()+" | Felt type:"+ getFeltType()+" |");
+        //System.out.println("| FeltDTO nr: " + getPlacering() +" | FeltDTO Navn:" + getNavn()+" | FeltDTO type:"+ getFeltType()+" |");
     }
     public void paaBesoegIFaengsel(){
         System.out.println("Du er nu på besoeg i faengslet.");
@@ -231,13 +229,13 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
     }
     public void taxiInfo(Taxi vogn){
-        System.out.println("| Felt nr: " + vogn.getPlacering() +" | Felt Navn:" + vogn.getNavn()+" | Felt type:"+ vogn.getFeltType()+" |");
+        System.out.println("| FeltDTO nr: " + vogn.getPlacering() +" | FeltDTO Navn:" + vogn.getNavn()+" | FeltDTO type:"+ vogn.getFeltType()+" |");
     }
     public void overStartAnimation(){
         System.out.println("Aktion som foelger af Start");
     }
     public void startsFeltsInfo(Start felt){
-        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
+        System.out.println("| FeltDTO nr: " + felt.getPlacering() +" | FeltDTO Navn:" + felt.getNavn()+" | FeltDTO type:"+ felt.getFeltType()+" |");
     }
     public void iFaengselMedDig(){
         System.out.println("HOV HOV HOV, meget kan man boeje men ikke loven!");
@@ -245,7 +243,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Skal du en tur i kashotten.");
     }
     public void faengselInfo(GaaIFaengsel Faengsel){
-        System.out.println("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
+        System.out.println("| FeltDTO nr: " + Faengsel.getPlacering() +" | FeltDTO Navn:" + Faengsel.getNavn()+" | FeltDTO type:"+ Faengsel.getFeltType()+" |");
 
     }
     public void muligeDestinationer(){
@@ -278,8 +276,8 @@ public class TUI implements UserInterfaceKontrakt {
     public void tetPaaMonopol(){
         System.out.println("Du er landet på et sted du ejer, naermer du dig et monopoly?");
     }
-    public void chanceFeltsInfo(ChanceFelt felt){
-        System.out.println("| Felt nr: " + felt.getPlacering() +" | Felt Navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
+    public void chanceFeltsInfo(ChanceFeltCO felt){
+        System.out.println("| FeltDTO nr: " + felt.getPlacering() +" | FeltDTO Navn:" + felt.getNavn()+" | FeltDTO type:"+ felt.getFeltType()+" |"
                 +"\nKort på felt:");
         for(int i = 0; i<felt.getKortPaaFelt().size();i++){
             System.out.print(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
@@ -292,7 +290,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Ejendommen er nu din!");
 
     }
-    public void ejendomsInfo(Ejendom ej){
+    public void ejendomsInfo(EjendomCO ej){
         String ejer;
         if(ej.getEjer() == null){
             ejer = "Ingen ejer endnu";
@@ -301,7 +299,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
 
 
-        System.out.println("| Felt nr: " + ej.getPlacering() +" | Felt Navn:" + ej.getNavn()+" | Felt type:"+ ej.getFeltType()+" |"+
+        System.out.println("| FeltDTO nr: " + ej.getPlacering() +" | FeltDTO Navn:" + ej.getNavn()+" | FeltDTO type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
                 " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
@@ -361,7 +359,7 @@ public class TUI implements UserInterfaceKontrakt {
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
     }
 
-    public void byggetHus(Ejendom ejendom) {
+    public void byggetHus(EjendomCO ejendom) {
         System.out.println("Du har bygget et hus paa "+ejendom.getNavn());
     }
 
@@ -373,7 +371,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du kan ikke bygge på nogen af dine ejendomme endnu.");
     }
 
-    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
+    public int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme) {
 
         ScannerSingleton scanner = ScannerSingleton.getInstance();
 
@@ -403,8 +401,10 @@ public class TUI implements UserInterfaceKontrakt {
 
     }
 
-    public void spillerNavne(int antalSpillere){
-        System.out.println("Indtast navnet på de "+antalSpillere+" der skal være med i spillet.\n Afslut med Enter efter hvert navn");
+    public String spillerNavne(){
+        System.out.println("Indtast navnet på spillerne der skal være med i spillet.\n Afslut med Enter efter hvert navn");
+        String navn = input.tagNavn();
+        return navn;
     }
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);

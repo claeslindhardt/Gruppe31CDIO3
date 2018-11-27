@@ -2,8 +2,8 @@ package ModelEnteties.Spiller;
 
 import Controller.UserInterfaceKontrakt;
 import Controller.SpilController;
-import ModelEnteties.braet.controllerKlasser.Ejendom;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
+import ModelEnteties.braet.controllerKlasser.EjendomCO;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 import java.util.ArrayList;
@@ -42,8 +42,8 @@ public class SpillerController extends SpillerData {
     public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:
-            Se sine ChanceFelt
-            aktivere et udvalgt ChanceFelt
+            Se sine ChanceFeltCO
+            aktivere et udvalgt ChanceFeltCO
          */
         if(getSpillerAktionsKort().size()>0){
             //Her printes de forskellige muligher:
@@ -94,7 +94,7 @@ public class SpillerController extends SpillerData {
     //_____________________________________
     //Koebe og salg funktioner:
 
-    public void koebEjendom(Ejendom ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void koebEjendom(EjendomCO ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if (ønsketEjendom.getEjer() == this) {
             userInterfaceKontrakt.tetPaaMonopol();
@@ -147,7 +147,7 @@ public class SpillerController extends SpillerData {
      * @param ejendom Ejendommen man oensker at undersoege.
      * @return True: spilleren ejer den, False: spilleren ejer den ikke.
      */
-    boolean ejerEjendom(Ejendom ejendom){
+    boolean ejerEjendom(EjendomCO ejendom){
         return ejendom.getEjer() == this;
     }
 
@@ -158,8 +158,8 @@ public class SpillerController extends SpillerData {
      * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
-    boolean ejerEjendomsGruppe(EjendomsGruppe ejendomsGruppe){
-        for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
+    boolean ejerEjendomsGruppe(EjendomsGruppeCO ejendomsGruppe){
+        for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this){
                 return false;
             }
@@ -178,8 +178,8 @@ public class SpillerController extends SpillerData {
      * @param ejendom: ejendommen man oensker at koebe et hus paa.
      * @return true: man kan koebe et hus paa ejendommen, false: man kan ikke koebe et hus paa ejendommen.
      */
-    boolean kanKoebeHus(Ejendom ejendom){
-        EjendomsGruppe ejendomsGruppe = ejendom.getGruppe();
+    boolean kanKoebeHus(EjendomCO ejendom){
+        EjendomsGruppeCO ejendomsGruppe = ejendom.getGruppe();
         return( ejerEjendom(ejendom)
                 && ejerEjendomsGruppe(ejendomsGruppe)
                 && ejendomsGruppe.huseErLigeligtFordelt()
@@ -193,7 +193,7 @@ public class SpillerController extends SpillerData {
      * og trække penge fra spilleren.
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
-    void koebHus(Ejendom ejendom){
+    void koebHus(EjendomCO ejendom){
         if( kanKoebeHus(ejendom) ){
             ejendom.bygHuse(1);
             addPenge(-ejendom.getHusPris());
@@ -206,10 +206,10 @@ public class SpillerController extends SpillerData {
      * @param ui: hvilket UserInterface der skal bruges.
      */
     public void koebHusPaaEjendom(UserInterfaceKontrakt ui){
-        Ejendom[] ejendomme = getEjendomme();
+        EjendomCO[] ejendomme = getEjendomme();
 
         if( ejendomme.length > 0 ){
-            ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
+            ArrayList<EjendomCO> bebyggeligeEjendomme = new ArrayList<EjendomCO>();
 
             /* Finder bebyggelige ejendomme og flytter dem over i en seperat liste.
                Se kanKoebeHus() for at se, hvordan det vurderes om spilleren kan
