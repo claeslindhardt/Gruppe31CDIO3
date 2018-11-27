@@ -4,6 +4,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.singletoner.RandomSingleton;
+import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -45,7 +46,7 @@ public class SpilController extends SpilData {
     // Diverse:
 
     public void genererSpillere(int antalSpillere) {
-        Scanner navnInput = new Scanner(System.in);
+        ScannerSingleton navnInput = ScannerSingleton.getInstance();
         getUserInterfaceKontrakt().spillerNavne(getAntalSpillere());
         for (int i = 0; i < antalSpillere; i++) {
             SpillerController deltager = new SpillerController(navnInput.nextLine(), i, 0);

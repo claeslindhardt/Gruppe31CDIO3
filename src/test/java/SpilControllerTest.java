@@ -64,11 +64,10 @@ class SpilControllerTest {
 
     /**
      * @auther Andreas
-     * Formål: At teste om Constructoren i SpilControllerklassen generer, hvad der forventes af den.
-     * Det forventes at der genereres det indtastede antal spiller. Ligeså forventes det at der genereres feltobjekter af de syv feltcontrollere.
-     * Her skal der som minimum genereres 1 startfelt, et fængselsfelt, et gåIFængsel felt, min 2 jernbane felter og min 5 chance felter.
+     * Formål: At teste om Constructoren i SpilControllerklassen generer, en spiller liste og en liste med feltobjekter.
+     * Det forventes at der genereres det indtastede antal spiller.
      * Status: Test gennemført
-     * Karatter: Ikke bestået.
+     * Karatter: Bestået.
      */
 
     @Test
