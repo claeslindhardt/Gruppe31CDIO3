@@ -11,7 +11,6 @@ import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.function.ToDoubleBiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 

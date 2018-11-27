@@ -20,6 +20,7 @@ public class Ejendom extends EjeligtFelt {
     private int     antalHoteller;
     private double  husPris = 50;
     private int     leje = 50;
+    private EjendomsGruppe gruppe;
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -45,6 +46,15 @@ public class Ejendom extends EjeligtFelt {
     public void setHusPris(double husPris) {
         this.husPris = husPris;
     }
+
+    public EjendomsGruppe getGruppe() {
+        return gruppe;
+    }
+
+    public void setGruppe(EjendomsGruppe gruppe) {
+        this.gruppe = gruppe;
+    }
+
 
 
     public int getLeje() {

@@ -28,7 +28,6 @@ public abstract class EjeligtFelt extends Felt{
     private boolean pantsat = false;
 
     // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
-    private EjendomsGruppe gruppe;
     //|--------- Getters og Setters:-----------------
 
     public String getEjerNavn(){
@@ -59,13 +58,6 @@ public abstract class EjeligtFelt extends Felt{
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppe getGruppe() {
-        return gruppe;
-    }
-
-    public void setGruppe(EjendomsGruppe gruppe) {
-        this.gruppe = gruppe;
-    }
 
     public static ArrayList<Ejendom> getAlleEjendomme() {
         return alleEjendomme;
