@@ -173,14 +173,18 @@ class SpillerControllerTest {
         SpillerController spiller = new SpillerController("Test", 0, 0);
         EjendomsGruppe ejendomsGruppe = new EjendomsGruppe("blaa", 3);
 
+
         Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom1);
+        ejendom1.setGruppe(ejendomsGruppe);
 
         Ejendom ejendom2 = new Ejendom("Ejendom2", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom2);
+        ejendom2.setGruppe(ejendomsGruppe);
 
         Ejendom ejendom3 = new Ejendom("Ejendom3", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom3);
+        ejendom3.setGruppe(ejendomsGruppe);
 
         double startPenge = spiller.getPenge();
 
