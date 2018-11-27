@@ -11,18 +11,18 @@ import java.util.InputMismatchException;
 public class IndputHaanteringTUI {
     ScannerSingleton scan = ScannerSingleton.getInstance();
 
-    public int TurMenu(){
-        int resultat = inputTal();
+    public int TurMenu(int min, int max){
+        int resultat = inputTal(min, max);
         return resultat;
     }
 
-    public int velkomstMenu(){
-        int resultat = inputTal();
+    public int velkomstMenu(int minInput, int maxInput){
+        int resultat = inputTal(minInput, maxInput);
         return resultat;
     }
 
-    public int instilingsSporgsmaal(){
-        int resultat = inputTal();
+    public int instilingsSporgsmaal(int minInput, int maxInput){
+        int resultat = inputTal(minInput, maxInput);
         return resultat;
     }
 

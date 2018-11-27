@@ -10,15 +10,15 @@ import gui_main.GUI;
 import java.util.ArrayList;
 
 public interface UserInterfaceKontrakt {
-    int TurMenu(int getSpillerTur);
+    int TurMenu(int getSpillerTur, int minInput, int maxInput);
     void ikkeMuligt();
-    int velkomstMenu();
+    int velkomstMenu(int minInput, int maxInput);
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
     void startSpilGrundFejl();
-    int instilingsSporgsmaal0();
-    int instilingsSporgsmaall();
-    int instilingsSporgsmaal2();
-    int instilingsSporgsmaal3();
+    int instilingsSporgsmaal0(int minInput, int maxInput);
+    int instilingsSporgsmaall(int minInput, int maxInput);
+    int instilingsSporgsmaal2(int minInput, int maxInput);
+    int instilingsSporgsmaal3(int minInput, int maxInput);
     void spillerPosition(int spillerPosition);
     void bankeRaadtGrundetLiquditet(int getBankeraadGraense);
     void spillerUdgår(int udgaaetSpiller);
