@@ -203,10 +203,10 @@ public class TUI implements UserInterfaceKontrakt {
 
         System.out.println("| Placering: "+stadtion.getPlacering()+" | Navn: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| Ejer:"+ejer+"|");
     }
-    public int hvorHen(int pos){
+    public int hvorHen(int pos, int min, int max){
         System.out.println("Din nuvaerende position er: "+ pos);
         System.out.println("Hvor vil de hen?: ");
-        return input.hvorHen();
+        return input.inputTal(min,max);
     }
     public void holdDigPaaBrettet(){
         System.out.println("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");

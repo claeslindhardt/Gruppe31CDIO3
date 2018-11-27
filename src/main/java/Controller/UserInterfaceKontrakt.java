@@ -44,7 +44,7 @@ public interface UserInterfaceKontrakt {
     void chanceKortNr(int i, SpillerController spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
-    int hvorHen(int pos);
+    int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
     void spillerStat(SpillerController spiller);
