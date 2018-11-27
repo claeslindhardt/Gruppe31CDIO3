@@ -19,6 +19,10 @@ public class ScannerSingleton {
         return instance;
     }
 
+    public String nextLine(){
+        return  scan.nextLine();
+    }
+
 
     /**
      * Fungerer ligesom Scanner-klassens egen nextInt()
