@@ -261,7 +261,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         gui.showMessage("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
     }
-    public int hvorHen(int pos){
+    public int hvorHen(int pos, int min, int max){
         gui.showMessage("Din nuvaerende position er: "+ pos+"Hvor vil de hen?: ");
         int valg = gui.getUserInteger("Intast nummeret på det felt du gerne vil hen til");
         return valg;
@@ -309,7 +309,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void muligeDestinationer(){
         gui.showMessage("Du kan rejse til ");
     }
-    public int stationsMuligheder(){
+    public int stationsMuligheder(int min, int max){
         int valg = gui.getUserInteger("hvis du ikke onsker at rejse tast 0,\nellers intast den destination du ønsker at rejse til:");
         return valg;
     }

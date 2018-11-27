@@ -44,7 +44,7 @@ public interface UserInterfaceKontrakt {
     void chanceKortNr(int i, SpillerController spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
-    int hvorHen(int pos);
+    int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
     void spillerStat(SpillerController spiller);
@@ -58,7 +58,7 @@ public interface UserInterfaceKontrakt {
     void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
     void jernBaneInfo(Jernbane stadtion);
-    int stationsMuligheder();
+    int stationsMuligheder(int min, int max);
     void turEfterJernbane();
     void manglerJernbaner();
     int jernBaneTilbud();

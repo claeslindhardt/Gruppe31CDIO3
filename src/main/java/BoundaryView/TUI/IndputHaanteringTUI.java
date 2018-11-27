@@ -124,8 +124,8 @@ public class IndputHaanteringTUI {
     }
 
     public int vilDuGiveOp(){
-        int svar = scan.nextInt();
-        return svar;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
 
     public void takForSpillet(){
@@ -150,7 +150,7 @@ public class IndputHaanteringTUI {
 
     }
     public int chanceKortsVejledning(){
-        int valg = scan.nextInt();
+        int valg = inputTal(-1,100);
         return valg;
     }
     public void ingenChanceKort(){
@@ -219,8 +219,8 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public int jernBaneTilbud(){
-        int kobsBeslutning = scan.nextInt();
-        return kobsBeslutning;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
     public void forsetTur(){
         System.out.println("_________________________________________________________________");
@@ -258,9 +258,8 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public int ejendomsBud(){
-        ScannerSingleton sc = ScannerSingleton.getInstance();
-        int kobsBeslutning = sc.nextInt();
-        return kobsBeslutning;
+        int resultat = inputTal(1, 3);
+        return resultat;
     }
     public void spillerEjendele(SpillerController spiller){
         System.out.println("_________________________________________________________________");
