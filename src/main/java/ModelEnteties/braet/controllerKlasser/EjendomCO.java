@@ -19,7 +19,7 @@ public class EjendomCO extends EjeligtFeltDTODTO {
     private int     antalHoteller;
     private double  husPris = 50;
     private int     leje = 50;
-    private EjendomsGruppe gruppe;
+    private EjendomsGruppeCO gruppe;
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -46,11 +46,11 @@ public class EjendomCO extends EjeligtFeltDTODTO {
         this.husPris = husPris;
     }
 
-    public EjendomsGruppe getGruppe() {
+    public EjendomsGruppeCO getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppe gruppe) {
+    public void setGruppe(EjendomsGruppeCO gruppe) {
         this.gruppe = gruppe;
     }
 
