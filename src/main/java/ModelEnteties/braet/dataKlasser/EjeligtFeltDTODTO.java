@@ -27,8 +27,7 @@ public abstract class EjeligtFeltDTODTO extends FeltDTO {
     private int pris = 200;
     private boolean pantsat = false;
 
-    // TODO: Flyt gruppe ud af EjeligtFeltDTODTO og over i EjendomCO - det er det eneste sted den bruges.
-    private EjendomsGruppeCO gruppe;
+    // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
     //|--------- Getters og Setters:-----------------
 
     public String getEjerNavn(){
@@ -59,13 +58,6 @@ public abstract class EjeligtFeltDTODTO extends FeltDTO {
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppeCO getGruppe() {
-        return gruppe;
-    }
-
-    public void setGruppe(EjendomsGruppeCO gruppe) {
-        this.gruppe = gruppe;
-    }
 
     public static ArrayList<EjendomCO> getAlleEjendomme() {
         return alleEjendomme;
