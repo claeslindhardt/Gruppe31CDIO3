@@ -123,15 +123,6 @@ class SpilControllerTest {
             }
 
         }
-        System.out.println("Start: " + startfelt);
-        System.out.println("ejendomme:" + ejendom);
-        System.out.println("Faengsel: " + faengsel);
-        System.out.println("Gå i fængsel: " + gaaIFaengsel);
-        System.out.println("Chance felt: " + chancefelt);
-        System.out.println("Taxi felt: " + taxi);
-        System.out.println("Jernbane: " + jernbane);
-
-
         assertTrue(ejendom > 2);
         assertTrue(startfelt == 1);
         assertTrue(faengsel == 1);
