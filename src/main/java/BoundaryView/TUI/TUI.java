@@ -251,10 +251,10 @@ public class TUI implements UserInterfaceKontrakt {
     public void muligeDestinationer(){
         System.out.println("Du kan rejse til ");
     }
-    public int stationsMuligheder(){
+    public int stationsMuligheder(int min, int max){
         System.out.println("hvis du ikke onsker at rejse tast 0, " +
                 "\nellers intast den destination du ønsker at rejse til:");
-        return input.stationsMuligheder();
+        return input.inputTal(min,max);
     }
     public void turEfterJernbane(){
         System.out.println("Du kan nu forsaette din tur men faar ikke muligheden for at tage jernbanen igen i denne tur," +

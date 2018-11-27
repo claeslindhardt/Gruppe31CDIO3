@@ -309,7 +309,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void muligeDestinationer(){
         gui.showMessage("Du kan rejse til ");
     }
-    public int stationsMuligheder(){
+    public int stationsMuligheder(int min, int max){
         int valg = gui.getUserInteger("hvis du ikke onsker at rejse tast 0,\nellers intast den destination du ønsker at rejse til:");
         return valg;
     }
