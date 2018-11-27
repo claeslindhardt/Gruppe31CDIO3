@@ -42,7 +42,10 @@ public class IndputHaanteringTUI {
             }
 
             catch (InputMismatchException i){
-                System.out.println("Dette er ikke et gyldigt input, proev igen!");
+               System.out.println("Dette er ikke et gyldigt input, proev igen!");
+               scan.nextLine();
+                // Man bliver nød til at tilføje denne nextLine() metode, da sout printet i kommando prompten
+                // bliver set på som et forkert input hver gang try kører og vil derfor blive fanget af catch.
 
             }
         }
