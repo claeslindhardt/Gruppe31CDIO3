@@ -46,6 +46,7 @@ public class SpilController extends SpilData {
     // Diverse:
 
     public void genererSpillere(int antalSpillere) {
+
         ScannerSingleton navnInput = ScannerSingleton.getInstance();
         getUserInterfaceKontrakt().spillerNavne(getAntalSpillere());
         for (int i = 0; i < antalSpillere; i++) {
