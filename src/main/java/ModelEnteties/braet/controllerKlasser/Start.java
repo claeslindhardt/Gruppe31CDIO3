@@ -2,9 +2,9 @@ package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.dataKlasser.AktionsFelter;
+import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
-public class Start extends AktionsFelter {
+public class Start extends AktionsFelterDTO {
     //|--------- Variabler:-----------------
     int penge;
 
@@ -28,7 +28,7 @@ public class Start extends AktionsFelter {
     public Start(int startPasseringsInkomst, int placering){
         setPenge(startPasseringsInkomst);
         setPlacering(placering);
-        setNavn("Start Felt");
+        setNavn("Start FeltDTO");
         setFeltType("Start");
     }
 }

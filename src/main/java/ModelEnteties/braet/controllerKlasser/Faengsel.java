@@ -2,9 +2,9 @@ package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.dataKlasser.AktionsFelter;
+import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
-public class Faengsel extends AktionsFelter {
+public class Faengsel extends AktionsFelterDTO {
     //|----------- Metoder:------------------
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.paaBesoegIFaengsel();

@@ -5,7 +5,6 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-import gui_main.GUI;
 
 import java.util.ArrayList;
 
@@ -65,9 +64,9 @@ public interface UserInterfaceKontrakt {
     void forsetTur();
     void ejetAfEnAnden();
     void tetPaaMonopol();
-    void chanceFeltsInfo(ChanceFelt felt);
+    void chanceFeltsInfo(ChanceFeltCO felt);
     void gennemfortKoeb();
-    void ejendomsInfo(Ejendom ej);
+    void ejendomsInfo(EjendomCO ej);
     void betalRente();
     void duErLandetPå();
     void badErrorMessage();
@@ -80,10 +79,10 @@ public interface UserInterfaceKontrakt {
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
-    void byggetHus(Ejendom ejendom);
+    void byggetHus(EjendomCO ejendom);
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
-    int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
+    int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
     void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter);
     void spillerNavne(int AntalSpillere);
 }

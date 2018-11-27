@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EjendomTest {
+class EjendomCOTest {
 
 
     /**
@@ -26,7 +26,7 @@ class EjendomTest {
         int forventetLeje;
         int faktiskLeje;
         int[] forventetLejeMedHus = {150, 200, 250, 300};
-        Ejendom ejendom = new Ejendom("ejendom", 100, basisLeje, 0);
+        EjendomCO ejendom = new EjendomCO("ejendom", 100, basisLeje, 0);
 
         // Basis
         forventetLeje = basisLeje;

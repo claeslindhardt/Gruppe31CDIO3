@@ -13,11 +13,11 @@ import java.util.ArrayList;
  *
  */
 
-public class EjendomsGruppe {
+public class EjendomsGruppeCO {
 
     private int stoerrelse;
     private String farve;
-    private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
+    private ArrayList<EjendomCO> ejendomme = new ArrayList<EjendomCO>();
 
     /**
      * @author Malte
@@ -28,7 +28,7 @@ public class EjendomsGruppe {
      *              og har ingen betydning for hvordan Ejendommene vurderes om de er i samme gruppe.
      * @param stoerrelse Antallet af Ejendomme som gruppe skal indeholder.
      */
-    public EjendomsGruppe(String farve, int stoerrelse) {
+    public EjendomsGruppeCO(String farve, int stoerrelse) {
         this.farve = farve;
         this.stoerrelse = stoerrelse;
     }
@@ -48,7 +48,7 @@ public class EjendomsGruppe {
         return ejendomme.size() >= stoerrelse;
     }
 
-    public ArrayList<Ejendom> getEjendomme() {
+    public ArrayList<EjendomCO> getEjendomme() {
         return ejendomme;
     }
 
@@ -60,7 +60,7 @@ public class EjendomsGruppe {
      * @param ejendom Ejendommen som gruppen skal indeholder
      * @return Om den indeholder 'ejendom' eller ej.
      */
-    public boolean indeholderEjendom(Ejendom ejendom){
+    public boolean indeholderEjendom(EjendomCO ejendom){
         return ejendomme.contains(ejendom);
     }
 
@@ -68,7 +68,7 @@ public class EjendomsGruppe {
      * @param ejendom Ejendommen der skal tilføjes til gruppen.
      * @author Malte
      */
-    public void tilfoejEjendom( Ejendom ejendom){
+    public void tilfoejEjendom( EjendomCO ejendom){
         ejendomme.add(ejendom);
     }
 

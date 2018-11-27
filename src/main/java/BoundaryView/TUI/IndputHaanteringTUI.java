@@ -191,7 +191,7 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
 
-    public void chanceFeltsInfo(ChanceFelt felt){
+    public void chanceFeltsInfo(ChanceFeltCO felt){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }

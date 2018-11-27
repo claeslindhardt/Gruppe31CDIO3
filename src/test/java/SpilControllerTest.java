@@ -2,10 +2,7 @@ import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.Felt;
-import ModelEnteties.singletoner.ScannerSingleton;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -104,9 +101,9 @@ class SpilControllerTest {
         for (int j = 0; j < spil.getBretGeneretForSpil().getBret().size(); j++) {
             if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Start) {
                 startfelt++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Ejendom) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof EjendomCO) {
                 ejendom++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof ChanceFelt) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof ChanceFeltCO) {
                 chancefelt++;
             } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Faengsel) {
                 faengsel++;

@@ -3,7 +3,7 @@ package ModelEnteties.braet;
 import Controller.UserInterfaceKontrakt;
 
 import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.Felt;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.EjendomsDoeber;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.JernbaneDoeber;
 import ModelEnteties.chanceKort.controllerKlasser.GiverPenge;
@@ -20,8 +20,8 @@ public class SpilleBraetController extends SpilleBraetData {
     public void printBret(UserInterfaceKontrakt userInterfaceKontrakt){
 
         for(int i = 0; i < this.getBret().size() ;i++){
-            Felt felt = this.getBret().get(i);
-            String felttyp = felt.getFeltType();//printInfo();
+            FeltDTO feltDTO = this.getBret().get(i);
+            String felttyp = feltDTO.getFeltType();//printInfo();
             userInterfaceKontrakt.bretPrinter(felttyp);
         }
         userInterfaceKontrakt.terminalLine();
@@ -38,7 +38,7 @@ public class SpilleBraetController extends SpilleBraetData {
                 stringBuilder.append(" , ");
             }
 
-            Felt str = this.getBret().get(i);
+            FeltDTO str = this.getBret().get(i);
             stringBuilder.append(str);
         }
         stringBuilder.append("}");
@@ -111,9 +111,9 @@ public class SpilleBraetController extends SpilleBraetData {
                     getJernbaner().add(station);
                 }
                 //_______________________________________________
-                // ChanceFelt
+                // ChanceFeltCO
                 else if(aktionsFeltType<=6) {//set til 6 når test er fertig
-                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                    ChanceFeltCO chance = new ChanceFeltCO(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
                     addBret(chance);
                 }
                 //_______________________________________________
@@ -130,11 +130,11 @@ public class SpilleBraetController extends SpilleBraetData {
                 }
             }
             //_______________________________________________
-            // Ejendom
+            // EjendomCO
             else{
                 EjendomsDoeber navn = new EjendomsDoeber();
-                Ejendom grund = new Ejendom(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
-                EjendomsGruppe gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
+                EjendomCO grund = new EjendomCO(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
+                EjendomsGruppeCO gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
                 grund.setGruppe(gruppe);
                 getBret().add(grund);
             }
@@ -154,9 +154,9 @@ public class SpilleBraetController extends SpilleBraetData {
                         getJernbaner().add(station);
                     }
                     //_______________________________________________
-                    // ChanceFelt
+                    // ChanceFeltCO
                     else if (aktionsFeltType <= 6) {//set til 6 når test er fertig
-                        ChanceFelt chance = new ChanceFelt(i + 2, ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                        ChanceFeltCO chance = new ChanceFeltCO(i + 2, ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
                         addBret(chance);
                     }
                     //_______________________________________________
@@ -173,10 +173,10 @@ public class SpilleBraetController extends SpilleBraetData {
                     }
                 }
                 //_______________________________________________
-                // Ejendom
+                // EjendomCO
                 else {
                     EjendomsDoeber navn = new EjendomsDoeber();
-                    Ejendom grund = new Ejendom(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
+                    EjendomCO grund = new EjendomCO(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
                     getBret().add(grund);
                 }
                 setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());

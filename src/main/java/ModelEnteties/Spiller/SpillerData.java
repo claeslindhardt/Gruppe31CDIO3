@@ -1,6 +1,6 @@
 package ModelEnteties.Spiller;
 
-import ModelEnteties.braet.controllerKlasser.Ejendom;
+import ModelEnteties.braet.controllerKlasser.EjendomCO;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.RandomSingleton;
@@ -23,7 +23,7 @@ public abstract class SpillerData {
     private String navn;
     //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
     //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
-    ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
+    ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
     ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
     protected double penge = 1500;
@@ -69,11 +69,11 @@ public abstract class SpillerData {
         this.faengselsStraf = faengselsStraf;
     }
 
-    public ArrayList<Ejendom> getSpillerEjendomme() {
+    public ArrayList<EjendomCO> getSpillerEjendomme() {
         return spillerEjendomme;
     }
 
-    public void setSpillerEjendomme(ArrayList<Ejendom> spillerEjendomme) {
+    public void setSpillerEjendomme(ArrayList<EjendomCO> spillerEjendomme) {
         this.spillerEjendomme = spillerEjendomme;
     }
 
@@ -81,12 +81,12 @@ public abstract class SpillerData {
     /**
      * @author Malte
      * Henter liste over spillerens ejendomme.
-     * @return Listen over spillerens ejendomme som en Ejendom array. Er tom, hvis der ikke er nogen i listen.
+     * @return Listen over spillerens ejendomme som en EjendomCO array. Er tom, hvis der ikke er nogen i listen.
      */
-    public Ejendom[] getEjendomme() {
+    public EjendomCO[] getEjendomme() {
         if(spillerEjendomme != null){
 
-            Ejendom[] ejendomme = new Ejendom[spillerEjendomme.size()];
+            EjendomCO[] ejendomme = new EjendomCO[spillerEjendomme.size()];
 
             for( int i = 0; i < ejendomme.length; i++){
                 ejendomme[i] = spillerEjendomme.get(i);

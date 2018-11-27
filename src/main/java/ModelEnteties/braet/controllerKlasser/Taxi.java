@@ -2,9 +2,9 @@ package ModelEnteties.braet.controllerKlasser;
 
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.dataKlasser.AktionsFelter;
+import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
-public class Taxi extends AktionsFelter {
+public class Taxi extends AktionsFelterDTO {
     //|----------- Metoder:------------------
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
@@ -17,7 +17,7 @@ public class Taxi extends AktionsFelter {
     //|--------- Constructor:-----------------
     public Taxi(int placering){
         setFeltType("Taxi");
-        setNavn("Taxi Felt");
+        setNavn("Taxi FeltDTO");
         setPlacering(placering);
     }
 
