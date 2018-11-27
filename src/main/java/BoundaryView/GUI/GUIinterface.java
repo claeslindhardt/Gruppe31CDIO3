@@ -438,4 +438,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
         return 0;
     }
+
+    public void rejseBekraeftelse(String jernbane){
+        gui.showMessage("Du er rejst til "+jernbane);
+    }
 }

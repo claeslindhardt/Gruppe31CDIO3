@@ -200,7 +200,7 @@ public class SpilController extends SpilData {
         //Todo: make it possible to choose a default option here:
         Random rand = new Random();
 
-        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0(5, 21);
+        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0(9, 21);
         setAntalFelter(felter);
 
 

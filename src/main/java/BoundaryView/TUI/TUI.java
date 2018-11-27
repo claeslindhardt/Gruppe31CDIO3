@@ -406,4 +406,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void spillerNavne(int antalSpillere){
         System.out.println("Indtast navnet på de "+antalSpillere+" der skal være med i spillet.\n Afslut med Enter efter hvert navn");
     }
+    public void rejseBekraeftelse(String jernbane){
+        System.out.println("Du er rejst til "+jernbane);
+    }
 }
