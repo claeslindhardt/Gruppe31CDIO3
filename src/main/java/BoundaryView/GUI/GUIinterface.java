@@ -84,7 +84,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
-    public int velkomstMenu(){
+    public int velkomstMenu(int minInput, int maxInput){
         String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
         gui.showMessage(valg);
@@ -93,7 +93,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
 
-    public int TurMenu(int getSpillerTur){
+    public int TurMenu(int getSpillerTur, int minInput, int maxInput){
         String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
@@ -115,23 +115,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
-    public int instilingsSporgsmaal0(){
+    public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
                 "\nNB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere"
         );
         int valg = gui.getUserInteger("Intast antal felter på brettet");
         return valg;
     }
-    public int instilingsSporgsmaall(){
+    public int instilingsSporgsmaall(int minInput, int maxInput){
         int valg = gui.getUserInteger("Indtast antal oenskede Spillere ");
         return valg;
 
     }
-    public int instilingsSporgsmaal2(){
+    public int instilingsSporgsmaal2(int minInput, int maxInput){
         int valg = gui.getUserInteger("Hvor mange terninger vil i spille med?: Dette må kun være andet end 2 hvis man bruger TUI'en");
         return valg;
     }
-    public int instilingsSporgsmaal3(){
+    public int instilingsSporgsmaal3(int minInput, int maxInput){
         int valg = gui.getUserInteger("Hvor få penge må man have før man går bankerot?:");
         return valg;
     }
@@ -261,7 +261,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         gui.showMessage("| Placering: "+stadtion.getPlacering()+" | Name: "+stadtion.getNavn()+" | Pris: "+stadtion.getPris() +" | Pantsat: "+stadtion.isPantsat()+"| ejer:"+ejer+"|");
     }
-    public int hvorHen(int pos){
+    public int hvorHen(int pos, int min, int max){
         gui.showMessage("Din nuvaerende position er: "+ pos+"Hvor vil de hen?: ");
         int valg = gui.getUserInteger("Intast nummeret på det felt du gerne vil hen til");
         return valg;
@@ -309,7 +309,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void muligeDestinationer(){
         gui.showMessage("Du kan rejse til ");
     }
-    public int stationsMuligheder(){
+    public int stationsMuligheder(int min, int max){
         int valg = gui.getUserInteger("hvis du ikke onsker at rejse tast 0,\nellers intast den destination du ønsker at rejse til:");
         return valg;
     }
@@ -437,5 +437,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
         return 0;
+    }
+
+    public void rejseBekraeftelse(String jernbane){
+        gui.showMessage("Du er rejst til "+jernbane);
     }
 }

@@ -30,12 +30,13 @@ public class Jernbane extends EjeligtFelt {
                 muligeRejser.get(i).printInfo(userInterfaceKontrakt);
             }
 
-            int destination = userInterfaceKontrakt.stationsMuligheder();
+            int destination = userInterfaceKontrakt.stationsMuligheder(0,(muligeRejser.size()+1));
             if(destination==0){
                 userInterfaceKontrakt.turEfterJernbane();
             } else if(destination >= 0) {
                 int rykSpillerTil = muligeRejser.get(destination - 1).getPlacering();
                 spillerMedTur.setSpillerPosition(rykSpillerTil);
+                userInterfaceKontrakt.rejseBekraeftelse(spil.getBretGeneretForSpil().getBret().get(rykSpillerTil).getNavn());
             }
         }else{
             userInterfaceKontrakt.manglerJernbaner();

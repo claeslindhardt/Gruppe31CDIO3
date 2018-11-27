@@ -10,15 +10,15 @@ import gui_main.GUI;
 import java.util.ArrayList;
 
 public interface UserInterfaceKontrakt {
-    int TurMenu(int getSpillerTur);
+    int TurMenu(int getSpillerTur, int minInput, int maxInput);
     void ikkeMuligt();
-    int velkomstMenu();
+    int velkomstMenu(int minInput, int maxInput);
     void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense);
     void startSpilGrundFejl();
-    int instilingsSporgsmaal0();
-    int instilingsSporgsmaall();
-    int instilingsSporgsmaal2();
-    int instilingsSporgsmaal3();
+    int instilingsSporgsmaal0(int minInput, int maxInput);
+    int instilingsSporgsmaall(int minInput, int maxInput);
+    int instilingsSporgsmaal2(int minInput, int maxInput);
+    int instilingsSporgsmaal3(int minInput, int maxInput);
     void spillerPosition(int spillerPosition);
     void bankeRaadtGrundetLiquditet(int getBankeraadGraense);
     void spillerUdgår(int udgaaetSpiller);
@@ -44,7 +44,7 @@ public interface UserInterfaceKontrakt {
     void chanceKortNr(int i, SpillerController spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
-    int hvorHen(int pos);
+    int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
     void spillerStat(SpillerController spiller);
@@ -58,7 +58,7 @@ public interface UserInterfaceKontrakt {
     void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
     void jernBaneInfo(Jernbane stadtion);
-    int stationsMuligheder();
+    int stationsMuligheder(int min, int max);
     void turEfterJernbane();
     void manglerJernbaner();
     int jernBaneTilbud();
@@ -86,4 +86,5 @@ public interface UserInterfaceKontrakt {
     int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
     void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter);
     void spillerNavne(int AntalSpillere);
+    void rejseBekraeftelse(String jernbane);
 }
