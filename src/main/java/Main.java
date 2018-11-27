@@ -61,8 +61,10 @@ public class Main {
         while (true) {
             try {
                 input = scan.nextInt();
-                if( input>0 && input<=2)
-                break;
+                if( input>0 && input<=2){
+                    break;
+                }
+                System.out.println("Forkert input. tallet skal være mellem 1 og 2");
             }
             catch (InputMismatchException i){
                 System.out.println("Dette er ikke et gyldigt input, proev igen!");

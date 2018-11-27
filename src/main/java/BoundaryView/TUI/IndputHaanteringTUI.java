@@ -35,13 +35,17 @@ public class IndputHaanteringTUI {
      * @param min inklusiv denne parameter
      * Vi bruger denne min, max practice da det er den der bliver brugt i index og andre steder, hvor der bliver brugt minimum og maximum.
      */
-    public int inputTal(int min, int max){ // inklusiv min og esklusiv mx
+    public int inputTal(int min, int max){
 
         while (true) {
             try {
 
                 int tal = scan.nextInt();
-                return tal;
+                if (tal < max && tal >= min){
+                    return tal;
+                }
+                System.out.println("Forkert input, tallet skal være mellem "+min+" og "+(max-1));
+
             }
 
             catch (InputMismatchException i){
@@ -49,9 +53,11 @@ public class IndputHaanteringTUI {
                scan.nextLine();
                 // Man bliver nød til at tilføje denne nextLine() metode, da sout printet i kommando prompten
                 // bliver set på som et forkert input hver gang try kører og vil derfor blive fanget af catch.
-
             }
+
         }
+
+
 
 
     }
