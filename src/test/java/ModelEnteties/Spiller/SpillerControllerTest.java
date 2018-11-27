@@ -9,6 +9,7 @@ import ModelEnteties.braet.controllerKlasser.Jernbane;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -169,7 +170,7 @@ class SpillerControllerTest {
         // Setup
 
         SpillerController spiller = new SpillerController("Test", 0, 0);
-        EjendomsGruppeCO ejendomsGruppe = new EjendomsGruppeCO("blaa", 3);
+        EjendomsGruppeCO ejendomsGruppe = new EjendomsGruppeCO(Color.BLUE, 3);
 
 
         EjendomCO ejendom1 = new EjendomCO("Ejendom1", 0, 0, 0);

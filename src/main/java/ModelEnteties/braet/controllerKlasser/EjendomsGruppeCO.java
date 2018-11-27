@@ -1,5 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class EjendomsGruppeCO {
 
     private int stoerrelse;
-    private String farve;
+    private Color farve;
     private ArrayList<EjendomCO> ejendomme = new ArrayList<EjendomCO>();
 
     /**
@@ -28,14 +29,14 @@ public class EjendomsGruppeCO {
      *              og har ingen betydning for hvordan Ejendommene vurderes om de er i samme gruppe.
      * @param stoerrelse Antallet af Ejendomme som gruppe skal indeholder.
      */
-    public EjendomsGruppeCO(String farve, int stoerrelse) {
+    public EjendomsGruppeCO(Color farve, int stoerrelse) {
         this.farve = farve;
         this.stoerrelse = stoerrelse;
     }
 
     //--------- Getters og Setters:-----------------
 
-    public String getFarve() {
+    public Color getFarve() {
         return farve;
     }
 

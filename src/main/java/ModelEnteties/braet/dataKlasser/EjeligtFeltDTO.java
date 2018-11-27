@@ -8,7 +8,7 @@ import ModelEnteties.braet.controllerKlasser.Jernbane;
 import java.util.ArrayList;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: EjeligtFeltDTODTO
+ *  PROGRAMDOKUMENTATION: EjeligtFeltDTO
  * @author
  *  Denne klasse er forældre klassen til alle de braet som opfører sig relativt
  *  statisk, samt har den egenskab at de kan ejes af et spiller objekt. Så vidt
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *          1. Ejendomm
  *          2. Jernbane
  */
-public abstract class EjeligtFeltDTODTO extends FeltDTO {
+public abstract class EjeligtFeltDTO extends FeltDTO {
     //|--------- Variabler:-----------------
     //Statiske Variabler
     private static ArrayList<EjendomCO> alleEjendomme = new ArrayList<EjendomCO>();
@@ -27,7 +27,7 @@ public abstract class EjeligtFeltDTODTO extends FeltDTO {
     private int pris = 200;
     private boolean pantsat = false;
 
-    // TODO: Flyt gruppe ud af EjeligtFeltDTODTO og over i EjendomCO - det er det eneste sted den bruges.
+    // TODO: Flyt gruppe ud af EjeligtFeltDTO og over i EjendomCO - det er det eneste sted den bruges.
     private EjendomsGruppeCO gruppe;
     //|--------- Getters og Setters:-----------------
 
@@ -72,11 +72,11 @@ public abstract class EjeligtFeltDTODTO extends FeltDTO {
     }
 
     public static void setAlleEjendomme(ArrayList<EjendomCO> alleEjendomme) {
-        EjeligtFeltDTODTO.alleEjendomme = alleEjendomme;
+        EjeligtFeltDTO.alleEjendomme = alleEjendomme;
     }
 
     public static void addAlleEjendomme(EjendomCO enEjendom) {
-        EjeligtFeltDTODTO.alleEjendomme.add(enEjendom);
+        EjeligtFeltDTO.alleEjendomme.add(enEjendom);
     }
 
     public static ArrayList<Jernbane> getAlleJernbaner() {
@@ -84,11 +84,11 @@ public abstract class EjeligtFeltDTODTO extends FeltDTO {
     }
 
     public static void setAlleJernbaner(ArrayList<Jernbane> alleJernbaner) {
-        EjeligtFeltDTODTO.alleJernbaner = alleJernbaner;
+        EjeligtFeltDTO.alleJernbaner = alleJernbaner;
     }
 
     public static void addAlleJernbaner(Jernbane enJernbane) {
-        EjeligtFeltDTODTO.alleJernbaner.add(enJernbane);
+        EjeligtFeltDTO.alleJernbaner.add(enJernbane);
     }
 
 }
