@@ -3,8 +3,10 @@ import BoundaryView.GUI.GUIinterface;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
+import java.util.InputMismatchException;
 
 public class Main {
+
     public static void main(String[] args) {
 
 
@@ -53,7 +55,20 @@ public class Main {
                 "\n----|input (1) for at spille med TUI(Text User Interface)" +
                 "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
         );
-        int input = scan.nextInt();
+
+
+        int input = 0;
+        while (true) {
+            try {
+                input = scan.nextInt();
+                break;
+            }
+            catch (InputMismatchException i){
+                System.out.println("Dette er ikke et gyldigt input, proev igen!");
+                scan.nextLine();
+            }
+        }
+
 
         if(input == 1) {
             System.out.println("Du valgte en TUI");
