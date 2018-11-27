@@ -1,14 +1,14 @@
 package ModelEnteties.braet.dataKlasser;
 
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.controllerKlasser.Ejendom;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppe;
+import ModelEnteties.braet.controllerKlasser.EjendomCO;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
 
 import java.util.ArrayList;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: EjeligtFelt
+ *  PROGRAMDOKUMENTATION: EjeligtFeltDTODTO
  * @author
  *  Denne klasse er forældre klassen til alle de braet som opfører sig relativt
  *  statisk, samt har den egenskab at de kan ejes af et spiller objekt. Så vidt
@@ -16,10 +16,10 @@ import java.util.ArrayList;
  *          1. Ejendomm
  *          2. Jernbane
  */
-public abstract class EjeligtFelt extends Felt{
+public abstract class EjeligtFeltDTODTO extends FeltDTO {
     //|--------- Variabler:-----------------
     //Statiske Variabler
-    private static ArrayList<Ejendom> alleEjendomme = new ArrayList<Ejendom>();
+    private static ArrayList<EjendomCO> alleEjendomme = new ArrayList<EjendomCO>();
     private static ArrayList<Jernbane> alleJernbaner = new ArrayList<Jernbane>();
 
     //  Dynamiske Variabler
@@ -27,8 +27,8 @@ public abstract class EjeligtFelt extends Felt{
     private int pris = 200;
     private boolean pantsat = false;
 
-    // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
-    private EjendomsGruppe gruppe;
+    // TODO: Flyt gruppe ud af EjeligtFeltDTODTO og over i EjendomCO - det er det eneste sted den bruges.
+    private EjendomsGruppeCO gruppe;
     //|--------- Getters og Setters:-----------------
 
     public String getEjerNavn(){
@@ -59,24 +59,24 @@ public abstract class EjeligtFelt extends Felt{
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppe getGruppe() {
+    public EjendomsGruppeCO getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppe gruppe) {
+    public void setGruppe(EjendomsGruppeCO gruppe) {
         this.gruppe = gruppe;
     }
 
-    public static ArrayList<Ejendom> getAlleEjendomme() {
+    public static ArrayList<EjendomCO> getAlleEjendomme() {
         return alleEjendomme;
     }
 
-    public static void setAlleEjendomme(ArrayList<Ejendom> alleEjendomme) {
-        EjeligtFelt.alleEjendomme = alleEjendomme;
+    public static void setAlleEjendomme(ArrayList<EjendomCO> alleEjendomme) {
+        EjeligtFeltDTODTO.alleEjendomme = alleEjendomme;
     }
 
-    public static void addAlleEjendomme(Ejendom enEjendom) {
-        EjeligtFelt.alleEjendomme.add(enEjendom);
+    public static void addAlleEjendomme(EjendomCO enEjendom) {
+        EjeligtFeltDTODTO.alleEjendomme.add(enEjendom);
     }
 
     public static ArrayList<Jernbane> getAlleJernbaner() {
@@ -84,11 +84,11 @@ public abstract class EjeligtFelt extends Felt{
     }
 
     public static void setAlleJernbaner(ArrayList<Jernbane> alleJernbaner) {
-        EjeligtFelt.alleJernbaner = alleJernbaner;
+        EjeligtFeltDTODTO.alleJernbaner = alleJernbaner;
     }
 
     public static void addAlleJernbaner(Jernbane enJernbane) {
-        EjeligtFelt.alleJernbaner.add(enJernbane);
+        EjeligtFeltDTODTO.alleJernbaner.add(enJernbane);
     }
 
 }

@@ -4,7 +4,7 @@ import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: Felt
+ *  PROGRAMDOKUMENTATION: FeltDTO
  * @author Claes
  * |-- HVORFOR ABSTRACT?
  * abstrackt er noget man kan gøre ved en klasse for at sikre at  man ikke kan lave instanser af den.
@@ -12,7 +12,7 @@ import Controller.UserInterfaceKontrakt;
  * holder nogen controller funktion. Så disse klasser er kun til for datastrukturen skyld. De gør ikke
  * noget selvstændigt.
  *  */
-public abstract class Felt {
+public abstract class FeltDTO {
     //|--------- Variabler:-----------------
     private int placering;
     private String navn = null;

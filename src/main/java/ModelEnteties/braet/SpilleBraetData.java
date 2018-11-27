@@ -1,9 +1,8 @@
 package ModelEnteties.braet;
 
-import ModelEnteties.braet.controllerKlasser.ChanceFelt;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
 import ModelEnteties.braet.controllerKlasser.Jernbane;
-import ModelEnteties.braet.dataKlasser.Felt;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +12,7 @@ public class SpilleBraetData {
     Random ra = new Random();
 
     //|--------- Variabler:-----------------
-    private ArrayList<Felt> bret = new ArrayList<Felt>();
+    private ArrayList<FeltDTO> bret = new ArrayList<FeltDTO>();
     private int StartGrundPris = 200;
     private int prisStigningAfEjendomme = 5;
     private int standardLeje = 50;
@@ -25,11 +24,11 @@ public class SpilleBraetData {
     private EjendomsGruppeManager ejendomsGruppeManager = new EjendomsGruppeManager(3);
 
     //|--------- Getters og Setters:-----------------
-    public ArrayList<Felt> getBret() {
+    public ArrayList<FeltDTO> getBret() {
         return bret;
     }
 
-    public void setBret(ArrayList<Felt> bret) {
+    public void setBret(ArrayList<FeltDTO> bret) {
         this.bret = bret;
     }
 
@@ -41,8 +40,8 @@ public class SpilleBraetData {
         this.ejendomsGruppeManager = ejendomsGruppeManager;
     }
 
-    public void addBret(Felt felt){
-        this.bret.add(felt);
+    public void addBret(FeltDTO feltDTO){
+        this.bret.add(feltDTO);
     }
 
     public int getStartGrundPris() {

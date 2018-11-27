@@ -13,7 +13,7 @@ public class EjendomsGruppeManager{
     private int gruppeStoerelser;
     private String[] farveListe = {"roed", "groen", "blaa","gul" ,"orange","lilla","lyseroed","sort"};
     private int antalGrupper = 0; // Hvor mange grupper der er blevet lavet.
-    private EjendomsGruppe klarGruppe;
+    private EjendomsGruppeCO klarGruppe;
 
 
     public EjendomsGruppeManager(int gruppeStoerelser){
@@ -39,10 +39,10 @@ public class EjendomsGruppeManager{
      * Opretter en ny Ejendomsgruppe, ved at give den specifik farve, og en stoerrelse med udgangspunkt i EGManageren.
      * @return Den nyopprettede gruppe.
      */
-    private EjendomsGruppe opretGruppe(){
+    private EjendomsGruppeCO opretGruppe(){
         antalGrupper++;
         String farve = farveListe[antalGrupper%farveListe.length];
-        EjendomsGruppe nyGruppe = new EjendomsGruppe(farve, gruppeStoerelser);
+        EjendomsGruppeCO nyGruppe = new EjendomsGruppeCO(farve, gruppeStoerelser);
         return nyGruppe;
     }
 
@@ -51,7 +51,7 @@ public class EjendomsGruppeManager{
      * @param ejendom Hvilken ejendom man gerne vil tilfoeje til en gruppe.
      * @return Ejendommen som gruppen er blevet tilfoejet til.
      */
-    public EjendomsGruppe tilfoejTilGruppe(Ejendom ejendom){
+    public EjendomsGruppeCO tilfoejTilGruppe(EjendomCO ejendom){
         // Undersøger om den 'klarGruppe' faktisk er klar, eller om der skal oprettes en ny.
         if( klarGruppe == null || !klarGruppe.erFuld() ){
             klarGruppe = opretGruppe();
