@@ -14,7 +14,7 @@ public class SpilController extends SpilData {
     /**
      * Hvorfor 2 constructore?
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
-     * vælge dem.
+     * vælge dem. Dette er også meget nyttigt til test :)
      */
     public SpilController(UserInterfaceKontrakt gui){
         this.setUserInterfaceKontrakt(gui);
