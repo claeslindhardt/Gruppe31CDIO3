@@ -5,23 +5,50 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
+
 public class IndputHaanteringTUI {
     ScannerSingleton scan = ScannerSingleton.getInstance();
 
     public int TurMenu(){
-        int input = scan.nextInt();
-        return input;
+        int resultat = inputTal();
+        return resultat;
     }
 
     public int velkomstMenu(){
-        int menuOpt = scan.nextInt();
-        return menuOpt;
+        int resultat = inputTal();
+        return resultat;
     }
 
     public int instilingsSporgsmaal(){
-        int felter = scan.nextInt();
-        return felter;
+        int resultat = inputTal();
+        return resultat;
     }
+
+    /**
+     * @author Jacob og Malte
+     * Denne metode Kører scanneren i et while loop. hvis det ikke er en gyldig int der bliver scannet, så vil try /catch
+     * fange den og fortælle at det er et forkert input og køre scanner igen.
+     * @return Den int der bliver scannet, hvis den er gyldig.
+     */
+    public int inputTal(){
+
+        while (true) {
+            try {
+
+                int tal = scan.nextInt();
+                return tal;
+            }
+
+            catch (InputMismatchException i){
+                System.out.println("Dette er ikke et gyldigt input, proev igen!");
+
+            }
+        }
+
+    }
+
 
 
     public void spillerPosition(){
