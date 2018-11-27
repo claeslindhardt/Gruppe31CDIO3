@@ -181,7 +181,7 @@ public class SpilController extends SpilData {
     //Menuer:
     public void startMenu(){
         RandomSingleton rand = RandomSingleton.getInstance();
-        int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,3);
+        int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,4);
 
 
         if(menuOpt == 2) {

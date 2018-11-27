@@ -61,6 +61,7 @@ public class Main {
         while (true) {
             try {
                 input = scan.nextInt();
+                if( input>0 && input<=2)
                 break;
             }
             catch (InputMismatchException i){
