@@ -66,7 +66,7 @@ public class Main {
                 }
                 System.out.println("Forkert input. tallet skal være mellem 1 og 2");
             }
-            catch (InputMismatchException i){
+            catch(InputMismatchException i){
                 System.out.println("Dette er ikke et gyldigt input, proev igen!");
                 scan.nextLine();
             }
