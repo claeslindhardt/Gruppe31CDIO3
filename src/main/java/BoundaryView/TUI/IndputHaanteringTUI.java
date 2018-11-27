@@ -31,8 +31,11 @@ public class IndputHaanteringTUI {
      * Denne metode Kører scanneren i et while loop. hvis det ikke er en gyldig int der bliver scannet, så vil try /catch
      * fange den og fortælle at det er et forkert input og køre scanner igen.
      * @return Den int der bliver scannet, hvis den er gyldig.
+     * @param max ekslkusiv denne parameter
+     * @param min inklusiv denne parameter
+     * Vi bruger denne min, max practice da det er den der bliver brugt i index og andre steder, hvor der bliver brugt minimum og maximum.
      */
-    public int inputTal(){
+    public int inputTal(int min, int max){ // inklusiv min og esklusiv mx
 
         while (true) {
             try {
@@ -49,6 +52,7 @@ public class IndputHaanteringTUI {
 
             }
         }
+
 
     }
 
