@@ -92,56 +92,17 @@ public class SpilleBraetController extends SpilleBraetData {
     //|--------- Constructor:-----------------
     public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
+        boolean lavFelter=true;
         //-------Tilføjning af objekter til brettet---
         Start go = new Start(getStartGrundPris(),0);
-        getBret().add(go);
         Faengsel kashotten = new Faengsel("Vester Fængsel",1);
-        getBret().add(kashotten);
 
-        for(int i =0;i<antalFelter-1;i++){
-            int feltType = ra.nextInt(8)+1;
-            if (feltType<=3){//set til 3 når test er fertig
-                int aktionsFeltType = ra.nextInt(8)+1;
-                //_______________________________________________
-                // Jernbane
-                if(aktionsFeltType<=4){//set til 4 når test er fertig
-                    JernbaneDoeber st = new JernbaneDoeber();
-                    Jernbane station = new Jernbane(st.getGeneretNavn(),getStartGrundPris(),i+2);
-                    getBret().add(station);
-                    getJernbaner().add(station);
-                }
-                //_______________________________________________
-                // ChanceFelt
-                else if(aktionsFeltType<=6) {//set til 6 når test er fertig
-                    ChanceFelt chance = new ChanceFelt(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
-                    addBret(chance);
-                }
-                //_______________________________________________
-                // Taxi
-                else if(aktionsFeltType<=7) {//set til 7 når test er fertig
-                    Taxi vogn = new Taxi(i+2);
-                    getBret().add(vogn);
-                }
-                //_______________________________________________
-                // GaaIFaengsel
-                else {
-                    GaaIFaengsel forbrydelse = new GaaIFaengsel(i+2);
-                    getBret().add(forbrydelse);
-                }
-            }
-            //_______________________________________________
-            // Ejendom
-            else{
-                EjendomsDoeber navn = new EjendomsDoeber();
-                Ejendom grund = new Ejendom(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
-                EjendomsGruppe gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
-                grund.setGruppe(gruppe);
-                getBret().add(grund);
-            }
-            setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
-            setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
-        }
-            for (int i = 0; i < antalFelter - 1; i++) {
+        do {int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
+            getBret().add(go);
+
+            getBret().add(kashotten);
+
+            for (int i = 0; i < antalFelter - 2; i++) {
                 int feltType = ra.nextInt(8) + 1;
                 if (feltType <= 3) {//set til 3 når test er fertig
                     int aktionsFeltType = ra.nextInt(8) + 1;
@@ -161,7 +122,7 @@ public class SpilleBraetController extends SpilleBraetData {
                     }
                     //_______________________________________________
                     // Taxi
-                   else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
+                    else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
                         Taxi vogn = new Taxi(i + 2);
                         getBret().add(vogn);
                     }
@@ -177,14 +138,75 @@ public class SpilleBraetController extends SpilleBraetData {
                 else {
                     EjendomsDoeber navn = new EjendomsDoeber();
                     Ejendom grund = new Ejendom(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
+                    EjendomsGruppe gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
+                    grund.setGruppe(gruppe);
                     getBret().add(grund);
                 }
                 setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());
                 setStandardLeje(getStandardLeje() + getPrisStigningAfEjendomme());
+            }
+           /* for (int i = 0; i < antalFelter - 1; i++) {
+                int feltType = ra.nextInt(8) + 1;
+                if (feltType <= 3) {//set til 3 når test er fertig
+                    int aktionsFeltType = ra.nextInt(8) + 1;
+                    //_______________________________________________
+                    // Jernbane
+                    if (aktionsFeltType <= 4) {//set til 4 når test er fertig
+                        JernbaneDoeber st = new JernbaneDoeber();
+                        Jernbane station = new Jernbane(st.getGeneretNavn(), getStartGrundPris(), i + 2);
+                        getBret().add(station);
+                        getJernbaner().add(station);
+                    }
+                    //_______________________________________________
+                    // ChanceFelt
+                    else if (aktionsFeltType <= 6) {//set til 6 når test er fertig
+                        ChanceFelt chance = new ChanceFelt(i + 2, ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                        addBret(chance);
+                    }
+                    //_______________________________________________
+                    // Taxi
+                    else if (aktionsFeltType <= 7) {//set til 7 når test er fertig
+                        Taxi vogn = new Taxi(i + 2);
+                        getBret().add(vogn);
+                    }
+                    //_______________________________________________
+                    // GaaIFaengsel
+                    else {
+                        GaaIFaengsel forbrydelse = new GaaIFaengsel(i + 2);
+                        getBret().add(forbrydelse);
+                    }
+            }
+            //_______________________________________________
+            // Ejendom
+                else {
+                EjendomsDoeber navn = new EjendomsDoeber();
+                Ejendom grund = new Ejendom(navn.getGeneretNavn(), getStartGrundPris(), getStandardLeje(), i + 2);
+                getBret().add(grund);
+            }
+            setStartGrundPris(getStartGrundPris() + getPrisStigningAfEjendomme());
+            setStandardLeje(getStandardLeje() + getPrisStigningAfEjendomme());
 
+
+            }*/
+            for (int j = 0; j < getBret().size(); j++) {
+                if (getBret().get(j) instanceof Start) {
+                    startfelt++;
+                } else if (getBret().get(j) instanceof Ejendom) {
+                    ejendom++;
+                } else if (getBret().get(j) instanceof ChanceFelt) {
+                    chancefelt++;
+                } else if (getBret().get(j) instanceof Faengsel) {
+                    faengsel++;
+                } else if (getBret().get(j) instanceof GaaIFaengsel) {
+                    gaaIFaengsel++;
+                } else if (getBret().get(j) instanceof Jernbane) {
+                    jernbane++;
+                } else if (getBret().get(j) instanceof Taxi) {
+                    taxi++;
+                }
 
             }
-
-
+            if(jernbane>2&&taxi==1&&gaaIFaengsel==1&&chancefelt>1){break;}else{getBret().clear();getJernbaner().clear();}
+        }while(lavFelter);
     }
 }

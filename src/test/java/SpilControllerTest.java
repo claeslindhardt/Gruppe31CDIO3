@@ -89,15 +89,19 @@ class SpilControllerTest {
         for (int i = 0; i < spil.getSpillerObjekter().size(); i++) {
             assertEquals(spil.getSpillerObjekter().get(i), spillere.get(i));
             // Her testes det at der generes det anatal felter til listen som der er sat som input.
-            spil.getAntalFelter();
-            int forventetAntalFelter = 20;
-            assertEquals(forventetAntalFelter, spil.getAntalFelter());
-            assertEquals(forventetAntalFelter, spil.getAntalFelter(), "Der findes det antal felter i listen, som det var ønsket");
-
         }
+
+        spil.getAntalFelter();
+        int forventetAntalFelter = 20;
+        assertEquals(forventetAntalFelter, spil.getAntalFelter());
+        assertEquals(forventetAntalFelter, spil.getAntalFelter(), "Der findes det antal felter i listen, som det var ønsket");
+
+    }
         // Her testes det at der bliver genereret forskellige feltertyper
-
-
+@Test
+        void alleFeltTyper(){
+        UserInterfaceKontrakt pan = new TUI();
+        SpilController spil = new SpilController(3, 20, 2, 0, pan);
         int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
 
 
@@ -128,22 +132,22 @@ class SpilControllerTest {
         System.out.println("Jernbane: " + jernbane);
 
 
-        assertTrue(ejendom < 20 || ejendom > 5);
+        assertTrue(ejendom > 2);
         assertTrue(startfelt == 1);
         assertTrue(faengsel == 1);
         assertTrue(jernbane > 2);
-        assertTrue(taxi > 1);
+        assertTrue(taxi == 1);
         assertTrue(gaaIFaengsel == 1);
-        assertTrue(chancefelt > 3);
+        assertTrue(chancefelt > 1);
 
     }
 
-    @Test
+   /*@Test
     public void genererSpillere(int antalSpillere) {
 
         UserInterfaceKontrakt pan = new TUI();
         SpilController spil = new SpilController(2, 10, 2, 0, pan);
-        Scanner navnInput = new Scanner(System.in);
+
 
         for (int i = 0; i < antalSpillere; i++) {
             SpillerController deltager = new SpillerController(navnInput.nextLine(), i, 0);
@@ -151,6 +155,6 @@ class SpilControllerTest {
 
         }
 
-    }
+    }*/
 }
 
