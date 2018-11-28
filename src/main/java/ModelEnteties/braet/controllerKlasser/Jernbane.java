@@ -74,7 +74,6 @@ public class Jernbane extends EjeligtFeltDTO {
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);
-        addAlleJernbaner(this);
         setFeltType("Jernbane");
 
     }

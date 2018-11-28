@@ -129,7 +129,6 @@ public class EjendomCO extends EjeligtFeltDTO {
         setNavn(whatName);
         setLeje(whatRent);
 
-        addAlleEjendomme(this);
         setAntalHoteller(0);
         setAntalHuse(0);
         setFeltType("EjendomCO");

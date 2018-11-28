@@ -16,17 +16,13 @@ import java.util.ArrayList;
  *          2. Jernbane
  */
 public abstract class EjeligtFeltDTO extends FeltDTO {
-    //|--------- Variabler:-----------------
-    //Statiske Variabler
-    private static ArrayList<EjendomCO> alleEjendomme = new ArrayList<EjendomCO>();
-    private static ArrayList<Jernbane> alleJernbaner = new ArrayList<Jernbane>();
 
-    //  Dynamiske Variabler
+    //|--------- Variabler:-----------------
+
     private SpillerController ejer;
     private int pris = 200;
     private boolean pantsat = false;
 
-    // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
     //|--------- Getters og Setters:-----------------
 
     public String getEjerNavn(){
@@ -55,31 +51,6 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
 
     public void setPantsat(boolean pantsat) {
         this.pantsat = pantsat;
-    }
-
-
-    public static ArrayList<EjendomCO> getAlleEjendomme() {
-        return alleEjendomme;
-    }
-
-    public static void setAlleEjendomme(ArrayList<EjendomCO> alleEjendomme) {
-        EjeligtFeltDTO.alleEjendomme = alleEjendomme;
-    }
-
-    public static void addAlleEjendomme(EjendomCO enEjendom) {
-        EjeligtFeltDTO.alleEjendomme.add(enEjendom);
-    }
-
-    public static ArrayList<Jernbane> getAlleJernbaner() {
-        return alleJernbaner;
-    }
-
-    public static void setAlleJernbaner(ArrayList<Jernbane> alleJernbaner) {
-        EjeligtFeltDTO.alleJernbaner = alleJernbaner;
-    }
-
-    public static void addAlleJernbaner(Jernbane enJernbane) {
-        EjeligtFeltDTO.alleJernbaner.add(enJernbane);
     }
 
 }
