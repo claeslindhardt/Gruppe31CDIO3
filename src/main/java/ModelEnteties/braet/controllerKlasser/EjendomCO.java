@@ -3,14 +3,14 @@ package ModelEnteties.braet.controllerKlasser;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.dataKlasser.EjeligtFeltDTODTO;
+import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
 
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: EjendomCO
  *
  */
-public class EjendomCO extends EjeligtFeltDTODTO {
+public class EjendomCO extends EjeligtFeltDTO {
     //|-------initiering af objekter: -----------
 
 
