@@ -28,19 +28,20 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerData> GUISpillerDataObjekter;
-    GUI_Field[] Fields;
+    private ArrayList<GUISpillerData> spillere;
+    GUI_Field[] felter;
+
     //---------Getters og setters: -------------
-    public ArrayList<GUISpillerData> getGUISpillerDataObjekter() {
-        return GUISpillerDataObjekter;
+    public ArrayList<GUISpillerData> getSpillere() {
+        return spillere;
     }
 
-    public void setGUISpillerDataObjekter(ArrayList<GUISpillerData> GUISpillerDataObjekter) {
-        this.GUISpillerDataObjekter = GUISpillerDataObjekter;
+    public void setSpillere(ArrayList<GUISpillerData> spillere) {
+        this.spillere = spillere;
     }
 
     public void addGUISpillerObjekter(GUISpillerData spiller) {
-        this.GUISpillerDataObjekter.add(spiller);
+        this.spillere.add(spiller);
     }
 
     public void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter){
@@ -57,7 +58,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
-        Fields = fields;
+        this.felter = fields;
         GUI guiMedBret = new GUI(fields);
 
         gui = guiMedBret;
@@ -78,6 +79,35 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
+    }
+
+
+    public void fjernBil(GUI_Player spiller){
+
+        for( GUI_Field felt : felter){
+
+            if(felt.hasCar(spiller)){
+
+                boolean[] harBil = new boolean[spillere.size()];
+
+                for(int i=0; i < spillere.size(); i++){
+                    harBil[i] = felt.hasCar(spillere.get(i).deltager);
+                }
+
+                felt.removeAllCars();
+
+                for( int i=0; i<spillere.size(); i++){
+                    if( harBil[i] && spillere.get(i).deltager != spiller ){
+                        felt.setCar(spillere.get(i).deltager, true);
+                    }
+                }
+            }
+        }
+    }
+
+    public void rykBil( GUI_Player spiller, int feltNr){
+        fjernBil(spiller);
+        felter[feltNr].setCar(spiller, true);
     }
 
     @Override
@@ -199,7 +229,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         );
         //printTerninger(terningsKrus);
 
-        //GUISpillerData GUIspillerMedTur = getGUISpillerDataObjekter().get(spillerTur-1);
+        //GUISpillerData GUIspillerMedTur = getSpillere().get(spillerTur-1);
         //(GUIspillerMedTur.bil);
         //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
