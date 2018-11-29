@@ -41,6 +41,12 @@ public class IndputHaanteringTUI {
             try {
 
                 int tal = scan.nextInt();
+                /**
+                 * Denne scanner er meget vigtig og en virkligt dårlig løsning. Da når vi scanner en integer,
+                 * Så efterlader den en new line på bufferen som hvis ikke vi har en scan.nextline her så
+                 * bliver samlet op af den først følgende Scanner what a horror
+                 */
+                scan.nextLine();
                 if (tal < max && tal >= min){
                     return tal;
                 }
@@ -50,7 +56,7 @@ public class IndputHaanteringTUI {
 
             catch (InputMismatchException i){
                System.out.println("Dette er ikke et gyldigt input, proev igen!");
-               scan.nextLine();
+               //scan.nextLine();
                 // Man bliver nød til at tilføje denne nextLine() metode, da sout printet i kommando prompten
                 // bliver set på som et forkert input hver gang try kører og vil derfor blive fanget af catch.
             }
@@ -283,6 +289,7 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
     public String tagNavn(){
+
        String navn = scan.nextLine();
        return navn;
     }

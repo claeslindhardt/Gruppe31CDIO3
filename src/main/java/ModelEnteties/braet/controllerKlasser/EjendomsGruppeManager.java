@@ -55,7 +55,7 @@ public class EjendomsGruppeManager{
      */
     public EjendomsGruppeCO tilfoejTilGruppe(EjendomCO ejendom){
         // Undersøger om den 'klarGruppe' faktisk er klar, eller om der skal oprettes en ny.
-        if( klarGruppe == null || !klarGruppe.erFuld() ){
+        if( klarGruppe == null || klarGruppe.erFuld() ){
             klarGruppe = opretGruppe();
             // ... laver ny gruppe
         }

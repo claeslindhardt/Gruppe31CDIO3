@@ -47,7 +47,8 @@ public class SpilController extends SpilData {
 
     public void genererSpillere(int antalSpillere) {
         for (int i = 0; i < antalSpillere; i++) {
-            SpillerController deltager = new SpillerController(getUserInterfaceKontrakt().spillerNavne(), i, 0);
+            String navn = getUserInterfaceKontrakt().spillerNavne();
+            SpillerController deltager = new SpillerController(navn, i, 0);
             getSpillerObjekter().add(deltager);
         }
     }
