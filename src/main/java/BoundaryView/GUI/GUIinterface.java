@@ -5,6 +5,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
@@ -28,7 +29,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerData> spillere;
+    private ArrayList<GUISpillerData> spillere = new ArrayList<>();
     GUI_Field[] felter;
 
     //---------Getters og setters: -------------
@@ -73,6 +74,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
 
             GUISpillerData deltager = new GUISpillerData(bil,medspiller);
+            spillere.add(deltager);
             gui.addPlayer(medspiller); //Sæt spilleren på
             fields[0].setCar(medspiller, true);
 
@@ -400,8 +402,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(){
-        gui.showMessage("Du er landet på ");
+    public void duErLandetPå(FeltDTO felt, SpillerController spiller){
+        gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
+        GUISpillerData guiSpiller = spillere.get(spiller.getId());
+        rykBil(guiSpiller.deltager,felt.getPlacering());
     }
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
