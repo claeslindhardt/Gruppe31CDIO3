@@ -27,6 +27,9 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <finalName>monopolyJunior</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <outputDirectory>MonopolyJunior</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -40,6 +43,8 @@
             </plugin>
         </plugins>
     </build>
+
+
 
     <repositories>
         <repository>
