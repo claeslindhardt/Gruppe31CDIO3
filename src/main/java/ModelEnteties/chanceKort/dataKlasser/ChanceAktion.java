@@ -29,11 +29,11 @@ public abstract class ChanceAktion {
     private String beskrivelse;
     private int pengeVerdi;
 
-    private static String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
+    private final String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
             " Du har penge udbetalt på aktier", " Doctor Who kidnappede dig"," Du fik gratis rosengin. Yaiiiii :)",
             " Dorthe Jørgensen synes du er sej", " Du har printet organer!!! You saved the wooorld"
     };
-    private static String[] negativeGrunde= {" der var en skatte beregning fejl"," Der blev indført en ny miljø afgift",
+    private final String[] negativeGrunde= {" der var en skatte beregning fejl"," Der blev indført en ny miljø afgift",
             " Du blev straffet for finans fusk", " Der kom en elefant og trådte på dit hus",
             " Din mor besluttede hun ville være russisk operasanger"
     };
@@ -58,20 +58,12 @@ public abstract class ChanceAktion {
         this.pengeVerdi = pengeVerdi;
     }
 
-    public static String[] getPositiveGrunde() {
+    public String[] getPositiveGrunde() {
         return positiveGrunde;
     }
 
-    public static void setPositiveGrunde(String[] positiveGrunde) {
-        ChanceAktion.positiveGrunde = positiveGrunde;
-    }
-
-    public static String[] getNegativeGrunde() {
+    public String[] getNegativeGrunde() {
         return negativeGrunde;
-    }
-
-    public static void setNegativeGrunde(String[] negativeGrunde) {
-        ChanceAktion.negativeGrunde = negativeGrunde;
     }
 
     //|----------- Metoder:----------------------
