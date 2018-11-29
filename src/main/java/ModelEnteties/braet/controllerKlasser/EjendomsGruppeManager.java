@@ -37,7 +37,7 @@ public class EjendomsGruppeManager{
     }
 
     /**
-     * @author Malte
+     * @author Malte.
      * Opretter en ny Ejendomsgruppe, ved at give den specifik farve, og en stoerrelse med udgangspunkt i EGManageren.
      * @return Den nyopprettede gruppe.
      */
