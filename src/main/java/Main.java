@@ -71,8 +71,9 @@ public class Main {
             ScannerSingleton scan = ScannerSingleton.getInstance();
 
             System.out.println("Hjerteligt velkommen til Monopoly junior" +
-                    "\n----|input (1) for at spille med TUI(Text User Interface)" +
-                    "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
+                    "\n----|input (1) for at spille med GUIinterface( Graphical User Interface)"+
+                    "\n----|input (2) for at spille med TUI (Text User Interface)"
+
             );
 
             while (true) {
