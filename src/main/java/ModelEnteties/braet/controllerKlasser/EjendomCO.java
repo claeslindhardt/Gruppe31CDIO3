@@ -77,7 +77,6 @@ public class EjendomCO extends EjeligtFeltDTO {
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerController spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
-            userInterfaceKontrakt.duErLandetPå(this, spillerMedTur);
             this.printInfo(userInterfaceKontrakt);
 
 
