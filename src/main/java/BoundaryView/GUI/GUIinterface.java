@@ -5,6 +5,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
@@ -26,21 +27,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
 
     //----------- Variabler: -------------------
+    private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
+
+
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerData> GUISpillerDataObjekter;
-    GUI_Field[] Fields;
+    private ArrayList<GUISpillerData> spillere = new ArrayList<>();
+    GUI_Field[] felter;
+
     //---------Getters og setters: -------------
-    public ArrayList<GUISpillerData> getGUISpillerDataObjekter() {
-        return GUISpillerDataObjekter;
+    public ArrayList<GUISpillerData> getSpillere() {
+        return spillere;
     }
 
-    public void setGUISpillerDataObjekter(ArrayList<GUISpillerData> GUISpillerDataObjekter) {
-        this.GUISpillerDataObjekter = GUISpillerDataObjekter;
+    public void setSpillere(ArrayList<GUISpillerData> spillere) {
+        this.spillere = spillere;
     }
 
     public void addGUISpillerObjekter(GUISpillerData spiller) {
-        this.GUISpillerDataObjekter.add(spiller);
+        this.spillere.add(spiller);
     }
 
     public void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter){
@@ -57,8 +62,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
             //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }
-        Fields = fields;
-        GUI guiMedBret = new GUI(fields);
+        this.felter = fields;
+        GUI guiMedBret = new GUI(fields,new Color(218,206,179));
 
         gui = guiMedBret;
 
@@ -67,17 +72,55 @@ public class GUIinterface implements UserInterfaceKontrakt {
          */
 
         for(int i=0;i<spillerObjekter.size();i++){
+
+
             GUI_Car bil = new GUI_Car(); //Opret en bil
-            bil.setPrimaryColor(Color.ORANGE); //Lad den være gul
+
+            // Finder spiller farve
+            int[] farveVaerdier = SPILLERFARVER[i%SPILLERFARVER.length];
+            Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
+            bil.setPrimaryColor(spillerFarve); //Lad den være gul
+
             GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
 
+
             GUISpillerData deltager = new GUISpillerData(bil,medspiller);
+            spillere.add(deltager);
             gui.addPlayer(medspiller); //Sæt spilleren på
             fields[0].setCar(medspiller, true);
 
         }
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
+    }
+
+
+    public void fjernBil(GUI_Player spiller){
+
+        for( GUI_Field felt : felter){
+
+            if(felt.hasCar(spiller)){
+
+                boolean[] harBil = new boolean[spillere.size()];
+
+                for(int i=0; i < spillere.size(); i++){
+                    harBil[i] = felt.hasCar(spillere.get(i).deltager);
+                }
+
+                felt.removeAllCars();
+
+                for( int i=0; i<spillere.size(); i++){
+                    if( harBil[i] && spillere.get(i).deltager != spiller ){
+                        felt.setCar(spillere.get(i).deltager, true);
+                    }
+                }
+            }
+        }
+    }
+
+    public void rykBil( GUI_Player spiller, int feltNr){
+        fjernBil(spiller);
+        felter[feltNr].setCar(spiller, true);
     }
 
     @Override
@@ -199,7 +242,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         );
         //printTerninger(terningsKrus);
 
-        //GUISpillerData GUIspillerMedTur = getGUISpillerDataObjekter().get(spillerTur-1);
+        //GUISpillerData GUIspillerMedTur = getSpillere().get(spillerTur-1);
         //(GUIspillerMedTur.bil);
         //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
@@ -370,8 +413,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(){
-        gui.showMessage("Du er landet på ");
+    public void duErLandetPå(FeltDTO felt, SpillerController spiller){
+        gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
+        GUISpillerData guiSpiller = spillere.get(spiller.getId());
+        rykBil(guiSpiller.deltager,felt.getPlacering());
     }
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");

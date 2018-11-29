@@ -3,6 +3,7 @@ package Controller;
 import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
 import ModelEnteties.singletoner.ScannerSingleton;
 
@@ -113,7 +114,14 @@ public class SpilController extends SpilData {
             }
             tjekForPasseringAfStartOgRykSpiller(terningsKrus);
             getUserInterfaceKontrakt().midtTerminalLinje();
-            spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this, getUserInterfaceKontrakt());
+
+            FeltDTO felt = spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition());
+
+            getUserInterfaceKontrakt().duErLandetPå(felt, getSpillerMedTur());
+
+            felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+
+
         } else {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }

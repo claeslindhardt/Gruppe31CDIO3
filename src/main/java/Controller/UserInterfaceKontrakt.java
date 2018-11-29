@@ -4,6 +4,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import gui_main.GUI;
 
@@ -69,7 +70,7 @@ public interface UserInterfaceKontrakt {
     void gennemfortKoeb();
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
-    void duErLandetPå();
+    void duErLandetPå(FeltDTO felt, SpillerController spiller);
     void badErrorMessage();
     int ejendomsBud();
     void spillerEjendele(SpillerController spiller);
