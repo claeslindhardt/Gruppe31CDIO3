@@ -25,6 +25,7 @@ public class ScannerSingleton {
      */
     public String nextLine(){
         return  scan.nextLine();
+
     }
 
 

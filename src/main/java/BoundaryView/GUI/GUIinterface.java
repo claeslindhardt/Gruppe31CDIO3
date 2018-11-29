@@ -58,7 +58,13 @@ public class GUIinterface implements UserInterfaceKontrakt {
             GUI_Street testStreet= new GUI_Street();
             testStreet.setTitle(bret.getBret().get(i).getNavn());
             testStreet.setSubText(bret.getBret().get(i).getFeltType());
-            testStreet.setBorder(Color.CYAN);
+            if(bret.getBret().get(i).getFeltType() == "Ejendom"){
+                EjendomCO ejendom = (EjendomCO) bret.getBret().get(i);
+                testStreet.setBorder(ejendom.getGruppe().getFarve());
+            }else{
+                testStreet.setBorder(Color.CYAN);
+            }
+
             //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
             fields[i] = testStreet;
         }

@@ -403,10 +403,13 @@ public class TUI implements UserInterfaceKontrakt {
     }
 
     public String spillerNavne(){
-        System.out.println("Indtast navnet på spillerne der skal være med i spillet.\n Afslut med Enter efter hvert navn");
+        System.out.println("|- Indtast navnet på spillerne der skal være med i spillet.\nAfslut med Enter efter hvert navn");
+        //hotFix();
         String navn = input.tagNavn();
         return navn;
     }
+    //public void hotFix(){int i = 2+2;}
+
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);
     }

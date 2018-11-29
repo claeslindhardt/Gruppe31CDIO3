@@ -130,6 +130,6 @@ public class EjendomCO extends EjeligtFeltDTO {
 
         setAntalHoteller(0);
         setAntalHuse(0);
-        setFeltType("EjendomCO");
+        setFeltType("Ejendom");
     }
 }

@@ -1,6 +1,8 @@
 package ModelEnteties.braet.controllerKlasser;
 
 
+import java.awt.*;
+
 /**
  * @author Malte
  * Klasse der opretter grupper til ejendomme, og putter ejendomme i grupper.
@@ -11,7 +13,7 @@ package ModelEnteties.braet.controllerKlasser;
 public class EjendomsGruppeManager{
 
     private int gruppeStoerelser;
-    private String[] farveListe = {"roed", "groen", "blaa","gul" ,"orange","lilla","lyseroed","sort"};
+    private Color[] farveListe = {Color.red, Color.green,Color.BLUE,Color.BLACK,Color.YELLOW ,Color.ORANGE,Color.PINK,Color.GRAY,Color.MAGENTA};
     private int antalGrupper = 0; // Hvor mange grupper der er blevet lavet.
     private EjendomsGruppeCO klarGruppe;
 
@@ -35,13 +37,13 @@ public class EjendomsGruppeManager{
     }
 
     /**
-     * @author Malte
+     * @author Malte.
      * Opretter en ny Ejendomsgruppe, ved at give den specifik farve, og en stoerrelse med udgangspunkt i EGManageren.
      * @return Den nyopprettede gruppe.
      */
     private EjendomsGruppeCO opretGruppe(){
         antalGrupper++;
-        String farve = farveListe[antalGrupper%farveListe.length];
+        Color farve = farveListe[antalGrupper%farveListe.length];
         EjendomsGruppeCO nyGruppe = new EjendomsGruppeCO(farve, gruppeStoerelser);
         return nyGruppe;
     }
@@ -53,7 +55,7 @@ public class EjendomsGruppeManager{
      */
     public EjendomsGruppeCO tilfoejTilGruppe(EjendomCO ejendom){
         // Undersøger om den 'klarGruppe' faktisk er klar, eller om der skal oprettes en ny.
-        if( klarGruppe == null || !klarGruppe.erFuld() ){
+        if( klarGruppe == null || klarGruppe.erFuld() ){
             klarGruppe = opretGruppe();
             // ... laver ny gruppe
         }
