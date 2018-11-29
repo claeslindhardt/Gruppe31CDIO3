@@ -69,7 +69,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             fields[i] = testStreet;
         }
         this.felter = fields;
-        GUI guiMedBret = new GUI(fields);
+        GUI guiMedBret = new GUI(fields,new Color(218,206,179));
 
         gui = guiMedBret;
 
