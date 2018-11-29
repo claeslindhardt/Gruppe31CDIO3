@@ -27,6 +27,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
 
     //----------- Variabler: -------------------
+    private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{29,69,201}};
+
+
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
     private ArrayList<GUISpillerData> spillere = new ArrayList<>();
@@ -60,7 +63,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             fields[i] = testStreet;
         }
         this.felter = fields;
-        GUI guiMedBret = new GUI(fields);
+        GUI guiMedBret = new GUI(fields,new Color(218,206,179));
 
         gui = guiMedBret;
 
@@ -69,9 +72,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
          */
 
         for(int i=0;i<spillerObjekter.size();i++){
+
+
             GUI_Car bil = new GUI_Car(); //Opret en bil
-            bil.setPrimaryColor(Color.ORANGE); //Lad den være gul
+
+            // Finder spiller farve
+            int[] farveVaerdier = SPILLERFARVER[i%SPILLERFARVER.length];
+            Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
+            bil.setPrimaryColor(spillerFarve); //Lad den være gul
+
             GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
+
 
             GUISpillerData deltager = new GUISpillerData(bil,medspiller);
             spillere.add(deltager);
