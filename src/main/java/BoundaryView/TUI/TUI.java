@@ -5,6 +5,7 @@ import ModelEnteties.Spiller.SpillerController;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetController;
 import ModelEnteties.braet.controllerKlasser.*;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
 import ModelEnteties.singletoner.ScannerSingleton;
 
@@ -308,7 +309,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void betalRente(){
         System.out.println("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(){
+    public void duErLandetPå(FeltDTO felt, SpillerController spiller){
         System.out.println("Du er landet på ");
     }
     public void badErrorMessage(){
