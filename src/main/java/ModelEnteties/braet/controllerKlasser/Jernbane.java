@@ -3,11 +3,11 @@ package ModelEnteties.braet.controllerKlasser;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.braet.dataKlasser.EjeligtFeltDTODTO;
+import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
 
 import java.util.ArrayList;
 
-public class Jernbane extends EjeligtFeltDTODTO {
+public class Jernbane extends EjeligtFeltDTO {
 
     //|----------- Metoder:------------------
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
@@ -74,7 +74,6 @@ public class Jernbane extends EjeligtFeltDTODTO {
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);
-        addAlleJernbaner(this);
         setFeltType("Jernbane");
 
     }
