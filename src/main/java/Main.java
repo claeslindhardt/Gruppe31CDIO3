@@ -10,15 +10,21 @@ public class Main {
     public static void main(String[] args) {
 
 
-    //Variabler: ________________________________
-        UserInterfaceKontrakt Ui;
-        Ui = new TUI();
+    // Håndterer startargument
 
-        ScannerSingleton scan = ScannerSingleton.getInstance();
+        int startArgument = 0;
+        // 0 = intet argument el. mere end ét argument
+        // 1 = gui
+        // 2 = tui
 
-    /**==========================================
-    |                  MAIN                   |
-    ==========================================*/
+        if(args.length == 1 && args[0].equals("gui")){
+            startArgument = 1;
+
+        }else if(args.length == 1 && args[0].equals("tui")){
+            startArgument = 2;
+        }
+
+
     /*
     ______________________________________________
     |Et standard exempel spil forløber(USE-Case):|
@@ -50,39 +56,54 @@ public class Main {
     10. ellers vil turen blive givet videre til den næste i række følgen.
     |============================================|
      */
+
+
+
+
     // Metode kald ________________________________
-        System.out.println("Hjerteligt velkommen til Monopoly junior" +
-                "\n----|input (1) for at spille med TUI(Text User Interface)" +
-                "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
-        );
 
 
-        int input = 0;
-        while (true) {
-            try {
-                input = scan.nextInt();
-                if( input>0 && input<=2){
-                    break;
+
+
+        // Efterspørger start argument
+        if( startArgument == 0) {
+
+            ScannerSingleton scan = ScannerSingleton.getInstance();
+
+            System.out.println("Hjerteligt velkommen til Monopoly junior" +
+                    "\n----|input (1) for at spille med TUI(Text User Interface)" +
+                    "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
+            );
+
+            while (true) {
+                try {
+                    startArgument = scan.nextInt();
+                    if (startArgument == 1 || startArgument == 2) {
+                        break;
+                    }
+                    System.out.println("Forkert input. tallet skal være mellem 1 og 2");
+                } catch (InputMismatchException i) {
+                    System.out.println("Dette er ikke et gyldigt input, proev igen!");
+                    scan.nextLine();
                 }
-                System.out.println("Forkert input. tallet skal være mellem 1 og 2");
-            }
-            catch(InputMismatchException i){
-                System.out.println("Dette er ikke et gyldigt input, proev igen!");
-                scan.nextLine();
             }
         }
 
 
-        if(input == 1) {
-            System.out.println("Du valgte en TUI");
-            Ui = new TUI();
-        } else if(input == 2) {
-            System.out.println("Du valgte en GUIinterface");
+        UserInterfaceKontrakt Ui = null;
+
+        if(startArgument == 1) {
+            System.out.println("Starter med GUI");
             Ui = new GUIinterface();
-
+        } else if (startArgument == 2){
+            System.out.println("Starter med TUI");
+            Ui = new TUI();
         }
+
         SpilController spil = new SpilController(Ui);
 
+
+        // TODO: Ryk det her ud af main
         while(spil.isKør()){
             spil.tjekForVinder();
             spil.tjekOmGivetOp();
@@ -92,12 +113,7 @@ public class Main {
             if(!spil.isVinderFindes()){
                 spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
             }
-
         }
         spil.getUserInterfaceKontrakt().spilletErSlut();
-        /*
-        SpillerController spiller = new SpillerController("bo",2,25);
-        TUI UserInterfaceKontrakt = new TUI();
-        spiller.chanceKortMuligheder(UserInterfaceKontrakt);*/
     }
 }
