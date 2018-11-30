@@ -1,22 +1,30 @@
-import BaundaryView.GUI.GUIinterface;
-import BaundaryView.TUI.TUI;
+import BoundaryView.TUI.TUI;
+import BoundaryView.GUI.GUIinterface;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
+import java.util.InputMismatchException;
 
 public class Main {
+
     public static void main(String[] args) {
 
 
-    //Variabler: ________________________________
-        UserInterfaceKontrakt Ui;
-        Ui = new TUI();
+    // Håndterer startargument
 
-        ScannerSingleton scan = ScannerSingleton.getInstance();
+        int startArgument = 0;
+        // 0 = intet argument el. mere end ét argument
+        // 1 = gui
+        // 2 = tui
 
-    /**==========================================
-    |                  MAIN                   |
-    ==========================================*/
+        if(args.length == 1 && args[0].equals("gui")){
+            startArgument = 1;
+
+        }else if(args.length == 1 && args[0].equals("tui")){
+            startArgument = 2;
+        }
+
+
     /*
     ______________________________________________
     |Et standard exempel spil forløber(USE-Case):|
@@ -38,7 +46,7 @@ public class Main {
             som fx. kunne være:
             1. At betale rente
             2. At kunne købe et nyt felt
-            3. at tage en Taxi
+            3. at tage en TaxiCO
     6. Så vil han se hvad hans muligheder nu er
     og for tur menuen igen
     7. Når han er fertig slutter han sin tur.
@@ -48,22 +56,55 @@ public class Main {
     10. ellers vil turen blive givet videre til den næste i række følgen.
     |============================================|
      */
-    // Metode kald ________________________________
-        System.out.println("Hjerteligt velkommen til Monopoly junior" +
-                "\n----|input (1) for at spille med TUI(Text User Interface)" +
-                "\n----|input (2) for at spille med GUIinterface(graphical User Interface), denne er endnu begrænset implementeret"
-        );
-        int input = scan.nextInt();
 
-        if(input == 1) {
-            System.out.println("Du valgte en TUI");
-            Ui = new TUI();
-        } else if(input == 2) {
-            System.out.println("Du valgte en GUIinterface");
-            Ui = new GUIinterface();
+
+
+
+    // Metode kald ________________________________
+
+
+
+
+        // Efterspørger start argument
+        if( startArgument == 0) {
+
+            ScannerSingleton scan = ScannerSingleton.getInstance();
+
+            System.out.println("Hjerteligt velkommen til Monopoly junior" +
+                    "\n----|input (1) for at spille med GUIinterface( Graphical User Interface)"+
+                    "\n----|input (2) for at spille med TUI (Text User Interface)"
+
+            );
+
+            while (true) {
+                try {
+                    startArgument = scan.nextInt();
+                    if (startArgument == 1 || startArgument == 2) {
+                        break;
+                    }
+                    System.out.println("Forkert input. tallet skal være mellem 1 og 2");
+                } catch (InputMismatchException i) {
+                    System.out.println("Dette er ikke et gyldigt input, proev igen!");
+                    scan.nextLine();
+                }
+            }
         }
+
+
+        UserInterfaceKontrakt Ui = null;
+
+        if(startArgument == 1) {
+            System.out.println("Starter med GUI");
+            Ui = new GUIinterface();
+        } else if (startArgument == 2){
+            System.out.println("Starter med TUI");
+            Ui = new TUI();
+        }
+
         SpilController spil = new SpilController(Ui);
 
+
+        // TODO: Ryk det her ud af main
         while(spil.isKør()){
             spil.tjekForVinder();
             spil.tjekOmGivetOp();
@@ -73,12 +114,7 @@ public class Main {
             if(!spil.isVinderFindes()){
                 spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
             }
-
         }
-        spil.userInterfaceKontrakt.spilletErSlut();
-        /*
-        SpillerController spiller = new SpillerController("bo",2,25);
-        TUI UserInterfaceKontrakt = new TUI();
-        spiller.chanceKortMuligheder(UserInterfaceKontrakt);*/
+        spil.getUserInterfaceKontrakt().spilletErSlut();
     }
 }

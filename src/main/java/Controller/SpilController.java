@@ -1,74 +1,80 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
+import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class SpilController extends SpilData {
 
     //|----------- Metoder:------------------
+
     /**
      * Hvorfor 2 constructore?
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
-     * vælge dem.
+     * vælge dem. Dette er også meget nyttigt til test :)
      */
-    public SpilController(UserInterfaceKontrakt gui){
-        this.userInterfaceKontrakt =gui;
+    public SpilController(UserInterfaceKontrakt gui) {
+        this.setUserInterfaceKontrakt(gui);
         startMenu();
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), userInterfaceKontrakt);
-        RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
+        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
+        gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
     }
 
-    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui){
+    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
         this.setAntalTerninger(antalTerninger);
         this.setBankeraadGraense(bankeRaadtGrense);
-        this.userInterfaceKontrakt =gui;
+        this.setUserInterfaceKontrakt(gui);
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), userInterfaceKontrakt);
-        RafleBaeger terningsKrus = new RafleBaeger (getAntalTerninger());
+        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
+        gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
     }
     //_____________________________________
     // Diverse:
 
-    public void genererSpillere(int antalSpillere){
-        for(int i = 0;i < antalSpillere;i++){
-            SpillerController deltager = new SpillerController("Jonny",i,0);
+    public void genererSpillere(int antalSpillere) {
+        for (int i = 0; i < antalSpillere; i++) {
+            String navn = getUserInterfaceKontrakt().spillerNavne();
+            SpillerCO deltager = new SpillerCO(navn, i, 0);
             getSpillerObjekter().add(deltager);
         }
     }
-    public void printSpilleresInfo(){
-        for(int i = 0;i < getSpillerObjekter().size();i++){
+
+    public void printSpilleresInfo() {
+        for (int i = 0; i < getSpillerObjekter().size(); i++) {
             getSpillerObjekter().get(i).printSpillerStats(getUserInterfaceKontrakt());
         }
     }
-    public void anketDomsigelse(){
+
+    public void anketDomsigelse() {
         Random ra = new Random();
-        int domsAfsigelseDel1 = ra.nextInt(5)+1;
-        int domsAfsigelseDel2 = ra.nextInt(5)+1;
+        int domsAfsigelseDel1 = ra.nextInt(5) + 1;
+        int domsAfsigelseDel2 = ra.nextInt(5) + 1;
         getUserInterfaceKontrakt().retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
-        if(domsAfsigelseDel1 == domsAfsigelseDel2){
+        if (domsAfsigelseDel1 == domsAfsigelseDel2) {
             getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
-            getSpillerMedTur().setSpillerPosition( domsAfsigelseDel1+domsAfsigelseDel2);
-        }else if(domsAfsigelseDel1 != domsAfsigelseDel2){
+            getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
+        } else if (domsAfsigelseDel1 != domsAfsigelseDel2) {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
         }
 
     }
-    public void slutSpillerTur(){
+
+    public void slutSpillerTur() {
         getSpillerMedTur().setHarSlaaetForTuren(false);
         getSpillerMedTur().setHarAnketDomDenneRunde(false);
         tjekForBankeRaadt();
@@ -76,29 +82,29 @@ public class SpilController extends SpilData {
         if (getSpillerTur() >= getAntalSpillere()) {
             setSpillerTur(1);
 
-        } else if(getSpillerTur() <= getAntalSpillere()){
-            setSpillerTur(getSpillerTur()+1);
+        } else if (getSpillerTur() <= getAntalSpillere()) {
+            setSpillerTur(getSpillerTur() + 1);
         }
 
 
     }
 
-    public void tjekForBankeRaadt(){
+    public void tjekForBankeRaadt() {
 
-        if(getSpillerMedTur().getPenge()<getBankeraadGraense()){
+        if (getSpillerMedTur().getPenge() < getBankeraadGraense()) {
             getUserInterfaceKontrakt().bankeRaadtGrundetLiquditet(getBankeraadGraense());
             getSpillerMedTur().setHarGivetOp(true);
             getSpillerMedTur().getSpillerEjendomme().clear();
-            int udgaaetSpiller = getSpillerMedTur().getId()+1;
+            int udgaaetSpiller = getSpillerMedTur().getId() + 1;
             getUserInterfaceKontrakt().spillerUdgår(udgaaetSpiller);
         }
 
     }
 
-    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetController spilleBret){
-        if(!getSpillerMedTur().isHarSlaaetForTuren()) {
+    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
+        if (!getSpillerMedTur().isHarSlaaetForTuren()) {
             terningsKrus.slaa();
-            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus);
+            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
             if (terningsKrus.erEns()) {
                 getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
@@ -107,17 +113,24 @@ public class SpilController extends SpilData {
             }
             tjekForPasseringAfStartOgRykSpiller(terningsKrus);
             getUserInterfaceKontrakt().midtTerminalLinje();
-           spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(this, getUserInterfaceKontrakt());
-        }else{
+
+            FeltDTO felt = spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition());
+
+            getUserInterfaceKontrakt().duErLandetPå(felt, getSpillerMedTur());
+
+            felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+
+
+        } else {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }
     }
 
     //_____________________________________
     //Tjekkere:
-    public void tjekForFeangselsStraf(){
-        if(getSpillerMedTur().isFaengselsStraf()){
-            if(!getSpillerMedTur().isHarAnketDomDenneRunde()){
+    public void tjekForFeangselsStraf() {
+        if (getSpillerMedTur().isFaengselsStraf()) {
+            if (!getSpillerMedTur().isHarAnketDomDenneRunde()) {
                 getUserInterfaceKontrakt().terminalLinje();
                 getUserInterfaceKontrakt().anketStraffeDom(getSpillerTur());
                 anketDomsigelse();
@@ -127,34 +140,35 @@ public class SpilController extends SpilData {
         }
     }
 
-    public void tjekOmGivetOp(){
+    public void tjekOmGivetOp() {
         if (getSpillerMedTur().isHarGivetOp()) {
-            if (spillerTur == antalSpillere) {
-                spillerTur = 1;
+            if (getSpillerTur() == getAntalSpillere()) {
+                setSpillerTur(1);
             } else {
-                spillerTur++;
+                setSpillerTur(getSpillerTur() + 1);
             }
         }
     }
 
-    public void tjekForVinder(){
-        if(antalSpillere-tjekAntalSpillereISpil() == 1){
+    public void tjekForVinder() {
+        if (getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
             getUserInterfaceKontrakt().terminalLinje();
-            SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
-            if (!spillerMedTur.isHarGivetOp()){
+            //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
+            if (!getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
-                int vinder =spillerMedTur.getId()+1;
-                getUserInterfaceKontrakt().vinder(vinder);
+                setVinder(getSpillerMedTur().getId() + 1);
+                getUserInterfaceKontrakt().vinder(getVinder());
                 setVinderFindes(true);
-                kør = false;
+                setKør(false);
             }
 
         }
     }
+
     public int tjekAntalSpillereISpil() {
         int UdgaetSpillere = 0;
-        for (int i = 0; i < spillerObjekter.size(); i++) {
-            if (spillerObjekter.get(i).isHarGivetOp()) {
+        for (int i = 0; i < getSpillerObjekter().size(); i++) {
+            if (getSpillerObjekter().get(i).isHarGivetOp()) {
                 UdgaetSpillere++;
             }
         }
@@ -162,69 +176,66 @@ public class SpilController extends SpilData {
         return UdgaetSpillere;
     }
 
-    public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus){
+    public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition+rykVeardi>antalFelter){
-            getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(),this, getUserInterfaceKontrakt());
-        }else{
-            getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition()+rykVeardi);
+        if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
+            getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, getUserInterfaceKontrakt());
+        } else {
+            getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition() + rykVeardi);
         }
         getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
     }
 
+
     //_____________________________________
     //Menuer:
-    public void startMenu(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
+    public void startMenu() {
         RandomSingleton rand = RandomSingleton.getInstance();
-        int menuOpt = getUserInterfaceKontrakt().velkomstMenu();
+        int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,4);
 
 
-        if(menuOpt == 2) {
+        if (menuOpt == 2) {
             startInstillingsMenu();
-        }else if(menuOpt == 3){
+        } else if (menuOpt == 3) {
             getUserInterfaceKontrakt().startSpilGrundFejl();
-        }else if(menuOpt == 1){
-            int starter = rand.nextInt(antalSpillere)+1;
-            spillerTur = starter;
+        } else if (menuOpt == 1) {
+            int starter = rand.nextInt(getAntalSpillere()) + 1;
+            setSpillerTur(starter);
         }
-        getUserInterfaceKontrakt().opretteInstillinger(getAntalSpillere(),getAntalFelter(),getAntalTerninger(),getSpillerTur(),getBankeraadGraense());
+        getUserInterfaceKontrakt().opretteInstillinger(getAntalSpillere(), getAntalFelter(), getAntalTerninger(), getSpillerTur(), getBankeraadGraense());
 
 
     }
-    public void startInstillingsMenu(){
+
+    public void startInstillingsMenu() {
         //Todo: make it possible to choose a default option here:
-        Scanner scan = new Scanner(System.in);
         Random rand = new Random();
-        getUserInterfaceKontrakt().instilingsSporgsmaal0();
-        int felter = scan.nextInt();
+
+        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0(9, 21);
         setAntalFelter(felter);
 
-        getUserInterfaceKontrakt().instilingsSporgsmaall();
-        int spillerMeangde = scan.nextInt();
+
+        int spillerMeangde = getUserInterfaceKontrakt().instilingsSporgsmaall(2,11);
         setAntalSpillere(spillerMeangde);
 
-        int starter = rand.nextInt(antalSpillere)+1;
-        spillerTur = starter;
-        getUserInterfaceKontrakt().instilingsSporgsmaal2();
-        int terninger = scan.nextInt();
+        int starter = rand.nextInt(getAntalSpillere()) + 1;
+        setSpillerTur(starter);
+
+        int terninger = getUserInterfaceKontrakt().instilingsSporgsmaal2(1,5);
         setAntalTerninger(terninger);
 
-        getUserInterfaceKontrakt().instilingsSporgsmaal3();
-        int driftsomkostninger = scan.nextInt();
+        int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal3(0, 99999);
         setBankeraadGraense(driftsomkostninger);
     }
 
-    public void turMenu(SpilleBraetController spilleBret, RafleBaeger terningsKrus){
-        Scanner scan = new Scanner(System.in);
+    public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
 
-        getUserInterfaceKontrakt().TurMenu(getSpillerTur());
+        int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
-        int input = scan.nextInt();
-        switch(input){
+        switch (input) {
             case 1:
-                kastTerninger(terningsKrus,spilleBret);
+                kastTerninger(terningsKrus, spilleBret);
                 //Denne funktion  kan kalder:
                 //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
                 //og aktionPåFelt.
@@ -248,13 +259,13 @@ public class SpilController extends SpilData {
                 getSpillerMedTur().givOp(this, getUserInterfaceKontrakt());
                 break;
             case 8:
-                //getSpillerMedTur().bygPaaEjendom();
+                getSpillerMedTur().koebHusPaaEjendom(getUserInterfaceKontrakt());
                 break;
             case 9:
                 getSpillerMedTur().handelMedEjendomme();
                 break;
             case 99:
-                kør = false;
+                setKør(false);
                 break;
             default:
                 getUserInterfaceKontrakt().ikkeMuligt();

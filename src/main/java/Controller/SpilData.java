@@ -1,8 +1,8 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 
 import java.util.ArrayList;
 
@@ -34,20 +34,28 @@ public abstract class SpilData {
     //|-------initiering af objekter: -----------
     //TODO: make singleton of scanner and random here.
     //|--------- Variabler:-----------------
-    public int spillerTur=1;
-    public int antalSpillere=3;
-    public int antalFelter=25;
-    public ArrayList<SpillerController> spillerObjekter = new ArrayList<SpillerController>();
-    public int antalTerninger=2;
-    public int antalChancekortPrFelt = 10;
-    public int bankeraadGraense = 15;
-    public boolean kør = true;
-    public boolean vinderFindes = false;
-    public SpilleBraetController bretGeneretForSpil;
-    public UserInterfaceKontrakt userInterfaceKontrakt;
-    public RafleBaeger terningeKrus;
+    private int spillerTur=1;
+    private int antalSpillere=3;
+    private   int antalFelter=20;
+    private  ArrayList<SpillerCO> spillerObjekter = new ArrayList<SpillerCO>();
+    private  int antalTerninger=2;
+    private  int antalChancekortPrFelt = 10;
+    private  int bankeraadGraense = 15;
+    private  boolean kør = true;
+    private  boolean vinderFindes = false;
+    private SpilleBraetCO bretGeneretForSpil;
+    private UserInterfaceKontrakt userInterfaceKontrakt;
+    private RafleBaeger terningeKrus;
+    private int vinder=-1;
 
     //|--------- Getters og Setters:-----------------
+    public int getVinder() {
+        return vinder;
+    }
+
+    public void setVinder(int vinder) {
+        this.vinder = vinder;
+    }
     public RafleBaeger getTerningeKrus() {
         return terningeKrus;
     }
@@ -62,7 +70,7 @@ public abstract class SpilData {
     public void setUserInterfaceKontrakt(UserInterfaceKontrakt userInterfaceKontrakt) {
         this.userInterfaceKontrakt = userInterfaceKontrakt;
     }
-    public SpillerController getSpillerMedTur() {
+    public SpillerCO getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
     }
 
@@ -90,11 +98,11 @@ public abstract class SpilData {
         this.antalFelter = antalFelter;
     }
 
-    public ArrayList<SpillerController> getSpillerObjekter() {
+    public ArrayList<SpillerCO> getSpillerObjekter() {
         return spillerObjekter;
     }
 
-    public void setSpillerObjekter(ArrayList<SpillerController> spillerObjekter) {
+    public void setSpillerObjekter(ArrayList<SpillerCO> spillerObjekter) {
         this.spillerObjekter = spillerObjekter;
     }
 
@@ -136,12 +144,15 @@ public abstract class SpilData {
     public void setBankeraadGraense(int bankeraadsgraense) {
         this.bankeraadGraense = bankeraadsgraense;
     }
-    public SpilleBraetController getBretGeneretForSpil() {
+    public SpilleBraetCO getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }
 
-    public void setBretGeneretForSpil(SpilleBraetController generetBretForSpil) {
+    public void setBretGeneretForSpil(SpilleBraetCO generetBretForSpil) {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 
+    public boolean getVinderFindes(){
+        return vinderFindes;
+    }
 }
