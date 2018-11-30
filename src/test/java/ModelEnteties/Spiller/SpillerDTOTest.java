@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpillerDataTest {
+class SpillerDTOTest {
 
     /**
      * @author Jacob
@@ -12,9 +12,9 @@ class SpillerDataTest {
      */
     @Test
     void setgetPengeTest(){
-        SpillerController spillerController = new SpillerController("Jacob",303,0);
-        spillerController.setPenge(1000.0);
-        assertTrue(spillerController.getPenge() == 1000.0);
+        SpillerCO spillerCO = new SpillerCO("Jacob",303,0);
+        spillerCO.setPenge(1000.0);
+        assertTrue(spillerCO.getPenge() == 1000.0);
     }
 
 }

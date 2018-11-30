@@ -1,22 +1,22 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
 
 import java.util.ArrayList;
 
-public class Jernbane extends EjeligtFeltDTO {
+public class JernbaneCO extends EjeligtFeltDTO {
 
     //|----------- Metoder:------------------
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.jernBaneInfo(this);
     }
-    public void tagTog(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
-        ArrayList<Jernbane> jernbaner = spil.getBretGeneretForSpil().getJernbaner();
-        ArrayList<Jernbane> muligeRejser = new ArrayList<Jernbane>();
+    public void tagTog(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        ArrayList<JernbaneCO> jernbaner = spil.getBretGeneretForSpil().getJernbaner();
+        ArrayList<JernbaneCO> muligeRejser = new ArrayList<JernbaneCO>();
 
         for (int i=0; i<jernbaner.size();i++){
             if(spillerMedTur== jernbaner.get(i).getEjer()){
@@ -43,8 +43,8 @@ public class Jernbane extends EjeligtFeltDTO {
         }
     }
 
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {
 
@@ -70,11 +70,11 @@ public class Jernbane extends EjeligtFeltDTO {
     }
 
     //|--------- Constructor:-----------------
-    public Jernbane(String whatName, int whatPrice,int placering){
+    public JernbaneCO(String whatName, int whatPrice, int placering){
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);
-        setFeltType("Jernbane");
+        setFeltType("JernbaneCO");
 
     }
 }

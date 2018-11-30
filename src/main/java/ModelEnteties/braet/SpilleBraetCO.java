@@ -6,15 +6,15 @@ import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.EjendomsDoeber;
 import ModelEnteties.braet.navneGenerering.controllerKlasser.JernbaneDoeber;
-import ModelEnteties.chanceKort.controllerKlasser.GiverPenge;
-import ModelEnteties.chanceKort.controllerKlasser.GratisUdAfFaengsel;
-import ModelEnteties.chanceKort.controllerKlasser.RykkerSpiller;
-import ModelEnteties.chanceKort.controllerKlasser.TagerPenge;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.chanceKort.controllerKlasser.GiverPengeCO;
+import ModelEnteties.chanceKort.controllerKlasser.GratisUdAfFaengselCO;
+import ModelEnteties.chanceKort.controllerKlasser.RykkerSpillerCO;
+import ModelEnteties.chanceKort.controllerKlasser.TagerPengeCO;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
-public class SpilleBraetController extends SpilleBraetData {
+public class SpilleBraetCO extends SpilleBraetDTO {
 
     //|----------- Metoder:------------------
     public void printBret(UserInterfaceKontrakt userInterfaceKontrakt){
@@ -45,12 +45,12 @@ public class SpilleBraetController extends SpilleBraetData {
         return stringBuilder.toString();
     }
 
-    public ArrayList<ChanceAktion> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
+    public ArrayList<ChanceAktionDTO> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
 
-        ArrayList<ChanceAktion> chanceKortTilFelt = new ArrayList<ChanceAktion>();
+        ArrayList<ChanceAktionDTO> chanceKortTilFelt = new ArrayList<ChanceAktionDTO>();
 
         //ændre dette:
-        ChanceAktion some = new GiverPenge();
+        ChanceAktionDTO some = new GiverPengeCO();
         chanceKortTilFelt.add(some);
         //til dette
 
@@ -60,24 +60,24 @@ public class SpilleBraetController extends SpilleBraetData {
                 //_______________________________________________
                 // Giver penge
                 case 1:
-                    GiverPenge faaPenge = new GiverPenge();
+                    GiverPengeCO faaPenge = new GiverPengeCO();
                     chanceKortTilFelt.add(faaPenge);
                     break;
                 //_______________________________________________
                 // Tager penge fra dig
                 case 2:
-                    TagerPenge mistPenge = new TagerPenge();
+                    TagerPengeCO mistPenge = new TagerPengeCO();
                     chanceKortTilFelt.add(mistPenge);
                     //_______________________________________________
                     // Du må rykke som du ønsker
                 case 3:
-                    RykkerSpiller rykkerDig = new RykkerSpiller();
+                    RykkerSpillerCO rykkerDig = new RykkerSpillerCO();
                     chanceKortTilFelt.add(rykkerDig);
                     break;
                 //_______________________________________________
                 // Du kan slippe for fængsel
                 case 4:
-                    GratisUdAfFaengsel kaution = new GratisUdAfFaengsel();
+                    GratisUdAfFaengselCO kaution = new GratisUdAfFaengselCO();
                     chanceKortTilFelt.add(kaution);
                     break;
                 default:
@@ -90,12 +90,12 @@ public class SpilleBraetController extends SpilleBraetData {
     }
 
     //|--------- Constructor:-----------------
-    public SpilleBraetController(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
+    public SpilleBraetCO(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
         boolean lavFelter=true;
         //-------Tilføjning af objekter til brettet---
-        Start go = new Start(getStartGrundPris(),0);
-        Faengsel kashotten = new Faengsel("Vester Fængsel",1);
+        StartCO go = new StartCO(getStartGrundPris(),0);
+        FaengselCO kashotten = new FaengselCO("Vester Fængsel",1);
 
         do {int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
             getBret().add(go);
@@ -107,10 +107,10 @@ public class SpilleBraetController extends SpilleBraetData {
             if (feltType<=3){//set til 3 når test er fertig
                 int aktionsFeltType = ra.nextInt(8)+1;
                 //_______________________________________________
-                // Jernbane
+                // JernbaneCO
                 if(aktionsFeltType<=4){//set til 4 når test er fertig
                     JernbaneDoeber st = new JernbaneDoeber();
-                    Jernbane station = new Jernbane(st.getGeneretNavn(),getStartGrundPris(),i+2);
+                    JernbaneCO station = new JernbaneCO(st.getGeneretNavn(),getStartGrundPris(),i+2);
                     getBret().add(station);
                     getJernbaner().add(station);
                 }
@@ -121,15 +121,15 @@ public class SpilleBraetController extends SpilleBraetData {
                     addBret(chance);
                 }
                 //_______________________________________________
-                // Taxi
+                // TaxiCO
                 else if(aktionsFeltType<=7) {//set til 7 når test er fertig
-                    Taxi vogn = new Taxi(i+2);
+                    TaxiCO vogn = new TaxiCO(i+2);
                     getBret().add(vogn);
                 }
                 //_______________________________________________
-                // GaaIFaengsel
+                // GaaIFaengselCO
                 else {
-                    GaaIFaengsel forbrydelse = new GaaIFaengsel(i+2);
+                    GaaIFaengselCO forbrydelse = new GaaIFaengselCO(i+2);
                     getBret().add(forbrydelse);
                 }
             }
@@ -138,7 +138,7 @@ public class SpilleBraetController extends SpilleBraetData {
             else{
                 EjendomsDoeber navn = new EjendomsDoeber();
                 EjendomCO grund = new EjendomCO(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
-                EjendomsGruppeCO gruppe = getEjendomsGruppeManager().tilfoejTilGruppe(grund);
+                EjendomsGruppeDTO gruppe = getEjendomsGruppeCO().tilfoejTilGruppe(grund);
                 grund.setGruppe(gruppe);
                 getBret().add(grund);
             }
@@ -146,19 +146,19 @@ public class SpilleBraetController extends SpilleBraetData {
             setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
         }
             for (int j = 0; j < getBret().size(); j++) {
-                if (getBret().get(j) instanceof Start) {
+                if (getBret().get(j) instanceof StartCO) {
                     startfelt++;
                 } else if (getBret().get(j) instanceof EjendomCO) {
                     ejendom++;
                 } else if (getBret().get(j) instanceof ChanceFeltCO) {
                     chancefelt++;
-                } else if (getBret().get(j) instanceof Faengsel) {
+                } else if (getBret().get(j) instanceof FaengselCO) {
                     faengsel++;
-                } else if (getBret().get(j) instanceof GaaIFaengsel) {
+                } else if (getBret().get(j) instanceof GaaIFaengselCO) {
                     gaaIFaengsel++;
-                } else if (getBret().get(j) instanceof Jernbane) {
+                } else if (getBret().get(j) instanceof JernbaneCO) {
                     jernbane++;
-                } else if (getBret().get(j) instanceof Taxi) {
+                } else if (getBret().get(j) instanceof TaxiCO) {
                     taxi++;
                 }
 

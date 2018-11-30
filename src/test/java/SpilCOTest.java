@@ -1,16 +1,15 @@
 import BoundaryView.TUI.TUI;
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.controllerKlasser.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpilControllerTest {
+class SpilCOTest {
     /**
      * @auther Andreas
      * Formål: At teste om vi kan passere start og fortsat blive på spillepladen
@@ -26,7 +25,7 @@ class SpilControllerTest {
         int spillerTur = 1;
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilController spil = new SpilController(1, 4, 2, 0, pan);
+        SpilCO spil = new SpilCO(1, 4, 2, 0, pan);
 
 
         spil.getTerningeKrus().setTotalVaerdi(3);
@@ -47,7 +46,7 @@ class SpilControllerTest {
     void tjekForVinder() {
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilController spil = new SpilController(3, 4, 2, 0, pan);
+        SpilCO spil = new SpilCO(3, 4, 2, 0, pan);
 
         spil.getSpillerObjekter().get(0).setHarGivetOp(true);
         spil.getSpillerObjekter().get(1).setHarGivetOp(true);
@@ -71,13 +70,13 @@ class SpilControllerTest {
     void Spilcontroller() {
         UserInterfaceKontrakt pan = new TUI();
 
-        SpilController spil = new SpilController(3, 20, 2, 0, pan);
+        SpilCO spil = new SpilCO(3, 20, 2, 0, pan);
         //Her bliver det testet at der bliver oprettet spiller objekter i en liste.
         int count = 0;
-        SpillerController sp1 = spil.getSpillerObjekter().get(0);
-        SpillerController sp2 = spil.getSpillerObjekter().get(1);
-        SpillerController sp3 = spil.getSpillerObjekter().get(2);
-        ArrayList<SpillerController> spillere = new ArrayList<SpillerController>();
+        SpillerCO sp1 = spil.getSpillerObjekter().get(0);
+        SpillerCO sp2 = spil.getSpillerObjekter().get(1);
+        SpillerCO sp3 = spil.getSpillerObjekter().get(2);
+        ArrayList<SpillerCO> spillere = new ArrayList<SpillerCO>();
         spillere.add(0, sp1);
         spillere.add(1, sp2);
         spillere.add(2, sp3);
@@ -97,24 +96,24 @@ class SpilControllerTest {
 @Test
         void alleFeltTyper(){
         UserInterfaceKontrakt pan = new TUI();
-        SpilController spil = new SpilController(3, 20, 2, 0, pan);
+        SpilCO spil = new SpilCO(3, 20, 2, 0, pan);
         int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
 
 
         for (int j = 0; j < spil.getBretGeneretForSpil().getBret().size(); j++) {
-            if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Start) {
+            if (spil.getBretGeneretForSpil().getBret().get(j) instanceof StartCO) {
                 startfelt++;
             } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof EjendomCO) {
                 ejendom++;
             } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof ChanceFeltCO) {
                 chancefelt++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Faengsel) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof FaengselCO) {
                 faengsel++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof GaaIFaengsel) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof GaaIFaengselCO) {
                 gaaIFaengsel++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Jernbane) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof JernbaneCO) {
                 jernbane++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Taxi) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof TaxiCO) {
                 taxi++;
             }
 
@@ -133,11 +132,11 @@ class SpilControllerTest {
     public void genererSpillere(int antalSpillere) {
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilController spil = new SpilController(2, 10, 2, 0, pan);
+        SpilCO spil = new SpilCO(2, 10, 2, 0, pan);
 
 
         for (int i = 0; i < antalSpillere; i++) {
-            SpillerController deltager = new SpillerController(navnInput.nextLine(), i, 0);
+            SpillerCO deltager = new SpillerCO(navnInput.nextLine(), i, 0);
             spil.getSpillerObjekter().add(deltager);
 
         }

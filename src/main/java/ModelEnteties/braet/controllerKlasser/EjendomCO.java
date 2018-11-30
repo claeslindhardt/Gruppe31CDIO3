@@ -1,8 +1,8 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
 
 
@@ -19,7 +19,7 @@ public class EjendomCO extends EjeligtFeltDTO {
     private int     antalHoteller;
     private double  husPris = 50;
     private int     leje = 50;
-    private EjendomsGruppeCO gruppe;
+    private EjendomsGruppeDTO gruppe;
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -46,11 +46,11 @@ public class EjendomCO extends EjeligtFeltDTO {
         this.husPris = husPris;
     }
 
-    public EjendomsGruppeCO getGruppe() {
+    public EjendomsGruppeDTO getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppeCO gruppe) {
+    public void setGruppe(EjendomsGruppeDTO gruppe) {
         this.gruppe = gruppe;
     }
 
@@ -74,8 +74,8 @@ public class EjendomCO extends EjeligtFeltDTO {
         userInterfaceKontrakt.ejendomsInfo(this);
     }
 
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
 
@@ -100,8 +100,8 @@ public class EjendomCO extends EjeligtFeltDTO {
         }
     }
 
-    public void indsamleLeje(SpillerController spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController ejeren = this.getEjer();
+    public void indsamleLeje(SpillerCO spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO ejeren = this.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
             spilleren.setPenge(spilleren.getPenge()-getLeje());

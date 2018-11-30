@@ -1,27 +1,27 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 
 import java.util.Random;
 
-public class TagerPenge extends ChanceAktion {
+public class TagerPengeCO extends ChanceAktionDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 
     //|----------- Metoder:--------------------
-    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void DirketeAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
 
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()-getPengeVerdi());
     }
     public void BetingetAktion(){ }
 
     //|--------- Constructor:-----------------
-    public TagerPenge(){
+    public TagerPengeCO(){
         int potentiellePenge = ra.nextInt(499)+1;
         int valgAfGrund = ra.nextInt(getNegativeGrunde().length);
         String startBeskrivelse = "Du mister: ";

@@ -1,11 +1,10 @@
 package BoundaryView.TUI;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class IndputHaanteringTUI {
@@ -269,7 +268,7 @@ public class IndputHaanteringTUI {
         int resultat = inputTal(1, 3);
         return resultat;
     }
-    public void spillerEjendele(SpillerController spiller){
+    public void spillerEjendele(SpillerCO spiller){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }

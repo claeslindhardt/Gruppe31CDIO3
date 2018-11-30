@@ -1,10 +1,10 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
-public class Start extends AktionsFelterDTO {
+public class StartCO extends AktionsFelterDTO {
     //|--------- Variabler:-----------------
     int penge;
 
@@ -18,17 +18,17 @@ public class Start extends AktionsFelterDTO {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.overStartAnimation();
     }
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.startsFeltsInfo(this);
     }
     //|--------- Constructor:-----------------
-    public Start(int startPasseringsInkomst, int placering){
+    public StartCO(int startPasseringsInkomst, int placering){
         setPenge(startPasseringsInkomst);
         setPlacering(placering);
-        setNavn("Start FeltDTO");
-        setFeltType("Start");
+        setNavn("StartCO FeltDTO");
+        setFeltType("StartCO");
     }
 }

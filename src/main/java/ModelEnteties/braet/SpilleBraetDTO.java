@@ -1,13 +1,13 @@
 package ModelEnteties.braet;
 
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeManager;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
+import ModelEnteties.braet.controllerKlasser.JernbaneCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SpilleBraetData {
+public class SpilleBraetDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 
@@ -17,11 +17,11 @@ public class SpilleBraetData {
     private int prisStigningAfEjendomme = 5;
     private int standardLeje = 50;
     private int standardAntalChanceKortPrFelt = 12;
-    private ArrayList<Jernbane> jernbaner= new ArrayList<Jernbane>();
+    private ArrayList<JernbaneCO> jernbaner= new ArrayList<JernbaneCO>();
 
 
 
-    private EjendomsGruppeManager ejendomsGruppeManager = new EjendomsGruppeManager(3);
+    private EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
     //|--------- Getters og Setters:-----------------
     public ArrayList<FeltDTO> getBret() {
@@ -32,12 +32,12 @@ public class SpilleBraetData {
         this.bret = bret;
     }
 
-    public EjendomsGruppeManager getEjendomsGruppeManager() {
-        return ejendomsGruppeManager;
+    public EjendomsGruppeCO getEjendomsGruppeCO() {
+        return ejendomsGruppeCO;
     }
 
-    public void setEjendomsGruppeManager(EjendomsGruppeManager ejendomsGruppeManager) {
-        this.ejendomsGruppeManager = ejendomsGruppeManager;
+    public void setEjendomsGruppeCO(EjendomsGruppeCO ejendomsGruppeCO) {
+        this.ejendomsGruppeCO = ejendomsGruppeCO;
     }
 
     public void addBret(FeltDTO feltDTO){
@@ -66,7 +66,7 @@ public class SpilleBraetData {
     public void setStandardLeje(int standardLeje) {
         this.standardLeje = standardLeje;
     }
-    public ArrayList<Jernbane> getJernbaner() {
+    public ArrayList<JernbaneCO> getJernbaner() {
         return jernbaner;
     }
 

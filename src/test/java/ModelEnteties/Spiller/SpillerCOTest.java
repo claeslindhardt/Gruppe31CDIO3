@@ -1,11 +1,11 @@
 package ModelEnteties.Spiller;
 
 import BoundaryView.TUI.TUI;
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
+import ModelEnteties.braet.controllerKlasser.JernbaneCO;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpillerControllerTest {
+class SpillerCOTest {
 
     @Test
     void givOp() {
@@ -32,7 +32,7 @@ class SpillerControllerTest {
         int spillerTur =1;
 
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilController spil = new SpilController(1,4,2,0,userInterface);
+        SpilCO spil = new SpilCO(1,4,2,0,userInterface);
 
 
         spil.getTerningeKrus().setTotalVaerdi(5);
@@ -51,7 +51,7 @@ class SpillerControllerTest {
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
+        SpilCO spil = new SpilCO(1, 7, 2, 0,userInterface);
 
         spil.getTerningeKrus().setTotalVaerdi(7);
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
@@ -73,7 +73,7 @@ class SpillerControllerTest {
     @Test
     void faarManPengeNaarManPassererSidsteFeltOgLanderPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilController spil = new SpilController(1, 6, 1, 0,userInterface);
+        SpilCO spil = new SpilCO(1, 6, 1, 0,userInterface);
 
         spil.getSpillerMedTur().setSpillerPosition(4);
         spil.getTerningeKrus().setTotalVaerdi(1);
@@ -94,7 +94,7 @@ class SpillerControllerTest {
     @Test
     void passeringAfStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
+        SpilCO spil = new SpilCO(1, 7, 2, 0,userInterface);
 
         spil.getTerningeKrus().setTotalVaerdi(8);
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
@@ -128,7 +128,7 @@ class SpillerControllerTest {
     void koebEjendom() {
 
         EjendomCO ejendom = new EjendomCO("Hajgade",100,50,0);
-        SpillerController spiller = new SpillerController("Jacob",30,0);
+        SpillerCO spiller = new SpillerCO("Jacob",30,0);
         UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
         ArrayList<EjendomCO> mineEjendomme = new ArrayList<EjendomCO>();
@@ -145,12 +145,12 @@ class SpillerControllerTest {
      */
     @Test
     void koebJernbane() {
-        Jernbane jernbane = new Jernbane("Hovedbanegården",500,0);
-        SpillerController spiller = new SpillerController("Jacob",10,0);
+        JernbaneCO jernbane = new JernbaneCO("Hovedbanegården",500,0);
+        SpillerCO spiller = new SpillerCO("Jacob",10,0);
 
         UserInterfaceKontrakt userinterface = new TUI();
         GUI userInterface1 = new GUI();
-        SpilController spil = new SpilController(2,10,2,0,userinterface);
+        SpilCO spil = new SpilCO(2,10,2,0,userinterface);
         double pengebeholdning = spiller.getPenge();
 
         spiller.koebJernbane(jernbane,userinterface,spil);
@@ -169,8 +169,8 @@ class SpillerControllerTest {
 
         // Setup
 
-        SpillerController spiller = new SpillerController("Test", 0, 0);
-        EjendomsGruppeCO ejendomsGruppe = new EjendomsGruppeCO(Color.BLUE, 3);
+        SpillerCO spiller = new SpillerCO("Test", 0, 0);
+        EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 3);
 
 
         EjendomCO ejendom1 = new EjendomCO("Ejendom1", 0, 0, 0);

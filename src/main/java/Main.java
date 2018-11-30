@@ -1,6 +1,6 @@
 import BoundaryView.TUI.TUI;
 import BoundaryView.GUI.GUIinterface;
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
 import java.util.InputMismatchException;
@@ -46,7 +46,7 @@ public class Main {
             som fx. kunne være:
             1. At betale rente
             2. At kunne købe et nyt felt
-            3. at tage en Taxi
+            3. at tage en TaxiCO
     6. Så vil han se hvad hans muligheder nu er
     og for tur menuen igen
     7. Når han er fertig slutter han sin tur.
@@ -101,7 +101,7 @@ public class Main {
             Ui = new TUI();
         }
 
-        SpilController spil = new SpilController(Ui);
+        SpilCO spil = new SpilCO(Ui);
 
 
         // TODO: Ryk det her ud af main

@@ -1,12 +1,11 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
-import gui_main.GUI;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
@@ -42,23 +41,23 @@ public interface UserInterfaceKontrakt {
     void duGavIkkeOp();
     void passeringAfStart(int gangeOverStart);
     void chanceKortHar();
-    void chanceKortNr(int i, SpillerController spiller);
+    void chanceKortNr(int i, SpillerCO spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
     int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
-    void spillerStat(SpillerController spiller);
+    void spillerStat(SpillerCO spiller);
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
-    void taxiInfo(Taxi vogn);
+    void taxiInfo(TaxiCO vogn);
     void overStartAnimation();
-    void startsFeltsInfo(Start felt);
+    void startsFeltsInfo(StartCO felt);
     void iFaengselMedDig();
-    void faengselInfo(GaaIFaengsel Faengsel);
+    void faengselInfo(GaaIFaengselCO Faengsel);
     void muligeDestinationer();
-    void jernBaneInfo(Jernbane stadtion);
+    void jernBaneInfo(JernbaneCO stadtion);
     int stationsMuligheder(int min, int max);
     void turEfterJernbane();
     void manglerJernbaner();
@@ -70,14 +69,14 @@ public interface UserInterfaceKontrakt {
     void gennemfortKoeb();
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
-    void duErLandetPå(FeltDTO felt, SpillerController spiller);
+    void duErLandetPå(FeltDTO felt, SpillerCO spiller);
     void badErrorMessage();
     int ejendomsBud();
-    void spillerEjendele(SpillerController spiller);
+    void spillerEjendele(SpillerCO spiller);
     void bretPrinter(String felt);
     void terminalLine();
     void chanceKortGenereringsFejl();
-    void printChanceKortDirekte(ChanceAktion di);
+    void printChanceKortDirekte(ChanceAktionDTO di);
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
@@ -85,7 +84,7 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter);
+    void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
 }

@@ -1,8 +1,8 @@
 package ModelEnteties.Spiller;
 
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.braet.controllerKlasser.JernbaneCO;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 import ModelEnteties.singletoner.RandomSingleton;
 import ModelEnteties.singletoner.ScannerSingleton;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *  Den bliver brugt i SpilLederen, til at genere en liste med spillerObjekter
  *  som indholder alle de spillere der indgår i et givet spil.
  */
-public abstract class SpillerData {
+public abstract class SpillerDTO {
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;
@@ -24,8 +24,8 @@ public abstract class SpillerData {
     //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
     //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
-    ArrayList<Jernbane> spillerJernbaner = new ArrayList<Jernbane>();
-    ArrayList<ChanceAktion> spillerAktionsKort = new ArrayList<ChanceAktion>();
+    ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
+    ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
     protected boolean harGivetOp=false;
@@ -98,23 +98,23 @@ public abstract class SpillerData {
         }
     }
 
-    public ArrayList<Jernbane> getSpillerJernbaner() {
+    public ArrayList<JernbaneCO> getSpillerJernbaner() {
         return spillerJernbaner;
     }
 
-    public void setSpillerJernbaner(ArrayList<Jernbane> spillerJernbaner) {
+    public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
         this.spillerJernbaner = spillerJernbaner;
     }
 
-    public ArrayList<ChanceAktion> getSpillerAktionsKort() {
+    public ArrayList<ChanceAktionDTO> getSpillerAktionsKort() {
         return spillerAktionsKort;
     }
 
-    public void setSpillerAktionsKort(ArrayList<ChanceAktion> spillerAktionsKort) {
+    public void setSpillerAktionsKort(ArrayList<ChanceAktionDTO> spillerAktionsKort) {
         this.spillerAktionsKort = spillerAktionsKort;
     }
 
-    public void addSpillerAktionsKort(ChanceAktion spillerAktionsKort) {
+    public void addSpillerAktionsKort(ChanceAktionDTO spillerAktionsKort) {
         this.spillerAktionsKort.add(spillerAktionsKort);
     }
 

@@ -1,32 +1,32 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 
 import java.util.Random;
 
-public class GratisUdAfFaengsel extends ChanceAktion {
+public class GratisUdAfFaengselCO extends ChanceAktionDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 
     //|----------- Metoder:----------------------
-    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+    public void DirketeAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
         spillerMedTur.addSpillerAktionsKort(this);
     }
-    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+    public void BetingetAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);
         spillerMedTur.setHarSlaaetForTuren(false);
         //todo:test
         userInterfaceKontrakt.brugtUdAfFaengsel();
     }
     //|----------- Constructor:------------------
-    public GratisUdAfFaengsel(){
+    public GratisUdAfFaengselCO(){
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String grund = getPositiveGrunde()[valgAfGrund];
         String slutBeskrivelse = " Derfor syntes vi at du er så god en borger," +

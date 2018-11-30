@@ -1,12 +1,12 @@
 package BoundaryView.TUI;
 
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
@@ -170,12 +170,12 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du valgte ikke at give op. ");
     }
     public void passeringAfStart(int gangeOverStart){
-        System.out.println("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
+        System.out.println("Tillykke du har passeret StartCO "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
     }
     public void chanceKortHar(){
         System.out.println("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerController spiller){
+    public void chanceKortNr(int i, SpillerCO spiller){
         System.out.println("Chance kort nr. "+i+": ");
         System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
 
@@ -192,7 +192,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du har ikke nogen Chance Kort lige nu.");
     }
 
-    public void jernBaneInfo(Jernbane stadtion){
+    public void jernBaneInfo(JernbaneCO stadtion){
         String ejer;
         if(stadtion.getEjer() == null){
             ejer = "Ingen ejer endnu";
@@ -212,9 +212,9 @@ public class TUI implements UserInterfaceKontrakt {
     }
     public void overStart(int pos){
         System.out.println("Din position er: "+ pos);
-        System.out.println("Du har i din rundfart med taxaen kommet til at passere Start, modtag 200");
+        System.out.println("Du har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerController spiller){
+    public void spillerStat(SpillerCO spiller){
         System.out.println("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -229,13 +229,13 @@ public class TUI implements UserInterfaceKontrakt {
     public void monetosMangel(){
         System.out.println("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
     }
-    public void taxiInfo(Taxi vogn){
+    public void taxiInfo(TaxiCO vogn){
         System.out.println("| FeltDTO nr: " + vogn.getPlacering() +" | FeltDTO Navn:" + vogn.getNavn()+" | FeltDTO type:"+ vogn.getFeltType()+" |");
     }
     public void overStartAnimation(){
-        System.out.println("Aktion som foelger af Start");
+        System.out.println("Aktion som foelger af StartCO");
     }
-    public void startsFeltsInfo(Start felt){
+    public void startsFeltsInfo(StartCO felt){
         System.out.println("| FeltDTO nr: " + felt.getPlacering() +" | FeltDTO Navn:" + felt.getNavn()+" | FeltDTO type:"+ felt.getFeltType()+" |");
     }
     public void iFaengselMedDig(){
@@ -243,7 +243,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Fordi du er landet på et felt, hvor man bliver kriminel");
         System.out.println("Skal du en tur i kashotten.");
     }
-    public void faengselInfo(GaaIFaengsel Faengsel){
+    public void faengselInfo(GaaIFaengselCO Faengsel){
         System.out.println("| FeltDTO nr: " + Faengsel.getPlacering() +" | FeltDTO Navn:" + Faengsel.getNavn()+" | FeltDTO type:"+ Faengsel.getFeltType()+" |");
 
     }
@@ -309,7 +309,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void betalRente(){
         System.out.println("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerController spiller){
+    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         System.out.println("Du er landet på ");
     }
     public void badErrorMessage(){
@@ -322,7 +322,7 @@ public class TUI implements UserInterfaceKontrakt {
 
         return input.ejendomsBud();
     }
-    public void spillerEjendele(SpillerController spiller){
+    public void spillerEjendele(SpillerCO spiller){
         System.out.println("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);
@@ -343,7 +343,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void chanceKortGenereringsFejl(){
         System.out.println("Der var et problem med generering af ChanceKort, på et specifikt felt.");
     }
-    public void printChanceKortDirekte(ChanceAktion di){
+    public void printChanceKortDirekte(ChanceAktionDTO di){
         System.out.println(di.getBeskrivelse());
 
     }
@@ -353,7 +353,7 @@ public class TUI implements UserInterfaceKontrakt {
         );
     }
     public void chanceKortBrugt(){
-        System.out.println("Du har nu brugt dit Taxi chance kort");
+        System.out.println("Du har nu brugt dit TaxiCO chance kort");
     }
     public void brugtUdAfFaengsel(){
         System.out.println("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +
@@ -398,7 +398,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void generGUIBret(int AntalFelter, SpilleBraetController bret,ArrayList<SpillerController> spillerObjekter){
+    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
 
     }
 

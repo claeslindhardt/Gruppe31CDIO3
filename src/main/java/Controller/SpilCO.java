@@ -1,16 +1,14 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.Random;
-import java.util.Scanner;
 
-public class SpilController extends SpilData {
+public class SpilCO extends SpilDTO {
 
     //|----------- Metoder:------------------
 
@@ -19,25 +17,25 @@ public class SpilController extends SpilData {
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem. Dette er også meget nyttigt til test :)
      */
-    public SpilController(UserInterfaceKontrakt gui) {
+    public SpilCO(UserInterfaceKontrakt gui) {
         this.setUserInterfaceKontrakt(gui);
         startMenu();
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), getUserInterfaceKontrakt());
+        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
         gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
     }
 
-    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
+    public SpilCO(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
         this.setAntalTerninger(antalTerninger);
         this.setBankeraadGraense(bankeRaadtGrense);
         this.setUserInterfaceKontrakt(gui);
         genererSpillere(getAntalSpillere());
-        SpilleBraetController spilleBret = new SpilleBraetController(getAntalFelter(), getUserInterfaceKontrakt());
+        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
@@ -49,7 +47,7 @@ public class SpilController extends SpilData {
     public void genererSpillere(int antalSpillere) {
         for (int i = 0; i < antalSpillere; i++) {
             String navn = getUserInterfaceKontrakt().spillerNavne();
-            SpillerController deltager = new SpillerController(navn, i, 0);
+            SpillerCO deltager = new SpillerCO(navn, i, 0);
             getSpillerObjekter().add(deltager);
         }
     }
@@ -103,7 +101,7 @@ public class SpilController extends SpilData {
 
     }
 
-    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetController spilleBret) {
+    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
         if (!getSpillerMedTur().isHarSlaaetForTuren()) {
             terningsKrus.slaa();
             getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
@@ -155,7 +153,7 @@ public class SpilController extends SpilData {
     public void tjekForVinder() {
         if (getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
             getUserInterfaceKontrakt().terminalLinje();
-            //SpillerController spillerMedTur = spillerObjekter.get(spillerTur - 1);
+            //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
             if (!getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
                 setVinder(getSpillerMedTur().getId() + 1);
@@ -231,7 +229,7 @@ public class SpilController extends SpilData {
         setBankeraadGraense(driftsomkostninger);
     }
 
-    public void turMenu(SpilleBraetController spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
 
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 

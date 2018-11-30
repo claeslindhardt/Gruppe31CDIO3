@@ -1,12 +1,12 @@
 package BoundaryView.GUI;
 
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktion;
+import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -32,23 +32,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerData> spillere = new ArrayList<>();
+    private ArrayList<GUISpillerDTO> spillere = new ArrayList<>();
     GUI_Field[] felter;
 
     //---------Getters og setters: -------------
-    public ArrayList<GUISpillerData> getSpillere() {
+    public ArrayList<GUISpillerDTO> getSpillere() {
         return spillere;
     }
 
-    public void setSpillere(ArrayList<GUISpillerData> spillere) {
+    public void setSpillere(ArrayList<GUISpillerDTO> spillere) {
         this.spillere = spillere;
     }
 
-    public void addGUISpillerObjekter(GUISpillerData spiller) {
+    public void addGUISpillerObjekter(GUISpillerDTO spiller) {
         this.spillere.add(spiller);
     }
 
-    public void generGUIBret(int AntalFelter, SpilleBraetController bret, ArrayList<SpillerController> spillerObjekter){
+    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
         GUI_Field[] fields = new GUI_Field[AntalFelter];
         /**
          * @param testStreet Her laves felternes grafiske elementer
@@ -90,7 +90,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
 
 
-            GUISpillerData deltager = new GUISpillerData(bil,medspiller);
+            GUISpillerDTO deltager = new GUISpillerDTO(bil,medspiller);
             spillere.add(deltager);
             gui.addPlayer(medspiller); //Sæt spilleren på
             fields[0].setCar(medspiller, true);
@@ -248,7 +248,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         );
         //printTerninger(terningsKrus);
 
-        //GUISpillerData GUIspillerMedTur = getSpillere().get(spillerTur-1);
+        //GUISpillerDTO GUIspillerMedTur = getSpillere().get(spillerTur-1);
         //(GUIspillerMedTur.bil);
         //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
@@ -284,12 +284,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du valgte ikke at give op. ");
     }
     public void passeringAfStart(int gangeOverStart){
-        gui.showMessage("Tillykke du har passeret Start "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
+        gui.showMessage("Tillykke du har passeret StartCO "+gangeOverStart+" gange og modtager "+200*gangeOverStart);
     }
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerController spiller){
+    public void chanceKortNr(int i, SpillerCO spiller){
         gui.showMessage("Chance kort nr. "+i+": ");
         gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
 
@@ -302,7 +302,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("Du har ikke nogen Chance Kort lige nu.");
     }
 
-    public void jernBaneInfo(Jernbane stadtion){
+    public void jernBaneInfo(JernbaneCO stadtion){
         String ejer;
         if(stadtion.getEjer() == null){
             ejer = "Ingen ejer endnu";
@@ -322,9 +322,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void overStart(int pos){
         gui.showMessage("Din position er: "+ pos+
-                "\nDu har i din rundfart med taxaen kommet til at passere Start, modtag 200");
+                "\nDu har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerController spiller){
+    public void spillerStat(SpillerCO spiller){
         gui.showMessage("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -339,13 +339,13 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
     }
-    public void taxiInfo(Taxi vogn){
+    public void taxiInfo(TaxiCO vogn){
         gui.showMessage("| FeltDTO nr: " + vogn.getPlacering() +" | FeltDTO Navn:" + vogn.getNavn()+" | FeltDTO type:"+ vogn.getFeltType()+" |");
     }
     public void overStartAnimation(){
-        System.out.println("Aktion som foelger af Start");
+        System.out.println("Aktion som foelger af StartCO");
     }
-    public void startsFeltsInfo(Start felt){
+    public void startsFeltsInfo(StartCO felt){
         gui.showMessage("| FeltDTO nr: " + felt.getPlacering() +" | FeltDTO Navn:" + felt.getNavn()+" | FeltDTO type:"+ felt.getFeltType()+" |");
     }
     public void iFaengselMedDig(){
@@ -353,7 +353,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         "\nFordi du er landet på et felt, hvor man bliver kriminel"+
         "\nSkal du en tur i kashotten.");
     }
-    public void faengselInfo(GaaIFaengsel Faengsel){
+    public void faengselInfo(GaaIFaengselCO Faengsel){
         gui.showMessage("| FeltDTO nr: " + Faengsel.getPlacering() +" | FeltDTO Navn:" + Faengsel.getNavn()+" | FeltDTO type:"+ Faengsel.getFeltType()+" |");
 
     }
@@ -373,7 +373,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
     public int jernBaneTilbud(){
-        String valg = gui.getUserSelection("|--|Det er en Jernbane vil du købe den?",
+        String valg = gui.getUserSelection("|--|Det er en JernbaneCO vil du købe den?",
                 "ja", "nej");
         gui.showMessage(valg);
         return input.binartValg(valg);
@@ -419,9 +419,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerController spiller){
+    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
-        GUISpillerData guiSpiller = spillere.get(spiller.getId());
+        GUISpillerDTO guiSpiller = spillere.get(spiller.getId());
         rykBil(guiSpiller.deltager,felt.getPlacering());
     }
     public void badErrorMessage(){
@@ -434,7 +434,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         return input.binartValg(valg);
     }
-    public void spillerEjendele(SpillerController spiller){
+    public void spillerEjendele(SpillerCO spiller){
         gui.showMessage("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);
@@ -455,7 +455,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void chanceKortGenereringsFejl(){
         gui.showMessage("Der var et problem med generering af ChanceKort, på et specifikt felt.");
     }
-    public void printChanceKortDirekte(ChanceAktion di){
+    public void printChanceKortDirekte(ChanceAktionDTO di){
         gui.showMessage(di.getBeskrivelse());
 
     }
@@ -465,7 +465,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         );
     }
     public void chanceKortBrugt(){
-        System.out.println("Du har nu brugt dit Taxi chance kort");
+        System.out.println("Du har nu brugt dit TaxiCO chance kort");
     }
     public void brugtUdAfFaengsel(){
         gui.showMessage("Du har brugt dit 'Gratis ud af feangsel' chance kort. Var du bag trammer er du nu fri," +

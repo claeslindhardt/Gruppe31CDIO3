@@ -1,19 +1,19 @@
 package ModelEnteties.Spiller;
 
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import Controller.SpilController;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
+import ModelEnteties.braet.controllerKlasser.JernbaneCO;
 
 import java.util.ArrayList;
 
 
-public class SpillerController extends SpillerData {
+public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
-    public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void givOp(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
         svar = userInterfaceKontrakt.vilDuGiveOp();
         if(svar==1) {
@@ -27,7 +27,7 @@ public class SpillerController extends SpillerData {
         }
 
     }
-    public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public int passeringAfStart (int terningvalg, SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt) {
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
@@ -64,9 +64,9 @@ public class SpillerController extends SpillerData {
             userInterfaceKontrakt.ingenChanceKort();
         }
     }
-    public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void tagTaxi(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
-        //Spiller relavantSpiller = SpilData.getSpillerMedTur();
+        //Spiller relavantSpiller = SpilDTO.getSpillerMedTur();
 
         this.setHarSlaaetForTuren(true);
 
@@ -112,7 +112,7 @@ public class SpillerController extends SpillerData {
         }
     }
 
-    public void koebJernbane(Jernbane relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
+    public void koebJernbane(JernbaneCO relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilCO spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {
             userInterfaceKontrakt.alleredeEjer();
@@ -158,7 +158,7 @@ public class SpillerController extends SpillerData {
      * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
-    boolean ejerEjendomsGruppe(EjendomsGruppeCO ejendomsGruppe){
+    boolean ejerEjendomsGruppe(EjendomsGruppeDTO ejendomsGruppe){
         for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this){
                 return false;
@@ -179,7 +179,7 @@ public class SpillerController extends SpillerData {
      * @return true: man kan koebe et hus paa ejendommen, false: man kan ikke koebe et hus paa ejendommen.
      */
     boolean kanKoebeHus(EjendomCO ejendom){
-        EjendomsGruppeCO ejendomsGruppe = ejendom.getGruppe();
+        EjendomsGruppeDTO ejendomsGruppe = ejendom.getGruppe();
         return( ejerEjendom(ejendom)
                 && ejerEjendomsGruppe(ejendomsGruppe)
                 && ejendomsGruppe.huseErLigeligtFordelt()
@@ -235,7 +235,7 @@ public class SpillerController extends SpillerData {
         }
     }
 
-    public SpillerController(String NAVN, int ID,int position){
+    public SpillerCO(String NAVN, int ID, int position){
         setSpillerPosition(position);
         setId(ID);
         setNavn(NAVN);

@@ -1,13 +1,13 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetController;
+import ModelEnteties.braet.SpilleBraetCO;
 
 import java.util.ArrayList;
 
 /**___________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: SpilData
+ *  PROGRAMDOKUMENTATION: SpilDTO
  *
  * @author Claes
  *  dette er vores 'gameManager' Dette er klassen som indeholder vores main funktion.
@@ -30,20 +30,20 @@ import java.util.ArrayList;
  *          Setters: bruges til at give en variabel en ny værdi
  *
  */
-public abstract class SpilData {
+public abstract class SpilDTO {
     //|-------initiering af objekter: -----------
     //TODO: make singleton of scanner and random here.
     //|--------- Variabler:-----------------
     private int spillerTur=1;
     private int antalSpillere=3;
     private   int antalFelter=25;
-    private  ArrayList<SpillerController> spillerObjekter = new ArrayList<SpillerController>();
+    private  ArrayList<SpillerCO> spillerObjekter = new ArrayList<SpillerCO>();
     private  int antalTerninger=2;
     private  int antalChancekortPrFelt = 10;
     private  int bankeraadGraense = 15;
     private  boolean kør = true;
     private  boolean vinderFindes = false;
-    private  SpilleBraetController bretGeneretForSpil;
+    private SpilleBraetCO bretGeneretForSpil;
     private UserInterfaceKontrakt userInterfaceKontrakt;
     private RafleBaeger terningeKrus;
     private int vinder=-1;
@@ -70,7 +70,7 @@ public abstract class SpilData {
     public void setUserInterfaceKontrakt(UserInterfaceKontrakt userInterfaceKontrakt) {
         this.userInterfaceKontrakt = userInterfaceKontrakt;
     }
-    public SpillerController getSpillerMedTur() {
+    public SpillerCO getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
     }
 
@@ -98,11 +98,11 @@ public abstract class SpilData {
         this.antalFelter = antalFelter;
     }
 
-    public ArrayList<SpillerController> getSpillerObjekter() {
+    public ArrayList<SpillerCO> getSpillerObjekter() {
         return spillerObjekter;
     }
 
-    public void setSpillerObjekter(ArrayList<SpillerController> spillerObjekter) {
+    public void setSpillerObjekter(ArrayList<SpillerCO> spillerObjekter) {
         this.spillerObjekter = spillerObjekter;
     }
 
@@ -144,11 +144,11 @@ public abstract class SpilData {
     public void setBankeraadGraense(int bankeraadsgraense) {
         this.bankeraadGraense = bankeraadsgraense;
     }
-    public SpilleBraetController getBretGeneretForSpil() {
+    public SpilleBraetCO getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }
 
-    public void setBretGeneretForSpil(SpilleBraetController generetBretForSpil) {
+    public void setBretGeneretForSpil(SpilleBraetCO generetBretForSpil) {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 

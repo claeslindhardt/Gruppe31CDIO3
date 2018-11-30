@@ -1,14 +1,14 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilController;
+import Controller.SpilCO;
 import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
-public class GaaIFaengsel extends AktionsFelterDTO {
+public class GaaIFaengselCO extends AktionsFelterDTO {
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerController spillerMedTur = spil.getSpillerMedTur();
+    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(true);
         spillerMedTur.setSpillerPosition(1);
         userInterfaceKontrakt.iFaengselMedDig();
@@ -19,7 +19,7 @@ public class GaaIFaengsel extends AktionsFelterDTO {
         userInterfaceKontrakt.faengselInfo(this);
     }
     //|--------- Constructor:-----------------
-    public GaaIFaengsel(int placering){
+    public GaaIFaengselCO(int placering){
         setFeltType("Gå i fængsel");
         setNavn("Gå til fængsel!");
         setPlacering(placering);

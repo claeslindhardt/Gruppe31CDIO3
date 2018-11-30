@@ -1,9 +1,9 @@
 package ModelEnteties.braet.dataKlasser;
 
-import ModelEnteties.Spiller.SpillerController;
+import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeCO;
-import ModelEnteties.braet.controllerKlasser.Jernbane;
+import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
+import ModelEnteties.braet.controllerKlasser.JernbaneCO;
 
 import java.util.ArrayList;
 
@@ -14,32 +14,32 @@ import java.util.ArrayList;
  *  statisk, samt har den egenskab at de kan ejes af et spiller objekt. Så vidt
  *  har denne klasse børne-klasserne:
  *          1. Ejendomm
- *          2. Jernbane
+ *          2. JernbaneCO
  */
 public abstract class EjeligtFeltDTO extends FeltDTO {
     //|--------- Variabler:-----------------
     //Statiske Variabler
     private static ArrayList<EjendomCO> alleEjendomme = new ArrayList<EjendomCO>();
-    private static ArrayList<Jernbane> alleJernbaner = new ArrayList<Jernbane>();
+    private static ArrayList<JernbaneCO> alleJernbaner = new ArrayList<JernbaneCO>();
 
     //  Dynamiske Variabler
-    private SpillerController ejer;
+    private SpillerCO ejer;
     private int pris = 200;
     private boolean pantsat = false;
 
     // TODO: Flyt gruppe ud af EjeligtFeltDTO og over i EjendomCO - det er det eneste sted den bruges.
-    private EjendomsGruppeCO gruppe;
+    private EjendomsGruppeDTO gruppe;
     //|--------- Getters og Setters:-----------------
 
     public String getEjerNavn(){
         return ejer.getNavn();
     }
 
-    public SpillerController getEjer() {
+    public SpillerCO getEjer() {
         return ejer;
     }
 
-    public void setEjer(SpillerController ejer) {
+    public void setEjer(SpillerCO ejer) {
         this.ejer = ejer;
     }
 
@@ -59,11 +59,11 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppeCO getGruppe() {
+    public EjendomsGruppeDTO getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppeCO gruppe) {
+    public void setGruppe(EjendomsGruppeDTO gruppe) {
         this.gruppe = gruppe;
     }
 
@@ -79,15 +79,15 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
         EjeligtFeltDTO.alleEjendomme.add(enEjendom);
     }
 
-    public static ArrayList<Jernbane> getAlleJernbaner() {
+    public static ArrayList<JernbaneCO> getAlleJernbaner() {
         return alleJernbaner;
     }
 
-    public static void setAlleJernbaner(ArrayList<Jernbane> alleJernbaner) {
+    public static void setAlleJernbaner(ArrayList<JernbaneCO> alleJernbaner) {
         EjeligtFeltDTO.alleJernbaner = alleJernbaner;
     }
 
-    public static void addAlleJernbaner(Jernbane enJernbane) {
+    public static void addAlleJernbaner(JernbaneCO enJernbane) {
         EjeligtFeltDTO.alleJernbaner.add(enJernbane);
     }
 

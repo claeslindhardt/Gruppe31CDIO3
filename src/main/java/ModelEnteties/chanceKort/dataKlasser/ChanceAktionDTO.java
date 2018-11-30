@@ -5,14 +5,14 @@ import ModelEnteties.singletoner.RandomSingleton;
 import java.util.Random;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: ChanceAktion
+ *  PROGRAMDOKUMENTATION: ChanceAktionDTO
  *
  * @author Claes
  * Det her er objeket som essientielt er et chance kort. Fordi der er mange forskellige slags chance kort.
- * har denne forældre klasse(ChanceAktion) en række børn:
- *          1. GiverPenge
- *          2. TagerPenge
- *          3. RykkerSpiller
+ * har denne forældre klasse(ChanceAktionDTO) en række børn:
+ *          1. GiverPengeCO
+ *          2. TagerPengeCO
+ *          3. RykkerSpillerCO
  *          4. GratisUdafFeangsel
  *  Her er altså tale om et polymorfisme(se programdokumentationen til felt.java for yderligere forklaring af dette),
  *  dette kan godt virke tricky. Eftersom dette polymorfisme ligger inden i et andet polymorfisme. Derfor har vi lavet
@@ -24,7 +24,7 @@ import java.util.Random;
  *  en grund generationer der generer ny beskrivelser til alle chance kort. Så chancen for at to chancekort noglesinde
  *  er de samme er meget lille, og har via polymorfismet en meget skalerbar antal aktioner der følger af chancekortene.
  */
-public abstract class ChanceAktion {
+public abstract class ChanceAktionDTO {
     //|--------- Variabler:----------------------
     private String beskrivelse;
     private int pengeVerdi;
