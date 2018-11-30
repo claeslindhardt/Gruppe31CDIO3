@@ -1,6 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
@@ -13,7 +13,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.jernBaneInfo(this);
     }
-    public void tagTog(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void tagTog(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         ArrayList<JernbaneCO> jernbaner = spil.getBretGeneretForSpil().getJernbaner();
         ArrayList<JernbaneCO> muligeRejser = new ArrayList<JernbaneCO>();
@@ -43,7 +43,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
         }
     }
 
-    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
 
         if(this.getEjer()==null) {

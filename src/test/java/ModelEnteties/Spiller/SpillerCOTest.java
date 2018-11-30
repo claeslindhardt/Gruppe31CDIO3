@@ -1,7 +1,7 @@
 package ModelEnteties.Spiller;
 
 import BoundaryView.TUI.TUI;
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
@@ -32,7 +32,7 @@ class SpillerCOTest {
         int spillerTur =1;
 
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilCO spil = new SpilCO(1,4,2,0,userInterface);
+        SpilController spil = new SpilController(1,4,2,0,userInterface);
 
 
         spil.getTerningeKrus().setTotalVaerdi(5);
@@ -51,7 +51,7 @@ class SpillerCOTest {
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilCO spil = new SpilCO(1, 7, 2, 0,userInterface);
+        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
         spil.getTerningeKrus().setTotalVaerdi(7);
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
@@ -73,7 +73,7 @@ class SpillerCOTest {
     @Test
     void faarManPengeNaarManPassererSidsteFeltOgLanderPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilCO spil = new SpilCO(1, 6, 1, 0,userInterface);
+        SpilController spil = new SpilController(1, 6, 1, 0,userInterface);
 
         spil.getSpillerMedTur().setSpillerPosition(4);
         spil.getTerningeKrus().setTotalVaerdi(1);
@@ -94,7 +94,7 @@ class SpillerCOTest {
     @Test
     void passeringAfStart(){
         UserInterfaceKontrakt userInterface = new TUI();
-        SpilCO spil = new SpilCO(1, 7, 2, 0,userInterface);
+        SpilController spil = new SpilController(1, 7, 2, 0,userInterface);
 
         spil.getTerningeKrus().setTotalVaerdi(8);
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
@@ -150,7 +150,7 @@ class SpillerCOTest {
 
         UserInterfaceKontrakt userinterface = new TUI();
         GUI userInterface1 = new GUI();
-        SpilCO spil = new SpilCO(2,10,2,0,userinterface);
+        SpilController spil = new SpilController(2,10,2,0,userinterface);
         double pengebeholdning = spiller.getPenge();
 
         spiller.koebJernbane(jernbane,userinterface,spil);

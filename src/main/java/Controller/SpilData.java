@@ -7,7 +7,7 @@ import ModelEnteties.braet.SpilleBraetCO;
 import java.util.ArrayList;
 
 /**___________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: SpilDTO
+ *  PROGRAMDOKUMENTATION: SpilData
  *
  * @author Claes
  *  dette er vores 'gameManager' Dette er klassen som indeholder vores main funktion.
@@ -30,7 +30,7 @@ import java.util.ArrayList;
  *          Setters: bruges til at give en variabel en ny værdi
  *
  */
-public abstract class SpilDTO {
+public abstract class SpilData {
     //|-------initiering af objekter: -----------
     //TODO: make singleton of scanner and random here.
     //|--------- Variabler:-----------------

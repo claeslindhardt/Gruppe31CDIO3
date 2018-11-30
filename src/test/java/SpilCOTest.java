@@ -1,5 +1,5 @@
 import BoundaryView.TUI.TUI;
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -25,7 +25,7 @@ class SpilCOTest {
         int spillerTur = 1;
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilCO spil = new SpilCO(1, 4, 2, 0, pan);
+        SpilController spil = new SpilController(1, 4, 2, 0, pan);
 
 
         spil.getTerningeKrus().setTotalVaerdi(3);
@@ -46,7 +46,7 @@ class SpilCOTest {
     void tjekForVinder() {
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilCO spil = new SpilCO(3, 4, 2, 0, pan);
+        SpilController spil = new SpilController(3, 4, 2, 0, pan);
 
         spil.getSpillerObjekter().get(0).setHarGivetOp(true);
         spil.getSpillerObjekter().get(1).setHarGivetOp(true);
@@ -70,7 +70,7 @@ class SpilCOTest {
     void Spilcontroller() {
         UserInterfaceKontrakt pan = new TUI();
 
-        SpilCO spil = new SpilCO(3, 20, 2, 0, pan);
+        SpilController spil = new SpilController(3, 20, 2, 0, pan);
         //Her bliver det testet at der bliver oprettet spiller objekter i en liste.
         int count = 0;
         SpillerCO sp1 = spil.getSpillerObjekter().get(0);
@@ -96,7 +96,7 @@ class SpilCOTest {
 @Test
         void alleFeltTyper(){
         UserInterfaceKontrakt pan = new TUI();
-        SpilCO spil = new SpilCO(3, 20, 2, 0, pan);
+        SpilController spil = new SpilController(3, 20, 2, 0, pan);
         int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
 
 
@@ -132,7 +132,7 @@ class SpilCOTest {
     public void genererSpillere(int antalSpillere) {
 
         UserInterfaceKontrakt pan = new TUI();
-        SpilCO spil = new SpilCO(2, 10, 2, 0, pan);
+        SpilController spil = new SpilController(2, 10, 2, 0, pan);
 
 
         for (int i = 0; i < antalSpillere; i++) {

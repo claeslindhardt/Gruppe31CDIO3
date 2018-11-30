@@ -1,6 +1,6 @@
 package ModelEnteties.braet.dataKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 
 /**__________________________________________________________________________________________________________________________________________________________
@@ -46,5 +46,5 @@ public abstract class FeltDTO {
     //|----------- Metoder:------------------
     //Disse er ikke i brug i denne forældre klasse men alt afgørende for, klassens børn
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){ }
-    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){}
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){}
 }

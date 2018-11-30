@@ -8,7 +8,7 @@ import ModelEnteties.singletoner.RandomSingleton;
 
 import java.util.Random;
 
-public class SpilCO extends SpilDTO {
+public class SpilController extends SpilData {
 
     //|----------- Metoder:------------------
 
@@ -17,7 +17,7 @@ public class SpilCO extends SpilDTO {
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem. Dette er også meget nyttigt til test :)
      */
-    public SpilCO(UserInterfaceKontrakt gui) {
+    public SpilController(UserInterfaceKontrakt gui) {
         this.setUserInterfaceKontrakt(gui);
         startMenu();
         genererSpillere(getAntalSpillere());
@@ -28,7 +28,7 @@ public class SpilCO extends SpilDTO {
         gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
     }
 
-    public SpilCO(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
+    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
         this.setAntalSpillere(antalSpillere);
         this.setAntalFelter(antalFelter);
         this.setAntalTerninger(antalTerninger);

@@ -1,6 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.braet.dataKlasser.EjeligtFeltDTO;
@@ -74,7 +74,7 @@ public class EjendomCO extends EjeligtFeltDTO {
         userInterfaceKontrakt.ejendomsInfo(this);
     }
 
-    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);

@@ -1,6 +1,6 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
@@ -12,7 +12,7 @@ public class GiverPengeCO extends ChanceAktionDTO {
     Random ra = new Random();
 
     //|----------- Metoder:--------------------
-    public void DirketeAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()+getPengeVerdi());

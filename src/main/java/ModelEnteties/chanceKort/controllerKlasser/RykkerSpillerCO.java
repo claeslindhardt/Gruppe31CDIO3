@@ -1,6 +1,6 @@
 package ModelEnteties.chanceKort.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
@@ -12,7 +12,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
     Random ra = new Random();
 
     //|----------- Metoder:--------------------
-    public void DirketeAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
 
         userInterfaceKontrakt.printChanceKortDirekte(this);
@@ -21,7 +21,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         spillerMedTur.addSpillerAktionsKort(this);
 
     }
-    public void BetingetAktion(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();
     }

@@ -1,6 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
@@ -25,7 +25,7 @@ public class ChanceFeltCO extends AktionsFelterDTO {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int muligeKort = spil.getBretGeneretForSpil().getStandardAntalChanceKortPrFelt();
         int vælgAktion = ra.nextInt(muligeKort)+1;
         ChanceAktionDTO relavantKort = KortPaaFelt.get(vælgAktion);

@@ -1,6 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.dataKlasser.AktionsFelterDTO;
 
@@ -18,7 +18,7 @@ public class StartCO extends AktionsFelterDTO {
     }
 
     //|----------- Metoder:------------------
-    public void aktionPaaFelt(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.overStartAnimation();
     }
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){

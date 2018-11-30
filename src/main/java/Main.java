@@ -1,6 +1,6 @@
 import BoundaryView.TUI.TUI;
 import BoundaryView.GUI.GUIinterface;
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
 import java.util.InputMismatchException;
@@ -101,7 +101,7 @@ public class Main {
             Ui = new TUI();
         }
 
-        SpilCO spil = new SpilCO(Ui);
+        SpilController spil = new SpilController(Ui);
 
 
         // TODO: Ryk det her ud af main

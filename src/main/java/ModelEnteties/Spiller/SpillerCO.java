@@ -1,6 +1,6 @@
 package ModelEnteties.Spiller;
 
-import Controller.SpilCO;
+import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
@@ -13,7 +13,7 @@ public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
-    public void givOp(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
         svar = userInterfaceKontrakt.vilDuGiveOp();
         if(svar==1) {
@@ -27,7 +27,7 @@ public class SpillerCO extends SpillerDTO {
         }
 
     }
-    public int passeringAfStart (int terningvalg, SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
 
@@ -64,9 +64,9 @@ public class SpillerCO extends SpillerDTO {
             userInterfaceKontrakt.ingenChanceKort();
         }
     }
-    public void tagTaxi(SpilCO spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
-        //Spiller relavantSpiller = SpilDTO.getSpillerMedTur();
+        //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
         this.setHarSlaaetForTuren(true);
 
@@ -112,7 +112,7 @@ public class SpillerCO extends SpillerDTO {
         }
     }
 
-    public void koebJernbane(JernbaneCO relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilCO spil){
+    public void koebJernbane(JernbaneCO relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {
             userInterfaceKontrakt.alleredeEjer();
