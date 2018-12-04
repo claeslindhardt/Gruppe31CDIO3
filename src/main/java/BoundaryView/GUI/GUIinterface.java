@@ -110,14 +110,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 boolean[] harBil = new boolean[spillere.size()];
 
                 for(int i=0; i < spillere.size(); i++){
-                    harBil[i] = felt.hasCar(spillere.get(i).deltager);
+                    harBil[i] = felt.hasCar(spillere.get(i).getDeltager());
                 }
 
                 felt.removeAllCars();
 
                 for( int i=0; i<spillere.size(); i++){
-                    if( harBil[i] && spillere.get(i).deltager != spiller ){
-                        felt.setCar(spillere.get(i).deltager, true);
+                    if( harBil[i] && spillere.get(i).getDeltager() != spiller ){
+                        felt.setCar(spillere.get(i).getDeltager(), true);
                     }
                 }
             }
@@ -422,7 +422,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
         GUISpillerDTO guiSpiller = spillere.get(spiller.getId());
-        rykBil(guiSpiller.deltager,felt.getPlacering());
+        rykBil(guiSpiller.getDeltager(),felt.getPlacering());
     }
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");

@@ -9,7 +9,21 @@ public class GUISpillerDTO {
     private GUI_Player deltager;
 
     //---------Getters og setters: -------------
+    public GUI_Car getBil() {
+        return bil;
+    }
 
+    public void setBil(GUI_Car bil) {
+        this.bil = bil;
+    }
+
+    public GUI_Player getDeltager() {
+        return deltager;
+    }
+
+    public void setDeltager(GUI_Player deltager) {
+        this.deltager = deltager;
+    }
 
     //---------Constructor: -------------
     public GUISpillerDTO(GUI_Car automobil, GUI_Player deltager){
