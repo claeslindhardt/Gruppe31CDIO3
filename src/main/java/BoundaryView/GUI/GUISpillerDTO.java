@@ -5,8 +5,8 @@ import gui_fields.GUI_Player;
 
 public class GUISpillerDTO {
     //----------- Variabler: -------------------
-    GUI_Car bil;
-    GUI_Player deltager;
+    private GUI_Car bil;
+    private GUI_Player deltager;
 
     //---------Getters og setters: -------------
 

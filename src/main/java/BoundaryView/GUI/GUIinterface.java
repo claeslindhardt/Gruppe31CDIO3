@@ -30,10 +30,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
 
 
-    GUI gui = new GUI(new GUI_Field[0]);
-    IndputHaanteringGUI input = new IndputHaanteringGUI();
+    private GUI gui = new GUI(new GUI_Field[0]);
+    private IndputHaanteringGUI input = new IndputHaanteringGUI();
     private ArrayList<GUISpillerDTO> spillere = new ArrayList<>();
-    GUI_Field[] felter;
+    private GUI_Field[] felter;
 
     //---------Getters og setters: -------------
     public ArrayList<GUISpillerDTO> getSpillere() {
