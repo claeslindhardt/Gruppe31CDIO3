@@ -70,6 +70,11 @@ public abstract class SpilData {
     public void setUserInterfaceKontrakt(UserInterfaceKontrakt userInterfaceKontrakt) {
         this.userInterfaceKontrakt = userInterfaceKontrakt;
     }
+
+    /**
+     *
+     * @return
+     */
     public SpillerCO getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
     }
@@ -144,6 +149,12 @@ public abstract class SpilData {
     public void setBankeraadGraense(int bankeraadsgraense) {
         this.bankeraadGraense = bankeraadsgraense;
     }
+
+    /**
+     * Denne metode returnerer en SpillerBraetCO variable, så derfor hedder metoden som den hedder istedet
+     * for fx. int, double eller lignende.
+     * @return
+     */
     public SpilleBraetCO getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }

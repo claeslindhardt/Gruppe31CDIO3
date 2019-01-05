@@ -7,6 +7,9 @@ import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.InputMismatchException;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class IndputHaanteringTUI {
     ScannerSingleton scan = ScannerSingleton.getInstance();
 

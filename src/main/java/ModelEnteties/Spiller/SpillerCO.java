@@ -13,6 +13,12 @@ public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
         svar = userInterfaceKontrakt.vilDuGiveOp();
@@ -27,6 +33,14 @@ public class SpillerCO extends SpillerDTO {
         }
 
     }
+
+    /**
+     * Indsæt beskrivelse her
+     * @param terningvalg
+     * @param spil
+     * @param userInterfaceKontrakt
+     * @return
+     */
     public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
         int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
         setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
@@ -38,7 +52,10 @@ public class SpillerCO extends SpillerDTO {
         return gangeOverStart;
     }
 
-
+    /**
+     * Indsæt beskrivelse her
+     * @param userInterfaceKontrakt
+     */
     public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:
@@ -64,6 +81,12 @@ public class SpillerCO extends SpillerDTO {
             userInterfaceKontrakt.ingenChanceKort();
         }
     }
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
@@ -83,10 +106,21 @@ public class SpillerCO extends SpillerDTO {
     }
     //_____________________________________
     //Vis og print funktinoer:
+
+    /**
+     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
+     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
+     * @param userInterfaceKontrakt
+     */
     public void printSpillerStats(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.spillerStat(this);
     }
 
+    /**
+     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
+     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
+     * @param userInterfaceKontrakt
+     */
     public void visEjendeFelter(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.spillerEjendele(this);
     }
@@ -94,6 +128,11 @@ public class SpillerCO extends SpillerDTO {
     //_____________________________________
     //Koebe og salg funktioner:
 
+    /**
+     * Indsæt beskrivelse her
+     * @param ønsketEjendom
+     * @param userInterfaceKontrakt
+     */
     public void koebEjendom(EjendomCO ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if (ønsketEjendom.getEjer() == this) {
@@ -112,6 +151,12 @@ public class SpillerCO extends SpillerDTO {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param relevantJernbane
+     * @param userInterfaceKontrakt
+     * @param spil
+     */
     public void koebJernbane(JernbaneCO relevantJernbane, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if (relevantJernbane.getEjer() == this) {
@@ -234,7 +279,7 @@ public class SpillerCO extends SpillerDTO {
             ui.ejerIngenEjendomme();
         }
     }
-
+//----------------------Constructor-----------------------------------------------------------------------------------//
     public SpillerCO(String NAVN, int ID, int position){
         setSpillerPosition(position);
         setId(ID);

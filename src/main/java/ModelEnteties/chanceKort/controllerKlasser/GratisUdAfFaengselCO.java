@@ -12,12 +12,24 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
     Random ra = new Random();
 
     //|----------- Metoder:----------------------
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
         spillerMedTur.addSpillerAktionsKort(this);
     }
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);

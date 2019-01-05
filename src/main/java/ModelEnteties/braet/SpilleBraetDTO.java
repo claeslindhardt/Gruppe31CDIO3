@@ -7,6 +7,9 @@ import ModelEnteties.braet.dataKlasser.FeltDTO;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class SpilleBraetDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();

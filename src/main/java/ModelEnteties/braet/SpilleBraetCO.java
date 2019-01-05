@@ -14,6 +14,9 @@ import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class SpilleBraetCO extends SpilleBraetDTO {
 
     //|----------- Metoder:------------------
@@ -27,6 +30,10 @@ public class SpilleBraetCO extends SpilleBraetDTO {
         userInterfaceKontrakt.terminalLine();
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @return
+     */
     public String toString(){
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -45,6 +52,12 @@ public class SpilleBraetCO extends SpilleBraetDTO {
         return stringBuilder.toString();
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param antalChancekort
+     * @param userInterfaceKontrakt
+     * @return
+     */
     public ArrayList<ChanceAktionDTO> ChanceKortsGenerator(int antalChancekort, UserInterfaceKontrakt userInterfaceKontrakt){
 
         ArrayList<ChanceAktionDTO> chanceKortTilFelt = new ArrayList<ChanceAktionDTO>();
@@ -90,6 +103,12 @@ public class SpilleBraetCO extends SpilleBraetDTO {
     }
 
     //|--------- Constructor:-----------------
+
+    /**
+     * Indsæt beskrivelse her
+     * @param antalFelter
+     * @param userInterfaceKontrakt
+     */
     public SpilleBraetCO(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
         boolean lavFelter=true;

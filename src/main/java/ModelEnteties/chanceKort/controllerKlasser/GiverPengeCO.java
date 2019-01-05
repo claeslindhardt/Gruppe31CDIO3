@@ -12,6 +12,12 @@ public class GiverPengeCO extends ChanceAktionDTO {
     Random ra = new Random();
 
     //|----------- Metoder:--------------------
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
         SpillerCO spillerMedTur = spil.getSpillerMedTur();

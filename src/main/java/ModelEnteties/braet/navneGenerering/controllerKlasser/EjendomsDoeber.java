@@ -2,6 +2,9 @@ package ModelEnteties.braet.navneGenerering.controllerKlasser;
 
 import ModelEnteties.braet.navneGenerering.DataKlasser.NavneGenerator;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class EjendomsDoeber extends NavneGenerator {
     public EjendomsDoeber(){
         int vejnavn =  getRandomTal().nextInt(getVejNavn().length);

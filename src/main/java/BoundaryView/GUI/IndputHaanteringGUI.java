@@ -1,5 +1,8 @@
 package BoundaryView.GUI;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class IndputHaanteringGUI {
     public int velkomstMenu(String valg){
         int menuOpt = 1;
