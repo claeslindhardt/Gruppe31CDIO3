@@ -1,4 +1,4 @@
-I denne pakke har vi lagt, alt det som er kontrol af configurationer.
+I denne pakke har vi lagt, alt det som er kontrol af konfigurationer.
 Altså alle de ting som er de samme altid lige meget hvordan spillet udfolder sig.
 Hvorimod alle de ting som er regler og som kun forekommer på betingelse en bestemt
 handling som ikke nødvendigvis forekommer i et standardspil ligger i spil Logik.

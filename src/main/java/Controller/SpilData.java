@@ -156,3 +156,4 @@ public abstract class SpilData {
         return vinderFindes;
     }
 }
+
