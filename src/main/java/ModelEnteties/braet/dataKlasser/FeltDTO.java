@@ -45,6 +45,17 @@ public abstract class FeltDTO {
 
     //|----------- Metoder:------------------
     //Disse er ikke i brug i denne forældre klasse men alt afgørende for, klassens børn
+
+    /**
+     * Indsæt beskrivelse her
+     * @param userInterfaceKontrakt
+     */
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){ }
+
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){}
 }

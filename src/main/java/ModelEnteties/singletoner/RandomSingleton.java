@@ -2,6 +2,9 @@ package ModelEnteties.singletoner;
 
 import java.util.Random;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class RandomSingleton {
     private static RandomSingleton instance;
     private Random rand;

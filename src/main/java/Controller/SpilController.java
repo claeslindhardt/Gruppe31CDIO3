@@ -44,6 +44,10 @@ public class SpilController extends SpilData {
     //_____________________________________
     // Diverse:
 
+    /**
+     * Indsæt beskrivelse her
+     * @param antalSpillere
+     */
     public void genererSpillere(int antalSpillere) {
         for (int i = 0; i < antalSpillere; i++) {
             String navn = getUserInterfaceKontrakt().spillerNavne();
@@ -52,12 +56,18 @@ public class SpilController extends SpilData {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void printSpilleresInfo() {
         for (int i = 0; i < getSpillerObjekter().size(); i++) {
             getSpillerObjekter().get(i).printSpillerStats(getUserInterfaceKontrakt());
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void anketDomsigelse() {
         Random ra = new Random();
         int domsAfsigelseDel1 = ra.nextInt(5) + 1;
@@ -74,6 +84,9 @@ public class SpilController extends SpilData {
 
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void slutSpillerTur() {
         getSpillerMedTur().setHarSlaaetForTuren(false);
         getSpillerMedTur().setHarAnketDomDenneRunde(false);
@@ -89,6 +102,9 @@ public class SpilController extends SpilData {
 
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void tjekForBankeRaadt() {
 
         if (getSpillerMedTur().getPenge() < getBankeraadGraense()) {
@@ -101,6 +117,11 @@ public class SpilController extends SpilData {
 
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param terningsKrus
+     * @param spilleBret
+     */
     public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
         if (!getSpillerMedTur().isHarSlaaetForTuren()) {
             terningsKrus.slaa();
@@ -128,6 +149,10 @@ public class SpilController extends SpilData {
 
     //_____________________________________
     //Tjekkere:
+
+    /**
+     * Indsæt beskrivelse her
+     */
     public void tjekForFeangselsStraf() {
         if (getSpillerMedTur().isFaengselsStraf()) {
             if (!getSpillerMedTur().isHarAnketDomDenneRunde()) {
@@ -140,6 +165,9 @@ public class SpilController extends SpilData {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void tjekOmGivetOp() {
         if (getSpillerMedTur().isHarGivetOp()) {
             if (getSpillerTur() == getAntalSpillere()) {
@@ -150,6 +178,9 @@ public class SpilController extends SpilData {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void tjekForVinder() {
         if (getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
             getUserInterfaceKontrakt().terminalLinje();
@@ -165,6 +196,10 @@ public class SpilController extends SpilData {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @return
+     */
     public int tjekAntalSpillereISpil() {
         int UdgaetSpillere = 0;
         for (int i = 0; i < getSpillerObjekter().size(); i++) {
@@ -176,6 +211,10 @@ public class SpilController extends SpilData {
         return UdgaetSpillere;
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param terningKrus
+     */
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
         int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
@@ -190,6 +229,10 @@ public class SpilController extends SpilData {
 
     //_____________________________________
     //Menuer:
+
+    /**
+     * Indsæt beskrivelse her
+     */
     public void startMenu() {
         RandomSingleton rand = RandomSingleton.getInstance();
         int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,4);
@@ -208,6 +251,9 @@ public class SpilController extends SpilData {
 
     }
 
+    /**
+     * Indsæt beskrivelse her
+     */
     public void startInstillingsMenu() {
         //Todo: make it possible to choose a default option here:
         Random rand = new Random();
@@ -229,6 +275,11 @@ public class SpilController extends SpilData {
         setBankeraadGraense(driftsomkostninger);
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param spilleBret
+     * @param terningsKrus
+     */
     public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
 
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);

@@ -3,6 +3,9 @@ package BoundaryView.GUI;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class GUISpillerDTO {
     //----------- Variabler: -------------------
     private GUI_Car bil;

@@ -55,7 +55,10 @@ public class EjendomCO extends EjeligtFeltDTO {
     }
 
 
-
+    /**
+     * Indsæt beskrivelse her
+     * @return
+     */
     public int getLeje() {
         /* Ejendommens leje er vurderet ved standard lejen (leje),
             og antallet huse. Hvert hus øger lejen med halvdelen af den originale leje */
@@ -70,10 +73,21 @@ public class EjendomCO extends EjeligtFeltDTO {
 
 
     //|----------- Metoder:------------------
+
+    /**
+     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
+     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
+     * @param userInterfaceKontrakt
+     */
     public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.ejendomsInfo(this);
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
@@ -100,6 +114,11 @@ public class EjendomCO extends EjeligtFeltDTO {
         }
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param spilleren
+     * @param userInterfaceKontrakt
+     */
     public void indsamleLeje(SpillerCO spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO ejeren = this.getEjer();
         if( ejeren != null && spilleren != null) {

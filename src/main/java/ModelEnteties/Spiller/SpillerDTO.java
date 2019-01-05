@@ -114,6 +114,10 @@ public abstract class SpillerDTO {
         this.spillerAktionsKort = spillerAktionsKort;
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param spillerAktionsKort
+     */
     public void addSpillerAktionsKort(ChanceAktionDTO spillerAktionsKort) {
         this.spillerAktionsKort.add(spillerAktionsKort);
     }
