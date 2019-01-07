@@ -48,6 +48,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         this.spillere.add(spiller);
     }
 
+    /**
+     * Indsæt beskrivelse her
+     * @param AntalFelter
+     * @param bret
+     * @param spillerObjekter
+     */
     public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
         GUI_Field[] fields = new GUI_Field[AntalFelter];
         /**
