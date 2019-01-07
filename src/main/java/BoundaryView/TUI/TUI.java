@@ -2,6 +2,7 @@ package BoundaryView.TUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -286,7 +287,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(){
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
         System.out.println("Du kan koebe grunden hurra!!");
         System.out.println("Ejendommen er nu din!");
 

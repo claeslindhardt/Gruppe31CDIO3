@@ -1,6 +1,7 @@
 package Controller;
 
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -69,7 +70,7 @@ public interface UserInterfaceKontrakt {
     void ejetAfEnAnden();
     void tetPaaMonopol();
     void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfortKoeb();
+    void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
     void duErLandetPå(FeltDTO felt, SpillerCO spiller);

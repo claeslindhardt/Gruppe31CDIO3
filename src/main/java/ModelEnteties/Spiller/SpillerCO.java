@@ -130,22 +130,22 @@ public class SpillerCO extends SpillerDTO {
 
     /**
      * Indsæt beskrivelse her
-     * @param ønsketEjendom
+     * @param ejendom
      * @param userInterfaceKontrakt
      */
-    public void koebEjendom(EjendomCO ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void koebEjendom(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
-        if (ønsketEjendom.getEjer() == this) {
+        if (ejendom.getEjer() == this) {
             userInterfaceKontrakt.tetPaaMonopol();
         }
-        else if (this.penge > ønsketEjendom.getPris()) {
-            userInterfaceKontrakt.gennemfortKoeb();
+        else if (this.penge > ejendom.getPris()) {
+            userInterfaceKontrakt.gennemfortKoeb(ejendom, this);
             //Todo: fix enkapsulering her
-            this.penge -= ønsketEjendom.getPris();
+            this.penge -= ejendom.getPris();
 
             //skifte ejerskab
-            ønsketEjendom.setEjer(this);
-            this.getSpillerEjendomme().add(ønsketEjendom);
+            ejendom.setEjer(this);
+            this.getSpillerEjendomme().add(ejendom);
         } else {
             userInterfaceKontrakt.monetosMangel();
         }

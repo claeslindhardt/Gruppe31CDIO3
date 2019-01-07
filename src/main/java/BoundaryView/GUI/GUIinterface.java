@@ -2,6 +2,7 @@ package BoundaryView.GUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -136,7 +137,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         felter[feltNr].setCar(spiller, true);
     }
 
-    @Override
     public String spillerNavne() {
         String spillernavn = gui.getUserString("Indtast et navn");
         return spillernavn;
@@ -403,11 +403,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(){
-        gui.showMessage("Du kan koebe grunden hurra!!");
-        gui.showMessage("Ejendommen er nu din!");
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+        gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
+
+        GUI_Street gui_ejendom = (GUI_Street) gui.getFields()[ejendom.getPlacering()];
+
+        gui_ejendom.setBorder(spillere.get(spiller.getId()).bil.getPrimaryColor());
 
     }
+
+
     public void ejendomsInfo(EjendomCO ej){
         String ejer;
         if(ej.getEjer() == null){
