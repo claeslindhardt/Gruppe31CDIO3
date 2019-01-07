@@ -100,7 +100,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
-
+    /**
+     * Indsæt beskrivelse her
+     * @param spiller
+     */
     public void fjernBil(GUI_Player spiller){
 
         for( GUI_Field felt : felter){
