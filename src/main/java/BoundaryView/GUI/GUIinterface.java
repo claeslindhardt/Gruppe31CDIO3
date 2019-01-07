@@ -50,40 +50,37 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     /**
      * Indsæt beskrivelse her
-     * @param AntalFelter
-     * @param bret
-     * @param spillerObjekter
+     * @param braet
+     * @param spillere
      */
-    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
-        GUI_Field[] fields = new GUI_Field[AntalFelter];
-        /**
-         * @param testStreet Her laves felternes grafiske elementer
-         */
-        //lav dette om til et for each loop
-        for(int i = 0 ;i<fields.length; i++){
-            GUI_Street testStreet= new GUI_Street();
-            testStreet.setTitle(bret.getBret().get(i).getNavn());
-            testStreet.setSubText(bret.getBret().get(i).getFeltType());
-            if(bret.getBret().get(i).getFeltType() == "Ejendom"){
-                EjendomCO ejendom = (EjendomCO) bret.getBret().get(i);
-                testStreet.setBorder(ejendom.getGruppe().getFarve());
+    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+        int antalFelter =  braet.getBret().size();
+        GUI_Field[] fields = new GUI_Field[antalFelter];
+
+        // Laver felternes grafiske elementer
+        for( int i = 0;  i < antalFelter; i++){
+
+            FeltDTO felt = braet.getBret().get(i);
+            GUI_Street gui_felt= new GUI_Street();
+            gui_felt.setTitle( felt.getNavn() );
+            gui_felt.setSubText( felt.getFeltType()) ;
+
+            if(braet.getBret().get(i).getFeltType() == "Ejendom"){
+                EjendomCO ejendom = (EjendomCO) felt;
+                gui_felt.setBorder( ejendom.getGruppe().getFarve() );
+
             }else{
-                testStreet.setBorder(Color.CYAN);
+                gui_felt.setBorder(Color.CYAN);
             }
-
-            //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
-            fields[i] = testStreet;
+            fields[i] = gui_felt;
         }
+
         this.felter = fields;
-        GUI guiMedBret = new GUI(fields,new Color(218,206,179));
 
-        gui = guiMedBret;
+        gui = new GUI(fields,new Color(218,206,179));
 
-        /**
-         * @param dunnoWhat Her laves spilelrnes grafiske elementer.
-         */
-
-        for(int i=0;i<spillerObjekter.size();i++){
+        // Laver spilleres grafiske elementer
+        for(int i=0;i<spillere.size();i++){
 
 
             GUI_Car bil = new GUI_Car(); //Opret en bil
@@ -93,16 +90,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
             Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
             bil.setPrimaryColor(spillerFarve); //Lad den være gul
 
-            GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
+            GUI_Player spiller = new GUI_Player(spillere.get(i).getNavn(),(int)spillere.get(i).getPenge(), bil); //opret en spiller
 
 
-            GUISpillerDTO deltager = new GUISpillerDTO(bil,medspiller);
-            spillere.add(deltager);
-            gui.addPlayer(medspiller); //Sæt spilleren på
-            fields[0].setCar(medspiller, true);
+            GUISpillerDTO deltager = new GUISpillerDTO(bil,spiller);
+            this.spillere.add(deltager);
+            gui.addPlayer(spiller); //Sæt spilleren på
+            fields[0].setCar(spiller, true);
 
         }
-        //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
     }
 

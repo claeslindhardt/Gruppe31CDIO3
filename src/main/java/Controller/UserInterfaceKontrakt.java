@@ -87,7 +87,7 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter);
+    void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
 }

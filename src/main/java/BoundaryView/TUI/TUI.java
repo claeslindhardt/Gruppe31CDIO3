@@ -398,7 +398,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
+    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
 
     }
 
