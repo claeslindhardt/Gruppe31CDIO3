@@ -48,14 +48,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
         this.spillere.add(spiller);
     }
 
+
     /**
-     * Indsæt beskrivelse her
-     * @param braet
-     * @param spillere
+     * Genererer det grafiske braet til spillet (GUI).
+     *
+     * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
+     * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
     public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
         int antalFelter =  braet.getBret().size();
-        GUI_Field[] fields = new GUI_Field[antalFelter];
+        GUI_Field[] felter = new GUI_Field[ antalFelter ];
 
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
@@ -63,21 +65,20 @@ public class GUIinterface implements UserInterfaceKontrakt {
             FeltDTO felt = braet.getBret().get(i);
             GUI_Street gui_felt= new GUI_Street();
             gui_felt.setTitle( felt.getNavn() );
-            gui_felt.setSubText( felt.getFeltType()) ;
+            gui_felt.setSubText( felt.getFeltType() );
 
-            if(braet.getBret().get(i).getFeltType() == "Ejendom"){
+            felter[i] = gui_felt;
+
+            if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
-                gui_felt.setBorder( ejendom.getGruppe().getFarve() );
-
+                gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
             }else{
-                gui_felt.setBorder(Color.CYAN);
+                gui_felt.setBackGroundColor( Color.CYAN );
             }
-            fields[i] = gui_felt;
         }
 
-        this.felter = fields;
-
-        gui = new GUI(fields,new Color(218,206,179));
+        this.felter = felter;
+        gui = new GUI(felter,new Color(218,206,179));
 
         // Laver spilleres grafiske elementer
         for(int i=0;i<spillere.size();i++){
@@ -96,11 +97,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
             GUISpillerDTO deltager = new GUISpillerDTO(bil,spiller);
             this.spillere.add(deltager);
             gui.addPlayer(spiller); //Sæt spilleren på
-            fields[0].setCar(spiller, true);
+            felter[0].setCar(spiller, true);
 
         }
 
     }
+
 
     /**
      * Indsæt beskrivelse her
