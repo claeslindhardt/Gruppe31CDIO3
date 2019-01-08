@@ -294,7 +294,7 @@ public class SpilController extends SpilData {
                     //og aktionPåFelt.
                 }
                 else if (getSpillerMedTur().isFaengselsStraf()){
-
+                    getUserInterfaceKontrakt().kanIkkeSlaaFaengsel();
                 }
                 break;
             case 2:

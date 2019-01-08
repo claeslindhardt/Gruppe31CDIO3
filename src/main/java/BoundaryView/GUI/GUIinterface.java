@@ -516,4 +516,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
     }
+
+    public void kanIkkeSlaaFaengsel(){
+        gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
+    }
 }
