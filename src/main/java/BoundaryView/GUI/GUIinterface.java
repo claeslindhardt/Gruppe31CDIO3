@@ -2,6 +2,7 @@ package BoundaryView.GUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -92,7 +93,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
             GUI_Player spiller = new GUI_Player(spillere.get(i).getNavn(),(int)spillere.get(i).getPenge(), bil); //opret en spiller
 
-            spillere.add(spiller);
+            this.spillere.add(spiller);
             gui.addPlayer(spiller); //Sæt spilleren på
             felter[0].setCar(spiller, true);
 
@@ -411,7 +412,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street gui_ejendom = (GUI_Street) gui.getFields()[ejendom.getPlacering()];
 
         // Ændrer borderen på feltet til spillerens bils farve
-        gui_ejendom.setBorder(spillere.get( spiller.getId()).bil.getPrimaryColor() );
+        gui_ejendom.setBorder(spillere.get( spiller.getId()).getCar().getPrimaryColor() );
 
     }
     public void ejendomsInfo(EjendomCO ej){
