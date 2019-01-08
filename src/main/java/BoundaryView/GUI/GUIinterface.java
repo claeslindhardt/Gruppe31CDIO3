@@ -172,15 +172,29 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
+     */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere"
+                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt være 16. Braettet skal " +
+                "have et lige antal felter"
         );
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast antal felter på braettet");
 
-                if (valg <= 40 && valg >= 16 && (valg%2==0) ) {
+                if (valg <= 38 && valg >= 16 && (valg%2==0) ) {
                     return valg;
                 }
                 gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
@@ -189,7 +203,22 @@ public class GUIinterface implements UserInterfaceKontrakt {
             }
         }
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor mange spillere man vil generere (min - 2 og max - 8).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor mange spillere der skal være i spillet.
+     */
     public int instilingsSporgsmaall(int minInput, int maxInput){
+        gui.showMessage("Hvor mange spillere vil i være?" +
+                "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast antal spillere i spillet");
@@ -202,13 +231,38 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
         }
-
-
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode returnerer bare 2 terninger, da det er det antal terninger som der ALTID skal være. Der bliver
+     * skrevet en besked i GUI med den oplysning.
+     *
+     * @param minInput - Bliver KUN brugt i TUI
+     * @param maxInput - Bliver KUN brugt i TUI
+     * @return 2 terninger
+     */
     public int instilingsSporgsmaal2(int minInput, int maxInput){
+        gui.showMessage("Spillet starter med 2 terninger");
         return 2;
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stor en bankerot graense der skal være (min - 0 og max - 1000).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
+     */
     public int instilingsSporgsmaal3(int minInput, int maxInput){
+        gui.showMessage("Hvor skal bankerot graensen ligge?: " +
+                "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast bankerotgraensen!");
