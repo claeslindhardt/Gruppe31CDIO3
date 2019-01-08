@@ -25,7 +25,6 @@ import java.util.ArrayList;
  *
  */
 public class GUIinterface implements UserInterfaceKontrakt {
-    //TODO: forsimpel alle de steder der er gentagelser i teksten her.
 
     //----------- Variabler: -------------------
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
@@ -33,19 +32,19 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerDTO> spillere = new ArrayList<>();
+    private ArrayList<GUI_Player> spillere = new ArrayList<>();
     GUI_Field[] felter;
 
     //---------Getters og setters: -------------
-    public ArrayList<GUISpillerDTO> getSpillere() {
+    public ArrayList<GUI_Player> getSpillere() {
         return spillere;
     }
 
-    public void setSpillere(ArrayList<GUISpillerDTO> spillere) {
+    public void setSpillere(ArrayList<GUI_Player> spillere) {
         this.spillere = spillere;
     }
 
-    public void addGUISpillerObjekter(GUISpillerDTO spiller) {
+    public void addGUISpillerObjekter(GUI_Player spiller) {
         this.spillere.add(spiller);
     }
 
@@ -94,15 +93,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
             GUI_Player spiller = new GUI_Player(spillere.get(i).getNavn(),(int)spillere.get(i).getPenge(), bil); //opret en spiller
 
-
-            GUISpillerDTO deltager = new GUISpillerDTO(bil,spiller);
-            this.spillere.add(deltager);
+            this.spillere.add(spiller);
             gui.addPlayer(spiller); //Sæt spilleren på
             felter[0].setCar(spiller, true);
 
         }
-    }
+        //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
+    }
 
     /**
      * Indsæt beskrivelse her
@@ -117,14 +115,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 boolean[] harBil = new boolean[spillere.size()];
 
                 for(int i=0; i < spillere.size(); i++){
-                    harBil[i] = felt.hasCar(spillere.get(i).deltager);
+                    harBil[i] = felt.hasCar(spillere.get(i));
                 }
 
                 felt.removeAllCars();
 
                 for( int i=0; i<spillere.size(); i++){
-                    if( harBil[i] && spillere.get(i).deltager != spiller ){
-                        felt.setCar(spillere.get(i).deltager, true);
+                    if( harBil[i] && spillere.get(i) != spiller ){
+                        felt.setCar(spillere.get(i), true);
                     }
                 }
             }
@@ -252,10 +250,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du slog: "+ternin+
                 "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter."
         );
-        //printTerninger(terningsKrus);
 
-        //GUISpillerDTO GUIspillerMedTur = getSpillere().get(spillerTur-1);
-        //(GUIspillerMedTur.bil);
         //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
     }
@@ -417,11 +412,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street gui_ejendom = (GUI_Street) gui.getFields()[ejendom.getPlacering()];
 
         // Ændrer borderen på feltet til spillerens bils farve
-        gui_ejendom.setBorder(spillere.get( spiller.getId()).bil.getPrimaryColor() );
+        gui_ejendom.setBorder(spillere.get( spiller.getId()).getCar().getPrimaryColor() );
 
     }
-
-
     public void ejendomsInfo(EjendomCO ej){
         String ejer;
         if(ej.getEjer() == null){
@@ -442,8 +435,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
-        GUISpillerDTO guiSpiller = spillere.get(spiller.getId());
-        rykBil(guiSpiller.deltager,felt.getPlacering());
+        GUI_Player guiSpiller = spillere.get(spiller.getId());
+        rykBil(guiSpiller,felt.getPlacering());
     }
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
