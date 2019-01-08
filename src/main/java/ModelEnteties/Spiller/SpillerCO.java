@@ -36,18 +36,11 @@ public class SpillerCO extends SpillerDTO {
 
     /**
      * Indsæt beskrivelse her
-     * @param terningvalg
-     * @param spil
-     * @param userInterfaceKontrakt
      * @return
      */
-    public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
-        int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
-        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
-
+    public int passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
 
         penge += 200*gangeOverStart;
-
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         return gangeOverStart;
     }

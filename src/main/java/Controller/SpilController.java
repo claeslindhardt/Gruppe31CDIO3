@@ -122,26 +122,23 @@ public class SpilController extends SpilData {
     /**
      * Indsæt beskrivelse her
      * @param terningsKrus
-     * @param spilleBret
      */
-    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
+    public void kastTerninger(RafleBaeger terningsKrus) {
         if (!getSpillerMedTur().isHarSlaaetForTuren()) {
+
             terningsKrus.slaa();
+
             getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
+
             if (terningsKrus.erEns()) {
                 getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
             } else {
                 getSpillerMedTur().setHarSlaaetForTuren(true);
             }
-            tjekForPasseringAfStartOgRykSpiller(terningsKrus);
-            getUserInterfaceKontrakt().midtTerminalLinje();
 
-            FeltDTO felt = spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition());
 
-            getUserInterfaceKontrakt().duErLandetPå(felt, getSpillerMedTur());
-
-            felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+            rykSpillerAntalFelter(getSpillerMedTur(), getTerningeKrus().getTotalVaerdi());
 
 
         } else {
@@ -150,13 +147,23 @@ public class SpilController extends SpilData {
     }
 
 
+    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
+        int nuvaerendePosition = spiller.getSpillerPosition();
+        int totalAntalFelter = getBretGeneretForSpil().getBret().size();
 
-    public boolean passererSpillerStart(int startPlacering, int slutPlacering){
-        return slutPlacering < startPlacering;
+        int gangeOverStart  = ( nuvaerendePosition + felterAtRykke ) / totalAntalFelter;
+        int endeligPosition = ( nuvaerendePosition + felterAtRykke ) % totalAntalFelter;
+
+        FeltDTO endeligtFelt = getBretGeneretForSpil().getBret().get(endeligPosition);
+
+        rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
     }
 
 
-    public void rykSpiller( SpillerCO spiller, FeltDTO felt ){
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
+
+        if( gangeOverStart > 0 ){
+            spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
 
         spiller.setSpillerPosition(felt.getPlacering());
 
@@ -236,14 +243,14 @@ public class SpilController extends SpilData {
      * @param terningKrus
      */
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
-        int rykVeardi = terningKrus.getTotalVaerdi();
+        /*int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
         if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, getUserInterfaceKontrakt());
         } else {
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition() + rykVeardi);
         }
-        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
+        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());*/
     }
 
 
@@ -306,7 +313,7 @@ public class SpilController extends SpilData {
 
         switch (input) {
             case 1:
-                kastTerninger(terningsKrus, spilleBret);
+                kastTerninger(terningsKrus);
                 //Denne funktion  kan kalder:
                 //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
                 //og aktionPåFelt.
