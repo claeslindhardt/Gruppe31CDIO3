@@ -517,6 +517,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du er rejst til "+jernbane);
     }
 
+    /**
+     * @ Filip
+     * Printer en besked i GUI'en
+     */
+
     public void kanIkkeSlaaFaengsel(){
         gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
