@@ -202,21 +202,51 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Hvor mange felter skal braettet have?: " +
                 "\nNB!: Braettet skal minimum have 3 felter og maksimum 40"
         );
-        int valg = gui.getUserInteger("Intast antal felter på brettet");
-        return valg;
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast antal felter på braettet");
+
+                if (valg <= 40 && valg >= 16 && (valg%2==0) ) {
+                    return valg;
+                }
+                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
     }
     public int instilingsSporgsmaall(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Indtast antal oenskede Spillere ");
-        return valg;
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast antal spillere i spillet");
+
+                if (valg <= 8 && valg >= 1 ) {
+                    return valg;
+                }
+                gui.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
+
 
     }
     public int instilingsSporgsmaal2(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Hvor mange terninger vil i spille med?: Dette må kun være andet end 2 hvis man bruger TUI'en");
-        return valg;
+        return 2;
     }
     public int instilingsSporgsmaal3(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Hvor få penge må man have før man går bankerot?:");
-        return valg;
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast bankerotgraensen!");
+
+                if (valg <= 1000 && valg >= 0) {
+                    return valg;
+                }
+                gui.showMessage("Bankerotgraensen kan være fra 0 til 1000, vælg en ny bankerotgraense!");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
     }
 
     public void spillerPosition(int spillerPosition){
