@@ -53,6 +53,11 @@ public class EjendomsGruppeDTO {
         return ejendomme;
     }
 
+
+    public void clearEjendomsListe() {
+        ejendomme.clear();
+    }
+
     public int getAntalEjendomme(){ return ejendomme.size(); }
 
     /**

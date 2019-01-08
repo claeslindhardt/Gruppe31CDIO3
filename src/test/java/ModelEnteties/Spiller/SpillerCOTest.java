@@ -3,6 +3,7 @@ package ModelEnteties.Spiller;
 import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import Controller.UserInterfaceKontrakt;
+import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
 import ModelEnteties.braet.controllerKlasser.JernbaneCO;
@@ -110,6 +111,15 @@ class SpillerCOTest {
 
     @Test
     void tagTaxi() {
+        TUI Ui = new TUI();
+        GUI gui = new GUI();
+
+        //SpilleBraetCO spilleBraet = new SpilleBraetCO(10,Ui);
+        SpilController spil = new SpilController(2,10,2,200,Ui);
+        spil.getSpillerMedTur().tagTaxi(spil,Ui);
+
+
+
     }
 
     @Test
