@@ -2,10 +2,12 @@ package Controller;
 
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Terning.FalskRaflebaeger;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
+import sun.awt.geom.AreaOp;
 
 import java.util.Random;
 
@@ -124,32 +126,75 @@ public class SpilController extends SpilData {
     /**
      * Indsæt beskrivelse her
      * @param terningsKrus
-     * @param spilleBret
      */
-    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
+    public void kastTerninger(RafleBaeger terningsKrus) {
         if (!getSpillerMedTur().isHarSlaaetForTuren()) {
+
             terningsKrus.slaa();
+
             getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
+
             if (terningsKrus.erEns()) {
                 getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
             } else {
                 getSpillerMedTur().setHarSlaaetForTuren(true);
             }
-            tjekForPasseringAfStartOgRykSpiller(terningsKrus);
-            getUserInterfaceKontrakt().midtTerminalLinje();
 
-            FeltDTO felt = spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition());
-
-            getUserInterfaceKontrakt().duErLandetPå(felt, getSpillerMedTur());
-
-            felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
-
+            rykSpillerAntalFelter(getSpillerMedTur(), getTerningeKrus().getTotalVaerdi());
 
         } else {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }
     }
+
+
+    /**
+     * @author Malte
+     * Rykker spilleren et bestemt antal felter fremad. Den beregner hvor mange
+     * gange over start man bevæger sig, og udløser metoden {@link #rykSpillerTilFelt}.
+     *
+     * @param spiller       Spilleren der skal rykkes
+     * @param felterAtRykke Hvor mange felter fremad spilleren rykker
+     */
+    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
+        int nuvaerendePosition = spiller.getSpillerPosition();
+        int totalAntalFelter = getBretGeneretForSpil().getBret().size();
+
+        // Beregner passering af start
+        int gangeOverStart  = ( nuvaerendePosition + felterAtRykke ) / totalAntalFelter;
+        int endeligPosition = ( nuvaerendePosition + felterAtRykke ) % totalAntalFelter;
+
+        // Rykker
+        FeltDTO endeligtFelt = getBretGeneretForSpil().getBret().get(endeligPosition);
+        rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
+    }
+
+
+    /**
+     * @author Malte
+     * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
+     * ift. feltet, samt UI-metoder ifm. at flytte felt.
+     * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
+     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
+     * 'gangeOverStart'
+     *
+     * @param spiller Spiller der skal rykkes
+     * @param felt Feltet spilleren skal rykke til
+     * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
+     */
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
+
+        if( gangeOverStart > 0 ){
+            spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
+
+        spiller.setSpillerPosition(felt.getPlacering());
+
+        getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
+
+        felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+    }
+
 
     //_____________________________________
     //Tjekkere:
@@ -220,14 +265,14 @@ public class SpilController extends SpilData {
      * @param terningKrus
      */
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
-        int rykVeardi = terningKrus.getTotalVaerdi();
+        /*int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
         if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, getUserInterfaceKontrakt());
         } else {
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition() + rykVeardi);
         }
-        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
+        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());*/
     }
 
 
@@ -296,7 +341,7 @@ public class SpilController extends SpilData {
             case 1:
 
                 if (!getSpillerMedTur().isFaengselsStraf()) {
-                    kastTerninger(terningsKrus, spilleBret);
+                    kastTerninger(terningsKrus);
                     //Denne funktion  kan kalder:
                     //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
                     //og aktionPåFelt.
