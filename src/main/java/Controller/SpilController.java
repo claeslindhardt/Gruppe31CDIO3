@@ -80,7 +80,6 @@ public class SpilController extends SpilData {
         } else {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
-            slutSpillerTur();
         }
 
     }
@@ -287,10 +286,16 @@ public class SpilController extends SpilData {
 
         switch (input) {
             case 1:
-                kastTerninger(terningsKrus, spilleBret);
-                //Denne funktion  kan kalder:
-                //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
-                //og aktionPåFelt.
+
+                if (!getSpillerMedTur().isFaengselsStraf()) {
+                    kastTerninger(terningsKrus, spilleBret);
+                    //Denne funktion  kan kalder:
+                    //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
+                    //og aktionPåFelt.
+                }
+                else if (getSpillerMedTur().isFaengselsStraf()){
+
+                }
                 break;
             case 2:
                 slutSpillerTur();
