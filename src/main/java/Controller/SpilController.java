@@ -66,7 +66,7 @@ public class SpilController extends SpilData {
     }
 
     /**
-     * Indsæt beskrivelse her
+     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
     public void anketDomsigelse() {
         Random ra = new Random();
