@@ -90,11 +90,7 @@ public class SpillerCO extends SpillerDTO {
         if(destination>spil.getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
-            this.setSpillerPosition(destination);
-            userInterfaceKontrakt.overStart(this.getSpillerPosition());
-            this.addPenge(200);
-            //kalder en aktion på det felt man tager til med taxien
-            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(spil, userInterfaceKontrakt);
+            spil.rykSpillerTilFelt(this, spil.getBretGeneretForSpil().getBret().get(destination),1);
         }
     }
     //_____________________________________
