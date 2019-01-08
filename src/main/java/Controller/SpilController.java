@@ -77,9 +77,10 @@ public class SpilController extends SpilData {
             getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
             getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
-        } else if (domsAfsigelseDel1 != domsAfsigelseDel2) {
+        } else {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
+            slutSpillerTur();
         }
 
     }
