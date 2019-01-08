@@ -137,9 +137,7 @@ public class SpilController extends SpilData {
                 getSpillerMedTur().setHarSlaaetForTuren(true);
             }
 
-
             rykSpillerAntalFelter(getSpillerMedTur(), getTerningeKrus().getTotalVaerdi());
-
 
         } else {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
@@ -147,19 +145,40 @@ public class SpilController extends SpilData {
     }
 
 
+    /**
+     * @author Malte
+     * Rykker spilleren et bestemt antal felter fremad. Den beregner hvor mange
+     * gange over start man bevæger sig, og udløser metoden {@link #rykSpillerTilFelt}.
+     *
+     * @param spiller       Spilleren der skal rykkes
+     * @param felterAtRykke Hvor mange felter fremad spilleren rykker
+     */
     public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
         int nuvaerendePosition = spiller.getSpillerPosition();
         int totalAntalFelter = getBretGeneretForSpil().getBret().size();
 
+        // Beregner passering af start
         int gangeOverStart  = ( nuvaerendePosition + felterAtRykke ) / totalAntalFelter;
         int endeligPosition = ( nuvaerendePosition + felterAtRykke ) % totalAntalFelter;
 
+        // Rykker
         FeltDTO endeligtFelt = getBretGeneretForSpil().getBret().get(endeligPosition);
-
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
     }
 
 
+    /**
+     * @author Malte
+     * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
+     * ift. feltet, samt UI-metoder ifm. at flytte felt.
+     * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
+     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
+     * 'gangeOverStart'
+     *
+     * @param spiller Spiller der skal rykkes
+     * @param felt Feltet spilleren skal rykke til
+     * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
+     */
     public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
 
         if( gangeOverStart > 0 ){
@@ -170,7 +189,6 @@ public class SpilController extends SpilData {
         getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
 
         felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
-
     }
 
 
