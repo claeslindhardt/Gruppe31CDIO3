@@ -83,6 +83,7 @@ public abstract class SpilData {
         return spillerTur;
     }
 
+
     public void setSpillerTur(int spillerTur) {
         this.spillerTur = spillerTur;
     }
