@@ -414,4 +414,9 @@ public class TUI implements UserInterfaceKontrakt {
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);
     }
+
+    public void kanIkkeSlaaFaengsel(){
+        System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
+    }
 }
+

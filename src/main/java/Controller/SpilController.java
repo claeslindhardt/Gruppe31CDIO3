@@ -69,7 +69,8 @@ public class SpilController extends SpilData {
     }
 
     /**
-     * Indsæt beskrivelse her
+     * @author Filip
+     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
     public void anketDomsigelse() {
         Random ra = new Random();
@@ -80,7 +81,7 @@ public class SpilController extends SpilData {
             getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
             getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
-        } else if (domsAfsigelseDel1 != domsAfsigelseDel2) {
+        } else {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
         }
@@ -281,9 +282,11 @@ public class SpilController extends SpilData {
     }
 
     /**
-     * Indsæt beskrivelse her
-     * @param spilleBret
-     * @param terningsKrus
+     * @author Filip
+     * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
+     * sørger for at tilhørende metoder udføres
+     * @param spilleBret SpilleBraetCO objekt, hvor nogle af metoderne benyttes af turmenu
+     * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
 
@@ -291,10 +294,16 @@ public class SpilController extends SpilData {
 
         switch (input) {
             case 1:
-                kastTerninger(terningsKrus, spilleBret);
-                //Denne funktion  kan kalder:
-                //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
-                //og aktionPåFelt.
+
+                if (!getSpillerMedTur().isFaengselsStraf()) {
+                    kastTerninger(terningsKrus, spilleBret);
+                    //Denne funktion  kan kalder:
+                    //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
+                    //og aktionPåFelt.
+                }
+                else if (getSpillerMedTur().isFaengselsStraf()){
+                    getUserInterfaceKontrakt().kanIkkeSlaaFaengsel();
+                }
                 break;
             case 2:
                 slutSpillerTur();
