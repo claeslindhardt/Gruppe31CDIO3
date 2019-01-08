@@ -51,7 +51,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     /**
-     * Genererer det grafiske braet til spillet (GUI).
+     * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
      *
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
@@ -101,7 +101,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
             felter[0].setCar(spiller, true);
 
         }
-
     }
 
 
@@ -403,12 +402,22 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
+
+
+    /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
+     *
+     * @param ejendom Ejendommens der købes
+     * @param spiller Spilleren der køber ejendommen
+     */
     public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
+        /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
+        *   og omformer (caster) den til en GUI_Street objekt, så setBorder-metoden kan bruges.*/
         GUI_Street gui_ejendom = (GUI_Street) gui.getFields()[ejendom.getPlacering()];
 
-        gui_ejendom.setBorder(spillere.get(spiller.getId()).bil.getPrimaryColor());
+        // Ændrer borderen på feltet til spillerens bils farve
+        gui_ejendom.setBorder(spillere.get( spiller.getId()).bil.getPrimaryColor() );
 
     }
 
