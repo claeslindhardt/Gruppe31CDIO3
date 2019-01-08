@@ -66,6 +66,7 @@ public class SpilController extends SpilData {
     }
 
     /**
+     * @author Filip
      * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
     public void anketDomsigelse() {
@@ -276,7 +277,9 @@ public class SpilController extends SpilData {
     }
 
     /**
-     * Indsæt beskrivelse her
+     * @author Filip
+     * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
+     * sørger for at tilhørende metoder udføres
      * @param spilleBret
      * @param terningsKrus
      */

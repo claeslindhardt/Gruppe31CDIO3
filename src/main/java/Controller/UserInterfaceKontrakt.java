@@ -11,7 +11,7 @@ import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 import java.util.ArrayList;
 
 /**
- * Indsæt beskrivelse her
+ * Controller der linker mellem UI og Spillogikken
  */
 public interface UserInterfaceKontrakt {
     int TurMenu(int getSpillerTur, int minInput, int maxInput);
