@@ -1,6 +1,7 @@
 package Controller;
 
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
@@ -22,7 +23,8 @@ public class SpilController extends SpilData {
         startMenu();
         genererSpillere(getAntalSpillere());
         SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
         gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
@@ -36,7 +38,8 @@ public class SpilController extends SpilData {
         this.setUserInterfaceKontrakt(gui);
         genererSpillere(getAntalSpillere());
         SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
         gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
@@ -273,6 +276,8 @@ public class SpilController extends SpilData {
 
         int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal3(0, 99999);
         setBankeraadGraense(driftsomkostninger);
+
+
     }
 
     /**
@@ -323,4 +328,6 @@ public class SpilController extends SpilData {
         }
 
     }
+
+
 }
