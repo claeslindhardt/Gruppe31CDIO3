@@ -1,10 +1,12 @@
 package Controller;
 
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
+import sun.awt.geom.AreaOp;
 
 import java.util.Random;
 
@@ -146,6 +148,24 @@ public class SpilController extends SpilData {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }
     }
+
+
+
+    public boolean passererSpillerStart(int startPlacering, int slutPlacering){
+        return slutPlacering < startPlacering;
+    }
+
+
+    public void rykSpiller( SpillerCO spiller, FeltDTO felt ){
+
+        spiller.setSpillerPosition(felt.getPlacering());
+
+        getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
+
+        felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+
+    }
+
 
     //_____________________________________
     //Tjekkere:
