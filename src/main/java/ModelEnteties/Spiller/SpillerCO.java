@@ -35,14 +35,16 @@ public class SpillerCO extends SpillerDTO {
     }
 
     /**
-     * Indsæt beskrivelse her
-     * @return
+     * @author Malte
+     * Giver spilleren penge, alt efter hvor mange gange over start spilleren kommer,
+     * samt kører den passende UI-kode til passering af start.
+     * Den finder IKKE ud af, hvor mange gange man kører over start.
+     * @param gangeOverStart Antallet af gange man passerer start
+     * @param userInterfaceKontrakt UI'en der skal bruges til at vise det.
      */
-    public int passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
-
+    public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
         penge += 200*gangeOverStart;
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
-        return gangeOverStart;
     }
 
     /**
