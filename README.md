@@ -1,4 +1,4 @@
-# Matador
+# Matador :cat:
 *CDIO Final, Gruppe 31*
 
 *Dette er et projektaflevering til en opgave på studiet Softwareteknologi (Diplomingeniør) på Danmarks Tekniske Universitet (DTU).*
