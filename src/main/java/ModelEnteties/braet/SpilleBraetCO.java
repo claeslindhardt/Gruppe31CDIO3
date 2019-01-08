@@ -182,7 +182,8 @@ public class SpilleBraetCO extends SpilleBraetDTO {
                 }
 
             }
-            if(jernbane>2&&taxi==1&&gaaIFaengsel==1&&chancefelt>1){break;}else{getBret().clear();getJernbaner().clear();}
+            if(jernbane>2&&jernbane<4&&taxi==1&&gaaIFaengsel==1&&chancefelt>1){break;}else{getBret().clear();getJernbaner().clear();
+                getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);}
         }while(lavFelter);
     }
 }
