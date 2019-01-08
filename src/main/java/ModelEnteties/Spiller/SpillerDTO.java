@@ -21,8 +21,7 @@ public abstract class SpillerDTO {
     private int spillerPosition=0;
     private int id;
     private String navn;
-    //TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData,
-    //og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
+    // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
     ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
@@ -33,26 +32,8 @@ public abstract class SpillerDTO {
     protected boolean harSlaaetForTuren = false;
 
 
-    //Singleton Variabler;
-    private RandomSingleton randomTal = RandomSingleton.getInstance();
-    private ScannerSingleton scanner = ScannerSingleton.getInstance();
-
     //|--------- Getters og Setters:-----------------
-    public RandomSingleton getRandomTal() {
-        return randomTal;
-    }
 
-    public void setRandomTal(RandomSingleton randomTal) {
-        this.randomTal = randomTal;
-    }
-
-    public ScannerSingleton getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(ScannerSingleton scanner) {
-        this.scanner = scanner;
-    }
     public int getSpillerPosition() {
         return spillerPosition;
     }
