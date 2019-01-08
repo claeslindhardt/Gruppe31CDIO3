@@ -280,8 +280,8 @@ public class SpilController extends SpilData {
      * @author Filip
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
-     * @param spilleBret
-     * @param terningsKrus
+     * @param spilleBret SpilleBraetCO objekt, hvor nogle af metoderne benyttes af turmenu
+     * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
 
