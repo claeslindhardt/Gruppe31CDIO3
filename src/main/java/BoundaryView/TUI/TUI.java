@@ -414,4 +414,6 @@ public class TUI implements UserInterfaceKontrakt {
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);
     }
+
+    public void updateSpillere(ArrayList<SpillerCO> spillerObjekter){};
 }

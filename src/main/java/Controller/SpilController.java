@@ -287,7 +287,7 @@ public class SpilController extends SpilData {
      * @param terningsKrus
      */
     public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
-
+        getUserInterfaceKontrakt().updateSpillere(getSpillerObjekter());
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
         switch (input) {

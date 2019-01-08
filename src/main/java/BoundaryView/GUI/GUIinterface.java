@@ -1,5 +1,6 @@
 package BoundaryView.GUI;
 
+import Controller.SpilData;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Spiller.SpillerDTO;
@@ -149,8 +150,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
-        updateSpillere();
-        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillere().get(getSpillerTur).getName()+"'s tur.",
+
+        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -378,7 +379,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         String valg = gui.getUserSelection("|--|Det er en JernbaneCO vil du købe den?",
                 "ja", "nej");
         gui.showMessage(valg);
-        updateSpillere();
+
         return input.binartValg(valg);
     }
     public void forsetTur(){
@@ -400,9 +401,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    public void updateSpillere(){
+    public void updateSpillere(ArrayList<SpillerCO> spillerObjekter){
+
         for(int i = 0; i < spillere.size();i++){
-            gui.addPlayer(spillere.get(i));
+            double balance = spillerObjekter.get(i).getPenge();
+            spillere.get(i).setBalance((int) balance);
         }
     }
 
