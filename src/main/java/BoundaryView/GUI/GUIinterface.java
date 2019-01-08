@@ -160,10 +160,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return input.TurMenu(valg);
 
     }
+
+    /**
+     * @author Jacob
+     * Denne metode er midlertidig. den bliver kaldt når man vælger noget i spillet som ikke er blevet
+     * implementeret endnu.
+     */
     public void ikkeMuligt(){
         gui.showMessage("Dette er ikke en mulighed endnu - prøv igen");
     }
 
+    /**
+     * @author Jacob
+     * Denne metode bliver kaldes når indstillingerne for spillet er aendret. Den printer en besked på GUI med:
+     * @param getAntalSpillere - antallet af spillere i spillet
+     * @param getAntalFelter - antallet af felter på spillebraettet
+     * @param getAntalTerninger - antallet af terninger i det genererede spil
+     * @param getSpillerTur - hvilken spiller der starter spillet. Det er randomized.
+     * @param getBankeraadGraense - spillets bankerot graense
+     */
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         gui.showMessage("I er: " + getAntalSpillere + " spillere." +
                 "\nBraettet har "+getAntalFelter+" Felter," +
@@ -175,9 +190,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
+
+    /**
+     * @author Jacob
+     *
+     * @param minInput - Det minimale antal felter, som braettet kan have
+     * @param maxInput - Det maksimale antal felter, som braettet kan have
+     * @return
+     */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere"
+                "\nNB!: Braettet skal minimum have 3 felter og maksimum 40"
         );
         int valg = gui.getUserInteger("Intast antal felter på brettet");
         return valg;
@@ -242,6 +265,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
+
+    /**
+     *
+     * @param terningsKrus
+     * @param spillerTur
+     */
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
         ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
