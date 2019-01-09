@@ -108,6 +108,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
+            userInterfaceKontrakt.updateSpillere(spillerMedTur);
             this.indsamleLeje(spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
@@ -125,6 +126,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             //todo: enkapsuler dette på en ordenligt måde
             spilleren.setPenge(spilleren.getPenge()-getLeje());
             ejeren.addPenge(getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
+            userInterfaceKontrakt.updateSpillere(spilleren);
         }else{
             userInterfaceKontrakt.badErrorMessage();
         }

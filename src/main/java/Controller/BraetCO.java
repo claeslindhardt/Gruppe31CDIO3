@@ -180,8 +180,8 @@ public class BraetCO extends BraetDTO {
                 }
 
             }
-            if(jernbane>2&&jernbane<4&&taxi==1&&gaaIFaengsel==1&&chancefelt>1){break;}else{getBret().clear();getJernbaner().clear();
-                getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);}
+            if(ejendom > 6 && jernbane > 2 && jernbane < 4 && taxi == 1 && gaaIFaengsel == 1 && chancefelt > 1){break;}else{getBret().clear();getJernbaner().clear();
+                getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);setStandardLeje(50);}
         }while(lavFelter);
     }
 }
