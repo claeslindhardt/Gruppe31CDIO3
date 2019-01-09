@@ -36,7 +36,7 @@ public abstract class SpilData {
     //|--------- Variabler:-----------------
     private int spillerTur=1;
     private int antalSpillere=3;
-    private   int antalFelter=20;
+    private   int antalFelter=39;
     private  ArrayList<SpillerCO> spillerObjekter = new ArrayList<SpillerCO>();
     private  int antalTerninger=2;
     private  int antalChancekortPrFelt = 10;
