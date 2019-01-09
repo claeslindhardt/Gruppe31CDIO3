@@ -13,7 +13,7 @@ import java.awt.*;
 public class EjendomsGruppeCO {
 
     private int gruppeStoerelser;
-    private Color[] farveListe = {Color.red, Color.green,Color.BLUE,Color.BLACK,Color.YELLOW ,Color.ORANGE,Color.PINK,Color.GRAY,Color.MAGENTA};
+    private Color[] farveListe = {Color.red, Color.green,Color.BLUE,Color.YELLOW ,Color.ORANGE,Color.PINK,Color.GRAY,Color.MAGENTA};
     private int antalGrupper = 0; // Hvor mange grupper der er blevet lavet.
     private EjendomsGruppeDTO klarGruppe;
 
