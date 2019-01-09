@@ -416,4 +416,9 @@ public class TUI implements UserInterfaceKontrakt {
     }
 
     public void updateSpillere(ArrayList<SpillerCO> spillerObjekter){};
+
+    public void kanIkkeSlaaFaengsel(){
+        System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
+    }
 }
+

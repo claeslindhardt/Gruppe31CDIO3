@@ -172,25 +172,109 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
                 "\nmed standard instillinger");
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
+     */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Hvis ikke braettet har 3 felter, spilles der ikke monololy laengere"
+                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt have 16. Braettet skal " +
+                "have et lige antal felter"
         );
-        int valg = gui.getUserInteger("Intast antal felter på brettet");
-        return valg;
-    }
-    public int instilingsSporgsmaall(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Indtast antal oenskede Spillere ");
-        return valg;
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast antal felter på braettet");
 
+                if (valg <= 38 && valg >= 16 && (valg%2==0) ) {
+                    return valg;
+                }
+                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor mange spillere man vil generere (min - 2 og max - 8).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor mange spillere der skal være i spillet.
+     */
+    public int instilingsSporgsmaall(int minInput, int maxInput){
+        gui.showMessage("Hvor mange spillere vil i være?" +
+                "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast antal spillere i spillet");
+
+                if (valg <= 8 && valg >= 1 ) {
+                    return valg;
+                }
+                gui.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
+    }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode returnerer bare 2 terninger, da det er det antal terninger som der ALTID skal være. Der bliver
+     * skrevet en besked i GUI med den oplysning.
+     *
+     * @param minInput - Bliver KUN brugt i TUI
+     * @param maxInput - Bliver KUN brugt i TUI
+     * @return 2 terninger
+     */
     public int instilingsSporgsmaal2(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Hvor mange terninger vil i spille med?: Dette må kun være andet end 2 hvis man bruger TUI'en");
-        return valg;
+        gui.showMessage("Spillet starter med 2 terninger");
+        return 2;
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stor en bankerot graense der skal være (min - 0 og max - 1000).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
+     */
     public int instilingsSporgsmaal3(int minInput, int maxInput){
-        int valg = gui.getUserInteger("Hvor få penge må man have før man går bankerot?:");
-        return valg;
+        gui.showMessage("Hvor skal bankerot graensen ligge?: " +
+                "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
+        while (true) {
+            try {
+                int valg = gui.getUserInteger("Indtast bankerotgraensen!");
+
+                if (valg <= 1000 && valg >= 0) {
+                    return valg;
+                }
+                gui.showMessage("Bankerotgraensen kan være fra 0 til 1000, vælg en ny bankerotgraense!");
+            } catch (Exception i) {
+                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+            }
+        }
     }
 
     public void spillerPosition(int spillerPosition){
@@ -518,5 +602,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
+    }
+
+    /**
+     * @ Filip
+     * Printer en besked i GUI'en
+     */
+
+    public void kanIkkeSlaaFaengsel(){
+        gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
 }
