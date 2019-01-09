@@ -1,5 +1,6 @@
 package BoundaryView.GUI;
 
+import Controller.SpilData;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
 import ModelEnteties.Spiller.SpillerDTO;
@@ -149,7 +150,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
-        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
+
+        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -462,6 +464,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         String valg = gui.getUserSelection("|--|Det er en JernbaneCO vil du købe den?",
                 "ja", "nej");
         gui.showMessage(valg);
+
         return input.binartValg(valg);
     }
     public void forsetTur(){
@@ -483,6 +486,13 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
+    public void updateSpillere(SpillerCO spiller){
+
+        for(int i = 0; i < spillere.size();i++){
+            double balance = spiller.getPenge();
+            spillere.get(spiller.getId()).setBalance((int) balance);
+        }
+    }
 
     /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
      *
