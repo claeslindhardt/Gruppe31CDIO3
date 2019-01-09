@@ -218,8 +218,8 @@ public class SpillerCO extends SpillerDTO {
         EjendomsGruppeDTO ejendomsGruppe = ejendom.getGruppe();
         return( ejerEjendom(ejendom)
                 && ejerEjendomsGruppe(ejendomsGruppe)
-                && ejendomsGruppe.huseErLigeligtFordelt()
                 && ejendom.getAntalHuse() < 4
+                && ejendomsGruppe.huseErLigeligtFordelt(ejendom,true)
                 && getPenge()>ejendom.getHusPris() ); }
 
     /**

@@ -1,5 +1,8 @@
 package ModelEnteties.braet.controllerKlasser;
 
+import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -90,8 +93,22 @@ public class EjendomsGruppeDTO {
     }
 
     // TODO: Implementér logikken i denne. Kan være den skal flyttes.
-    public boolean huseErLigeligtFordelt(){
-        return true;
+    public boolean huseErLigeligtFordelt(EjendomCO ejendomCO, boolean vilKoebe){
+        EjendomsGruppeDTO ejendomsGruppe = this;
+        EjendomCO ejendomUdgangspunkt = ejendomCO;
+
+        for (int i = 0; i < ejendomme.size(); i++){
+            EjendomCO ejendom = ejendomme.get(i);
+            if (ejendom.getAntalHuse()==ejendom.getAntalHuse() && ejendom.getAntalHuse()==ejendom.getAntalHuse()+1){
+
+                vilKoebe = true;
+            }
+            else if (ejendom.getAntalHuse()==ejendom.getAntalHuse()&&ejendom.getAntalHuse()==ejendom.getAntalHuse()-1){
+                vilKoebe= false;
+            }
+
+        }
+        return vilKoebe;
     }
 
 
