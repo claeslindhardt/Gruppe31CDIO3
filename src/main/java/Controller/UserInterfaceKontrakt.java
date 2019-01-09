@@ -1,6 +1,7 @@
 package Controller;
 
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -10,7 +11,7 @@ import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
 import java.util.ArrayList;
 
 /**
- * Indsæt beskrivelse her
+ * Controller der linker mellem UI og Spillogikken
  */
 public interface UserInterfaceKontrakt {
     int TurMenu(int getSpillerTur, int minInput, int maxInput);
@@ -69,7 +70,7 @@ public interface UserInterfaceKontrakt {
     void ejetAfEnAnden();
     void tetPaaMonopol();
     void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfortKoeb();
+    void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
     void duErLandetPå(FeltDTO felt, SpillerCO spiller);
@@ -87,7 +88,8 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter);
+    void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
+    void kanIkkeSlaaFaengsel();
 }

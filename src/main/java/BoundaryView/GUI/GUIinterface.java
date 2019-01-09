@@ -2,6 +2,7 @@ package BoundaryView.GUI;
 
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.Spiller.SpillerCO;
+import ModelEnteties.Spiller.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.controllerKlasser.*;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
  *
  */
 public class GUIinterface implements UserInterfaceKontrakt {
-    //TODO: forsimpel alle de steder der er gentagelser i teksten her.
 
     //----------- Variabler: -------------------
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
@@ -32,58 +32,56 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     GUI gui = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
-    private ArrayList<GUISpillerDTO> spillere = new ArrayList<>();
+    private ArrayList<GUI_Player> spillere = new ArrayList<>();
     GUI_Field[] felter;
 
     //---------Getters og setters: -------------
-    public ArrayList<GUISpillerDTO> getSpillere() {
+    public ArrayList<GUI_Player> getSpillere() {
         return spillere;
     }
 
-    public void setSpillere(ArrayList<GUISpillerDTO> spillere) {
+    public void setSpillere(ArrayList<GUI_Player> spillere) {
         this.spillere = spillere;
     }
 
-    public void addGUISpillerObjekter(GUISpillerDTO spiller) {
+    public void addGUISpillerObjekter(GUI_Player spiller) {
         this.spillere.add(spiller);
     }
 
+
     /**
-     * Indsæt beskrivelse her
-     * @param AntalFelter
-     * @param bret
-     * @param spillerObjekter
+     * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
+     *
+     * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
+     * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
-        GUI_Field[] fields = new GUI_Field[AntalFelter];
-        /**
-         * @param testStreet Her laves felternes grafiske elementer
-         */
-        //lav dette om til et for each loop
-        for(int i = 0 ;i<fields.length; i++){
-            GUI_Street testStreet= new GUI_Street();
-            testStreet.setTitle(bret.getBret().get(i).getNavn());
-            testStreet.setSubText(bret.getBret().get(i).getFeltType());
-            if(bret.getBret().get(i).getFeltType() == "Ejendom"){
-                EjendomCO ejendom = (EjendomCO) bret.getBret().get(i);
-                testStreet.setBorder(ejendom.getGruppe().getFarve());
+    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+        int antalFelter =  braet.getBret().size();
+        GUI_Field[] felter = new GUI_Field[ antalFelter ];
+
+        // Laver felternes grafiske elementer
+        for( int i = 0;  i < antalFelter; i++){
+
+            FeltDTO felt = braet.getBret().get(i);
+            GUI_Street gui_felt= new GUI_Street();
+            gui_felt.setTitle( felt.getNavn() );
+            gui_felt.setSubText( felt.getFeltType() );
+
+            felter[i] = gui_felt;
+
+            if( felt.getFeltType().equals("Ejendom") ){
+                EjendomCO ejendom = (EjendomCO) felt;
+                gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
             }else{
-                testStreet.setBorder(Color.CYAN);
+                gui_felt.setBackGroundColor( Color.CYAN );
             }
-
-            //testStreet.setRent("600,-"); hvad skal vi med den her???? har vi ikke allrede rente i back end?
-            fields[i] = testStreet;
         }
-        this.felter = fields;
-        GUI guiMedBret = new GUI(fields,new Color(218,206,179));
 
-        gui = guiMedBret;
+        this.felter = felter;
+        gui = new GUI(felter,new Color(218,206,179));
 
-        /**
-         * @param dunnoWhat Her laves spilelrnes grafiske elementer.
-         */
-
-        for(int i=0;i<spillerObjekter.size();i++){
+        // Laver spilleres grafiske elementer
+        for(int i=0;i<spillere.size();i++){
 
 
             GUI_Car bil = new GUI_Car(); //Opret en bil
@@ -93,13 +91,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
             Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
             bil.setPrimaryColor(spillerFarve); //Lad den være gul
 
-            GUI_Player medspiller = new GUI_Player(spillerObjekter.get(i).getNavn(),(int)spillerObjekter.get(i).getPenge(), bil); //opret en spiller
+            GUI_Player spiller = new GUI_Player(spillere.get(i).getNavn(),(int)spillere.get(i).getPenge(), bil); //opret en spiller
 
-
-            GUISpillerDTO deltager = new GUISpillerDTO(bil,medspiller);
-            spillere.add(deltager);
-            gui.addPlayer(medspiller); //Sæt spilleren på
-            fields[0].setCar(medspiller, true);
+            this.spillere.add(spiller);
+            gui.addPlayer(spiller); //Sæt spilleren på
+            felter[0].setCar(spiller, true);
 
         }
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
@@ -119,14 +115,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 boolean[] harBil = new boolean[spillere.size()];
 
                 for(int i=0; i < spillere.size(); i++){
-                    harBil[i] = felt.hasCar(spillere.get(i).deltager);
+                    harBil[i] = felt.hasCar(spillere.get(i));
                 }
 
                 felt.removeAllCars();
 
                 for( int i=0; i<spillere.size(); i++){
-                    if( harBil[i] && spillere.get(i).deltager != spiller ){
-                        felt.setCar(spillere.get(i).deltager, true);
+                    if( harBil[i] && spillere.get(i) != spiller ){
+                        felt.setCar(spillere.get(i), true);
                     }
                 }
             }
@@ -138,7 +134,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         felter[feltNr].setCar(spiller, true);
     }
 
-    @Override
     public String spillerNavne() {
         String spillernavn = gui.getUserString("Indtast et navn");
         return spillernavn;
@@ -160,25 +155,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return input.TurMenu(valg);
 
     }
-
-    /**
-     * @author Jacob
-     * Denne metode er midlertidig. den bliver kaldt når man vælger noget i spillet som ikke er blevet
-     * implementeret endnu.
-     */
     public void ikkeMuligt(){
         gui.showMessage("Dette er ikke en mulighed endnu - prøv igen");
     }
 
-    /**
-     * @author Jacob
-     * Denne metode bliver kaldes når indstillingerne for spillet er aendret. Den printer en besked på GUI med:
-     * @param getAntalSpillere - antallet af spillere i spillet
-     * @param getAntalFelter - antallet af felter på spillebraettet
-     * @param getAntalTerninger - antallet af terninger i det genererede spil
-     * @param getSpillerTur - hvilken spiller der starter spillet. Det er randomized.
-     * @param getBankeraadGraense - spillets bankerot graense
-     */
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         gui.showMessage("I er: " + getAntalSpillere + " spillere." +
                 "\nBraettet har "+getAntalFelter+" Felter," +
@@ -192,21 +172,27 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     /**
-     * @author Jacob
+     * @author Jacob og Chua
      *
-     * @param minInput - Det minimale antal felter, som braettet kan have
-     * @param maxInput - Det maksimale antal felter, som braettet kan have
-     * @return
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Braettet skal minimum have 3 felter og maksimum 40"
+                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt være 16. Braettet skal " +
+                "have et lige antal felter"
         );
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast antal felter på braettet");
 
-                if (valg <= 40 && valg >= 16 && (valg%2==0) ) {
+                if (valg <= 38 && valg >= 16 && (valg%2==0) ) {
                     return valg;
                 }
                 gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
@@ -215,7 +201,22 @@ public class GUIinterface implements UserInterfaceKontrakt {
             }
         }
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor mange spillere man vil generere (min - 2 og max - 8).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor mange spillere der skal være i spillet.
+     */
     public int instilingsSporgsmaall(int minInput, int maxInput){
+        gui.showMessage("Hvor mange spillere vil i være?" +
+                "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast antal spillere i spillet");
@@ -228,13 +229,38 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
         }
-
-
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode returnerer bare 2 terninger, da det er det antal terninger som der ALTID skal være. Der bliver
+     * skrevet en besked i GUI med den oplysning.
+     *
+     * @param minInput - Bliver KUN brugt i TUI
+     * @param maxInput - Bliver KUN brugt i TUI
+     * @return 2 terninger
+     */
     public int instilingsSporgsmaal2(int minInput, int maxInput){
+        gui.showMessage("Spillet starter med 2 terninger");
         return 2;
     }
+
+    /**
+     * @author Jacob og Chua
+     *
+     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
+     * hvor stor en bankerot graense der skal være (min - 0 og max - 1000).
+     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
+     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
+     *
+     * @param minInput - Denne parameter bliver kun brugt i TUI
+     * @param maxInput - Denne parameter bliver kun brugt i TUI
+     * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
+     */
     public int instilingsSporgsmaal3(int minInput, int maxInput){
+        gui.showMessage("Hvor skal bankerot graensen ligge?: " +
+                "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast bankerotgraensen!");
@@ -295,12 +321,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spilletErSlut(){
         System.out.println("Spillet er slut.");
     }
-
-    /**
-     *
-     * @param terningsKrus
-     * @param spillerTur
-     */
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
         ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
@@ -314,10 +334,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du slog: "+ternin+
                 "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter."
         );
-        //printTerninger(terningsKrus);
 
-        //GUISpillerDTO GUIspillerMedTur = getSpillere().get(spillerTur-1);
-        //(GUIspillerMedTur.bil);
         //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
     }
@@ -464,9 +481,22 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(){
-        gui.showMessage("Du kan koebe grunden hurra!!");
-        gui.showMessage("Ejendommen er nu din!");
+
+
+    /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
+     *
+     * @param ejendom Ejendommens der købes
+     * @param spiller Spilleren der køber ejendommen
+     */
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+        gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
+
+        /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
+        *   og omformer (caster) den til en GUI_Street objekt, så setBorder-metoden kan bruges.*/
+        GUI_Street gui_ejendom = (GUI_Street) gui.getFields()[ejendom.getPlacering()];
+
+        // Ændrer borderen på feltet til spillerens bils farve
+        gui_ejendom.setBorder(spillere.get( spiller.getId()).getCar().getPrimaryColor() );
 
     }
     public void ejendomsInfo(EjendomCO ej){
@@ -489,8 +519,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
-        GUISpillerDTO guiSpiller = spillere.get(spiller.getId());
-        rykBil(guiSpiller.deltager,felt.getPlacering());
+        GUI_Player guiSpiller = spillere.get(spiller.getId());
+        rykBil(guiSpiller,felt.getPlacering());
     }
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
@@ -562,5 +592,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
+    }
+
+    /**
+     * @ Filip
+     * Printer en besked i GUI'en
+     */
+
+    public void kanIkkeSlaaFaengsel(){
+        gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
 }

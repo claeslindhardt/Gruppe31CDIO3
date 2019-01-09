@@ -63,4 +63,6 @@ public class EjendomsGruppeCO {
         return klarGruppe;
     }
 
+    public void clearKlarGruppe(){klarGruppe = null;}
+
 }

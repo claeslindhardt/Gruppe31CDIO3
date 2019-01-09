@@ -35,21 +35,16 @@ public class SpillerCO extends SpillerDTO {
     }
 
     /**
-     * Indsæt beskrivelse her
-     * @param terningvalg
-     * @param spil
-     * @param userInterfaceKontrakt
-     * @return
+     * @author Malte
+     * Giver spilleren penge, alt efter hvor mange gange over start spilleren kommer,
+     * samt kører den passende UI-kode til passering af start.
+     * Den finder IKKE ud af, hvor mange gange man kører over start.
+     * @param gangeOverStart Antallet af gange man passerer start
+     * @param userInterfaceKontrakt UI'en der skal bruges til at vise det.
      */
-    public int passeringAfStart (int terningvalg, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
-        int gangeOverStart = (getSpillerPosition()+terningvalg)/spil.getAntalFelter();
-        setSpillerPosition((getSpillerPosition()+ terningvalg)% spil.getAntalFelter());
-
-
+    public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
         penge += 200*gangeOverStart;
-
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
-        return gangeOverStart;
     }
 
     /**
@@ -97,11 +92,7 @@ public class SpillerCO extends SpillerDTO {
         if(destination>spil.getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
-            this.setSpillerPosition(destination);
-            userInterfaceKontrakt.overStart(this.getSpillerPosition());
-            this.addPenge(200);
-            //kalder en aktion på det felt man tager til med taxien
-            spil.getBretGeneretForSpil().getBret().get(spil.getSpillerMedTur().getSpillerPosition()).aktionPaaFelt(spil, userInterfaceKontrakt);
+            spil.rykSpillerTilFelt(this, spil.getBretGeneretForSpil().getBret().get(destination),1);
         }
     }
     //_____________________________________
@@ -130,22 +121,22 @@ public class SpillerCO extends SpillerDTO {
 
     /**
      * Indsæt beskrivelse her
-     * @param ønsketEjendom
+     * @param ejendom
      * @param userInterfaceKontrakt
      */
-    public void koebEjendom(EjendomCO ønsketEjendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void koebEjendom(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
-        if (ønsketEjendom.getEjer() == this) {
+        if (ejendom.getEjer() == this) {
             userInterfaceKontrakt.tetPaaMonopol();
         }
-        else if (this.penge > ønsketEjendom.getPris()) {
-            userInterfaceKontrakt.gennemfortKoeb();
+        else if (this.penge > ejendom.getPris()) {
+            userInterfaceKontrakt.gennemfortKoeb(ejendom, this);
             //Todo: fix enkapsulering her
-            this.penge -= ønsketEjendom.getPris();
+            this.penge -= ejendom.getPris();
 
             //skifte ejerskab
-            ønsketEjendom.setEjer(this);
-            this.getSpillerEjendomme().add(ønsketEjendom);
+            ejendom.setEjer(this);
+            this.getSpillerEjendomme().add(ejendom);
         } else {
             userInterfaceKontrakt.monetosMangel();
         }
