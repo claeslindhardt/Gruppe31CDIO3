@@ -161,7 +161,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
         gui.showMessage("I er: " + getAntalSpillere + " spillere." +
-                "\nBraettet har "+getAntalFelter+" Felter," +
+                "\nBraettet har "+(getAntalFelter+1)+" Felter," +
                 "\nmed "+getAntalTerninger+" terninger på braettet." +
                 "\nSpiller "+getSpillerTur + " Starter!" +
                 "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
@@ -175,7 +175,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @author Jacob og Chua
      *
      * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
-     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal).
+     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal, som er dividerbart med 4).
      * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
      * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
      *
@@ -186,16 +186,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
                 "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt have 16. Braettet skal " +
-                "have et lige antal felter"
+                "have et lige antal felter, som skal være dividerbart med 4"
         );
         while (true) {
             try {
                 int valg = gui.getUserInteger("Indtast antal felter på braettet");
 
-                if (valg <= 38 && valg >= 16 && (valg%2==0) ) {
-                    return valg;
+                if (valg <= 40 && valg >= 16 && (valg%4==0) ) {
+                    return valg-1;
                 }
-                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
+                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, " +
+                        "og det skal være mellem: 16 og 40, og dividerbart med 4");
             } catch (Exception i) {
                 gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
@@ -596,9 +597,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     /**
      * @ Filip
-     * Printer en besked i GUI'en
+     * Printer en besked i GUI'en, hvis man vælger at slå terninger fra turmenu, mens man er i fængsel.
      */
-
     public void kanIkkeSlaaFaengsel(){
         gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
