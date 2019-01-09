@@ -2,11 +2,11 @@ package ModelEnteties.Spiller;
 
 import BoundaryView.TUI.TUI;
 import Controller.SpilController;
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
-import ModelEnteties.braet.controllerKlasser.JernbaneCO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.SpillerCO;
+import ModelEnteties.EjendomCO;
+import ModelEnteties.EjendomsGruppeDTO;
+import Controller.JernbaneCO;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
+import ModelEnteties.EjendomCO;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

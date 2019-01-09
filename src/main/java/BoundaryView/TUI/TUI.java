@@ -1,13 +1,14 @@
 package BoundaryView.TUI;
 
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Spiller.SpillerDTO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.*;
+import Controller.SpillerCO;
+import ModelEnteties.EjendomCO;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
+import Controller.SpilleBraetCO;
+import ModelEnteties.FeltDTO;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;

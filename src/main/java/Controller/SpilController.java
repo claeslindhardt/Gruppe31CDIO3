@@ -1,13 +1,10 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Terning.FalskRaflebaeger;
-import ModelEnteties.Spiller.SpillerDTO;
+import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.SpilData;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
+import ModelEnteties.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import sun.awt.geom.AreaOp;
 
 import java.util.Random;
 

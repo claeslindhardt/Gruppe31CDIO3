@@ -1,7 +1,7 @@
 import BoundaryView.TUI.TUI;
 import BoundaryView.GUI.GUIinterface;
 import Controller.SpilController;
-import Controller.UserInterfaceKontrakt;
+import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.singletoner.ScannerSingleton;
 import java.util.InputMismatchException;
 

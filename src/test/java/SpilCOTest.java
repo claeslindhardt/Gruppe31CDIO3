@@ -1,8 +1,8 @@
 import BoundaryView.TUI.TUI;
-import Controller.SpilController;
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.braet.controllerKlasser.*;
+import Controller.*;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.SpillerCO;
+import ModelEnteties.EjendomCO;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
