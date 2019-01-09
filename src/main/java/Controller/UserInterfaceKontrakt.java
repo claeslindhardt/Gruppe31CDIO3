@@ -91,5 +91,6 @@ public interface UserInterfaceKontrakt {
     void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
+    void updateSpillere(SpillerCO spiller);
     void kanIkkeSlaaFaengsel();
 }
