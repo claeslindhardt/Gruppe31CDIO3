@@ -9,7 +9,6 @@ import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
 
 
-
 import java.util.Random;
 
 public class SpilController extends SpilData {
@@ -184,7 +183,7 @@ public class SpilController extends SpilData {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
 
         if( gangeOverStart > 0 ){
             spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
