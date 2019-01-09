@@ -175,7 +175,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @author Jacob og Chua
      *
      * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
-     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal).
+     * hvor stort et bræt man vil generere (min - 16 og max - 40, og kun et lige antal, som er dividerbart med 4).
      * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
      * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
      *
