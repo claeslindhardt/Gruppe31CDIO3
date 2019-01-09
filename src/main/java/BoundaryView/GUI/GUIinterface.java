@@ -596,7 +596,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     /**
      * @ Filip
-     * Printer en besked i GUI'en
+     * Printer en besked i GUI'en, hvis man vælger at slå terninger fra turmenu, mens man er i fængsel.
      */
 
     public void kanIkkeSlaaFaengsel(){
