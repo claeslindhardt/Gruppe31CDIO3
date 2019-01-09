@@ -7,7 +7,7 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import sun.awt.geom.AreaOp;
+
 
 import java.util.Random;
 
