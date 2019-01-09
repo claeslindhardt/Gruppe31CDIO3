@@ -192,8 +192,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
             try {
                 int valg = gui.getUserInteger("Indtast antal felter på braettet");
 
-                if (valg <= 38 && valg >= 16 && (valg%2==0) ) {
-                    return valg;
+                if (valg <= 40 && valg >= 16 && (valg%2==0) ) {
+                    return valg-1;
                 }
                 gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, og det skal være mellem: 16 og 40");
             } catch (Exception i) {
