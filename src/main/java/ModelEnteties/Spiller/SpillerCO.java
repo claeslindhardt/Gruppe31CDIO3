@@ -1,6 +1,7 @@
 package ModelEnteties.Spiller;
 
 import Controller.SpilController;
+import Controller.SpilData;
 import Controller.UserInterfaceKontrakt;
 import ModelEnteties.braet.controllerKlasser.EjendomCO;
 import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
@@ -45,6 +46,7 @@ public class SpillerCO extends SpillerDTO {
     public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
         penge += 200*gangeOverStart;
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
+        userInterfaceKontrakt.updateSpillere(this);
     }
 
     /**
@@ -133,7 +135,7 @@ public class SpillerCO extends SpillerDTO {
             userInterfaceKontrakt.gennemfortKoeb(ejendom, this);
             //Todo: fix enkapsulering her
             this.penge -= ejendom.getPris();
-
+            userInterfaceKontrakt.updateSpillere(this);
             //skifte ejerskab
             ejendom.setEjer(this);
             this.getSpillerEjendomme().add(ejendom);
@@ -155,9 +157,10 @@ public class SpillerCO extends SpillerDTO {
         } else if (getPenge() > relevantJernbane.getPris()) {
             setPenge(getPenge()-relevantJernbane.getPris());
             userInterfaceKontrakt.dinJernbane();
+            userInterfaceKontrakt.updateSpillere(this);
             //Todo: fix enkapsulering herunder:
             //skifte ejerskab
-            relevantJernbane.setEjer(this);;
+            relevantJernbane.setEjer(this);
             getSpillerJernbaner().add(relevantJernbane);
             relevantJernbane.tagTog(spil, userInterfaceKontrakt);
         } else {
@@ -229,11 +232,14 @@ public class SpillerCO extends SpillerDTO {
      * og trække penge fra spilleren.
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
-    void koebHus(EjendomCO ejendom){
+    void koebHus(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( kanKoebeHus(ejendom) ){
             ejendom.bygHuse(1);
             addPenge(-ejendom.getHusPris());
-        } }
+            userInterfaceKontrakt.updateSpillere(this);
+
+        }
+    }
 
     /**
      * @author Malte
@@ -260,7 +266,7 @@ public class SpillerCO extends SpillerDTO {
             if(bebyggeligeEjendomme.size() > 0){
 
                 int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
-                koebHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                koebHus(bebyggeligeEjendomme.get(ejendomsIndex),ui);
                 ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
 
             }else {

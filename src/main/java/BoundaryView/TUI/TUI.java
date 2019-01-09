@@ -415,7 +415,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du er rejst til "+jernbane);
     }
 
-    public void updateSpillere(ArrayList<SpillerCO> spillerObjekter){};
+    public void updateSpillere(SpillerCO spiller){};
 
     public void kanIkkeSlaaFaengsel(){
         System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");

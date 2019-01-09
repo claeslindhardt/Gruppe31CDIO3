@@ -485,11 +485,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    public void updateSpillere(ArrayList<SpillerCO> spillerObjekter){
+    public void updateSpillere(SpillerCO spiller){
 
         for(int i = 0; i < spillere.size();i++){
-            double balance = spillerObjekter.get(i).getPenge();
-            spillere.get(i).setBalance((int) balance);
+            double balance = spiller.getPenge();
+            spillere.get(spiller.getId()).setBalance((int) balance);
         }
     }
 

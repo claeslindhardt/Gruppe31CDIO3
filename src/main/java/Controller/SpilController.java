@@ -7,7 +7,7 @@ import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.braet.SpilleBraetCO;
 import ModelEnteties.braet.dataKlasser.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import sun.awt.geom.AreaOp;
+
 
 
 import java.util.Random;
@@ -184,7 +184,7 @@ public class SpilController extends SpilData {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ){
             spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
@@ -335,7 +335,7 @@ public class SpilController extends SpilData {
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
-        getUserInterfaceKontrakt().updateSpillere(getSpillerObjekter());
+
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
         switch (input) {
