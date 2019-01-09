@@ -185,7 +185,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
         gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt være 16. Braettet skal " +
+                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt have 16. Braettet skal " +
                 "have et lige antal felter"
         );
         while (true) {
