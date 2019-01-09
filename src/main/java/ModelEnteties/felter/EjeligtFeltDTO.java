@@ -1,7 +1,8 @@
-package ModelEnteties;
+package ModelEnteties.felter;
 
 import Controller.SpillerCO;
 import Controller.JernbaneCO;
+import ModelEnteties.EjendomsGruppeDTO;
 
 import java.util.ArrayList;
 

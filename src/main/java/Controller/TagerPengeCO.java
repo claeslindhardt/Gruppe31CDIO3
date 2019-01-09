@@ -1,7 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.Random;
 

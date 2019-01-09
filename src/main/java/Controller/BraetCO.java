@@ -2,20 +2,20 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
-import ModelEnteties.SpilleBraetDTO;
-import ModelEnteties.FeltDTO;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.navneGenerering.EjendomsDoeber;
 import ModelEnteties.navneGenerering.JernbaneDoeber;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
 /**
  * Indsæt beskrivelse her
  */
-public class SpilleBraetCO extends SpilleBraetDTO {
+public class BraetCO extends BraetDTO {
 
     //|----------- Metoder:------------------
     public void printBret(UserInterfaceKontrakt userInterfaceKontrakt){
@@ -107,7 +107,7 @@ public class SpilleBraetCO extends SpilleBraetDTO {
      * @param antalFelter
      * @param userInterfaceKontrakt
      */
-    public SpilleBraetCO(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
+    public BraetCO(int antalFelter, UserInterfaceKontrakt userInterfaceKontrakt){
 
         boolean lavFelter=true;
         //-------Tilføjning af objekter til brettet---

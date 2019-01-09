@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.SpillerDTO;
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
 
 import java.util.ArrayList;

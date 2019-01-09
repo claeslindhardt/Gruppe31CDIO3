@@ -1,7 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.AktionsFelterDTO;
+import ModelEnteties.felter.AktionsFelterDTO;
 
 public class StartCO extends AktionsFelterDTO {
     //|--------- Variabler:-----------------

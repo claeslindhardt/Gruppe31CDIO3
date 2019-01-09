@@ -2,12 +2,12 @@ package BoundaryView;
 
 import Controller.*;
 import Controller.SpillerCO;
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import Controller.SpilleBraetCO;
-import ModelEnteties.FeltDTO;
-import ModelEnteties.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
@@ -89,7 +89,7 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere);
+    void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(SpillerCO spiller);

@@ -2,7 +2,7 @@ import BoundaryView.TUI.TUI;
 import Controller.*;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

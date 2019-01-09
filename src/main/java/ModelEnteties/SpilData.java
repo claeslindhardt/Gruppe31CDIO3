@@ -1,9 +1,9 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import Controller.BraetCO;
 import Controller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import Controller.SpilleBraetCO;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public abstract class SpilData {
     private  int bankeraadGraense = 15;
     private  boolean kør = true;
     private  boolean vinderFindes = false;
-    private SpilleBraetCO bretGeneretForSpil;
+    private BraetCO bretGeneretForSpil;
     private UserInterfaceKontrakt userInterfaceKontrakt;
     private RafleBaeger terningeKrus;
     private int vinder=-1;
@@ -157,11 +157,11 @@ public abstract class SpilData {
      * for fx. int, double eller lignende.
      * @return
      */
-    public SpilleBraetCO getBretGeneretForSpil() {
+    public BraetCO getBretGeneretForSpil() {
         return bretGeneretForSpil;
     }
 
-    public void setBretGeneretForSpil(SpilleBraetCO generetBretForSpil) {
+    public void setBretGeneretForSpil(BraetCO generetBretForSpil) {
         this.bretGeneretForSpil = generetBretForSpil;
     }
 

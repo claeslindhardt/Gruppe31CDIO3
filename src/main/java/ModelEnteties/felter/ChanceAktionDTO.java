@@ -1,4 +1,4 @@
-package ModelEnteties;
+package ModelEnteties.felter;
 
 import ModelEnteties.singletoner.RandomSingleton;
 

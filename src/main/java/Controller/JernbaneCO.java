@@ -1,7 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.EjeligtFeltDTO;
+import ModelEnteties.felter.EjeligtFeltDTO;
 
 import java.util.ArrayList;
 

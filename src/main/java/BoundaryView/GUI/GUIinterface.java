@@ -3,12 +3,12 @@ package BoundaryView.GUI;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import Controller.SpillerCO;
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import Controller.SpilleBraetCO;
-import ModelEnteties.FeltDTO;
-import ModelEnteties.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -56,7 +56,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
         int antalFelter =  braet.getBret().size();
         GUI_Field[] felter = new GUI_Field[ antalFelter ];
 

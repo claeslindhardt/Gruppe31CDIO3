@@ -3,12 +3,12 @@ package BoundaryView.TUI;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import Controller.SpillerCO;
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import Controller.SpilleBraetCO;
-import ModelEnteties.FeltDTO;
-import ModelEnteties.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
@@ -400,7 +400,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
 
     }
 

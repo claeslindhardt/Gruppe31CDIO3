@@ -1,8 +1,9 @@
-package ModelEnteties;
+package ModelEnteties.felter;
 
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
+import ModelEnteties.EjendomsGruppeDTO;
 
 
 /**__________________________________________________________________________________________________________________________________________________________

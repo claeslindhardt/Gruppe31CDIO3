@@ -1,5 +1,7 @@
 package ModelEnteties;
 
+import ModelEnteties.felter.EjendomCO;
+
 import java.awt.*;
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
 package ModelEnteties;
 
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.ArrayList;
 

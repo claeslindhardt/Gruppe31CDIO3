@@ -2,7 +2,7 @@ package ModelEnteties;
 
 import Controller.EjendomsGruppeCO;
 import Controller.JernbaneCO;
-import ModelEnteties.FeltDTO;
+import ModelEnteties.felter.FeltDTO;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Indsæt beskrivelse her
  */
-public class SpilleBraetDTO {
+public class BraetDTO {
     //|-------initiering af objekter: -----------
     protected Random ra = new Random();
 

@@ -1,7 +1,7 @@
 package Controller;
 
 
-import ModelEnteties.EjendomCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
 
 import java.awt.*;
