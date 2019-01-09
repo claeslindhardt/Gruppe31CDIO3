@@ -2,11 +2,11 @@ package ModelEnteties.Spiller;
 
 import BoundaryView.TUI.TUI;
 import Controller.SpilController;
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.EjendomCO;
-import ModelEnteties.braet.controllerKlasser.EjendomsGruppeDTO;
-import ModelEnteties.braet.controllerKlasser.JernbaneCO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.SpillerCO;
+import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.EjendomsGruppeDTO;
+import Controller.JernbaneCO;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 
@@ -114,7 +114,7 @@ class SpillerCOTest {
         TUI Ui = new TUI();
         GUI gui = new GUI();
 
-        //SpilleBraetCO spilleBraet = new SpilleBraetCO(10,Ui);
+        //BraetCO spilleBraet = new BraetCO(10,Ui);
         SpilController spil = new SpilController(2,10,2,200,Ui);
         spil.getSpillerMedTur().tagTaxi(spil,Ui);
 
@@ -178,6 +178,7 @@ class SpillerCOTest {
     void koebHus() {
 
         // Setup
+        UserInterfaceKontrakt userInterface = new TUI();
 
         SpillerCO spiller = new SpillerCO("Test", 0, 0);
         EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 3);
@@ -200,13 +201,13 @@ class SpillerCOTest {
 
         // Tester om man kan koebe hus uden at eje nogen af ejendommene.
 
-        spiller.koebHus(ejendom1);
+        spiller.koebHus(ejendom1,userInterface);
         assertEquals(0, ejendom1.getAntalHuse() );
 
-        spiller.koebHus(ejendom2);
+        spiller.koebHus(ejendom2,userInterface);
         assertEquals(0, ejendom2.getAntalHuse() );
 
-        spiller.koebHus(ejendom3);
+        spiller.koebHus(ejendom3,userInterface);
         assertEquals(0, ejendom3.getAntalHuse() );
 
         assertEquals(startPenge, spiller.getPenge());
@@ -216,13 +217,13 @@ class SpillerCOTest {
 
         // Tester om man kan koebe hus, når man ejer 1 ejendom
 
-        spiller.koebHus(ejendom1);
+        spiller.koebHus(ejendom1,userInterface);
         assertEquals(0, ejendom1.getAntalHuse() );
 
-        spiller.koebHus(ejendom2);
+        spiller.koebHus(ejendom2,userInterface);
         assertEquals(0, ejendom2.getAntalHuse() );
 
-        spiller.koebHus(ejendom3);
+        spiller.koebHus(ejendom3, userInterface);
         assertEquals(0, ejendom3.getAntalHuse() );
         assertEquals(startPenge, spiller.getPenge());
 
@@ -231,13 +232,13 @@ class SpillerCOTest {
 
         ejendom2.setEjer(spiller);
 
-        spiller.koebHus(ejendom1);
+        spiller.koebHus(ejendom1, userInterface);
         assertEquals(0, ejendom1.getAntalHuse() );
 
-        spiller.koebHus(ejendom2);
+        spiller.koebHus(ejendom2, userInterface);
         assertEquals(0, ejendom2.getAntalHuse() );
 
-        spiller.koebHus(ejendom3);
+        spiller.koebHus(ejendom3, userInterface);
         assertEquals(0, ejendom3.getAntalHuse() );
         assertEquals(startPenge, spiller.getPenge());
 
@@ -245,13 +246,13 @@ class SpillerCOTest {
         // Tester om man kan koebe hus, når man ejer alle ejendomme i gruppe
         ejendom3.setEjer(spiller);
 
-        spiller.koebHus(ejendom1);
+        spiller.koebHus(ejendom1, userInterface);
         assertEquals(1, ejendom1.getAntalHuse() );
 
-        spiller.koebHus(ejendom2);
+        spiller.koebHus(ejendom2, userInterface);
         assertEquals(1, ejendom2.getAntalHuse() );
 
-        spiller.koebHus(ejendom3);
+        spiller.koebHus(ejendom3, userInterface);
         assertEquals(1, ejendom3.getAntalHuse() );
 
         // Tester at pengene er blevet trukket korrekt fra spillerens beholdning.

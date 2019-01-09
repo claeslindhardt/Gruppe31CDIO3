@@ -1,13 +1,14 @@
 package BoundaryView.GUI;
 
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Spiller.SpillerDTO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.*;
+import Controller.SpillerCO;
+import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
@@ -55,7 +56,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
         int antalFelter =  braet.getBret().size();
         GUI_Field[] felter = new GUI_Field[ antalFelter ];
 
@@ -149,7 +150,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
-        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillerTur+"'s tur.",
+
+        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -462,6 +464,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         String valg = gui.getUserSelection("|--|Det er en JernbaneCO vil du købe den?",
                 "ja", "nej");
         gui.showMessage(valg);
+
         return input.binartValg(valg);
     }
     public void forsetTur(){
@@ -483,6 +486,13 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
+    public void updateSpillere(SpillerCO spiller){
+
+        for(int i = 0; i < spillere.size();i++){
+            double balance = spiller.getPenge();
+            spillere.get(spiller.getId()).setBalance((int) balance);
+        }
+    }
 
     /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
      *

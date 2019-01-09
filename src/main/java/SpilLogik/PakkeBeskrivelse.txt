@@ -1,2 +1,0 @@
-Her ligger alle de ting som er regler men ikke hvordan de bliver udført det
-ligger i modelEnteties.

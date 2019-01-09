@@ -1,13 +1,14 @@
 package BoundaryView.TUI;
 
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Spiller.SpillerDTO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.*;
+import Controller.SpillerCO;
+import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
@@ -399,7 +400,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void genererGUIBret(SpilleBraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
 
     }
 
@@ -414,6 +415,8 @@ public class TUI implements UserInterfaceKontrakt {
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);
     }
+
+    public void updateSpillere(SpillerCO spiller){};
 
     public void kanIkkeSlaaFaengsel(){
         System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
