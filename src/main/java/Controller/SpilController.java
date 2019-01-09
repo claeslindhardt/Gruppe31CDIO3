@@ -1,13 +1,10 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Terning.FalskRaflebaeger;
-import ModelEnteties.Spiller.SpillerDTO;
+import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.SpilData;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-
 
 import java.util.Random;
 
@@ -24,7 +21,7 @@ public class SpilController extends SpilData {
         this.setUserInterfaceKontrakt(gui);
         startMenu();
         genererSpillere(getAntalSpillere());
-        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
@@ -39,7 +36,7 @@ public class SpilController extends SpilData {
         this.setBankeraadGraense(bankeRaadtGrense);
         this.setUserInterfaceKontrakt(gui);
         genererSpillere(getAntalSpillere());
-        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
@@ -183,7 +180,7 @@ public class SpilController extends SpilData {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart ){
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ){
             spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
@@ -330,10 +327,10 @@ public class SpilController extends SpilData {
      * @author Filip
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
-     * @param spilleBret SpilleBraetCO objekt, hvor nogle af metoderne benyttes af turmenu
+     * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu(BraetCO spilleBret, RafleBaeger terningsKrus) {
 
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 

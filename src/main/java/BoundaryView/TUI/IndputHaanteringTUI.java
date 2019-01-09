@@ -1,8 +1,8 @@
 package BoundaryView.TUI;
 
-import ModelEnteties.Spiller.SpillerCO;
+import Controller.ChanceFeltCO;
+import Controller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.InputMismatchException;
