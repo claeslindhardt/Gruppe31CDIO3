@@ -17,6 +17,7 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -329,7 +330,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
         int terning1=tern.get(0);
         int terning2=tern.get(1);
-        gui.setDice(terning1,terning2);
+        Random rand = new Random();
+        int x1 = rand.nextInt(8)+2;
+        int y1 = rand.nextInt(8)+2;
+        int x2 = rand.nextInt(8)+2;
+        int y2 = rand.nextInt(8)+2;
+        gui.setDice(terning1,x1,y1,terning2,x2,y2);
         String ternin="";
         for(int i =0; i<tern.size();i++) {
             ternin = ternin.concat(tern.get(i)+ ", ");
