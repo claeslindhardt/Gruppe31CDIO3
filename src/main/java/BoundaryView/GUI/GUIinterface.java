@@ -17,6 +17,7 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -157,7 +158,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public int velkomstMenu(int minInput, int maxInput){
-        String valg = gui.getUserSelection("|=========| MONOPOL SPILLET V1, MKIII",
+        String valg = gui.getUserButtonPressed("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
         gui.showMessage(valg);
         //todo: fix this to return the right option
@@ -167,7 +168,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserSelection("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+        String valg = gui.getUserButtonPressed("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -202,23 +203,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
-        gui.showMessage("Hvor mange felter skal braettet have?: " +
-                "\nNB!: Braettet kan maksimalt have 40 felter, og det kan minimalt have 16. Braettet skal " +
-                "have et lige antal felter, som skal være dividerbart med 4"
-        );
-        while (true) {
-            try {
-                int valg = gui.getUserInteger("Indtast antal felter på braettet");
-
-                if (valg <= 40 && valg >= 16 && (valg%4==0) ) {
-                    return valg-1;
-                }
-                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, " +
-                        "og det skal være mellem: 16 og 40, og dividerbart med 4");
-            } catch (Exception i) {
-                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
-            }
-        }
+       String input = gui.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
+                "16","20","24","28","32","36","40");
+       return Integer.parseInt(input) - 1;
     }
 
     /**
@@ -345,7 +332,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
         int terning1=tern.get(0);
         int terning2=tern.get(1);
-        gui.setDice(terning1,terning2);
+        Random rand = new Random();
+        int x1 = rand.nextInt(8)+2;
+        int y1 = rand.nextInt(8)+2;
+        int x2 = rand.nextInt(8)+2;
+        int y2 = rand.nextInt(8)+2;
+        gui.setDice(terning1,x1,y1,terning2,x2,y2);
         String ternin="";
         for(int i =0; i<tern.size();i++) {
             ternin = ternin.concat(tern.get(i)+ ", ");
@@ -537,7 +529,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         gui.showMessage("| FeltDTO nr: " + ej.getPlacering() +" | FeltDTO Navn:" + ej.getNavn()+" | FeltDTO type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
-                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
     }
 

@@ -11,15 +11,16 @@ import ModelEnteties.EjendomsGruppeDTO;
  *
  */
 public class EjendomCO extends EjeligtFeltDTO {
-    //|-------initiering af objekter: -----------
 
-
-    //|--------- Variabler:-----------------
-    private int     antalHuse;
-    private int     antalHoteller;
+    private boolean harHotel = false;
+    private int     antalHuse = 0;
     private double  husPris = 50;
     private int     leje = 50;
     private EjendomsGruppeDTO gruppe;
+    private int lejeHotel = 0;
+    private int lejeStart = 0;
+    private int[] lejeHus = {0,0,0,0};
+
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -30,12 +31,8 @@ public class EjendomCO extends EjeligtFeltDTO {
         this.antalHuse = antalHuse;
     }
 
-    public int getAntalHoteller() {
-        return antalHoteller;
-    }
-
-    public void setAntalHoteller(int antalHoteller) {
-        this.antalHoteller = antalHoteller;
+    public boolean harHotel(){
+        return harHotel;
     }
 
     public double getHusPris() {
@@ -56,19 +53,99 @@ public class EjendomCO extends EjeligtFeltDTO {
 
 
     /**
-     * Indsæt beskrivelse her
-     * @return
+     * @author Malte
+     * Henter hvad lejen er på grunden, ved et bestemt antal huse.
+     *
+     * @param antalHuse Antallet af huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
+     *                  Giver man et input over dette returnerer den lejen ved 4 huse, og giver man et input
+     *                  under dette returnerer den lejen ved 1 hus.
+     * @return Lejen ved det antal huse, der er blevet indtastet.
+     */
+    public int getLejeHus(int antalHuse){
+        // Justerer antalHuse, så det passer med index i arrayliste
+        antalHuse--;
+
+        if( antalHuse < 0 ) {
+            antalHuse = 0;
+        }else if( antalHuse > 3){
+            antalHuse = 3;
+        }
+        return lejeHus[antalHuse];
+    }
+
+
+    /**
+     * @author Malte
+     * @return Grundens leje hvis der står et hotel.
+     */
+    public int getLejeHotel(){
+        return lejeHotel;
+    }
+
+    /**
+     * @author Malte
+     * @return Grundens leje når der hverken er hotel eller huse på.
+     */
+    public int getLejeStart(){
+        return lejeStart;
+    }
+
+
+    /**
+     * @return Den totale leje for at lande på grunden.
      */
     public int getLeje() {
-        /* Ejendommens leje er vurderet ved standard lejen (leje),
-            og antallet huse. Hvert hus øger lejen med halvdelen af den originale leje */
-        int lejePerHus = leje/2;
-        int totalLeje = leje + lejePerHus*antalHuse;
-        return totalLeje;
+
+        // TODO: Skal rykkes over i spil logik
+        int leje = 0;
+        leje += getLejeStart();
+        if( getAntalHuse() > 0 ){
+            leje += getLejeHus(getAntalHuse());
+        }
+
+        if( harHotel ){
+            leje += getLejeHotel();
+        }
+
+        return leje;
     }
 
     public void setLeje(int leje) {
         this.leje = leje;
+
+        setLejeStart(leje);
+
+        //TODO: Det her skal rykkes over i spillogik
+        int lejePerHus = leje/2;
+        setLejeHus(lejePerHus, lejePerHus*2, lejePerHus*3, lejePerHus*4);
+        setLejeHotel(lejePerHus*5);
+    }
+
+    /**
+     * @param etHus     Lejen på grunden, når der står ét hus på.
+     * @param toHuse    Lejen på grunden, når der står to huse på.
+     * @param treHuse   Lejen på grunden, når der står tre huse på.
+     * @param fireHuse  Lejen på grunden, når der står fire huse på.
+     */
+    public void setLejeHus( int etHus, int toHuse, int treHuse, int fireHuse ){
+        lejeHus[0] = etHus;
+        lejeHus[1] = toHuse;
+        lejeHus[2] = treHuse;
+        lejeHus[3] = fireHuse;
+    }
+
+    /**
+     * @param lejeStart Lejen på grunden, når der står hverken hotel eller huse på.
+     */
+    public void setLejeStart(int lejeStart){
+        this.lejeStart = lejeStart;
+    }
+
+    /**
+     * @param lejeHotel Lejen af grunden, når der står et hotel på.
+     */
+    public void setLejeHotel(int lejeHotel){
+        this.lejeHotel = lejeHotel;
     }
 
 
@@ -108,6 +185,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
+            userInterfaceKontrakt.updateSpillere(spillerMedTur);
             this.indsamleLeje(spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
@@ -125,6 +203,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             //todo: enkapsuler dette på en ordenligt måde
             spilleren.setPenge(spilleren.getPenge()-getLeje());
             ejeren.addPenge(getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
+            userInterfaceKontrakt.updateSpillere(spilleren);
         }else{
             userInterfaceKontrakt.badErrorMessage();
         }
@@ -147,7 +226,6 @@ public class EjendomCO extends EjeligtFeltDTO {
         setNavn(whatName);
         setLeje(whatRent);
 
-        setAntalHoteller(0);
         setAntalHuse(0);
         setFeltType("Ejendom");
     }
