@@ -11,15 +11,16 @@ import ModelEnteties.EjendomsGruppeDTO;
  *
  */
 public class EjendomCO extends EjeligtFeltDTO {
-    //|-------initiering af objekter: -----------
 
-
-    //|--------- Variabler:-----------------
     private int     antalHuse;
     private int     antalHoteller;
     private double  husPris = 50;
     private int     leje = 50;
     private EjendomsGruppeDTO gruppe;
+    private int lejeHotel = 0;
+    private int lejeStart = 0;
+    private int[] lejeHus = {0,0,0,0};
+
 
     //|--------- Getters og Setters:-----------------
     public int getAntalHuse() {
@@ -52,6 +53,44 @@ public class EjendomCO extends EjeligtFeltDTO {
 
     public void setGruppe(EjendomsGruppeDTO gruppe) {
         this.gruppe = gruppe;
+    }
+
+
+    /**
+     * @author Malte
+     * Henter hvad lejen er på grunden, ved et bestemt antal huse.
+     *
+     * @param antalHuse Antallet af huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
+     *                  Giver man et input over dette returnerer den lejen ved 4 huse, og giver man et input
+     *                  under dette returnerer den lejen ved 1 hus.
+     * @return Lejen ved det antal huse, der er blevet indtastet.
+     */
+    public int getLejeHus(int antalHuse){
+        // Justerer antalHuse, så det passer med index i arrayliste
+        antalHuse--;
+
+        if( antalHuse < 0 ) {
+            antalHuse = 0;
+        }else if( antalHuse > 3){
+            antalHuse = 3;
+        }
+        return lejeHus[antalHuse];
+    }
+
+
+    /**
+     * @author Malte
+     * @return Grundens leje hvis der står et hotel.
+     */
+    public int getLejeHotel(){
+        return lejeHotel;
+    }
+
+    /**
+     * @return Grundens leje når der hverken er hotel eller huse på.
+     */
+    public int getLejeStart(){
+        return lejeStart;
     }
 
 
