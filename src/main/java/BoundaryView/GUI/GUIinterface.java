@@ -188,7 +188,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
        String num = gui.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
-                "1","20","24","28","32","36","40");
+                "16","20","24","28","32","36","40");
        int valg = Integer.parseInt(num);
        if(valg == 40){valg = 39;}
        /* while (true) {
