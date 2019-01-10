@@ -1,12 +1,15 @@
 package Controller;
 
+import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.SpilData;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
+import gui_main.GUI;
 import spillogik.BevaegelsesLogik;
 
 import java.util.Random;
@@ -15,22 +18,31 @@ public class SpilController extends SpilData {
 
     //|----------- Metoder:------------------
 
+    private UserInterfaceKontrakt ui;
+    private Spil spil;
+
     /**
      * Hvorfor 2 constructore?
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem. Dette er også meget nyttigt til test :)
      */
-    public SpilController(UserInterfaceKontrakt gui) {
-        this.setUserInterfaceKontrakt(gui);
+    public SpilController() {
+
+        this.setUserInterfaceKontrakt(new GUIinterface());
+
         startMenu();
+
         genererSpillere(getAntalSpillere());
         BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
         FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.genererGUIBret(spilleBret, getSpillerObjekter());
+
+        ui.genererGUIBret(spilleBret, getSpillerObjekter());
     }
+
+    public SpilController( Spil spil ){}
 
     public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
         this.setAntalSpillere(antalSpillere);
@@ -380,6 +392,69 @@ public class SpilController extends SpilData {
         }
 
     }
+
+
+    private Spil spilIndstillinger(){
+
+
+        return null;
+    }
+
+
+    private void indtastSpillerNavne() {
+
+        for( SpillerDTO spiller : spil.getSpillere()){
+            String navn = ui.spillerNavne();
+            spiller.setNavn(navn);
+        }
+
+    }
+
+
+    public void start(){
+
+        int input = 1;//getUserInterfaceKontrakt().velkomstMenu(1,4);
+
+        switch( input ){
+
+            case 1:
+                spil = new Spil();
+                break;
+
+            case 2:
+                spil = spilIndstillinger();
+                break;
+        }
+
+        indtastSpillerNavne();
+
+        koerSpil();
+
+
+
+        genererSpillere(getAntalSpillere());
+        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
+        setTerningeKrus(terningsKrus);
+        setBretGeneretForSpil(spilleBret);
+
+        ui.genererGUIBret(spilleBret, getSpillerObjekter());
+
+    }
+
+
+
+    public void koerSpil(){
+
+
+
+
+
+    }
+
+
+
 
 
 }
