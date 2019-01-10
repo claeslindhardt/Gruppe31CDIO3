@@ -81,5 +81,18 @@ public class BraetDTO {
         this.standardAntalChanceKortPrFelt = standardAntalChanceKortPrFelt;
     }
 
+    /**
+     * Laver 'bret' ArrayListen om til en FeltDTO-array
+     */
+    public FeltDTO[] getBretArray(){
+        // TODO: Denne skal fjernes når braettet bliver til et array i stedet for array list.
+        FeltDTO[] felter = new FeltDTO[bret.size()];
+
+        for( int i = 0; i < felter.length; i++){
+            felter[i] = bret.get(i);
+        }
+        return felter;
+    }
+
 
 }
