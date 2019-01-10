@@ -184,7 +184,7 @@ public class SpillerCO extends SpillerDTO {
      * @param ejendom Ejendommen man oensker at undersoege.
      * @return True: spilleren ejer den, False: spilleren ejer den ikke.
      */
-    boolean ejerEjendom(EjendomCO ejendom){
+    public boolean ejerEjendom(EjendomCO ejendom){
         return ejendom.getEjer() == this;
     }
 
@@ -195,7 +195,7 @@ public class SpillerCO extends SpillerDTO {
      * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
-    boolean ejerEjendomsGruppe(EjendomsGruppeDTO ejendomsGruppe){
+    public boolean ejerEjendomsGruppe(EjendomsGruppeDTO ejendomsGruppe){
         for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this){
                 return false;

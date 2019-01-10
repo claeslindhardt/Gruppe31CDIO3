@@ -1,5 +1,7 @@
 package spillogik;
 
+import Controller.SpillerCO;
+import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.felter.EjendomCO;
 
 public class EjendomsLogik {
@@ -9,18 +11,29 @@ public class EjendomsLogik {
     private EjendomsLogik(){}
 
 
+    // TODO: Implementer Jacobs i
+    public boolean huseErFordeltPaaGruppe( EjendomsGruppeDTO ejendomsGruppe, EjendomCO ejendomsUdgangspunkt ){
+        return true;
+    }
+
 
     public boolean kanKoebeHotel(){
         return false;
     }
 
 
-    public boolean kanKoebeHus(){
-        return false;
+    public boolean kanKoebeHus( SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+
+        return      spiller.ejerEjendom( ejendom )
+                &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
+                &&  huseErFordeltPaaGruppe( ejendomsGruppe, ejendom )
+                &&  ejendom.getAntalHuse() < 4
+                &&  !ejendom.harHotel()
+                &&  spiller.getPenge() > ejendom.getHusPris();
     }
 
 
-    public static int beregnLeje( EjendomCO ejendom, boolean harAlleIGruppe ){
+    public static int beregnLejeTotal( EjendomCO ejendom, boolean harAlleIGruppe ){
         int leje;
 
         if( ejendom.getAntalHuse() > 0 ){
