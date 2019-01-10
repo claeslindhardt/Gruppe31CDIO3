@@ -72,22 +72,25 @@ public class EjendomsLogik {
 
         }else{
             leje = ejendom.getLejeStart();
-
-            if( harAlleIGruppe ){
-                leje *= 2;
-            }
+            if( harAlleIGruppe ){  leje *= 2;  }
         }
-
         return leje;
     }
 
 
-
+    /**
+     * @author Malte
+     * Beregner lejen ved et bestemt antal huse for en Ejendom.
+     *
+     * @param ejendom       Ejendommen man vil beregne for
+     * @param antalHuse     Antallet af huse man vil beregne leje for
+     * @return Lejen på en Ejendom ved et bestemt antal huse.
+     */
     public static int beregnLejeVedHus(EjendomCO ejendom, int antalHuse){
 
         int lejePerHus = ejendom.getLejeStart() * 2;
 
-        return lejePerHus * antalHuse;
+        return ejendom.getLejeStart() + lejePerHus * antalHuse;
     }
 
 
