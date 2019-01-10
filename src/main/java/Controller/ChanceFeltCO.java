@@ -34,7 +34,7 @@ public class ChanceFeltCO extends AktionsFelterDTO {
         int muligeKort = spil.getBretGeneretForSpil().getStandardAntalChanceKortPrFelt();
         int vælgAktion = ra.nextInt(muligeKort)+1;
         ChanceAktionDTO relavantKort = KortPaaFelt.get(vælgAktion);
-        relavantKort.DirketeAktion();
+        relavantKort.DirketeAktion(spil, userInterfaceKontrakt);
     }
 
     /**
@@ -48,9 +48,9 @@ public class ChanceFeltCO extends AktionsFelterDTO {
     }
     //|--------- Constructor:-----------------
     public ChanceFeltCO(int placering, ArrayList<ChanceAktionDTO> chanceKortTilFelt){
+        setPlacering(placering);
         setFeltType("Chance Kort");
         setNavn("Prøv lykken");
-        setPlacering(getPlacering());
         this.setKortPaaFelt(chanceKortTilFelt);
     }
 }
