@@ -80,12 +80,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
                         + "Leje fra hus 2: " + ((EjendomCO) felt).getLejeHus(2) + " / "
                         + "Leje fra hus 3: " + ((EjendomCO) felt).getLejeHus(3) + " / "
                         + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
-                        + "Leje fra hus 5: " + ((EjendomCO) felt).getLejeHus(5) + " / "
                         + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
-                    gui_felt.setDescription("Jernbanepris: ");
+                    gui_felt.setDescription("Tag Toget");
                 }
                 else if (felt.getFeltType().equals("TaxiCO")){
                     gui_felt.setDescription("Tag en taxi");
