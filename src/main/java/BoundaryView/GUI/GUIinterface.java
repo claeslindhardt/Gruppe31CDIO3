@@ -187,23 +187,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
-       String num = gui.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
+       String input = gui.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
                 "16","20","24","28","32","36","40");
-       int valg = Integer.parseInt(num);
-       if(valg == 40){valg = 39;}
-       /* while (true) {
-            try {
-                int valg = gui.getUserInteger("Indtast antal felter på braettet");
-
-                if (valg <= 40 && valg >= 16 && (valg%4==0) ) {
-                    return valg-1;
-                }
-                gui.showMessage("Braettet kan desværre ikke være den størrelse, antallet skal være lige, " +
-                        "og det skal være mellem: 16 og 40, og dividerbart med 4");
-            } catch (Exception i) {
-                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
-            }
-        }*/ return valg;
+       return Integer.parseInt(input) - 1;
     }
 
     /**
