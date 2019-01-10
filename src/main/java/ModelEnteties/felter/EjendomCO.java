@@ -4,6 +4,7 @@ import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import spillogik.EjendomsLogik;
 
 
 /**__________________________________________________________________________________________________________________________________________________________
@@ -15,7 +16,7 @@ public class EjendomCO extends EjeligtFeltDTO {
     private boolean harHotel = false;
     private int     antalHuse = 0;
     private double  husPris = 50;
-    private int     leje = 50;
+    private int     leje = 0;
     private EjendomsGruppeDTO gruppe;
     private int lejeHotel = 0;
     private int lejeStart = 0;
@@ -92,33 +93,14 @@ public class EjendomCO extends EjeligtFeltDTO {
 
 
     /**
-     * @return Den totale leje for at lande på grunden.
+     * @author Malte
      */
     public int getLeje() {
-
-        // TODO: Skal rykkes over i spil logik
-        int leje = 0;
-        leje += getLejeStart();
-        if( getAntalHuse() > 0 ){
-            leje += getLejeHus(getAntalHuse());
-        }
-
-        if( harHotel ){
-            leje += getLejeHotel();
-        }
-
         return leje;
     }
 
     public void setLeje(int leje) {
         this.leje = leje;
-
-        setLejeStart(leje);
-
-        //TODO: Det her skal rykkes over i spillogik
-        int lejePerHus = leje/2;
-        setLejeHus(lejePerHus, lejePerHus*2, lejePerHus*3, lejePerHus*4);
-        setLejeHotel(lejePerHus*5);
     }
 
     /**
@@ -220,13 +202,22 @@ public class EjendomCO extends EjeligtFeltDTO {
     }
 
     //|--------- Constructor:-----------------
-    public EjendomCO(String whatName, int whatPrice, int whatRent, int placering){
+    public EjendomCO(String navn, int pris, int startLeje, int placering){
         setPlacering(placering);
-        setPris(whatPrice);
-        setNavn(whatName);
-        setLeje(whatRent);
+        setPris(pris);
+        setNavn(navn);
 
-        setAntalHuse(0);
+        setLejeStart(startLeje);
+
+        setLejeHus( EjendomsLogik.beregnLejeVedHus(this, 1),
+                    EjendomsLogik.beregnLejeVedHus(this, 2),
+                    EjendomsLogik.beregnLejeVedHus(this, 3),
+                    EjendomsLogik.beregnLejeVedHus(this, 4) );
+
+        setLejeHotel( EjendomsLogik.beregnLejeVedHotel(this) );
+
+        setLeje(startLeje);
+
         setFeltType("Ejendom");
     }
 }

@@ -21,7 +21,7 @@ public class EjendomsLogik {
     }
 
 
-    public static boolean kanKoebeHotel(){
+    public static boolean   kanKoebeHotel(){
         // TODO: Implemener denne
         return false;
     }
@@ -91,6 +91,18 @@ public class EjendomsLogik {
         int lejePerHus = ejendom.getLejeStart() * 2;
 
         return ejendom.getLejeStart() + lejePerHus * antalHuse;
+    }
+
+
+    /**
+     * @author Malte
+     * Beregner lejen for en Ejendom, hvis der står et hotel på den.
+     *
+     * @param ejendom       Ejendommen man vil beregne for
+     * @return  Lejen på Ejendommen hvis der står et hotel
+     */
+    public static int beregnLejeVedHotel( EjendomCO ejendom ){
+        return beregnLejeVedHus(ejendom, 5);
     }
 
 

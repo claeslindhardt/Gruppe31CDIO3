@@ -4,6 +4,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import spillogik.BevaegelsesLogik;
+import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
@@ -42,7 +44,7 @@ public class SpillerCO extends SpillerDTO {
      * @param userInterfaceKontrakt UI'en der skal bruges til at vise det.
      */
     public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
-        penge += 200*gangeOverStart;
+        penge += BevaegelsesLogik.passererStartPenge(gangeOverStart);
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         userInterfaceKontrakt.updateSpillere(this);
     }
@@ -228,11 +230,13 @@ public class SpillerCO extends SpillerDTO {
      * Metode der koeber et hus på en ejendom for spilleren.
      * Dette inkluderer at bygge huset paa ejendom (ejendom.bygHuse),
      * og trække penge fra spilleren.
+     *
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
     public void koebHus(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
-        if( kanKoebeHus(ejendom) ){
+        if( EjendomsLogik.kanKoebeHus(this, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
+            ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, ejerEjendomsGruppe(ejendom.getGruppe())));
             addPenge(-ejendom.getHusPris());
             userInterfaceKontrakt.updateSpillere(this);
 
@@ -256,7 +260,7 @@ public class SpillerCO extends SpillerDTO {
                bygge et hus paa en ejendom.
              */
             for(int i = 0; i < ejendomme.length; i++){
-                if(kanKoebeHus(ejendomme[i])){
+                if( EjendomsLogik.kanKoebeHus(this, ejendomme[i], ejendomme[i].getGruppe()) ){
                     bebyggeligeEjendomme.add(ejendomme[i]);
                 }
             }
