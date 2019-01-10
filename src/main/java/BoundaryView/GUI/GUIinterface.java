@@ -73,8 +73,24 @@ public class GUIinterface implements UserInterfaceKontrakt {
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
+                gui_felt.setDescription("Grundleje: " + ((EjendomCO) felt).getLeje() + "\n" + "Huspris: " + ((EjendomCO) felt).getHusPris());
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
+                if (felt.getFeltType().equals("JernbaneCO")){
+                    gui_felt.setDescription("Jernbanepris: ");
+                }
+                else if (felt.getFeltType().equals("TaxiCO")){
+                    gui_felt.setDescription("Tag en taxi");
+                }
+                else if (felt.getFeltType().equals("Chance Kort")){
+                    gui_felt.setDescription("Prøv lykken");
+                }
+                else if (felt.getFeltType().equals("Fængsel")){
+                    gui_felt.setDescription("På besøg");
+                }
+                else if (felt.getFeltType().equals("Gå i fængsel")){
+                    gui_felt.setDescription("Du har brudt loven, gå i fængsel!");
+                }
             }
         }
 
