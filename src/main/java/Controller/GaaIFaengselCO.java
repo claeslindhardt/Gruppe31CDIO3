@@ -17,6 +17,7 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
         //Kan lave et braet objekt da der gaaIfængselfeltet altid ligger det samme sted, nemlig felt nr. 1.
         BraetCO braet =new BraetCO(20,userInterfaceKontrakt);
         spillerMedTur.setSpillerPosition(1);
+
         userInterfaceKontrakt.iFaengselMedDig();
         userInterfaceKontrakt.duErLandetPå(braet.getBret().get(1), spillerMedTur);
 
