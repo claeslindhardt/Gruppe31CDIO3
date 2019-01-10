@@ -10,17 +10,38 @@ public class EjendomsLogik {
     private EjendomsLogik(){}
 
 
-    // TODO: Implementer Jacobs i
+    /**
+     * @param ejendomsGruppe        Ejendomsgruppen man vil undersøge
+     * @param ejendomsUdgangspunkt  Udgangspunktet for undersøgelsen
+     * @return  Om huse er fordeligt ligeligt i ejendomsgruppen
+     */
     public static boolean huseErFordeltIGruppe( EjendomsGruppeDTO ejendomsGruppe, EjendomCO ejendomsUdgangspunkt ){
+        // TODO: Implementer Jacobs i
         return true;
     }
 
 
     public static boolean kanKoebeHotel(){
+        // TODO: Implemener denne
         return false;
     }
 
 
+    /**
+     * @author Malte
+     * Undersøger, om man kan koebe et hus paa en vilkårlig ejendom.
+     * Her tjekkes for at
+     *  1) man ejer ejendommen
+     *  2) man ejer alle ejendomme i gruppen
+     *  3) der er ligelig fordeling af huse paa ejendommene i gruppen (ikke implementeret)
+     *  4) antallet af huse er under 4
+     *  5) spilleren har nok penge til at koebe ejendommen.
+     *
+     * @param spiller           Spilleren som vil koebe
+     * @param ejendom           Ejendom som spilleren vil koebe hus paa
+     * @param ejendomsGruppe    Ejendomsgruppen som Ejendommen tilhoerer
+     * @return  Om man kan koebe hus eller ej.
+     */
     public static boolean kanKoebeHus( SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
@@ -32,6 +53,14 @@ public class EjendomsLogik {
     }
 
 
+    /**
+     * Beregner hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
+     * og om man ejer alle i Ejendomsgruppen.
+     *
+     * @param ejendom           Hvilken Ejendom man vil beregne leje for
+     * @param harAlleIGruppe    Om ejeren af Ejendommen har alle i 'ejendom's gruppe.
+     * @return
+     */
     public static int beregnLejeTotal( EjendomCO ejendom, boolean harAlleIGruppe ){
         int leje;
 
