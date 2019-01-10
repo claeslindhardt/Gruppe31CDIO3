@@ -87,6 +87,7 @@ public class EjendomCO extends EjeligtFeltDTO {
     }
 
     /**
+     * @author Malte
      * @return Grundens leje når der hverken er hotel eller huse på.
      */
     public int getLejeStart(){
@@ -95,19 +96,59 @@ public class EjendomCO extends EjeligtFeltDTO {
 
 
     /**
-     * Indsæt beskrivelse her
-     * @return
+     * @return Den totale leje for at lande på grunden.
      */
     public int getLeje() {
-        /* Ejendommens leje er vurderet ved standard lejen (leje),
-            og antallet huse. Hvert hus øger lejen med halvdelen af den originale leje */
-        int lejePerHus = leje/2;
-        int totalLeje = leje + lejePerHus*antalHuse;
-        return totalLeje;
+
+        // TODO: Skal rykkes over i spil logik
+        int leje = 0;
+        leje += getLejeStart();
+        leje += getLejeHus(getAntalHuse());
+
+        if( antalHoteller > 0){
+            leje += getLejeHotel();
+        }
+
+        return leje;
     }
 
     public void setLeje(int leje) {
         this.leje = leje;
+
+        setLejeStart(leje);
+
+        //TODO: Det her skal rykkes over i spillogik
+        int lejePerHus = leje/2;
+        setLejeHus(lejePerHus, lejePerHus*2, lejePerHus*3, lejePerHus*4);
+        setLejeHotel(lejePerHus*5);
+
+    }
+
+    /**
+     * @param etHus     Lejen på grunden, når der står ét hus på.
+     * @param toHuse    Lejen på grunden, når der står to huse på.
+     * @param treHuse   Lejen på grunden, når der står tre huse på.
+     * @param fireHuse  Lejen på grunden, når der står fire huse på.
+     */
+    public void setLejeHus( int etHus, int toHuse, int treHuse, int fireHuse ){
+        lejeHus[0] = etHus;
+        lejeHus[1] = toHuse;
+        lejeHus[2] = treHuse;
+        lejeHus[3] = fireHuse;
+    }
+
+    /**
+     * @param lejeStart Lejen på grunden, når der står hverken hotel eller huse på.
+     */
+    public void setLejeStart(int lejeStart){
+        this.lejeStart = lejeStart;
+    }
+
+    /**
+     * @param lejeHotel Lejen af grunden, når der står et hotel på.
+     */
+    public void setLejeHotel(int lejeHotel){
+        this.lejeHotel = lejeHotel;
     }
 
 
