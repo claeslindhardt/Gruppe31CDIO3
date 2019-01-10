@@ -6,27 +6,26 @@ import ModelEnteties.felter.EjendomCO;
 
 public class EjendomsLogik {
 
-
     /** Private constructor sikrer at man ikke kan lave objekter af klassen. */
     private EjendomsLogik(){}
 
 
     // TODO: Implementer Jacobs i
-    public boolean huseErFordeltPaaGruppe( EjendomsGruppeDTO ejendomsGruppe, EjendomCO ejendomsUdgangspunkt ){
+    public static boolean huseErFordeltIGruppe( EjendomsGruppeDTO ejendomsGruppe, EjendomCO ejendomsUdgangspunkt ){
         return true;
     }
 
 
-    public boolean kanKoebeHotel(){
+    public static boolean kanKoebeHotel(){
         return false;
     }
 
 
-    public boolean kanKoebeHus( SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+    public static boolean kanKoebeHus( SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
-                &&  huseErFordeltPaaGruppe( ejendomsGruppe, ejendom )
+                &&  huseErFordeltIGruppe( ejendomsGruppe, ejendom )
                 &&  ejendom.getAntalHuse() < 4
                 &&  !ejendom.harHotel()
                 &&  spiller.getPenge() > ejendom.getHusPris();
