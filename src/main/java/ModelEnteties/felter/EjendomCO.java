@@ -12,8 +12,8 @@ import ModelEnteties.EjendomsGruppeDTO;
  */
 public class EjendomCO extends EjeligtFeltDTO {
 
-    private int     antalHuse;
-    private int     antalHoteller;
+    private boolean harHotel = false;
+    private int     antalHuse = 0;
     private double  husPris = 50;
     private int     leje = 50;
     private EjendomsGruppeDTO gruppe;
@@ -31,12 +31,8 @@ public class EjendomCO extends EjeligtFeltDTO {
         this.antalHuse = antalHuse;
     }
 
-    public int getAntalHoteller() {
-        return antalHoteller;
-    }
-
-    public void setAntalHoteller(int antalHoteller) {
-        this.antalHoteller = antalHoteller;
+    public boolean harHotel(){
+        return harHotel;
     }
 
     public double getHusPris() {
@@ -103,9 +99,11 @@ public class EjendomCO extends EjeligtFeltDTO {
         // TODO: Skal rykkes over i spil logik
         int leje = 0;
         leje += getLejeStart();
-        leje += getLejeHus(getAntalHuse());
+        if( getAntalHuse() > 0 ){
+            leje += getLejeHus(getAntalHuse());
+        }
 
-        if( antalHoteller > 0){
+        if( harHotel ){
             leje += getLejeHotel();
         }
 
@@ -121,7 +119,6 @@ public class EjendomCO extends EjeligtFeltDTO {
         int lejePerHus = leje/2;
         setLejeHus(lejePerHus, lejePerHus*2, lejePerHus*3, lejePerHus*4);
         setLejeHotel(lejePerHus*5);
-
     }
 
     /**
@@ -229,7 +226,6 @@ public class EjendomCO extends EjeligtFeltDTO {
         setNavn(whatName);
         setLeje(whatRent);
 
-        setAntalHoteller(0);
         setAntalHuse(0);
         setFeltType("Ejendom");
     }

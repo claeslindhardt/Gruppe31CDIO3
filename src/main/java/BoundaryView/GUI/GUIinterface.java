@@ -513,7 +513,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         gui.showMessage("| FeltDTO nr: " + ej.getPlacering() +" | FeltDTO Navn:" + ej.getNavn()+" | FeltDTO type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
-                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
     }
 
