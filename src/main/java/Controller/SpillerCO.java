@@ -51,7 +51,7 @@ public class SpillerCO extends SpillerDTO {
      * Indsæt beskrivelse her
      * @param userInterfaceKontrakt
      */
-    public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
+    public void chanceKortMuligheder(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFeltCO
@@ -60,22 +60,22 @@ public class SpillerCO extends SpillerDTO {
         if(getSpillerAktionsKort().size()>0){
             //Her printes de forskellige muligher:
             userInterfaceKontrakt.chanceKortHar();
-            for(int i = 0; i<getSpillerAktionsKort().size();i++){
+            /*for(int i = 0; i<getSpillerAktionsKort().size();i++){
                 userInterfaceKontrakt.chanceKortNr(i,this);
-            }
+            }*/
 
             //Her er controlleren der lader en reagere på mulighederne
 
-            int valg = userInterfaceKontrakt.chanceKortsVejledning();
-            if(valg == -1){ }
-            else if(valg != -1){
-                getSpillerAktionsKort().get(valg).BetingetAktion();
+            int valg = userInterfaceKontrakt.chanceKortNr(this);
+            //if(valg == -1){ }
+            //else if(valg != -1){
+                getSpillerAktionsKort().get(valg).BetingetAktion(spil,userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }
-        }else{
+        //}else{
             userInterfaceKontrakt.ingenChanceKort();
         }
-    }
+    //}
 
     /**
      * Indsæt beskrivelse her

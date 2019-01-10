@@ -352,7 +352,7 @@ public class SpilController extends SpilData {
                 slutSpillerTur();
                 break;
             case 3:
-                getSpillerMedTur().chanceKortMuligheder(getUserInterfaceKontrakt());
+                getSpillerMedTur().chanceKortMuligheder(this,getUserInterfaceKontrakt());
                 break;
             case 4:
                 getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());

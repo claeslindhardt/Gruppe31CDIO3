@@ -177,10 +177,11 @@ public class TUI implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         System.out.println("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerCO spiller){
-        System.out.println("Chance kort nr. "+i+": ");
-        System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
-
+    public int chanceKortNr(SpillerCO spiller){
+        //Her er der fjernet parameteren i
+        System.out.println("Chance kort nr. : ");
+        //System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+        return 0;
     }
     public int chanceKortsVejledning(){
         System.out.println("-------------------------------");

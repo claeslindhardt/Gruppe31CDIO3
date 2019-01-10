@@ -51,7 +51,6 @@ public class ChanceFeltCO extends AktionsFelterDTO {
         setPlacering(placering);
         setFeltType("Chance Kort");
         setNavn("Prøv lykken");
-        setPlacering(getPlacering());
         this.setKortPaaFelt(chanceKortTilFelt);
     }
 }

@@ -30,6 +30,7 @@ public abstract class ChanceAktionDTO {
     //|--------- Variabler:----------------------
     private String beskrivelse;
     private int pengeVerdi;
+    private String kortBeskrivelse;
 
     private final String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
             " Du har penge udbetalt på aktier", " Doctor Who kidnappede dig"," Du fik gratis rosengin. Yaiiiii :)",
@@ -52,6 +53,12 @@ public abstract class ChanceAktionDTO {
         this.beskrivelse = beskrivelse;
     }
 
+    public void setKortBeskrivelse(String kortBeskrivelse){
+        this.kortBeskrivelse = kortBeskrivelse;
+    }
+
+    public String getKortBeskrivelse(){return kortBeskrivelse;}
+
     public int getPengeVerdi() {
         return pengeVerdi;
     }
@@ -70,5 +77,5 @@ public abstract class ChanceAktionDTO {
 
     //|----------- Metoder:----------------------
     public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
-    public void BetingetAktion(){ }
+    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
 }
