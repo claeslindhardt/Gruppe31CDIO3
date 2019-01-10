@@ -339,6 +339,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         int terning1=tern.get(0);
         int terning2=tern.get(1);
         Random rand = new Random();
+        //Angiver, position af terningerne
         int x1 = rand.nextInt(8)+2;
         int y1 = rand.nextInt(8)+2;
         int x2 = rand.nextInt(8)+2;
@@ -401,7 +402,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         }
         String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias);
-        //gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+
         int valgKort=0;
         for(int i = 0; i < alias.length;i++) {
             if (valg.equalsIgnoreCase(alias[i])){
@@ -558,7 +559,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
     public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
-        gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
+        String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
+        if(felt.getPlacering()==1){
+            str = str2;
+        }else str = str1;
+
+
+
+        gui.showMessage(str+felt.getPlacering()+": "+felt.getNavn());
         GUI_Player guiSpiller = spillere.get(spiller.getId());
         rykBil(guiSpiller,felt.getPlacering());
     }
