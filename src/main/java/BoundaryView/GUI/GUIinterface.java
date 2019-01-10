@@ -74,7 +74,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
-                gui_felt.setDescription("Grundleje: " + ((EjendomCO) felt).getLeje() + "\n" + "Huspris: " + ((EjendomCO) felt).getHusPris());
+                gui_felt.setDescription("Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
+                        + "Huspris: " + ((EjendomCO) felt).getHusPris() + " / "
+                        + "Leje fra hus 1: " + ((EjendomCO) felt).getLejeHus(1) + " / "
+                        + "Leje fra hus 2: " + ((EjendomCO) felt).getLejeHus(2) + " / "
+                        + "Leje fra hus 3: " + ((EjendomCO) felt).getLejeHus(3) + " / "
+                        + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
+                        + "Leje fra hus 5: " + ((EjendomCO) felt).getLejeHus(5) + " / "
+                        + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
