@@ -40,9 +40,10 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String grund = getPositiveGrunde()[valgAfGrund];
         String slutBeskrivelse = " Derfor syntes vi at du er så god en borger," +
-                "\nat du fortjener at komme engang gratis ud af fængsel. ";
+                "at du fortjener at komme engang gratis ud af fængsel. ";
         String forklaring = grund.concat(slutBeskrivelse);
 
         this.setBeskrivelse(forklaring);
+        this.setKortBeskrivelse("Kom gratis ud af faengsel");
     }
 }

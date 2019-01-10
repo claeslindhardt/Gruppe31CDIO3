@@ -38,5 +38,6 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         String forklaring = startBeskrivelse.concat(grund);
 
         this.setBeskrivelse(forklaring);
+        this.setKortBeskrivelse("Kom gratis med taxa");
     }
 }

@@ -20,6 +20,7 @@ public class GiverPengeCO extends ChanceAktionDTO {
         userInterfaceKontrakt.printChanceKortDirekte(this);
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()+getPengeVerdi());
+        userInterfaceKontrakt.updateSpillere(spil.getSpillerMedTur());
     }
     public void BetingetAktion(){ }
 

@@ -1,4 +1,8 @@
 package ModelEnteties.felter;
+
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.SpilController;
+
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: AktionsFelterDTO
  *
@@ -12,4 +16,7 @@ package ModelEnteties.felter;
  *          5. FaengselCO
  */
 public abstract class AktionsFelterDTO extends FeltDTO {
+
+    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
+    }
 }

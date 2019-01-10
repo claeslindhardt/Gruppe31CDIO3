@@ -74,8 +74,30 @@ public class GUIinterface implements UserInterfaceKontrakt {
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
+                gui_felt.setDescription("Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
+                        + "Huspris: " + ((EjendomCO) felt).getHusPris() + " / "
+                        + "Leje fra hus 1: " + ((EjendomCO) felt).getLejeHus(1) + " / "
+                        + "Leje fra hus 2: " + ((EjendomCO) felt).getLejeHus(2) + " / "
+                        + "Leje fra hus 3: " + ((EjendomCO) felt).getLejeHus(3) + " / "
+                        + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
+                        + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
+                if (felt.getFeltType().equals("JernbaneCO")){
+                    gui_felt.setDescription("Tag Toget");
+                }
+                else if (felt.getFeltType().equals("TaxiCO")){
+                    gui_felt.setDescription("Tag en taxi");
+                }
+                else if (felt.getFeltType().equals("Chance Kort")){
+                    gui_felt.setDescription("Prøv lykken");
+                }
+                else if (felt.getFeltType().equals("Fængsel")){
+                    gui_felt.setDescription("På besøg");
+                }
+                else if (felt.getFeltType().equals("Gå i fængsel")){
+                    gui_felt.setDescription("Du har brudt loven, gå i fængsel!");
+                }
             }
         }
 
@@ -369,10 +391,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerCO spiller){
-        gui.showMessage("Chance kort nr. "+i+": ");
-        gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+    public int chanceKortNr(SpillerCO spiller){
+        int laengde = spiller.getSpillerAktionsKort().size();
 
+        String[] alias = new String[laengde];
+
+        for(int j = 0; j < spiller.getSpillerAktionsKort().size();j++) {
+            alias[j] = spiller.getSpillerAktionsKort().get(j).getKortBeskrivelse();
+
+        }
+        String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias);
+        //gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+        int valgKort=0;
+        for(int i = 0; i < alias.length;i++) {
+            if (valg.equalsIgnoreCase(alias[i])){
+                valgKort = alias[i].indexOf(valg);
+
+            }
+        }
+        return valgKort;
     }
     public int chanceKortsVejledning(){
         int valg = gui.getUserInteger("Intast nummeret på det chance kort du gerne vil aktiverer");
