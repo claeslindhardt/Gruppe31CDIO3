@@ -1,5 +1,6 @@
 package ModelEnteties.felter;
 
+import Controller.HandelsController;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
@@ -16,6 +17,7 @@ public class EjendomCO extends EjeligtFeltDTO {
     private boolean harHotel = false;
     private int     antalHuse = 0;
     private double  husPris = 50;
+    private double  hotelPris = 100;
     private int     leje = 0;
     private EjendomsGruppeDTO gruppe;
     private int lejeHotel = 0;
@@ -38,6 +40,12 @@ public class EjendomCO extends EjeligtFeltDTO {
 
     public double getHusPris() {
         return husPris;
+    }
+
+    public double getHotelPris(){return hotelPris;}
+
+    public void setHotelPris(double hotelPris) {
+        this.hotelPris = hotelPris;
     }
 
     public void setHusPris(double husPris) {
@@ -147,7 +155,8 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
@@ -168,7 +177,7 @@ public class EjendomCO extends EjeligtFeltDTO {
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
             userInterfaceKontrakt.updateSpillere(spillerMedTur);
-            this.indsamleLeje(spillerMedTur, userInterfaceKontrakt);
+            handel.indsamleLeje(this,spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
         }
@@ -179,17 +188,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param spilleren
      * @param userInterfaceKontrakt
      */
-    public void indsamleLeje(SpillerCO spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO ejeren = this.getEjer();
-        if( ejeren != null && spilleren != null) {
-            //todo: enkapsuler dette på en ordenligt måde
-            spilleren.setPenge(spilleren.getPenge()-getLeje());
-            ejeren.addPenge(getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
-            userInterfaceKontrakt.updateSpillere(spilleren);
-        }else{
-            userInterfaceKontrakt.badErrorMessage();
-        }
-    }
+
 
 
     /** @author Malte

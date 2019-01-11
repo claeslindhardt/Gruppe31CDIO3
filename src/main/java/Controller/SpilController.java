@@ -189,8 +189,8 @@ public class SpilController extends SpilData {
         spiller.setSpillerPosition(felt.getPlacering());
 
         getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
-
-        felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+        HandelsController handel = new HandelsController();
+        felt.aktionPaaFelt(handel,this, getUserInterfaceKontrakt());
     }
 
 

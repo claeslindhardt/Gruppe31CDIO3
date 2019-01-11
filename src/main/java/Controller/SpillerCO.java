@@ -9,6 +9,8 @@ import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
+import static spillogik.EjendomsLogik.kanKoebeHotel;
+
 
 public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
@@ -278,6 +280,8 @@ public class SpillerCO extends SpillerDTO {
             ui.ejerIngenEjendomme();
         }
     }
+
+
 //----------------------Constructor-----------------------------------------------------------------------------------//
     public SpillerCO(String NAVN, int ID, int position){
         setSpillerPosition(position);
