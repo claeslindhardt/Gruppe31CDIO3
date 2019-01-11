@@ -105,7 +105,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
 
         this.felter = felter;
-        gui = new GUI(felter,new Color(218,206,179));
+        gui = new GUI( felter, new Color(218,206,179));
 
         // Laver spilleres grafiske elementer
         for(int i=0;i<spillere.size();i++){
@@ -649,6 +649,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void startSpil(Spil spil) {
 
         genererGUIBret(spil.getBraet(), spil.getSpillereArrayList());
+
+        hovedmenu = null;
 
     }
 

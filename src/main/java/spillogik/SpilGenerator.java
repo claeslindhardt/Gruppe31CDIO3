@@ -1,5 +1,7 @@
 package spillogik;
 
+import BoundaryView.TUI.TUI;
+import Controller.BraetCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
@@ -23,15 +25,17 @@ public class SpilGenerator {
 
 
     public static BraetDTO genererBraet(int antalFelter){
-        BraetDTO braet = new BraetDTO();
+        BraetDTO braet = new BraetCO( antalFelter, new TUI() );
 
 
         return braet;
     }
 
 
-    public static ChanceAktionDTO[] genererChanceKort(int antalKort){
+    public static ChanceAktionDTO[] genererChanceKort(int antalKort ){
         ChanceAktionDTO[] chanceKort = new ChanceAktionDTO[antalKort];
+
+
 
 
         return chanceKort;
@@ -50,7 +54,7 @@ public class SpilGenerator {
     }
 
     public static Spil genererSpil(){
-        return genererSpil( 4, 40, 40, 1500);
+        return genererSpil( 4, 39, 40, 1500);
     }
 
 

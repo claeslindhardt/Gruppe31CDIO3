@@ -15,6 +15,15 @@ public class Spil {
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
+
+    public ChanceAktionDTO[] getChanceKort() {
+        return chanceKort;
+    }
+
+    public void setChanceKort(ChanceAktionDTO[] chanceKort) {
+        this.chanceKort = chanceKort;
+    }
+
     private ChanceAktionDTO[] chanceKort;
 
     private  int bankerotGraense = 0;
@@ -69,8 +78,9 @@ public class Spil {
     }
 
     public void setChanceKort(){
-
     }
+
+    public void
 
 
     public int getAntalSpillere(){
