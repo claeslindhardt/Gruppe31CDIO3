@@ -2,7 +2,6 @@ package BoundaryView.GUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import Controller.SpillerCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
@@ -394,7 +393,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chance Kort:");
     }
-    public int chanceKortNr(SpillerCO spiller){
+    public int chanceKortNr(SpillerDTO spiller){
         int laengde = spiller.getSpillerAktionsKort().size();
 
         String[] alias = new String[laengde];
@@ -444,7 +443,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Din position er: "+ pos+
                 "\nDu har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerCO spiller){
+    public void spillerStat(SpillerDTO spiller){
         gui.showMessage("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -518,7 +517,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    public void updateSpillere(SpillerCO spiller){
+    public void updateSpillere(SpillerDTO spiller){
 
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
@@ -560,7 +559,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
+    public void duErLandetPå(FeltDTO felt, SpillerDTO spiller){
         gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
         GUI_Player guiSpiller = spillere.get(spiller.getId());
         rykBil(guiSpiller,felt.getPlacering());
@@ -575,7 +574,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         return input.binartValg(valg);
     }
-    public void spillerEjendele(SpillerCO spiller){
+    public void spillerEjendele(SpillerDTO spiller){
         gui.showMessage("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);

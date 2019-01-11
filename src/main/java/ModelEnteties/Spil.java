@@ -9,12 +9,13 @@ import java.util.ArrayList;
 
 public class Spil {
 
-    private int spillerTur;
+    private int spillerTur = 1;
 
     private SpillerDTO[] spillere;
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
+
 
     public ChanceAktionDTO[] getChanceKort() {
         return chanceKort;
@@ -61,11 +62,11 @@ public class Spil {
         this.ui = ui;
     }
 
-    public RafleBaeger getRafleBaeger() {
+    public RafleBaeger getRaflebaeger() {
         return rafleBaeger;
     }
 
-    public void setRafleBaeger(RafleBaeger rafleBaeger) {
+    public void setRaflebaeger(RafleBaeger rafleBaeger) {
         this.rafleBaeger = rafleBaeger;
     }
 
@@ -80,16 +81,26 @@ public class Spil {
     public void setChanceKort(){
     }
 
-    public void
+    public int getBankeraadGraense(){return 0;}
 
 
     public int getAntalSpillere(){
         return spillere.length;
     }
 
+    public int getAntalFelter(){ return braet.getBret().size(); }
+
     public SpillerDTO getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
     }
+
+
+    public SpillerDTO getSpillerMedTur(){
+        return spillere[spillerTur];
+    }
+
+    // TODO: Fjern denne
+    public void setVinder(int i){}
 
     // TODO: Fjern denne!
     public ArrayList<SpillerDTO> getSpillereArrayList(){

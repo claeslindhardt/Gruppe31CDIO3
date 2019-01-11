@@ -90,11 +90,11 @@ public class SpillerCO extends SpillerDTO {
 
         this.setHarSlaaetForTuren(true);
 
-        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getAntalFelter());
-        if(destination>spil.getAntalFelter() || destination< 1 ){
+        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
+        if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
-            spil.rykSpillerTilFelt(this, spil.getBretGeneretForSpil().getBret().get(destination),1);
+            spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
         }
     }
     //_____________________________________

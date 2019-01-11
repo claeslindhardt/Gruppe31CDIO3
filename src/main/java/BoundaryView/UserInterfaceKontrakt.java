@@ -1,7 +1,6 @@
 package BoundaryView;
 
 import Controller.*;
-import Controller.SpillerCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
@@ -48,13 +47,13 @@ public interface UserInterfaceKontrakt {
     void duGavIkkeOp();
     void passeringAfStart(int gangeOverStart);
     void chanceKortHar();
-    int chanceKortNr(SpillerCO spiller);
+    int chanceKortNr(SpillerDTO spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
     int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
-    void spillerStat(SpillerCO spiller);
+    void spillerStat(SpillerDTO spiller);
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
@@ -76,10 +75,10 @@ public interface UserInterfaceKontrakt {
     void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
-    void duErLandetPå(FeltDTO felt, SpillerCO spiller);
+    void duErLandetPå(FeltDTO felt, SpillerDTO spiller);
     void badErrorMessage();
     int ejendomsBud();
-    void spillerEjendele(SpillerCO spiller);
+    void spillerEjendele(SpillerDTO spiller);
     void bretPrinter(String felt);
     void terminalLine();
     void chanceKortGenereringsFejl();
@@ -94,7 +93,7 @@ public interface UserInterfaceKontrakt {
     void genererGUIBret(BraetDTO braet, ArrayList<SpillerDTO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
-    void updateSpillere(SpillerCO spiller);
+    void updateSpillere(SpillerDTO spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
 }
