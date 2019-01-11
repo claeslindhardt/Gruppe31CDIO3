@@ -9,6 +9,7 @@ import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.navneGenerering.EjendomsDoeber;
 import ModelEnteties.navneGenerering.JernbaneDoeber;
 import ModelEnteties.felter.ChanceAktionDTO;
+import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
