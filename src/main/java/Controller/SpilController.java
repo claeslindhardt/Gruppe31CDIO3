@@ -1,7 +1,6 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.SpilData;
 import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
@@ -54,11 +53,40 @@ public class SpilController extends SpilData {
      * @param antalSpillere
      */
     public void genererSpillere(int antalSpillere) {
+
         for (int i = 0; i < antalSpillere; i++) {
+
             String navn = getUserInterfaceKontrakt().spillerNavne();
             SpillerCO deltager = new SpillerCO(navn, i, 0);
+
+            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
+            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
+            boolean harNavn = kontrollerNavn(navn);
+            while(harNavn){
+                getUserInterfaceKontrakt().spillerMaaIkkeEns();
+                String nytNavn =  getUserInterfaceKontrakt().spillerNavne();
+                    if(!kontrollerNavn(nytNavn)){
+                        deltager.setNavn(nytNavn);
+                        harNavn = kontrollerNavn(nytNavn);
+                    }
+            }
             getSpillerObjekter().add(deltager);
+
+
         }
+    }
+
+    public boolean kontrollerNavn(String navn){
+        String tjek = navn;
+        boolean harAllerede = false;
+        for(int i = 0; i < getSpillerObjekter().size();i++){
+            if(getSpillerObjekter().get(i).getNavn().equalsIgnoreCase(tjek)){
+                harAllerede = true;
+            }else {
+                harAllerede = false;
+            }
+        }
+        return harAllerede;
     }
 
     /**

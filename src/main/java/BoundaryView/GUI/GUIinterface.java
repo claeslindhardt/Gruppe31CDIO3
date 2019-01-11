@@ -641,4 +641,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void kanIkkeSlaaFaengsel(){
         gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
+
+   public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
+
+    public void spillerMaaIkkeEns(){gui.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 }
