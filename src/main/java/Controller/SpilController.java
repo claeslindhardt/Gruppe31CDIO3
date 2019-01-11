@@ -11,12 +11,11 @@ import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
 import gui_main.GUI;
 import spillogik.BevaegelsesLogik;
+import spillogik.SpilGenerator;
 
 import java.util.Random;
 
 public class SpilController extends SpilData {
-
-    //|----------- Metoder:------------------
 
     private UserInterfaceKontrakt ui;
     private Spil spil;
@@ -26,7 +25,7 @@ public class SpilController extends SpilData {
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
      * vælge dem. Dette er også meget nyttigt til test :)
      */
-    public SpilController() {
+    /*public SpilController() {
 
         this.setUserInterfaceKontrakt(new GUIinterface());
 
@@ -40,9 +39,24 @@ public class SpilController extends SpilData {
         setBretGeneretForSpil(spilleBret);
 
         ui.genererGUIBret(spilleBret, getSpillerObjekter());
+
+    }
+*/
+
+
+    public void setSpil(Spil spil){
+        this.spil = spil;
     }
 
-    public SpilController( Spil spil ){}
+
+    public SpilController(UserInterfaceKontrakt ui){
+        this.ui = ui;
+    }
+
+    public SpilController(){
+        ui = new GUIinterface();
+    }
+
 
     public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
         this.setAntalSpillere(antalSpillere);
@@ -251,7 +265,6 @@ public class SpilController extends SpilData {
                 setVinderFindes(true);
                 setKør(false);
             }
-
         }
     }
 
@@ -395,10 +408,30 @@ public class SpilController extends SpilData {
 
 
     private Spil spilIndstillinger(){
+        Random random = new Random();
 
+        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
+        int antalSpillere = ui.instilingsSporgsmaall(2,11);
+        int bankerotGraense = ui.instilingsSporgsmaal3(0, 99999);
+        int startPenge = 1500; // ui.inputStartPenge()
 
+        // SpillerDTO spillere = lavSpillere( antalSpillere, int startPenge );
+
+        // BraetCO braet = new BraetCO( antalFelter );
+
+        /*
+        Spil spil = new Spil()
+        spil.setSpillere(spillere)
+        spil.setBankerotGraense(bankerotGraense)
+        spil.setBraet(braet)
+        */
+
+        //return spil
         return null;
     }
+
+
+
 
 
     private void indtastSpillerNavne() {
@@ -446,10 +479,6 @@ public class SpilController extends SpilData {
 
 
     public void koerSpil(){
-
-
-
-
 
     }
 

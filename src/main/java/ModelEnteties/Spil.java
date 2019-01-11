@@ -2,9 +2,7 @@ package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Terning.RafleBaeger;
-
-
-
+import ModelEnteties.felter.ChanceAktionDTO;
 
 
 public class Spil {
@@ -15,6 +13,7 @@ public class Spil {
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
+    private ChanceAktionDTO[] chanceKort;
 
     private  int bankerotGraense = 0;
     private  boolean kør = true;
