@@ -149,6 +149,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
 
@@ -169,7 +170,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             userInterfaceKontrakt.betalRente();
             userInterfaceKontrakt.updateSpillere(spillerMedTur);
             this.indsamleLeje(spillerMedTur, userInterfaceKontrakt);
-        }else if(this.getEjer() == spillerMedTur){
+    }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
         }
     }

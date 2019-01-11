@@ -370,13 +370,13 @@ public class SpilController{
                 slutSpillerTur();
                 break;
             case 3:
-                /*spil.getSpillerMedTur().chanceKortMuligheder(this,ui);*/
+                spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
                 break;
             case 4:
-                /*spil.getSpillerMedTur().visEjendeFelter(ui);*/
+                spil.getSpillerMedTur().visEjendeFelter(ui);
                 break;
             case 5:
-                //spilleBret.printBret(ui);
+                /*spilleBret.printBret(ui);*/
                 break;
             case 6:
                 printSpilleresInfo();

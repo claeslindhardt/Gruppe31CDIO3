@@ -2,6 +2,7 @@ package ModelEnteties;
 
 import Controller.EjendomsGruppeCO;
 import Controller.JernbaneCO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 
 import java.util.ArrayList;
@@ -22,8 +23,15 @@ public class BraetDTO {
     private int standardAntalChanceKortPrFelt = 12;
     private ArrayList<JernbaneCO> jernbaner= new ArrayList<JernbaneCO>();
 
+    public EjendomCO[] getEjendomme() {
+        return ejendomme;
+    }
 
+    public void setEjendomme(EjendomCO[] ejendomme) {
+        this.ejendomme = ejendomme;
+    }
 
+    private EjendomCO[] ejendomme;
     private EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
     //|--------- Getters og Setters:-----------------

@@ -517,7 +517,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void updateSpillere(SpillerCO spiller){
-
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);

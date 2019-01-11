@@ -4,7 +4,10 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
+import ModelEnteties.Terning.FalskRaflebaeger;
+import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.FeltDTO;
 import org.junit.jupiter.api.Test;
 import spillogik.SpilGenerator;
 
@@ -15,22 +18,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SpilControllerTest {
 
-    @Test
-    void enTest(){
-
-        SpillerCO spiller1 = new SpillerCO();
-        SpillerCO spiller2 = new SpillerCO();
-
-        spiller1.setNavn("Malte");
-        spiller1.setPenge(10000);
-
+    public static void main(String[] args) {
         Spil spil = SpilGenerator.genererSpil(3, 39,40,1500);
         spil.getSpiller(0).setNavn("Malte");
-        spil.getSpiller(0).setPenge(9999);
+        spil.getSpiller(0).setPenge(9999999);
+        spil.setRaflebaeger( new FalskRaflebaeger(2) );
+
+
+        for( FeltDTO felt : spil.getBraet().getBret() ){
+            if( felt instanceof EjeligtFeltDTO ){
+                System.out.println("fundet felt");
+                ((EjeligtFeltDTO)  felt).setEjer(spil.getSpiller(0));
+            }
+        }
 
         SpilController spilController = new SpilController();
         spilController.setSpil(spil);
         spilController.koerSpil();
+
     }
 
 }

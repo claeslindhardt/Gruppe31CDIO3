@@ -10,6 +10,7 @@ public class EjendomsLogik {
     private EjendomsLogik(){}
 
 
+
     /**
      * @param ejendomsGruppe        Ejendomsgruppen man vil undersøge
      * @param ejendomsUdgangspunkt  Udgangspunktet for undersøgelsen

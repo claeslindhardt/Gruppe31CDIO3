@@ -4,6 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.felter.EjendomCO;
 
 import java.util.ArrayList;
 
@@ -82,6 +83,15 @@ public class Spil {
     public void setChanceKort(){
     }
 
+
+    public EjendomCO getEjendomme(){
+
+
+
+
+        return null;
+    }
+
     public int getBankeraadGraense(){return 0;}
 
 
@@ -97,7 +107,7 @@ public class Spil {
 
 
     public SpillerCO getSpillerMedTur(){
-        return spillere[spillerTur];
+        return spillere[spillerTur-1];
     }
 
     // TODO: Fjern denne
