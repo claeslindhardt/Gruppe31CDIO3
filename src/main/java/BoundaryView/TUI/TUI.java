@@ -5,7 +5,6 @@ import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -178,7 +177,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         System.out.println("Du har foelgende Chance Kort:");
     }
-    public int chanceKortNr(SpillerDTO spiller){
+    public int chanceKortNr(SpillerCO spiller){
         //Her er der fjernet parameteren i
         System.out.println("Chance kort nr. : ");
         //System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
@@ -218,7 +217,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Din position er: "+ pos);
         System.out.println("Du har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerDTO spiller){
+    public void spillerStat(SpillerCO spiller){
         System.out.println("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -290,7 +289,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
         System.out.println("Du kan koebe grunden hurra!!");
         System.out.println("Ejendommen er nu din!");
 
@@ -313,7 +312,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void betalRente(){
         System.out.println("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerDTO spiller){
+    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
         System.out.println("Du er landet på ");
     }
     public void badErrorMessage(){
@@ -326,7 +325,7 @@ public class TUI implements UserInterfaceKontrakt {
 
         return input.ejendomsBud();
     }
-    public void spillerEjendele(SpillerDTO spiller){
+    public void spillerEjendele(SpillerCO spiller){
         System.out.println("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);
@@ -402,7 +401,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerDTO> spillere){
+    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
 
     }
 
@@ -418,7 +417,7 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du er rejst til "+jernbane);
     }
 
-    public void updateSpillere(SpillerDTO spiller){};
+    public void updateSpillere(SpillerCO spiller){};
 
     public void kanIkkeSlaaFaengsel(){
         System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");

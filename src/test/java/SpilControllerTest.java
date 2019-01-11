@@ -2,10 +2,11 @@ import BoundaryView.TUI.TUI;
 import Controller.*;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
+import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
 import org.junit.jupiter.api.Test;
+import spillogik.SpilGenerator;
 
 import java.util.ArrayList;
 
@@ -17,23 +18,19 @@ class SpilControllerTest {
     @Test
     void enTest(){
 
-        SpillerDTO spiller1 = new SpillerDTO();
-        SpillerDTO spiller2 = new SpillerDTO();
+        SpillerCO spiller1 = new SpillerCO();
+        SpillerCO spiller2 = new SpillerCO();
 
         spiller1.setNavn("Malte");
         spiller1.setPenge(10000);
 
-        Spil spil = new Spil();
-        spil.setSpillere(spiller1, spiller2);
-
+        Spil spil = SpilGenerator.genererSpil(3, 39,40,1500);
+        spil.getSpiller(0).setNavn("Malte");
+        spil.getSpiller(0).setPenge(9999);
 
         SpilController spilController = new SpilController();
-        spilController.start();
-
+        spilController.setSpil(spil);
         spilController.koerSpil();
-
-
-
     }
 
 }

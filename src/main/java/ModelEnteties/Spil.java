@@ -1,6 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import Controller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 
@@ -11,7 +12,7 @@ public class Spil {
 
     private int spillerTur = 1;
 
-    private SpillerDTO[] spillere;
+    private SpillerCO[] spillere;
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
@@ -38,11 +39,11 @@ public class Spil {
         this.spillerTur = spillerTur;
     }
 
-    public SpillerDTO[] getSpillere() {
+    public SpillerCO[] getSpillere() {
         return spillere;
     }
 
-    public void setSpillere(SpillerDTO ... spillere) {
+    public void setSpillere(SpillerCO ... spillere) {
         this.spillere = spillere;
     }
 
@@ -90,12 +91,12 @@ public class Spil {
 
     public int getAntalFelter(){ return braet.getBret().size(); }
 
-    public SpillerDTO getSpiller( int spillerIndex ){
+    public SpillerCO getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
     }
 
 
-    public SpillerDTO getSpillerMedTur(){
+    public SpillerCO getSpillerMedTur(){
         return spillere[spillerTur];
     }
 
@@ -103,11 +104,11 @@ public class Spil {
     public void setVinder(int i){}
 
     // TODO: Fjern denne!
-    public ArrayList<SpillerDTO> getSpillereArrayList(){
+    public ArrayList<SpillerCO> getSpillereArrayList(){
 
-        ArrayList<SpillerDTO> spillere = new ArrayList<>();
+        ArrayList<SpillerCO> spillere = new ArrayList<>();
 
-        for( SpillerDTO spiller : this.spillere ){
+        for( SpillerCO spiller : this.spillere ){
             spillere.add(spiller);
         }
 

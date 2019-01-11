@@ -148,7 +148,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
 

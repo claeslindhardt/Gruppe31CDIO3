@@ -24,8 +24,8 @@ public class JernbaneCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void tagTog(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
-        ArrayList<JernbaneCO> jernbaner = spil.getBretGeneretForSpil().getJernbaner();
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        ArrayList<JernbaneCO> jernbaner = spil.getSpil().getBraet().getJernbaner();
         ArrayList<JernbaneCO> muligeRejser = new ArrayList<JernbaneCO>();
 
         for (int i=0; i<jernbaner.size();i++){
@@ -46,7 +46,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
             } else if(destination >= 0) {
                 int rykSpillerTil = muligeRejser.get(destination - 1).getPlacering();
                 spillerMedTur.setSpillerPosition(rykSpillerTil);
-                userInterfaceKontrakt.rejseBekraeftelse(spil.getBretGeneretForSpil().getBret().get(rykSpillerTil).getNavn());
+                userInterfaceKontrakt.rejseBekraeftelse(spil.getSpil().getBraet().getBret().get(rykSpillerTil).getNavn());
             }
         }else{
             userInterfaceKontrakt.manglerJernbaner();
@@ -59,7 +59,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null) {
 

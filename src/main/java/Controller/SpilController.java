@@ -77,17 +77,6 @@ public class SpilController{
     //_____________________________________
     // Diverse:
 
-    /**
-     * Indsæt beskrivelse her
-     * @param antalSpillere
-     */
-    public void genererSpillere(int antalSpillere) {
-        for (int i = 0; i < antalSpillere; i++) {
-            String navn = ui.spillerNavne();
-            SpillerCO deltager = new SpillerCO(navn, i, 0);
-            spil.getSpillereArrayList().add(deltager);
-        }
-    }
 
     /**
      * Indsæt beskrivelse her
@@ -185,7 +174,7 @@ public class SpilController{
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter( SpillerDTO spiller, int felterAtRykke ) {
+    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
         FeltDTO[] braet = spil.getBraet().getBretArray();
 
@@ -209,7 +198,7 @@ public class SpilController{
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerDTO spiller, FeltDTO felt, int gangeOverStart){
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));

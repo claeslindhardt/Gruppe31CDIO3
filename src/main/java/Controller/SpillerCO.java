@@ -279,10 +279,7 @@ public class SpillerCO extends SpillerDTO {
         }
     }
 //----------------------Constructor-----------------------------------------------------------------------------------//
-    public SpillerCO(String NAVN, int ID, int position){
-        setSpillerPosition(position);
-        setId(ID);
-        setNavn(NAVN);
+    public SpillerCO(){
     }
 
 

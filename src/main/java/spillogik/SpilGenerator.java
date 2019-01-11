@@ -2,6 +2,7 @@ package spillogik;
 
 import BoundaryView.TUI.TUI;
 import Controller.BraetCO;
+import Controller.SpillerCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
@@ -11,12 +12,13 @@ import ModelEnteties.felter.ChanceAktionDTO;
 public class SpilGenerator {
 
 
-    public static SpillerDTO[] genererSpillere( int antalSpillere, double startPenge ){
-        SpillerDTO[] spillere = new SpillerDTO[antalSpillere];
+    public static SpillerCO[] genererSpillere(int antalSpillere, double startPenge ){
+        SpillerCO[] spillere = new SpillerCO[antalSpillere];
 
         for( int i = 0; i < antalSpillere; i++   ){
-            SpillerDTO spiller = new SpillerDTO();
+            SpillerCO spiller = new SpillerCO();
             spiller.setPenge(startPenge);
+            spiller.setNavn("spiller"+(i+1));
             spillere[i] = spiller;
         }
 
@@ -48,7 +50,7 @@ public class SpilGenerator {
         spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
         spil.setBraet( genererBraet(antalFelter) );
         // spil.setChanceKort( genererChancekort);
-        spil.setRafleBaeger( new RafleBaeger(2));
+        spil.setRaflebaeger( new RafleBaeger(2));
 
         return spil;
     }

@@ -12,7 +12,7 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(true);
         spillerMedTur.setSpillerPosition(1);
         userInterfaceKontrakt.iFaengselMedDig();
