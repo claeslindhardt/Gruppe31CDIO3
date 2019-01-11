@@ -3,6 +3,7 @@ package spillogik;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
+import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 
 public class SpilGenerator {
@@ -37,7 +38,8 @@ public class SpilGenerator {
 
         spil.setSpillere( genererSpillere(antalSpillere) );
         spil.setBraet( genererBraet(antalFelter) );
-
+        // spil.setChanceKort( genererChancekort);
+        spil.setRafleBaeger( new RafleBaeger(2));
 
         return spil;
     }

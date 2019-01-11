@@ -66,6 +66,10 @@ public class Spil {
         this.kør = kør;
     }
 
+    public void setChanceKort(){
+
+    }
+
 
     public int getAntalSpillere(){
         return spillere.length;
