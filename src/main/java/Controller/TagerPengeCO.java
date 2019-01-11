@@ -23,6 +23,8 @@ public class TagerPengeCO extends ChanceAktionDTO {
         spillerMedTur.setPenge(spillerMedTur.getPenge()-getPengeVerdi());
         userInterfaceKontrakt.updateSpillere(spil.getSpillerMedTur());
     }
+
+
     public void BetingetAktion(){ }
 
     //|--------- Constructor:-----------------

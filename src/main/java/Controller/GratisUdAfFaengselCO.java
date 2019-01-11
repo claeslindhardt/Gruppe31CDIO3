@@ -35,6 +35,7 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
         //todo:test
         userInterfaceKontrakt.brugtUdAfFaengsel();
     }
+
     //|----------- Constructor:------------------
     public GratisUdAfFaengselCO(){
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);

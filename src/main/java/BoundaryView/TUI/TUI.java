@@ -3,6 +3,8 @@ package BoundaryView.TUI;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import Controller.SpillerCO;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
@@ -401,7 +403,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerDTO> spillere){
 
     }
 
@@ -421,6 +423,11 @@ public class TUI implements UserInterfaceKontrakt {
 
     public void kanIkkeSlaaFaengsel(){
         System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
+    }
+
+    @Override
+    public void startSpil(Spil spil) {
+
     }
 }
 

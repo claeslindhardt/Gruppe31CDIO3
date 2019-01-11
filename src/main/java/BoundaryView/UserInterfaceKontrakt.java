@@ -2,6 +2,8 @@ package BoundaryView;
 
 import Controller.*;
 import Controller.SpillerCO;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
@@ -89,9 +91,10 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere);
+    void genererGUIBret(BraetDTO braet, ArrayList<SpillerDTO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(SpillerCO spiller);
     void kanIkkeSlaaFaengsel();
+    void startSpil(Spil spil);
 }

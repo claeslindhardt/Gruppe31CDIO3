@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpilData;
 import ModelEnteties.SpillerDTO;
@@ -9,7 +10,6 @@ import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
-import gui_main.GUI;
 import spillogik.BevaegelsesLogik;
 import spillogik.SpilGenerator;
 
@@ -19,6 +19,9 @@ public class SpilController extends SpilData {
 
     private UserInterfaceKontrakt ui;
     private Spil spil;
+
+
+
 
     /**
      * Hvorfor 2 constructore?
@@ -44,9 +47,8 @@ public class SpilController extends SpilData {
 */
 
 
-    public void setSpil(Spil spil){
-        this.spil = spil;
-    }
+
+
 
 
     public SpilController(UserInterfaceKontrakt ui){
@@ -70,7 +72,7 @@ public class SpilController extends SpilData {
         //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.genererGUIBret(spilleBret, getSpillerObjekter());
+        //gui.genererGUIBret(spilleBret, getSpillerObjekter());
     }
     //_____________________________________
     // Diverse:
@@ -356,7 +358,7 @@ public class SpilController extends SpilData {
      * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(BraetCO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
 
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
@@ -383,7 +385,7 @@ public class SpilController extends SpilData {
                 getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());
                 break;
             case 5:
-                spilleBret.printBret(getUserInterfaceKontrakt());
+                //spilleBret.printBret(getUserInterfaceKontrakt());
                 break;
             case 6:
                 printSpilleresInfo();
@@ -408,29 +410,14 @@ public class SpilController extends SpilData {
 
 
     private Spil spilIndstillinger(){
-        Random random = new Random();
 
         int antalFelter = ui.instilingsSporgsmaal0(9, 21);
         int antalSpillere = ui.instilingsSporgsmaall(2,11);
-        int bankerotGraense = ui.instilingsSporgsmaal3(0, 99999);
-        int startPenge = 1500; // ui.inputStartPenge()
+        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
+        double startPenge = 2000; // ui.startpenge
 
-        // SpillerDTO spillere = lavSpillere( antalSpillere, int startPenge );
-
-        // BraetCO braet = new BraetCO( antalFelter );
-
-        /*
-        Spil spil = new Spil()
-        spil.setSpillere(spillere)
-        spil.setBankerotGraense(bankerotGraense)
-        spil.setBraet(braet)
-        */
-
-        //return spil
-        return null;
+        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
     }
-
-
 
 
 
@@ -446,12 +433,12 @@ public class SpilController extends SpilData {
 
     public void start(){
 
-        int input = 1;//getUserInterfaceKontrakt().velkomstMenu(1,4);
+        int input = ui.velkomstMenu(1,3);
 
         switch( input ){
 
             case 1:
-                spil = new Spil();
+                spil = SpilGenerator.genererSpil();
                 break;
 
             case 2:
@@ -463,22 +450,35 @@ public class SpilController extends SpilData {
 
         koerSpil();
 
-
-
-        genererSpillere(getAntalSpillere());
-        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
-        setTerningeKrus(terningsKrus);
-        setBretGeneretForSpil(spilleBret);
-
-        ui.genererGUIBret(spilleBret, getSpillerObjekter());
-
     }
 
 
+    public void setSpil(Spil spil){
+        this.spil = spil;
+    }
 
     public void koerSpil(){
+
+
+        ui.startSpil(spil); //- skal lave et nyt gui vindue og køre spillet
+
+        do{
+            tjekForVinder();
+            tjekOmGivetOp();
+            tjekForFeangselsStraf();
+
+            //Kører kun hvis ikke der er en der har vundet spillet
+            if( !isVinderFindes() ){
+                turMenu( spil.getBraet(), spil.getRafleBaeger() );
+            }
+
+            if( !isKør() ){
+                break;
+            }
+
+        }while( true );
+
+        ui.spilletErSlut();
 
     }
 

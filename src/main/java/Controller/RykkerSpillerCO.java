@@ -9,7 +9,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 
-    //|----------- Metoder:--------------------
+    //|----------- Metoder:-------------------
 
     /**
      * Indsæt beskrivelse her
@@ -25,6 +25,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         spillerMedTur.addSpillerAktionsKort(this);
 
     }
+
     public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();

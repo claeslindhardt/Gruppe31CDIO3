@@ -4,6 +4,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 
+import java.util.ArrayList;
+
 
 public class Spil {
 
@@ -79,4 +81,15 @@ public class Spil {
         return spillere[spillerIndex];
     }
 
+    // TODO: Fjern denne!
+    public ArrayList<SpillerDTO> getSpillereArrayList(){
+
+        ArrayList<SpillerDTO> spillere = new ArrayList<>();
+
+        for( SpillerDTO spiller : this.spillere ){
+            spillere.add(spiller);
+        }
+
+        return spillere;
+    }
 }

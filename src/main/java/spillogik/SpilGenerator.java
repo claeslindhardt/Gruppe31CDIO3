@@ -9,10 +9,14 @@ import ModelEnteties.felter.ChanceAktionDTO;
 public class SpilGenerator {
 
 
-    public static SpillerDTO[] genererSpillere(int antalSpillere){
+    public static SpillerDTO[] genererSpillere( int antalSpillere, double startPenge ){
         SpillerDTO[] spillere = new SpillerDTO[antalSpillere];
 
-
+        for( int i = 0; i < antalSpillere; i++   ){
+            SpillerDTO spiller = new SpillerDTO();
+            spiller.setPenge(startPenge);
+            spillere[i] = spiller;
+        }
 
         return spillere;
     }
@@ -25,6 +29,7 @@ public class SpilGenerator {
         return braet;
     }
 
+
     public static ChanceAktionDTO[] genererChanceKort(int antalKort){
         ChanceAktionDTO[] chanceKort = new ChanceAktionDTO[antalKort];
 
@@ -33,15 +38,19 @@ public class SpilGenerator {
     }
 
 
-    public static Spil genererSpil(int antalSpillere, int antalFelter, int antalChanceKort ){
+    public static Spil genererSpil(int antalSpillere, int antalFelter, int antalChanceKort, double startPenge ){
         Spil spil = new Spil();
 
-        spil.setSpillere( genererSpillere(antalSpillere) );
+        spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
         spil.setBraet( genererBraet(antalFelter) );
         // spil.setChanceKort( genererChancekort);
         spil.setRafleBaeger( new RafleBaeger(2));
 
         return spil;
+    }
+
+    public static Spil genererSpil(){
+        return genererSpil( 4, 40, 40, 1500);
     }
 
 

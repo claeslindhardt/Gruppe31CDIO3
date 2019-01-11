@@ -91,30 +91,20 @@ public class Main {
         }
 
 
-        UserInterfaceKontrakt Ui = null;
 
-        if(startArgument == 1) {
-            System.out.println("Starter med GUI");
-            Ui = new GUIinterface();
-        } else if (startArgument == 2){
+        SpilController spilController;
+
+        if (startArgument == 2){
             System.out.println("Starter med TUI");
-            Ui = new TUI();
+            spilController = new SpilController( new TUI() );
+        }else{
+            System.out.println("Starter med GUI");
+            spilController = new SpilController( new GUIinterface() );
         }
 
-        SpilController spil = new SpilController(Ui);
+        spilController.start();
 
 
-        // TODO: Ryk det her ud af main
-        while(spil.isKør()){
-            spil.tjekForVinder();
-            spil.tjekOmGivetOp();
-            spil.tjekForFeangselsStraf();
 
-            //Kører kun hvis ikke der er en der har vundet spillet
-            if(!spil.isVinderFindes()){
-                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
-            }
-        }
-        spil.getUserInterfaceKontrakt().spilletErSlut();
     }
 }
