@@ -73,7 +73,8 @@ public class SpillerCO extends SpillerDTO {
             int valg = userInterfaceKontrakt.chanceKortNr(this);
             //if(valg == -1){ }
             //else if(valg != -1){
-                getSpillerAktionsKort().get(valg).BetingetAktion(spil,userInterfaceKontrakt);
+            HandelsController handel = new HandelsController();
+                getSpillerAktionsKort().get(valg).BetingetAktion(handel,spil,userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }
         //}else{

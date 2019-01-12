@@ -401,7 +401,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             alias[j] = spiller.getSpillerAktionsKort().get(j).getKortBeskrivelse();
 
         }
-        String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias);
+        String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias+"Tilbage");
 
         int valgKort=0;
         for(int i = 0; i < alias.length;i++) {
