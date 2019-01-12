@@ -37,9 +37,9 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>monopolyJunior</finalName>
+                    <finalName>matadorSpil</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <outputDirectory>MonopolyJunior</outputDirectory>
+                    <outputDirectory>Matador Spil</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>

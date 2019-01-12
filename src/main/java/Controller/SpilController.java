@@ -1,10 +1,13 @@
 package Controller;
 
-import ModelEnteties.Spiller.SpillerCO;
+import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.SpilData;
+import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
+import spillogik.BevaegelsesLogik;
 
 import java.util.Random;
 
@@ -21,11 +24,12 @@ public class SpilController extends SpilData {
         this.setUserInterfaceKontrakt(gui);
         startMenu();
         genererSpillere(getAntalSpillere());
-        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
+        gui.genererGUIBret(spilleBret, getSpillerObjekter());
     }
 
     public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
@@ -35,11 +39,12 @@ public class SpilController extends SpilData {
         this.setBankeraadGraense(bankeRaadtGrense);
         this.setUserInterfaceKontrakt(gui);
         genererSpillere(getAntalSpillere());
-        SpilleBraetCO spilleBret = new SpilleBraetCO(getAntalFelter(), getUserInterfaceKontrakt());
+        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
         RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
-        gui.generGUIBret(getAntalFelter(), spilleBret, getSpillerObjekter());
+        gui.genererGUIBret(spilleBret, getSpillerObjekter());
     }
     //_____________________________________
     // Diverse:
@@ -66,7 +71,8 @@ public class SpilController extends SpilData {
     }
 
     /**
-     * Indsæt beskrivelse her
+     * @author Filip
+     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
     public void anketDomsigelse() {
         Random ra = new Random();
@@ -77,7 +83,7 @@ public class SpilController extends SpilData {
             getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
             getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
-        } else if (domsAfsigelseDel1 != domsAfsigelseDel2) {
+        } else {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
         }
@@ -120,32 +126,73 @@ public class SpilController extends SpilData {
     /**
      * Indsæt beskrivelse her
      * @param terningsKrus
-     * @param spilleBret
      */
-    public void kastTerninger(RafleBaeger terningsKrus, SpilleBraetCO spilleBret) {
+    public void kastTerninger(RafleBaeger terningsKrus) {
         if (!getSpillerMedTur().isHarSlaaetForTuren()) {
+
             terningsKrus.slaa();
+
             getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
+
             if (terningsKrus.erEns()) {
                 getUserInterfaceKontrakt().ensTerninger();
                 getSpillerMedTur().setHarSlaaetForTuren(false);
             } else {
                 getSpillerMedTur().setHarSlaaetForTuren(true);
             }
-            tjekForPasseringAfStartOgRykSpiller(terningsKrus);
-            getUserInterfaceKontrakt().midtTerminalLinje();
 
-            FeltDTO felt = spilleBret.getBret().get(getSpillerMedTur().getSpillerPosition());
-
-            getUserInterfaceKontrakt().duErLandetPå(felt, getSpillerMedTur());
-
-            felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
-
+            rykSpillerAntalFelter(getSpillerMedTur(), getTerningeKrus().getTotalVaerdi());
 
         } else {
             getUserInterfaceKontrakt().harSlaaetMedTerningfor();
         }
     }
+
+
+    /**
+     * @author Malte
+     * Rykker spilleren et bestemt antal felter fremad. Den beregner hvor mange
+     * gange over start man bevæger sig, og udløser metoden {@link #rykSpillerTilFelt}.
+     *
+     * @param spiller       Spilleren der skal rykkes
+     * @param felterAtRykke Hvor mange felter fremad spilleren rykker
+     */
+    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
+
+        FeltDTO[] braet = getBretGeneretForSpil().getBretArray();
+
+        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
+
+        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
+
+        rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
+    }
+
+
+    /**
+     * @author Malte
+     * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
+     * ift. feltet, samt UI-metoder ifm. at flytte felt.
+     * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
+     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
+     * 'gangeOverStart'
+     *
+     * @param spiller Spiller der skal rykkes
+     * @param felt Feltet spilleren skal rykke til
+     * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
+     */
+    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+
+        if( gangeOverStart > 0 ){
+            spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
+
+        spiller.setSpillerPosition(felt.getPlacering());
+
+        getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
+
+        felt.aktionPaaFelt(this, getUserInterfaceKontrakt());
+    }
+
 
     //_____________________________________
     //Tjekkere:
@@ -216,14 +263,14 @@ public class SpilController extends SpilData {
      * @param terningKrus
      */
     public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
-        int rykVeardi = terningKrus.getTotalVaerdi();
+        /*int rykVeardi = terningKrus.getTotalVaerdi();
         int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
         if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
             getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, getUserInterfaceKontrakt());
         } else {
             getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition() + rykVeardi);
         }
-        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());
+        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());*/
     }
 
 
@@ -273,29 +320,39 @@ public class SpilController extends SpilData {
 
         int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal3(0, 99999);
         setBankeraadGraense(driftsomkostninger);
+
+
     }
 
     /**
-     * Indsæt beskrivelse her
-     * @param spilleBret
-     * @param terningsKrus
+     * @author Filip
+     * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
+     * sørger for at tilhørende metoder udføres
+     * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
+     * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(SpilleBraetCO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu(BraetCO spilleBret, RafleBaeger terningsKrus) {
 
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
         switch (input) {
             case 1:
-                kastTerninger(terningsKrus, spilleBret);
-                //Denne funktion  kan kalder:
-                //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
-                //og aktionPåFelt.
+
+                if (!getSpillerMedTur().isFaengselsStraf()) {
+                    kastTerninger(terningsKrus);
+                    //Denne funktion  kan kalder:
+                    //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
+                    //og aktionPåFelt.
+                }
+                else if (getSpillerMedTur().isFaengselsStraf()){
+                    getUserInterfaceKontrakt().kanIkkeSlaaFaengsel();
+                }
                 break;
             case 2:
                 slutSpillerTur();
                 break;
             case 3:
-                getSpillerMedTur().chanceKortMuligheder(getUserInterfaceKontrakt());
+                getSpillerMedTur().chanceKortMuligheder(this,getUserInterfaceKontrakt());
                 break;
             case 4:
                 getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());
@@ -323,4 +380,6 @@ public class SpilController extends SpilData {
         }
 
     }
+
+
 }
