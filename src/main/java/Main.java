@@ -13,15 +13,12 @@ public class Main {
          * @author Claes Lindhardt
          * main klassen har til formål at lade java vide hvor den skal starte.
          * den gør brug af parameteret
-         * @param String[] args
-         * som er en samling af strenge der indskrives når man kører et givent program
+         * @param String[] args en samling af strenge der indskrives når man kører et givent program
+         *
          * og desusden variablerne:
-         * @param startArgumen
-         * angiver [indset forklaring]
-         * @param Ui
-         * Ui er implementeringen af et interface, som angiver hvilket UserInterface
-         * der ønskes at gøre brug af.
-         * @param SpilController
+         * @param startArgumen      angiver [indset forklaring]
+         * @param Ui                angiver hvilket UserInterface der ønskes at gøre brug af.
+         * @param SpilController    alle de obejekter der skal til for at spille spillet(brettet, spillerne osv.)
          *
          */
 
@@ -42,6 +39,8 @@ public class Main {
          * 4. Så kører spillet tur baseret som et loop, der tjekker om der skulle være en vinder
          * 5. når der til sidst er fundet en vinder kørers slutprotokollen der sikrer at
          *    alle process bliver lukket rigtigt.
+         * __________________________________________
+         * (se evt. Use-Casen i bunden For uddybelse)
          */
 
     }
