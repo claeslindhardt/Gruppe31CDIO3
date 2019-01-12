@@ -55,13 +55,13 @@ public class SpillerCO extends SpillerDTO {
      * Indsæt beskrivelse her
      * @param userInterfaceKontrakt
      */
-    public void chanceKortMuligheder(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void chanceKortMuligheder(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
         /*
         Her skal spilleren kunne:
             Se sine ChanceFeltCO
             aktivere et udvalgt ChanceFeltCO
          */
-        if(getSpillerAktionsKort().size()>0){
+        if (getSpillerAktionsKort().size() > 0) {
             //Her printes de forskellige muligher:
             userInterfaceKontrakt.chanceKortHar();
             /*for(int i = 0; i<getSpillerAktionsKort().size();i++){
@@ -70,18 +70,24 @@ public class SpillerCO extends SpillerDTO {
 
             //Her er controlleren der lader en reagere på mulighederne
 
+
             int valg = userInterfaceKontrakt.chanceKortNr(this);
             //if(valg == -1){ }
             //else if(valg != -1){
-            HandelsController handel = new HandelsController();
-                getSpillerAktionsKort().get(valg).BetingetAktion(handel,spil,userInterfaceKontrakt);
+            if (valg == getSpillerAktionsKort().size()) {
+                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
+                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
+            } else {
+                HandelsController handel = new HandelsController();
+                getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }
-        //}else{
+        } else {
+            //}else{
             userInterfaceKontrakt.ingenChanceKort();
         }
-    //}
-
+        //}
+    }
     /**
      * Indsæt beskrivelse her
      * @param spil

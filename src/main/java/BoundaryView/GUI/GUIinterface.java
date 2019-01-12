@@ -393,20 +393,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du har foelgende Chance Kort:");
     }
     public int chanceKortNr(SpillerCO spiller){
-        int laengde = spiller.getSpillerAktionsKort().size();
+
+        int laengde = spiller.getSpillerAktionsKort().size()+1;
 
         String[] alias = new String[laengde];
+
 
         for(int j = 0; j < spiller.getSpillerAktionsKort().size();j++) {
             alias[j] = spiller.getSpillerAktionsKort().get(j).getKortBeskrivelse();
 
         }
-        String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias+"Tilbage");
+        alias[spiller.getSpillerAktionsKort().size()] = "Tilbage";
+        String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias);
 
-        int valgKort=0;
+        int valgKort = 0;
         for(int i = 0; i < alias.length;i++) {
-            if (valg.equalsIgnoreCase(alias[i])){
-                valgKort = alias[i].indexOf(valg);
+            if (alias[i].equalsIgnoreCase(valg)){
+                valgKort = i;
 
             }
         }
