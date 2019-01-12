@@ -13,7 +13,8 @@ public class Main {
          * @author Claes Lindhardt
          * main klassen har til formål at lade java vide hvor den skal starte.
          * den gør brug af parameteret
-         * @param String[] args en samling af strenge der indskrives når man kører et givent program
+         * @param String[] args En liste af argumenter givet til programmet ved start,
+         *                 som repræsenteres som en en liste af strings
          *
          * og desusden variablerne:
          * @param startArgumen      angiver [indset forklaring]
@@ -50,9 +51,11 @@ public class Main {
     public static int HaanterStartArgument(int arglength, Object[] args){
         /**
          * @author Claes Lindhardt
-         * Indsæt beskrivelse her
-         * @param startArgument
-         * @return Ui
+         * Når man kører programmet (f.eks. via .bat-filen) kan man give den en række startargumenter,
+         * som havner i en String array. Med udgangspunkt i den liste kan man så få programmet til
+         * at gøre noget bestemt afhængigt af argumenterne. Så man kan starte programmet med nogle
+         * bestemte indstillinger.
+         * @param startArgument     Så man som start argument kan angive hvilken UI man vil bruge
          */
         // Håndterer startargument
 
@@ -75,9 +78,12 @@ public class Main {
     public static UserInterfaceKontrakt valgAfUI(int startArgument){
         /**
          * @author Claes Lindhardt
-         * Indsæt beskrivelse her
-         * @param startArgument
-         * @return Ui
+         * Funktion tager et input fra brugeren og implementere, med udgangspunkt i det
+         * den relevante interface af brugerinteraktiosnfladen.
+         * @param startArgument     hvis man før man kører program filen et andet
+         *                          sted på forhånd har angivet hvilke UI man ønsker.
+         *                          bruges dette parameter til at springe valget over
+         * @return Ui               Den valgte UI enten en TUI eller en GUI
          */
         // Efterspørger start argument
         if( startArgument == 0) {
