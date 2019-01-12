@@ -110,7 +110,8 @@ public class SpilController extends SpilData {
         if (domsAfsigelseDel1 == domsAfsigelseDel2) {
             getUserInterfaceKontrakt().heldIRetten();
             getSpillerMedTur().setFaengselsStraf(false);
-            getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
+            //Har udkemmenteret denne da jeg ikke syntes at det giver mening at have den.
+            //getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
         } else {
             getSpillerMedTur().setFaengselsStraf(true);
             getUserInterfaceKontrakt().ingenHeldIRetten();
