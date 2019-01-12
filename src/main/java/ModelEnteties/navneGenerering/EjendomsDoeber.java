@@ -1,7 +1,8 @@
 package ModelEnteties.navneGenerering;
 
 /**
- * Indsæt beskrivelse her
+ * Denne 'børneklasse' nedaver fra NavneGeneratoren
+ *  * og har til formål at navngive Ejendomme.
  */
 public class EjendomsDoeber extends NavneGenerator {
     public EjendomsDoeber(){

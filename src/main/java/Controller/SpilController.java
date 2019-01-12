@@ -2,7 +2,6 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.SpilData;
-import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
@@ -13,7 +12,6 @@ import java.util.Random;
 public class SpilController extends SpilData {
 
     //|----------- Metoder:------------------
-
     /**
      * Hvorfor 2 constructore?
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
@@ -24,8 +22,8 @@ public class SpilController extends SpilData {
         startMenu();
         genererSpillere(getAntalSpillere());
         BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
+        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
         gui.genererGUIBret(spilleBret, getSpillerObjekter());
