@@ -5,13 +5,13 @@ import ModelEnteties.SpilData;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
+import spillogik.BevaegelsesLogik;
 
 import java.util.Random;
 
 public class SpilController extends SpilData {
 
     //|----------- Metoder:------------------
-
     /**
      * Hvorfor 2 constructore?
      * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
@@ -155,15 +155,13 @@ public class SpilController extends SpilData {
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
     public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
-        int nuvaerendePosition = spiller.getSpillerPosition();
-        int totalAntalFelter = getBretGeneretForSpil().getBret().size();
 
-        // Beregner passering af start
-        int gangeOverStart  = ( nuvaerendePosition + felterAtRykke ) / totalAntalFelter;
-        int endeligPosition = ( nuvaerendePosition + felterAtRykke ) % totalAntalFelter;
+        FeltDTO[] braet = getBretGeneretForSpil().getBretArray();
 
-        // Rykker
-        FeltDTO endeligtFelt = getBretGeneretForSpil().getBret().get(endeligPosition);
+        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
+
+        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
+
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
     }
 
@@ -351,7 +349,7 @@ public class SpilController extends SpilData {
                 slutSpillerTur();
                 break;
             case 3:
-                getSpillerMedTur().chanceKortMuligheder(getUserInterfaceKontrakt());
+                getSpillerMedTur().chanceKortMuligheder(this,getUserInterfaceKontrakt());
                 break;
             case 4:
                 getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());

@@ -1,7 +1,8 @@
 package ModelEnteties.navneGenerering;
 
 /**
- * Indsæt beskrivelse her
+ * Denne 'børneklasse' nedaver fra NavneGeneratoren
+ * og har til formål at navngive Jermbaner.
  */
 public class JernbaneDoeber extends NavneGenerator {
     int vejnavn = getRandomTal().nextInt(Math.round(getVejNavn().length));

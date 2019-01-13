@@ -177,10 +177,11 @@ public class TUI implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         System.out.println("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerCO spiller){
-        System.out.println("Chance kort nr. "+i+": ");
-        System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
-
+    public int chanceKortNr(SpillerCO spiller){
+        //Her er der fjernet parameteren i
+        System.out.println("Chance kort nr. : ");
+        //System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+        return 0;
     }
     public int chanceKortsVejledning(){
         System.out.println("-------------------------------");
@@ -304,7 +305,7 @@ public class TUI implements UserInterfaceKontrakt {
 
         System.out.println("| FeltDTO nr: " + ej.getPlacering() +" | FeltDTO Navn:" + ej.getNavn()+" | FeltDTO type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
-                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                " | Huspris: "+ej.getHusPris()+" | Har Hotel: " + ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
     }
 

@@ -4,6 +4,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import spillogik.BevaegelsesLogik;
+import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
@@ -42,7 +44,7 @@ public class SpillerCO extends SpillerDTO {
      * @param userInterfaceKontrakt UI'en der skal bruges til at vise det.
      */
     public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
-        penge += 200*gangeOverStart;
+        penge += BevaegelsesLogik.passererStartPenge(gangeOverStart);
         userInterfaceKontrakt.passeringAfStart(gangeOverStart);
         userInterfaceKontrakt.updateSpillere(this);
     }
@@ -51,7 +53,7 @@ public class SpillerCO extends SpillerDTO {
      * Indsæt beskrivelse her
      * @param userInterfaceKontrakt
      */
-    public void chanceKortMuligheder(UserInterfaceKontrakt userInterfaceKontrakt){
+    public void chanceKortMuligheder(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         /*
         Her skal spilleren kunne:
             Se sine ChanceFeltCO
@@ -60,22 +62,22 @@ public class SpillerCO extends SpillerDTO {
         if(getSpillerAktionsKort().size()>0){
             //Her printes de forskellige muligher:
             userInterfaceKontrakt.chanceKortHar();
-            for(int i = 0; i<getSpillerAktionsKort().size();i++){
+            /*for(int i = 0; i<getSpillerAktionsKort().size();i++){
                 userInterfaceKontrakt.chanceKortNr(i,this);
-            }
+            }*/
 
             //Her er controlleren der lader en reagere på mulighederne
 
-            int valg = userInterfaceKontrakt.chanceKortsVejledning();
-            if(valg == -1){ }
-            else if(valg != -1){
-                getSpillerAktionsKort().get(valg).BetingetAktion();
+            int valg = userInterfaceKontrakt.chanceKortNr(this);
+            //if(valg == -1){ }
+            //else if(valg != -1){
+                getSpillerAktionsKort().get(valg).BetingetAktion(spil,userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }
-        }else{
+        //}else{
             userInterfaceKontrakt.ingenChanceKort();
         }
-    }
+    //}
 
     /**
      * Indsæt beskrivelse her
@@ -184,7 +186,7 @@ public class SpillerCO extends SpillerDTO {
      * @param ejendom Ejendommen man oensker at undersoege.
      * @return True: spilleren ejer den, False: spilleren ejer den ikke.
      */
-    boolean ejerEjendom(EjendomCO ejendom){
+    public boolean ejerEjendom(EjendomCO ejendom){
         return ejendom.getEjer() == this;
     }
 
@@ -195,7 +197,7 @@ public class SpillerCO extends SpillerDTO {
      * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
-    boolean ejerEjendomsGruppe(EjendomsGruppeDTO ejendomsGruppe){
+    public boolean ejerEjendomsGruppe(EjendomsGruppeDTO ejendomsGruppe){
         for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this){
                 return false;
@@ -228,11 +230,13 @@ public class SpillerCO extends SpillerDTO {
      * Metode der koeber et hus på en ejendom for spilleren.
      * Dette inkluderer at bygge huset paa ejendom (ejendom.bygHuse),
      * og trække penge fra spilleren.
+     *
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
     public void koebHus(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
-        if( kanKoebeHus(ejendom) ){
+        if( EjendomsLogik.kanKoebeHus(this, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
+            ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, ejerEjendomsGruppe(ejendom.getGruppe())));
             addPenge(-ejendom.getHusPris());
             userInterfaceKontrakt.updateSpillere(this);
 
@@ -256,7 +260,7 @@ public class SpillerCO extends SpillerDTO {
                bygge et hus paa en ejendom.
              */
             for(int i = 0; i < ejendomme.length; i++){
-                if(kanKoebeHus(ejendomme[i])){
+                if( EjendomsLogik.kanKoebeHus(this, ejendomme[i], ejendomme[i].getGruppe()) ){
                     bebyggeligeEjendomme.add(ejendomme[i]);
                 }
             }

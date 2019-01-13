@@ -46,7 +46,7 @@ public interface UserInterfaceKontrakt {
     void duGavIkkeOp();
     void passeringAfStart(int gangeOverStart);
     void chanceKortHar();
-    void chanceKortNr(int i, SpillerCO spiller);
+    int chanceKortNr(SpillerCO spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
     int hvorHen(int pos, int min, int max);
