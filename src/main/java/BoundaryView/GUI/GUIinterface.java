@@ -4,6 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
@@ -520,6 +521,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
+    @Override
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
+
+    }
+
     public void updateSpillere(SpillerCO spiller){
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
@@ -641,6 +647,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return 0;
     }
 
+    @Override
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+
+    }
+
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
     }
@@ -655,7 +666,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
 
-    public void spillerMaaIkkeEns(){gui.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
+    public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 
     @Override
     public void startSpil(Spil spil) {

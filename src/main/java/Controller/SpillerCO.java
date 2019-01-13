@@ -76,7 +76,7 @@ public class SpillerCO extends SpillerDTO {
             //else if(valg != -1){
             if (valg == getSpillerAktionsKort().size()) {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
+                spil.turMenu(spil.getSpil().getBraet(),spil.getSpil().getRaflebaeger() );
             } else {
                 HandelsController handel = new HandelsController();
                 getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);

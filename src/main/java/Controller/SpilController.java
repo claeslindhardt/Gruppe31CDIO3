@@ -45,51 +45,18 @@ public class SpilController{
 
     /**
      * @author Andreas
-     * Metoden generer spillere.
-     * @param antalSpillere
-     */
-    public void genererSpillere(int antalSpillere) {
-
-        for (int i = 0; i < antalSpillere; i++) {
-
-            String navn = getUserInterfaceKontrakt().spillerNavne();
-            SpillerCO deltager = new SpillerCO(navn, i, 0);
-
-            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
-            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
-            boolean harNavn = kontrollerNavn(navn);
-            while(harNavn){
-                getUserInterfaceKontrakt().spillerMaaIkkeEns();
-                String nytNavn =  getUserInterfaceKontrakt().spillerNavne();
-                //Her undersøges det om en allerede genereret spiller har det samme navn.
-                    if(!kontrollerNavn(nytNavn)){
-                        deltager.setNavn(nytNavn);
-                        harNavn = kontrollerNavn(nytNavn);
-                    }
-            }
-            getSpillerObjekter().add(deltager);
-
-
-        }
-    }
-
-    /**
-     * @author Andreas
      * Metoden gennemgår listen af spillere og undersøger om en spiller i listen har det samme navn.
      * @param navn
      * @return boolean
      */
     public boolean kontrollerNavn(String navn){
-        String tjek = navn;
-        boolean harAllerede = false;
-        for(int i = 0; i < getSpillerObjekter().size();i++){
-            if(getSpillerObjekter().get(i).getNavn().equalsIgnoreCase(tjek)){
-                harAllerede = true;
-            }else {
-                harAllerede = false;
+
+        for(int i = 0; i < spil.getSpillere().length; i++){
+            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
+                return true;
             }
         }
-        return harAllerede;
+        return false;
     }
 
     /**
@@ -396,15 +363,26 @@ public class SpilController{
     private void indtastSpillerNavne() {
 
         // Et for-each loop der kører i gennem alle spillere.
-        for( SpillerDTO spiller : spil.getSpillere()){
+        for( SpillerDTO spiller : spil.getSpillere() ){
+
             String navn = ui.spillerNavne();
+
+            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
+            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
+            boolean harNavn = kontrollerNavn(navn);
+
+            while(harNavn){
+                ui.spillerMaaIkkeEns();
+                navn =  ui.spillerNavne();
+                //Her undersøges det om en allerede genereret spiller har det samme navn.
+                if(!kontrollerNavn(navn)){
+                    harNavn = kontrollerNavn(navn);
+                }
+            }
             spiller.setNavn(navn);
+
         }
     }
-
-
-
-
 
 
     /**
@@ -419,10 +397,6 @@ public class SpilController{
             tjekForVinder();
             tjekOmGivetOp();
             tjekForFeangselsStraf();
-
-
-
-
 
             if( !spil.getVinderFindes() ){
                 turMenu( spil.getBraet(), spil.getRaflebaeger() );

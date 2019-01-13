@@ -2,6 +2,7 @@ package BoundaryView;
 
 import Controller.*;
 import Controller.SpillerCO;
+import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
