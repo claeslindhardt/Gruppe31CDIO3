@@ -4,7 +4,11 @@ import Controller.SpillerCO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.felter.EjendomCO;
 
+import java.util.ArrayList;
+
 public class EjendomsLogik {
+
+    private ArrayList <EjendomCO> ejendomme = new ArrayList<EjendomCO>();
 
     /** Private constructor sikrer at man ikke kan lave objekter af klassen. */
     private EjendomsLogik(){}

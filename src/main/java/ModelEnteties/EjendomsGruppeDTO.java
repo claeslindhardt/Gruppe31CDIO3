@@ -105,12 +105,24 @@ public class EjendomsGruppeDTO {
      *                            fordelt i en ejendomsgruppe
      * @return
      */
-    public boolean huseErLigeligtFordelt(EjendomCO ejendomUdgangspunkt){
+    public boolean kanManKoebeEtHus(EjendomCO ejendomUdgangspunkt){
 
         for (int i = 0; i < ejendomme.size(); i++){
             EjendomCO ejendom = ejendomme.get(i);
 
             if( ejendom.getAntalHuse() < ejendomUdgangspunkt.getAntalHuse() ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
+
+        for (int i = 0; i < ejendomme.size(); i++){
+            EjendomCO ejendom = ejendomme.get(i);
+
+            if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
                 return false;
             }
         }

@@ -222,7 +222,7 @@ public class SpillerCO extends SpillerDTO {
         return( ejerEjendom(ejendom)
                 && ejerEjendomsGruppe(ejendomsGruppe)
                 && ejendom.getAntalHuse() < 4
-                && ejendomsGruppe.huseErLigeligtFordelt(ejendom,true)
+                && ejendomsGruppe.kanManKoebeEtHus(ejendom)
                 && getPenge()>ejendom.getHusPris() ); }
 
     /**
