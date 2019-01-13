@@ -47,7 +47,8 @@ public class SpilController extends SpilData {
     // Diverse:
 
     /**
-     * Indsæt beskrivelse her
+     * @author Andreas
+     * Metoden generer spillere.
      * @param antalSpillere
      */
     public void genererSpillere(int antalSpillere) {
@@ -63,6 +64,7 @@ public class SpilController extends SpilData {
             while(harNavn){
                 getUserInterfaceKontrakt().spillerMaaIkkeEns();
                 String nytNavn =  getUserInterfaceKontrakt().spillerNavne();
+                //Her undersøges det om en allerede genereret spiller har det samme navn.
                     if(!kontrollerNavn(nytNavn)){
                         deltager.setNavn(nytNavn);
                         harNavn = kontrollerNavn(nytNavn);
@@ -74,6 +76,12 @@ public class SpilController extends SpilData {
         }
     }
 
+    /**
+     * @author Andreas
+     * Metoden gennemgår listen af spillere og undersøger om en spiller i listen har det samme navn.
+     * @param navn
+     * @return boolean
+     */
     public boolean kontrollerNavn(String navn){
         String tjek = navn;
         boolean harAllerede = false;
