@@ -377,6 +377,9 @@ public class SpilController{
 
             if( !spil.getVinderFindes() ){
                 turMenu( spil.getBraet(), spil.getRaflebaeger() );
+
+            }else{
+                break;
             }
 
         }while( true );
