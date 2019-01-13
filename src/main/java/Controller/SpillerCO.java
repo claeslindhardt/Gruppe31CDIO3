@@ -227,6 +227,7 @@ public class SpillerCO extends SpillerDTO {
     public void koebHus(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHus(this, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
+
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, ejerEjendomsGruppe(ejendom.getGruppe())));
             addPenge(-ejendom.getHusPris());
             userInterfaceKontrakt.updateSpillere(this);

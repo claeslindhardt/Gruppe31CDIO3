@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.SpilData;
+import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
@@ -22,8 +23,8 @@ public class SpilController extends SpilData {
         startMenu();
         genererSpillere(getAntalSpillere());
         BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
+        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
+        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
         setTerningeKrus(terningsKrus);
         setBretGeneretForSpil(spilleBret);
         gui.genererGUIBret(spilleBret, getSpillerObjekter());
