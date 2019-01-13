@@ -23,57 +23,23 @@ public class SpilController{
     // TODO: Fjern denne
     public Spil getSpil(){return spil;}
 
-    /**
-     * Hvorfor 2 constructore?
-     * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
-     * vælge dem. Dette er også meget nyttigt til test :)
-     */
-    /*public SpilController() {
-
-        this.setUserInterfaceKontrakt(new GUIinterface());
-
-        startMenu();
-
-        genererSpillere(spil.getAntalSpillere());
-        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
-        setTerningeKrus(terningsKrus);
-        setBretGeneretForSpil(spilleBret);
-
-        ui.genererGUIBret(spilleBret, spil.getSpillereArrayList());
-
+    public void setSpil(Spil spil){
+        this.spil = spil;
     }
-*/
 
 
-
-
-
-
+    /** Laver en ny SpilController med en vilkårlig UI */
     public SpilController(UserInterfaceKontrakt ui){
         this.ui = ui;
     }
 
+    /** Laver en ny SpilController med en GUI */
     public SpilController(){
         ui = new GUIinterface();
     }
 
 
- /*   public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
-        this.setAntalSpillere(antalSpillere);
-        this.setAntalFelter(antalFelter);
-        this.setAntalTerninger(antalTerninger);
-        this.setBankeraadGraense(bankeRaadtGrense);
-        this.setUserInterfaceKontrakt(gui);
-        genererSpillere(spil.getAntalSpillere());
-        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
-        setTerningeKrus(terningsKrus);
-        setBretGeneretForSpil(spilleBret);
-        //gui.genererGUIBret(spilleBret, spil.getSpillereArrayList());
-    }*/
+
     //_____________________________________
     // Diverse:
 
@@ -276,71 +242,6 @@ public class SpilController{
         return UdgaetSpillere;
     }
 
-    /**
-     * Indsæt beskrivelse her
-     * @param terningKrus
-     */
-    public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
-        /*int rykVeardi = terningKrus.getTotalVaerdi();
-        int nuvaerendeposition = spil.getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
-            spil.getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, ui);
-        } else {
-            spil.getSpillerMedTur().setSpillerPosition(spil.getSpillerMedTur().getSpillerPosition() + rykVeardi);
-        }
-        ui.spillerPosition(spil.getSpillerMedTur().getSpillerPosition());*/
-    }
-
-
-    //_____________________________________
-    //Menuer:
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void startMenu() {
-        RandomSingleton rand = RandomSingleton.getInstance();
-        int menuOpt = ui.velkomstMenu(1,4);
-
-
-        if (menuOpt == 2) {
-            startInstillingsMenu();
-        } else if (menuOpt == 3) {
-            ui.startSpilGrundFejl();
-        } else if (menuOpt == 1) {
-            int starter = rand.nextInt(spil.getAntalSpillere()) + 1;
-            spil.setSpillerTur(starter);
-        }
-        ui.opretteInstillinger(spil.getAntalSpillere(), spil.getAntalFelter(), 2, spil.getSpillerTur(), spil.getBankeraadGraense());
-
-
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void startInstillingsMenu() {
-        /*//Todo: make it possible to choose a default option here:
-        Random rand = new Random();
-
-        int felter = ui.instilingsSporgsmaal0(9, 21);
-        setAntalFelter(felter);
-
-
-        int spillerMeangde = ui.instilingsSporgsmaall(2,11);
-        setAntalSpillere(spillerMeangde);
-
-        int starter = rand.nextInt(spil.spil.getAntalSpillere()) + 1;
-        spil.setSpillerTur(starter);
-
-        int terninger = ui.instilingsSporgsmaal2(1,5);
-        setAntalTerninger(terninger);
-
-        int driftsomkostninger = ui.instilingsSporgsmaal3(0, 99999);
-        setBankeraadGraense(driftsomkostninger);*/
-
-
-    }
 
     /**
      * @author Filip
@@ -397,28 +298,6 @@ public class SpilController{
     }
 
 
-    private Spil spilIndstillinger(){
-
-        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
-        int antalSpillere = ui.instilingsSporgsmaall(2,11);
-        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
-        double startPenge = 2000; // ui.startpenge
-
-        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
-    }
-
-
-
-    private void indtastSpillerNavne() {
-
-        for( SpillerDTO spiller : spil.getSpillere()){
-            String navn = ui.spillerNavne();
-            spiller.setNavn(navn);
-        }
-
-    }
-
-
     public void start(){
 
         int input = ui.velkomstMenu(1,3);
@@ -437,18 +316,54 @@ public class SpilController{
         indtastSpillerNavne();
 
         koerSpil();
-
     }
 
 
-    public void setSpil(Spil spil){
-        this.spil = spil;
+    /**
+     * Efterspørger brugerdefineret indstillinger til et spil,
+     * og generer derefter spillet.
+     * @author Malte
+     * @return Det generet spil med brugerdefineret indstillinger
+     */
+    private Spil spilIndstillinger(){
+
+        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
+        int antalSpillere = ui.instilingsSporgsmaall(2,11);
+        // TODO: Implementer disse i UI v
+        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
+        double startPenge = 2000; // ui.startpenge
+
+        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
     }
 
+
+    /**
+     * Beder UI om at efterspørge spillernavne, på spillerne i det nuvaerende
+     * spil.
+     * Det er ikke nødvendigt, at køre denne for at kunne køre spillet.
+     * @author Malte
+     */
+    private void indtastSpillerNavne() {
+
+        // Et for-each loop der kører i gennem alle spillere.
+        for( SpillerDTO spiller : spil.getSpillere()){
+            String navn = ui.spillerNavne();
+            spiller.setNavn(navn);
+        }
+    }
+
+
+
+
+
+
+    /**
+     * Kører det spil som SpilControlleren er blevet givet (spil variablen).
+     * @author Malte
+     */
     public void koerSpil(){
 
-
-        ui.startSpil(spil); //- skal lave et nyt gui vindue og køre spillet
+        ui.startSpil( spil );
 
         do{
             tjekForVinder();
@@ -465,8 +380,8 @@ public class SpilController{
 
         }while( true );
 
-        ui.spilletErSlut();
 
+        ui.spilletErSlut();
     }
 
 

@@ -76,6 +76,7 @@ public class Spil {
         return kør;
     }
 
+
     public void setKør(boolean kør) {
         this.kør = kør;
     }
