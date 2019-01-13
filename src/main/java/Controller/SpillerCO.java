@@ -205,25 +205,7 @@ public class SpillerCO extends SpillerDTO {
         }
         return true; }
 
-    /**
-     * @author Malte
-     * Undersøger, om man kan koebe et hus paa en vilkårlig ejendom.
-     * Her tjekkes for at
-     *  1) man ejer ejendommen
-     *  2) man ejer alle ejendomme i gruppen
-     *  3) der er ligelig fordeling af huse paa ejendommene i gruppen (ikke implementeret)
-     *  4) antallet af huse er under 4
-     *  5) spilleren har nok penge til at koebe ejendommen.
-     * @param ejendom: ejendommen man oensker at koebe et hus paa.
-     * @return true: man kan koebe et hus paa ejendommen, false: man kan ikke koebe et hus paa ejendommen.
-     */
-    boolean kanKoebeHus(EjendomCO ejendom){
-        EjendomsGruppeDTO ejendomsGruppe = ejendom.getGruppe();
-        return( ejerEjendom(ejendom)
-                && ejerEjendomsGruppe(ejendomsGruppe)
-                && ejendom.getAntalHuse() < 4
-                && ejendomsGruppe.kanManKoebeEtHus(ejendom)
-                && getPenge()>ejendom.getHusPris() ); }
+
 
     /**
      * @author Malte
