@@ -17,6 +17,7 @@ public class Spil {
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
+    private boolean vinderFindes;
 
 
     public ChanceAktionDTO[] getChanceKort() {
@@ -124,5 +125,13 @@ public class Spil {
         }
 
         return spillere;
+    }
+
+    public void setVinderFindes(boolean vinderFindes) {
+        this.vinderFindes = vinderFindes;
+    }
+
+    public boolean getVinderFindes() {
+        return vinderFindes;
     }
 }

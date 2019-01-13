@@ -222,6 +222,7 @@ public class SpilController{
             if (!spil.getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
                 spil.setVinder(spil.getSpillerMedTur().getId() + 1);
+                spil.setVinderFindes(true);
                 ui.vinder(spil.getSpillerMedTur().getId());
             }
         }
@@ -371,11 +372,11 @@ public class SpilController{
             tjekForFeangselsStraf();
 
 
-            turMenu( spil.getBraet(), spil.getRaflebaeger() );
 
 
-            if( false ){
-                break;
+
+            if( !spil.getVinderFindes() ){
+                turMenu( spil.getBraet(), spil.getRaflebaeger() );
             }
 
         }while( true );
