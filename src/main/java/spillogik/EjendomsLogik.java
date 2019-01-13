@@ -59,8 +59,10 @@ public class EjendomsLogik {
 
 
     /**
-     * Beregner hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
+     * Henter information for, hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
      * og om man ejer alle i Ejendomsgruppen.
+     * I metoden {@link #beregnLejeVedHus} bliver legne for en ejendom udregnet. Denne information bliver gemt i en liste,
+     * der holdes af ejendomsobjektet.
      *
      * @param ejendom           Hvilken Ejendom man vil beregne leje for
      * @param harAlleIGruppe    Om ejeren af Ejendommen har alle i 'ejendom's gruppe.
