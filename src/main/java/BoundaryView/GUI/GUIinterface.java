@@ -84,7 +84,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
-                    gui_felt.setDescription("Tag Toget");
+                    gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + braet.getStartGrundPris());
                 }
                 else if (felt.getFeltType().equals("TaxiCO")){
                     gui_felt.setDescription("Tag en taxi");
