@@ -16,7 +16,7 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void DirketeAktion(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
@@ -28,7 +28,7 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void BetingetAktion(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);
         spillerMedTur.setHarSlaaetForTuren(false);

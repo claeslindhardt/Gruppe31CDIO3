@@ -22,9 +22,14 @@ public class EjendomsLogik {
     }
 
 
-    public static boolean   kanKoebeHotel(){
-        // TODO: Implemener denne
-        return false;
+    public static boolean kanKoebeHotel(SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
+        return spiller.ejerEjendom( ejendom )
+                &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
+                &&  huseErFordeltIGruppe( ejendomsGruppe, ejendom )
+                &&  ejendom.getAntalHuse() == 4
+                &&  !ejendom.harHotel()
+                &&  spiller.getPenge() > ejendom.getHusPris();
+
     }
 
 

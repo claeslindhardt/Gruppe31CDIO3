@@ -7,25 +7,137 @@ import java.util.InputMismatchException;
 
 public class Main {
 
+
     public static void main(String[] args) {
+        /**
+         * @author Claes Lindhardt
+         * main klassen har til formål at lade java vide hvor den skal starte.
+         * den gør brug af parameteret
+         * @param String[] args En liste af argumenter givet til programmet ved start,
+         *                 som repræsenteres som en en liste af strings
+         *
+         * og desusden variablerne:
+         * @param startArgumen      angiver [indset forklaring]
+         * @param Ui                angiver hvilket UserInterface der ønskes at gøre brug af.
+         * @param SpilController    alle de obejekter der skal til for at spille spillet(brettet, spillerne osv.)
+         *
+         */
+
+        int startArgument = HaanterStartArgument(args.length, args);
+        UserInterfaceKontrakt Ui = valgAfUI(startArgument);
+        SpilController spil = new SpilController(Ui);
+        koerSpillet(spil);
+        spil.getUserInterfaceKontrakt().spilletErSlut();
+
+        /**
+         * ==========================================
+         *          Typsik forløb i main
+         * ==========================================
+         * 1. Funktionen HaanterStartArgument giver en mulighed for at vælge startArgumentet gennem terminalen
+         * 2. Så vælges hvilken slags BrugerInteraktionsflade(UI) der skal gøres brug af.
+         * 3. En spille controller oprettes så på baggrund af valgt UI
+         *    Her vælges også spillets specifikation(så som antal spillere)
+         * 4. Så kører spillet tur baseret som et loop, der tjekker om der skulle være en vinder
+         * 5. når der til sidst er fundet en vinder kørers slutprotokollen der sikrer at
+         *    alle process bliver lukket rigtigt.
+         * __________________________________________
+         * (se evt. Use-Casen i bunden For uddybelse)
+         */
+
+    }
 
 
-    // Håndterer startargument
+
+    public static int HaanterStartArgument(int arglength, Object[] args){
+        /**
+         * @author Claes Lindhardt
+         * Når man kører programmet (f.eks. via .bat-filen) kan man give den en række startargumenter,
+         * som havner i en String array. Med udgangspunkt i den liste kan man så få programmet til
+         * at gøre noget bestemt afhængigt af argumenterne. Så man kan starte programmet med nogle
+         * bestemte indstillinger.
+         * @param startArgument     Så man som start argument kan angive hvilken UI man vil bruge
+         */
+        // Håndterer startargument
 
         int startArgument = 0;
         // 0 = intet argument el. mere end ét argument
         // 1 = gui
         // 2 = tui
 
-        if(args.length == 1 && args[0].equals("gui")){
+        if(arglength == 1 && args[0].equals("gui")){
             startArgument = 1;
 
-        }else if(args.length == 1 && args[0].equals("tui")){
+        }else if(arglength == 1 && args[0].equals("tui")){
             startArgument = 2;
+        }
+        return startArgument;
+    }
+
+
+
+    public static UserInterfaceKontrakt valgAfUI(int startArgument){
+        /**
+         * @author Claes Lindhardt
+         * Funktion tager et input fra brugeren og implementere, med udgangspunkt i det
+         * den relevante interface af brugerinteraktiosnfladen.
+         * @param startArgument     hvis man før man kører program filen et andet
+         *                          sted på forhånd har angivet hvilke UI man ønsker.
+         *                          bruges dette parameter til at springe valget over
+         * @return Ui               Den valgte UI enten en TUI eller en GUI
+         */
+        // Efterspørger start argument
+        if( startArgument == 0) {
+
+            ScannerSingleton scan = ScannerSingleton.getInstance();
+
+            System.out.println("Hjerteligt velkommen til Monopoly junior" +
+                    "\n----|input (1) for at spille med GUIinterface( Graphical User Interface)"+
+                    "\n----|input (2) for at spille med TUI (Text User Interface)"
+
+            );
+
+            while (true) {
+                try {
+                    startArgument = scan.nextInt();
+                    if (startArgument == 1 || startArgument == 2) {
+                        break;
+                    }
+                    System.out.println("Forkert input. tallet skal være mellem 1 og 2");
+                } catch (InputMismatchException i) {
+                    System.out.println("Dette er ikke et gyldigt input, proev igen!");
+                    scan.nextLine();
+                }
+            }
         }
 
 
-    /*
+        UserInterfaceKontrakt Ui = null;
+
+        if(startArgument == 1) {
+            System.out.println("Starter med GUI");
+            Ui = new GUIinterface();
+        } else if (startArgument == 2){
+            System.out.println("Starter med TUI");
+            Ui = new TUI();
+        }
+        return Ui;
+    }
+
+    public static void koerSpillet(SpilController spil){
+        while(spil.isKør()){
+            spil.tjekForVinder();
+            spil.tjekOmGivetOp();
+            spil.tjekForFeangselsStraf();
+
+            //Kører kun hvis ikke der er en der har vundet spillet
+            if(!spil.isVinderFindes()){
+                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
+            }
+        }
+        spil.getUserInterfaceKontrakt().spilletErSlut();
+    }
+}
+/*
     ______________________________________________
     |Et standard exempel spil forløber(USE-Case):|
     |============================================|
@@ -57,54 +169,3 @@ public class Main {
     |============================================|
      */
 
-
-
-
-    // Metode kald ________________________________
-
-
-
-
-        // Efterspørger start argument
-        if( startArgument == 0) {
-
-            ScannerSingleton scan = ScannerSingleton.getInstance();
-
-            System.out.println("Hjerteligt velkommen til Monopoly junior" +
-                    "\n----|input (1) for at spille med GUIinterface( Graphical User Interface)"+
-                    "\n----|input (2) for at spille med TUI (Text User Interface)"
-
-            );
-
-            while (true) {
-                try {
-                    startArgument = scan.nextInt();
-                    if (startArgument == 1 || startArgument == 2) {
-                        break;
-                    }
-                    System.out.println("Forkert input. tallet skal være mellem 1 og 2");
-                } catch (InputMismatchException i) {
-                    System.out.println("Dette er ikke et gyldigt input, proev igen!");
-                    scan.nextLine();
-                }
-            }
-        }
-
-
-
-        SpilController spilController;
-
-        if (startArgument == 2){
-            System.out.println("Starter med TUI");
-            spilController = new SpilController( new TUI() );
-        }else{
-            System.out.println("Starter med GUI");
-            spilController = new SpilController( new GUIinterface() );
-        }
-
-        spilController.start();
-
-
-
-    }
-}

@@ -43,6 +43,54 @@ public class SpilController{
     //_____________________________________
     // Diverse:
 
+    /**
+     * @author Andreas
+     * Metoden generer spillere.
+     * @param antalSpillere
+     */
+    public void genererSpillere(int antalSpillere) {
+
+        for (int i = 0; i < antalSpillere; i++) {
+
+            String navn = getUserInterfaceKontrakt().spillerNavne();
+            SpillerCO deltager = new SpillerCO(navn, i, 0);
+
+            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
+            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
+            boolean harNavn = kontrollerNavn(navn);
+            while(harNavn){
+                getUserInterfaceKontrakt().spillerMaaIkkeEns();
+                String nytNavn =  getUserInterfaceKontrakt().spillerNavne();
+                //Her undersøges det om en allerede genereret spiller har det samme navn.
+                    if(!kontrollerNavn(nytNavn)){
+                        deltager.setNavn(nytNavn);
+                        harNavn = kontrollerNavn(nytNavn);
+                    }
+            }
+            getSpillerObjekter().add(deltager);
+
+
+        }
+    }
+
+    /**
+     * @author Andreas
+     * Metoden gennemgår listen af spillere og undersøger om en spiller i listen har det samme navn.
+     * @param navn
+     * @return boolean
+     */
+    public boolean kontrollerNavn(String navn){
+        String tjek = navn;
+        boolean harAllerede = false;
+        for(int i = 0; i < getSpillerObjekter().size();i++){
+            if(getSpillerObjekter().get(i).getNavn().equalsIgnoreCase(tjek)){
+                harAllerede = true;
+            }else {
+                harAllerede = false;
+            }
+        }
+        return harAllerede;
+    }
 
     /**
      * Indsæt beskrivelse her
@@ -65,7 +113,8 @@ public class SpilController{
         if (domsAfsigelseDel1 == domsAfsigelseDel2) {
             ui.heldIRetten();
             spil.getSpillerMedTur().setFaengselsStraf(false);
-            spil.getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
+            //Har udkemmenteret denne da jeg ikke syntes at det giver mening at have den.
+            //getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
         } else {
             spil.getSpillerMedTur().setFaengselsStraf(true);
             ui.ingenHeldIRetten();
@@ -176,8 +225,8 @@ public class SpilController{
         spiller.setSpillerPosition(felt.getPlacering());
 
         ui.duErLandetPå(felt, spiller);
-
-        felt.aktionPaaFelt(this, ui);
+        HandelsController handel = new HandelsController();
+        felt.aktionPaaFelt(handel, this, ui);
     }
 
 

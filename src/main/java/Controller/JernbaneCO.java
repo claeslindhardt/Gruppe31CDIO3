@@ -58,7 +58,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null) {

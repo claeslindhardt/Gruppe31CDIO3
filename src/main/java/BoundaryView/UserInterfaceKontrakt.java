@@ -1,9 +1,9 @@
 package BoundaryView;
 
 import Controller.*;
-import ModelEnteties.BraetDTO;
-import ModelEnteties.Spil;
+import Controller.SpillerCO;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -71,7 +71,7 @@ public interface UserInterfaceKontrakt {
     void ejetAfEnAnden();
     void tetPaaMonopol();
     void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller);
+    void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
     void duErLandetPå(FeltDTO felt, SpillerCO spiller);
@@ -89,10 +89,12 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere);
+    void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(SpillerCO spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
+    void kanIkkeKøbeHotel();
+    void spillerMaaIkkeEns();
 }
