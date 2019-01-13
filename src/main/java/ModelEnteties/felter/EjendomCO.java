@@ -65,7 +65,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @author Malte
      * Henter hvad lejen er på grunden, ved et bestemt antal huse.
      *
-     * @param antalHuse Antallet af huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
+     * @param antalHuse Antallet aPf huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
      *                  Giver man et input over dette returnerer den lejen ved 4 huse, og giver man et input
      *                  under dette returnerer den lejen ved 1 hus.
      * @return Lejen ved det antal huse, der er blevet indtastet.
