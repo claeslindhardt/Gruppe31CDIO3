@@ -339,6 +339,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         int terning1=tern.get(0);
         int terning2=tern.get(1);
         Random rand = new Random();
+        //Angiver, position af terningerne
         int x1 = rand.nextInt(8)+2;
         int y1 = rand.nextInt(8)+2;
         int x2 = rand.nextInt(8)+2;
@@ -392,20 +393,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du har foelgende Chance Kort:");
     }
     public int chanceKortNr(SpillerCO spiller){
-        int laengde = spiller.getSpillerAktionsKort().size();
+
+        int laengde = spiller.getSpillerAktionsKort().size()+1;
 
         String[] alias = new String[laengde];
+
 
         for(int j = 0; j < spiller.getSpillerAktionsKort().size();j++) {
             alias[j] = spiller.getSpillerAktionsKort().get(j).getKortBeskrivelse();
 
         }
+        alias[spiller.getSpillerAktionsKort().size()] = "Tilbage";
         String valg = gui.getUserSelection("Liste af dine Chance kort: ",alias);
-        //gui.showMessage(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
-        int valgKort=0;
+
+        int valgKort = 0;
         for(int i = 0; i < alias.length;i++) {
-            if (valg.equalsIgnoreCase(alias[i])){
-                valgKort = alias[i].indexOf(valg);
+            if (alias[i].equalsIgnoreCase(valg)){
+                valgKort = i;
 
             }
         }
@@ -558,7 +562,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
     public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
-        gui.showMessage("Du er landet på felt "+felt.getPlacering()+": "+felt.getNavn());
+        String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
+        if(felt.getPlacering()==1){
+            str = str2;
+        }else str = str1;
+
+
+
+        gui.showMessage(str+felt.getPlacering()+": "+felt.getNavn());
         GUI_Player guiSpiller = spillere.get(spiller.getId());
         rykBil(guiSpiller,felt.getPlacering());
     }
@@ -641,4 +652,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void kanIkkeSlaaFaengsel(){
         gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
+
+   public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
+
+    public void spillerMaaIkkeEns(){gui.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 }

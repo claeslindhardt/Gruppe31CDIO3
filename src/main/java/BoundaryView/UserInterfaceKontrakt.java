@@ -94,4 +94,6 @@ public interface UserInterfaceKontrakt {
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(SpillerCO spiller);
     void kanIkkeSlaaFaengsel();
+    void kanIkkeKøbeHotel();
+    void spillerMaaIkkeEns();
 }

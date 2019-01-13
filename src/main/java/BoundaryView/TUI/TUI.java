@@ -422,5 +422,8 @@ public class TUI implements UserInterfaceKontrakt {
     public void kanIkkeSlaaFaengsel(){
         System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
+
+    public void kanIkkeKøbeHotel(){};
+    public void spillerMaaIkkeEns(){};
 }
 

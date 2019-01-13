@@ -30,11 +30,12 @@ public class ChanceFeltCO extends AktionsFelterDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int muligeKort = spil.getBretGeneretForSpil().getStandardAntalChanceKortPrFelt();
         int vælgAktion = ra.nextInt(muligeKort)+1;
         ChanceAktionDTO relavantKort = KortPaaFelt.get(vælgAktion);
-        relavantKort.DirketeAktion(spil, userInterfaceKontrakt);
+
+        relavantKort.DirketeAktion(handel, spil, userInterfaceKontrakt);
     }
 
     /**
