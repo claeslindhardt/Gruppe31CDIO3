@@ -96,37 +96,4 @@ public class EjendomsGruppeDTO {
 
     // TODO: Implementér logikken i denne. Kan være den skal flyttes.
 
-    /**
-     * @author Jacob
-     *
-     *
-     *
-     * @param ejendomUdgangspunkt - Den ejendom som man tager udgangspunkt i, når man skal tjekke om husene er ligeligt
-     *                            fordelt i en ejendomsgruppe
-     * @return
-     */
-    public boolean kanManKoebeEtHus(EjendomCO ejendomUdgangspunkt){
-
-        for (int i = 0; i < ejendomme.size(); i++){
-            EjendomCO ejendom = ejendomme.get(i);
-
-            if( ejendom.getAntalHuse() < ejendomUdgangspunkt.getAntalHuse() ){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
-
-        for (int i = 0; i < ejendomme.size(); i++){
-            EjendomCO ejendom = ejendomme.get(i);
-
-            if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
-                return false;
-            }
-        }
-        return true;
-    }
-
 }
