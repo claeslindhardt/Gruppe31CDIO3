@@ -2,8 +2,8 @@ package ModelEnteties;
 
 import ModelEnteties.felter.EjendomCO;
 
-import ModelEnteties.Spiller.SpillerCO;
-import ModelEnteties.Spiller.SpillerDTO;
+import Controller.SpillerCO;
+import ModelEnteties.SpillerDTO;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -95,23 +95,26 @@ public class EjendomsGruppeDTO {
     }
 
     // TODO: Implementér logikken i denne. Kan være den skal flyttes.
-    public boolean huseErLigeligtFordelt(EjendomCO ejendomCO, boolean vilKoebe){
-        EjendomsGruppeDTO ejendomsGruppe = this;
-        EjendomCO ejendomUdgangspunkt = ejendomCO;
+
+    /**
+     * @author Jacob
+     *
+     *
+     *
+     * @param ejendomUdgangspunkt - Den ejendom som man tager udgangspunkt i, når man skal tjekke om husene er ligeligt
+     *                            fordelt i en ejendomsgruppe
+     * @return
+     */
+    public boolean huseErLigeligtFordelt(EjendomCO ejendomUdgangspunkt){
 
         for (int i = 0; i < ejendomme.size(); i++){
             EjendomCO ejendom = ejendomme.get(i);
-            if (ejendom.getAntalHuse()==ejendom.getAntalHuse() && ejendom.getAntalHuse()==ejendom.getAntalHuse()+1){
 
-                vilKoebe = true;
+            if( ejendom.getAntalHuse() < ejendomUdgangspunkt.getAntalHuse() ){
+                return false;
             }
-            else if (ejendom.getAntalHuse()==ejendom.getAntalHuse()&&ejendom.getAntalHuse()==ejendom.getAntalHuse()-1){
-                vilKoebe= false;
-            }
-
         }
-        return vilKoebe;
+        return true;
     }
-
 
 }
