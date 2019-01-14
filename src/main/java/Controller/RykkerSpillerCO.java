@@ -16,7 +16,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void DirketeAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void DirketeAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpillerMedTur();
 
         userInterfaceKontrakt.printChanceKortDirekte(this);
@@ -25,7 +25,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         spillerMedTur.addSpillerAktionsKort(this);
 
     }
-    public void BetingetAktion(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void BetingetAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();
     }

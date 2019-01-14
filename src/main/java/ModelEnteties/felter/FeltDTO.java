@@ -1,5 +1,6 @@
 package ModelEnteties.felter;
 
+import Controller.HandelsController;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 
@@ -57,5 +58,5 @@ public abstract class FeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){}
+    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){}
 }
