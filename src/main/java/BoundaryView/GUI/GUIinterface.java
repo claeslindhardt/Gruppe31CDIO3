@@ -6,13 +6,12 @@ import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.*;
 import gui_main.GUI;
-import spillogik.EjendomsLogik;
 
 import java.awt.*;
 import java.util.ArrayList;

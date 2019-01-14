@@ -3,12 +3,10 @@ package Controller;
 import BoundaryView.UserInterfaceKontrakt;
 
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.navneGenerering.NavneGenerator;
+import ModelEnteties.NavneGenerator;
 import ModelEnteties.felter.ChanceAktionDTO;
-import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 

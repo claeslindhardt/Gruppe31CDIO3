@@ -1,4 +1,4 @@
-package ModelEnteties.navneGenerering;
+package ModelEnteties;
 
 import ModelEnteties.singletoner.RandomSingleton;
 

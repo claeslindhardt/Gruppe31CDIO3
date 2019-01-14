@@ -5,10 +5,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.FalskRaflebaeger;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.singletoner.RandomSingleton;
 import spillogik.BevaegelsesLogik;
 import spillogik.SpilGenerator;
 

@@ -2,7 +2,7 @@ package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
