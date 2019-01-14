@@ -1,12 +1,15 @@
 package BoundaryView.TUI;
 
-import ModelEnteties.Spiller.SpillerCO;
+import Controller.ChanceFeltCO;
+import Controller.SpillerCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.controllerKlasser.*;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.InputMismatchException;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class IndputHaanteringTUI {
     ScannerSingleton scan = ScannerSingleton.getInstance();
 
@@ -57,7 +60,7 @@ public class IndputHaanteringTUI {
 
             catch (InputMismatchException i){
                System.out.println("Dette er ikke et gyldigt input, proev igen!");
-               //scan.nextLine();
+               scan.nextLine();
                 // Man bliver nød til at tilføje denne nextLine() metode, da sout printet i kommando prompten
                 // bliver set på som et forkert input hver gang try kører og vil derfor blive fanget af catch.
             }

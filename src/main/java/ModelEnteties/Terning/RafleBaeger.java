@@ -38,6 +38,8 @@ public class RafleBaeger {
             antalTerninger=1;
         }
 
+
+
         // Laver Terning
         terninger = new Terning[antalTerninger];
         for( int i=0; i<antalTerninger; i++){

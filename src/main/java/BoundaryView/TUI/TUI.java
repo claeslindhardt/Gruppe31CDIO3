@@ -1,12 +1,15 @@
 package BoundaryView.TUI;
 
-import Controller.UserInterfaceKontrakt;
-import ModelEnteties.Spiller.SpillerCO;
+import BoundaryView.UserInterfaceKontrakt;
+import Controller.*;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
+import ModelEnteties.SpillerDTO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.braet.SpilleBraetCO;
-import ModelEnteties.braet.controllerKlasser.*;
-import ModelEnteties.braet.dataKlasser.FeltDTO;
-import ModelEnteties.chanceKort.dataKlasser.ChanceAktionDTO;
+import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
@@ -175,10 +178,11 @@ public class TUI implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         System.out.println("Du har foelgende Chance Kort:");
     }
-    public void chanceKortNr(int i, SpillerCO spiller){
-        System.out.println("Chance kort nr. "+i+": ");
-        System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
-
+    public int chanceKortNr(SpillerCO spiller){
+        //Her er der fjernet parameteren i
+        System.out.println("Chance kort nr. : ");
+        //System.out.println(spiller.getSpillerAktionsKort().get(i).getBeskrivelse());
+        return 0;
     }
     public int chanceKortsVejledning(){
         System.out.println("-------------------------------");
@@ -286,7 +290,13 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(){
+
+    @Override
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
+
+    }
+
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
         System.out.println("Du kan koebe grunden hurra!!");
         System.out.println("Ejendommen er nu din!");
 
@@ -302,7 +312,7 @@ public class TUI implements UserInterfaceKontrakt {
 
         System.out.println("| FeltDTO nr: " + ej.getPlacering() +" | FeltDTO Navn:" + ej.getNavn()+" | FeltDTO type:"+ ej.getFeltType()+" |"+
                 "\n| Pris: "+ej.getPris()+ " | Rent: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
-                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.getAntalHoteller() +"|"+
+                " | Huspris: "+ej.getHusPris()+" | Har Hotel: " + ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" ejer: "+ejer+"|");
     }
 
@@ -398,7 +408,13 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void generGUIBret(int AntalFelter, SpilleBraetCO bret, ArrayList<SpillerCO> spillerObjekter){
+
+    @Override
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+
+    }
+
+    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
 
     }
 
@@ -413,4 +429,19 @@ public class TUI implements UserInterfaceKontrakt {
     public void rejseBekraeftelse(String jernbane){
         System.out.println("Du er rejst til "+jernbane);
     }
+
+    public void updateSpillere(SpillerCO spiller){};
+
+    public void kanIkkeSlaaFaengsel(){
+        System.out.println("Du kan ikke slaa terningerne, da du stadig er i faengsel");
+    }
+
+    public void kanIkkeKøbeHotel(){};
+    public void spillerMaaIkkeEns(){};
+
+    @Override
+    public void startSpil(Spil spil) {
+
+    }
 }
+

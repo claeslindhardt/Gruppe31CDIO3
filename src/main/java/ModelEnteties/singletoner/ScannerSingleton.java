@@ -3,6 +3,9 @@ package ModelEnteties.singletoner;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Indsæt beskrivelse her
+ */
 public class ScannerSingleton {
     private static ScannerSingleton instance;
     private Scanner scan;
