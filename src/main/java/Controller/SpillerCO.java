@@ -11,46 +11,7 @@ import java.util.ArrayList;
 
 
 public class SpillerCO extends SpillerDTO {
-    //|----------- Metoder:------------------
-    //_____________________________________
-    //Diverse:
 
-
-
-
-    /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
-     */
-    public void givOp(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        int svar;
-        svar = userInterfaceKontrakt.vilDuGiveOp();
-        if(svar==1) {
-            setHarGivetOp(true);
-            getSpillerEjendomme().clear();
-            userInterfaceKontrakt.takForSpillet();
-            spil.slutSpillerTur();
-        }
-        else {
-            userInterfaceKontrakt.duGavIkkeOp();
-        }
-
-    }
-
-    /**
-     * @author Malte
-     * Giver spilleren penge, alt efter hvor mange gange over start spilleren kommer,
-     * samt kører den passende UI-kode til passering af start.
-     * Den finder IKKE ud af, hvor mange gange man kører over start.
-     * @param gangeOverStart Antallet af gange man passerer start
-     * @param userInterfaceKontrakt UI'en der skal bruges til at vise det.
-     */
-    public void passeringAfStart (int gangeOverStart, UserInterfaceKontrakt userInterfaceKontrakt) {
-        penge += BevaegelsesLogik.passererStartPenge(gangeOverStart);
-        userInterfaceKontrakt.passeringAfStart(gangeOverStart);
-        userInterfaceKontrakt.updateSpillere(this);
-    }
 
     /**
      * Indsæt beskrivelse her
@@ -110,28 +71,6 @@ public class SpillerCO extends SpillerDTO {
         }else{
             spil.getRykSpiller().rykSpillerTilFelt( this, spil.getSpil().getBraet().getBret().get(destination), 1, userInterfaceKontrakt, spil );
         }
-    }
-
-
-    //_____________________________________
-    //Vis og print funktinoer:
-
-    /**
-     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
-     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
-     * @param userInterfaceKontrakt
-     */
-    public void printSpillerStats(UserInterfaceKontrakt userInterfaceKontrakt){
-        userInterfaceKontrakt.spillerStat(this);
-    }
-
-    /**
-     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
-     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
-     * @param userInterfaceKontrakt
-     */
-    public void visEjendeFelter(UserInterfaceKontrakt userInterfaceKontrakt){
-        userInterfaceKontrakt.spillerEjendele(this);
     }
 
     //_____________________________________
@@ -277,11 +216,5 @@ public class SpillerCO extends SpillerDTO {
             ui.ejerIngenEjendomme();
         }
     }
-
-
-//----------------------Constructor-----------------------------------------------------------------------------------//
-    public SpillerCO(){
-    }
-
 
 }

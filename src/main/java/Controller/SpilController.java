@@ -294,7 +294,7 @@ public class SpilController{
                 spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
                 break;
             case 4:
-                spil.getSpillerMedTur().visEjendeFelter(ui);
+                ui.spillerEjendele(spil.getSpillerMedTur());
                 break;
             case 5:
                 /*spilleBret.printBret(ui);*/
