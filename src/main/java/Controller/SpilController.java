@@ -15,15 +15,21 @@ public class SpilController{
     private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
-    public RykSpiller getRykSpiller() {
-        return rykSpiller;
+
+
+    private RykSpiller  rykSpiller  = new RykSpiller();
+    private Handlinger  handlinger  = new Handlinger();
+    private Handel      handel      = new Handel();
+
+    public Handel getHandel() {
+        return handel;
     }
 
-    public void setRykSpiller(RykSpiller rykSpiller) {
-        this.rykSpiller = rykSpiller;
+    public Controller.KoebFelt getKoebFelt() {
+        return KoebFelt;
     }
 
-    private RykSpiller rykSpiller = new RykSpiller();
+    private KoebFelt    KoebFelt    = new KoebFelt();
 
 
 
@@ -32,6 +38,12 @@ public class SpilController{
     public void setSpil(Spil spil){
         this.spil = spil;
     }
+
+    public RykSpiller getRykSpiller() {
+        return rykSpiller;
+    }
+
+    public Handlinger getHandlinger(){ return handlinger;  }
 
 
     /** Laver en ny SpilController med en vilkårlig UI */
@@ -274,7 +286,6 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-        Handlinger handling = new Handlinger();
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
@@ -291,7 +302,7 @@ public class SpilController{
                 slutSpillerTur();
                 break;
             case 3:
-                spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
+                handlinger.chanceKortMuligheder(spil.getSpillerMedTur(), this, ui);
                 break;
             case 4:
                 ui.spillerEjendele(spil.getSpillerMedTur());
@@ -303,13 +314,13 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                handling.givOp(spil.getSpillerMedTur(),this, ui );
+                handlinger.givOp(spil.getSpillerMedTur(),this, ui );
                 break;
             case 8:
-                spil.getSpillerMedTur().koebHusPaaEjendom(ui);
+                handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
                 break;
             case 9:
-                spil.getSpillerMedTur().handelMedEjendomme();
+                //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
                 ui.ikkeMuligt();

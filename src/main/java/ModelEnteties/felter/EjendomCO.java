@@ -169,7 +169,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
                 case 1:
-                    spillerMedTur.koebEjendom(this, userInterfaceKontrakt);
+                    spil.getKoebFelt().koebEjendom(this, spillerMedTur, userInterfaceKontrakt);
                     break;
                 case 2:
                     userInterfaceKontrakt.forsetTur();

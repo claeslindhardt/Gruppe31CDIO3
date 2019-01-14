@@ -1,5 +1,6 @@
 package ModelEnteties;
 
+import Controller.SpillerCO;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -149,6 +150,35 @@ public class SpillerDTO {
     }
     public void addPenge(double beloeb) {
         this.penge+=beloeb;
+    }
+
+
+    /**
+     * @author Malte
+     * Undersoeger om spilleren ejer alle ejendomme i en specifik
+     * ejendomsgruppe.
+     * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
+     * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
+     */
+    public boolean ejerEjendomsGruppe( EjendomsGruppeDTO ejendomsGruppe ){
+        for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
+            if( ejendom.getEjer() != this ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * @author Malte
+     * Undersoege om man ejer en specifik ejendom, ved at sammenligne
+     * ejeren af ejendommen med spilleren.
+     * @param ejendom Ejendommen man oensker at undersoege.
+     * @return True: spilleren ejer den, False: spilleren ejer den ikke.
+     */
+    public boolean ejerEjendom(EjendomCO ejendom){
+        return ejendom.getEjer() == this;
     }
 
 

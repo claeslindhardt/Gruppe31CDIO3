@@ -29,7 +29,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
 
 
     public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        spil.getSpil().getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
+        spil.getHandlinger().tagTaxi(spil.getSpil().getSpillerMedTur(),spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();
     }
 
