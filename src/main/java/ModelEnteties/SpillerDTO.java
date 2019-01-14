@@ -151,5 +151,16 @@ public class SpillerDTO {
         this.penge+=beloeb;
     }
 
+    /**
+     * @author Jacob og Andreas
+     * tilføjer ejendomme til en spillers ejendomme.
+     * Denne metode bliver brugt i vores test spil.
+     *
+     * @param ejendom den ejendom der skal tilføjes
+     */
+    public void tilføjEjendom(EjendomCO ejendom){
+        spillerEjendomme.add(ejendom);
 
+
+    }
 }

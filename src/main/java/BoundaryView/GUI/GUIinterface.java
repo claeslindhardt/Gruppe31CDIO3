@@ -50,7 +50,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         this.spillere.add(spiller);
     }
 
-
+    public GUI_Field[] getFelter(){return felter;}
 
     /**
      * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
@@ -624,19 +624,19 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
     }
 
+    /**
+     * @author Jacob og Andreas
+     *
+     * Denne metode sætter et hus på den ejendom som man har valgt at bygge den på.
+     *
+     * @param ejendom den Ejendom man vil bygge på
+     */
     @Override
     public void byggetHus(EjendomCO ejendom) {
 
+        GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
+        husSkalPaa.setHouses(ejendom.getAntalHuse());
 
-
-        if (ejendom.getAntalHuse()==1) { //hvis ejendommen har hus på sig, så skal gui'en vise det
-            GUI_Brewery hus = new GUI_Brewery(); //lave et hus
-
-
-                hus.setTitle(ejendom.getNavn());     //Her vil vi gerne navngive huset det samme navn som egendommen.
-
-
-        }
     }
 
     @Override
@@ -649,9 +649,37 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    /**
+     * @author Jacob og Andreas
+     *
+     * Denne metode laver en liste i GUI, efter man har valgt at bygge på en ejendom, som viser en liste af
+     * bebyggelige ejendomme.
+     * Først omdannes arrayList ejendomme til String[] ejedomsliste.
+     * Så fylder man den nye array ud med elementer fra arrayList med en for løkke.
+     * Derefter vises en besked, hvorefter man vælger en bebyggelig grund fra listen og et hus bliver vist på
+     * ejendommen i GUI
+     *
+     * @param ejendomme arrayList med alle ejendommene
+     * @return den ejendom fra listen med bebyggelige ejendomme, som man har valgt at bygge på
+     */
     @Override
     public int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme) {
-        return 0;
+
+        String[] ejendomsListe = new String[ejendomme.size()];
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            ejendomsListe[i] = ejendomme.get(i).getNavn();
+        }
+
+        String valg = gui.getUserSelection("Hvilken ejendom vil du bygge paa? ",ejendomsListe);
+        int indexRetur = 0;
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            if (valg == ejendomsListe[i]){
+                indexRetur = i;
+            }
+        }
+        return indexRetur;
     }
 
     @Override
