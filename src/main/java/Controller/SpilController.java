@@ -368,7 +368,7 @@ public class SpilController extends SpilData {
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetCO spilleBret, RafleBaeger terningsKrus) {
-
+        HandlingController handling = new HandlingController();
         int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
 
         switch (input) {
@@ -400,7 +400,7 @@ public class SpilController extends SpilData {
                 printSpilleresInfo();
                 break;
             case 7:
-                getSpillerMedTur().givOp(this, getUserInterfaceKontrakt());
+                handling.givOp(getSpillerMedTur(),this, getUserInterfaceKontrakt());
                 break;
             case 8:
                 getSpillerMedTur().koebHusPaaEjendom(getUserInterfaceKontrakt());
