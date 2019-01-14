@@ -102,7 +102,11 @@ public class SpillerCO extends SpillerDTO {
         destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
         if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
-        }else{
+        }
+        else if (destination == getSpillerPosition()){
+            userInterfaceKontrakt.ikkeTaxiTilTaxi();
+        }
+        else{
             spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
         }
     }

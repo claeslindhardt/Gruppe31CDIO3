@@ -672,6 +672,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 
+    public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
+
     @Override
     public void startSpil(Spil spil) {
 

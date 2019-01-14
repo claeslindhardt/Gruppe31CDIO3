@@ -438,6 +438,7 @@ public class TUI implements UserInterfaceKontrakt {
 
     public void kanIkkeKøbeHotel(){};
     public void spillerMaaIkkeEns(){};
+    public void ikkeTaxiTilTaxi(){};
 
     @Override
     public void startSpil(Spil spil) {
