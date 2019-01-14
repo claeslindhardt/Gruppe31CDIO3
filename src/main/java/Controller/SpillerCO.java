@@ -105,6 +105,7 @@ public class SpillerCO extends SpillerDTO {
         }
         else if (destination == getSpillerPosition()){
             userInterfaceKontrakt.ikkeTaxiTilTaxi();
+            tagTaxi(spil,userInterfaceKontrakt);
         }
         else{
             spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
