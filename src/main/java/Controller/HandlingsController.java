@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 
-public class HandlingController {
+public class HandlingsController {
 
 
     /**

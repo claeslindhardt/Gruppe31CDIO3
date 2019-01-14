@@ -5,10 +5,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.singletoner.RandomSingleton;
 import spillogik.BevaegelsesLogik;
 import spillogik.SpilGenerator;
 
@@ -268,7 +266,7 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-        HandlingController handling = new HandlingController();
+        HandlingsController handling = new HandlingsController();
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
@@ -300,7 +298,7 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                handling.givOp(getSpillerMedTur(),this, getUserInterfaceKontrakt());
+                handling.givOp(spil.getSpillerMedTur(),this, ui );
                 break;
             case 8:
                 /*spil.getSpillerMedTur().koebHusPaaEjendom(ui);*/
