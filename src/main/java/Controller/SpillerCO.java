@@ -89,9 +89,11 @@ public class SpillerCO extends SpillerDTO {
         //}
     }
     /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
+     * @author Filip
+     * Når spilleren lander på et taxifelt, kan vedkommende rykke til et felt efter deres valg
+     * (bortset fra selve taxifeltet).
+     * @param spil SpilController objekt, der der giver adgang til dens metoder, bl.a. rykSpillerTilFelt
+     * @param userInterfaceKontrakt Forbindelse til UI, så metoden kan modtage input og give output tilbage
      */
     public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
