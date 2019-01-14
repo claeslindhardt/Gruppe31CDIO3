@@ -2,6 +2,9 @@ package ModelEnteties;
 
 import ModelEnteties.felter.EjendomCO;
 
+import Controller.SpillerCO;
+import ModelEnteties.SpillerDTO;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -92,9 +95,5 @@ public class EjendomsGruppeDTO {
     }
 
     // TODO: Implementér logikken i denne. Kan være den skal flyttes.
-    public boolean huseErLigeligtFordelt(){
-        return true;
-    }
-
 
 }

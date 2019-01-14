@@ -38,6 +38,10 @@ public class EjendomCO extends EjeligtFeltDTO {
         return harHotel;
     }
 
+    public void setHarHotel(boolean harHotel) {
+        this.harHotel = harHotel;
+    }
+
     public double getHusPris() {
         return husPris;
     }
