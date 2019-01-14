@@ -1,3 +1,4 @@
+/*
 package ModelEnteties.Spiller;
 
 import BoundaryView.TUI.TUI;
@@ -21,13 +22,15 @@ class SpillerCOTest {
     void givOp() {
     }
 
-    /**
+    */
+/**
      * @author Andreas
      * Formål: At teste om vi kan passere start og fortsat blive på spillepladen
      * Metode: brættet har 4 felter, spillers, start position er 0 (start), terningværdi er 5.
      * Forventet: spillerplacering efter slag 1.
      * Statur: Testen er godkendt og bestået.
-     */
+     *//*
+
     @Test
     void tjekForPasseringAfStartRykSpiller() {
         int spillerTur =1;
@@ -44,11 +47,13 @@ class SpillerCOTest {
         assertEquals(aktuelSpillerPosition,forventetSpillerPosition);
     }
 
-    /**
+    */
+/**
     @author Chua
      Her vil jeg undersøge, om spilleren får penge på man lander på start igen. Dette er en kode som skal finde en fejl.
      Testen bliver gennemført da den ikke går igennem går igennem :D
-     */
+     *//*
+
     @Test
     void landerPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
@@ -62,7 +67,8 @@ class SpillerCOTest {
         assertEquals(aktuelSpillerBeholdning,forventetSpillerBeholdning);
     }
 
-    /**
+    */
+/**
      * @author Jacob & Chua
      * Her tester vi, om der sker noget med ens pengebeholdning når spilleren lander på feltet lige inden start.
      * DET GØR DER IKKE.
@@ -70,7 +76,8 @@ class SpillerCOTest {
      * slået nogle terninger med øjne der adderes med spillerens placering resulterer i at spilleren rykker lige akkurat forbi
      * start, men så subtraherede 1 fra antallet af felter man har, så får man 200 penge når man lander på start.
      * Her tester vi, om man fra næstsidste position til sidste position, optjener point, på baggrund af "landerPaaStart"
-     */
+     *//*
+
     @Test
     void faarManPengeNaarManPassererSidsteFeltOgLanderPaaStart(){
         UserInterfaceKontrakt userInterface = new TUI();
@@ -86,12 +93,14 @@ class SpillerCOTest {
     }
 
 
-    /**
+    */
+/**
      * @author Chua
      * Her vil jeg teste om spilleren får penge når man har passeret start.
      * Testen viser at koden er programmeret så man får penge hvis man rykker forbi start.
      * Positiv test
-     */
+     *//*
+
     @Test
     void passeringAfStart(){
         UserInterfaceKontrakt userInterface = new TUI();
@@ -130,10 +139,12 @@ class SpillerCOTest {
     void visEjendeFelter() {
     }
 
-    /**
+    */
+/**
      * @author Jacob, Malte
      * Unit test, som tester om metoden koebEjendom virker. Den tester
-     */
+     *//*
+
     @Test
     void koebEjendom() {
 
@@ -149,10 +160,12 @@ class SpillerCOTest {
         assertTrue(spiller.getSpillerEjendomme().contains(ejendom));
     }
 
-    /**
+    */
+/**
      * @author Jacob
      * Unit test, som tester om metoden koebJernbane
-     */
+     *//*
+
     @Test
     void koebJernbane() {
         JernbaneCO jernbane = new JernbaneCO("Hovedbanegården",500,0);
@@ -170,10 +183,12 @@ class SpillerCOTest {
         assertTrue(spiller.getSpillerJernbaner().contains(jernbane));
     }
 
-    /** @author Malte
+    */
+/** @author Malte
      *  Tester for at integrationen mellem koebHus() og metoderne der tester, om man kan koebe
      *  et hus, virker korrekt.
-     */
+     *//*
+
     @Test
     void koebHus() {
 
@@ -264,4 +279,4 @@ class SpillerCOTest {
 
 
 
-}
+}*/

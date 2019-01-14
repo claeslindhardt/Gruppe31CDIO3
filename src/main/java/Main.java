@@ -25,9 +25,9 @@ public class Main {
 
         int startArgument = HaanterStartArgument(args.length, args);
         UserInterfaceKontrakt Ui = valgAfUI(startArgument);
-        SpilController spil = new SpilController(Ui);
-        koerSpillet(spil);
-        spil.getUserInterfaceKontrakt().spilletErSlut();
+
+        SpilController spilController = new SpilController(Ui);
+        spilController.start();
 
         /**
          * ==========================================
@@ -123,18 +123,6 @@ public class Main {
         return Ui;
     }
 
-    public static void koerSpillet(SpilController spil){
-        while(spil.isKør()){
-            spil.tjekForVinder();
-            spil.tjekOmGivetOp();
-            spil.tjekForFeangselsStraf();
-
-            //Kører kun hvis ikke der er en der har vundet spillet
-            if(!spil.isVinderFindes()){
-                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
-            }
-        }
-    }
 }
 /*
     ______________________________________________
