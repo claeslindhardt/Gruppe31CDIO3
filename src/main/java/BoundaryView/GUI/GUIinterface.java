@@ -522,11 +522,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    @Override
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
-
-    }
-
     public void updateSpillere(SpillerCO spiller){
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
@@ -539,7 +534,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
