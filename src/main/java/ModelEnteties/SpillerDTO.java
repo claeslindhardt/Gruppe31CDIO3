@@ -151,5 +151,11 @@ public class SpillerDTO {
         this.penge+=beloeb;
     }
 
+    public void tilfoejEjendom(EjendomCO ejendom){
+        if( !spillerEjendomme.contains(ejendom) ){
+            spillerEjendomme.add(ejendom);
+        }
+    }
+
 
 }

@@ -26,9 +26,11 @@ class SpilControllerTest {
 
 
         for( FeltDTO felt : spil.getBraet().getBret() ){
-            if( felt instanceof EjeligtFeltDTO ){
+            if( felt instanceof EjendomCO ){
                 System.out.println("fundet felt");
-                ((EjeligtFeltDTO)  felt).setEjer(spil.getSpiller(0));
+                ((EjendomCO)  felt).setEjer(spil.getSpiller(0));
+                spil.getSpiller(0).tilfoejEjendom( (EjendomCO) felt);
+
             }
         }
 
