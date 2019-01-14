@@ -76,7 +76,7 @@ public class SpillerCO extends SpillerDTO {
             //else if(valg != -1){
             if (valg == getSpillerAktionsKort().size()) {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu(spil.getBretGeneretForSpil(),spil.getTerningeKrus());
+                spil.turMenu(spil.getSpil().getBraet(),spil.getSpil().getRaflebaeger() );
             } else {
                 HandelsController handel = new HandelsController();
                 getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);
@@ -99,11 +99,11 @@ public class SpillerCO extends SpillerDTO {
 
         this.setHarSlaaetForTuren(true);
 
-        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getAntalFelter());
-        if(destination>spil.getAntalFelter() || destination< 1 ){
+        destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
+        if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
-            spil.rykSpillerTilFelt(this, spil.getBretGeneretForSpil().getBret().get(destination),1);
+            spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
         }
     }
     //_____________________________________
@@ -290,10 +290,7 @@ public class SpillerCO extends SpillerDTO {
 
 
 //----------------------Constructor-----------------------------------------------------------------------------------//
-    public SpillerCO(String NAVN, int ID, int position){
-        setSpillerPosition(position);
-        setId(ID);
-        setNavn(NAVN);
+    public SpillerCO(){
     }
 
 

@@ -2,9 +2,10 @@ package BoundaryView.GUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import Controller.SpillerCO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -32,7 +33,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
 
 
-    GUI gui = new GUI(new GUI_Field[0]);
+    private GUI gui;
+    private GUI hovedmenu = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
     private ArrayList<GUI_Player> spillere = new ArrayList<>();
     GUI_Field[] felter;
@@ -57,7 +59,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
         int antalFelter =  braet.getBret().size();
         GUI_Field[] felter = new GUI_Field[ antalFelter ];
 
@@ -102,7 +104,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
 
         this.felter = felter;
-        gui = new GUI(felter,new Color(218,206,179));
+        gui = new GUI( felter, new Color(218,206,179));
 
         // Laver spilleres grafiske elementer
         for(int i=0;i<spillere.size();i++){
@@ -159,14 +161,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public String spillerNavne() {
-        String spillernavn = gui.getUserString("Indtast et navn");
+        String spillernavn = hovedmenu.getUserString("Indtast et navn");
         return spillernavn;
     }
 
     public int velkomstMenu(int minInput, int maxInput){
-        String valg = gui.getUserButtonPressed("|=========| MONOPOL SPILLET V1, MKIII",
+        String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOL SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
-        gui.showMessage(valg);
+        hovedmenu.showMessage(valg);
         //todo: fix this to return the right option
         return input.velkomstMenu(valg);
     }
@@ -185,7 +187,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
-        gui.showMessage("I er: " + getAntalSpillere + " spillere." +
+        hovedmenu.showMessage("I er: " + getAntalSpillere + " spillere." +
                 "\nBraettet har "+(getAntalFelter+1)+" Felter," +
                 "\nmed "+getAntalTerninger+" terninger på braettet." +
                 "\nSpiller "+getSpillerTur + " Starter!" +
@@ -209,7 +211,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return - Der bliver returneret en indstilling af hvor stort brættet skal være.
      */
     public int instilingsSporgsmaal0(int minInput, int maxInput){
-       String input = gui.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
+       String input = hovedmenu.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
                 "16","20","24","28","32","36","40");
        return Integer.parseInt(input) - 1;
     }
@@ -227,18 +229,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return - Der bliver returneret en indstilling af hvor mange spillere der skal være i spillet.
      */
     public int instilingsSporgsmaall(int minInput, int maxInput){
-        gui.showMessage("Hvor mange spillere vil i være?" +
+        hovedmenu.showMessage("Hvor mange spillere vil i være?" +
                 "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
         while (true) {
             try {
-                int valg = gui.getUserInteger("Indtast antal spillere i spillet");
+                int valg = hovedmenu.getUserInteger("Indtast antal spillere i spillet");
 
                 if (valg <= 8 && valg >= 1 ) {
                     return valg;
                 }
-                gui.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
+                hovedmenu.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
             } catch (Exception i) {
-                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+                hovedmenu.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
         }
     }
@@ -254,7 +256,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return 2 terninger
      */
     public int instilingsSporgsmaal2(int minInput, int maxInput){
-        gui.showMessage("Spillet starter med 2 terninger");
+        hovedmenu.showMessage("Spillet starter med 2 terninger");
         return 2;
     }
 
@@ -271,18 +273,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
      */
     public int instilingsSporgsmaal3(int minInput, int maxInput){
-        gui.showMessage("Hvor skal bankerot graensen ligge?: " +
+        hovedmenu.showMessage("Hvor skal bankerot graensen ligge?: " +
                 "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
         while (true) {
             try {
-                int valg = gui.getUserInteger("Indtast bankerotgraensen!");
+                int valg = hovedmenu.getUserInteger("Indtast bankerotgraensen!");
 
                 if (valg <= 1000 && valg >= 0) {
                     return valg;
                 }
-                gui.showMessage("Bankerotgraensen kan være fra 0 til 1000, vælg en ny bankerotgraense!");
+                hovedmenu.showMessage("Bankerotgraensen kan være fra 0 til 1000, vælg en ny bankerotgraense!");
             } catch (Exception i) {
-                gui.showMessage("Dette er ikke et gyldigt input, proev igen!");
+                hovedmenu.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
         }
     }
@@ -519,8 +521,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    public void updateSpillere(SpillerCO spiller){
+    @Override
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
 
+    }
+
+    public void updateSpillere(SpillerCO spiller){
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
@@ -532,7 +538,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
@@ -641,6 +647,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return 0;
     }
 
+    @Override
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+
+    }
+
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
     }
@@ -653,7 +664,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
 
-   public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
+    public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
 
-    public void spillerMaaIkkeEns(){gui.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
+    public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
+
+    @Override
+    public void startSpil(Spil spil) {
+
+        genererGUIBret(spil.getBraet(), spil.getSpillereArrayList());
+
+        hovedmenu = null;
+
+    }
+
 }
