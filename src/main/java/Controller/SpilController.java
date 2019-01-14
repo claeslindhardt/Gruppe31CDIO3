@@ -112,7 +112,7 @@ public class SpilController{
      */
     public void tjekForBankeRaadt() {
 
-        if (spil.getSpillerMedTur().getPenge() < spil.getBankeraadGraense()) {
+        if (spil.getSpillerMedTur().getPenge() < 0) {
             ui.bankeRaadtGrundetLiquditet(spil.getBankeraadGraense());
             spil.getSpillerMedTur().setHarGivetOp(true);
             spil.getSpillerMedTur().getSpillerEjendomme().clear();
