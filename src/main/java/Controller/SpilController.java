@@ -299,10 +299,10 @@ public class SpilController{
             case 6:
                 printSpilleresInfo();
                 break;
-            case 8:
+            case 7:
                 /*spil.getSpillerMedTur().givOp(this, ui);*/
                 break;
-            case 7:
+            case 8:
                 spil.getSpillerMedTur().koebHusPaaEjendom(ui);
                 break;
             case 9:
