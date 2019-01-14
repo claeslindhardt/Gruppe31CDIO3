@@ -306,10 +306,10 @@ public class SpilController{
                 handling.givOp(spil.getSpillerMedTur(),this, ui );
                 break;
             case 8:
-                /*spil.getSpillerMedTur().koebHusPaaEjendom(ui);*/
+                spil.getSpillerMedTur().koebHusPaaEjendom(ui);
                 break;
             case 9:
-                /*spil.getSpillerMedTur().handelMedEjendomme();*/
+                spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
                 ui.ikkeMuligt();
