@@ -1,7 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
