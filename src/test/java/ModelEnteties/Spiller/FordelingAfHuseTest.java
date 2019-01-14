@@ -14,7 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FordelingAfHuseTest {
 
 
-
+    /**
+     * Tester om metoden huseErFordeltIGruppe virker som den skal.
+     * Laver 3 ejendomme, og tilfoejer dem til en gruppe.
+     *             Øger antallet af huse på hver ejendom gradvist.
+     */
     @Test
     void testFordelingAfHuse(){
         /*  Tester om metoden huseErFordeltIGruppe virker som den skal.

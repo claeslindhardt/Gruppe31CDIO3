@@ -26,6 +26,9 @@ public class EjendomsLogik {
             EjendomCO ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if( ejendom.getAntalHuse() < ejendomsUdgangspunkt.getAntalHuse() ){
+                if ( ejendom.harHotel()){
+                    return true;
+                }
                 return false;
             }
         }
@@ -41,7 +44,7 @@ public class EjendomsLogik {
      * @param ejendomUdgangspunkt Udgangspunkt for undersøgelsen
      * @return om huse er ligeligt fordelt i ejendomsgruppen, og om den er i et mode, hvor man kan sælge huset.
      */
-    public static boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
+    /**public static boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
 
         for (int i = 0; i < ejendomUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
             EjendomCO ejendom = ejendomUdgangspunkt.getGruppe().getEjendomme().get(i);
@@ -51,7 +54,7 @@ public class EjendomsLogik {
             }
         }
         return true;
-    }
+    }*/
 
 
     public static boolean kanKoebeHotel(SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
