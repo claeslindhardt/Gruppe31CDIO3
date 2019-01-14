@@ -6,8 +6,7 @@ import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.navneGenerering.EjendomsDoeber;
-import ModelEnteties.navneGenerering.JernbaneDoeber;
+import ModelEnteties.navneGenerering.NavneGenerator;
 import ModelEnteties.felter.ChanceAktionDTO;
 import spillogik.EjendomsLogik;
 
@@ -120,83 +119,83 @@ public class BraetCO extends BraetDTO {
 
             getBret().add(kashotten);
 
-        for(int i =0;i<antalFelter-1;i++){
-            int feltType = ra.nextInt(8)+1;
-            if (feltType<=3){//set til 3 når test er fertig
-                int aktionsFeltType = ra.nextInt(8)+1;
-                //_______________________________________________
-                // JernbaneCO
-                if(aktionsFeltType<=4){//set til 4 når test er fertig
-                    JernbaneDoeber st = new JernbaneDoeber();
-                    JernbaneCO station = new JernbaneCO(st.getGeneretNavn(),getStartGrundPris(),i+2);
-                    getBret().add(station);
-                    getJernbaner().add(station);
-                }
-                //_______________________________________________
-                // ChanceFeltCO
-                else if(aktionsFeltType<=6) {//set til 6 når test er fertig
-                    ChanceFeltCO chance = new ChanceFeltCO(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
-                    addBret(chance);
-                }
-                //_______________________________________________
-                // TaxiCO
-                else if(aktionsFeltType<=7) {//set til 7 når test er fertig
-                    TaxiCO vogn = new TaxiCO(i+2);
-                    getBret().add(vogn);
-                }
-                //_______________________________________________
-                // GaaIFaengselCO
-                else {
-                    GaaIFaengselCO forbrydelse = new GaaIFaengselCO(i+2);
-                    getBret().add(forbrydelse);
-                }
-            }
-            //_______________________________________________
-            // EjendomCO
-            else{
-                EjendomsDoeber navn = new EjendomsDoeber();
-                EjendomCO grund = new EjendomCO(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
-                getBret().add(grund);
-            }
-            setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
-            setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
-        }
-            for (int j = 0; j < getBret().size(); j++) {
-                if (getBret().get(j) instanceof StartCO) {
-                    startfelt++;
-                } else if (getBret().get(j) instanceof EjendomCO) {
-                    ejendom++;
-                } else if (getBret().get(j) instanceof ChanceFeltCO) {
-                    chancefelt++;
-                } else if (getBret().get(j) instanceof FaengselCO) {
-                    faengsel++;
-                } else if (getBret().get(j) instanceof GaaIFaengselCO) {
-                    gaaIFaengsel++;
-                } else if (getBret().get(j) instanceof JernbaneCO) {
-                    jernbane++;
-                } else if (getBret().get(j) instanceof TaxiCO) {
-                    taxi++;
-                }
-
-            }
-            if(ejendom > 6 && jernbane > 2 && jernbane < 4 && taxi == 1 && gaaIFaengsel == 1 && chancefelt > 1){
-
-                // Finder ejendomme og tilfoejer dem til en liste, som så bliver gemt i braettet
-                EjendomCO[] ejendomme = new EjendomCO[ejendom];
-                int taeller = 0;
-                for( FeltDTO felt : getBret() ){
-                    if( felt instanceof EjendomCO ){
-                        ejendomme[taeller] = (EjendomCO) felt;
-                        taeller++;
+            NavneGenerator navn = new NavneGenerator();
+            for(int i =0;i<antalFelter-1;i++){
+                int feltType = ra.nextInt(8)+1;
+                if (feltType<=3){//set til 3 når test er fertig
+                    int aktionsFeltType = ra.nextInt(8)+1;
+                    //_______________________________________________
+                    // JernbaneCO
+                    if(aktionsFeltType<=4){//set til 4 når test er fertig
+                        NavneGenerator st = new NavneGenerator();
+                        JernbaneCO station = new JernbaneCO(st.getJernbaneNavn(),getStartGrundPris(),i+2);
+                        getBret().add(station);
+                        getJernbaner().add(station);
+                    }
+                    //_______________________________________________
+                    // ChanceFeltCO
+                    else if(aktionsFeltType<=6) {//set til 6 når test er fertig
+                        ChanceFeltCO chance = new ChanceFeltCO(i+2,ChanceKortsGenerator(getStandardAntalChanceKortPrFelt(), userInterfaceKontrakt));
+                        addBret(chance);
+                    }
+                    //_______________________________________________
+                    // TaxiCO
+                    else if(aktionsFeltType<=7) {//set til 7 når test er fertig
+                        TaxiCO vogn = new TaxiCO(i+2);
+                        getBret().add(vogn);
+                    }
+                    //_______________________________________________
+                    // GaaIFaengselCO
+                    else {
+                        GaaIFaengselCO forbrydelse = new GaaIFaengselCO(i+2);
+                        getBret().add(forbrydelse);
                     }
                 }
-                setEjendomme( ejendomme );
+                //_______________________________________________
+                // EjendomCO
+                else{
+                    EjendomCO grund = new EjendomCO(navn.getEjendomsNavn(),getStartGrundPris(),getStandardLeje(),i+2);
+                    getBret().add(grund);
+                }
+                setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
+                setStandardLeje(getStandardLeje()+getPrisStigningAfEjendomme());
+            }
+                for (int j = 0; j < getBret().size(); j++) {
+                    if (getBret().get(j) instanceof StartCO) {
+                        startfelt++;
+                    } else if (getBret().get(j) instanceof EjendomCO) {
+                        ejendom++;
+                    } else if (getBret().get(j) instanceof ChanceFeltCO) {
+                        chancefelt++;
+                    } else if (getBret().get(j) instanceof FaengselCO) {
+                        faengsel++;
+                    } else if (getBret().get(j) instanceof GaaIFaengselCO) {
+                        gaaIFaengsel++;
+                    } else if (getBret().get(j) instanceof JernbaneCO) {
+                        jernbane++;
+                    } else if (getBret().get(j) instanceof TaxiCO) {
+                        taxi++;
+                    }
+
+                }
+                if(ejendom > 6 && jernbane > 2 && jernbane < 4 && taxi == 1 && gaaIFaengsel == 1 && chancefelt > 1){
+
+                    // Finder ejendomme og tilfoejer dem til en liste, som så bliver gemt i braettet
+                    EjendomCO[] ejendomme = new EjendomCO[ejendom];
+                    int taeller = 0;
+                    for( FeltDTO felt : getBret() ){
+                        if( felt instanceof EjendomCO ){
+                            ejendomme[taeller] = (EjendomCO) felt;
+                            taeller++;
+                        }
+                    }
+                    setEjendomme( ejendomme );
 
 
-                break;
+                    break;
 
-            }else{getBret().clear();getJernbaner().clear();
-                getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);setStandardLeje(50);}
+                }else{getBret().clear();getJernbaner().clear();
+                    getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);setStandardLeje(50);}
 
         }while(lavFelter);
     }

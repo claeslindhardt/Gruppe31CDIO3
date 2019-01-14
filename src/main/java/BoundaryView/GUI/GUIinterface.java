@@ -10,11 +10,9 @@ import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
-import gui_fields.GUI_Street;
+import gui_fields.*;
 import gui_main.GUI;
+import spillogik.EjendomsLogik;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -177,7 +175,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+        String valg = gui.getUserButtonPressed("|--|Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -629,6 +627,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void byggetHus(EjendomCO ejendom) {
 
+
+
+        if (ejendom.getAntalHuse()==1) { //hvis ejendommen har hus på sig, så skal gui'en vise det
+            GUI_Brewery hus = new GUI_Brewery(); //lave et hus
+
+
+                hus.setTitle(ejendom.getNavn());     //Her vil vi gerne navngive huset det samme navn som egendommen.
+
+
+        }
     }
 
     @Override
