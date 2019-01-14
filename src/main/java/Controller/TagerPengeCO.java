@@ -19,10 +19,12 @@ public class TagerPengeCO extends ChanceAktionDTO {
     public void DirketeAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
 
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()-getPengeVerdi());
-        userInterfaceKontrakt.updateSpillere(spil.getSpillerMedTur());
+        userInterfaceKontrakt.updateSpillere(spil.getSpil().getSpillerMedTur());
     }
+
+
     public void BetingetAktion(){ }
 
     //|--------- Constructor:-----------------

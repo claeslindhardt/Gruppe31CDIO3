@@ -9,7 +9,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 
-    //|----------- Metoder:--------------------
+    //|----------- Metoder:-------------------
 
     /**
      * Indsæt beskrivelse her
@@ -17,16 +17,19 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
      * @param userInterfaceKontrakt
      */
     public void DirketeAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
+        // TODO: Fix denne
+        /*Spiller spillerMedTur = spil.getSpillerMedTur();
 
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
 
-        spillerMedTur.addSpillerAktionsKort(this);
+        spillerMedTur.addSpillerAktionsKort(this);*/
 
     }
+
+
     public void BetingetAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        spil.getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
+        spil.getSpil().getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();
     }
 

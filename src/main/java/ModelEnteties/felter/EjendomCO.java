@@ -38,6 +38,10 @@ public class EjendomCO extends EjeligtFeltDTO {
         return harHotel;
     }
 
+    public void setHarHotel(boolean harHotel) {
+        this.harHotel = harHotel;
+    }
+
     public double getHusPris() {
         return husPris;
     }
@@ -155,9 +159,9 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
 
-        SpillerCO spillerMedTur = spil.getSpillerMedTur();
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
 

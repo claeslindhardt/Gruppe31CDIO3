@@ -2,6 +2,7 @@ package BoundaryView;
 
 import Controller.*;
 import Controller.SpillerCO;
+import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
@@ -94,6 +95,7 @@ public interface UserInterfaceKontrakt {
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(SpillerCO spiller);
     void kanIkkeSlaaFaengsel();
+    void startSpil(Spil spil);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
 }

@@ -2,9 +2,10 @@ package BoundaryView.TUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import Controller.SpillerCO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Terning.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -289,7 +290,13 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.print(" |");
         System.out.println(" ");
     }
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+
+    @Override
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
+
+    }
+
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
         System.out.println("Du kan koebe grunden hurra!!");
         System.out.println("Ejendommen er nu din!");
 
@@ -401,7 +408,13 @@ public class TUI implements UserInterfaceKontrakt {
         }
         return (input-1);
     }
-    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere){
+
+    @Override
+    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+
+    }
+
+    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
 
     }
 
@@ -425,5 +438,10 @@ public class TUI implements UserInterfaceKontrakt {
 
     public void kanIkkeKøbeHotel(){};
     public void spillerMaaIkkeEns(){};
+
+    @Override
+    public void startSpil(Spil spil) {
+
+    }
 }
 
