@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import spillogik.EjendomsLogik;
 
@@ -22,8 +23,8 @@ public class Handel {
      * @param spilleren
      * @param userInterfaceKontrakt
      */
-    public void indsamleLeje(EjendomCO ejendom,SpillerCO spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO ejeren = ejendom.getEjer();
+    public void indsamleLeje(EjendomCO ejendom, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spiller ejeren = ejendom.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
             int lejeForFelt = EjendomsLogik.beregnLejeTotal(ejendom, spilleren.ejerEjendomsGruppe( ejendom.getGruppe() ));
@@ -46,7 +47,7 @@ public class Handel {
      *
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
-    public void koebHus(SpillerCO spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void koebHus(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHus( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
 
@@ -63,7 +64,7 @@ public class Handel {
      * om at vise ting og tage i mod inputs.
      * @param ui: hvilket UserInterface der skal bruges.
      */
-    public void koebHusPaaEjendom(SpillerCO spiller, UserInterfaceKontrakt ui){
+    public void koebHusPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
         EjendomCO[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){

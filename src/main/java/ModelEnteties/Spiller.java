@@ -1,6 +1,5 @@
 package ModelEnteties;
 
-import Controller.SpillerCO;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  *  Den bliver brugt i SpilLederen, til at genere en liste med spillerObjekter
  *  som indholder alle de spillere der indgår i et givet spil.
  */
-public class SpillerDTO {
+public class Spiller {
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;

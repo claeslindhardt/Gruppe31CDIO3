@@ -3,8 +3,8 @@ package ModelEnteties.felter;
 import Controller.Handel;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spiller;
 import spillogik.EjendomsLogik;
 
 
@@ -160,7 +160,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);

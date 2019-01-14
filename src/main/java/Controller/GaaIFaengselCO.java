@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.AktionsFelterDTO;
 
 public class GaaIFaengselCO extends AktionsFelterDTO {
@@ -12,7 +13,7 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(true);
         //Kan lave et braet objekt da der gaaIfængselfeltet altid ligger det samme sted, nemlig felt nr. 1.
         BraetCO braet =new BraetCO(20,userInterfaceKontrakt);

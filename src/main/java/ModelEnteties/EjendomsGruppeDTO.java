@@ -2,8 +2,6 @@ package ModelEnteties;
 
 import ModelEnteties.felter.EjendomCO;
 
-import Controller.SpillerCO;
-import ModelEnteties.SpillerDTO;
 
 import java.awt.*;
 import java.util.ArrayList;

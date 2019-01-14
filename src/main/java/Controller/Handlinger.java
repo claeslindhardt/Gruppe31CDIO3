@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 
 public class Handlinger {
 
@@ -10,7 +11,7 @@ public class Handlinger {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void givOp(SpillerCO spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void givOp(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int svar;
         svar = userInterfaceKontrakt.vilDuGiveOp();
         if(svar==1) {
@@ -29,7 +30,7 @@ public class Handlinger {
      * Indsæt beskrivelse her
      * @param userInterfaceKontrakt
      */
-    public void chanceKortMuligheder(SpillerCO spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
 
         if ( spiller.getSpillerAktionsKort().size() > 0 ) {
 
@@ -37,7 +38,7 @@ public class Handlinger {
             userInterfaceKontrakt.chanceKortHar();
 
             //Her er controlleren der lader en reagere på mulighederne
-            int valg = userInterfaceKontrakt.chanceKortNr(spiller );
+            int valg = userInterfaceKontrakt.chanceKortNr( spiller );
 
             if (valg == spiller.getSpillerAktionsKort().size()) {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
@@ -60,7 +61,7 @@ public class Handlinger {
      * @param spil SpilController objekt, der der giver adgang til dens metoder, bl.a. rykSpillerTilFelt
      * @param userInterfaceKontrakt Forbindelse til UI, så metoden kan modtage input og give output tilbage
      */
-    public void tagTaxi(SpillerCO spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void tagTaxi( Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 

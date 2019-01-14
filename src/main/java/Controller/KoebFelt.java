@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 
 public class KoebFelt {
@@ -11,7 +12,7 @@ public class KoebFelt {
      * @param ejendom
      * @param ui
      */
-    public void koebEjendom(EjendomCO ejendom, SpillerCO spiller, UserInterfaceKontrakt ui) {
+    public void koebEjendom(EjendomCO ejendom, Spiller spiller, UserInterfaceKontrakt ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( ejendom.getEjer() == spiller ) {
@@ -38,7 +39,7 @@ public class KoebFelt {
      * @param userInterfaceKontrakt
      * @param spil
      */
-    public void koebJernbane(JernbaneCO jernbane, SpillerCO spiller, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
+    public void koebJernbane(JernbaneCO jernbane, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil){
 
         //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
         if ( jernbane.getEjer() == spiller ) {

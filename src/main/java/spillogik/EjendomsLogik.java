@@ -1,7 +1,7 @@
 package spillogik;
 
-import Controller.SpillerCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class EjendomsLogik {
     }*/
 
 
-    public static boolean kanKoebeHotel(SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
+    public static boolean kanKoebeHotel(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
                 &&  huseErFordeltIGruppe( ejendom )
@@ -83,7 +83,7 @@ public class EjendomsLogik {
      * @param ejendomsGruppe    Ejendomsgruppen som Ejendommen tilhoerer
      * @return  Om man kan koebe hus eller ej.
      */
-    public static boolean kanKoebeHus( SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+    public static boolean kanKoebeHus(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )

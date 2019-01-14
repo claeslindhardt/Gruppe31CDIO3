@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.Random;
@@ -19,7 +20,7 @@ public class TagerPengeCO extends ChanceAktionDTO {
     public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
 
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()-getPengeVerdi());
         userInterfaceKontrakt.updateSpillere(spil.getSpil().getSpillerMedTur());
     }

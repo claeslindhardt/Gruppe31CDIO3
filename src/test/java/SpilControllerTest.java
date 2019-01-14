@@ -1,14 +1,9 @@
 import BoundaryView.TUI.TUI;
 import Controller.*;
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Terning.FalskRaflebaeger;
-import ModelEnteties.felter.EjeligtFeltDTO;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.felter.FeltDTO;
-import org.junit.jupiter.api.Test;
 import spillogik.SpilGenerator;
 
 import java.util.ArrayList;

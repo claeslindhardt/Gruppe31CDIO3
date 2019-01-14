@@ -4,7 +4,7 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.Terning.RafleBaeger;
 import spillogik.SpilGenerator;
 
@@ -377,7 +377,7 @@ public class SpilController{
     private void indtastSpillerNavne() {
 
         // Et for-each loop der kører i gennem alle spillere.
-        for( SpillerDTO spiller : spil.getSpillere() ){
+        for( Spiller spiller : spil.getSpillere() ){
 
             String navn = ui.spillerNavne();
 
