@@ -25,6 +25,7 @@ public class SpilGenerator {
             SpillerCO spiller = new SpillerCO();
             spiller.setPenge(startPenge);
             spiller.setNavn("spiller"+(i+1));
+            spiller.setId(i);
             spillere[i] = spiller;
         }
 

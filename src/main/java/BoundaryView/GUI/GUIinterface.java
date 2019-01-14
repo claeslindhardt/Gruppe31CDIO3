@@ -53,6 +53,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
 
+
     /**
      * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
      *
