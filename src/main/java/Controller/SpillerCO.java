@@ -9,8 +9,6 @@ import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
-import static spillogik.EjendomsLogik.kanKoebeHotel;
-
 
 public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
@@ -81,7 +79,7 @@ public class SpillerCO extends SpillerDTO {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
                 spil.turMenu(spil.getSpil().getBraet(),spil.getSpil().getRaflebaeger() );
             } else {
-                HandelsController handel = new HandelsController();
+                Handel handel = new Handel();
                 getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }

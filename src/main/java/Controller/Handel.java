@@ -9,7 +9,7 @@ import spillogik.EjendomsLogik;
 * */
 
 
-public class HandelsController {
+public class Handel {
 
 
     /**

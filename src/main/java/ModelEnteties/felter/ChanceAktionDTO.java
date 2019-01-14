@@ -1,11 +1,9 @@
 package ModelEnteties.felter;
 
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.HandelsController;
+import Controller.Handel;
 import Controller.SpilController;
 import ModelEnteties.singletoner.RandomSingleton;
-
-import java.util.Random;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: ChanceAktionDTO
@@ -77,6 +75,6 @@ public abstract class ChanceAktionDTO {
     }
 
     //|----------- Metoder:----------------------
-    public void DirketeAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
-    public void BetingetAktion(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
+    public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
+    public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
 }

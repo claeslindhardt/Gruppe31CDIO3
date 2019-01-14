@@ -2,7 +2,6 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import spillogik.BevaegelsesLogik;
@@ -84,7 +83,7 @@ public class RykSpiller {
         spiller.setSpillerPosition(felt.getPlacering());
 
         ui.duErLandetPå(felt, spiller);
-        HandelsController handel = new HandelsController();
+        Handel handel = new Handel();
         felt.aktionPaaFelt(handel, spilController, ui);
 
     }

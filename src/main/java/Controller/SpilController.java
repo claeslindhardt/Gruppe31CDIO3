@@ -6,8 +6,6 @@ import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
-import spillogik.BevaegelsesLogik;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -200,7 +198,7 @@ public class SpilController{
         spiller.setSpillerPosition(felt.getPlacering());
 
         ui.duErLandetPå(felt, spiller);
-        HandelsController handel = new HandelsController();
+        Handel handel = new Handel();
         felt.aktionPaaFelt(handel, this, ui);
     }*/
 
@@ -276,7 +274,7 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-        HandlingsController handling = new HandlingsController();
+        Handlinger handling = new Handlinger();
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
