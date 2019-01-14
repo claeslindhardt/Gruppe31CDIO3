@@ -98,4 +98,5 @@ public interface UserInterfaceKontrakt {
     void startSpil(Spil spil);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
+    void ikkeTaxiTilTaxi();
 }

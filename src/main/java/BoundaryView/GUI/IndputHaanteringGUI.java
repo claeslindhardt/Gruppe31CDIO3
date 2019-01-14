@@ -24,7 +24,7 @@ public class IndputHaanteringGUI {
         }else if(valg == "Se chancekort"){
             beslutning = 3;
         }else if(valg == "Se hvad du ejer"){
-            beslutning = 2;
+            beslutning = 4;
         }else if(valg == "Se spiller stats"){
             beslutning = 6;
         }else if(valg == "Giv op"){

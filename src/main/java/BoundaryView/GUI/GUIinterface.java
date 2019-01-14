@@ -525,11 +525,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    @Override
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
-
-    }
-
     public void updateSpillere(SpillerCO spiller){
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
@@ -542,7 +537,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
@@ -709,6 +704,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
 
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
+
+    public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
 
     @Override
     public void startSpil(Spil spil) {

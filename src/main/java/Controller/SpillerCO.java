@@ -89,9 +89,11 @@ public class SpillerCO extends SpillerDTO {
         //}
     }
     /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
+     * @author Filip
+     * Når spilleren lander på et taxifelt, kan vedkommende rykke til et felt efter deres valg
+     * (bortset fra selve taxifeltet).
+     * @param spil SpilController objekt, der der giver adgang til dens metoder, bl.a. rykSpillerTilFelt
+     * @param userInterfaceKontrakt Forbindelse til UI, så metoden kan modtage input og give output tilbage
      */
     public void tagTaxi(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         int destination;
@@ -102,7 +104,12 @@ public class SpillerCO extends SpillerDTO {
         destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
         if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
-        }else{
+        }
+        else if (destination == getSpillerPosition()){
+            userInterfaceKontrakt.ikkeTaxiTilTaxi();
+            tagTaxi(spil,userInterfaceKontrakt);
+        }
+        else{
             spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
         }
     }

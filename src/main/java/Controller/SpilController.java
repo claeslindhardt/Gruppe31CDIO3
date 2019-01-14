@@ -300,13 +300,13 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                /*spil.getSpillerMedTur().givOp(this, ui);*/
+                spil.getSpillerMedTur().givOp(this, ui);
                 break;
             case 8:
                 spil.getSpillerMedTur().koebHusPaaEjendom(ui);
                 break;
             case 9:
-                /*spil.getSpillerMedTur().handelMedEjendomme();*/
+                spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
                 ui.ikkeMuligt();
