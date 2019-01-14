@@ -648,7 +648,22 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     @Override
     public int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme) {
-        return 0;
+
+        String[] ejendomsListe = new String[ejendomme.size()];
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            ejendomsListe[i] = ejendomme.get(i).getNavn();
+        }
+
+        String valg = gui.getUserSelection("Hvilken ejendom vil du bygge paa? ",ejendomsListe);
+        int indexRetur = 0;
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            if (valg == ejendomsListe[i]){
+                indexRetur = i;
+            }
+        }
+        return indexRetur;
     }
 
     @Override
