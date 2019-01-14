@@ -4,6 +4,8 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.BraetCO;
 import Controller.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
+import Controller.SpillerCO;
+import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
 

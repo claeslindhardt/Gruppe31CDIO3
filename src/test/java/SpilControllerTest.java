@@ -1,5 +1,7 @@
 import Controller.*;
 import ModelEnteties.Spil;
+import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.FeltDTO;
 import spillogik.SpilGenerator;
 
 
@@ -12,12 +14,14 @@ class SpilControllerTest {
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
 
-        /*for( FeltDTO felt : spil.getBraet().getBret() ){
-            if( felt instanceof EjeligtFeltDTO ){
+        for( FeltDTO felt : spil.getBraet().getBret() ){
+            if( felt instanceof EjendomCO ){
                 System.out.println("fundet felt");
-                ((EjeligtFeltDTO)  felt).setEjer(spil.getSpiller(0));
+                ((EjendomCO)  felt).setEjer(spil.getSpiller(0));
+                spil.getSpiller(0).tilføjEjendom( (EjendomCO) felt );
             }
-        }*/
+        }
+
 
         SpilController spilController = new SpilController();
         spilController.setSpil(spil);
