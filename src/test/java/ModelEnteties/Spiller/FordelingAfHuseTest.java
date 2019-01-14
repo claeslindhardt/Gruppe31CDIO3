@@ -34,6 +34,10 @@ class FordelingAfHuseTest {
         ejendomsGruppe.tilfoejEjendom(ejendom2);
         ejendomsGruppe.tilfoejEjendom(ejendom3);
 
+        ejendom1.setGruppe(ejendomsGruppe);
+        ejendom2.setGruppe(ejendomsGruppe);
+        ejendom3.setGruppe(ejendomsGruppe);
+
         // Test 1 -  Ingen huse på nogen ejendomme
         assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
         assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom2) );

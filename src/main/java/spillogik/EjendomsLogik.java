@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public class EjendomsLogik {
 
-    private static ArrayList <EjendomCO> ejendomme = new ArrayList<EjendomCO>();
-
     /** Private constructor sikrer at man ikke kan lave objekter af klassen. */
     private EjendomsLogik(){}
 
@@ -17,14 +15,15 @@ public class EjendomsLogik {
     /**@author Jacob
      *
      * Denne metode ser på inddelingen af huse. Hvis den ejendom, som man tager udgangspunkt i har et større antal
-     * huse end andre ejendomme returneres den som false og man kan derfor ikke koebe et hus.
+     * huse end andre ejendomme i dens gruppe, returneres den som false og man kan derfor ikke koebe et hus.
      *
      * @param ejendomsUdgangspunkt  Udgangspunktet for undersøgelsen
      * @return  Om huse er fordeligt ligeligt i ejendomsgruppen og at man derfor kan koebe et hus på ejendommen
      */
     public static boolean huseErFordeltIGruppe( EjendomCO ejendomsUdgangspunkt ){
-        for (int i = 0; i < ejendomme.size(); i++){
-            EjendomCO ejendom = ejendomme.get(i);
+
+        for (int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
+            EjendomCO ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if( ejendom.getAntalHuse() < ejendomsUdgangspunkt.getAntalHuse() ){
                 return false;
@@ -37,15 +36,15 @@ public class EjendomsLogik {
      * @author Jacob
      *
      * Denne metode ser på inddelingen af huse. Hvis den ejendom, som man tager udgangspunkt i har et mindre antal
-     * huse end andre ejendomme returneres den som false og man kan derfor ikke sælge et hus.
+     * huse end andre ejendomme i gruppen returneres den som false og man kan derfor ikke sælge et hus.
      *
      * @param ejendomUdgangspunkt Udgangspunkt for undersøgelsen
      * @return om huse er ligeligt fordelt i ejendomsgruppen, og om den er i et mode, hvor man kan sælge huset.
      */
     public static boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
 
-        for (int i = 0; i < ejendomme.size(); i++){
-            EjendomCO ejendom = ejendomme.get(i);
+        for (int i = 0; i < ejendomUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
+            EjendomCO ejendom = ejendomUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
                 return false;
@@ -58,7 +57,7 @@ public class EjendomsLogik {
     public static boolean kanKoebeHotel(SpillerCO spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
-                &&  huseErFordeltIGruppe( ejendomsGruppe, ejendom )
+                &&  huseErFordeltIGruppe( ejendom )
                 &&  ejendom.getAntalHuse() == 4
                 &&  !ejendom.harHotel()
                 &&  spiller.getPenge() > ejendom.getHusPris();
