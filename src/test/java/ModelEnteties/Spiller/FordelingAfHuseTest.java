@@ -61,6 +61,43 @@ class FordelingAfHuseTest {
         assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom2) );
         assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom3) );
 
+        // HOTELLER -------
+
+        // Test 5 - Man skal kunne bygge på ejendom1
+        ejendom1.setAntalHuse(4);
+        ejendom2.setAntalHuse(0);
+        ejendom2.setHarHotel(true);
+        ejendom3.setAntalHuse(0);
+        ejendom2.setHarHotel(true);
+
+        assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
+
+
+        // Test 6 - Man skal ikke kunne bygge på ejendom1
+        ejendom1.setAntalHuse(4);
+        ejendom2.setAntalHuse(3);
+        ejendom2.setHarHotel(false);
+
+        ejendom3.setAntalHuse(3);
+        ejendom2.setHarHotel(false);
+
+        assertFalse( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
+
+
+        // Test 7 - Man skal ikke kunne bygge på alle ejendomme
+        ejendom1.setAntalHuse(4);
+        ejendom2.setHarHotel(false);
+
+        ejendom2.setAntalHuse(4);
+        ejendom2.setHarHotel(false);
+
+        ejendom3.setAntalHuse(4);
+        ejendom2.setHarHotel(false);
+
+        assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
+        assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
+        assertTrue( EjendomsLogik.huseErFordeltIGruppe(ejendom1) );
+
 
     }
 
