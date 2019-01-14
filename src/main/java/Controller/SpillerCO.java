@@ -17,6 +17,9 @@ public class SpillerCO extends SpillerDTO {
     //_____________________________________
     //Diverse:
 
+
+
+
     /**
      * Indsæt beskrivelse her
      * @param spil
@@ -97,15 +100,15 @@ public class SpillerCO extends SpillerDTO {
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
-        this.setHarSlaaetForTuren(true);
-
         destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
         if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }else{
-            spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
+            spil.getRykSpiller().rykSpillerTilFelt( this, spil.getSpil().getBraet().getBret().get(destination), 1, userInterfaceKontrakt, spil );
         }
     }
+
+
     //_____________________________________
     //Vis og print funktinoer:
 

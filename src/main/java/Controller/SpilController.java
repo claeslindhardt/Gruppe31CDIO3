@@ -14,11 +14,21 @@ import java.util.Random;
 
 public class SpilController{
 
-    private UserInterfaceKontrakt ui;
+    private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
+    public RykSpiller getRykSpiller() {
+        return rykSpiller;
+    }
 
-    // TODO: Fjern denne
+    public void setRykSpiller(RykSpiller rykSpiller) {
+        this.rykSpiller = rykSpiller;
+    }
+
+    private RykSpiller rykSpiller = new RykSpiller();
+
+
+
     public Spil getSpil(){return spil;}
 
     public void setSpil(Spil spil){
@@ -124,7 +134,7 @@ public class SpilController{
      * Indsæt beskrivelse her
      * @param terningsKrus
      */
-    public void kastTerninger(RafleBaeger terningsKrus) {
+    /*public void kastTerninger(RafleBaeger terningsKrus) {
         if (!spil.getSpillerMedTur().isHarSlaaetForTuren()) {
 
             terningsKrus.slaa();
@@ -143,7 +153,7 @@ public class SpilController{
         } else {
             ui.harSlaaetMedTerningfor();
         }
-    }
+    }*/
 
 
     /**
@@ -154,7 +164,7 @@ public class SpilController{
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
+    /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
         FeltDTO[] braet = spil.getBraet().getBretArray();
 
@@ -163,7 +173,7 @@ public class SpilController{
         int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
 
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
-    }
+    }*/
 
 
     /**
@@ -178,7 +188,7 @@ public class SpilController{
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+    /*public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
@@ -192,7 +202,7 @@ public class SpilController{
         ui.duErLandetPå(felt, spiller);
         HandelsController handel = new HandelsController();
         felt.aktionPaaFelt(handel, this, ui);
-    }
+    }*/
 
 
     //_____________________________________
@@ -273,10 +283,7 @@ public class SpilController{
             case 1:
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
-                    kastTerninger(terningsKrus);
-                    //Denne funktion  kan kalder:
-                    //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
-                    //og aktionPåFelt.
+                    rykSpiller.kastTerninger( spil, spil.getSpillerMedTur(), ui, this  );
                 }
                 else if (spil.getSpillerMedTur().isFaengselsStraf()){
                     ui.kanIkkeSlaaFaengsel();

@@ -21,7 +21,6 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
         userInterfaceKontrakt.iFaengselMedDig();
         userInterfaceKontrakt.duErLandetPå(braet.getBret().get(1), spillerMedTur);
 
-
         spil.slutSpillerTur();
     }
 
