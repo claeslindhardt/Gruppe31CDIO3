@@ -1,81 +1,47 @@
 package Controller;
 
+import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.SpilData;
+import ModelEnteties.BraetDTO;
+import ModelEnteties.Spil;
+import ModelEnteties.SpillerDTO;
 import ModelEnteties.Terning.FalskRaflebaeger;
 import ModelEnteties.Terning.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.singletoner.RandomSingleton;
 import spillogik.BevaegelsesLogik;
+import spillogik.SpilGenerator;
 
 import java.util.Random;
 
-public class SpilController extends SpilData {
+public class SpilController{
 
-    //|----------- Metoder:------------------
-    /**
-     * Hvorfor 2 constructore?
-     * jo fordi man kan enten konstruere et spil med default configurationer eller man kan selv
-     * vælge dem. Dette er også meget nyttigt til test :)
-     */
-    public SpilController(UserInterfaceKontrakt gui) {
-        this.setUserInterfaceKontrakt(gui);
-        startMenu();
-        genererSpillere(getAntalSpillere());
-        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        //RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
-        setTerningeKrus(terningsKrus);
-        setBretGeneretForSpil(spilleBret);
-        gui.genererGUIBret(spilleBret, getSpillerObjekter());
+    private UserInterfaceKontrakt ui;
+    private Spil spil;
+
+
+    // TODO: Fjern denne
+    public Spil getSpil(){return spil;}
+
+    public void setSpil(Spil spil){
+        this.spil = spil;
     }
 
-    public SpilController(int antalSpillere, int antalFelter, int antalTerninger, int bankeRaadtGrense, UserInterfaceKontrakt gui) {
-        this.setAntalSpillere(antalSpillere);
-        this.setAntalFelter(antalFelter);
-        this.setAntalTerninger(antalTerninger);
-        this.setBankeraadGraense(bankeRaadtGrense);
-        this.setUserInterfaceKontrakt(gui);
-        genererSpillere(getAntalSpillere());
-        BraetCO spilleBret = new BraetCO(getAntalFelter(), getUserInterfaceKontrakt());
-        RafleBaeger terningsKrus = new RafleBaeger(getAntalTerninger());
-        //FalskRaflebaeger terningsKrus = new FalskRaflebaeger(getAntalTerninger());
-        setTerningeKrus(terningsKrus);
-        setBretGeneretForSpil(spilleBret);
-        gui.genererGUIBret(spilleBret, getSpillerObjekter());
+
+    /** Laver en ny SpilController med en vilkårlig UI */
+    public SpilController(UserInterfaceKontrakt ui){
+        this.ui = ui;
     }
+
+    /** Laver en ny SpilController med en GUI */
+    public SpilController(){
+        ui = new GUIinterface();
+    }
+
+
+
     //_____________________________________
     // Diverse:
-
-    /**
-     * @author Andreas
-     * Metoden generer spillere.
-     * @param antalSpillere
-     */
-    public void genererSpillere(int antalSpillere) {
-
-        for (int i = 0; i < antalSpillere; i++) {
-
-            String navn = getUserInterfaceKontrakt().spillerNavne();
-            SpillerCO deltager = new SpillerCO(navn, i, 0);
-
-            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
-            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
-            boolean harNavn = kontrollerNavn(navn);
-            while(harNavn){
-                getUserInterfaceKontrakt().spillerMaaIkkeEns();
-                String nytNavn =  getUserInterfaceKontrakt().spillerNavne();
-                //Her undersøges det om en allerede genereret spiller har det samme navn.
-                    if(!kontrollerNavn(nytNavn)){
-                        deltager.setNavn(nytNavn);
-                        harNavn = kontrollerNavn(nytNavn);
-                    }
-            }
-            getSpillerObjekter().add(deltager);
-
-
-        }
-    }
 
     /**
      * @author Andreas
@@ -84,25 +50,22 @@ public class SpilController extends SpilData {
      * @return boolean
      */
     public boolean kontrollerNavn(String navn){
-        String tjek = navn;
-        boolean harAllerede = false;
-        for(int i = 0; i < getSpillerObjekter().size();i++){
-            if(getSpillerObjekter().get(i).getNavn().equalsIgnoreCase(tjek)){
-                harAllerede = true;
-            }else {
-                harAllerede = false;
+
+        for(int i = 0; i < spil.getSpillere().length; i++){
+            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
+                return true;
             }
         }
-        return harAllerede;
+        return false;
     }
 
     /**
      * Indsæt beskrivelse her
      */
     public void printSpilleresInfo() {
-        for (int i = 0; i < getSpillerObjekter().size(); i++) {
-            getSpillerObjekter().get(i).printSpillerStats(getUserInterfaceKontrakt());
-        }
+        /*for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
+            spil.getSpiller(i).printSpillerStats(ui);
+        }*/
     }
 
     /**
@@ -113,15 +76,15 @@ public class SpilController extends SpilData {
         Random ra = new Random();
         int domsAfsigelseDel1 = ra.nextInt(5) + 1;
         int domsAfsigelseDel2 = ra.nextInt(5) + 1;
-        getUserInterfaceKontrakt().retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
+        ui.retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
         if (domsAfsigelseDel1 == domsAfsigelseDel2) {
-            getUserInterfaceKontrakt().heldIRetten();
-            getSpillerMedTur().setFaengselsStraf(false);
+            ui.heldIRetten();
+            spil.getSpillerMedTur().setFaengselsStraf(false);
             //Har udkemmenteret denne da jeg ikke syntes at det giver mening at have den.
             //getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
         } else {
-            getSpillerMedTur().setFaengselsStraf(true);
-            getUserInterfaceKontrakt().ingenHeldIRetten();
+            spil.getSpillerMedTur().setFaengselsStraf(true);
+            ui.ingenHeldIRetten();
         }
 
     }
@@ -130,15 +93,15 @@ public class SpilController extends SpilData {
      * Indsæt beskrivelse her
      */
     public void slutSpillerTur() {
-        getSpillerMedTur().setHarSlaaetForTuren(false);
-        getSpillerMedTur().setHarAnketDomDenneRunde(false);
+        spil.getSpillerMedTur().setHarSlaaetForTuren(false);
+        spil.getSpillerMedTur().setHarAnketDomDenneRunde(false);
         tjekForBankeRaadt();
 
-        if (getSpillerTur() >= getAntalSpillere()) {
-            setSpillerTur(1);
+        if ( spil.getSpillerTur() >= spil.getAntalSpillere() ) {
+            spil.setSpillerTur(1);
 
-        } else if (getSpillerTur() <= getAntalSpillere()) {
-            setSpillerTur(getSpillerTur() + 1);
+        } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
+            spil.setSpillerTur(spil.getSpillerTur() + 1);
         }
 
 
@@ -149,12 +112,12 @@ public class SpilController extends SpilData {
      */
     public void tjekForBankeRaadt() {
 
-        if (getSpillerMedTur().getPenge() < getBankeraadGraense()) {
-            getUserInterfaceKontrakt().bankeRaadtGrundetLiquditet(getBankeraadGraense());
-            getSpillerMedTur().setHarGivetOp(true);
-            getSpillerMedTur().getSpillerEjendomme().clear();
-            int udgaaetSpiller = getSpillerMedTur().getId() + 1;
-            getUserInterfaceKontrakt().spillerUdgår(udgaaetSpiller);
+        if (spil.getSpillerMedTur().getPenge() < spil.getBankeraadGraense()) {
+            ui.bankeRaadtGrundetLiquditet(spil.getBankeraadGraense());
+            spil.getSpillerMedTur().setHarGivetOp(true);
+            spil.getSpillerMedTur().getSpillerEjendomme().clear();
+            int udgaaetSpiller = spil.getSpillerMedTur().getId() + 1;
+            ui.spillerUdgår(udgaaetSpiller);
         }
 
     }
@@ -164,23 +127,23 @@ public class SpilController extends SpilData {
      * @param terningsKrus
      */
     public void kastTerninger(RafleBaeger terningsKrus) {
-        if (!getSpillerMedTur().isHarSlaaetForTuren()) {
+        if (!spil.getSpillerMedTur().isHarSlaaetForTuren()) {
 
             terningsKrus.slaa();
 
-            getUserInterfaceKontrakt().spillerRykkerGrundetTerningslag(terningsKrus, getSpillerTur());
+            ui.spillerRykkerGrundetTerningslag(terningsKrus, spil.getSpillerTur());
 
             if (terningsKrus.erEns()) {
-                getUserInterfaceKontrakt().ensTerninger();
-                getSpillerMedTur().setHarSlaaetForTuren(false);
+                ui.ensTerninger();
+                spil.getSpillerMedTur().setHarSlaaetForTuren(false);
             } else {
-                getSpillerMedTur().setHarSlaaetForTuren(true);
+                spil.getSpillerMedTur().setHarSlaaetForTuren(true);
             }
 
-            rykSpillerAntalFelter(getSpillerMedTur(), getTerningeKrus().getTotalVaerdi());
+            rykSpillerAntalFelter( spil.getSpillerMedTur(), spil.getRaflebaeger().getTotalVaerdi());
 
         } else {
-            getUserInterfaceKontrakt().harSlaaetMedTerningfor();
+            ui.harSlaaetMedTerningfor();
         }
     }
 
@@ -195,7 +158,7 @@ public class SpilController extends SpilData {
      */
     public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
-        FeltDTO[] braet = getBretGeneretForSpil().getBretArray();
+        FeltDTO[] braet = spil.getBraet().getBretArray();
 
         FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
 
@@ -219,14 +182,18 @@ public class SpilController extends SpilData {
      */
     public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
-        if( gangeOverStart > 0 ){
-            spiller.passeringAfStart(gangeOverStart, getUserInterfaceKontrakt());}
+        if( gangeOverStart > 0 ) {
+            spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
+            ui.passeringAfStart(gangeOverStart);
+            ui.updateSpillere(spiller);
+
+        }
 
         spiller.setSpillerPosition(felt.getPlacering());
 
-        getUserInterfaceKontrakt().duErLandetPå(felt, spiller);
+        ui.duErLandetPå(felt, spiller);
         HandelsController handel = new HandelsController();
-        felt.aktionPaaFelt(handel,this, getUserInterfaceKontrakt());
+        felt.aktionPaaFelt(handel, this, ui);
     }
 
 
@@ -236,13 +203,13 @@ public class SpilController extends SpilData {
     /**
      * Indsæt beskrivelse her
      */
-    public void tjekForFeangselsStraf() {
-        if (getSpillerMedTur().isFaengselsStraf()) {
-            if (!getSpillerMedTur().isHarAnketDomDenneRunde()) {
-                getUserInterfaceKontrakt().terminalLinje();
-                getUserInterfaceKontrakt().anketStraffeDom(getSpillerTur());
+    public void tjekForFeangselsStraf(){
+        if (spil.getSpillerMedTur().isFaengselsStraf()) {
+            if (!spil.getSpillerMedTur().isHarAnketDomDenneRunde()) {
+                ui.terminalLinje();
+                ui.anketStraffeDom(spil.getSpillerTur());
                 anketDomsigelse();
-                getSpillerMedTur().setHarAnketDomDenneRunde(true);
+                spil.getSpillerMedTur().setHarAnketDomDenneRunde(true);
             }
 
         }
@@ -252,11 +219,11 @@ public class SpilController extends SpilData {
      * Indsæt beskrivelse her
      */
     public void tjekOmGivetOp() {
-        if (getSpillerMedTur().isHarGivetOp()) {
-            if (getSpillerTur() == getAntalSpillere()) {
-                setSpillerTur(1);
+        if (spil.getSpillerMedTur().isHarGivetOp()) {
+            if (spil.getSpillerTur() == spil.getAntalSpillere()) {
+                spil.setSpillerTur(1);
             } else {
-                setSpillerTur(getSpillerTur() + 1);
+                spil.setSpillerTur(spil.getSpillerTur() + 1);
             }
         }
     }
@@ -265,17 +232,15 @@ public class SpilController extends SpilData {
      * Indsæt beskrivelse her
      */
     public void tjekForVinder() {
-        if (getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
-            getUserInterfaceKontrakt().terminalLinje();
+        if (spil.getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
+            ui.terminalLinje();
             //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
-            if (!getSpillerMedTur().isHarGivetOp()) {
+            if (!spil.getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
-                setVinder(getSpillerMedTur().getId() + 1);
-                getUserInterfaceKontrakt().vinder(getVinder());
-                setVinderFindes(true);
-                setKør(false);
+                spil.setVinder(spil.getSpillerMedTur().getId() + 1);
+                spil.setVinderFindes(true);
+                ui.vinder(spil.getSpillerMedTur().getId());
             }
-
         }
     }
 
@@ -285,8 +250,8 @@ public class SpilController extends SpilData {
      */
     public int tjekAntalSpillereISpil() {
         int UdgaetSpillere = 0;
-        for (int i = 0; i < getSpillerObjekter().size(); i++) {
-            if (getSpillerObjekter().get(i).isHarGivetOp()) {
+        for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
+            if (spil.getSpillereArrayList().get(i).isHarGivetOp()) {
                 UdgaetSpillere++;
             }
         }
@@ -294,71 +259,6 @@ public class SpilController extends SpilData {
         return UdgaetSpillere;
     }
 
-    /**
-     * Indsæt beskrivelse her
-     * @param terningKrus
-     */
-    public void tjekForPasseringAfStartOgRykSpiller(RafleBaeger terningKrus) {
-        /*int rykVeardi = terningKrus.getTotalVaerdi();
-        int nuvaerendeposition = getSpillerMedTur().getSpillerPosition();
-        if (nuvaerendeposition + rykVeardi > getAntalFelter() - 1) {
-            getSpillerMedTur().passeringAfStart(terningKrus.getTotalVaerdi(), this, getUserInterfaceKontrakt());
-        } else {
-            getSpillerMedTur().setSpillerPosition(getSpillerMedTur().getSpillerPosition() + rykVeardi);
-        }
-        getUserInterfaceKontrakt().spillerPosition(getSpillerMedTur().getSpillerPosition());*/
-    }
-
-
-    //_____________________________________
-    //Menuer:
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void startMenu() {
-        RandomSingleton rand = RandomSingleton.getInstance();
-        int menuOpt = getUserInterfaceKontrakt().velkomstMenu(1,4);
-
-
-        if (menuOpt == 2) {
-            startInstillingsMenu();
-        } else if (menuOpt == 3) {
-            getUserInterfaceKontrakt().startSpilGrundFejl();
-        } else if (menuOpt == 1) {
-            int starter = rand.nextInt(getAntalSpillere()) + 1;
-            setSpillerTur(starter);
-        }
-        getUserInterfaceKontrakt().opretteInstillinger(getAntalSpillere(), getAntalFelter(), getAntalTerninger(), getSpillerTur(), getBankeraadGraense());
-
-
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void startInstillingsMenu() {
-        //Todo: make it possible to choose a default option here:
-        Random rand = new Random();
-
-        int felter = getUserInterfaceKontrakt().instilingsSporgsmaal0(9, 21);
-        setAntalFelter(felter);
-
-
-        int spillerMeangde = getUserInterfaceKontrakt().instilingsSporgsmaall(2,11);
-        setAntalSpillere(spillerMeangde);
-
-        int starter = rand.nextInt(getAntalSpillere()) + 1;
-        setSpillerTur(starter);
-
-        int terninger = getUserInterfaceKontrakt().instilingsSporgsmaal2(1,5);
-        setAntalTerninger(terninger);
-
-        int driftsomkostninger = getUserInterfaceKontrakt().instilingsSporgsmaal3(0, 99999);
-        setBankeraadGraense(driftsomkostninger);
-
-
-    }
 
     /**
      * @author Filip
@@ -367,55 +267,152 @@ public class SpilController extends SpilData {
      * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(BraetCO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
 
-        int input = getUserInterfaceKontrakt().TurMenu(getSpillerTur(), 1, 10);
+        int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
             case 1:
 
-                if (!getSpillerMedTur().isFaengselsStraf()) {
+                if (!spil.getSpillerMedTur().isFaengselsStraf()) {
                     kastTerninger(terningsKrus);
                     //Denne funktion  kan kalder:
                     //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
                     //og aktionPåFelt.
                 }
-                else if (getSpillerMedTur().isFaengselsStraf()){
-                    getUserInterfaceKontrakt().kanIkkeSlaaFaengsel();
+                else if (spil.getSpillerMedTur().isFaengselsStraf()){
+                    ui.kanIkkeSlaaFaengsel();
                 }
                 break;
             case 2:
                 slutSpillerTur();
                 break;
             case 3:
-                getSpillerMedTur().chanceKortMuligheder(this,getUserInterfaceKontrakt());
+                spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
                 break;
             case 4:
-                getSpillerMedTur().visEjendeFelter(getUserInterfaceKontrakt());
+                spil.getSpillerMedTur().visEjendeFelter(ui);
                 break;
             case 5:
-                spilleBret.printBret(getUserInterfaceKontrakt());
+                /*spilleBret.printBret(ui);*/
                 break;
             case 6:
                 printSpilleresInfo();
                 break;
             case 7:
-                getSpillerMedTur().givOp(this, getUserInterfaceKontrakt());
+                /*spil.getSpillerMedTur().givOp(this, ui);*/
                 break;
             case 8:
-                getSpillerMedTur().koebHusPaaEjendom(getUserInterfaceKontrakt());
+                /*spil.getSpillerMedTur().koebHusPaaEjendom(ui);*/
                 break;
             case 9:
-                getSpillerMedTur().handelMedEjendomme();
-                break;
-            case 99:
-                setKør(false);
+                /*spil.getSpillerMedTur().handelMedEjendomme();*/
                 break;
             default:
-                getUserInterfaceKontrakt().ikkeMuligt();
+                ui.ikkeMuligt();
         }
 
     }
+
+
+    public void start(){
+
+        int input = ui.velkomstMenu(1,3);
+
+        switch( input ){
+
+            case 1:
+                spil = SpilGenerator.genererSpil();
+                break;
+
+            case 2:
+                spil = spilIndstillinger();
+                break;
+        }
+
+        indtastSpillerNavne();
+
+        koerSpil();
+    }
+
+
+    /**
+     * Efterspørger brugerdefineret indstillinger til et spil,
+     * og generer derefter spillet.
+     * @author Malte
+     * @return Det generet spil med brugerdefineret indstillinger
+     */
+    private Spil spilIndstillinger(){
+
+        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
+        int antalSpillere = ui.instilingsSporgsmaall(2,11);
+        // TODO: Implementer disse i UI v
+        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
+        double startPenge = 2000; // ui.startpenge
+
+        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
+    }
+
+
+    /**
+     * Beder UI om at efterspørge spillernavne, på spillerne i det nuvaerende
+     * spil.
+     * Det er ikke nødvendigt, at køre denne for at kunne køre spillet.
+     * @author Malte
+     */
+    private void indtastSpillerNavne() {
+
+        // Et for-each loop der kører i gennem alle spillere.
+        for( SpillerDTO spiller : spil.getSpillere() ){
+
+            String navn = ui.spillerNavne();
+
+            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
+            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
+            boolean harNavn = kontrollerNavn(navn);
+
+            while(harNavn){
+                ui.spillerMaaIkkeEns();
+                navn =  ui.spillerNavne();
+                //Her undersøges det om en allerede genereret spiller har det samme navn.
+                if(!kontrollerNavn(navn)){
+                    harNavn = kontrollerNavn(navn);
+                }
+            }
+            spiller.setNavn(navn);
+
+        }
+    }
+
+
+    /**
+     * Kører det spil som SpilControlleren er blevet givet (spil variablen).
+     * @author Malte
+     */
+    public void koerSpil(){
+
+        ui.startSpil( spil );
+
+        do{
+            tjekForVinder();
+            tjekOmGivetOp();
+            tjekForFeangselsStraf();
+
+            if( !spil.getVinderFindes() ){
+                turMenu( spil.getBraet(), spil.getRaflebaeger() );
+
+            }else{
+                break;
+            }
+
+        }while( true );
+
+
+        ui.spilletErSlut();
+    }
+
+
+
 
 
 }

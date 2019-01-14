@@ -14,11 +14,11 @@ import java.util.ArrayList;
  *  Den bliver brugt i SpilLederen, til at genere en liste med spillerObjekter
  *  som indholder alle de spillere der indgår i et givet spil.
  */
-public abstract class SpillerDTO {
+public class SpillerDTO {
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;
-    private String navn;
+    private String navn = "?";
     // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();

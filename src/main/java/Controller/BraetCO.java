@@ -156,8 +156,6 @@ public class BraetCO extends BraetDTO {
             else{
                 EjendomsDoeber navn = new EjendomsDoeber();
                 EjendomCO grund = new EjendomCO(navn.getGeneretNavn(),getStartGrundPris(),getStandardLeje(),i+2);
-                EjendomsGruppeDTO gruppe = getEjendomsGruppeCO().tilfoejTilGruppe(grund);
-                grund.setGruppe(gruppe);
                 getBret().add(grund);
             }
             setStartGrundPris(getStartGrundPris()+getPrisStigningAfEjendomme());
@@ -181,8 +179,25 @@ public class BraetCO extends BraetDTO {
                 }
 
             }
-            if(ejendom > 6 && jernbane > 2 && jernbane < 4 && taxi == 1 && gaaIFaengsel == 1 && chancefelt > 1){break;}else{getBret().clear();getJernbaner().clear();
+            if(ejendom > 6 && jernbane > 2 && jernbane < 4 && taxi == 1 && gaaIFaengsel == 1 && chancefelt > 1){
+
+                // Finder ejendomme og tilfoejer dem til en liste, som så bliver gemt i braettet
+                EjendomCO[] ejendomme = new EjendomCO[ejendom];
+                int taeller = 0;
+                for( FeltDTO felt : getBret() ){
+                    if( felt instanceof EjendomCO ){
+                        ejendomme[taeller] = (EjendomCO) felt;
+                        taeller++;
+                    }
+                }
+                setEjendomme( ejendomme );
+
+
+                break;
+
+            }else{getBret().clear();getJernbaner().clear();
                 getEjendomsGruppeCO().clearKlarGruppe();setStartGrundPris(200);setStandardLeje(50);}
+
         }while(lavFelter);
     }
 }
