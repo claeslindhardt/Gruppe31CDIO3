@@ -273,6 +273,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param maxInput - Denne parameter bliver kun brugt i TUI
      * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
      */
+
+    //TODO: Fjern denne på en ordentlig måde!!!!
+
     public int instilingsSporgsmaal3(int minInput, int maxInput){
         hovedmenu.showMessage("Hvor skal bankerot graensen ligge?: " +
                 "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
