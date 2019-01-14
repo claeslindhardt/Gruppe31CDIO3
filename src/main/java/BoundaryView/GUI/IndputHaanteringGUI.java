@@ -1,5 +1,7 @@
 package BoundaryView.GUI;
 
+import Controller.SpilController;
+
 /**
  * Indsæt beskrivelse her
  */

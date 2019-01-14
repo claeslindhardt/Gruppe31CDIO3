@@ -1,4 +1,4 @@
-package ModelEnteties.Terning;
+package ModelEnteties.raflebaeger;
 
 import java.util.ArrayList;
 //TODO: del denne op i en data og en kontroller klasse
@@ -27,7 +27,7 @@ public class RafleBaeger {
     }
 
     //|----------- Metoder:-----------------
-    /** Laver et raflebæger, der indeholder 'antalTerninger' terninger (se Terning klasse).
+    /** Laver et raflebæger, der indeholder 'antalTerninger' terninger (se raflebaeger klasse).
      *  Den laver nye terninge objekter.
      *
      * @param antalTerninger Et fast antal terninger i bægeret - kan ikke ændres
@@ -40,7 +40,7 @@ public class RafleBaeger {
 
 
 
-        // Laver Terning
+        // Laver raflebaeger
         terninger = new Terning[antalTerninger];
         for( int i=0; i<antalTerninger; i++){
             terninger[i] = new Terning();

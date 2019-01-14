@@ -4,15 +4,12 @@ import BoundaryView.TUI.TUI;
 import Controller.BraetCO;
 import Controller.EjendomsGruppeCO;
 import Controller.SpillerCO;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class SpilGenerator {

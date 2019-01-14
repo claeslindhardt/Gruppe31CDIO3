@@ -3,7 +3,7 @@ package ModelEnteties;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.BraetCO;
 import Controller.SpillerCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
 

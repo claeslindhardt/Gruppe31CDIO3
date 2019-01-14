@@ -2,7 +2,7 @@ package BoundaryView.TUI;
 
 import Controller.ChanceFeltCO;
 import Controller.SpillerCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.InputMismatchException;
