@@ -82,7 +82,7 @@ public class SpilGenerator {
     }
 
 
-
-
-
+    public static ArrayList<ChanceAktionDTO> genererChancekort(int i) {
+        return null;
+    }
 }
