@@ -705,7 +705,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void byggeHotel(EjendomCO ejendom) {
         GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
-            hotelSkalPaa.setHotel(ejendom.harHotel());
+            if(getFelter()[ejendom.getPlacering()] instanceof GUI_Brewery){
+                gui.showMessage("Ikke muligt at bygge på byggeriet");
+
+            } else{ hotelSkalPaa.setHotel(ejendom.harHotel());}
     }
 
     public void friParkering(){
