@@ -334,7 +334,8 @@ public class SpilGenerator {
 
 
     public static ArrayList<ChanceAktionDTO> genererChancekort(){
-        return null;
+        // TODO Implementer fastsatte chancekort
+        return RandomGenerator.genererChancekort(10);
     }
 
     public static Spil genererSpil( int antalSpillere ){

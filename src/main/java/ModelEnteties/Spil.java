@@ -21,6 +21,8 @@ public class Spil {
 
     private FeltDTO[] felter;
 
+    private ArrayList<ChanceAktionDTO> chanceKort;
+
     public ArrayList<ChanceAktionDTO> getChanceKort() {
         return chanceKort;
     }
@@ -28,7 +30,12 @@ public class Spil {
     public void setChanceKort(ArrayList<ChanceAktionDTO> chanceKort) {
         this.chanceKort = chanceKort;
     }
-    private ArrayList<ChanceAktionDTO> chanceKort;
+
+    public void addChancekort(ChanceAktionDTO chancekort ){
+        this.chanceKort.add(chancekort);
+    }
+
+
 
     private  boolean kør = true;
 
