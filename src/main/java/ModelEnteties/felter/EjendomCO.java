@@ -204,6 +204,10 @@ public class EjendomCO extends EjeligtFeltDTO {
         setAntalHuse(getAntalHuse()+antalHuse);
     }
 
+    public void bygHotel(boolean harHotel){
+        setHarHotel(harHotel);
+    }
+
     //|--------- Constructor:-----------------
     public EjendomCO(String navn, int pris, int startLeje, int placering){
         setPlacering(placering);

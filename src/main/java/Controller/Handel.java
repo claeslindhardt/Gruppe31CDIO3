@@ -114,7 +114,53 @@ public class Handel {
     }
 
 
+    public void koebHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+        if( EjendomsLogik.kanKoebeHotel( spiller, ejendom, ejendom.getGruppe()) ){
+            ejendom.bygHotel(true);
+            ejendom.setAntalHuse(0);
 
+            ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
+            spiller.addPenge(-ejendom.getHotelPris());
+            userInterfaceKontrakt.updateSpillere( spiller );
+
+        }
+    }
+
+    /**
+     * @author Malte
+     * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
+     * om at vise ting og tage i mod inputs.
+     * @param ui : hvilket UserInterface der skal bruges.
+     */
+    public void koebHotelPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
+        EjendomCO[] ejendomme = spiller.getEjendomme();
+
+        if( ejendomme.length > 0 ){
+            ArrayList<EjendomCO> grundeMedMulighedForHotel = new ArrayList<EjendomCO>();
+
+
+            for(int i = 0; i < ejendomme.length; i++){
+                if( EjendomsLogik.kanKoebeHotel(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
+                    grundeMedMulighedForHotel.add(ejendomme[i]);
+                }
+            }
+
+            if(grundeMedMulighedForHotel.size() > 0){
+
+                int ejendomsIndex = ui.input_EjendomAtByggeHotelPaa(grundeMedMulighedForHotel);
+                koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
+
+                ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
+                ui.tillykkeMedHotel();
+
+            }else {
+                ui.kanIkkeKøbeHotel();
+            }
+
+        }else{
+            ui.kanIkkeKøbeHotel();
+        }
+    }
 
 
 }
