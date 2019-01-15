@@ -181,7 +181,7 @@ public class EjendomCO extends EjeligtFeltDTO {
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
             userInterfaceKontrakt.updateSpillere(spillerMedTur);
-            handel.indsamleLeje(this,spillerMedTur, userInterfaceKontrakt);
+            handel.indsamleLeje(spil.getSpil(),this,spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
         }
@@ -202,6 +202,10 @@ public class EjendomCO extends EjeligtFeltDTO {
      */
     public void bygHuse(int antalHuse){
         setAntalHuse(getAntalHuse()+antalHuse);
+    }
+
+    public void bygHotel(boolean harHotel){
+        setHarHotel(harHotel);
     }
 
     //|--------- Constructor:-----------------

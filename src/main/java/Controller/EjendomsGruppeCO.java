@@ -63,6 +63,7 @@ public class EjendomsGruppeCO {
             // ... laver ny gruppe
         }
         klarGruppe.tilfoejEjendom(ejendom);
+        ejendom.setGruppe(klarGruppe);
         return klarGruppe;
     }
 

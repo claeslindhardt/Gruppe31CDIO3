@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class RafleBaeger {
     //|--------- Variabler:-----------------
     private Terning[] terninger;
-    private int     totalVaerdi;
+    private int     totalVaerdi =0;
 
     private int     antalTerninger = 2; // Forventes brugbar til at teste med
     //|--------- Getters og Setters:--------
@@ -99,6 +99,8 @@ public class RafleBaeger {
     /** @return Den nuværende sum af terningerns vaerdier
      */
     public int getTotalVaerdi() {
+
+
         return totalVaerdi;
     }
 

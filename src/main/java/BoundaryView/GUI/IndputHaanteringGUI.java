@@ -1,6 +1,7 @@
 package BoundaryView.GUI;
 
 import Controller.SpilController;
+import ModelEnteties.felter.EjendomCO;
 
 /**
  * Indsæt beskrivelse her
@@ -33,8 +34,10 @@ public class IndputHaanteringGUI {
             beslutning = 7;
         }else if(valg == "Byg på ejendom"){
             beslutning = 8;
-        }else if(valg == "Handel med Ejede ting"){
+        }else if(valg == "Byg hotel"){
             beslutning = 9;
+        } else if(valg == "Handel med Ejede ting"){
+            beslutning = 10;
         }
         return beslutning;
     }

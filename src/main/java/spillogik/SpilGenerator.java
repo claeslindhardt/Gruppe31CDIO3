@@ -1,16 +1,17 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
-import Controller.BraetCO;
-import Controller.EjendomsGruppeCO;
-import ModelEnteties.EjendomsGruppeDTO;
+
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import static spillogik.RandomGenerator.genererRandomFelter;
 
 public class SpilGenerator {
 
@@ -30,56 +31,29 @@ public class SpilGenerator {
     }
 
 
-
-
-    public static BraetCO genererBraet(int antalFelter){
-        BraetCO braet = new BraetCO( antalFelter, new TUI() );
-
-        genererEjendomsGrupper( braet.getEjendomme(), 3 );
-
-        return braet;
+    public static FeltDTO[] genererFelter(){
+        return null;
     }
 
 
-    public static ChanceAktionDTO[] genererChanceKort(int antalKort ){
-        ChanceAktionDTO[] chanceKort = new ChanceAktionDTO[antalKort];
-
-
-        return chanceKort;
+    public static ArrayList<ChanceAktionDTO> genererChancekort(){
+        return null;
     }
 
+    public static Spil genererSpil( int antalSpillere ){
 
-    public static Spil genererSpil(int antalSpillere, int antalFelter, int antalChanceKort, double startPenge ){
         Spil spil = new Spil();
 
-        spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
-        spil.setBraet( genererBraet(antalFelter) );
-        // spil.setChanceKort( genererChancekort);
-        spil.setRaflebaeger( new RafleBaeger(2));
+        spil.setSpillere(  genererSpillere( antalSpillere, 1500 )  );
+        // TODO: Implementer standard generering af felter
+        //spil.setFelter( genererFelter() );
+        spil.setFelter( genererRandomFelter(40, 100, 25) );
+        spil.setChanceKort( genererChancekort() );
+        spil.setRaflebaeger( new RafleBaeger(2) );
 
         return spil;
     }
 
-
-    public static EjendomsGruppeDTO[] genererEjendomsGrupper(EjendomCO[] ejendomme, int gruppeStoerrelse){
-        ArrayList<EjendomsGruppeDTO> ejendomsGrupper = new ArrayList<>();
-        EjendomsGruppeCO ejendomsGruppeController = new EjendomsGruppeCO(gruppeStoerrelse);
-
-        // Tilfoejer alle ejendomme til grupper
-        for( EjendomCO ejendom : ejendomme ){
-            EjendomsGruppeDTO gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
-            ejendom.setGruppe(gruppe);
-            ejendomsGrupper.add(gruppe);
-        }
-
-        // Laver listen over ejendomsgrupper om til en almindelig array og returnere den ( .toArray() ) @author Malte
-        return ejendomsGrupper.toArray(new EjendomsGruppeDTO[0]);
-    }
-
-
-    public static Spil genererSpil(){
-        return genererSpil( 4, 39, 40, 1500);
-    }
 
 
 }
