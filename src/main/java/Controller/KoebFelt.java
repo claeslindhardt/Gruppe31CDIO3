@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 
 public class KoebFelt {
@@ -55,6 +56,26 @@ public class KoebFelt {
             jernbane.setEjer( spiller );
             spiller.getSpillerJernbaner().add(jernbane);
             jernbane.tagTog(spil, userInterfaceKontrakt);
+
+        } else {
+            userInterfaceKontrakt.monetosMangel();
+        }
+    }
+
+    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil) {
+        if ( bryggeri.getEjer() == spiller ) {
+            userInterfaceKontrakt.alleredeEjer();
+
+        } else if ( spiller.getPenge() > bryggeri.getPris()) {
+
+            spiller.addPenge( -bryggeri.getPris() );
+            userInterfaceKontrakt.dinJernbane();
+            userInterfaceKontrakt.updateSpillere( spiller );
+
+            //skifte ejerskab
+            bryggeri.setEjer( spiller );
+            spiller.getSpillerBryggerier().add(bryggeri);
+
 
         } else {
             userInterfaceKontrakt.monetosMangel();
