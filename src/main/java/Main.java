@@ -51,7 +51,7 @@ public class Main {
     public static int HaanterStartArgument(int arglength, Object[] args){
         /**
          * @author Claes Lindhardt
-         * Når man kører programmet (f.eks. via .bat-filen) kan man give den en række startargumenter,
+         * Kører  man programmet (f.eks. gennem .bat-filen) kan man give den startargumenter,
          * som havner i en String array. Med udgangspunkt i den liste kan man så få programmet til
          * at gøre noget bestemt afhængigt af argumenterne. Så man kan starte programmet med nogle
          * bestemte indstillinger.
