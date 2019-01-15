@@ -1,6 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import Controller.FaengselCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -118,6 +119,21 @@ public class Spil {
         }
 
         return spillere;
+    }
+
+    /**
+     * Finder fængsel feltet i listen over felter, og returnere det.
+     * @author Malte
+     * @return Faengselfeltet på gui'en.
+     */
+    public FaengselCO getFaengsel(){
+        for( FeltDTO felt : felter ){
+
+            if(  felt instanceof FaengselCO ){
+                return (FaengselCO) felt;
+            }
+        }
+        return null;
     }
 
     public void setVinderFindes(boolean vinderFindes) {

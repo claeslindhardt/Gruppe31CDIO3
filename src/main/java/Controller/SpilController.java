@@ -2,7 +2,6 @@ package Controller;
 
 import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;

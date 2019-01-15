@@ -14,12 +14,13 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
+        FaengselCO faengsel = spil.getSpil().getFaengsel();
+
         spillerMedTur.setFaengselsStraf(true);
-        //Kan lave et braet objekt da der gaaIfængselfeltet altid ligger det samme sted, nemlig felt nr. 1.
-        spillerMedTur.setSpillerPosition(1);
+        spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
         userInterfaceKontrakt.iFaengselMedDig();
-        userInterfaceKontrakt.duErLandetPå(spil.getSpil().getFelter()[1], spillerMedTur);
+        userInterfaceKontrakt.duErLandetPå( faengsel, spillerMedTur);
 
         spil.slutSpillerTur();
     }
