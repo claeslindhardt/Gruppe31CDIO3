@@ -66,11 +66,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
-            FeltDTO felt = braet.getBret().get(i);
-            GUI_Street gui_felt= new GUI_Street();
-            gui_felt.setTitle( felt.getNavn() );
-            gui_felt.setSubText( felt.getFeltType() );
+            GUI_Field gui_felt;
 
+            FeltDTO felt = braet.getBret().get(i);
+            if(felt.getFeltType() == "Bryggeri"){
+                gui_felt = new GUI_Brewery();
+                gui_felt.setTitle( felt.getNavn() );
+                gui_felt.setSubText( felt.getFeltType() );
+            } else {
+                gui_felt = new GUI_Street();
+                gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText(felt.getFeltType());
+            }
             felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
