@@ -23,7 +23,7 @@ public class RandomGenerator {
 
         spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
         spil.setFelter( genererRandomFelter(antalFelter, 100, 25) );
-        // spil.setChanceKort( genererChancekort);
+        spil.setChanceKort( genererChancekort(antalChanceKort) );
         spil.setRaflebaeger( new RafleBaeger(2));
 
         return spil;

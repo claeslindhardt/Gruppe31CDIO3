@@ -29,6 +29,10 @@ public class Spiller {
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
 
+
+
+    ArrayList<ChanceAktionDTO> chancekort = new ArrayList<ChanceAktionDTO>();
+
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
     protected boolean harGivetOp=false;
@@ -62,6 +66,14 @@ public class Spiller {
         this.spillerEjendomme = spillerEjendomme;
     }
 
+
+    public ArrayList<ChanceAktionDTO> getChancekort() {
+        return chancekort;
+    }
+
+    public void addChancekort( ChanceAktionDTO chancekort) {
+        this.chancekort.add(chancekort);
+    }
 
     /**
      * @author Malte

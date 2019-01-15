@@ -188,7 +188,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[19] = ejendom;
 
-        friParkering = new FriParkering();
+        friParkering = new FriParkering(20);
         felter[20] = friParkering;
 
         ejendomsGruppe = new EjendomsGruppeDTO(Color.red,3);
@@ -334,7 +334,8 @@ public class SpilGenerator {
 
 
     public static ArrayList<ChanceAktionDTO> genererChancekort(){
-        return null;
+        // TODO Implementer fastsatte chancekort
+        return RandomGenerator.genererChancekort(10);
     }
 
     public static Spil genererSpil( int antalSpillere ){

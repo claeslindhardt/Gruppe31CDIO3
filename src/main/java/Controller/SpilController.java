@@ -4,8 +4,6 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
@@ -132,7 +130,7 @@ public class SpilController{
     public void tjekForBankeRaadt() {
 
         if (spil.getSpillerMedTur().getPenge() < 0) {
-            ui.bankeRaadtGrundetLiquditet(spil.getBankeraadGraense());
+            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
             spil.getSpillerMedTur().setHarGivetOp(true);
             spil.getSpillerMedTur().getSpillerEjendomme().clear();
             int udgaaetSpiller = spil.getSpillerMedTur().getId() + 1;
@@ -225,7 +223,6 @@ public class SpilController{
     public void tjekForFeangselsStraf(){
         if (spil.getSpillerMedTur().isFaengselsStraf()) {
             if (!spil.getSpillerMedTur().isHarAnketDomDenneRunde()) {
-                ui.terminalLinje();
                 ui.anketStraffeDom(spil.getSpillerTur());
                 anketDomsigelse();
                 spil.getSpillerMedTur().setHarAnketDomDenneRunde(true);
@@ -252,7 +249,6 @@ public class SpilController{
      */
     public void tjekForVinder() {
         if (spil.getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
-            ui.terminalLinje();
             //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
             if (!spil.getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
@@ -291,9 +287,8 @@ public class SpilController{
             case 1:
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
-                    rykSpiller.kastTerninger( spil, spil.getSpillerMedTur(), ui, this  );
-                }
-                else if (spil.getSpillerMedTur().isFaengselsStraf()){
+                    rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
+                } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
                     ui.kanIkkeSlaaFaengsel();
                 }
                 break;
@@ -313,7 +308,7 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                handlinger.givOp(spil.getSpillerMedTur(),this, ui );
+                handlinger.givOp(spil.getSpillerMedTur(), this, ui);
                 break;
             case 8:
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
