@@ -1,6 +1,8 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import Controller.FaengselCO;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
@@ -13,23 +15,21 @@ public class Spil {
     private int spillerTur = 1;
 
     private Spiller[] spillere;
-    private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
     private boolean vinderFindes;
 
+    private FeltDTO[] felter;
 
-    public ChanceAktionDTO[] getChanceKort() {
+    public ArrayList<ChanceAktionDTO> getChanceKort() {
         return chanceKort;
     }
 
-    public void setChanceKort(ChanceAktionDTO[] chanceKort) {
+    public void setChanceKort(ArrayList<ChanceAktionDTO> chanceKort) {
         this.chanceKort = chanceKort;
     }
+    private ArrayList<ChanceAktionDTO> chanceKort;
 
-    private ChanceAktionDTO[] chanceKort;
-
-    private  int bankerotGraense = 0;
     private  boolean kør = true;
 
     public int getSpillerTur() {
@@ -48,13 +48,6 @@ public class Spil {
         this.spillere = spillere;
     }
 
-    public BraetDTO getBraet() {
-        return braet;
-    }
-
-    public void setBraet(BraetDTO braet) {
-        this.braet = braet;
-    }
 
     public UserInterfaceKontrakt getUi() {
         return ui;
@@ -85,13 +78,14 @@ public class Spil {
     }
 
 
-    public EjendomCO getEjendomme(){
-
-
-
-
-        return null;
+    public FeltDTO[] getFelter() {
+        return felter;
     }
+
+    public void setFelter(FeltDTO[] felter) {
+        this.felter = felter;
+    }
+
 
     public int getBankeraadGraense(){return 0;}
 
@@ -100,7 +94,8 @@ public class Spil {
         return spillere.length;
     }
 
-    public int getAntalFelter(){ return braet.getBret().size(); }
+
+    public int getAntalFelter(){ return felter.length;}
 
     public Spiller getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
@@ -124,6 +119,21 @@ public class Spil {
         }
 
         return spillere;
+    }
+
+    /**
+     * Finder fængsel feltet i listen over felter, og returnere det.
+     * @author Malte
+     * @return Faengselfeltet på gui'en.
+     */
+    public FaengselCO getFaengsel(){
+        for( FeltDTO felt : felter ){
+
+            if(  felt instanceof FaengselCO ){
+                return (FaengselCO) felt;
+            }
+        }
+        return null;
     }
 
     public void setVinderFindes(boolean vinderFindes) {

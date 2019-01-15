@@ -6,7 +6,6 @@ import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
 
@@ -89,7 +88,6 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(Spiller spiller);

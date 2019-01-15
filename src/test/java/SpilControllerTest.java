@@ -5,19 +5,22 @@ import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.Rederi;
+import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
+
+import java.util.Random;
 
 
 class SpilControllerTest {
 
     public static void main(String[] args) {
-        Spil spil = SpilGenerator.genererSpil(3, 39,40,1500);
+        Spil spil = RandomGenerator.genererSpil(3, 40,40,1500);
         spil.getSpiller(0).setNavn("Malte");
         spil.getSpiller(0).setPenge(9999999);
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
 
-        for( FeltDTO felt : spil.getBraet().getBret() ){
+        for( FeltDTO felt : spil.getFelter() ){
             if( felt instanceof EjendomCO ){
                 System.out.println("fundet   felt");
                 ((EjendomCO)  felt).setEjer(spil.getSpiller(0));
@@ -55,13 +58,13 @@ class SpilControllerTest {
         spiller.addRederi(DFDS);
         DFDS.setEjer(spiller);
 
-        spil.getBraet().getBret().set(3,(Tuborg));
-        spil.getBraet().getBret().set(4,(Carlsberg));
+        spil.getFelter()[3] = Tuborg;
+        spil.getFelter()[4] = Carlsberg;
 
-        spil.getBraet().getBret().set(5,Øresund);
-        spil.getBraet().getBret().set(6,Bornholm);
-        spil.getBraet().getBret().set(7,ØK);
-        spil.getBraet().getBret().set(8,DFDS);
+        spil.getFelter()[5] = Øresund;
+        spil.getFelter()[6] = Bornholm;
+        spil.getFelter()[7] = ØK;
+        spil.getFelter()[8] = DFDS;
 
         SpilController spilController = new SpilController();
         spilController.setSpil(spil);

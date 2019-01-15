@@ -2,13 +2,11 @@ package BoundaryView.TUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
@@ -416,14 +414,6 @@ public class TUI implements UserInterfaceKontrakt {
         return (input-1);
     }
 
-    @Override
-    public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
-
-    }
-
-    public void genererGUIBret(BraetDTO braet, ArrayList<Spiller> spillere){
-
-    }
 
     public String spillerNavne(){
         System.out.println("|- Indtast navnet på spillerne der skal være med i spillet.\nAfslut med Enter efter hvert navn");
