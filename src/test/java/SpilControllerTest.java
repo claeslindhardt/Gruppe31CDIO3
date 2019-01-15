@@ -22,10 +22,9 @@ class SpilControllerTest {
                 spil.getSpiller(0).tilføjEjendom( (EjendomCO) felt );
             }
         }
+
         Bryggeri Tuborg = new Bryggeri("Tuborg",3);
         Bryggeri Carlsberg = new Bryggeri("Carlsberg",4);
-
-
 
         spil.getBraet().getBret().set(3,(Tuborg));
         spil.getBraet().getBret().set(4,(Carlsberg));

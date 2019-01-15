@@ -480,6 +480,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void dinJernbane(){
         gui.showMessage("Jernbanen er nu din!");
     }
+
+    public void ditBryggeri(){
+        gui.showMessage("Bryggeriet er nu dit!");
+    }
+
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
     }

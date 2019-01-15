@@ -69,7 +69,7 @@ public class KoebFelt {
         } else if ( spiller.getPenge() > bryggeri.getPris()) {
 
             spiller.addPenge( -bryggeri.getPris() );
-            userInterfaceKontrakt.dinJernbane();
+            userInterfaceKontrakt.ditBryggeri();
             userInterfaceKontrakt.updateSpillere( spiller );
 
             //skifte ejerskab
