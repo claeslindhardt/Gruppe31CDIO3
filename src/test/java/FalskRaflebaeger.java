@@ -1,8 +1,6 @@
-package ModelEnteties.Terning;
-
+import ModelEnteties.raflebaeger.RafleBaeger;
+import ModelEnteties.raflebaeger.Terning;
 import ModelEnteties.singletoner.ScannerSingleton;
-
-import java.util.ArrayList;
 
 public class FalskRaflebaeger extends RafleBaeger {
 

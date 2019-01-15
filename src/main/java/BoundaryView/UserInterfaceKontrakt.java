@@ -1,11 +1,10 @@
 package BoundaryView;
 
 import Controller.*;
-import Controller.SpillerCO;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.Spiller;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -47,13 +46,13 @@ public interface UserInterfaceKontrakt {
     void duGavIkkeOp();
     void passeringAfStart(int gangeOverStart);
     void chanceKortHar();
-    int chanceKortNr(SpillerCO spiller);
+    int chanceKortNr(Spiller spiller);
     int chanceKortsVejledning();
     void ingenChanceKort();
     int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
     void overStart(int pos);
-    void spillerStat(SpillerCO spiller);
+    void spillerStat(Spiller spiller);
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
@@ -72,13 +71,13 @@ public interface UserInterfaceKontrakt {
     void ejetAfEnAnden();
     void tetPaaMonopol();
     void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller);
+    void gennemfortKoeb(EjendomCO ejendom, Spiller spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
-    void duErLandetPå(FeltDTO felt, SpillerCO spiller);
+    void duErLandetPå(FeltDTO felt, Spiller spiller);
     void badErrorMessage();
     int ejendomsBud();
-    void spillerEjendele(SpillerCO spiller);
+    void spillerEjendele(Spiller spiller);
     void bretPrinter(String felt);
     void terminalLine();
     void chanceKortGenereringsFejl();
@@ -90,12 +89,13 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
-    void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere);
+    void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
-    void updateSpillere(SpillerCO spiller);
+    void updateSpillere(Spiller spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
+    void ikkeTaxiTilTaxi();
 }

@@ -11,8 +11,8 @@ public class TaxiCO extends AktionsFelterDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        spil.getSpil().getSpillerMedTur().tagTaxi(spil, userInterfaceKontrakt);
+    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        spil.getHandlinger().tagTaxi( spil.getSpil().getSpillerMedTur(), spil, userInterfaceKontrakt );
 
     }
 

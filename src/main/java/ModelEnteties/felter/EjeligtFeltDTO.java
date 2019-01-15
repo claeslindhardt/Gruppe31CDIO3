@@ -1,8 +1,8 @@
 package ModelEnteties.felter;
 
-import Controller.SpillerCO;
 import Controller.JernbaneCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spiller;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
     private static ArrayList<JernbaneCO> alleJernbaner = new ArrayList<JernbaneCO>();
 
     //  Dynamiske Variabler
-    private SpillerCO ejer;
+    private Spiller ejer;
     private int pris = 200;
     private boolean pantsat = false;
 
@@ -34,11 +34,11 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
         return ejer.getNavn();
     }
 
-    public SpillerCO getEjer() {
+    public Spiller getEjer() {
         return ejer;
     }
 
-    public void setEjer(SpillerCO ejer) {
+    public void setEjer(Spiller ejer) {
         this.ejer = ejer;
     }
 

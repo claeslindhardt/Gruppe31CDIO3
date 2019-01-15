@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *  Den bliver brugt i SpilLederen, til at genere en liste med spillerObjekter
  *  som indholder alle de spillere der indgår i et givet spil.
  */
-public class SpillerDTO {
+public class Spiller {
     //|--------- Variabler:-----------------
     private int spillerPosition=0;
     private int id;
@@ -151,10 +151,43 @@ public class SpillerDTO {
         this.penge+=beloeb;
     }
 
-    public void tilfoejEjendom(EjendomCO ejendom){
-        if( !spillerEjendomme.contains(ejendom) ){
-            spillerEjendomme.add(ejendom);
+    /**
+     * @author Jacob og Andreas
+     * tilføjer ejendomme til en spillers ejendomme.
+     * Denne metode bliver brugt i vores test spil.
+     *
+     * @param ejendom den ejendom der skal tilføjes
+     */
+    public void tilføjEjendom(EjendomCO ejendom) {
+        spillerEjendomme.add(ejendom);
+    }
+
+    /**
+     * @author Malte
+     * Undersoeger om spilleren ejer alle ejendomme i en specifik
+     * ejendomsgruppe.
+     * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
+     * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
+     */
+    public boolean ejerEjendomsGruppe( EjendomsGruppeDTO ejendomsGruppe ){
+        for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
+            if( ejendom.getEjer() != this ){
+                return false;
+            }
         }
+        return true;
+    }
+
+
+    /**
+     * @author Malte
+     * Undersoege om man ejer en specifik ejendom, ved at sammenligne
+     * ejeren af ejendommen med spilleren.
+     * @param ejendom Ejendommen man oensker at undersoege.
+     * @return True: spilleren ejer den, False: spilleren ejer den ikke.
+     */
+    public boolean ejerEjendom(EjendomCO ejendom){
+        return ejendom.getEjer() == this;
     }
 
 

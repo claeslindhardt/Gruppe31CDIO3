@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.ChanceAktionDTO;
 
 import java.util.Random;
@@ -16,8 +17,8 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void DirketeAktion(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+    public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
         spillerMedTur.addSpillerAktionsKort(this);
@@ -28,8 +29,8 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void BetingetAktion(HandelsController handel,SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+    public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setFaengselsStraf(false);
         spillerMedTur.setHarSlaaetForTuren(false);
         //todo:test

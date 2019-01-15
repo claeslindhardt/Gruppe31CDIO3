@@ -1,8 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
@@ -13,7 +12,7 @@ public class Spil {
 
     private int spillerTur = 1;
 
-    private SpillerCO[] spillere;
+    private Spiller[] spillere;
     private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
@@ -41,11 +40,11 @@ public class Spil {
         this.spillerTur = spillerTur;
     }
 
-    public SpillerCO[] getSpillere() {
+    public Spiller[] getSpillere() {
         return spillere;
     }
 
-    public void setSpillere(SpillerCO ... spillere) {
+    public void setSpillere(Spiller ... spillere) {
         this.spillere = spillere;
     }
 
@@ -103,12 +102,12 @@ public class Spil {
 
     public int getAntalFelter(){ return braet.getBret().size(); }
 
-    public SpillerCO getSpiller( int spillerIndex ){
+    public Spiller getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
     }
 
 
-    public SpillerCO getSpillerMedTur(){
+    public Spiller getSpillerMedTur(){
         return spillere[spillerTur-1];
     }
 
@@ -116,11 +115,11 @@ public class Spil {
     public void setVinder(int i){}
 
     // TODO: Fjern denne!
-    public ArrayList<SpillerCO> getSpillereArrayList(){
+    public ArrayList<Spiller> getSpillereArrayList(){
 
-        ArrayList<SpillerCO> spillere = new ArrayList<>();
+        ArrayList<Spiller> spillere = new ArrayList<>();
 
-        for( SpillerCO spiller : this.spillere ){
+        for( Spiller spiller : this.spillere ){
             spillere.add(spiller);
         }
 

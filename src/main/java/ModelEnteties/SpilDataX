@@ -2,8 +2,10 @@ package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.BraetCO;
+import Controller.Spiller;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.SpillerCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public abstract class SpilData {
     private int spillerTur=1;
     private int antalSpillere=3;
     private   int antalFelter=39;
-    private  ArrayList<SpillerCO> spillerObjekter = new ArrayList<SpillerCO>();
+    private  ArrayList<Spiller> spillerObjekter = new ArrayList<Spiller>();
     private  int antalTerninger=2;
     private  int antalChancekortPrFelt = 10;
     private  int bankeraadGraense = 15;
@@ -76,7 +78,7 @@ public abstract class SpilData {
      *
      * @return
      */
-    public SpillerCO getSpillerMedTur() {
+    public Spiller getSpillerMedTur() {
         return spillerObjekter.get(spillerTur-1);
     }
 
@@ -105,11 +107,11 @@ public abstract class SpilData {
         this.antalFelter = antalFelter;
     }
 
-    public ArrayList<SpillerCO> getSpillerObjekter() {
+    public ArrayList<Spiller> getSpillerObjekter() {
         return spillerObjekter;
     }
 
-    public void setSpillerObjekter(ArrayList<SpillerCO> spillerObjekter) {
+    public void setSpillerObjekter(ArrayList<Spiller> spillerObjekter) {
         this.spillerObjekter = spillerObjekter;
     }
 

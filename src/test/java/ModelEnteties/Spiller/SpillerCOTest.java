@@ -4,7 +4,7 @@ package ModelEnteties.Spiller;
 import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
+import Controller.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.EjendomsGruppeDTO;
 import Controller.JernbaneCO;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpillerCOTest {
+class SpillerTest {
 
     @Test
     void givOp() {
@@ -149,7 +149,7 @@ class SpillerCOTest {
     void koebEjendom() {
 
         EjendomCO ejendom = new EjendomCO("Hajgade",100,50,0);
-        SpillerCO spiller = new SpillerCO("Jacob",30,0);
+        Spiller spiller = new Spiller("Jacob",30,0);
         UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
         ArrayList<EjendomCO> mineEjendomme = new ArrayList<EjendomCO>();
@@ -169,7 +169,7 @@ class SpillerCOTest {
     @Test
     void koebJernbane() {
         JernbaneCO jernbane = new JernbaneCO("Hovedbanegården",500,0);
-        SpillerCO spiller = new SpillerCO("Jacob",10,0);
+        Spiller spiller = new Spiller("Jacob",10,0);
 
         UserInterfaceKontrakt userinterface = new TUI();
         GUI userInterface1 = new GUI();
@@ -195,7 +195,7 @@ class SpillerCOTest {
         // Setup
         UserInterfaceKontrakt userInterface = new TUI();
 
-        SpillerCO spiller = new SpillerCO("Test", 0, 0);
+        Spiller spiller = new Spiller("Test", 0, 0);
         EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 3);
 
 

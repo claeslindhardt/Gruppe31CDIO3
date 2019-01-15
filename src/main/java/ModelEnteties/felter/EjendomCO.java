@@ -1,10 +1,10 @@
 package ModelEnteties.felter;
 
-import Controller.HandelsController;
+import Controller.Handel;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spiller;
 import spillogik.EjendomsLogik;
 
 
@@ -36,6 +36,10 @@ public class EjendomCO extends EjeligtFeltDTO {
 
     public boolean harHotel(){
         return harHotel;
+    }
+
+    public void setHarHotel(boolean harHotel) {
+        this.harHotel = harHotel;
     }
 
     public double getHusPris() {
@@ -155,8 +159,8 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null){
             this.printInfo(userInterfaceKontrakt);
@@ -165,7 +169,7 @@ public class EjendomCO extends EjeligtFeltDTO {
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
                 case 1:
-                    spillerMedTur.koebEjendom(this, userInterfaceKontrakt);
+                    spil.getKoebFelt().koebEjendom(this, spillerMedTur, userInterfaceKontrakt);
                     break;
                 case 2:
                     userInterfaceKontrakt.forsetTur();

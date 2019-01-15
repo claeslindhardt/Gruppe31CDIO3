@@ -4,16 +4,13 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
-import gui_fields.GUI_Street;
+import gui_fields.*;
 import gui_main.GUI;
 
 
@@ -53,6 +50,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         this.spillere.add(spiller);
     }
 
+    public GUI_Field[] getFelter(){return felter;}
 
     /**
      * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
@@ -60,7 +58,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetDTO braet, ArrayList<Spiller> spillere){
         int antalFelter =  braet.getBret().size();
         GUI_Field[] felter = new GUI_Field[ antalFelter ];
 
@@ -131,9 +129,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
-    public GUI_Field[] getFelter(){
-        return felter;
-    }
 
     /**
      * Indsæt beskrivelse her
@@ -183,7 +178,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+        String valg = gui.getUserButtonPressed("|--|Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
@@ -279,6 +274,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param maxInput - Denne parameter bliver kun brugt i TUI
      * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
      */
+
+    //TODO: Fjern denne på en ordentlig måde!!!!
+
     public int instilingsSporgsmaal3(int minInput, int maxInput){
         hovedmenu.showMessage("Hvor skal bankerot graensen ligge?: " +
                 "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
@@ -401,7 +399,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chance Kort:");
     }
-    public int chanceKortNr(SpillerCO spiller){
+    public int chanceKortNr(Spiller spiller){
 
         int laengde = spiller.getSpillerAktionsKort().size()+1;
 
@@ -454,7 +452,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Din position er: "+ pos+
                 "\nDu har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerCO spiller){
+    public void spillerStat(Spiller spiller){
         gui.showMessage("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -528,15 +526,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    @Override
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller) {
-
-    }
-
-    public void updateSpillere(SpillerCO spiller){
+    public void updateSpillere(Spiller spiller){
+        for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
 
+        }
     }
 
     /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
@@ -544,7 +539,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerCO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, Spiller spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
@@ -573,7 +568,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
+    public void duErLandetPå(FeltDTO felt, Spiller spiller){
         String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
         if(felt.getPlacering()==1){
             str = str2;
@@ -595,7 +590,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         return input.binartValg(valg);
     }
-    public void spillerEjendele(SpillerCO spiller){
+    public void spillerEjendele(Spiller spiller){
         gui.showMessage("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);
@@ -633,14 +628,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\nog hvis du ikke var, faar du alligvel lov til at slå med terningerne igen.");
     }
 
+    /**
+     * @author Jacob og Andreas
+     *
+     * Denne metode sætter et hus på den ejendom som man har valgt at bygge den på.
+     *
+     * @param ejendom den Ejendom man vil bygge på
+     */
     @Override
     public void byggetHus(EjendomCO ejendom) {
 
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
-
-
-
 
     }
 
@@ -656,13 +655,41 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    /**
+     * @author Jacob og Andreas
+     *
+     * Denne metode laver en liste i GUI, efter man har valgt at bygge på en ejendom, som viser en liste af
+     * bebyggelige ejendomme.
+     * Først omdannes arrayList ejendomme til String[] ejedomsliste.
+     * Så fylder man den nye array ud med elementer fra arrayList med en for løkke.
+     * Derefter vises en besked, hvorefter man vælger en bebyggelig grund fra listen og et hus bliver vist på
+     * ejendommen i GUI
+     *
+     * @param ejendomme arrayList med alle ejendommene
+     * @return den ejendom fra listen med bebyggelige ejendomme, som man har valgt at bygge på
+     */
     @Override
     public int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme) {
-        return 0;
+
+        String[] ejendomsListe = new String[ejendomme.size()];
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            ejendomsListe[i] = ejendomme.get(i).getNavn();
+        }
+
+        String valg = gui.getUserSelection("Hvilken ejendom vil du bygge paa? ",ejendomsListe);
+        int indexRetur = 0;
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            if (valg == ejendomsListe[i]){
+                indexRetur = i;
+            }
+        }
+        return indexRetur;
     }
 
     @Override
-    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+    public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
 
     }
 
@@ -681,6 +708,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void kanIkkeKøbeHotel(){gui.showMessage("Du har desværre ikke mulighed for at købe et hotel endnu");};
 
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
+
+    public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
 
     @Override
     public void startSpil(Spil spil) {

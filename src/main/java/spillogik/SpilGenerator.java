@@ -3,28 +3,26 @@ package spillogik;
 import BoundaryView.TUI.TUI;
 import Controller.BraetCO;
 import Controller.EjendomsGruppeCO;
-import Controller.SpillerCO;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.Spiller;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class SpilGenerator {
 
 
-    public static SpillerCO[] genererSpillere(int antalSpillere, double startPenge ){
-        SpillerCO[] spillere = new SpillerCO[antalSpillere];
+    public static Spiller[] genererSpillere(int antalSpillere, double startPenge ){
+        Spiller[] spillere = new Spiller[antalSpillere];
 
         for( int i = 0; i < antalSpillere; i++   ){
-            SpillerCO spiller = new SpillerCO();
+            Spiller spiller = new Spiller();
             spiller.setPenge(startPenge);
             spiller.setNavn("spiller"+(i+1));
+            spiller.setId(i);
             spillere[i] = spiller;
         }
 

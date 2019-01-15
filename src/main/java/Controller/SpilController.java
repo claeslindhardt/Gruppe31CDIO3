@@ -4,28 +4,46 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
-import ModelEnteties.Terning.FalskRaflebaeger;
-import ModelEnteties.Terning.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.singletoner.RandomSingleton;
-import spillogik.BevaegelsesLogik;
+import ModelEnteties.Spiller;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
 
 public class SpilController{
 
-    private UserInterfaceKontrakt ui;
+    private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
 
-    // TODO: Fjern denne
+
+    private RykSpiller  rykSpiller  = new RykSpiller();
+    private Handlinger  handlinger  = new Handlinger();
+    private Handel      handel      = new Handel();
+
+    public Handel getHandel() {
+        return handel;
+    }
+
+    public Controller.KoebFelt getKoebFelt() {
+        return KoebFelt;
+    }
+
+    private KoebFelt    KoebFelt    = new KoebFelt();
+
+
+
     public Spil getSpil(){return spil;}
 
     public void setSpil(Spil spil){
         this.spil = spil;
     }
+
+    public RykSpiller getRykSpiller() {
+        return rykSpiller;
+    }
+
+    public Handlinger getHandlinger(){ return handlinger;  }
 
 
     /** Laver en ny SpilController med en vilkårlig UI */
@@ -112,7 +130,7 @@ public class SpilController{
      */
     public void tjekForBankeRaadt() {
 
-        if (spil.getSpillerMedTur().getPenge() < spil.getBankeraadGraense()) {
+        if (spil.getSpillerMedTur().getPenge() < 0) {
             ui.bankeRaadtGrundetLiquditet(spil.getBankeraadGraense());
             spil.getSpillerMedTur().setHarGivetOp(true);
             spil.getSpillerMedTur().getSpillerEjendomme().clear();
@@ -126,7 +144,7 @@ public class SpilController{
      * Indsæt beskrivelse her
      * @param terningsKrus
      */
-    public void kastTerninger(RafleBaeger terningsKrus) {
+    /*public void kastTerninger(RafleBaeger terningsKrus) {
         if (!spil.getSpillerMedTur().isHarSlaaetForTuren()) {
 
             terningsKrus.slaa();
@@ -145,7 +163,7 @@ public class SpilController{
         } else {
             ui.harSlaaetMedTerningfor();
         }
-    }
+    }*/
 
 
     /**
@@ -156,7 +174,7 @@ public class SpilController{
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
+    /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
         FeltDTO[] braet = spil.getBraet().getBretArray();
 
@@ -165,7 +183,7 @@ public class SpilController{
         int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
 
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
-    }
+    }*/
 
 
     /**
@@ -180,7 +198,7 @@ public class SpilController{
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+    /*public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
@@ -192,9 +210,9 @@ public class SpilController{
         spiller.setSpillerPosition(felt.getPlacering());
 
         ui.duErLandetPå(felt, spiller);
-        HandelsController handel = new HandelsController();
+        Handel handel = new Handel();
         felt.aktionPaaFelt(handel, this, ui);
-    }
+    }*/
 
 
     //_____________________________________
@@ -268,17 +286,13 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
             case 1:
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
-                    kastTerninger(terningsKrus);
-                    //Denne funktion  kan kalder:
-                    //tjekForPasseringAfStartOgRykSpiller(Raflebaeger terningKrus)
-                    //og aktionPåFelt.
+                    rykSpiller.kastTerninger( spil, spil.getSpillerMedTur(), ui, this  );
                 }
                 else if (spil.getSpillerMedTur().isFaengselsStraf()){
                     ui.kanIkkeSlaaFaengsel();
@@ -288,10 +302,10 @@ public class SpilController{
                 slutSpillerTur();
                 break;
             case 3:
-                spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
+                handlinger.chanceKortMuligheder(spil.getSpillerMedTur(), this, ui);
                 break;
             case 4:
-                spil.getSpillerMedTur().visEjendeFelter(ui);
+                ui.spillerEjendele(spil.getSpillerMedTur());
                 break;
             case 5:
                 /*spilleBret.printBret(ui);*/
@@ -300,13 +314,13 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                spil.getSpillerMedTur().givOp(this, ui);
+                handlinger.givOp(spil.getSpillerMedTur(),this, ui );
                 break;
             case 8:
-                spil.getSpillerMedTur().koebHusPaaEjendom(ui);
+                handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
                 break;
             case 9:
-                spil.getSpillerMedTur().handelMedEjendomme();
+                //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
                 ui.ikkeMuligt();
@@ -363,7 +377,7 @@ public class SpilController{
     private void indtastSpillerNavne() {
 
         // Et for-each loop der kører i gennem alle spillere.
-        for( SpillerDTO spiller : spil.getSpillere() ){
+        for( Spiller spiller : spil.getSpillere() ){
 
             String navn = ui.spillerNavne();
 

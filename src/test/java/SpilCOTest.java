@@ -2,7 +2,7 @@
 import BoundaryView.TUI.TUI;
 import Controller.*;
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.SpillerCO;
+import Controller.Spiller;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import org.junit.jupiter.api.Test;
@@ -81,10 +81,10 @@ class SpilCOTest {
         SpilController spil = new SpilController(3, 20, 2, 0, pan);
         //Her bliver det testet at der bliver oprettet spiller objekter i en liste.
         int count = 0;
-        SpillerCO sp1 = spil.getSpillerObjekter().get(0);
-        SpillerCO sp2 = spil.getSpillerObjekter().get(1);
-        SpillerCO sp3 = spil.getSpillerObjekter().get(2);
-        ArrayList<SpillerCO> spillere = new ArrayList<SpillerCO>();
+        Spiller sp1 = spil.getSpillerObjekter().get(0);
+        Spiller sp2 = spil.getSpillerObjekter().get(1);
+        Spiller sp3 = spil.getSpillerObjekter().get(2);
+        ArrayList<Spiller> spillere = new ArrayList<Spiller>();
         spillere.add(0, sp1);
         spillere.add(1, sp2);
         spillere.add(2, sp3);
@@ -145,7 +145,7 @@ class SpilCOTest {
 
 
         for (int i = 0; i < antalSpillere; i++) {
-            SpillerCO deltager = new SpillerCO(navnInput.nextLine(), i, 0);
+            Spiller deltager = new Spiller(navnInput.nextLine(), i, 0);
             spil.getSpillerObjekter().add(deltager);
 
         }
