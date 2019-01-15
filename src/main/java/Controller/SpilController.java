@@ -282,10 +282,8 @@ public class SpilController{
      * @author Filip
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
-     * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
-     * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu() {
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
@@ -413,7 +411,7 @@ public class SpilController{
             tjekForFeangselsStraf();
 
             if( !spil.getVinderFindes() ){
-                turMenu( spil.getBraet(), spil.getRaflebaeger() );
+                turMenu();
 
             }else{
                 break;

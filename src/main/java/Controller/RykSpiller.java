@@ -50,11 +50,11 @@ public class RykSpiller {
      */
     public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterfaceKontrakt ui, SpilController spilController) {
 
-        FeltDTO[] braet = spil.getBraet().getBretArray();
+        FeltDTO[] felter = spil.getFelter();
 
-        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
+        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getSpillerPosition()], felterAtRykke  );
 
-        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
+        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, felter.length);
 
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart, ui, spilController);
     }

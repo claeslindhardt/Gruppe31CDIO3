@@ -53,7 +53,7 @@ public class SpilGenerator {
         Spil spil = new Spil();
 
         spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
-        spil.setBraet( genererBraet(antalFelter) );
+        //spil.setBraet( genererBraet(antalFelter) );
         // spil.setChanceKort( genererChancekort);
         spil.setRaflebaeger( new RafleBaeger(2));
 
@@ -80,6 +80,9 @@ public class SpilGenerator {
     public static Spil genererSpil(){
         return genererSpil( 4, 39, 40, 1500);
     }
+
+
+
 
 
 }

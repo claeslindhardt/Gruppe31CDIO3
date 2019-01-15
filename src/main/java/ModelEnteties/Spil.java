@@ -1,6 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
@@ -13,11 +14,11 @@ public class Spil {
     private int spillerTur = 1;
 
     private Spiller[] spillere;
-    private BraetDTO braet;
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
     private boolean vinderFindes;
 
+    private FeltDTO[] felter;
 
     public ChanceAktionDTO[] getChanceKort() {
         return chanceKort;
@@ -48,13 +49,6 @@ public class Spil {
         this.spillere = spillere;
     }
 
-    public BraetDTO getBraet() {
-        return braet;
-    }
-
-    public void setBraet(BraetDTO braet) {
-        this.braet = braet;
-    }
 
     public UserInterfaceKontrakt getUi() {
         return ui;
@@ -85,6 +79,14 @@ public class Spil {
     }
 
 
+    public FeltDTO[] getFelter() {
+        return felter;
+    }
+
+    public void setFelter(FeltDTO[] felter) {
+        this.felter = felter;
+    }
+
     public EjendomCO getEjendomme(){
 
 
@@ -100,7 +102,8 @@ public class Spil {
         return spillere.length;
     }
 
-    public int getAntalFelter(){ return braet.getBret().size(); }
+
+    public int getAntalFelter(){ return felter.length;}
 
     public Spiller getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
