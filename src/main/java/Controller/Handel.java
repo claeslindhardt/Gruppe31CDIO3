@@ -7,6 +7,7 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.EjendomsLogik;
 
@@ -40,6 +41,9 @@ public class Handel {
             } else if (felt instanceof Bryggeri){
                 lejeForFelt = EjendomsLogik.beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
 
+            }
+            else if (felt instanceof Rederi){
+                lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, ejeren);
             }
 
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);

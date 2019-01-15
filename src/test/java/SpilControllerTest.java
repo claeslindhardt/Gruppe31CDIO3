@@ -4,6 +4,7 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Rederi;
 import spillogik.SpilGenerator;
 
 
@@ -34,8 +35,18 @@ class SpilControllerTest {
         spiller.addBryggeri(Carlsberg);
         Carlsberg.setEjer(spiller);
 
+        Rederi Øresund = new Rederi("A/S Øresund",20,5);
+        Rederi Bornholm = new Rederi("D/S Bornholm",20,6);
+        Rederi ØK = new Rederi("Ø.K.",20,7);
+        Rederi DFDS = new Rederi("D.F.D.S.",20,8);
+
         spil.getBraet().getBret().set(3,(Tuborg));
         spil.getBraet().getBret().set(4,(Carlsberg));
+
+        spil.getBraet().getBret().set(5,Øresund);
+        spil.getBraet().getBret().set(6,Bornholm);
+        spil.getBraet().getBret().set(7,ØK);
+        spil.getBraet().getBret().set(8,DFDS);
 
         SpilController spilController = new SpilController();
         spilController.setSpil(spil);
