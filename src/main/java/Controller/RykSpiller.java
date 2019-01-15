@@ -75,7 +75,7 @@ public class RykSpiller {
     public void rykSpillerTilFelt( Spiller spiller, FeltDTO felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
 
         if( gangeOverStart > 0 ) {
-            spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
+            spiller.setPenge(spiller.getPenge() + BevaegelsesLogik.passererStartPenge(gangeOverStart));
             ui.passeringAfStart(gangeOverStart);
             ui.updateSpillere(spiller);
 

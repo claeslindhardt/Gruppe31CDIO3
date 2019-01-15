@@ -96,4 +96,5 @@ public interface UserInterfaceKontrakt {
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
+    void ditBryggeri();
 }

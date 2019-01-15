@@ -35,6 +35,7 @@ public abstract class FeltDTO {
     public void setNavn(String navn) {
         this.navn = navn;
     }
+
     public String getFeltType() {
         return feltType;
     }
@@ -42,6 +43,8 @@ public abstract class FeltDTO {
     public void setFeltType(String feltType) {
         this.feltType = feltType;
     }
+
+
 
 
     //|----------- Metoder:------------------
