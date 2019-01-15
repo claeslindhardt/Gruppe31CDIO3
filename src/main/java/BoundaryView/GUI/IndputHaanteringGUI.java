@@ -1,56 +1,55 @@
 package BoundaryView.GUI;
 
-import Controller.SpilController;
-import ModelEnteties.felter.EjendomCO;
-
 /**
  * Indsæt beskrivelse her
  */
 public class IndputHaanteringGUI {
-    public int velkomstMenu(String valg){
+    public int velkomstMenu(String valg) {
         int menuOpt = 1;
-        if(valg == "starte nyt spil"){
+        if (valg == "starte nyt spil") {
             menuOpt = 1;
-        }else if(valg == "aendre spil instillinger"){
+        } else if (valg == "aendre spil instillinger") {
             menuOpt = 2;
-        }else if(valg == "forsaette sidste spil"){
+        } else if (valg == "forsaette sidste spil") {
             menuOpt = 3;
         }
         return menuOpt;
     }
-    public int TurMenu(String valg){
+
+    public int TurMenu(String valg) {
         int beslutning = 0;
-        if(valg == "Kast terninger"){
+        if (valg == "Kast terninger") {
             beslutning = 1;
-        }else if(valg == "Slut din tur"){
+        } else if (valg == "Slut din tur") {
             beslutning = 2;
-        }else if(valg == "Se chancekort"){
+        } else if (valg == "Se chancekort") {
             beslutning = 3;
-        }else if(valg == "Se hvad du ejer"){
+        } else if (valg == "Se hvad du ejer") {
             beslutning = 4;
-        }else if(valg == "Se spiller stats"){
+        } else if (valg == "Se spiller stats") {
             beslutning = 6;
-        }else if(valg == "Giv op"){
+        } else if (valg == "Giv op") {
             beslutning = 7;
-        }else if(valg == "Byg på ejendom"){
+        } else if (valg == "Byg på ejendom") {
             beslutning = 8;
-        }else if(valg == "Byg hotel"){
+        } else if (valg == "Byg hotel") {
             beslutning = 9;
-        } else if(valg == "Handel med Ejede ting"){
+        } else if (valg == "Handel med Ejede ting") {
             beslutning = 10;
         }
         return beslutning;
     }
 
-    public int binartValg(String valg){
+    public int binartValg(String valg) {
         int beslutning = 0;
-        if(valg == "ja"){
+        if (valg == "ja") {
             beslutning = 1;
-        }else if(valg == "nej"){
+        } else if (valg == "nej") {
             beslutning = 2;
         }
         return beslutning;
     }
 
-
 }
+
+

@@ -26,7 +26,7 @@ public interface UserInterfaceKontrakt {
     int instilingsSporgsmaal2(int minInput, int maxInput);
     int instilingsSporgsmaal3(int minInput, int maxInput);
     void spillerPosition(int spillerPosition);
-    void bankeRaadtGrundetLiquditet(int getBankeraadGraense);
+    void bankeRaadtGrundetLikviditet(int getBankeraadGraense);
     void spillerUdgår(int udgaaetSpiller);
     void terminalLinje();
     void midtTerminalLinje();
@@ -72,7 +72,7 @@ public interface UserInterfaceKontrakt {
     void ejetAfEnAnden();
     void tetPaaMonopol();
     void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfortKoeb(EjendomCO ejendom, Spiller spiller);
+    void gennemfoertKoeb(EjendomCO ejendom, Spiller spiller);
     void ejendomsInfo(EjendomCO ej);
     void betalRente();
     void duErLandetPå(FeltDTO felt, Spiller spiller);

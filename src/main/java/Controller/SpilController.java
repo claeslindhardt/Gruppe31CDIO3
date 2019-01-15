@@ -5,7 +5,6 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.SpilGenerator;
 
@@ -132,7 +131,7 @@ public class SpilController{
     public void tjekForBankeRaadt() {
 
         if (spil.getSpillerMedTur().getPenge() < 0) {
-            ui.bankeRaadtGrundetLiquditet(spil.getBankeraadGraense());
+            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
             spil.getSpillerMedTur().setHarGivetOp(true);
             spil.getSpillerMedTur().getSpillerEjendomme().clear();
             int udgaaetSpiller = spil.getSpillerMedTur().getId() + 1;
@@ -293,9 +292,8 @@ public class SpilController{
             case 1:
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
-                    rykSpiller.kastTerninger( spil, spil.getSpillerMedTur(), ui, this  );
-                }
-                else if (spil.getSpillerMedTur().isFaengselsStraf()){
+                    rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
+                } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
                     ui.kanIkkeSlaaFaengsel();
                 }
                 break;
@@ -315,7 +313,7 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                handlinger.givOp(spil.getSpillerMedTur(),this, ui );
+                handlinger.givOp(spil.getSpillerMedTur(), this, ui);
                 break;
             case 8:
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);

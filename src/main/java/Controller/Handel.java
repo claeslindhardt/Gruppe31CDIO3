@@ -114,6 +114,15 @@ public class Handel {
     }
 
 
+    /**
+     * @author Chua
+     * Metode der koeber et hotel på en ejendom for spilleren.
+     * Dette inkluderer at bygge hotel paa ejendom (ejendom.bygHotel),
+     * og trække penge fra spilleren.
+     * @param spiller
+     * @param ejendom
+     * @param userInterfaceKontrakt
+     */
     public void koebHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHotel( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHotel(true);
@@ -127,9 +136,9 @@ public class Handel {
     }
 
     /**
-     * @author Malte
-     * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
-     * om at vise ting og tage i mod inputs.
+     * @author Chua
+     * FORLØBET i at købe et hotel på en ejendom. Dvs. den der beder UI
+     * om at vise ting og tage imod inputs.
      * @param ui : hvilket UserInterface der skal bruges.
      */
     public void koebHotelPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
