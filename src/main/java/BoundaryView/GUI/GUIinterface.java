@@ -231,7 +231,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int instilingsSporgsmaal0(int minInput, int maxInput){
        String input = hovedmenu.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
                 "16","20","24","28","32","36","40");
-       return Integer.parseInt(input) - 1;
+       return Integer.parseInt(input);
     }
 
     /**
