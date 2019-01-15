@@ -72,7 +72,7 @@ public class Spiller {
     }
 
     public void addChancekort( ChanceAktionDTO chancekort) {
-        this.chancekort.add(chancekort);
+        this.spillerAktionsKort.add(chancekort);
     }
 
     /**
