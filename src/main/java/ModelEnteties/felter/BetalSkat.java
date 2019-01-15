@@ -1,5 +1,5 @@
 package ModelEnteties.felter;
-
+//Ekstra Commit
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Handel;
 import Controller.SpilController;
