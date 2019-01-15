@@ -75,7 +75,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[3] = ejendom;
 
-        indkomstSkat = new BetalSkat();
+        indkomstSkat = new BetalSkat(4);
         felter[4] = indkomstSkat;
 
         rederi = new Rederi("Øresund A/S",200,5);
@@ -317,7 +317,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[37] = ejendom;
 
-        statsSkat = new BetalSkat();
+        statsSkat = new BetalSkat(38);
         felter[38] = statsSkat;
 
         ejendom = new EjendomCO("Rådhuspladsen",400,50,39);

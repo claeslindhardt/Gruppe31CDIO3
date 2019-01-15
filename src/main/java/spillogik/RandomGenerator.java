@@ -4,6 +4,7 @@ import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
+import ModelEnteties.felter.BetalSkat;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
@@ -82,6 +83,10 @@ public class RandomGenerator {
             EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
             felter[0] = new StartCO(0,0);
+
+            felter[4] = new BetalSkat(4);
+
+            felter[38] = new BetalSkat(38);
 
             // Placerer "must have" felter
             int placering;

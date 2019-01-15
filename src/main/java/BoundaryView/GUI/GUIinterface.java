@@ -592,6 +592,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    public String skatteBetaling(){
+        String betal =     gui.getUserSelection("Du skla betale skat!\n Du kan enten betale 200 eller 10% af din samlede pengebeholdning\n Hvad vælger du? ", "At betale 200","At betale 10%");
+              return betal;
+    }
+
+    public void skatteBesked(int valg){
+
+        if(valg == 1) {
+            gui.showMessage("Du skal betale ekstraordinær statsskat. Derfor bliver vi all 100 kr rigere");
+        }else {gui.showMessage("Du skal betale indkomstskat");}
+    }
+
     @Override
     public void tillykkeMedHotel() {
         gui.showMessage("Tillykke! Du har koebt et hotel!");
