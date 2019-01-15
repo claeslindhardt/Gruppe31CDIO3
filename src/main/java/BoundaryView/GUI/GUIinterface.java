@@ -233,15 +233,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
      */
     public int instilingsSporgsmaall(int minInput, int maxInput){
         hovedmenu.showMessage("Hvor mange spillere vil i være?" +
-                "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
+                "\nNB Der kan være mellem " + minInput + " og " + maxInput + " spillere");
         while (true) {
             try {
                 int valg = hovedmenu.getUserInteger("Indtast antal spillere i spillet");
 
-                if (valg <= 8 && valg >= 1 ) {
+                if (valg <= maxInput && valg >= minInput ) {
                     return valg;
                 }
-                hovedmenu.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
+                hovedmenu.showMessage("Man kan vælge at være fra "+minInput+" til "+maxInput+" spillere, prøv igen!");
             } catch (Exception i) {
                 hovedmenu.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
