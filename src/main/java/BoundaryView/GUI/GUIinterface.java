@@ -13,6 +13,7 @@ import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.*;
 import gui_main.GUI;
 
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -74,13 +75,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
-                gui_felt.setDescription("Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
+                gui_felt.setDescription("Grundpris: "+((EjendomCO) felt).getPris() + " / "
+                        + "Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
                         + "Huspris: " + ((EjendomCO) felt).getHusPris() + " / "
                         + "Leje fra hus 1: " + ((EjendomCO) felt).getLejeHus(1) + " / "
                         + "Leje fra hus 2: " + ((EjendomCO) felt).getLejeHus(2) + " / "
                         + "Leje fra hus 3: " + ((EjendomCO) felt).getLejeHus(3) + " / "
                         + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
                         + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
+
             }else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
@@ -526,6 +529,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
+
         }
     }
 
@@ -637,6 +641,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
         husSkalPaa.setHouses(ejendom.getAntalHuse());
 
     }
+
+
 
     @Override
     public void ejerIngenEjendomme() {

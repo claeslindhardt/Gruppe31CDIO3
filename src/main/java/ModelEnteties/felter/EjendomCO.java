@@ -1,6 +1,6 @@
 package ModelEnteties.felter;
 
-import Controller.HandelsController;
+import Controller.Handel;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.SpillerCO;
@@ -69,7 +69,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @author Malte
      * Henter hvad lejen er på grunden, ved et bestemt antal huse.
      *
-     * @param antalHuse Antallet af huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
+     * @param antalHuse Antallet aPf huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
      *                  Giver man et input over dette returnerer den lejen ved 4 huse, og giver man et input
      *                  under dette returnerer den lejen ved 1 hus.
      * @return Lejen ved det antal huse, der er blevet indtastet.
@@ -159,7 +159,7 @@ public class EjendomCO extends EjeligtFeltDTO {
      * @param spil
      * @param userInterfaceKontrakt
      */
-    public void aktionPaaFelt(HandelsController handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null){

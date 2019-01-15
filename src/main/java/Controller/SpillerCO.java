@@ -9,13 +9,14 @@ import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
-import static spillogik.EjendomsLogik.kanKoebeHotel;
-
 
 public class SpillerCO extends SpillerDTO {
     //|----------- Metoder:------------------
     //_____________________________________
     //Diverse:
+
+
+
 
     /**
      * Indsæt beskrivelse her
@@ -78,7 +79,7 @@ public class SpillerCO extends SpillerDTO {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
                 spil.turMenu(spil.getSpil().getBraet(),spil.getSpil().getRaflebaeger() );
             } else {
-                HandelsController handel = new HandelsController();
+                Handel handel = new Handel();
                 getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);
                 getSpillerAktionsKort().remove(valg);
             }
@@ -99,8 +100,6 @@ public class SpillerCO extends SpillerDTO {
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
-        this.setHarSlaaetForTuren(true);
-
         destination = userInterfaceKontrakt.hvorHen(this.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
         if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
@@ -108,11 +107,12 @@ public class SpillerCO extends SpillerDTO {
         else if (destination == getSpillerPosition()){
             userInterfaceKontrakt.ikkeTaxiTilTaxi();
             tagTaxi(spil,userInterfaceKontrakt);
-        }
-        else{
-            spil.rykSpillerTilFelt(this, spil.getSpil().getBraet().getBret().get(destination),1);
+        }else{
+            spil.getRykSpiller().rykSpillerTilFelt( this, spil.getSpil().getBraet().getBret().get(destination), 1, userInterfaceKontrakt, spil );
         }
     }
+
+
     //_____________________________________
     //Vis og print funktinoer:
 
@@ -234,6 +234,7 @@ public class SpillerCO extends SpillerDTO {
     public void koebHus(EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHus(this, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
+
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, ejerEjendomsGruppe(ejendom.getGruppe())));
             addPenge(-ejendom.getHusPris());
             userInterfaceKontrakt.updateSpillere(this);
