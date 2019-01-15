@@ -2,8 +2,12 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
+import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
@@ -19,17 +23,23 @@ public class Handel {
     /**
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
-     * @param ejendom
+     * @param felt
      * @param spilleren
      * @param userInterfaceKontrakt
      */
-    public void indsamleLeje(EjendomCO ejendom, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
-        Spiller ejeren = ejendom.getEjer();
+    public void indsamleLeje(Spil spil, EjeligtFeltDTO felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spiller ejeren = felt.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
-            int lejeForFelt = EjendomsLogik.beregnLejeTotal(ejendom, spilleren.ejerEjendomsGruppe( ejendom.getGruppe() ));
+
+            int lejeForFelt = 0;
+            if (felt instanceof EjendomCO) {
+                lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
+            } else if (felt instanceof Bryggeri){
+                lejeForFelt = EjendomsLogik.beregnLejeTotal(spil.getRaflebaeger().getTotalVaerdi(), felt,spilleren);
+            }
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
-            ejeren.addPenge(ejendom.getLeje());  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
+            ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
             userInterfaceKontrakt.updateSpillere(spilleren);
             userInterfaceKontrakt.updateSpillere(ejeren);
         }else{

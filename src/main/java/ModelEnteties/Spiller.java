@@ -1,5 +1,7 @@
 package ModelEnteties;
 
+import ModelEnteties.felter.Bryggeri;
+import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -25,6 +27,8 @@ public class Spiller {
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
     ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
+    ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
+
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
     protected boolean harGivetOp=false;
@@ -81,6 +85,10 @@ public class Spiller {
 
     public ArrayList<JernbaneCO> getSpillerJernbaner() {
         return spillerJernbaner;
+    }
+
+    public ArrayList<Bryggeri> getSpillerBryggerier() {
+        return spillerBryggeri;
     }
 
     public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
@@ -197,6 +205,10 @@ public class Spiller {
     public boolean ejerEjendom(EjendomCO ejendom){
         return ejendom.getEjer() == this;
     }
+
+
+
+
 
 
 }

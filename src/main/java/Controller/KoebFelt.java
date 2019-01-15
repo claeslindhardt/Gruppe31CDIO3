@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.Rederi;
 
@@ -62,6 +63,26 @@ public class KoebFelt {
         }
     }
 
+    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt, SpilController spil) {
+        if ( bryggeri.getEjer() == spiller ) {
+            userInterfaceKontrakt.alleredeEjer();
+
+        } else if ( spiller.getPenge() > bryggeri.getPris()) {
+
+            spiller.addPenge( -bryggeri.getPris() );
+            userInterfaceKontrakt.dinJernbane();
+            userInterfaceKontrakt.updateSpillere( spiller );
+
+            //skifte ejerskab
+            bryggeri.setEjer( spiller );
+            spiller.getSpillerBryggerier().add(bryggeri);
+
+
+        } else {
+            userInterfaceKontrakt.monetosMangel();
+        }
+    }
+
     public void koebRederi(Rederi rederi, Spiller spiller, UserInterfaceKontrakt ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
@@ -81,5 +102,5 @@ public class KoebFelt {
             ui.monetosMangel();
         }
     }
-    
+
 }

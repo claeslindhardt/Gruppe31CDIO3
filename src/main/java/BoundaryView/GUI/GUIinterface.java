@@ -5,6 +5,7 @@ import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
@@ -84,7 +85,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                         + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
                         + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
 
-            }else{
+            }else if(felt.getFeltType().equals("Bryggeri")) {
+                gui_felt.setDescription("Grundpris: "+((Bryggeri) felt).getPris() +" "+ ((Bryggeri) felt).getPris() + " / "
+                        + "Huspris: " + ((Bryggeri) felt).getLeje());
+
+            }
+
+
+            else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
                     gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + braet.getStartGrundPris());
@@ -101,6 +109,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 else if (felt.getFeltType().equals("Gå i fængsel")){
                     gui_felt.setDescription("Du har brudt loven, gå i fængsel!");
                 }
+
             }
         }
 
