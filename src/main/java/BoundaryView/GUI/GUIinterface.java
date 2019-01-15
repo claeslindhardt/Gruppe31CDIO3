@@ -717,7 +717,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
 
-    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit");}
+    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit.");}
 
     @Override
     public void startSpil(Spil spil) {

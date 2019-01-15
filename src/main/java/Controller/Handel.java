@@ -40,7 +40,7 @@ public class Handel {
                 lejeForFelt = EjendomsLogik.beregnLejeTotal(spil.getRaflebaeger().getTotalVaerdi(), felt,spilleren);
             }
             else if (felt instanceof Rederi){
-                lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, spilleren);
+                lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, ejeren);
             }
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte

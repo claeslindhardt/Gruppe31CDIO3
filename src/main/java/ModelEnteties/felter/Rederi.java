@@ -7,7 +7,7 @@ import ModelEnteties.Spiller;
 
 /**
  * @author Filip
- *
+ *Implementerer rederier i spillet, hvor lejen fordobles for hvert rederi, der ejes af samme spiller.
  */
 
 public class Rederi extends EjeligtFeltDTO {

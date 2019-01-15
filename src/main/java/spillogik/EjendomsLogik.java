@@ -134,13 +134,13 @@ public class EjendomsLogik {
     }
 
     public static int beregnLejeRederi(EjeligtFeltDTO felt, Spiller spiller){
-        int leje = 0;
+        int leje = 25;
 
         if (spiller.getSpillerRederier().size() == 2){
-            leje = leje * 2 * 2;
+            leje = leje * 2;
         }
         else if (spiller.getSpillerRederier().size() == 3){
-            leje = leje * 2 * 2 * 2;
+            leje = leje * 2 * 2;
         }
         else if (spiller.getSpillerRederier().size() == 4){
             leje = leje * 2 * 2 * 2;
