@@ -4,6 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Rederi;
 
 public class KoebFelt {
 
@@ -79,6 +80,26 @@ public class KoebFelt {
 
         } else {
             userInterfaceKontrakt.monetosMangel();
+        }
+    }
+
+    public void koebRederi(Rederi rederi, Spiller spiller, UserInterfaceKontrakt ui) {
+
+        //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
+        if ( rederi.getEjer() == spiller ) {
+            ui.tetPaaMonopol();
+        }
+        else if (spiller.getPenge() > rederi.getPris()) {
+            ui.ditRederi(rederi, spiller);
+            spiller.addPenge( - rederi.getPris() );
+            ui.updateSpillere(spiller);
+
+            //skifte ejerskab
+            rederi.setEjer(spiller);
+            spiller.getSpillerRederier().add(rederi);
+
+        } else {
+            ui.monetosMangel();
         }
     }
 

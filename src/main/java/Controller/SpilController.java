@@ -4,6 +4,7 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
@@ -284,7 +285,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public void turMenu() {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
+        int input = ui.TurMenu(spil.getSpillerTur(), 1, 11);
 
         switch (input) {
             case 1:
@@ -318,6 +319,9 @@ public class SpilController{
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
                 break;
             case 9:
+                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
+                break;
+            case 10:
                 //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:

@@ -143,4 +143,5 @@ public class Spil {
     public boolean getVinderFindes() {
         return vinderFindes;
     }
+
 }

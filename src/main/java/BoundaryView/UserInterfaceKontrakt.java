@@ -4,6 +4,7 @@ import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
@@ -84,7 +85,6 @@ public interface UserInterfaceKontrakt {
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
-    void byggetHus(EjendomCO ejendom);
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
@@ -93,8 +93,13 @@ public interface UserInterfaceKontrakt {
     void updateSpillere(Spiller spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
+    void byggeHotel(EjendomCO ejendom);
+    void byggetHus(EjendomCO ejendom);
+    void tillykkeMedHotel();
+    int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
+    void ditRederi(Rederi rederi, Spiller spiller);
     void ditBryggeri();
 }
