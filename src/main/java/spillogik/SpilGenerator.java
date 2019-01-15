@@ -1,9 +1,6 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
-import Controller.BraetCO;
-import Controller.EjendomsGruppeCO;
-import ModelEnteties.EjendomsGruppeDTO;
+
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.FeltDTO;
