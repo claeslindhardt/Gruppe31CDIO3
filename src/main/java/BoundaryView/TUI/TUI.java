@@ -6,6 +6,7 @@ import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -435,6 +436,7 @@ public class TUI implements UserInterfaceKontrakt {
     public void kanIkkeKøbeHotel(){};
     public void spillerMaaIkkeEns(){};
     public void ikkeTaxiTilTaxi(){};
+    public void ditRederi(Rederi rederi, Spiller spiller){};
 
     @Override
     public void startSpil(Spil spil) {
