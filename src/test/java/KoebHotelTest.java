@@ -4,6 +4,7 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
+import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
 public class KoebHotelTest {
@@ -11,7 +12,7 @@ public class KoebHotelTest {
 
     public static void main(String[] args) {
 
-        Spil spil = SpilGenerator.genererSpil(3, 39,40,1500);
+        Spil spil = RandomGenerator.genererSpil(3, 40,40,1500);
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
         Spiller spiller = spil.getSpiller(0);
@@ -19,7 +20,7 @@ public class KoebHotelTest {
         spiller.setNavn("Malte");
         spiller.setPenge(9999999);
 
-        for( FeltDTO felt : spil.getBraet().getBret() ){
+        for( FeltDTO felt : spil.getFelter() ){
             if( felt instanceof EjendomCO){
                 EjendomCO ejendom = (EjendomCO) felt;
 
