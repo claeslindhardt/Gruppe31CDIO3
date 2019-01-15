@@ -321,7 +321,8 @@ public class SpilController{
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
                 break;
             case 9:
-                    handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
+                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
+                break;
             case 10:
                 //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
