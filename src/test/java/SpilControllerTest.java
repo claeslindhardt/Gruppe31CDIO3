@@ -1,6 +1,6 @@
+/*
 import Controller.*;
 import ModelEnteties.Spil;
-import ModelEnteties.FalskRaflebaeger;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 import spillogik.SpilGenerator;
@@ -31,3 +31,4 @@ class SpilControllerTest {
     }
 
 }
+*/
