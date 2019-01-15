@@ -270,6 +270,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\nog du har derfor ikke høj nok likviditet til at forsætte Spillet."
         );
     }
+
     public void spillerUdgår(int udgaaetSpiller){
         gui.showMessage("Spiller "+udgaaetSpiller+" er nu udgået");
     }
