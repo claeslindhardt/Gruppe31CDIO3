@@ -95,6 +95,10 @@ public class Spiller {
         spillerBryggeri.add(bryggeri);
     }
 
+    public void addRederi(Rederi rederi){
+        spillerRederier.add(rederi);
+    }
+
     public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
         this.spillerJernbaner = spillerJernbaner;
     }
