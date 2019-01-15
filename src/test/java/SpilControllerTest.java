@@ -1,5 +1,7 @@
 import Controller.*;
 import ModelEnteties.Spil;
+import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 import spillogik.SpilGenerator;
@@ -22,6 +24,18 @@ class SpilControllerTest {
             }
         }
 
+        Spiller spiller = spil.getSpiller(0);
+
+        Bryggeri Tuborg = new Bryggeri("Tuborg",3);
+        spiller.addBryggeri(Tuborg);
+        Tuborg.setEjer(spiller);
+
+        Bryggeri Carlsberg = new Bryggeri("Carlsberg",4);
+        spiller.addBryggeri(Carlsberg);
+        Carlsberg.setEjer(spiller);
+
+        spil.getBraet().getBret().set(3,(Tuborg));
+        spil.getBraet().getBret().set(4,(Carlsberg));
 
         SpilController spilController = new SpilController();
         spilController.setSpil(spil);

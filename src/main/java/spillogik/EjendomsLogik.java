@@ -2,9 +2,11 @@ package spillogik;
 
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
+import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
-
-import java.util.ArrayList;
+import ModelEnteties.felter.Rederi;
+import ModelEnteties.raflebaeger.RafleBaeger;
 
 public class EjendomsLogik {
 
@@ -100,25 +102,41 @@ public class EjendomsLogik {
      * I metoden {@link #beregnLejeVedHus} bliver legne for en ejendom udregnet. Denne information bliver gemt i en liste,
      * der holdes af ejendomsobjektet.
      *
-     * @param ejendom           Hvilken Ejendom man vil beregne leje for
+     * @param felt           Hvilken Ejendom man vil beregne leje for
      * @param harAlleIGruppe    Om ejeren af Ejendommen har alle i 'ejendom's gruppe.
      * @return
      */
-    public static int beregnLejeTotal( EjendomCO ejendom, boolean harAlleIGruppe ){
+    public static int beregnLejeTotal(EjeligtFeltDTO felt, boolean harAlleIGruppe ){
         int leje;
 
-        if( ejendom.getAntalHuse() > 0 ){
-            leje = ejendom.getLejeHus(ejendom.getAntalHuse());
+        //Her beregnes den leje som man skal betale, hvis at man har et en grund.
+                if( ((EjendomCO) felt).getAntalHuse() > 0 ){
+                    leje = ((EjendomCO) felt).getLejeHus(((EjendomCO) felt).getAntalHuse());
 
-        }else if( ejendom.harHotel() ){
-            leje = ejendom.getLejeHotel();
+                }else if( ((EjendomCO) felt).harHotel() ){
+                    leje = ((EjendomCO) felt).getLejeHotel();
 
-        }else{
-            leje = ejendom.getLejeStart();
-            if( harAlleIGruppe ){  leje *= 2;  }
+                }else{
+                    leje = ((EjendomCO) felt).getLejeStart();
+                    if( harAlleIGruppe ){  leje *= 2;  }
+                }
+                return leje;
+
+
         }
+    public static int beregnLejeBryggeri( int terningeKast, Spiller ejer ){
+        int leje;
+
+        if(ejer .getSpillerBryggerier().size() >= 2) {
+            leje = terningeKast * 10;
+        } else {
+            leje = terningeKast * 4;
+        }
+
         return leje;
     }
+
+
 
 
     /**

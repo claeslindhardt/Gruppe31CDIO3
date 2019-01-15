@@ -1,5 +1,6 @@
 package ModelEnteties;
 
+import Controller.EjendomsGruppeCO;
 import ModelEnteties.felter.EjendomCO;
 
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 public class EjendomsGruppeDTO {
 
+    private int id;
     private int stoerrelse;
     private Color farve;
     private ArrayList<EjendomCO> ejendomme = new ArrayList<EjendomCO>();
@@ -35,6 +37,11 @@ public class EjendomsGruppeDTO {
     public EjendomsGruppeDTO(Color farve, int stoerrelse) {
         this.farve = farve;
         this.stoerrelse = stoerrelse;
+    }
+
+    public EjendomsGruppeDTO( int stoerrelse, int id ){
+        this.id = id;
+
     }
 
     //--------- Getters og Setters:-----------------
