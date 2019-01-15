@@ -92,6 +92,7 @@ public class RandomGenerator {
         do {
 
             felter = new FeltDTO[antalFelter];
+            EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
             felter[0] = new StartCO(0,0);
 
@@ -122,7 +123,10 @@ public class RandomGenerator {
 
                     // Ejendom
                     if (feltType <= 5) {
-                        felter[i] = new EjendomCO( navneGenerator.getEjendomsNavn(), (int) feltPris, (int) feltPris/2, i );
+                        EjendomCO ejendom = new EjendomCO( navneGenerator.getEjendomsNavn(), (int) feltPris, (int) feltPris/2, i );
+                        felter[i] = ejendom;
+                        ejendomsGruppeCO.tilfoejTilGruppe(ejendom);
+
                         antalEjendomme++;
 
                         // Jernbane

@@ -6,6 +6,7 @@ import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
+import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -334,7 +335,8 @@ public class SpilController{
         switch( input ){
 
             case 1:
-                spil = SpilGenerator.genererSpil();
+                int antalSpillere = ui.instilingsSporgsmaall(2, 6);
+                spil = SpilGenerator.genererSpil(antalSpillere);
                 break;
 
             case 2:
@@ -362,7 +364,7 @@ public class SpilController{
         int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
         double startPenge = 2000; // ui.startpenge
 
-        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
+        return RandomGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
     }
 
 
