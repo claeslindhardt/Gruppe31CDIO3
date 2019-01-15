@@ -6,14 +6,11 @@ import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.SpillerDTO;
 import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.Terning.RafleBaeger;
+import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
-import gui_fields.GUI_Street;
+import gui_fields.*;
 import gui_main.GUI;
 
 
@@ -180,7 +177,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("|--|Det er spiller "+getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+        String valg = gui.getUserButtonPressed("|--|Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
