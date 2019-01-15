@@ -5,12 +5,9 @@ import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
-import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -720,7 +717,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
 
-    public void ditRederi(){gui.showMessage("Rederiet er nu dit");}
+    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit");}
 
     @Override
     public void startSpil(Spil spil) {

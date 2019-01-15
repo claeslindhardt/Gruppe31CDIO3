@@ -48,7 +48,7 @@ private int leje = 0;
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
             userInterfaceKontrakt.updateSpillere(spillerMedTur);
-            handel.indsamleLeje(this,spillerMedTur, userInterfaceKontrakt);
+            handel.indsamleLeje(spil.getSpil(),this, spillerMedTur, userInterfaceKontrakt);
         }else if(this.getEjer() == spillerMedTur){
             userInterfaceKontrakt.tetPaaMonopol();
         }

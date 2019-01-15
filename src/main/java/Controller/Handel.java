@@ -7,6 +7,7 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.EjendomsLogik;
 
@@ -37,6 +38,9 @@ public class Handel {
                 lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
             } else if (felt instanceof Bryggeri){
                 lejeForFelt = EjendomsLogik.beregnLejeTotal(spil.getRaflebaeger().getTotalVaerdi(), felt,spilleren);
+            }
+            else if (felt instanceof Rederi){
+                lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, spilleren);
             }
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
