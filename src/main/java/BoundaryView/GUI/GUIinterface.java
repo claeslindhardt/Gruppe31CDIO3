@@ -2,12 +2,12 @@ package BoundaryView.GUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import Controller.BraetCO;
+import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -53,19 +53,21 @@ public class GUIinterface implements UserInterfaceKontrakt {
     /**
      * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
      *
-     * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
-     * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(BraetDTO braet, ArrayList<Spiller> spillere){
-        int antalFelter =  braet.getBret().size();
-        GUI_Field[] felter = new GUI_Field[ antalFelter ];
+    public void genererGUIBret( Spil spil ){
+        FeltDTO[] felter = spil.getFelter();
+        Spiller[] spillere = spil.getSpillere();
+        int antalFelter =  felter.length;
+
+        GUI_Field[] gui_felter = new GUI_Field[ antalFelter ];
 
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
             GUI_Field gui_felt;
 
-            FeltDTO felt = braet.getBret().get(i);
+            FeltDTO felt = felter[i];
+
             if(felt.getFeltType() == "Bryggeri"){
                 gui_felt = new GUI_Brewery();
                 gui_felt.setTitle( felt.getNavn() );
@@ -75,7 +77,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 gui_felt.setTitle(felt.getNavn());
                 gui_felt.setSubText(felt.getFeltType());
             }
-            felter[i] = gui_felt;
+            gui_felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
@@ -99,7 +101,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             else{
                 gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
-                    gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + braet.getStartGrundPris());
+                    gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + 0 );
                 }
                 else if (felt.getFeltType().equals("TaxiCO")){
                     gui_felt.setDescription("Tag en taxi");
@@ -117,11 +119,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
             }
         }
 
-        this.felter = felter;
-        gui = new GUI( felter, new Color(218,206,179));
+        this.felter = gui_felter;
+        gui = new GUI( gui_felter, new Color(218,206,179));
 
         // Laver spilleres grafiske elementer
-        for(int i=0;i<spillere.size();i++){
+        for(int i=0;i<spillere.length;i++){
 
 
             GUI_Car bil = new GUI_Car(); //Opret en bil
@@ -131,11 +133,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
             Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
             bil.setPrimaryColor(spillerFarve); //Lad den være gul
 
-            GUI_Player spiller = new GUI_Player(spillere.get(i).getNavn(),(int)spillere.get(i).getPenge(), bil); //opret en spiller
+            GUI_Player spiller = new GUI_Player(spillere[i].getNavn(),(int) spillere[i].getPenge(), bil); //opret en spiller
 
             this.spillere.add(spiller);
             gui.addPlayer(spiller); //Sæt spilleren på
-            felter[0].setCar(spiller, true);
+            gui_felter[0].setCar(spiller, true);
 
         }
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
@@ -228,7 +230,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int instilingsSporgsmaal0(int minInput, int maxInput){
        String input = hovedmenu.getUserButtonPressed("Hvor mange felter skal braettet have?: ",
                 "16","20","24","28","32","36","40");
-       return Integer.parseInt(input) - 1;
+       return Integer.parseInt(input);
     }
 
     /**
@@ -245,15 +247,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
      */
     public int instilingsSporgsmaall(int minInput, int maxInput){
         hovedmenu.showMessage("Hvor mange spillere vil i være?" +
-                "\nNB Der kan maksimalt være 8 spillere i spillet, og minimalt være 2");
+                "\nNB Der kan være mellem " + minInput + " og " + maxInput + " spillere");
         while (true) {
             try {
                 int valg = hovedmenu.getUserInteger("Indtast antal spillere i spillet");
 
-                if (valg <= 8 && valg >= 1 ) {
+                if (valg <= maxInput && valg >= minInput ) {
                     return valg;
                 }
-                hovedmenu.showMessage("Man kan vælge at være fra 1 til 8 spillere, prøv igen!");
+                hovedmenu.showMessage("Man kan vælge at være fra "+minInput+" til "+maxInput+" spillere, prøv igen!");
             } catch (Exception i) {
                 hovedmenu.showMessage("Dette er ikke et gyldigt input, proev igen!");
             }
@@ -730,10 +732,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return indexRetur;
     }
 
-    @Override
-    public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
-
-    }
 
     public void rejseBekraeftelse(String jernbane){
         gui.showMessage("Du er rejst til "+jernbane);
@@ -758,7 +756,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void startSpil(Spil spil) {
 
-        genererGUIBret(spil.getBraet(), spil.getSpillereArrayList());
+        genererGUIBret( spil );
 
         hovedmenu = null;
 

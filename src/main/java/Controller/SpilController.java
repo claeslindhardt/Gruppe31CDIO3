@@ -2,11 +2,11 @@ package Controller;
 
 import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
+import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -283,10 +283,8 @@ public class SpilController{
      * @author Filip
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
-     * @param spilleBret BraetCO objekt, hvor nogle af metoderne benyttes af turmenu
-     * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
-    public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
+    public void turMenu() {
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 11);
 
         switch (input) {
@@ -340,7 +338,8 @@ public class SpilController{
         switch( input ){
 
             case 1:
-                spil = SpilGenerator.genererSpil();
+                int antalSpillere = ui.instilingsSporgsmaall(2, 6);
+                spil = SpilGenerator.genererSpil(antalSpillere);
                 break;
 
             case 2:
@@ -368,7 +367,7 @@ public class SpilController{
         int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
         double startPenge = 2000; // ui.startpenge
 
-        return SpilGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
+        return RandomGenerator.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
     }
 
 
@@ -417,7 +416,7 @@ public class SpilController{
             tjekForFeangselsStraf();
 
             if( !spil.getVinderFindes() ){
-                turMenu( spil.getBraet(), spil.getRaflebaeger() );
+                turMenu();
 
             }else{
                 break;

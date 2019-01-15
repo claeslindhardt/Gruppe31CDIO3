@@ -42,7 +42,7 @@ public class Handlinger {
 
             if (valg == spiller.getSpillerAktionsKort().size()) {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu(spil.getSpil().getBraet(),spil.getSpil().getRaflebaeger() );
+                spil.turMenu( );
             } else {
                 Handel handel = new Handel();
                 spiller.getSpillerAktionsKort().get(valg).BetingetAktion(handel, spil, userInterfaceKontrakt);
@@ -65,7 +65,7 @@ public class Handlinger {
         int destination;
         //Spiller relavantSpiller = SpilData.getSpillerMedTur();
 
-        destination = userInterfaceKontrakt.hvorHen( spiller.getSpillerPosition(),1,spil.getSpil().getAntalFelter());
+        destination = userInterfaceKontrakt.hvorHen( spiller.getSpillerPosition(),1, spil.getSpil().getAntalFelter() );
         if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
             userInterfaceKontrakt.holdDigPaaBrettet();
         }
@@ -73,7 +73,7 @@ public class Handlinger {
             userInterfaceKontrakt.ikkeTaxiTilTaxi();
             tagTaxi(spiller, spil, userInterfaceKontrakt);
         }else{
-            spil.getRykSpiller().rykSpillerTilFelt( spiller, spil.getSpil().getBraet().getBret().get(destination), 1, userInterfaceKontrakt, spil );
+            spil.getRykSpiller().rykSpillerTilFelt( spiller, spil.getSpil().getFelter()[destination], 1, userInterfaceKontrakt, spil );
         }
     }
 
