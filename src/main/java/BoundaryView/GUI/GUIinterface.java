@@ -110,6 +110,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             } else if( felt instanceof Rederi ) {
                 gui_felt = new GUI_Shipping();
                 gui_felt.setTitle(felt.getNavn());
+                gui_felt.setBackGroundColor(Color.white);
 
             } else if( felt instanceof ChanceFeltCO ) {
                 gui_felt = new GUI_Chance();
@@ -151,7 +152,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
             else{
-                gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
                     gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + 0 );
                 }
