@@ -82,12 +82,14 @@ public class SpilGenerator {
         FeltDTO[] felter = new FeltDTO[40];
 
         EjendomCO ejendom;
-        ChanceAktionDTO proevLykken;
+        ChanceFeltCO proevLykken;
         BetalSkat indkomstSkat;
+        BetalSkat statsSkat;
         Rederi rederi;
         Bryggeri bryggeri;
         FaengselCO faengsel;
         GaaIFaengselCO gaaIFaengsel;
+        FriParkering friParkering;
 
         felter[0] = new StartCO(200,0);
 
@@ -99,7 +101,8 @@ public class SpilGenerator {
         ejendom.setHotelPris(50);
         felter[1] = ejendom;
 
-        felter[2] = new ChanceFeltCO(2,null);
+        proevLykken = new ChanceFeltCO(2,null);
+        felter[2] = proevLykken;
 
         ejendom = new EjendomCO("Hvidovrevej", 60,4,3);
         ejendom.setLejeHus(20,60,180,320);
@@ -124,7 +127,8 @@ public class SpilGenerator {
         ejendom.setHotelPris(50);
         felter[6] = ejendom;
 
-        felter[7] = new ChanceFeltCO(7,null);
+        proevLykken = new ChanceFeltCO(7,null);
+        felter[7] = proevLykken;
 
         ejendom = new EjendomCO("Valby Langgade",100,6,8);
         ejendom.setLejeHus(30,90,270,400);
@@ -142,7 +146,8 @@ public class SpilGenerator {
         ejendom.setHotelPris(50);
         felter[9] = ejendom;
 
-        felter[10] = new FaengselCO("Fængsel",10);
+        faengsel = new FaengselCO("Fængsel",10);
+        felter[10] = faengsel;
 
         ejendom = new EjendomCO("Frederiksberg Allé",140,10,11);
         ejendom.setLejeHus(50,150,450,625);
@@ -179,13 +184,144 @@ public class SpilGenerator {
         ejendom.setLejeHus(70,200,550,750);
         ejendom.setLejeHotel(950);
         ejendom.setPantsaetningsVaerdi(90);
+        ejendom.setHusPris(100);
+        ejendom.setHotelPris(100);
+        felter[16] = ejendom;
 
+        proevLykken = new ChanceFeltCO(17,null);
+        felter[17] = proevLykken;
 
+        ejendom = new EjendomCO("Hellerupvej",180,14,18);
+        ejendom.setLejeHus(70,200,550,750);
+        ejendom.setLejeHotel(950);
+        ejendom.setPantsaetningsVaerdi(90);
+        ejendom.setHusPris(100);
+        ejendom.setHotelPris(100);
+        felter[18] = ejendom;
 
+        ejendom = new EjendomCO("Strandvej",200,16,19);
+        ejendom.setLejeHus(80,220,600,800);
+        ejendom.setLejeHotel(1000);
+        ejendom.setPantsaetningsVaerdi(100);
+        ejendom.setHusPris(100);
+        ejendom.setHotelPris(100);
+        felter[19] = ejendom;
 
+        friParkering = new FriParkering();
+        felter[20] = friParkering;
 
+        ejendom = new EjendomCO("Trianglen",220,18,21);
+        ejendom.setLejeHus(90,250,700,875);
+        ejendom.setLejeHotel(1050);
+        ejendom.setPantsaetningsVaerdi(110);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[21] = ejendom;
+
+        proevLykken = new ChanceFeltCO(22,null);
+        felter[22] = proevLykken;
+
+        ejendom = new EjendomCO("Østerbrogade",220,18,23);
+        ejendom.setLejeHus(90,250,700,875);
+        ejendom.setLejeHotel(1050);
+        ejendom.setPantsaetningsVaerdi(110);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[23] = ejendom;
+
+        ejendom = new EjendomCO("Grønningen",240,20,24);
+        ejendom.setLejeHus(100,300,750,925);
+        ejendom.setLejeHotel(1100);
+        ejendom.setPantsaetningsVaerdi(120);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[24] = ejendom;
+
+        rederi = new Rederi();
+        felter[25] = rederi;
+
+        ejendom = new EjendomCO("Bredgade",260,22,26);
+        ejendom.setLejeHus(110,330,800,975);
+        ejendom.setLejeHotel(1150);
+        ejendom.setPantsaetningsVaerdi(130);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[26] = ejendom;
+
+        ejendom = new EjendomCO("Kgs. Nytorv",260,22,27);
+        ejendom.setLejeHus(110,330,800,975);
+        ejendom.setLejeHotel(1150);
+        ejendom.setPantsaetningsVaerdi(130);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[27] = ejendom;
+
+        bryggeri = new Bryggeri();
+        felter[28] = bryggeri;
+
+        ejendom = new EjendomCO("Østergade",280,24,29);
+        ejendom.setLejeHus(120,360,850,1025);
+        ejendom.setLejeHotel(1200);
+        ejendom.setPantsaetningsVaerdi(140);
+        ejendom.setHusPris(150);
+        ejendom.setHotelPris(150);
+        felter[29] = ejendom;
+
+        gaaIFaengsel = new GaaIFaengselCO(30);
+        felter[30] = gaaIFaengsel;
+
+        ejendom = new EjendomCO("Amagertorv",300,26,31);
+        ejendom.setLejeHus(130,390,900,1100);
+        ejendom.setLejeHotel(1275);
+        ejendom.setPantsaetningsVaerdi(150);
+        ejendom.setHusPris(200);
+        ejendom.setHotelPris(200);
+        felter[31] = ejendom;
+
+        ejendom = new EjendomCO("Vimmelskaftet",300,26,32);
+        ejendom.setLejeHus(130,390,900,1100);
+        ejendom.setLejeHotel(1275);
+        ejendom.setPantsaetningsVaerdi(150);
+        ejendom.setHusPris(200);
+        ejendom.setHotelPris(200);
+        felter[32] = ejendom;
+
+        proevLykken = new ChanceFeltCO(33,null);
+        felter[33] = proevLykken;
+
+        ejendom = new EjendomCO("Nygade", 320,28,34);
+        ejendom.setLejeHus(150,450,1000,1200);
+        ejendom.setLejeHotel(1400);
+        ejendom.setPantsaetningsVaerdi(160);
+        ejendom.setHusPris(200);
+        ejendom.setHotelPris(200);
+        felter[34] = ejendom;
+
+        rederi = new Rederi();
+        felter[35] = rederi;
+
+        proevLykken = new ChanceFeltCO(36,null);
+        felter[36] = proevLykken;
+
+        ejendom = new EjendomCO("Frederiksberggade",350,35,37);
+        ejendom.setLejeHus(175,500,1100,1300);
+        ejendom.setLejeHotel(1500);
+        ejendom.setPantsaetningsVaerdi(175);
+        ejendom.setHusPris(200);
+        ejendom.setHotelPris(200);
+        felter[37] = ejendom;
+
+        statsSkat = new BetalSkat();
+        felter[38] = statsSkat;
+
+        ejendom = new EjendomCO("Rådhuspladsen",400,50,39);
+        ejendom.setLejeHus(200,600,1400,1700);
+        ejendom.setLejeHotel(2000);
+        ejendom.setPantsaetningsVaerdi(200);
+        ejendom.setHusPris(200);
+        ejendom.setHotelPris(200);
+        felter[39] = ejendom;
 
     }
-
 
 }
