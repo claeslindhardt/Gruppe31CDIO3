@@ -21,10 +21,10 @@ public class FriParkering extends FeltDTO {
     }
 
     //|--------- Constructor:-----------------
-    public FriParkering(String whatName, int placering){
+    public FriParkering( int placering){
         setPlacering(placering);
-        setNavn(whatName);
-        setFeltType("ParkeringsPlads");
+        setNavn("Fri Parkering");
+        setFeltType("Fri Parkering");
 
     }
 }
