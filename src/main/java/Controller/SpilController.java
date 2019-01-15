@@ -5,6 +5,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.SpilGenerator;
 
@@ -318,6 +319,7 @@ public class SpilController{
                 break;
             case 8:
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
+                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(),ui);
                 break;
             case 9:
                 //spil.getSpillerMedTur().handelMedEjendomme();

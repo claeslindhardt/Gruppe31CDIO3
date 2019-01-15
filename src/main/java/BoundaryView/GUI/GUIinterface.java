@@ -720,4 +720,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    @Override
+    public void byggeHotel(EjendomCO ejendom) {
+        GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
+            ejendom.setAntalHuse(0);
+            hotelSkalPaa.setHotel(ejendom.harHotel());
+    }
+
 }

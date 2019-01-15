@@ -440,5 +440,10 @@ public class TUI implements UserInterfaceKontrakt {
     public void startSpil(Spil spil) {
 
     }
+
+    @Override
+    public void byggeHotel(EjendomCO ejendom) {
+
+    }
 }
 

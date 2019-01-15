@@ -95,6 +95,7 @@ public interface UserInterfaceKontrakt {
     void updateSpillere(Spiller spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
+    void byggeHotel(EjendomCO ejendom);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
