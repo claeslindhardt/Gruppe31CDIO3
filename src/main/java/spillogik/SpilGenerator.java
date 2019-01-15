@@ -81,6 +81,7 @@ public class SpilGenerator {
 
         FeltDTO[] felter = new FeltDTO[40];
 
+    //-----------------------------------------Variabler--------------------------------------//
         EjendomCO ejendom;
         ChanceFeltCO proevLykken;
         BetalSkat indkomstSkat;
@@ -91,6 +92,7 @@ public class SpilGenerator {
         GaaIFaengselCO gaaIFaengsel;
         FriParkering friParkering;
 
+    //----------------------------------------Brættet---------------------------------------//
         felter[0] = new StartCO(200,0);
 
         ejendom = new EjendomCO("Rødovrevej",60,2,1);
@@ -157,7 +159,9 @@ public class SpilGenerator {
         ejendom.setHotelPris(100);
         felter[11] = ejendom;
 
-        bryggeri = new Bryggeri();
+        bryggeri = new Bryggeri("Tuborg",12);
+        bryggeri.setPris(150);
+        bryggeri.setPantsaetningsVaerdi(75);
         felter[12] = bryggeri;
 
         ejendom = new EjendomCO("Bülowsvej",140,10,13);
@@ -256,7 +260,9 @@ public class SpilGenerator {
         ejendom.setHotelPris(150);
         felter[27] = ejendom;
 
-        bryggeri = new Bryggeri();
+        bryggeri = new Bryggeri("Carlsberg",28);
+        bryggeri.setPris(150);
+        bryggeri.setPantsaetningsVaerdi(75);
         felter[28] = bryggeri;
 
         ejendom = new EjendomCO("Østergade",280,24,29);
