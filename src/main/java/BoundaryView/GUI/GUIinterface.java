@@ -2,12 +2,10 @@ package BoundaryView.GUI;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
-import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.felter.ChanceAktionDTO;
 import gui_fields.*;
@@ -687,11 +685,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
             }
         }
         return indexRetur;
-    }
-
-    @Override
-    public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
-
     }
 
     public void rejseBekraeftelse(String jernbane){

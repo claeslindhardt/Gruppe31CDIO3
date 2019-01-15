@@ -1,6 +1,5 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
 import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
@@ -17,18 +16,6 @@ import static spillogik.SpilGenerator.genererSpillere;
 
 public class RandomGenerator {
 
-
-
-
-
-
-    public static BraetCO genererBraet(int antalFelter){
-        BraetCO braet = new BraetCO( antalFelter, new TUI() );
-
-        genererEjendomsGrupper( braet.getEjendomme(), 3 );
-
-        return braet;
-    }
 
 
     public static Spil genererSpil(int antalSpillere, int antalFelter, int antalChanceKort, double startPenge ){
