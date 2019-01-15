@@ -3,6 +3,7 @@ package ModelEnteties;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
 import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.felter.Rederi;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class Spiller {
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
     ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
+    ArrayList<Rederi> spillerRederier = new ArrayList<>();
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
     protected boolean harGivetOp=false;
@@ -91,6 +93,12 @@ public class Spiller {
 
     public void setSpillerAktionsKort(ArrayList<ChanceAktionDTO> spillerAktionsKort) {
         this.spillerAktionsKort = spillerAktionsKort;
+    }
+
+    public ArrayList<Rederi> getSpillerRederier(){ return spillerRederier;}
+
+    public void setSpillerRederier (ArrayList<Rederi> spillerRederier){
+        this.spillerRederier = spillerRederier;
     }
 
     /**

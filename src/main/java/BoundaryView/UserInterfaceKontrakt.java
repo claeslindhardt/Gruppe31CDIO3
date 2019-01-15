@@ -4,6 +4,7 @@ import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
 import ModelEnteties.felter.FeltDTO;
@@ -98,4 +99,5 @@ public interface UserInterfaceKontrakt {
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
+    void ditRederi(Rederi rederi, Spiller spiller);
 }
