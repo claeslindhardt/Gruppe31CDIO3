@@ -4,10 +4,8 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
-import spillogik.BevaegelsesLogik;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -17,15 +15,21 @@ public class SpilController{
     private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
-    public RykSpiller getRykSpiller() {
-        return rykSpiller;
+
+
+    private RykSpiller  rykSpiller  = new RykSpiller();
+    private Handlinger  handlinger  = new Handlinger();
+    private Handel      handel      = new Handel();
+
+    public Handel getHandel() {
+        return handel;
     }
 
-    public void setRykSpiller(RykSpiller rykSpiller) {
-        this.rykSpiller = rykSpiller;
+    public Controller.KoebFelt getKoebFelt() {
+        return KoebFelt;
     }
 
-    private RykSpiller rykSpiller = new RykSpiller();
+    private KoebFelt    KoebFelt    = new KoebFelt();
 
 
 
@@ -34,6 +38,12 @@ public class SpilController{
     public void setSpil(Spil spil){
         this.spil = spil;
     }
+
+    public RykSpiller getRykSpiller() {
+        return rykSpiller;
+    }
+
+    public Handlinger getHandlinger(){ return handlinger;  }
 
 
     /** Laver en ny SpilController med en vilkårlig UI */
@@ -276,7 +286,6 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-        Handlinger handling = new Handlinger();
         int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
 
         switch (input) {
@@ -293,10 +302,10 @@ public class SpilController{
                 slutSpillerTur();
                 break;
             case 3:
-                spil.getSpillerMedTur().chanceKortMuligheder(this,ui);
+                handlinger.chanceKortMuligheder(spil.getSpillerMedTur(), this, ui);
                 break;
             case 4:
-                spil.getSpillerMedTur().visEjendeFelter(ui);
+                ui.spillerEjendele(spil.getSpillerMedTur());
                 break;
             case 5:
                 /*spilleBret.printBret(ui);*/
@@ -305,13 +314,13 @@ public class SpilController{
                 printSpilleresInfo();
                 break;
             case 7:
-                handling.givOp(spil.getSpillerMedTur(),this, ui );
+                handlinger.givOp(spil.getSpillerMedTur(),this, ui );
                 break;
             case 8:
-                spil.getSpillerMedTur().koebHusPaaEjendom(ui);
+                handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
                 break;
             case 9:
-                spil.getSpillerMedTur().handelMedEjendomme();
+                //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
                 ui.ikkeMuligt();
@@ -368,7 +377,7 @@ public class SpilController{
     private void indtastSpillerNavne() {
 
         // Et for-each loop der kører i gennem alle spillere.
-        for( SpillerDTO spiller : spil.getSpillere() ){
+        for( Spiller spiller : spil.getSpillere() ){
 
             String navn = ui.spillerNavne();
 

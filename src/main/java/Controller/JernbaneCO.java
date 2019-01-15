@@ -1,6 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjeligtFeltDTO;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void tagTog(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         ArrayList<JernbaneCO> jernbaner = spil.getSpil().getBraet().getJernbaner();
         ArrayList<JernbaneCO> muligeRejser = new ArrayList<JernbaneCO>();
 
@@ -59,14 +60,14 @@ public class JernbaneCO extends EjeligtFeltDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        SpillerCO spillerMedTur = spil.getSpil().getSpillerMedTur();
+        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
 
         if(this.getEjer()==null) {
 
             int kobsBeslutning = userInterfaceKontrakt.jernBaneTilbud();
             switch (kobsBeslutning) {
                 case 1:
-                    spillerMedTur.koebJernbane(this, userInterfaceKontrakt,spil);
+                    spil.getKoebFelt().koebJernbane(this, spillerMedTur, userInterfaceKontrakt,spil);
                     break;
                 case 2:
                     userInterfaceKontrakt.forsetTur();

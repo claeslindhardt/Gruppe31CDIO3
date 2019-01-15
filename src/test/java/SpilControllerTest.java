@@ -1,4 +1,3 @@
-/*
 import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.felter.EjendomCO;
@@ -17,7 +16,7 @@ class SpilControllerTest {
 
         for( FeltDTO felt : spil.getBraet().getBret() ){
             if( felt instanceof EjendomCO ){
-                System.out.println("fundet felt");
+                System.out.println("fundet   felt");
                 ((EjendomCO)  felt).setEjer(spil.getSpiller(0));
                 spil.getSpiller(0).tilføjEjendom( (EjendomCO) felt );
             }
@@ -31,4 +30,3 @@ class SpilControllerTest {
     }
 
 }
-*/

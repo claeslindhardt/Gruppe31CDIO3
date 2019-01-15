@@ -4,7 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import ModelEnteties.BraetDTO;
 import ModelEnteties.Spil;
-import ModelEnteties.SpillerDTO;
+import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import Controller.BraetCO;
@@ -58,7 +58,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param braet     Braet-objektet, som der skal laves en GUI ud fra. SKAL have opsat felter.
      * @param spillere  Spiller-objekterne der skal laves braet ud fra.
      */
-    public void genererGUIBret(BraetDTO braet, ArrayList<SpillerCO> spillere){
+    public void genererGUIBret(BraetDTO braet, ArrayList<Spiller> spillere){
         int antalFelter =  braet.getBret().size();
         GUI_Field[] felter = new GUI_Field[ antalFelter ];
 
@@ -128,6 +128,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
     }
+
 
     /**
      * Indsæt beskrivelse her
@@ -398,7 +399,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chance Kort:");
     }
-    public int chanceKortNr(SpillerCO spiller){
+    public int chanceKortNr(Spiller spiller){
 
         int laengde = spiller.getSpillerAktionsKort().size()+1;
 
@@ -451,7 +452,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Din position er: "+ pos+
                 "\nDu har i din rundfart med taxaen kommet til at passere StartCO, modtag 200");
     }
-    public void spillerStat(SpillerCO spiller){
+    public void spillerStat(Spiller spiller){
         gui.showMessage("Navn: "+spiller.getNavn()+" ID:"+spiller.getId()+" getPlacering(): "+spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
 
     }
@@ -525,7 +526,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println(" ");
     }
 
-    public void updateSpillere(SpillerCO spiller){
+    public void updateSpillere(Spiller spiller){
         for(int i = 0; i < spillere.size();i++){
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
@@ -538,7 +539,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfortKoeb(EjendomCO ejendom, SpillerDTO spiller){
+    public void gennemfortKoeb(EjendomCO ejendom, Spiller spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
@@ -567,7 +568,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden Spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, SpillerCO spiller){
+    public void duErLandetPå(FeltDTO felt, Spiller spiller){
         String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
         if(felt.getPlacering()==1){
             str = str2;
@@ -589,7 +590,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         return input.binartValg(valg);
     }
-    public void spillerEjendele(SpillerCO spiller){
+    public void spillerEjendele(Spiller spiller){
         gui.showMessage("Ejendeomme: ");
         for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
             spiller.getSpillerEjendomme().get(i).printInfo(this);
@@ -688,7 +689,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     @Override
-    public void genererGUIBret(BraetCO braet, ArrayList<SpillerCO> spillere) {
+    public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
 
     }
 

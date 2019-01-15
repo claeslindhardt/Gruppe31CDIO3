@@ -2,6 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
+import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import spillogik.BevaegelsesLogik;
@@ -12,7 +13,7 @@ public class RykSpiller {
     /**
      * Indsæt beskrivelse her
      */
-    public void kastTerninger( Spil spil, SpillerCO spiller, UserInterfaceKontrakt ui, SpilController spilController) {
+    public void kastTerninger(Spil spil, Spiller spiller, UserInterfaceKontrakt ui, SpilController spilController) {
         RafleBaeger rafleBaeger = spil.getRaflebaeger();
 
         if ( !spiller.isHarSlaaetForTuren() ) {
@@ -47,7 +48,7 @@ public class RykSpiller {
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter(Spil spil, SpillerCO spiller, int felterAtRykke, UserInterfaceKontrakt ui, SpilController spilController) {
+    public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterfaceKontrakt ui, SpilController spilController) {
 
         FeltDTO[] braet = spil.getBraet().getBretArray();
 
@@ -64,14 +65,14 @@ public class RykSpiller {
      * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
      * ift. feltet, samt UI-metoder ifm. at flytte felt.
      * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
-     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
+     * men den udløser metoden passererStart() i Spiller med udgangspunkt i
      * 'gangeOverStart'
      *
      * @param spiller Spiller der skal rykkes
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
+    public void rykSpillerTilFelt( Spiller spiller, FeltDTO felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));

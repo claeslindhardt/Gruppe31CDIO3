@@ -1,5 +1,3 @@
-package ModelEnteties.Spiller;
-
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.felter.EjendomCO;
 import org.junit.jupiter.api.Test;

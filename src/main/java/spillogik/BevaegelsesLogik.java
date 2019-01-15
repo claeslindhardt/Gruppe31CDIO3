@@ -1,6 +1,5 @@
 package spillogik;
 
-import Controller.SpillerCO;
 import ModelEnteties.felter.FeltDTO;
 
 public class BevaegelsesLogik {
