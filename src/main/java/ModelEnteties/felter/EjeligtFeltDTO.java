@@ -25,10 +25,19 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
     private Spiller ejer;
     private int pris = 200;
     private boolean pantsat = false;
+    private double pantsaetningsVaerdi;
 
     // TODO: Flyt gruppe ud af EjeligtFeltDTO og over i EjendomCO - det er det eneste sted den bruges.
     private EjendomsGruppeDTO gruppe;
     //|--------- Getters og Setters:-----------------
+
+    public double getPantsaetningsVaerdi() {
+        return pantsaetningsVaerdi;
+    }
+
+    public void setPantsaetningsVaerdi(double pantsaetningsVaerdi) {
+        this.pantsaetningsVaerdi = pantsaetningsVaerdi;
+    }
 
     public String getEjerNavn(){
         return ejer.getNavn();

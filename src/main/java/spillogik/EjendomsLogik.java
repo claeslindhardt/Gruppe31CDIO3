@@ -144,8 +144,8 @@ public class EjendomsLogik {
         return leje;
     }
 
-    public static int beregnLejeRederi(EjeligtFeltDTO felt, Spiller spiller){
-        int leje = 25;
+    public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
+        int leje = rederi.getLeje();
 
         if (spiller.getSpillerRederier().size() == 2){
             leje = leje * 2;

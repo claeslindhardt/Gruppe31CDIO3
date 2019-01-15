@@ -16,8 +16,8 @@ import BoundaryView.UserInterfaceKontrakt;
 public abstract class FeltDTO {
     //|--------- Variabler:-----------------
     private int placering;
-    private String navn = null;
-    private String feltType = null;
+    private String navn = "?";
+    private String feltType = "?";
 
     //|--------- Getters og Setters:-----------------
     public int getPlacering() {
