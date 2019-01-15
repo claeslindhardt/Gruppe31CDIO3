@@ -2,9 +2,11 @@ package spillogik;
 
 import Controller.*;
 import ModelEnteties.NavneGenerator;
+import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomGenerator {
@@ -85,7 +87,7 @@ public class RandomGenerator {
                         // Proev lykken
                     } else if (feltType == 8) {
                         // TODO: Fix det her med chancekort - Malte
-                        felter[i] = new ChanceFeltCO(i, SpilGenerator.genererChancekort(20));
+                        felter[i] = new ChanceFeltCO(i, genererChancekort(20));
                         antalChancefelter++;
 
                     }
@@ -101,6 +103,48 @@ public class RandomGenerator {
         } while (true);
 
         return felter;
+    }
+
+    public static ArrayList<ChanceAktionDTO> genererChancekort(int antalChancekort ){
+
+        Random random = new Random();
+        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<ChanceAktionDTO>();
+
+        for( int i = 0; i<antalChancekort; i++){
+
+            ChanceAktionDTO chancekort = null;
+            int kortType = random.nextInt(4);
+
+            switch (kortType){
+
+                //_______________________________________________
+                // Giver penge
+                case 0:
+                    chancekort = new GiverPengeCO();
+                    break;
+
+                //_______________________________________________
+                // Tager penge fra dig
+                case 1:
+                    chancekort = new TagerPengeCO();
+                    break;
+
+                //_______________________________________________
+                // Du må rykke som du ønsker
+                case 2:
+                    chancekort = new RykkerSpillerCO();
+                    break;
+
+                //_______________________________________________
+                // Du kan slippe for fængsel
+                case 3:
+                    chancekort = new GratisUdAfFaengselCO();
+                    break;
+            }
+            alleChancekort.add(chancekort);
+        }
+
+        return alleChancekort;
     }
 
 

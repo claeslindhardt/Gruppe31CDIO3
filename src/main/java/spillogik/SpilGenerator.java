@@ -81,8 +81,4 @@ public class SpilGenerator {
         return genererSpil( 4, 39, 40, 1500);
     }
 
-
-    public static ArrayList<ChanceAktionDTO> genererChancekort(int i) {
-        return null;
-    }
 }
