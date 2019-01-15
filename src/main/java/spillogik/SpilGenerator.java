@@ -117,7 +117,8 @@ public class SpilGenerator {
         indkomstSkat = new BetalSkat();
         felter[4] = indkomstSkat;
 
-        rederi = new Rederi();
+        rederi = new Rederi("Øresund A/S",200,5);
+        rederi.setLeje(25);
         rederi.setPantsaetningsVaerdi(100);
         felter[5] = rederi;
 
@@ -180,7 +181,8 @@ public class SpilGenerator {
         ejendom.setHotelPris(100);
         felter[14] = ejendom;
 
-        rederi = new Rederi();
+        rederi = new Rederi("D.F.D.S",200,15);
+        rederi.setLeje(25);
         rederi.setPantsaetningsVaerdi(100);
         felter[15] = rederi;
 
@@ -241,7 +243,9 @@ public class SpilGenerator {
         ejendom.setHotelPris(150);
         felter[24] = ejendom;
 
-        rederi = new Rederi();
+        rederi = new Rederi("Ø.K",200,25);
+        rederi.setLeje(25);
+        rederi.setPantsaetningsVaerdi(100);
         felter[25] = rederi;
 
         ejendom = new EjendomCO("Bredgade",260,22,26);
@@ -303,7 +307,9 @@ public class SpilGenerator {
         ejendom.setHotelPris(200);
         felter[34] = ejendom;
 
-        rederi = new Rederi();
+        rederi = new Rederi("Bornholm 1866",200,35);
+        rederi.setLeje(25);
+        rederi.setPantsaetningsVaerdi(100);
         felter[35] = rederi;
 
         proevLykken = new ChanceFeltCO(36,null);

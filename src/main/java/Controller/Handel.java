@@ -43,7 +43,7 @@ public class Handel {
 
             }
             else if (felt instanceof Rederi){
-                lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, ejeren);
+                lejeForFelt = EjendomsLogik.beregnLejeRederi((Rederi) felt, ejeren);
             }
 
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
