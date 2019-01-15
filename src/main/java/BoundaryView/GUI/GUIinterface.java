@@ -355,16 +355,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public int chanceKortNr(Spiller spiller){
 
-        int laengde = spiller.getSpillerAktionsKort().size()+1;
+        ArrayList<ChanceAktionDTO> chancekort = spiller.getChancekort();
+
+        int laengde = chancekort.size()+1;
 
         String[] alias = new String[laengde];
 
 
-        for(int j = 0; j < spiller.getSpillerAktionsKort().size();j++) {
-            alias[j] = spiller.getSpillerAktionsKort().get(j).getKortBeskrivelse();
-
+        for(int j = 0; j < chancekort.size();j++) {
+            alias[j] = chancekort.get(j).getKortBeskrivelse();
         }
-        alias[spiller.getSpillerAktionsKort().size()] = "Tilbage";
+
+        alias[ chancekort.size()] = "Tilbage";
         String valg = gui.getUserSelection("Liste af dine Chancekort: ",alias);
 
         int valgKort = 0;

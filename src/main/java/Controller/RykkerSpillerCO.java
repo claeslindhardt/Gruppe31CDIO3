@@ -30,7 +30,6 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
 
 
     public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        spil.getSpil().addChancekort( this ); // Lægger kortet tilbage i bunken
         spil.getHandlinger().tagTaxi(spil.getSpil().getSpillerMedTur(),spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();
     }

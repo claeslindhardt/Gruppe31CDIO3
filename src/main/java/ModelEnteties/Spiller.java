@@ -25,11 +25,8 @@ public class Spiller {
     // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
-    ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
-
-
 
     ArrayList<ChanceAktionDTO> chancekort = new ArrayList<ChanceAktionDTO>();
 
@@ -72,7 +69,7 @@ public class Spiller {
     }
 
     public void addChancekort( ChanceAktionDTO chancekort) {
-        this.spillerAktionsKort.add(chancekort);
+        this.chancekort.add(chancekort);
     }
 
     /**
@@ -115,27 +112,12 @@ public class Spiller {
         this.spillerJernbaner = spillerJernbaner;
     }
 
-    public ArrayList<ChanceAktionDTO> getSpillerAktionsKort() {
-        return spillerAktionsKort;
-    }
-
-    public void setSpillerAktionsKort(ArrayList<ChanceAktionDTO> spillerAktionsKort) {
-        this.spillerAktionsKort = spillerAktionsKort;
-    }
-
     public ArrayList<Rederi> getSpillerRederier(){ return spillerRederier;}
 
     public void setSpillerRederier (ArrayList<Rederi> spillerRederier){
         this.spillerRederier = spillerRederier;
     }
 
-    /**
-     * Indsæt beskrivelse her
-     * @param spillerAktionsKort
-     */
-    public void addSpillerAktionsKort(ChanceAktionDTO spillerAktionsKort) {
-        this.spillerAktionsKort.add(spillerAktionsKort);
-    }
 
     public double getPenge() {
         return penge;
