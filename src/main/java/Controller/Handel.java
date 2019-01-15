@@ -34,14 +34,18 @@ public class Handel {
             //todo: enkapsuler dette på en ordenligt måde
 
             int lejeForFelt = 0;
+
             if (felt instanceof EjendomCO) {
                 lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
+
             } else if (felt instanceof Bryggeri){
-                lejeForFelt = EjendomsLogik.beregnLejeTotal(spil.getRaflebaeger().getTotalVaerdi(), felt,spilleren);
+                lejeForFelt = EjendomsLogik.beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
+
             }
             else if (felt instanceof Rederi){
                 lejeForFelt = EjendomsLogik.beregnLejeRederi(felt, ejeren);
             }
+
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
             userInterfaceKontrakt.updateSpillere(spilleren);

@@ -63,11 +63,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
-            FeltDTO felt = braet.getBret().get(i);
-            GUI_Street gui_felt= new GUI_Street();
-            gui_felt.setTitle( felt.getNavn() );
-            gui_felt.setSubText( felt.getFeltType() );
+            GUI_Field gui_felt;
 
+            FeltDTO felt = braet.getBret().get(i);
+            if(felt.getFeltType() == "Bryggeri"){
+                gui_felt = new GUI_Brewery();
+                gui_felt.setTitle( felt.getNavn() );
+                gui_felt.setSubText( felt.getFeltType() );
+            } else {
+                gui_felt = new GUI_Street();
+                gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText(felt.getFeltType());
+            }
             felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
@@ -470,6 +477,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void dinJernbane(){
         gui.showMessage("Jernbanen er nu din!");
     }
+
+    public void ditBryggeri(){
+        gui.showMessage("Bryggeriet er nu dit!");
+    }
+
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde");
     }

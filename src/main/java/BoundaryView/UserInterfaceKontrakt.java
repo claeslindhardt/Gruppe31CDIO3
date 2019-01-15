@@ -100,4 +100,5 @@ public interface UserInterfaceKontrakt {
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
     void ditRederi(Rederi rederi, Spiller spiller);
+    void ditBryggeri();
 }

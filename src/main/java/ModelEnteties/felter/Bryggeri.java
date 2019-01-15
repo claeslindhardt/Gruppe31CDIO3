@@ -13,16 +13,14 @@ public class Bryggeri extends EjeligtFeltDTO {
     private int  leje = 0;
     private EjendomsGruppeDTO gruppe;
     private String navn;
-    private int placering;
+
 
 
     public Bryggeri(String navn, int placering){
 
-        this.placering = placering;
+        setPlacering(placering);
         setFeltType("Bryggeri");
         this.navn = navn;
-
-
 
     }
 

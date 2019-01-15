@@ -90,6 +90,10 @@ public class Spiller {
     public ArrayList<Bryggeri> getSpillerBryggerier() {
         return spillerBryggeri;
     }
+    
+    public void addBryggeri(Bryggeri bryggeri){
+        spillerBryggeri.add(bryggeri);
+    }
 
     public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
         this.spillerJernbaner = spillerJernbaner;

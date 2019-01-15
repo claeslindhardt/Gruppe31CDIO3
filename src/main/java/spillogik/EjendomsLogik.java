@@ -123,13 +123,16 @@ public class EjendomsLogik {
                 return leje;
 
 
-    }
-    public static int beregnLejeTotal(int terningeKast, EjeligtFeltDTO felt, Spiller spiller){
+        }
+    public static int beregnLejeBryggeri( int terningeKast, Spiller ejer ){
         int leje;
 
-        if(spiller.getSpillerBryggerier().size()>2) {
+        if(ejer .getSpillerBryggerier().size() >= 2) {
             leje = terningeKast * 10;
-        } else {leje = terningeKast *4;}
+        } else {
+            leje = terningeKast * 4;
+        }
+
         return leje;
     }
 
