@@ -68,10 +68,29 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
             FeltDTO felt = felter[i];
 
-            if(felt.getFeltType() == "Bryggeri"){
+
+            if( felt instanceof Bryggeri ) {
                 gui_felt = new GUI_Brewery();
-                gui_felt.setTitle( felt.getNavn() );
-                gui_felt.setSubText( felt.getFeltType() );
+                gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText(felt.getFeltType());
+
+            } else if( felt instanceof Rederi ) {
+                gui_felt = new GUI_Shipping();
+                gui_felt.setTitle(felt.getNavn());
+
+            } else if( felt instanceof ChanceFeltCO ) {
+                gui_felt = new GUI_Chance();
+
+            } else if( felt instanceof FriParkering ){
+                gui_felt = new GUI_Refuge();
+
+            } else if( felt instanceof BetalSkat ){
+                gui_felt = new GUI_Tax();
+                gui_felt.setTitle(felt.getNavn());
+
+            } else if( felt instanceof GaaIFaengselCO || felt instanceof FaengselCO ){
+                gui_felt = new GUI_Jail();
+
             } else {
                 gui_felt = new GUI_Street();
                 gui_felt.setTitle(felt.getNavn());
