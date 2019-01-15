@@ -86,6 +86,7 @@ public class EjendomsGruppeDTO {
      */
     public void tilfoejEjendom( EjendomCO ejendom){
         ejendomme.add(ejendom);
+        ejendom.setGruppe(this);
     }
 
     public void tilfoejEjendomme( EjendomCO ... ejendomme ){
