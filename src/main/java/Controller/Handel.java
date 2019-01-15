@@ -1,7 +1,6 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.EjendomCO;
 import spillogik.EjendomsLogik;
@@ -99,6 +98,7 @@ public class Handel {
     public void koebHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHotel( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHotel(true);
+            ejendom.setAntalHuse(0);
 
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
             spiller.addPenge(-ejendom.getHotelPris());
@@ -111,36 +111,35 @@ public class Handel {
      * @author Malte
      * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
      * om at vise ting og tage i mod inputs.
-     * @param ui: hvilket UserInterface der skal bruges.
+     * @param ui : hvilket UserInterface der skal bruges.
      */
     public void koebHotelPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
         EjendomCO[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){
-            ArrayList<EjendomCO> bebyggeligeEjendomme = new ArrayList<EjendomCO>();
+            ArrayList<EjendomCO> grundeMedMulighedForHotel = new ArrayList<EjendomCO>();
 
-            /* Finder bebyggelige ejendomme og flytter dem over i en seperat liste.
-               Se kanKoebeHus() for at se, hvordan det vurderes om spilleren kan
-               bygge et hus paa en ejendom.
-             */
+
             for(int i = 0; i < ejendomme.length; i++){
                 if( EjendomsLogik.kanKoebeHotel(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
-                    bebyggeligeEjendomme.add(ejendomme[i]);
+                    grundeMedMulighedForHotel.add(ejendomme[i]);
                 }
             }
 
-            if(bebyggeligeEjendomme.size() > 0){
+            if(grundeMedMulighedForHotel.size() > 0){
 
-                int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
-                koebHotel( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
+                int ejendomsIndex = ui.input_EjendomAtByggeHotelPaa(grundeMedMulighedForHotel);
+                koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
 
-                ui.byggeHotel(bebyggeligeEjendomme.get(ejendomsIndex));
+                ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
+                ui.tillykkeMedHotel();
 
             }else {
-                ui.ejerIngenBebyggeligeEjendomme(); }
+                ui.kanIkkeKøbeHotel();
+            }
 
         }else{
-            ui.ejerIngenEjendomme();
+            ui.kanIkkeKøbeHotel();
         }
     }
 

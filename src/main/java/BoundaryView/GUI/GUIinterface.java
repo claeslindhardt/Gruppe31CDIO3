@@ -179,7 +179,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
         String valg = gui.getUserButtonPressed("|--|Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom","Handel med Ejede ting");
+                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting");
         gui.showMessage(valg);
         return input.TurMenu(valg);
 
@@ -643,6 +643,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    @Override
+    public void tillykkeMedHotel() {
+        gui.showMessage("Tillykke! Du har købt et hotel!");
+    }
 
 
     @Override
@@ -689,6 +693,26 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     @Override
+    public int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme) {
+
+        String[] ejendomsListe = new String[ejendomme.size()];
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            ejendomsListe[i] = ejendomme.get(i).getNavn();
+        }
+
+        String valg = gui.getUserSelection("Hvilken ejendom vil du bygge hotel paa? ",ejendomsListe);
+        int indexRetur = 0;
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            if (valg == ejendomsListe[i]){
+                indexRetur = i;
+            }
+        }
+        return indexRetur;
+    }
+
+    @Override
     public void genererGUIBret(BraetCO braet, ArrayList<Spiller> spillere) {
 
     }
@@ -723,7 +747,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void byggeHotel(EjendomCO ejendom) {
         GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
-            ejendom.setAntalHuse(0);
             hotelSkalPaa.setHotel(ejendom.harHotel());
     }
 

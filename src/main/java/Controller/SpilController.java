@@ -287,7 +287,7 @@ public class SpilController{
      * @param terningsKrus RafleBaeger objekt, som benyttes til at kaste terninger
      */
     public void turMenu(BraetDTO spilleBret, RafleBaeger terningsKrus) {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 10);
+        int input = ui.TurMenu(spil.getSpillerTur(), 1, 11);
 
         switch (input) {
             case 1:
@@ -319,9 +319,10 @@ public class SpilController{
                 break;
             case 8:
                 handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
-                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(),ui);
                 break;
             case 9:
+                    handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
+            case 10:
                 //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:

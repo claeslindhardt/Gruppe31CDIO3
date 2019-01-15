@@ -85,7 +85,6 @@ public interface UserInterfaceKontrakt {
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
-    void byggetHus(EjendomCO ejendom);
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
@@ -96,6 +95,9 @@ public interface UserInterfaceKontrakt {
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
     void byggeHotel(EjendomCO ejendom);
+    void byggetHus(EjendomCO ejendom);
+    void tillykkeMedHotel();
+    int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
