@@ -18,8 +18,9 @@ public class Bryggeri extends EjeligtFeltDTO {
 
     public Bryggeri(String navn, int placering){
 
-        placering = placering;
+        this.placering = placering;
         setFeltType("Bryggeri");
+        this.navn = navn;
 
 
 
@@ -36,6 +37,11 @@ public class Bryggeri extends EjeligtFeltDTO {
     public String getNavn(){
         return navn;
 
+    }
+
+    public int getPris(){
+
+        return pris;
     }
 
 

@@ -126,21 +126,13 @@ public class EjendomsLogik {
         }
     public static int beregnLejeTotal(int terningeKast, EjeligtFeltDTO felt, Spiller spiller){
         int leje;
-        int count = 0;
 
-        for(int i = 0; i < spiller.getSpillerBryggerier().size();i++){
-            spiller.getSpillerEjendomme().get(i).getFeltType().equalsIgnoreCase("Bryggeri");
-            count++;
-        }
-        if(count>1) {
-            leje = terningeKast * 4;
-        } else {leje = terningeKast *10;}
+        if(spiller.getSpillerBryggerier().size()>2) {
+            leje = terningeKast * 10;
+        } else {leje = terningeKast *4;}
+return leje;
+}
 
-
-
-    return leje;
-
-    }
 
 
 
