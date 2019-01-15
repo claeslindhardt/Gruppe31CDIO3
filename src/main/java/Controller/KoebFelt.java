@@ -21,7 +21,7 @@ public class KoebFelt {
             ui.tetPaaMonopol();
         }
         else if (spiller.getPenge() > ejendom.getPris()) {
-            ui.gennemfortKoeb(ejendom, spiller);
+            ui.gennemfoertKoeb(ejendom, spiller);
             spiller.addPenge( - ejendom.getPris() );
             ui.updateSpillere(spiller);
 

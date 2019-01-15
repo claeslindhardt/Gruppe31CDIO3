@@ -107,7 +107,7 @@ public class TUI implements UserInterfaceKontrakt {
 
 
 
-    public void bankeRaadtGrundetLiquditet(int getBankeraadGraense){
+    public void bankeRaadtGrundetLikviditet(int getBankeraadGraense){
         System.out.println("Woops du har mindre end "+getBankeraadGraense+" penge, " +
                 "\nog du har derfor ikke en hoej nok pengebholdning til at forsaette Spillet."
         );
@@ -282,7 +282,7 @@ public class TUI implements UserInterfaceKontrakt {
     }
 
 
-    public void gennemfortKoeb(EjendomCO ejendom, Spiller spiller){
+    public void gennemfoertKoeb(EjendomCO ejendom, Spiller spiller){
         System.out.println("Du kan koebe grunden hurra!!");
         System.out.println("Ejendommen er nu din!");
 

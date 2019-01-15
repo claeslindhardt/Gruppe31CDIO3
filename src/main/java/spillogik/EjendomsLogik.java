@@ -59,6 +59,14 @@ public class EjendomsLogik {
     }*/
 
 
+    /**
+     * @author
+     * Reglerne som skal opfyldes for at man kan koebe et hotel.
+     * @param spiller
+     * @param ejendom
+     * @param ejendomsGruppe
+     * @return
+     */
     public static boolean kanKoebeHotel(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
