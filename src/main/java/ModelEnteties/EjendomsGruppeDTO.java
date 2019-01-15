@@ -88,6 +88,12 @@ public class EjendomsGruppeDTO {
         ejendomme.add(ejendom);
     }
 
+    public void tilfoejEjendomme( EjendomCO ... ejendomme ){
+        for( EjendomCO ejendom : ejendomme ){
+            this.ejendomme.add(ejendom);
+        }
+    }
+
 
     //|----------- Metoder:------------------
 
