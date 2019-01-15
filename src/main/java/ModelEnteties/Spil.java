@@ -20,17 +20,15 @@ public class Spil {
 
     private FeltDTO[] felter;
 
-    public ChanceAktionDTO[] getChanceKort() {
+    public ArrayList<ChanceAktionDTO> getChanceKort() {
         return chanceKort;
     }
 
-    public void setChanceKort(ChanceAktionDTO[] chanceKort) {
+    public void setChanceKort(ArrayList<ChanceAktionDTO> chanceKort) {
         this.chanceKort = chanceKort;
     }
+    private ArrayList<ChanceAktionDTO> chanceKort;
 
-    private ChanceAktionDTO[] chanceKort;
-
-    private  int bankerotGraense = 0;
     private  boolean kør = true;
 
     public int getSpillerTur() {
@@ -87,13 +85,6 @@ public class Spil {
         this.felter = felter;
     }
 
-    public EjendomCO getEjendomme(){
-
-
-
-
-        return null;
-    }
 
     public int getBankeraadGraense(){return 0;}
 

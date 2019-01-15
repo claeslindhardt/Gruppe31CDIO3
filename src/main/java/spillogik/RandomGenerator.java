@@ -1,16 +1,62 @@
 package spillogik;
 
+import BoundaryView.TUI.TUI;
 import Controller.*;
+import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
+import ModelEnteties.Spil;
 import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import static spillogik.SpilGenerator.genererSpillere;
+
 public class RandomGenerator {
 
+
+
+
+
+
+    public static BraetCO genererBraet(int antalFelter){
+        BraetCO braet = new BraetCO( antalFelter, new TUI() );
+
+        genererEjendomsGrupper( braet.getEjendomme(), 3 );
+
+        return braet;
+    }
+
+
+    public static Spil genererSpil(int antalSpillere, int antalFelter, int antalChanceKort, double startPenge ){
+        Spil spil = new Spil();
+
+        spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
+        //spil.setBraet( genererBraet(antalFelter) );
+        // spil.setChanceKort( genererChancekort);
+        spil.setRaflebaeger( new RafleBaeger(2));
+
+        return spil;
+    }
+
+
+    public static EjendomsGruppeDTO[] genererEjendomsGrupper(EjendomCO[] ejendomme, int gruppeStoerrelse){
+        ArrayList<EjendomsGruppeDTO> ejendomsGrupper = new ArrayList<>();
+        EjendomsGruppeCO ejendomsGruppeController = new EjendomsGruppeCO(gruppeStoerrelse);
+
+        // Tilfoejer alle ejendomme til grupper
+        for( EjendomCO ejendom : ejendomme ){
+            EjendomsGruppeDTO gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
+            ejendom.setGruppe(gruppe);
+            ejendomsGrupper.add(gruppe);
+        }
+
+        // Laver listen over ejendomsgrupper om til en almindelig array og returnere den ( .toArray() ) @author Malte
+        return ejendomsGrupper.toArray(new EjendomsGruppeDTO[0]);
+    }
 
 
 
