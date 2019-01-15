@@ -328,10 +328,8 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[39] = ejendom;
 
-    }
 
-
-        return null;
+        return felter;
     }
 
 
@@ -345,8 +343,8 @@ public class SpilGenerator {
 
         spil.setSpillere(  genererSpillere( antalSpillere, 1500 )  );
         // TODO: Implementer standard generering af felter
-        //spil.setFelter( genererFelter() );
-        spil.setFelter( genererRandomFelter(40, 100, 25) );
+        spil.setFelter( genererFelter() );
+        //spil.setFelter( genererRandomFelter(40, 100, 25) );
         spil.setChanceKort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
 
