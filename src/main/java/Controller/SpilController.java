@@ -4,7 +4,6 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
@@ -224,7 +223,6 @@ public class SpilController{
     public void tjekForFeangselsStraf(){
         if (spil.getSpillerMedTur().isFaengselsStraf()) {
             if (!spil.getSpillerMedTur().isHarAnketDomDenneRunde()) {
-                ui.terminalLinje();
                 ui.anketStraffeDom(spil.getSpillerTur());
                 anketDomsigelse();
                 spil.getSpillerMedTur().setHarAnketDomDenneRunde(true);
@@ -251,7 +249,6 @@ public class SpilController{
      */
     public void tjekForVinder() {
         if (spil.getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
-            ui.terminalLinje();
             //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
             if (!spil.getSpillerMedTur().isHarGivetOp()) {
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
