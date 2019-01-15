@@ -132,10 +132,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
-    public GUI_Field[] getFelter(){
-        return felter;
-    }
-
     /**
      * Indsæt beskrivelse her
      * @param spiller
