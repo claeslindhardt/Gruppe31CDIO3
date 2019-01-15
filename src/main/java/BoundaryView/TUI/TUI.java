@@ -455,5 +455,8 @@ public class TUI implements UserInterfaceKontrakt {
     public void byggeHotel(EjendomCO ejendom) {
 
     }
+
+    @Override
+    public void ditBryggeri(){}
 }
 
