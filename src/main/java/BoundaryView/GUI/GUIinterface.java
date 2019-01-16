@@ -8,6 +8,7 @@ import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.ChanceAktionDTO;
+import com.sun.org.glassfish.external.statistics.Stats;
 import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
@@ -101,19 +102,32 @@ public class GUIinterface implements UserInterfaceKontrakt {
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
-            GUI_Field gui_felt;
+            GUI_Field gui_felt = null;
 
             FeltDTO felt = felter[i];
 
 
-            if( felt instanceof Bryggeri ) {
-                gui_felt = new GUI_Brewery();
-                gui_felt.setTitle(felt.getNavn());
-                gui_felt.setSubText(felt.getFeltType());
+            if( felt instanceof EjeligtFeltDTO ) {
+                EjeligtFeltDTO ejeligtFeltDTO = (EjeligtFeltDTO) felt;
 
-            } else if( felt instanceof Rederi ) {
-                gui_felt = new GUI_Shipping();
-                gui_felt.setTitle(felt.getNavn());
+                if (ejeligtFeltDTO instanceof EjendomCO) {
+                    gui_felt = new GUI_Street();
+
+                } else if (ejeligtFeltDTO instanceof Bryggeri) {
+                    gui_felt = new GUI_Brewery();
+
+                } else if ( ejeligtFeltDTO instanceof Rederi ) {
+                    gui_felt = new GUI_Shipping();
+                    gui_felt.setBackGroundColor(Color.white);
+                }
+                gui_felt.setTitle(ejeligtFeltDTO.getNavn());
+                gui_felt.setSubText("Pris: " + ejeligtFeltDTO.getPris() + " kr.");
+
+
+            }else if ( felt instanceof StartCO ){
+                gui_felt = new GUI_Start();
+                gui_felt.setTitle("Start");
+                gui_felt.setSubText("");
                 gui_felt.setBackGroundColor(Color.white);
 
             } else if( felt instanceof ChanceFeltCO ) {
@@ -121,23 +135,30 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
             } else if( felt instanceof FriParkering ){
                 gui_felt = new GUI_Refuge();
+                gui_felt.setBackGroundColor(Color.white);
+                gui_felt.setSubText("Fri parkering");
 
-            } else if( felt instanceof BetalSkat ){
+            } else if( felt instanceof GaaIFaengselCO ) {
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Gaa i faengsel");
+
+
+            } else if( felt instanceof FaengselCO){
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Faengsel");
+
+            } else if (felt instanceof IndkomstSkat){
                 gui_felt = new GUI_Tax();
                 gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText("");
 
-            } else if( felt instanceof GaaIFaengselCO || felt instanceof FaengselCO ){
-                gui_felt = new GUI_Jail();
-
-            } else if (felt instanceof BetalSkat){ gui_felt = new GUI_Tax();
-
-            }
-
-            else {
-                gui_felt = new GUI_Street();
+            } else if( felt instanceof StatsSkat) {
+                gui_felt = new GUI_Tax();
                 gui_felt.setTitle(felt.getNavn());
-                gui_felt.setSubText(felt.getFeltType());
+                gui_felt.setSubText("");
             }
+
+
             gui_felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
