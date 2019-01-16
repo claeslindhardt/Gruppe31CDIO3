@@ -1,8 +1,11 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
+
+import java.util.ArrayList;
 
 public class LandPaaFelt {
 
@@ -17,6 +20,7 @@ public class LandPaaFelt {
             startFelt( ui );
 
         } else if( felt instanceof ChanceFeltCO ) {
+            proevLykken( spilController, ui );
 
         } else if( felt instanceof FriParkering ){
 
@@ -72,8 +76,14 @@ public class LandPaaFelt {
     }
 
 
-    public void proevLykken( ){
+    public void proevLykken( SpilController spilController, UserInterfaceKontrakt ui ){
+        ArrayList<ChanceAktionDTO> chancekort = spilController.getSpil().getChanceKort();
 
+        ChanceAktionDTO trukketKort = chancekort.get(0);
+        chancekort.remove(0);
+        chancekort.add(trukketKort);
+
+        trukketKort.DirketeAktion( spilController.getHandel(), spilController, ui );
     }
 
     public void gaaIFaengsel( ){
