@@ -94,6 +94,7 @@ public interface UserInterfaceKontrakt {
     void skatteBesked(int valg);
     void trækEtChancekort();
     void landetPaaStart();
+    void visChanceKort( ChanceAktionDTO chancekort );
 
 
     //===================================================

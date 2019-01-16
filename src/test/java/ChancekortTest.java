@@ -1,3 +1,4 @@
+import Controller.GratisUdAfFaengselCO;
 import Controller.RykkerSpillerCO;
 import Controller.SpilController;
 import ModelEnteties.ChanceAktionDTO;
@@ -29,14 +30,16 @@ public class ChancekortTest {
 
         Spiller spiller = spil.getSpiller(0);
 
+        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<>();
+
         ChanceAktionDTO chancekort = new RykkerSpillerCO();
         chancekort.setBeskrivelse("Chancekort 1");
         chancekort.setPengeVerdi(200);
+        alleChancekort.add(chancekort);
 
-        spiller.addChancekort(chancekort);
-
-
-        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<>();
+        chancekort = new GratisUdAfFaengselCO();
+        chancekort.setBeskrivelse("Chancekort 1");
+        alleChancekort.add(chancekort);
 
         spil.setChanceKort(alleChancekort);
 

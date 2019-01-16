@@ -20,7 +20,7 @@ public class LandPaaFelt {
             startFelt( ui );
 
         } else if( felt instanceof ProevLykken) {
-            proevLykken( spilController, ui );
+            proevLykken( spiller, spilController, ui );
 
         } else if( felt instanceof FriParkering ){
             friParkering( ui );
@@ -78,14 +78,20 @@ public class LandPaaFelt {
     }
 
 
-    public void proevLykken( SpilController spilController, UserInterfaceKontrakt ui ){
+    public void proevLykken( Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
         ArrayList<ChanceAktionDTO> chancekort = spilController.getSpil().getChanceKort();
 
         ChanceAktionDTO trukketKort = chancekort.get(0);
         chancekort.remove(0);
-        chancekort.add(trukketKort);
 
-        trukketKort.DirketeAktion( spilController.getHandel(), spilController, ui );
+        ui.visChanceKort( trukketKort );
+
+        if( trukketKort instanceof GratisUdAfFaengselCO || trukketKort instanceof RykkerSpillerCO ){
+            spiller.addChancekort( trukketKort );
+        }else{
+            spilController.getBrugChancekort().brugChancekort( trukketKort, spiller, spilController.getSpil(),  ui,  spilController );
+        }
+
     }
 
     public void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){

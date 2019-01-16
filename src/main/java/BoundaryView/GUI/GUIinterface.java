@@ -615,6 +615,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui_center.setChanceCard(di.getBeskrivelse());
         gui_center.displayChanceCard();
     }
+
+    public void visChanceKort( ChanceAktionDTO chancekort ){
+        gui_center.setChanceCard( chancekort.getBeskrivelse() );
+        gui_center.displayChanceCard();
+    }
+
     public void chanceKortTilføjet(){
         gui.showMessage("Dette kort vil blive tilfoejet til dine Chancekort," +
                 "\ndu kan nu bruge det når du oensker."

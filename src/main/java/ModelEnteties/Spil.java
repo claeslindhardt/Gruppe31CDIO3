@@ -19,7 +19,7 @@ public class Spil {
 
     private Felt[] felter;
 
-    private ArrayList<ChanceAktionDTO> chanceKort;
+    private ArrayList<ChanceAktionDTO> chanceKort = new ArrayList<>();
 
     public ArrayList<ChanceAktionDTO> getChanceKort() {
         return chanceKort;

@@ -70,6 +70,12 @@ public class Spiller {
         this.chancekort.add(chancekort);
     }
 
+    public void fjernChancekort( ChanceAktionDTO chancekort ){ this.chancekort.remove(chancekort); }
+
+    public boolean harChancekort( ChanceAktionDTO chancekort ){
+        return this.chancekort.contains( chancekort );
+    }
+
     /**
      * @author Malte
      * Henter liste over spillerens ejendomme.
