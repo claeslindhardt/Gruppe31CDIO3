@@ -380,7 +380,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void paaBesoegIFaengsel(){
-        System.out.println("Du er nu på besoeg i faengslet.");
+        gui.showMessage("Du er nu på besoeg i faengslet.");
     }
     public int vilDuGiveOp(){
         String valg = gui.getUserSelection("|--|Er du sikker på at du vil give op?",

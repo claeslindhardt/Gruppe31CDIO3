@@ -25,8 +25,10 @@ public class LandPaaFelt {
         } else if( felt instanceof FriParkering ){
 
         } else if( felt instanceof GaaIFaengselCO ) {
+            gaaIFaengsel(spilController, ui );
 
         } else if( felt instanceof FaengselCO){
+            faengsel(ui);
 
         } else if (felt instanceof IndkomstSkat){
 
@@ -86,13 +88,21 @@ public class LandPaaFelt {
         trukketKort.DirketeAktion( spilController.getHandel(), spilController, ui );
     }
 
-    public void gaaIFaengsel( ){
+    public void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
+        Spiller spillerMedTur = spilController.getSpil().getSpillerMedTur();
+        FaengselCO faengsel = spilController.getSpil().getFaengsel();
 
+        spillerMedTur.setFaengselsStraf(true);
+        spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
+        ui.iFaengselMedDig();
+        ui.duErLandetPå( faengsel, spillerMedTur);
+
+        spilController.slutSpillerTur();
     }
 
-    public void faengsel(){
-
+    public void faengsel( UserInterfaceKontrakt ui ){
+        ui.paaBesoegIFaengsel();
     }
 
     public void indkomstSkat(){
