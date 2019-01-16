@@ -1,7 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 
@@ -79,9 +79,9 @@ public class LandPaaFelt {
 
 
     public void proevLykken( Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
-        ArrayList<ChanceAktionDTO> chancekort = spilController.getSpil().getChanceKort();
+        ArrayList<Chancekort> chancekort = spilController.getSpil().getChanceKort();
 
-        ChanceAktionDTO trukketKort = chancekort.get(0);
+        Chancekort trukketKort = chancekort.get(0);
         chancekort.remove(0);
 
         ui.visChanceKort( trukketKort );

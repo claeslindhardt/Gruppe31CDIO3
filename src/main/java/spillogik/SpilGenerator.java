@@ -1,6 +1,6 @@
 package spillogik;
 
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
@@ -330,7 +330,7 @@ public class SpilGenerator {
     }
 
 
-    public static ArrayList<ChanceAktionDTO> genererChancekort(){
+    public static ArrayList<Chancekort> genererChancekort(){
         // TODO Implementer fastsatte chancekort
         return RandomGenerator.genererChancekort(10);
     }

@@ -1,5 +1,6 @@
 package ModelEnteties;
 
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.Ejendom;
 import Controller.JernbaneCO;
@@ -26,7 +27,7 @@ public class Spiller {
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
 
-    ArrayList<ChanceAktionDTO> chancekort = new ArrayList<ChanceAktionDTO>();
+    ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
@@ -62,17 +63,17 @@ public class Spiller {
     }
 
 
-    public ArrayList<ChanceAktionDTO> getChancekort() {
+    public ArrayList<Chancekort> getChancekort() {
         return chancekort;
     }
 
-    public void addChancekort( ChanceAktionDTO chancekort) {
+    public void addChancekort( Chancekort chancekort) {
         this.chancekort.add(chancekort);
     }
 
-    public void fjernChancekort( ChanceAktionDTO chancekort ){ this.chancekort.remove(chancekort); }
+    public void fjernChancekort( Chancekort chancekort ){ this.chancekort.remove(chancekort); }
 
-    public boolean harChancekort( ChanceAktionDTO chancekort ){
+    public boolean harChancekort( Chancekort chancekort ){
         return this.chancekort.contains( chancekort );
     }
 

@@ -2,11 +2,11 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 
 import java.util.Random;
 
-public class GratisUdAfFaengselCO extends ChanceAktionDTO {
+public class GratisUdAfFaengselCO extends Chancekort {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 

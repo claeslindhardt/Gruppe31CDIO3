@@ -4,7 +4,7 @@ import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
@@ -141,14 +141,14 @@ public class RandomGenerator {
         return felter;
     }
 
-    public static ArrayList<ChanceAktionDTO> genererChancekort(int antalChancekort ){
+    public static ArrayList<Chancekort> genererChancekort(int antalChancekort ){
 
         Random random = new Random();
-        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<ChanceAktionDTO>();
+        ArrayList<Chancekort> alleChancekort = new ArrayList<Chancekort>();
 
         for( int i = 0; i<antalChancekort; i++){
 
-            ChanceAktionDTO chancekort = null;
+            Chancekort chancekort = null;
             int kortType = random.nextInt(4);
 
             switch (kortType){

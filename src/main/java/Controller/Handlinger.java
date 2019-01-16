@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class Handlinger {
      * @param userInterfaceKontrakt
      */
     public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
-        ArrayList<ChanceAktionDTO> chancekort = spiller.getChancekort();
+        ArrayList<Chancekort> chancekort = spiller.getChancekort();
 
         if ( chancekort.size() > 0 ) {
 
@@ -48,7 +48,7 @@ public class Handlinger {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
                 spil.turMenu( );
             } else {
-                ChanceAktionDTO valgtChancekort = chancekort.get(valg);
+                Chancekort valgtChancekort = chancekort.get(valg);
                 Handel handel = new Handel();
                 valgtChancekort.BetingetAktion(handel, spil, userInterfaceKontrakt);
                 chancekort.remove(valgtChancekort);

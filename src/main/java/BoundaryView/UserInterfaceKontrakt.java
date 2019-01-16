@@ -2,10 +2,10 @@ package BoundaryView;
 
 import Controller.*;
 import ModelEnteties.Spil;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.*;
 import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public interface UserInterfaceKontrakt {
     void badErrorMessage();
     int ejendomsBud();
     void spillerEjendele(Spiller spiller);
-    void printChanceKortDirekte(ChanceAktionDTO di);
+    void printChanceKortDirekte(Chancekort di);
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
@@ -94,7 +94,7 @@ public interface UserInterfaceKontrakt {
     void skatteBesked(int valg);
     void trækEtChancekort();
     void landetPaaStart();
-    void visChanceKort( ChanceAktionDTO chancekort );
+    void visChanceKort( Chancekort chancekort );
 
 
     //===================================================

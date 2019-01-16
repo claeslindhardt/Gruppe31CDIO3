@@ -1,6 +1,7 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.Faengsel;
 import ModelEnteties.felter.Felt;
 import ModelEnteties.raflebaeger.RafleBaeger;
@@ -19,17 +20,17 @@ public class Spil {
 
     private Felt[] felter;
 
-    private ArrayList<ChanceAktionDTO> chanceKort = new ArrayList<>();
+    private ArrayList<Chancekort> chanceKort = new ArrayList<>();
 
-    public ArrayList<ChanceAktionDTO> getChanceKort() {
+    public ArrayList<Chancekort> getChanceKort() {
         return chanceKort;
     }
 
-    public void setChanceKort(ArrayList<ChanceAktionDTO> chanceKort) {
+    public void setChanceKort(ArrayList<Chancekort> chanceKort) {
         this.chanceKort = chanceKort;
     }
 
-    public void addChancekort(ChanceAktionDTO chancekort ){
+    public void addChancekort(Chancekort chancekort ){
         this.chanceKort.add(chancekort);
     }
 

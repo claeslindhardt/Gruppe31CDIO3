@@ -3,11 +3,11 @@ package Controller;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 
 import java.util.Random;
 
-public class RykkerSpillerCO extends ChanceAktionDTO {
+public class RykkerSpillerCO extends Chancekort {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
 

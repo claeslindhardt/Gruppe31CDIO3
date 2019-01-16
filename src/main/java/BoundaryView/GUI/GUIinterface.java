@@ -4,10 +4,10 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.Felt;
-import ModelEnteties.ChanceAktionDTO;
 import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
@@ -402,7 +402,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public int chanceKortNr(Spiller spiller){
 
-        ArrayList<ChanceAktionDTO> chancekort = spiller.getChancekort();
+        ArrayList<Chancekort> chancekort = spiller.getChancekort();
 
         int laengde = chancekort.size()+1;
 
@@ -610,13 +610,13 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du må trække et chancekort, fra bunken i midten");
     }
 
-    public void printChanceKortDirekte(ChanceAktionDTO di){
+    public void printChanceKortDirekte(Chancekort di){
 
         gui_center.setChanceCard(di.getBeskrivelse());
         gui_center.displayChanceCard();
     }
 
-    public void visChanceKort( ChanceAktionDTO chancekort ){
+    public void visChanceKort( Chancekort chancekort ){
         gui_center.setChanceCard( chancekort.getBeskrivelse() );
         gui_center.displayChanceCard();
     }
