@@ -8,6 +8,7 @@ import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.ChanceAktionDTO;
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -28,7 +29,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
 
-
+    GUI_Center gui_center = GUI_Center.getInstance();
     private GUI gui;
     private GUI hovedmenu = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
@@ -91,6 +92,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
         FeltDTO[] felter = spil.getFelter();
         Spiller[] spillere = spil.getSpillere();
         int antalFelter =  felter.length;
+
+
+
 
         GUI_Field[] gui_felter = new GUI_Field[ antalFelter ];
 
@@ -585,9 +589,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("______________________________________________________________________________");
     }
 
-    public void printChanceKortDirekte(ChanceAktionDTO di){
-        gui.showMessage(di.getBeskrivelse());
+    public void trækEtChancekort(){
+        gui.showMessage("Du må trække et chancekort, fra bunken i midten");
+    }
 
+    public void printChanceKortDirekte(ChanceAktionDTO di){
+
+        gui_center.setChanceCard(di.getBeskrivelse());
+        gui_center.displayChanceCard();
     }
     public void chanceKortTilføjet(){
         gui.showMessage("Dette kort vil blive tilfoejet til dine Chancekort," +

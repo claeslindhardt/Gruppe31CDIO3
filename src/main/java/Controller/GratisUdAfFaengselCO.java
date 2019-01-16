@@ -24,6 +24,8 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
         spiller.addChancekort(  this );
 
         userInterfaceKontrakt.printChanceKortDirekte(this);
+        userInterfaceKontrakt.trækEtChancekort();
+
         userInterfaceKontrakt.chanceKortTilføjet();
     }
 

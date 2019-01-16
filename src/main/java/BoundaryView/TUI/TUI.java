@@ -330,7 +330,7 @@ public class TUI implements UserInterfaceKontrakt {
         }
     }
 
-
+    public void trækEtChancekort(){}
 
     public void printChanceKortDirekte(ChanceAktionDTO di){
         System.out.println(di.getBeskrivelse());
