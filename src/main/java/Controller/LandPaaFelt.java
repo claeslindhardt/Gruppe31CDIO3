@@ -4,6 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
+import com.sun.org.glassfish.external.statistics.Stats;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class LandPaaFelt {
             proevLykken( spilController, ui );
 
         } else if( felt instanceof FriParkering ){
+            friParkering( ui );
 
         } else if( felt instanceof GaaIFaengselCO ) {
             gaaIFaengsel(spilController, ui );
@@ -31,8 +33,10 @@ public class LandPaaFelt {
             faengsel(ui);
 
         } else if (felt instanceof IndkomstSkat){
+            indkomstSkat(spiller, ui);
 
         } else if( felt instanceof StatsSkat) {
+            statsSkat( (StatsSkat) felt, spiller, ui);
 
         }
 
@@ -105,12 +109,53 @@ public class LandPaaFelt {
         ui.paaBesoegIFaengsel();
     }
 
-    public void indkomstSkat(){
+    public void indkomstSkat( Spiller spiller, UserInterfaceKontrakt ui ){
+
+        double nuvPengebeholdning = spiller.getPenge();
+        //Her vurderer aktionPåfelt om spilleren befinder sig på felt 4, hvor der skatten der skal betales er specifik.
+
+        ui.skatteBesked(2);
+
+        double skat;
+        int valg = 0;
+
+        /*HEr vælges det om spilleren vil beltale 200 ell er 10 %
+         * */
+        String betalingsValg = ui.skatteBetaling();
+
+        if (betalingsValg == "At betale 200") {
+            valg = 1;
+        } else {
+            valg = 2;
+        }
+        switch (valg) {
+            case 1:{ skat = 200;
+                spiller.setPenge(nuvPengebeholdning - skat);
+                break;}
+
+            case 2:{ spiller.setPenge(nuvPengebeholdning * 0.9);
+                break;}
+
+        }
+
+        ui.updateSpillere( spiller );
 
     }
 
-    public void statsSkat( ){
+    public void statsSkat( StatsSkat felt,  Spiller spiller, UserInterfaceKontrakt ui ){
 
+        double nuvPengebeholdning = spiller.getPenge();
+
+        // Her vurderer aktionPåfelt om spilleren befinder sig på felt 4, hvor der skatten der skal betales er specifik.
+
+        ui.skatteBesked(1);
+        spiller.setPenge(nuvPengebeholdning - felt.getSkat() );
+
+        ui.updateSpillere(spiller);
+    }
+
+    public void friParkering(UserInterfaceKontrakt ui ){
+        ui.friParkering();
     }
 
 }

@@ -17,7 +17,7 @@ public class FriParkering extends FeltDTO {
 
     //|----------- Metoder:------------------
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
-        userInterfaceKontrakt.friParkering();
+
     }
 
     //|--------- Constructor:-----------------
