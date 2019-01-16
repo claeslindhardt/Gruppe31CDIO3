@@ -65,6 +65,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //Funktioner der kun bruges af GUI'en:
     //_______________________________________________________________
 
+    /**
+     *
+     * @param spiller
+     */
     public void fjernBil(GUI_Player spiller){
 
         for( GUI_Field felt : felter){
@@ -243,7 +247,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public int velkomstMenu(int minInput, int maxInput){
-        String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOL SPILLET V1, MKIII",
+        String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOLY SPILLET V1, MKIII",
                 "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
         hovedmenu.showMessage(valg);
         //todo: fix this to return the right option
@@ -766,7 +770,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     /**
      * @author Chua
      * Generere et hotel på den grund man ejer.
-     * @param ejendom
+     * @param ejendom - Den grund man vil lave et hotel på
      */
     @Override
     public void byggeHotel(EjendomCO ejendom) {
