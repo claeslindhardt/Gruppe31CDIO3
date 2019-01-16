@@ -271,7 +271,7 @@ public class SpilController{
                 //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
                 spil.setVinder(spil.getSpillerMedTur().getId() + 1);
                 spil.setVinderFindes(true);
-                ui.vinder(spil.getSpillerMedTur().getId());
+                ui.vinder(spil.getSpillerMedTur().getId() + 1);
             }
         }
     }
@@ -339,7 +339,7 @@ public class SpilController{
                 //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
-                ui.ikkeMuligt();
+
         }
 
     }

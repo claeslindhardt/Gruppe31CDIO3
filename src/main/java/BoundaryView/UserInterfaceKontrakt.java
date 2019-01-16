@@ -19,7 +19,6 @@ public interface UserInterfaceKontrakt {
     //===================================================
     //===================================================
     int TurMenu(int getSpillerTur, int minInput, int maxInput);
-    void ikkeMuligt();
     int velkomstMenu(int minInput, int maxInput);
     int instilingsSporgsmaal0(int minInput, int maxInput);
     int instilingsSporgsmaall(int minInput, int maxInput);
@@ -44,7 +43,6 @@ public interface UserInterfaceKontrakt {
     void ingenChanceKort();
     int hvorHen(int pos, int min, int max);
     void holdDigPaaBrettet();
-    void spillerStat(Spiller spiller);
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
