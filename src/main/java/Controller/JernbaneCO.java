@@ -68,7 +68,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
             int kobsBeslutning = userInterfaceKontrakt.jernBaneTilbud();
             switch (kobsBeslutning) {
                 case 1:
-                    spil.getKoebFelt().koebJernbane(this, spillerMedTur, userInterfaceKontrakt,spil);
+                    spil.getKoebFelt().koebJernbane(this, spillerMedTur, userInterfaceKontrakt);
                     break;
                 case 2:
                     userInterfaceKontrakt.forsetTur();

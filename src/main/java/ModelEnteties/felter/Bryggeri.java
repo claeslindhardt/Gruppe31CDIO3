@@ -25,34 +25,4 @@ public class Bryggeri extends EjeligtFeltDTO {
     }
 
 
-
-
-    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
-
-        if(this.getEjer()==null){
-            this.printInfo(userInterfaceKontrakt);
-
-
-            int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
-            switch (kobsBeslutning){
-                case 0:
-                    spil.getKoebFelt().koebBryggeri(this, spillerMedTur, userInterfaceKontrakt, spil);
-                    break;
-                case 1:
-                    userInterfaceKontrakt.forsetTur();
-
-                    break;
-                default:
-                    userInterfaceKontrakt.ikkeMuligt();
-            }
-        }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
-            userInterfaceKontrakt.betalRente();
-            userInterfaceKontrakt.updateSpillere(spillerMedTur);
-            handel.indsamleLeje(spil.getSpil(),this,spillerMedTur, userInterfaceKontrakt);
-        }else if(this.getEjer() == spillerMedTur){
-            userInterfaceKontrakt.tetPaaMonopol();
-        }
-    }
-
 }
