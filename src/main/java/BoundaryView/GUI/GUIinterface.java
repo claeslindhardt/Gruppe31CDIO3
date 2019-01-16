@@ -520,14 +520,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void tetPaaMonopol(){
         gui.showMessage("Du er landet på et sted du ejer, naermer du dig et monopol?");
     }
+
     public void chanceFeltsInfo(ChanceFeltCO felt){
-        gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
+        /*gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
                 +"\nKort på felt:");
-        for(int i = 0; i<felt.getKortPaaFelt().size();i++){
+        for(int i = 0; i< felt.getKortPaaFelt().size();i++ ){
             gui.showMessage(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
         }
         System.out.print(" |");
-        System.out.println(" ");
+        System.out.println(" ");*/
     }
 
     public void updateSpillere(Spiller spiller){
