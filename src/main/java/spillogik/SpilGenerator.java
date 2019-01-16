@@ -347,6 +347,8 @@ public class SpilGenerator {
         // TODO Implementer fastsatte chancekort
 
         /*
+        Disse Chancekort er IKKE blevet implementeret:
+
         Tag ind på Rådhuspladsen.
 
         Du modtager Matador legatet.
