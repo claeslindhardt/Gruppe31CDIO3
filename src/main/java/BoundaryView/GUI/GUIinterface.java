@@ -208,8 +208,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting");
-        gui.showMessage("Du har valgt: " + valg);
-            return input.TurMenu(valg);
+
+        return input.TurMenu(valg);
     }
 
     public void ikkeMuligt(){
@@ -380,7 +380,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void ingenChanceKort(){
-        System.out.println("Du har ikke nogle Chancekort lige nu.");
+        gui.showMessage("Du har ikke nogen chancekort.");
     }
 
     public void jernBaneInfo(JernbaneCO station){
