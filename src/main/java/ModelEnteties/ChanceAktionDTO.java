@@ -1,4 +1,4 @@
-package ModelEnteties.felter;
+package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Handel;

@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 
 import java.util.Random;
 
@@ -19,8 +19,6 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
      */
     public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         Spiller spiller = spil.getSpil().getSpillerMedTur();
-        userInterfaceKontrakt.printChanceKortDirekte(this);
-        userInterfaceKontrakt.chanceKortTilføjet();
 
         spil.getSpil().getChanceKort().remove(this); // Fjerner kortet fra bunken
         spiller.addChancekort(  this );
@@ -45,8 +43,8 @@ public class GratisUdAfFaengselCO extends ChanceAktionDTO {
     public GratisUdAfFaengselCO(){
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String grund = getPositiveGrunde()[valgAfGrund];
-        String slutBeskrivelse = " Derfor syntes vi at du er så god en borger," +
-                "at du fortjener at komme engang gratis ud af fængsel. ";
+        String slutBeskrivelse = "Derfor syntes vi at du er så god en borger," +
+                "at du fortjener at komme engang gratis ud af fængsel.";
         String forklaring = grund.concat(slutBeskrivelse);
 
         this.setBeskrivelse(forklaring);

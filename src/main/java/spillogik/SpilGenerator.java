@@ -1,7 +1,7 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
 import Controller.*;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
@@ -10,8 +10,6 @@ import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.awt.*;
 import java.util.ArrayList;
-
-import static spillogik.RandomGenerator.genererRandomFelter;
 
 public class SpilGenerator {
 

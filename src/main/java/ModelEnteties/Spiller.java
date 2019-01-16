@@ -1,10 +1,8 @@
 package ModelEnteties;
 
 import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
-import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.Rederi;
 
 import java.util.ArrayList;

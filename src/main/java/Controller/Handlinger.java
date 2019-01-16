@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
