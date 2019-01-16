@@ -28,6 +28,7 @@ public class GiverPengeCO extends Chancekort {
 
     //|--------- Constructor:-----------------
     public GiverPengeCO(){
+        super("", true);
         int potentiellePenge = ra.nextInt(499)+1;
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String startBeskrivelse = "Du modtager: ";

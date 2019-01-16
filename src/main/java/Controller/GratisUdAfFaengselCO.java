@@ -29,6 +29,7 @@ public class GratisUdAfFaengselCO extends Chancekort {
         userInterfaceKontrakt.chanceKortTilføjet();
     }
 
+
     /**
      * Indsæt beskrivelse her
      * @param spil
@@ -43,6 +44,7 @@ public class GratisUdAfFaengselCO extends Chancekort {
 
     //|----------- Constructor:------------------
     public GratisUdAfFaengselCO(){
+        super( "", true );
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String grund = getPositiveGrunde()[valgAfGrund];
         String slutBeskrivelse = "Derfor syntes vi at du er så god en borger," +

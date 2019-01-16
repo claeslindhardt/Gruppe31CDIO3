@@ -103,8 +103,6 @@ public class LandPaaFelt {
 
         ui.iFaengselMedDig();
         ui.duErLandetPå( faengsel, spillerMedTur);
-
-        spilController.slutSpillerTur();
     }
 
     public void faengsel( UserInterfaceKontrakt ui ){

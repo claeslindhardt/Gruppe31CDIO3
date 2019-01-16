@@ -6,6 +6,8 @@ import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.chancekort.JustererPenge;
 import ModelEnteties.chancekort.RykTilBestemtFelt;
+import ModelEnteties.chancekort.SmidIFaengsel;
+import ModelEnteties.felter.Faengsel;
 import ModelEnteties.felter.Felt;
 
 public class BrugChancekort {
@@ -30,6 +32,9 @@ public class BrugChancekort {
 
         }else if( chancekort instanceof RykTilBestemtFelt ){
             rykTilBestemtFelt( (RykTilBestemtFelt) chancekort, spiller, spilController, ui );
+
+        }else if( chancekort instanceof SmidIFaengsel ){
+            smidIFaengsel( spiller , spil, ui );
 
         }
 
@@ -72,6 +77,16 @@ public class BrugChancekort {
     public void rykTilBestemtFelt( RykTilBestemtFelt chancekort, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
         Felt felt = spilController.getSpil().getFelter()[ chancekort.getFeltNummer() ];
         spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
+    }
+
+    public void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
+        Faengsel faengsel = spil.getFaengsel();
+
+        spiller.setFaengselsStraf(true);
+        spiller.setSpillerPosition( faengsel.getPlacering() );
+
+        ui.iFaengselMedDig();
+        ui.duErLandetPå( faengsel, spiller);
     }
 
 
