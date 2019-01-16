@@ -643,12 +643,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
-    public  void saelgHus(EjendomCO ejendom){
+    public  void saelgHus(Ejendom ejendom){
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
     }
 
-    public void saelgHotel(EjendomCO ejendom){
+    public void saelgHotel(Ejendom ejendom){
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHotel(false);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
@@ -715,7 +715,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return indexRetur;
     }
 
-    public int input_EjendomAtSaelgeFra(ArrayList<EjendomCO> ejendomme) {
+    public int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme) {
         String[] ejendomsListe = new String[ejendomme.size()+1];
 
         //Arraylist converteres til et array

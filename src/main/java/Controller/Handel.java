@@ -74,7 +74,7 @@ public class Handel {
         }
     }
 
-    public void saelgHus(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
         if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())){
 
             ejendom.saelgHus(1);
@@ -87,7 +87,7 @@ public class Handel {
         }
     }
 
-    public void saelgHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void saelgHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
 
         spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
         ejendom.saelgHotel(false);
@@ -136,7 +136,7 @@ public class Handel {
 
 
     public void saelgHusPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
-        ArrayList<EjendomCO> kartotek = opretEjendomsKartotek(spiller);
+        ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
 
         if(kartotek.size() > 0){
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
@@ -153,7 +153,7 @@ public class Handel {
     }
 
     public void saelgHotelPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
-        ArrayList<EjendomCO> kartotek = opretHotelKartotek(spiller);
+        ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
         if(kartotek.size() > 0){
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
@@ -224,12 +224,12 @@ public class Handel {
     }
 
 
-    public ArrayList<EjendomCO> opretEjendomsKartotek(Spiller spiller){
+    public ArrayList<Ejendom> opretEjendomsKartotek(Spiller spiller){
         int count =0;
 
-        EjendomCO[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendomme();
 
-        ArrayList<EjendomCO> kartotek = new ArrayList<>();
+        ArrayList<Ejendom> kartotek = new ArrayList<>();
 
         for(int i = 0; i < ejendomme.length;i++){
             if(EjendomsLogik.kanSaelgeHus(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
@@ -239,10 +239,10 @@ public class Handel {
         return kartotek;
     }
 
-    public ArrayList<EjendomCO> opretHotelKartotek(Spiller spiller){
+    public ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
         int count =0;
 
-        EjendomCO[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendomme();
 
 
         for(int i = 0; i < ejendomme.length;i++){
@@ -250,7 +250,7 @@ public class Handel {
                 count++;
             }
         }
-        ArrayList<EjendomCO> kartotek = new ArrayList<>();
+        ArrayList<Ejendom> kartotek = new ArrayList<>();
 
         for(int j = 0; j < ejendomme.length;j++){
             if(ejendomme[j].harHotel()){

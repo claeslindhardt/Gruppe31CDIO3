@@ -42,10 +42,10 @@ public class EjendomsLogik {
      * @param ejendomsUdgangspunkt
      * @return
      */
-    public static boolean fordelingAfHuseVedSalg( EjendomCO ejendomsUdgangspunkt ){
+    public static boolean fordelingAfHuseVedSalg( Ejendom ejendomsUdgangspunkt ){
 
         for (int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
-            EjendomCO ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
+            Ejendom ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()){
 
@@ -123,17 +123,17 @@ public class EjendomsLogik {
     }
 
 
-    public static boolean kanSaelgeHus(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+    public static boolean kanSaelgeHus(Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
-                &&  fordelingAfHuseVedSalg( ejendom )
+                &&  fordelingAfHuseVedSalg(ejendom)
                 &&  ejendom.getAntalHuse() > 0
                 &&  !ejendom.harHotel();
 
     }
 
-    public static double beregnSalgsPrisHus(EjendomCO ejendom, int antalHuse){
+    public static double beregnSalgsPrisHus(Ejendom ejendom, int antalHuse){
 
         if(ejendom.harHotel()){
             return ((ejendom.getHotelPris())/2);
