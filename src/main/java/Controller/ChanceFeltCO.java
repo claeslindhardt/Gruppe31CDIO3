@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.felter.AktionsFelterDTO;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,11 +31,13 @@ public class ChanceFeltCO extends AktionsFelterDTO {
      * @param userInterfaceKontrakt
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        int antalKort = KortPaaFelt.size();
-        int vælgAktion = ra.nextInt(antalKort)+1;
-        ChanceAktionDTO relavantKort = KortPaaFelt.get(vælgAktion);
+        ArrayList<ChanceAktionDTO> chancekort = spil.getSpil().getChanceKort();
 
-        relavantKort.DirketeAktion(handel, spil, userInterfaceKontrakt);
+        ChanceAktionDTO trukketKort = chancekort.get(0);
+        chancekort.remove(0);
+        chancekort.add(trukketKort);
+
+        trukketKort.DirketeAktion(handel, spil, userInterfaceKontrakt);
     }
 
     /**

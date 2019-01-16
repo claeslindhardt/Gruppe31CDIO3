@@ -39,9 +39,24 @@ class SpilControllerTest {
         Carlsberg.setEjer(spiller);
 
         Rederi Øresund = new Rederi("A/S Øresund",20,5);
+        Øresund.setLeje(25);
+        spiller.addRederi(Øresund);
+        Øresund.setEjer(spiller);
+
         Rederi Bornholm = new Rederi("D/S Bornholm",20,6);
+        Bornholm.setLeje(25);
+        spiller.addRederi(Bornholm);
+        Øresund.setEjer(spiller);
+
         Rederi ØK = new Rederi("Ø.K.",20,7);
+        ØK.setLeje(25);
+        spiller.addRederi(ØK);
+        ØK.setEjer(spiller);
+
         Rederi DFDS = new Rederi("D.F.D.S.",20,8);
+        DFDS.setLeje(25);
+        spiller.addRederi(DFDS);
+        DFDS.setEjer(spiller);
 
         spil.getFelter()[3] = Tuborg;
         spil.getFelter()[4] = Carlsberg;

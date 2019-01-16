@@ -4,8 +4,6 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.FaengselCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.ChanceAktionDTO;
-import ModelEnteties.felter.EjendomCO;
 
 import java.util.ArrayList;
 
@@ -21,6 +19,8 @@ public class Spil {
 
     private FeltDTO[] felter;
 
+    private ArrayList<ChanceAktionDTO> chanceKort;
+
     public ArrayList<ChanceAktionDTO> getChanceKort() {
         return chanceKort;
     }
@@ -28,7 +28,12 @@ public class Spil {
     public void setChanceKort(ArrayList<ChanceAktionDTO> chanceKort) {
         this.chanceKort = chanceKort;
     }
-    private ArrayList<ChanceAktionDTO> chanceKort;
+
+    public void addChancekort(ChanceAktionDTO chancekort ){
+        this.chanceKort.add(chancekort);
+    }
+
+
 
     private  boolean kør = true;
 

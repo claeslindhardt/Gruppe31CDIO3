@@ -4,7 +4,7 @@ import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
@@ -23,7 +23,7 @@ public class RandomGenerator {
 
         spil.setSpillere( genererSpillere(antalSpillere, startPenge) );
         spil.setFelter( genererRandomFelter(antalFelter, 100, 25) );
-        // spil.setChanceKort( genererChancekort);
+        spil.setChanceKort( genererChancekort(antalChanceKort) );
         spil.setRaflebaeger( new RafleBaeger(2));
 
         return spil;

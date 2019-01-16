@@ -1,10 +1,8 @@
 package ModelEnteties;
 
 import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjeligtFeltDTO;
 import ModelEnteties.felter.EjendomCO;
 import Controller.JernbaneCO;
-import ModelEnteties.felter.ChanceAktionDTO;
 import ModelEnteties.felter.Rederi;
 
 import java.util.ArrayList;
@@ -25,9 +23,10 @@ public class Spiller {
     // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
-    ArrayList<ChanceAktionDTO> spillerAktionsKort = new ArrayList<ChanceAktionDTO>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
+
+    ArrayList<ChanceAktionDTO> chancekort = new ArrayList<ChanceAktionDTO>();
 
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
@@ -63,6 +62,14 @@ public class Spiller {
     }
 
 
+    public ArrayList<ChanceAktionDTO> getChancekort() {
+        return chancekort;
+    }
+
+    public void addChancekort( ChanceAktionDTO chancekort) {
+        this.chancekort.add(chancekort);
+    }
+
     /**
      * @author Malte
      * Henter liste over spillerens ejendomme.
@@ -95,16 +102,12 @@ public class Spiller {
         spillerBryggeri.add(bryggeri);
     }
 
+    public void addRederi(Rederi rederi){
+        spillerRederier.add(rederi);
+    }
+
     public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
         this.spillerJernbaner = spillerJernbaner;
-    }
-
-    public ArrayList<ChanceAktionDTO> getSpillerAktionsKort() {
-        return spillerAktionsKort;
-    }
-
-    public void setSpillerAktionsKort(ArrayList<ChanceAktionDTO> spillerAktionsKort) {
-        this.spillerAktionsKort = spillerAktionsKort;
     }
 
     public ArrayList<Rederi> getSpillerRederier(){ return spillerRederier;}
@@ -113,13 +116,6 @@ public class Spiller {
         this.spillerRederier = spillerRederier;
     }
 
-    /**
-     * Indsæt beskrivelse her
-     * @param spillerAktionsKort
-     */
-    public void addSpillerAktionsKort(ChanceAktionDTO spillerAktionsKort) {
-        this.spillerAktionsKort.add(spillerAktionsKort);
-    }
 
     public double getPenge() {
         return penge;

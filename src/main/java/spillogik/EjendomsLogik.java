@@ -59,6 +59,14 @@ public class EjendomsLogik {
     }*/
 
 
+    /**
+     * @author
+     * Reglerne som skal opfyldes for at man kan koebe et hotel.
+     * @param spiller
+     * @param ejendom
+     * @param ejendomsGruppe
+     * @return
+     */
     public static boolean kanKoebeHotel(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
@@ -136,8 +144,8 @@ public class EjendomsLogik {
         return leje;
     }
 
-    public static int beregnLejeRederi(EjeligtFeltDTO felt, Spiller spiller){
-        int leje = 25;
+    public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
+        int leje = rederi.getLeje();
 
         if (spiller.getSpillerRederier().size() == 2){
             leje = leje * 2;

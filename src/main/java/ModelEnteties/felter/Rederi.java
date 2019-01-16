@@ -35,10 +35,10 @@ private int leje = 0;
 
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
-                case 1:
+                case 0:
                     spil.getKoebFelt().koebRederi(this, spillerMedTur, userInterfaceKontrakt);
                     break;
-                case 2:
+                case 1:
                     userInterfaceKontrakt.forsetTur();
 
                     break;

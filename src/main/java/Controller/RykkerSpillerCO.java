@@ -1,7 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.Spil;
+import ModelEnteties.Spiller;
+import ModelEnteties.ChanceAktionDTO;
 
 import java.util.Random;
 
@@ -13,18 +15,17 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
 
     /**
      * Indsæt beskrivelse her
-     * @param spil
      * @param userInterfaceKontrakt
      */
-    public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        // TODO: Fix denne
-        /*Spiller spillerMedTur = spil.getSpillerMedTur();
+    public void DirketeAktion(Handel handel, SpilController spilController, UserInterfaceKontrakt userInterfaceKontrakt){
+        Spil spil = spilController.getSpil();
+        Spiller spiller = spil.getSpillerMedTur();
+
+        spil.getChanceKort().remove(this); // Fjerner kortet fra bunken
+        spiller.addChancekort(  this );
 
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
-
-        spillerMedTur.addSpillerAktionsKort(this);*/
-
     }
 
 
