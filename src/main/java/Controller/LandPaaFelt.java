@@ -59,9 +59,6 @@ public class LandPaaFelt {
                     ui.forsetTur();
                     break;
 
-                default:
-                    ui.ikkeMuligt();
-
             }
 
         }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
