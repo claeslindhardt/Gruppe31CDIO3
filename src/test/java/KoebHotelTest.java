@@ -1,11 +1,9 @@
 import Controller.SpilController;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Ejendom;
+import ModelEnteties.felter.Felt;
 import spillogik.RandomGenerator;
-import spillogik.SpilGenerator;
 
 public class KoebHotelTest {
 
@@ -20,9 +18,9 @@ public class KoebHotelTest {
         spiller.setNavn("Malte");
         spiller.setPenge(9999999);
 
-        for( FeltDTO felt : spil.getFelter() ){
-            if( felt instanceof EjendomCO){
-                EjendomCO ejendom = (EjendomCO) felt;
+        for( Felt felt : spil.getFelter() ){
+            if( felt instanceof Ejendom){
+                Ejendom ejendom = (Ejendom) felt;
 
                 ejendom.setEjer(spiller);
                 spiller.tilføjEjendom(ejendom);

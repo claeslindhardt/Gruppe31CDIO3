@@ -1,4 +1,4 @@
-import BoundaryView.TUI.TUI;
+
 import BoundaryView.GUI.GUIinterface;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
@@ -116,10 +116,10 @@ public class Main {
         if(startArgument == 1) {
             System.out.println("Starter med GUI");
             Ui = new GUIinterface();
-        } else if (startArgument == 2){
+        } /*else if (startArgument == 2){
             System.out.println("Starter med TUI");
             Ui = new TUI();
-        }
+        }*/
         return Ui;
     }
 

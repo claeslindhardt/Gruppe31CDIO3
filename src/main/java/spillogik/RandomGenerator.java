@@ -5,8 +5,7 @@ import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
 import ModelEnteties.ChanceAktionDTO;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
@@ -30,12 +29,12 @@ public class RandomGenerator {
     }
 
 
-    public static EjendomsGruppeDTO[] genererEjendomsGrupper(EjendomCO[] ejendomme, int gruppeStoerrelse){
+    public static EjendomsGruppeDTO[] genererEjendomsGrupper(Ejendom[] ejendomme, int gruppeStoerrelse){
         ArrayList<EjendomsGruppeDTO> ejendomsGrupper = new ArrayList<>();
         EjendomsGruppeCO ejendomsGruppeController = new EjendomsGruppeCO(gruppeStoerrelse);
 
         // Tilfoejer alle ejendomme til grupper
-        for( EjendomCO ejendom : ejendomme ){
+        for( Ejendom ejendom : ejendomme ){
             EjendomsGruppeDTO gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
             ejendom.setGruppe(gruppe);
             ejendomsGrupper.add(gruppe);
@@ -55,7 +54,7 @@ public class RandomGenerator {
      * @param felter Den liste som felter skal være i, og derfra den tomme plads skal findes
      * @return Array-index på den tomme plads i listen
      */
-    public static int getRandomLedigFeltPlads( FeltDTO[] felter ){
+    public static int getRandomLedigFeltPlads( Felt[] felter ){
         Random random = new Random();
         int indeks;
         do{
@@ -66,10 +65,10 @@ public class RandomGenerator {
 
 
     // Generer Random Felter
-    public static FeltDTO[] genererRandomFelter( int antalFelter, double startPris, double prisStigning ) {
+    public static Felt[] genererRandomFelter(int antalFelter, double startPris, double prisStigning ) {
 
         Random random = new Random();
-        FeltDTO[] felter;
+        Felt[] felter;
 
         /*
             Do-while loopet kører så længe at braettet ikke har et bestemt
@@ -78,22 +77,22 @@ public class RandomGenerator {
          */
         do {
 
-            felter = new FeltDTO[antalFelter];
+            felter = new Felt[antalFelter];
             EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
-            felter[0] = new StartCO(0,0);
+            felter[0] = new StartFelt(0);
 
             // Placerer "must have" felter
             int placering;
 
             placering = getRandomLedigFeltPlads(felter);
-            felter[placering] = new FaengselCO("Faengsel", placering);
+            felter[placering] = new Faengsel("Faengsel", placering);
 
             placering = getRandomLedigFeltPlads(felter);
             felter[placering] = new TaxiCO(placering);
 
             placering = getRandomLedigFeltPlads(felter);
-            felter[placering] = new GaaIFaengselCO(placering);
+            felter[placering] = new GaaIFaengsel(placering);
 
             // Genererer random felter
             int antalEjendomme = 0, antalChancefelter = 0, antalJernbaner = 0;
@@ -110,7 +109,7 @@ public class RandomGenerator {
 
                     // Ejendom
                     if (feltType <= 5) {
-                        EjendomCO ejendom = new EjendomCO( navneGenerator.getEjendomsNavn(), (int) feltPris, (int) feltPris/2, i );
+                        Ejendom ejendom = new Ejendom( navneGenerator.getEjendomsNavn(), (int) feltPris, (int) feltPris/2, i );
                         felter[i] = ejendom;
                         ejendomsGruppeCO.tilfoejTilGruppe(ejendom);
 
@@ -124,7 +123,7 @@ public class RandomGenerator {
                         // Proev lykken
                     } else if (feltType == 8) {
                         // TODO: Fix det her med chancekort - Malte
-                        felter[i] = new ChanceFeltCO(i, genererChancekort(20));
+                        felter[i] = new ProevLykken( i );
                         antalChancefelter++;
 
                     }

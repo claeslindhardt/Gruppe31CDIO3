@@ -1,7 +1,6 @@
 package ModelEnteties;
 
-import Controller.EjendomsGruppeCO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 
 
 import java.awt.*;
@@ -23,7 +22,7 @@ public class EjendomsGruppeDTO {
     private int id;
     private int stoerrelse;
     private Color farve;
-    private ArrayList<EjendomCO> ejendomme = new ArrayList<EjendomCO>();
+    private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
 
     /**
      * @author Malte
@@ -59,7 +58,7 @@ public class EjendomsGruppeDTO {
         return ejendomme.size() >= stoerrelse;
     }
 
-    public ArrayList<EjendomCO> getEjendomme() {
+    public ArrayList<Ejendom> getEjendomme() {
         return ejendomme;
     }
 
@@ -76,7 +75,7 @@ public class EjendomsGruppeDTO {
      * @param ejendom Ejendommen som gruppen skal indeholder
      * @return Om den indeholder 'ejendom' eller ej.
      */
-    public boolean indeholderEjendom(EjendomCO ejendom){
+    public boolean indeholderEjendom(Ejendom ejendom){
         return ejendomme.contains(ejendom);
     }
 
@@ -84,13 +83,13 @@ public class EjendomsGruppeDTO {
      * @param ejendom Ejendommen der skal tilføjes til gruppen.
      * @author Malte
      */
-    public void tilfoejEjendom( EjendomCO ejendom){
+    public void tilfoejEjendom( Ejendom ejendom){
         ejendomme.add(ejendom);
         ejendom.setGruppe(this);
     }
 
-    public void tilfoejEjendomme( EjendomCO ... ejendomme ){
-        for( EjendomCO ejendom : ejendomme ){
+    public void tilfoejEjendomme( Ejendom... ejendomme ){
+        for( Ejendom ejendom : ejendomme ){
             this.ejendomme.add(ejendom);
             ejendom.setGruppe(this);
         }

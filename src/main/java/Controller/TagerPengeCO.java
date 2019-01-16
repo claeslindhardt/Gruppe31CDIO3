@@ -18,6 +18,7 @@ public class TagerPengeCO extends ChanceAktionDTO {
      * @param userInterfaceKontrakt
      */
     public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.trækEtChancekort();
         userInterfaceKontrakt.printChanceKortDirekte(this);
 
         Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();

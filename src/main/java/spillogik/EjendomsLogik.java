@@ -2,11 +2,9 @@ package spillogik;
 
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjeligtFeltDTO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.EjeligtFelt;
+import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
-import ModelEnteties.raflebaeger.RafleBaeger;
 
 public class EjendomsLogik {
 
@@ -22,10 +20,10 @@ public class EjendomsLogik {
      * @param ejendomsUdgangspunkt  Udgangspunktet for undersøgelsen
      * @return  Om huse er fordeligt ligeligt i ejendomsgruppen og at man derfor kan koebe et hus på ejendommen
      */
-    public static boolean huseErFordeltIGruppe( EjendomCO ejendomsUdgangspunkt ){
+    public static boolean huseErFordeltIGruppe( Ejendom ejendomsUdgangspunkt ){
 
         for (int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
-            EjendomCO ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
+            Ejendom ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if( ejendom.getAntalHuse() < ejendomsUdgangspunkt.getAntalHuse() ){
                 if ( ejendom.harHotel()){
@@ -67,10 +65,10 @@ public class EjendomsLogik {
      * @param ejendomUdgangspunkt Udgangspunkt for undersøgelsen
      * @return om huse er ligeligt fordelt i ejendomsgruppen, og om den er i et mode, hvor man kan sælge huset.
      */
-    /**public static boolean kanManSaelgeEtHus(EjendomCO ejendomUdgangspunkt){
+    /**public static boolean kanManSaelgeEtHus(Ejendom ejendomUdgangspunkt){
 
         for (int i = 0; i < ejendomUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
-            EjendomCO ejendom = ejendomUdgangspunkt.getGruppe().getEjendomme().get(i);
+            Ejendom ejendom = ejendomUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
                 return false;
@@ -88,7 +86,7 @@ public class EjendomsLogik {
      * @param ejendomsGruppe
      * @return
      */
-    public static boolean kanKoebeHotel(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe){
+    public static boolean kanKoebeHotel(Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
                 &&  huseErFordeltIGruppe( ejendom )
@@ -114,7 +112,7 @@ public class EjendomsLogik {
      * @param ejendomsGruppe    Ejendomsgruppen som Ejendommen tilhoerer
      * @return  Om man kan koebe hus eller ej.
      */
-    public static boolean kanKoebeHus(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+    public static boolean kanKoebeHus(Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
@@ -153,18 +151,18 @@ public class EjendomsLogik {
      * @param harAlleIGruppe    Om ejeren af Ejendommen har alle i 'ejendom's gruppe.
      * @return
      */
-    public static int beregnLejeTotal(EjeligtFeltDTO felt, boolean harAlleIGruppe ){
+    public static int beregnLejeTotal(EjeligtFelt felt, boolean harAlleIGruppe ){
         int leje;
 
         //Her beregnes den leje som man skal betale, hvis at man har et en grund.
-                if( ((EjendomCO) felt).getAntalHuse() > 0 ){
-                    leje = ((EjendomCO) felt).getLejeHus(((EjendomCO) felt).getAntalHuse());
+                if( ((Ejendom) felt).getAntalHuse() > 0 ){
+                    leje = ((Ejendom) felt).getLejeHus(((Ejendom) felt).getAntalHuse());
 
-                }else if( ((EjendomCO) felt).harHotel() ){
-                    leje = ((EjendomCO) felt).getLejeHotel();
+                }else if( ((Ejendom) felt).harHotel() ){
+                    leje = ((Ejendom) felt).getLejeHotel();
 
                 }else{
-                    leje = ((EjendomCO) felt).getLejeStart();
+                    leje = ((Ejendom) felt).getLejeStart();
                     if( harAlleIGruppe ){  leje *= 2;  }
                 }
                 return leje;
@@ -210,7 +208,7 @@ public class EjendomsLogik {
      * @param antalHuse     Antallet af huse man vil beregne leje for
      * @return Lejen på en Ejendom ved et bestemt antal huse.
      */
-    public static int beregnLejeVedHus(EjendomCO ejendom, int antalHuse){
+    public static int beregnLejeVedHus(Ejendom ejendom, int antalHuse){
 
         int lejePerHus = ejendom.getLejeStart() * 2;
 
@@ -225,7 +223,7 @@ public class EjendomsLogik {
      * @param ejendom       Ejendommen man vil beregne for
      * @return  Lejen på Ejendommen hvis der står et hotel
      */
-    public static int beregnLejeVedHotel( EjendomCO ejendom ){
+    public static int beregnLejeVedHotel( Ejendom ejendom ){
         return beregnLejeVedHus(ejendom, 5);
     }
 

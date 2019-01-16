@@ -6,8 +6,9 @@ import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Felt;
 import ModelEnteties.ChanceAktionDTO;
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -28,7 +29,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
 
-
+    GUI_Center gui_center = GUI_Center.getInstance();
     private GUI gui;
     private GUI hovedmenu = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
@@ -64,6 +65,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //Funktioner der kun bruges af GUI'en:
     //_______________________________________________________________
 
+    /**
+     *
+     * @param spiller
+     */
     public void fjernBil(GUI_Player spiller){
 
         for( GUI_Field felt : felter){
@@ -88,53 +93,98 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void genererGUIBret( Spil spil ){
-        FeltDTO[] felter = spil.getFelter();
+        Felt[] felter = spil.getFelter();
         Spiller[] spillere = spil.getSpillere();
         int antalFelter =  felter.length;
+
+
+
 
         GUI_Field[] gui_felter = new GUI_Field[ antalFelter ];
 
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
-            GUI_Field gui_felt;
+            GUI_Field gui_felt = null;
 
-            FeltDTO felt = felter[i];
+            Felt felt = felter[i];
 
-            if(felt.getFeltType() == "Bryggeri"){
-                gui_felt = new GUI_Brewery();
-                gui_felt.setTitle( felt.getNavn() );
-                gui_felt.setSubText( felt.getFeltType() );
-            } else {
-                gui_felt = new GUI_Street();
+
+            if( felt instanceof EjeligtFelt) {
+                EjeligtFelt ejeligtFeltDTO = (EjeligtFelt) felt;
+
+                if (ejeligtFeltDTO instanceof Ejendom) {
+                    gui_felt = new GUI_Street();
+
+                } else if (ejeligtFeltDTO instanceof Bryggeri) {
+                    gui_felt = new GUI_Brewery();
+
+                } else if ( ejeligtFeltDTO instanceof Rederi ) {
+                    gui_felt = new GUI_Shipping();
+                    gui_felt.setBackGroundColor(Color.white);
+                }
+                gui_felt.setTitle(ejeligtFeltDTO.getNavn());
+                gui_felt.setSubText("Pris: " + ejeligtFeltDTO.getPris() + " kr.");
+
+
+            }else if ( felt instanceof StartFelt){
+                gui_felt = new GUI_Start();
+                gui_felt.setTitle("StartFelt");
+                gui_felt.setSubText("");
+                gui_felt.setBackGroundColor(Color.white);
+
+            } else if( felt instanceof ProevLykken) {
+                gui_felt = new GUI_Chance();
+
+            } else if( felt instanceof FriParkering ){
+                gui_felt = new GUI_Refuge();
+                gui_felt.setBackGroundColor(Color.white);
+                gui_felt.setSubText("Fri parkering");
+
+            } else if( felt instanceof GaaIFaengsel) {
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Gaa i faengsel");
+
+
+            } else if( felt instanceof Faengsel){
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Faengsel");
+
+            } else if (felt instanceof IndkomstSkat){
+                gui_felt = new GUI_Tax();
                 gui_felt.setTitle(felt.getNavn());
-                gui_felt.setSubText(felt.getFeltType());
+                gui_felt.setSubText("");
 
+            } else if( felt instanceof StatsSkat) {
+                gui_felt = new GUI_Tax();
+                gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText("");
             }
+
+
             gui_felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
-                EjendomCO ejendom = (EjendomCO) felt;
+                Ejendom ejendom = (Ejendom) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
-                ((GUI_Street) gui_felt).setHouses(((EjendomCO) felt).getAntalHuse());
-                gui_felt.setDescription("Grundpris: "+((EjendomCO) felt).getPris() + " / "
-                        + "Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
-                        + "Huspris: " + ((EjendomCO) felt).getHusPris() + " / "
-                        + "Leje fra hus 1: " + ((EjendomCO) felt).getLejeHus(1) + " / "
-                        + "Leje fra hus 2: " + ((EjendomCO) felt).getLejeHus(2) + " / "
-                        + "Leje fra hus 3: " + ((EjendomCO) felt).getLejeHus(3) + " / "
-                        + "Leje fra hus 4: " + ((EjendomCO) felt).getLejeHus(4) + " / "
-                        + "Leje fra hotel: " + ((EjendomCO) felt).getLejeHotel());
+                ((GUI_Street) gui_felt).setHouses(((Ejendom) felt).getAntalHuse());
+                gui_felt.setDescription("Grundpris: "+((Ejendom) felt).getPris() + " / "
+                        + "Grundleje: " + ((Ejendom) felt).getLeje() + " / "
+                        + "Huspris: " + ((Ejendom) felt).getHusPris() + " / "
+                        + "Leje fra hus 1: " + ((Ejendom) felt).getLejeHus(1) + " / "
+                        + "Leje fra hus 2: " + ((Ejendom) felt).getLejeHus(2) + " / "
+                        + "Leje fra hus 3: " + ((Ejendom) felt).getLejeHus(3) + " / "
+                        + "Leje fra hus 4: " + ((Ejendom) felt).getLejeHus(4) + " / "
+                        + "Leje fra hotel: " + ((Ejendom) felt).getLejeHotel());
 
             }else if(felt.getFeltType().equals("Bryggeri")) {
                 gui_felt.setDescription("Grundpris: "+((Bryggeri) felt).getPris() +" "+ ((Bryggeri) felt).getPris() + " / "
-                        + "Huspris: " + ((Bryggeri) felt).getLeje());
+                        + "Huspris: ");
 
             }
 
 
             else{
-                gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
                     gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + 0 );
                 }
@@ -198,8 +248,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public int velkomstMenu(int minInput, int maxInput){
-        String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOL SPILLET V1, MKIII",
-                "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
+        String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOLY SPILLET V1, MKIII",
+                "starte nyt spil", "aendre spil instillinger");
         hovedmenu.showMessage(valg);
         //todo: fix this to return the right option
         return input.velkomstMenu(valg);
@@ -209,15 +259,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
         String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting","Sælg hus på ejendommen","Sælg Hotel på ejendommen");
+                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting", "Sælg hus på ejendommen","Sælg Hotel på ejendommen");
 
         return input.TurMenu(valg);
     }
-
-    public void ikkeMuligt(){
-        gui.showMessage("Dette er ikke en mulighed endnu - prøv igen");
-    }
-
 
     /**
      * @author Jacob og Chua
@@ -292,7 +337,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void ingenHeldIRetten(){
         gui.showMessage("Ingen held i retten i dag, forbliv i faengsel." +
-                "\nDu kan stadig opkraeve rente og handle med ejendomme"
+                "\nDu kan stadig opkraeve leje"
         );
     }
     public void heldIRetten(){
@@ -334,7 +379,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void paaBesoegIFaengsel(){
-        System.out.println("Du er nu på besoeg i faengslet.");
+        gui.showMessage("Du er nu på besoeg i faengslet.");
     }
     public int vilDuGiveOp(){
         String valg = gui.getUserSelection("|--|Er du sikker på at du vil give op?",
@@ -350,7 +395,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du valgte ikke at give op. ");
     }
     public void passeringAfStart(int gangeOverStart){
-        gui.showMessage("Tillykke du har passeret Start "+gangeOverStart+" gang(e) og modtager "+200*gangeOverStart);
+        gui.showMessage("Tillykke du har passeret StartFelt "+gangeOverStart+" gang(e) og modtager "+200*gangeOverStart);
     }
     public void chanceKortHar(){
         gui.showMessage("Du har foelgende Chancekort:");
@@ -404,10 +449,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");
     }
 
-    public void spillerStat(Spiller spiller){
-        gui.showMessage("Navn: "+spiller.getNavn()+" ID: "+spiller.getId()+ " Position på braet: " + spiller.getSpillerPosition() +spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
-
-    }
 
     public void alleredeEjer(){
         gui.showMessage("Du er allerede ejer");
@@ -428,9 +469,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("| Felt nr: " + vogn.getPlacering() +" | Felt Navn:" + vogn.getNavn()+" | Felt type:"+ vogn.getFeltType()+" |");
     }
     public void overStartAnimation(){
-        System.out.println("Aktion som foelger af Start");
+        System.out.println("Aktion som foelger af StartFelt");
     }
-    public void startsFeltsInfo(StartCO felt){
+    public void startsFeltsInfo(StartFelt felt){
         gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
     }
     public void iFaengselMedDig(){
@@ -438,7 +479,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         "\nFordi du er landet på et felt, hvor man bliver kriminel "+
         "\nskal du nu en tur i kashotten.");
     }
-    public void faengselInfo(GaaIFaengselCO Faengsel){
+    public void faengselInfo(GaaIFaengsel Faengsel){
         gui.showMessage("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
 
     }
@@ -474,14 +515,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void tetPaaMonopol(){
         gui.showMessage("Du er landet på et sted du ejer, naermer du dig et monopol?");
     }
-    public void chanceFeltsInfo(ChanceFeltCO felt){
-        gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
+
+    public void chanceFeltsInfo(ProevLykken felt){
+        /*gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
                 +"\nKort på felt:");
-        for(int i = 0; i<felt.getKortPaaFelt().size();i++){
+        for(int i = 0; i< felt.getKortPaaFelt().size();i++ ){
             gui.showMessage(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
         }
         System.out.print(" |");
-        System.out.println(" ");
+        System.out.println(" ");*/
     }
 
     public void updateSpillere(Spiller spiller){
@@ -497,7 +539,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom Ejendommens der købes
      * @param spiller Spilleren der køber ejendommen
      */
-    public void gennemfoertKoeb(EjendomCO ejendom, Spiller spiller){
+    public void gennemfoertKoeb(Ejendom ejendom, Spiller spiller){
         gui.showMessage("Du har koebt " + ejendom.getNavn() + "!");
 
         /*  Henter gui_feltet med udgangspunkt i den givne 'ejendom' placering (ejendom.getplacering)
@@ -508,7 +550,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui_ejendom.setBorder(spillere.get( spiller.getId()).getCar().getPrimaryColor() );
 
     }
-    public void ejendomsInfo(EjendomCO ej){
+    public void ejendomsInfo(Ejendom ej){
         String ejer;
         if(ej.getEjer() == null){
             ejer = "Ingen ejer endnu";
@@ -526,18 +568,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, Spiller spiller){
-        String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
-        if(felt.getPlacering()==1){
-            str = str2;
-        }else str = str1;
 
-
-
-        gui.showMessage(str+felt.getPlacering()+": "+felt.getNavn());
+    public void duErLandetPå(Felt felt, Spiller spiller ){
+        gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
         GUI_Player guiSpiller = spillere.get(spiller.getId());
-        rykBil(guiSpiller,felt.getPlacering());
+        rykBil( guiSpiller, felt.getPlacering() );
     }
+
+    public void landetPaaStart(){
+        gui.showMessage("Tag du dig bare en pause.");
+    }
+
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
     }
@@ -550,9 +591,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void spillerEjendele(Spiller spiller){
         gui.showMessage("Ejendomme: ");
-        for(int i = 0; i<spiller.getSpillerEjendomme().size();i++){
-            spiller.getSpillerEjendomme().get(i).printInfo(this);
-        }
         gui.showMessage("Jernbaner: ");
         for(int i = 0; i<spiller.getSpillerJernbaner().size();i++){
             spiller.getSpillerJernbaner().get(i).printInfo(this);
@@ -564,9 +602,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("______________________________________________________________________________");
     }
 
-    public void printChanceKortDirekte(ChanceAktionDTO di){
-        gui.showMessage(di.getBeskrivelse());
+    public void landPaaStart(){
+        gui.showMessage("Du er landet på start, så du kan bare tage dig en pause.");
+    }
 
+    public void trækEtChancekort(){
+        gui.showMessage("Du må trække et chancekort, fra bunken i midten");
+    }
+
+    public void printChanceKortDirekte(ChanceAktionDTO di){
+
+        gui_center.setChanceCard(di.getBeskrivelse());
+        gui_center.displayChanceCard();
     }
     public void chanceKortTilføjet(){
         gui.showMessage("Dette kort vil blive tilfoejet til dine Chancekort," +
@@ -589,7 +636,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @param ejendom den Ejendom man vil bygge på
      */
     @Override
-    public void byggetHus(EjendomCO ejendom) {
+    public void byggetHus(Ejendom ejendom) {
 
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
@@ -605,6 +652,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHotel(false);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
+    }
+
+    public String skatteBetaling(){
+        String betal =     gui.getUserSelection("Du skla betale skat!\n Du kan enten betale 200 eller 10% af din samlede pengebeholdning\n Hvad vælger du? ", "At betale 200","At betale 10%");
+              return betal;
+    }
+
+    public void skatteBesked(int valg){
+
+        if(valg == 1) {
+            gui.showMessage("Du skal betale ekstraordinær statsskat. Derfor bliver vi all 100 kr rigere");
+        }else {gui.showMessage("Du skal betale indkomstskat");}
     }
 
     @Override
@@ -637,7 +696,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return den ejendom fra listen med bebyggelige ejendomme, som man har valgt at bygge på
      */
     @Override
-    public int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme) {
+    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
 
         String[] ejendomsListe = new String[ejendomme.size()];
 
@@ -685,7 +744,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return
      */
     @Override
-    public int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme) {
+    public int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme) {
 
         String[] ejendomsListe = new String[ejendomme.size()+1];
 
@@ -737,13 +796,15 @@ public class GUIinterface implements UserInterfaceKontrakt {
     /**
      * @author Chua
      * Generere et hotel på den grund man ejer.
-     * @param ejendom
+     * @param ejendom - Den grund man vil lave et hotel på
      */
     @Override
-    public void byggeHotel(EjendomCO ejendom) {
+    public void byggeHotel(Ejendom ejendom) {
         GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
-            hotelSkalPaa.setHotel(ejendom.harHotel());
+            if(getFelter()[ejendom.getPlacering()] instanceof GUI_Brewery){
+                gui.showMessage("Ikke muligt at bygge på byggeriet");
 
+            } else{ hotelSkalPaa.setHotel(ejendom.harHotel());}
     }
 
     public void friParkering(){

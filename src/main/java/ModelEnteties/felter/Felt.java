@@ -5,7 +5,7 @@ import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: FeltDTO
+ *  PROGRAMDOKUMENTATION: Felt
  * @author Claes
  * |-- HVORFOR ABSTRACT?
  * abstrackt er noget man kan gøre ved en klasse for at sikre at  man ikke kan lave instanser af den.
@@ -13,10 +13,10 @@ import BoundaryView.UserInterfaceKontrakt;
  * holder nogen controller funktion. Så disse klasser er kun til for datastrukturen skyld. De gør ikke
  * noget selvstændigt.
  *  */
-public abstract class FeltDTO {
+public abstract class Felt {
     //|--------- Variabler:-----------------
     private int placering;
-    private String navn = "?";
+    private String navn;
     private String feltType = "?";
 
     //|--------- Getters og Setters:-----------------
@@ -45,21 +45,8 @@ public abstract class FeltDTO {
     }
 
 
-
-
-    //|----------- Metoder:------------------
-    //Disse er ikke i brug i denne forældre klasse men alt afgørende for, klassens børn
-
-    /**
-     * Indsæt beskrivelse her
-     * @param userInterfaceKontrakt
-     */
-    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){ }
-
-    /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
-     */
-    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){}
+    public Felt(String navn, int placering ){
+        this.navn = navn;
+        this.placering = placering;
+    }
 }

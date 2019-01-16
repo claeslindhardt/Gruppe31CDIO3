@@ -1,5 +1,5 @@
 import ModelEnteties.EjendomsGruppeDTO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import org.junit.jupiter.api.Test;
 import spillogik.EjendomsLogik;
 
@@ -25,9 +25,9 @@ class FordelingAfHuseTest {
          */
 
         // Opretter ejendomme
-        EjendomCO ejendom1 = new EjendomCO("Ejendom1", 100, 100, 0);
-        EjendomCO ejendom2 = new EjendomCO("Ejendom2", 100, 100, 0);
-        EjendomCO ejendom3 = new EjendomCO("Ejendom3", 100, 100, 0);
+        Ejendom ejendom1 = new Ejendom("Ejendom1", 100, 100, 0);
+        Ejendom ejendom2 = new Ejendom("Ejendom2", 100, 100, 0);
+        Ejendom ejendom3 = new Ejendom("Ejendom3", 100, 100, 0);
 
         // Opretter Ejendomsgruppe
         EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 4);
