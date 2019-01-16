@@ -21,6 +21,7 @@ public class GiverPengeCO extends ChanceAktionDTO {
      * @param userInterfaceKontrakt - Så det kan ske i GUI
      */
     public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+        userInterfaceKontrakt.trækEtChancekort();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
         spillerMedTur.setPenge(spillerMedTur.getPenge()+ getPengeVerdi());

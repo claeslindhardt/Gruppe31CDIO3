@@ -8,6 +8,7 @@ import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.ChanceAktionDTO;
+import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -28,7 +29,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //----------- Variabler: -------------------
     private final int[][] SPILLERFARVER = { {0,204,0},{255,51,51},{10,30,201}, {255,128,0}, {50,255,240}, {135,245,36}, {255,137,235}, {245,239,72}};
 
-
+    GUI_Center gui_center = GUI_Center.getInstance();
     private GUI gui;
     private GUI hovedmenu = new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
@@ -92,24 +93,71 @@ public class GUIinterface implements UserInterfaceKontrakt {
         Spiller[] spillere = spil.getSpillere();
         int antalFelter =  felter.length;
 
+
+
+
         GUI_Field[] gui_felter = new GUI_Field[ antalFelter ];
 
         // Laver felternes grafiske elementer
         for( int i = 0;  i < antalFelter; i++){
 
-            GUI_Field gui_felt;
+            GUI_Field gui_felt = null;
 
             FeltDTO felt = felter[i];
 
-            if(felt.getFeltType() == "Bryggeri"){
-                gui_felt = new GUI_Brewery();
-                gui_felt.setTitle( felt.getNavn() );
-                gui_felt.setSubText( felt.getFeltType() );
-            } else {
-                gui_felt = new GUI_Street();
+
+            if( felt instanceof EjeligtFeltDTO ) {
+                EjeligtFeltDTO ejeligtFeltDTO = (EjeligtFeltDTO) felt;
+
+                if (ejeligtFeltDTO instanceof EjendomCO) {
+                    gui_felt = new GUI_Street();
+
+                } else if (ejeligtFeltDTO instanceof Bryggeri) {
+                    gui_felt = new GUI_Brewery();
+
+                } else if ( ejeligtFeltDTO instanceof Rederi ) {
+                    gui_felt = new GUI_Shipping();
+                    gui_felt.setBackGroundColor(Color.white);
+                }
+                gui_felt.setTitle(ejeligtFeltDTO.getNavn());
+                gui_felt.setSubText("Pris: " + ejeligtFeltDTO.getPris() + " kr.");
+
+
+            }else if ( felt instanceof StartCO ){
+                gui_felt = new GUI_Start();
+                gui_felt.setTitle("Start");
+                gui_felt.setSubText("");
+                gui_felt.setBackGroundColor(Color.white);
+
+            } else if( felt instanceof ChanceFeltCO ) {
+                gui_felt = new GUI_Chance();
+
+            } else if( felt instanceof FriParkering ){
+                gui_felt = new GUI_Refuge();
+                gui_felt.setBackGroundColor(Color.white);
+                gui_felt.setSubText("Fri parkering");
+
+            } else if( felt instanceof GaaIFaengselCO ) {
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Gaa i faengsel");
+
+
+            } else if( felt instanceof FaengselCO){
+                gui_felt = new GUI_Jail();
+                gui_felt.setSubText("Faengsel");
+
+            } else if (felt instanceof IndkomstSkat){
+                gui_felt = new GUI_Tax();
                 gui_felt.setTitle(felt.getNavn());
-                gui_felt.setSubText(felt.getFeltType());
+                gui_felt.setSubText("");
+
+            } else if( felt instanceof StatsSkat) {
+                gui_felt = new GUI_Tax();
+                gui_felt.setTitle(felt.getNavn());
+                gui_felt.setSubText("");
             }
+
+
             gui_felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
@@ -132,7 +180,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
             else{
-                gui_felt.setBackGroundColor( Color.CYAN );
                 if (felt.getFeltType().equals("JernbaneCO")){
                     gui_felt.setDescription("Tag Toget" + " / " + "Jernbanepris: " + 0 );
                 }
@@ -562,9 +609,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
         System.out.println("______________________________________________________________________________");
     }
 
-    public void printChanceKortDirekte(ChanceAktionDTO di){
-        gui.showMessage(di.getBeskrivelse());
+    public void trækEtChancekort(){
+        gui.showMessage("Du må trække et chancekort, fra bunken i midten");
+    }
 
+    public void printChanceKortDirekte(ChanceAktionDTO di){
+
+        gui_center.setChanceCard(di.getBeskrivelse());
+        gui_center.displayChanceCard();
     }
     public void chanceKortTilføjet(){
         gui.showMessage("Dette kort vil blive tilfoejet til dine Chancekort," +
@@ -592,6 +644,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
 
+    }
+
+    public String skatteBetaling(){
+        String betal =     gui.getUserSelection("Du skla betale skat!\n Du kan enten betale 200 eller 10% af din samlede pengebeholdning\n Hvad vælger du? ", "At betale 200","At betale 10%");
+              return betal;
+    }
+
+    public void skatteBesked(int valg){
+
+        if(valg == 1) {
+            gui.showMessage("Du skal betale ekstraordinær statsskat. Derfor bliver vi all 100 kr rigere");
+        }else {gui.showMessage("Du skal betale indkomstskat");}
     }
 
     @Override
@@ -707,7 +771,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void byggeHotel(EjendomCO ejendom) {
         GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
-            hotelSkalPaa.setHotel(ejendom.harHotel());
+            if(getFelter()[ejendom.getPlacering()] instanceof GUI_Brewery){
+                gui.showMessage("Ikke muligt at bygge på byggeriet");
+
+            } else{ hotelSkalPaa.setHotel(ejendom.harHotel());}
     }
 
     public void friParkering(){
