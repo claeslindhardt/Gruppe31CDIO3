@@ -1,10 +1,7 @@
 import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.felter.Rederi;
+import ModelEnteties.felter.*;
 import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
@@ -30,23 +27,11 @@ class SpilControllerTest {
 
         Spiller spiller = spil.getSpiller(0);
 
-        Bryggeri Tuborg = new Bryggeri("Tuborg",3);
-        spiller.addBryggeri(Tuborg);
-        Tuborg.setEjer(spiller);
 
-        Bryggeri Carlsberg = new Bryggeri("Carlsberg",4);
-        spiller.addBryggeri(Carlsberg);
-        Carlsberg.setEjer(spiller);
 
-        Rederi Øresund = new Rederi("A/S Øresund",20,5);
-        Øresund.setLeje(25);
-        spiller.addRederi(Øresund);
-        Øresund.setEjer(spiller);
 
-        Rederi Bornholm = new Rederi("D/S Bornholm",20,6);
-        Bornholm.setLeje(25);
-        spiller.addRederi(Bornholm);
-        Øresund.setEjer(spiller);
+
+
 
         Rederi ØK = new Rederi("Ø.K.",20,7);
         ØK.setLeje(25);
@@ -58,11 +43,7 @@ class SpilControllerTest {
         spiller.addRederi(DFDS);
         DFDS.setEjer(spiller);
 
-        spil.getFelter()[3] = Tuborg;
-        spil.getFelter()[4] = Carlsberg;
 
-        spil.getFelter()[5] = Øresund;
-        spil.getFelter()[6] = Bornholm;
         spil.getFelter()[7] = ØK;
         spil.getFelter()[8] = DFDS;
 

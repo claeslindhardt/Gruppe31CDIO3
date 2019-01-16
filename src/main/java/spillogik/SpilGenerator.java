@@ -28,7 +28,13 @@ public class SpilGenerator {
         return spillere;
     }
 
-
+    /**
+     * @author Jacob
+     *
+     * Denne metode genererer det klassiske Matador bræt.
+     *
+     * @return Matador brættet returneres.
+     */
     public static FeltDTO[] genererFelter(){
 
         FeltDTO[] felter = new FeltDTO[40];
@@ -36,8 +42,7 @@ public class SpilGenerator {
         //-----------------------------------------Variabler--------------------------------------//
         EjendomCO ejendom;
         ChanceFeltCO proevLykken;
-        BetalSkat indkomstSkat;
-        BetalSkat statsSkat;
+        StatsSkat statsSkat;
         Rederi rederi;
         Bryggeri bryggeri;
         FaengselCO faengsel;
@@ -73,7 +78,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[3] = ejendom;
 
-        indkomstSkat = new BetalSkat();
+        IndkomstSkat indkomstSkat = new IndkomstSkat(4);
         felter[4] = indkomstSkat;
 
         rederi = new Rederi("Øresund A/S",200,5);
@@ -315,7 +320,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[37] = ejendom;
 
-        statsSkat = new BetalSkat();
+        statsSkat = new StatsSkat(38, 100);
         felter[38] = statsSkat;
 
         ejendom = new EjendomCO("Rådhuspladsen",400,50,39);
@@ -326,7 +331,6 @@ public class SpilGenerator {
         ejendom.setHotelPris(200);
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[39] = ejendom;
-
 
         return felter;
     }

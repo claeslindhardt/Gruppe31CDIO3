@@ -94,6 +94,8 @@ public interface UserInterfaceKontrakt {
     void ditRederi(Rederi rederi, Spiller spiller);
     void ditBryggeri();
     void friParkering();
+    String skatteBetaling();
+    void skatteBesked(int valg);
     void trækEtChancekort();
 
     //===================================================
