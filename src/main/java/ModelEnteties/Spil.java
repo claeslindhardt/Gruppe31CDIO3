@@ -4,8 +4,6 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.FaengselCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.ChanceAktionDTO;
-import ModelEnteties.felter.EjendomCO;
 
 import java.util.ArrayList;
 

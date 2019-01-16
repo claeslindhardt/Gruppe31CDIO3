@@ -52,10 +52,10 @@ public class Bryggeri extends EjeligtFeltDTO {
 
             int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
             switch (kobsBeslutning){
-                case 1:
+                case 0:
                     spil.getKoebFelt().koebBryggeri(this, spillerMedTur, userInterfaceKontrakt, spil);
                     break;
-                case 2:
+                case 1:
                     userInterfaceKontrakt.forsetTur();
 
                     break;
