@@ -26,6 +26,12 @@ public class FalskRaflebaeger extends RafleBaeger {
 
         return getTotalVaerdi();
     }
+
+    @Override
+    public boolean erEns(){
+        return true;
+    }
+
    /* @Override
     public boolean erEns() {
                 return false;

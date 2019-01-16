@@ -1,7 +1,7 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
 import Controller.*;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
@@ -10,8 +10,6 @@ import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.awt.*;
 import java.util.ArrayList;
-
-import static spillogik.RandomGenerator.genererRandomFelter;
 
 public class SpilGenerator {
 
@@ -30,7 +28,13 @@ public class SpilGenerator {
         return spillere;
     }
 
-
+    /**
+     * @author Jacob
+     *
+     * Denne metode genererer det klassiske Matador bræt.
+     *
+     * @return Matador brættet returneres.
+     */
     public static FeltDTO[] genererFelter(){
 
         FeltDTO[] felter = new FeltDTO[40];
@@ -328,7 +332,6 @@ public class SpilGenerator {
         ejendom.setHotelPris(200);
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[39] = ejendom;
-
 
         return felter;
     }

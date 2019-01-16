@@ -8,7 +8,7 @@ import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;

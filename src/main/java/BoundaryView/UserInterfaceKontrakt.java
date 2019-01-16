@@ -7,7 +7,7 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.FeltDTO;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
