@@ -1,6 +1,6 @@
 package spillogik;
 
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Felt;
 
 public class BevaegelsesLogik {
 
@@ -64,7 +64,7 @@ public class BevaegelsesLogik {
      * @param antalFelter   Hvor mange felter man rykker
      * @return              Det felt man ender paa efter at rykke antalFelter
      */
-    public static FeltDTO beregnEndeligtFelt( FeltDTO[] braet, FeltDTO startFelt, int antalFelter ){
+    public static Felt beregnEndeligtFelt(Felt[] braet, Felt startFelt, int antalFelter ){
 
         int totalAntalFelter = braet.length;
         int startFeltNr = startFelt.getPlacering();

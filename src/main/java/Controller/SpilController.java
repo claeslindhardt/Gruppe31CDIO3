@@ -15,10 +15,27 @@ public class SpilController{
     private Spil spil;
 
 
-
+    // Controlllere
     private RykSpiller  rykSpiller  = new RykSpiller();
     private Handlinger  handlinger  = new Handlinger();
     private Handel      handel      = new Handel();
+
+
+
+
+    public LandPaaFelt getLandPaaFelt() {
+        return landPaaFelt;
+    }
+
+    public void setLandPaaFelt(LandPaaFelt landPaaFelt) {
+        this.landPaaFelt = landPaaFelt;
+    }
+
+    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+
+
+
+
 
     public Handel getHandel() {
         return handel;
@@ -175,9 +192,9 @@ public class SpilController{
      */
     /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
-        FeltDTO[] braet = spil.getBraet().getBretArray();
+        Felt[] braet = spil.getBraet().getBretArray();
 
-        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
+        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
 
         int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
 
@@ -197,7 +214,7 @@ public class SpilController{
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    /*public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+    /*public void rykSpillerTilFelt( SpillerCO spiller, Felt felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
@@ -288,9 +305,11 @@ public class SpilController{
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
+
                 } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
                     ui.kanIkkeSlaaFaengsel();
                 }
+
                 break;
             case 2:
                 slutSpillerTur();

@@ -2,11 +2,9 @@ package BoundaryView;
 
 import Controller.*;
 import ModelEnteties.Spil;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.*;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
@@ -50,9 +48,9 @@ public interface UserInterfaceKontrakt {
     void monetosMangel();
     void taxiInfo(TaxiCO vogn);
     void overStartAnimation();
-    void startsFeltsInfo(StartCO felt);
+    void startsFeltsInfo(StartFelt felt);
     void iFaengselMedDig();
-    void faengselInfo(GaaIFaengselCO Faengsel);
+    void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
     void jernBaneInfo(JernbaneCO stadtion);
     int stationsMuligheder(int min, int max);
@@ -62,11 +60,11 @@ public interface UserInterfaceKontrakt {
     void forsetTur();
     void ejetAfEnAnden();
     void tetPaaMonopol();
-    void chanceFeltsInfo(ChanceFeltCO felt);
-    void gennemfoertKoeb(EjendomCO ejendom, Spiller spiller);
-    void ejendomsInfo(EjendomCO ej);
+    void chanceFeltsInfo(ProevLykken felt);
+    void gennemfoertKoeb(Ejendom ejendom, Spiller spiller);
+    void ejendomsInfo(Ejendom ej);
     void betalRente();
-    void duErLandetPå(FeltDTO felt, Spiller spiller);
+    void duErLandetPå(Felt felt, Spiller spiller);
     void badErrorMessage();
     int ejendomsBud();
     void spillerEjendele(Spiller spiller);
@@ -76,16 +74,16 @@ public interface UserInterfaceKontrakt {
     void brugtUdAfFaengsel();
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
-    int input_EjendomAtByggePaa(ArrayList<EjendomCO> ejendomme);
+    int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(Spiller spiller);
     void kanIkkeSlaaFaengsel();
     void startSpil(Spil spil);
-    void byggeHotel(EjendomCO ejendom);
-    void byggetHus(EjendomCO ejendom);
+    void byggeHotel(Ejendom ejendom);
+    void byggetHus(Ejendom ejendom);
     void tillykkeMedHotel();
-    int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme);
+    int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme);
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
@@ -95,6 +93,8 @@ public interface UserInterfaceKontrakt {
     String skatteBetaling();
     void skatteBesked(int valg);
     void trækEtChancekort();
+    void landetPaaStart();
+
 
     //===================================================
     //===================================================

@@ -1,14 +1,12 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjeligtFeltDTO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.EjeligtFelt;
+import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
-import ModelEnteties.raflebaeger.RafleBaeger;
 import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
@@ -28,14 +26,14 @@ public class Handel {
      * @param spilleren
      * @param userInterfaceKontrakt
      */
-    public void indsamleLeje(Spil spil, EjeligtFeltDTO felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void indsamleLeje(Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
         Spiller ejeren = felt.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
 
             int lejeForFelt = 0;
 
-            if (felt instanceof EjendomCO) {
+            if (felt instanceof Ejendom) {
                 lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
 
             } else if (felt instanceof Bryggeri){
@@ -65,7 +63,7 @@ public class Handel {
      *
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
-    public void koebHus(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void koebHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHus( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
 
@@ -83,10 +81,10 @@ public class Handel {
      * @param ui: hvilket UserInterface der skal bruges.
      */
     public void koebHusPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
-        EjendomCO[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){
-            ArrayList<EjendomCO> bebyggeligeEjendomme = new ArrayList<EjendomCO>();
+            ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
 
             /* Finder bebyggelige ejendomme og flytter dem over i en seperat liste.
                Se kanKoebeHus() for at se, hvordan det vurderes om spilleren kan
@@ -123,7 +121,7 @@ public class Handel {
      * @param ejendom
      * @param userInterfaceKontrakt
      */
-    public void koebHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void koebHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
         if( EjendomsLogik.kanKoebeHotel( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHotel(true);
             ejendom.setAntalHuse(0);
@@ -142,10 +140,10 @@ public class Handel {
      * @param ui : hvilket UserInterface der skal bruges.
      */
     public void koebHotelPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
-        EjendomCO[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){
-            ArrayList<EjendomCO> grundeMedMulighedForHotel = new ArrayList<EjendomCO>();
+            ArrayList<Ejendom> grundeMedMulighedForHotel = new ArrayList<Ejendom>();
 
 
             for(int i = 0; i < ejendomme.length; i++){
