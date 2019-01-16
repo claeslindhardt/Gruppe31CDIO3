@@ -1,9 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.AktionsFelterDTO;
+import ModelEnteties.felter.FeltDTO;
 
-public class TaxiCO extends AktionsFelterDTO {
+public class TaxiCO extends FeltDTO {
     //|----------- Metoder:------------------
 
     /**
@@ -26,9 +26,7 @@ public class TaxiCO extends AktionsFelterDTO {
     }
     //|--------- Constructor:-----------------
     public TaxiCO(int placering){
-        setFeltType("TaxiCO");
-        setNavn("TaxiCO FeltDTO");
-        setPlacering(placering);
+        super( "Taxi", placering );
     }
 
 }

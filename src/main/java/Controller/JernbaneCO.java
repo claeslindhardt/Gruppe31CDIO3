@@ -88,6 +88,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
 
     //|--------- Constructor:-----------------
     public JernbaneCO(String whatName, int whatPrice, int placering){
+        super(whatName, whatPrice, placering);
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);

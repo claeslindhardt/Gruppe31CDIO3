@@ -55,12 +55,8 @@ private int leje = 0;
     }
 
     //|--------- Constructor:-----------------
-    public Rederi(String whatName, int whatPrice, int placering){
-        setPlacering(placering);
-        setPris(whatPrice);
-        setNavn(whatName);
-        setFeltType("Rederi");
-
+    public Rederi( String navn, int pris, int placering ){
+        super(navn, pris, placering);
     }
 
 }

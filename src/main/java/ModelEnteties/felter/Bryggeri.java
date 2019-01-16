@@ -8,20 +8,12 @@ import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 
 public class Bryggeri extends EjeligtFeltDTO {
-
-    private int pris = 25;
     private int  leje = 0;
     private EjendomsGruppeDTO gruppe;
-    private String navn;
 
 
-
-    public Bryggeri(String navn, int placering){
-
-        setPlacering(placering);
-        setFeltType("Bryggeri");
-        this.navn = navn;
-
+    public Bryggeri(String navn, int pris, int placering){
+        super(navn,pris,placering);
     }
 
     public int getLeje(){
@@ -32,15 +24,7 @@ public class Bryggeri extends EjeligtFeltDTO {
         this.leje = leje;
     }
 
-    public String getNavn(){
-        return navn;
 
-    }
-
-    public int getPris(){
-
-        return pris;
-    }
 
 
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){

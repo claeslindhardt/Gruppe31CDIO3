@@ -16,6 +16,7 @@ import java.util.ArrayList;
  *          2. JernbaneCO
  */
 public abstract class EjeligtFeltDTO extends FeltDTO {
+
     //|--------- Variabler:-----------------
     //Statiske Variabler
     private static ArrayList<EjendomCO> alleEjendomme = new ArrayList<EjendomCO>();
@@ -29,6 +30,14 @@ public abstract class EjeligtFeltDTO extends FeltDTO {
 
     // TODO: Flyt gruppe ud af EjeligtFeltDTO og over i EjendomCO - det er det eneste sted den bruges.
     private EjendomsGruppeDTO gruppe;
+
+
+    public EjeligtFeltDTO( String navn, int pris, int placering ){
+        super(navn, placering);
+        this.pris = pris;
+    }
+
+
     //|--------- Getters og Setters:-----------------
 
     public double getPantsaetningsVaerdi() {

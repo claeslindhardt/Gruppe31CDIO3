@@ -9,10 +9,8 @@ public class StatsSkat extends FeltDTO {
     private double skat;
 
     public StatsSkat(int placering, double skat) {
+        super( "Betal statsskat", placering );
         this.skat = skat;
-        setPlacering(placering);
-        setNavn("Betal statsskat");
-        setFeltType("Skat");
     }
 
     @Override

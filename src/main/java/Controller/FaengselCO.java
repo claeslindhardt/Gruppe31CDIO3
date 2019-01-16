@@ -1,9 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.AktionsFelterDTO;
+import ModelEnteties.felter.FeltDTO;
 
-public class FaengselCO extends AktionsFelterDTO {
+public class FaengselCO extends FeltDTO {
     //|----------- Metoder:------------------
 
     /**
@@ -18,8 +18,6 @@ public class FaengselCO extends AktionsFelterDTO {
 
     //|--------- Constructor:-----------------
     public FaengselCO(String navn, int placering){
-        setFeltType("Fængsel");
-        setNavn(navn);
-        setPlacering(placering);
+        super("Fængsel", placering );
     }
 }

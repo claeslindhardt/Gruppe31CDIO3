@@ -1,11 +1,14 @@
 package Controller;
 
+import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 
 public class LandPaaFelt {
 
-    public void landPaaFelt( FeltDTO felt, Spiller spiller ){
+    public void landPaaFelt(FeltDTO felt, Spiller spiller, UserInterfaceKontrakt ui){
+
+        ui.duErLandetPå(felt, spiller);
 
         if( felt instanceof EjeligtFeltDTO ) {
             EjeligtFeltDTO ejeligtFeltDTO = (EjeligtFeltDTO) felt;
@@ -19,6 +22,7 @@ public class LandPaaFelt {
             }
 
         }else if ( felt instanceof StartCO ){
+            startFelt( ui );
 
         } else if( felt instanceof ChanceFeltCO ) {
 
@@ -37,12 +41,12 @@ public class LandPaaFelt {
     }
 
 
-    public void ejeligtFelt( ){
+    public void ejeligtFelt(  ){
 
     }
 
-    public void startFelt(  ){
-        // Start Felt
+    public void startFelt( UserInterfaceKontrakt ui ){
+        ui.landetPaaStart();
     }
 
     public void proevLykken( ){

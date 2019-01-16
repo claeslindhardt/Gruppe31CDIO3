@@ -97,6 +97,8 @@ public interface UserInterfaceKontrakt {
     String skatteBetaling();
     void skatteBesked(int valg);
     void trækEtChancekort();
+    void landetPaaStart();
+
 
     //===================================================
     //===================================================

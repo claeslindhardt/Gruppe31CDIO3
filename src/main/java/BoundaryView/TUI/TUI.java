@@ -1,3 +1,4 @@
+/*
 package BoundaryView.TUI;
 
 import BoundaryView.UserInterfaceKontrakt;
@@ -14,6 +15,7 @@ import ModelEnteties.singletoner.ScannerSingleton;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+*/
 /**
  * __________________________________________________________________________________________________________________________________________________________
  * PROGRAMDOKUMENTATION: TUI
@@ -27,7 +29,8 @@ import java.util.InputMismatchException;
  * kan ses her og alle funktioner der bruges er samlet i SpilleLeder. Ønsker man at lave en GUIinterface skal den
  * bare have de samme funktioner og kald som denne klasse og så vil man have alt der skal bruges til at
  * lave en GUIinterface.
- */
+ *//*
+
 public class TUI implements UserInterfaceKontrakt {
     //TODO: forsimpel alle de steder der er gentagelser i teksten her.
     //Todo. Gør det muligt for denne at tage input via IndputHaanteringsklassen.
@@ -485,3 +488,4 @@ public class TUI implements UserInterfaceKontrakt {
 
 }
 
+*/

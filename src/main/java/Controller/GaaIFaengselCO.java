@@ -2,9 +2,9 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.AktionsFelterDTO;
+import ModelEnteties.felter.FeltDTO;
 
-public class GaaIFaengselCO extends AktionsFelterDTO {
+public class GaaIFaengselCO extends FeltDTO {
     //|----------- Metoder:------------------
 
     /**
@@ -35,8 +35,6 @@ public class GaaIFaengselCO extends AktionsFelterDTO {
     }
     //|--------- Constructor:-----------------
     public GaaIFaengselCO(int placering){
-        setFeltType("Gå i fængsel");
-        setNavn("Gå til fængsel!");
-        setPlacering(placering);
+        super( "Gå i fængsel", placering);
     }
 }

@@ -21,10 +21,8 @@ public class FriParkering extends FeltDTO {
     }
 
     //|--------- Constructor:-----------------
-    public FriParkering( int placering){
-        setPlacering(placering);
-        setNavn("Fri Parkering");
-        setFeltType("Fri Parkering");
-
+    public FriParkering( int placering ){
+        super( "Fri Parkering", placering );
     }
+
 }

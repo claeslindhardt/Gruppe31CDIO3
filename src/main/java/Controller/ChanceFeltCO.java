@@ -1,13 +1,13 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.AktionsFelterDTO;
 import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.felter.FeltDTO;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ChanceFeltCO extends AktionsFelterDTO {
+public class ChanceFeltCO extends FeltDTO {
     //|-------initiering af objekter: -----------
     Random ra = new Random();
     //TODO: fix singleton
@@ -50,10 +50,10 @@ public class ChanceFeltCO extends AktionsFelterDTO {
 
     }
     //|--------- Constructor:-----------------
-    public ChanceFeltCO(int placering, ArrayList<ChanceAktionDTO> chanceKortTilFelt){
+    public ChanceFeltCO( int placering ){
+        super( "Prøv lykken", placering );
         setPlacering(placering);
         setFeltType("Chance Kort");
         setNavn("Prøv lykken");
-        this.setKortPaaFelt(chanceKortTilFelt);
     }
 }

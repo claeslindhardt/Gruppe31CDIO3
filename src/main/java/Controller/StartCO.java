@@ -1,48 +1,11 @@
 package Controller;
 
-import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.AktionsFelterDTO;
+import ModelEnteties.felter.FeltDTO;
 
-public class StartCO extends AktionsFelterDTO {
-    //|--------- Variabler:-----------------
-    int penge;
+public class StartCO extends FeltDTO {
 
-    //|--------- Getters og Setters:-----------------
-    public int getPenge() {
-        return penge;
+    public StartCO( int placering ){
+        super( "Start", placering );
     }
 
-    public void setPenge(int penge) {
-        this.penge = penge;
-    }
-
-    //|----------- Metoder:------------------
-
-    /**
-     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
-     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
-     * @param spil
-     * @param userInterfaceKontrakt
-     */
-    public void aktionPaaFelt(SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        userInterfaceKontrakt.overStartAnimation();
-    }
-
-    /**
-     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
-     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
-     * @param userInterfaceKontrakt
-     */
-    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
-        userInterfaceKontrakt.startsFeltsInfo(this);
-    }
-
-
-    //|--------- Constructor:-----------------
-    public StartCO(int startPasseringsInkomst, int placering){
-        setPenge(startPasseringsInkomst);
-        setPlacering(placering);
-        setNavn("StartCO FeltDTO");
-        setFeltType("StartCO");
-    }
 }

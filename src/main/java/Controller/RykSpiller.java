@@ -82,11 +82,7 @@ public class RykSpiller {
         }
 
         spiller.setSpillerPosition(felt.getPlacering());
-
-        ui.duErLandetPå(felt, spiller);
-        Handel handel = new Handel();
-        felt.aktionPaaFelt(handel, spilController, ui);
-
+        spilController.getLandPaaFelt().landPaaFelt(felt, spiller, ui);
     }
 
 

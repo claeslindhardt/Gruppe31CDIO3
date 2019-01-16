@@ -15,10 +15,27 @@ public class SpilController{
     private Spil spil;
 
 
-
+    // Controlllere
     private RykSpiller  rykSpiller  = new RykSpiller();
     private Handlinger  handlinger  = new Handlinger();
     private Handel      handel      = new Handel();
+
+
+
+
+    public LandPaaFelt getLandPaaFelt() {
+        return landPaaFelt;
+    }
+
+    public void setLandPaaFelt(LandPaaFelt landPaaFelt) {
+        this.landPaaFelt = landPaaFelt;
+    }
+
+    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+
+
+
+
 
     public Handel getHandel() {
         return handel;
@@ -288,9 +305,11 @@ public class SpilController{
 
                 if (!spil.getSpillerMedTur().isFaengselsStraf()) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
+
                 } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
                     ui.kanIkkeSlaaFaengsel();
                 }
+
                 break;
             case 2:
                 slutSpillerTur();

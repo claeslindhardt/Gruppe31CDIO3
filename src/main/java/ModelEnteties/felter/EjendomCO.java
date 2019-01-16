@@ -210,6 +210,7 @@ public class EjendomCO extends EjeligtFeltDTO {
 
     //|--------- Constructor:-----------------
     public EjendomCO(String navn, int pris, int startLeje, int placering){
+        super( navn, pris, placering);
         setPlacering(placering);
         setPris(pris);
         setNavn(navn);

@@ -572,18 +572,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void betalRente(){
         gui.showMessage("En anden spiller ejer dette felt, du betaler derfor rente til ham:");
     }
-    public void duErLandetPå(FeltDTO felt, Spiller spiller){
-        String str; String str1 = "Du er landet på felt "; String str2 = "Du bliver overført til ";
-        if(felt.getPlacering()==1){
-            str = str2;
-        }else str = str1;
 
-
-
-        gui.showMessage(str+felt.getPlacering()+": "+felt.getNavn());
+    public void duErLandetPå( FeltDTO felt, Spiller spiller ){
+        gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
         GUI_Player guiSpiller = spillere.get(spiller.getId());
-        rykBil(guiSpiller,felt.getPlacering());
+        rykBil( guiSpiller, felt.getPlacering() );
     }
+
+    public void landetPaaStart(){
+        gui.showMessage("Tag du dig bare en pause.");
+    }
+
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
     }
@@ -608,6 +607,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void terminalLine(){
         System.out.println("______________________________________________________________________________");
+    }
+
+    public void landPaaStart(){
+        gui.showMessage("Du er landet på start, så du kan bare tage dig en pause.");
     }
 
     public void trækEtChancekort(){

@@ -81,7 +81,7 @@ public class RandomGenerator {
             felter = new FeltDTO[antalFelter];
             EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
 
-            felter[0] = new StartCO(0,0);
+            felter[0] = new StartCO(0);
 
             // Placerer "must have" felter
             int placering;
@@ -124,7 +124,7 @@ public class RandomGenerator {
                         // Proev lykken
                     } else if (feltType == 8) {
                         // TODO: Fix det her med chancekort - Malte
-                        felter[i] = new ChanceFeltCO(i, genererChancekort(20));
+                        felter[i] = new ChanceFeltCO( i );
                         antalChancefelter++;
 
                     }

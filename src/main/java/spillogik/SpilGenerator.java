@@ -52,7 +52,7 @@ public class SpilGenerator {
 
 
         //----------------------------------------Brættet---------------------------------------//
-        felter[0] = new StartCO(200,0);
+        felter[0] = new StartCO(0);
 
         ejendomsGruppe = new EjendomsGruppeDTO(Color.blue,2);
 
@@ -65,7 +65,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[1] = ejendom;
 
-        proevLykken = new ChanceFeltCO(2,null);
+        proevLykken = new ChanceFeltCO(2);
         felter[2] = proevLykken;
 
 
@@ -97,7 +97,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[6] = ejendom;
 
-        proevLykken = new ChanceFeltCO(7,null);
+        proevLykken = new ChanceFeltCO(7);
         felter[7] = proevLykken;
 
         ejendom = new EjendomCO("Valby Langgade",100,6,8);
@@ -132,8 +132,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[11] = ejendom;
 
-        bryggeri = new Bryggeri("Tuborg",12);
-        bryggeri.setPris(150);
+        bryggeri = new Bryggeri("Tuborg",150, 12);
         bryggeri.setPantsaetningsVaerdi(75);
         felter[12] = bryggeri;
 
@@ -171,7 +170,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[16] = ejendom;
 
-        proevLykken = new ChanceFeltCO(17,null);
+        proevLykken = new ChanceFeltCO(17);
         felter[17] = proevLykken;
 
         ejendom = new EjendomCO("Hellerupvej",180,14,18);
@@ -206,7 +205,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[21] = ejendom;
 
-        proevLykken = new ChanceFeltCO(22,null);
+        proevLykken = new ChanceFeltCO(22 );
         felter[22] = proevLykken;
 
         ejendom = new EjendomCO("Østerbrogade",220,18,23);
@@ -252,7 +251,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[27] = ejendom;
 
-        bryggeri = new Bryggeri("Carlsberg",28);
+        bryggeri = new Bryggeri("Carlsberg",150, 28);
         bryggeri.setPris(150);
         bryggeri.setPantsaetningsVaerdi(75);
         felter[28] = bryggeri;
@@ -289,7 +288,7 @@ public class SpilGenerator {
         ejendomsGruppe.tilfoejEjendom(ejendom);
         felter[32] = ejendom;
 
-        proevLykken = new ChanceFeltCO(33,null);
+        proevLykken = new ChanceFeltCO(33);
         felter[33] = proevLykken;
 
         ejendom = new EjendomCO("Nygade", 320,28,34);
@@ -306,7 +305,7 @@ public class SpilGenerator {
         rederi.setPantsaetningsVaerdi(100);
         felter[35] = rederi;
 
-        proevLykken = new ChanceFeltCO(36,null);
+        proevLykken = new ChanceFeltCO(36);
         felter[36] = proevLykken;
 
         ejendomsGruppe = new EjendomsGruppeDTO(Color.MAGENTA,2);

@@ -7,9 +7,7 @@ import Controller.SpilController;
 public class IndkomstSkat extends FeltDTO {
 
     public IndkomstSkat(int placering) {
-        setPlacering(placering);
-        setNavn("Betal indkomstskat");
-        setFeltType("Skat");
+        super( "Betal indkomstskat", placering );
     }
 
 
