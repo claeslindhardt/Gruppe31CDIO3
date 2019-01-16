@@ -1,7 +1,7 @@
 package spillogik;
 
-import BoundaryView.TUI.TUI;
 import Controller.*;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
@@ -10,8 +10,6 @@ import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.awt.*;
 import java.util.ArrayList;
-
-import static spillogik.RandomGenerator.genererRandomFelter;
 
 public class SpilGenerator {
 
@@ -64,6 +62,7 @@ public class SpilGenerator {
 
         proevLykken = new ChanceFeltCO(2,null);
         felter[2] = proevLykken;
+
 
         ejendom = new EjendomCO("Hvidovrevej", 60,4,3);
         ejendom.setLejeHus(20,60,180,320);

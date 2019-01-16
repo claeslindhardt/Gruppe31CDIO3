@@ -4,7 +4,7 @@ import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
-import ModelEnteties.felter.ChanceAktionDTO;
+import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
 import ModelEnteties.raflebaeger.RafleBaeger;
