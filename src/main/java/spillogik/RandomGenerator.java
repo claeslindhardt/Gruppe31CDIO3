@@ -4,7 +4,6 @@ import Controller.*;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
-import ModelEnteties.felter.BetalSkat;
 import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.felter.EjendomCO;
 import ModelEnteties.felter.FeltDTO;
