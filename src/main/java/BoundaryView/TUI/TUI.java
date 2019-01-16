@@ -341,6 +341,10 @@ public class TUI implements UserInterfaceKontrakt {
                 "\ndu kan nu bruge det når du oensker."
         );
     }
+    public String skatteBetaling(){return null;}
+
+    public void skatteBesked(int valg){};
+
     public void chanceKortBrugt(){
         System.out.println("Du har nu brugt dit TaxiCO chance kort");
     }
