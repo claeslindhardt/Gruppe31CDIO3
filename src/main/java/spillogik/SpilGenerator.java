@@ -363,82 +363,99 @@ public class SpilGenerator {
 
         Ryk brikken frem til det nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget
         til. Hvis selskabet  ikke ejes  af nogen kan de købe det af banken. * 2
-
-        De har anskaffet et nyt dæk til deres vogn. Indbetal 100kr.
-
-        De har kørt frem for ´Fuld Stop', betal 100kr i bøde.
-
-        Betal for vognvask og smøring. 10kr. * 2
-
-        De har været en tur i udlandet og haft for mange cigaretter med hjem. Betal 20kr i told.
-
-        De har måttet vedtage en parkeringsbøde. Betal 20kr til banken.
-
-
-
-
-
-
          */
 
         ArrayList<ChanceAktionDTO> chanceKort = new ArrayList<ChanceAktionDTO>();
 
-    //------------------------------------Giver penge chancekort------------------------------------------------------//
+        GiverPengeCO giverPenge;
+        TagerPengeCO tagerPenge;
+        GratisUdAfFaengselCO gratisUdAfFaengsel;
 
-        GiverPengeCO giverPenge = new GiverPengeCO();
+    //-----------------------------------Giver spilleren penge chancekort--------------------------------------------//
+
+        giverPenge = new GiverPengeCO();
         giverPenge.setBeskrivelse("Modtag udbytte af deres aktier. Modtag 50kr.");
         giverPenge.setPengeVerdi(50);
         chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge1 = new GiverPengeCO();
-        giverPenge1.setBeskrivelse("Værdien af egen avl fra nyttehaven udgør 200kr, som de modtager af banken.");
-        giverPenge1.setPengeVerdi(200);
-        chanceKort.add(giverPenge1);
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Værdien af egen avl fra nyttehaven udgør 200kr, som de modtager af banken.");
+        giverPenge.setPengeVerdi(200);
+        chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge2 = new GiverPengeCO();
-        giverPenge2.setBeskrivelse("Grundet på dyrtiden har de fået gageforhøjelse. Modtag 25kr. ");
-        giverPenge2.setPengeVerdi(25);
-        chanceKort.add(giverPenge2);
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Grundet på dyrtiden har de fået gageforhøjelse. Modtag 25kr. ");
+        giverPenge.setPengeVerdi(25);
+        chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge3 = new GiverPengeCO();
-        giverPenge3.setBeskrivelse("De har solgt deres gamle klude. Modtag  20kr.");
-        giverPenge3.setPengeVerdi(20);
-        chanceKort.add(giverPenge3);
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("De har solgt deres gamle klude. Modtag  20kr.");
+        giverPenge.setPengeVerdi(20);
+        chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge4 = new GiverPengeCO();
-        giverPenge4.setBeskrivelse("De har rettidigt afleveret deres abonnementskort. " +
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("De har rettidigt afleveret deres abonnementskort. " +
                 "Depositum 1kr udbetales dem af banken.");
-        giverPenge4.setPengeVerdi(1);
-        chanceKort.add(giverPenge4);
+        giverPenge.setPengeVerdi(1);
+        chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge5 = new GiverPengeCO();
-        giverPenge5.setBeskrivelse("Manufakturvarerne er blevet billigere og bedre, herved sparer de 50kr" +
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Manufakturvarerne er blevet billigere og bedre, herved sparer de 50kr" +
                 "som de modtager af banken.");
-        giverPenge5.setPengeVerdi(50);
-        chanceKort.add(giverPenge5);
+        giverPenge.setPengeVerdi(50);
+        chanceKort.add(giverPenge);
 
-        GiverPengeCO giverPenge6 = new GiverPengeCO();
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Efter auktionen på Assistenshuset, hvor de havde pantsat deres tøj," +
+                "modtager de ekstra 108kr.");
+        giverPenge.setPengeVerdi(108);
+        chanceKort.add(giverPenge);
 
-
-
+        giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Deres præmieobligation er kommet ud. De modtager 100kr af banken.");
+        giverPenge.setPengeVerdi(100);
+        chanceKort.add(giverPenge);
 
     //-----------------------------------Gratis ud af fængsel---------------------------------------------------------//
 
         for (int i = 0; i < 2; i++){
-            GratisUdAfFaengselCO gratisUdAfFangsel = new GratisUdAfFaengselCO();
-            gratisUdAfFangsel.setBeskrivelse("I andledningen af Kongens fødselsdag, benådes der herved for fængsel." +
+            gratisUdAfFaengsel = new GratisUdAfFaengselCO();
+            gratisUdAfFaengsel.setBeskrivelse("I andledningen af Kongens fødselsdag, benådes der herved for fængsel." +
                     "Dette kort kan opbevares, indtil de får brug for det.");
-            chanceKort.add(gratisUdAfFangsel);
+            chanceKort.add(gratisUdAfFaengsel);
         }
 
+    //-----------------------------------Tager penge fra spilleren----------------------------------------------------//
 
+        tagerPenge = new TagerPengeCO();
+        tagerPenge.setBeskrivelse("De har anskaffet et nyt dæk til deres vogn. Indbetal 100kr.");
+        tagerPenge.setPengeVerdi(100);
+        chanceKort.add(tagerPenge);
 
+        tagerPenge = new TagerPengeCO();
+        tagerPenge.setBeskrivelse("De har kørt frem for Fuld Stop. Betal 100kr i bøde.");
+        tagerPenge.setPengeVerdi(100);
+        chanceKort.add(tagerPenge);
 
+        for (int i = 0; i < 2; i++){
+            tagerPenge = new TagerPengeCO();
+            tagerPenge.setBeskrivelse("Betal for vognvask og smøring. 10kr.");
+            tagerPenge.setPengeVerdi(10);
+            chanceKort.add(tagerPenge);
+        }
 
+        tagerPenge = new TagerPengeCO();
+        tagerPenge.setBeskrivelse("De har været en tur i udlandet og haft for mange cigaretter med hjem. " +
+                "Betal 20kr i told.");
+        tagerPenge.setPengeVerdi(20);
+        chanceKort.add(tagerPenge);
 
+        tagerPenge = new TagerPengeCO();
+        tagerPenge.setBeskrivelse("De har måttet vedtage en parkeringsbøde. Betal 20kr til banken.");
+        tagerPenge.setPengeVerdi(20);
+        chanceKort.add(tagerPenge);
 
-
-        return RandomGenerator.genererChancekort(10);
+        return chanceKort;
     }
 
     public static Spil genererSpil( int antalSpillere ){
