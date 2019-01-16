@@ -13,7 +13,10 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
 
     //|----------- Metoder:-------------------
 
-    /**
+    /**@author Jacob
+     *
+     *
+     *
      * Indsæt beskrivelse her
      * @param userInterfaceKontrakt
      */
@@ -28,7 +31,15 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         userInterfaceKontrakt.chanceKortTilføjet();
     }
 
-
+    /**
+     * @author Jacob
+     *
+     *
+     *
+     * @param handel
+     * @param spil
+     * @param userInterfaceKontrakt
+     */
     public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getHandlinger().tagTaxi(spil.getSpil().getSpillerMedTur(),spil, userInterfaceKontrakt);
         userInterfaceKontrakt.chanceKortBrugt();

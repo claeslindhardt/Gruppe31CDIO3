@@ -339,6 +339,105 @@ public class SpilGenerator {
 
     public static ArrayList<ChanceAktionDTO> genererChancekort(){
         // TODO Implementer fastsatte chancekort
+
+        /*
+        Tag ind på Rådhuspladsen.
+
+        Du modtager Matador legatet.
+
+        Ryk from til Grønningen, hvis du passerer start modtag 200kr.
+
+        Tag med Øresundsbåden, hvis du passerer start modtag  200kr.
+
+        Gå i fængsel * 3.
+
+        Ryk tre felter tilbage * 2.
+
+        Ryk frem til start.
+
+        Kul og kokos priserne er steget, og de skal betale 25kr pr. hus og 125kr pr. hotel.
+
+        Ejendomsskatterne er steget, og ekstraudgifterne er: 50kr pr. hus og  125kr pr. hotel.
+
+        De har lagt penge ud til sammenskudsgilde. Mærkværdigvis betaler alle straks. Modtag 25kr fra hver medspiller.
+
+        Ryk brikken frem til det nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget
+        til. Hvis selskabet  ikke ejes  af nogen kan de købe det af banken. * 2
+
+        De har anskaffet et nyt dæk til deres vogn. Indbetal 100kr.
+
+        De har kørt frem for ´Fuld Stop', betal 100kr i bøde.
+
+        Betal for vognvask og smøring. 10kr. * 2
+
+        De har været en tur i udlandet og haft for mange cigaretter med hjem. Betal 20kr i told.
+
+        De har måttet vedtage en parkeringsbøde. Betal 20kr til banken.
+
+
+
+
+
+
+         */
+
+        ArrayList<ChanceAktionDTO> chanceKort = new ArrayList<ChanceAktionDTO>();
+
+    //------------------------------------Giver penge chancekort------------------------------------------------------//
+
+        GiverPengeCO giverPenge = new GiverPengeCO();
+        giverPenge.setBeskrivelse("Modtag udbytte af deres aktier. Modtag 50kr.");
+        giverPenge.setPengeVerdi(50);
+        chanceKort.add(giverPenge);
+
+        GiverPengeCO giverPenge1 = new GiverPengeCO();
+        giverPenge1.setBeskrivelse("Værdien af egen avl fra nyttehaven udgør 200kr, som de modtager af banken.");
+        giverPenge1.setPengeVerdi(200);
+        chanceKort.add(giverPenge1);
+
+        GiverPengeCO giverPenge2 = new GiverPengeCO();
+        giverPenge2.setBeskrivelse("Grundet på dyrtiden har de fået gageforhøjelse. Modtag 25kr. ");
+        giverPenge2.setPengeVerdi(25);
+        chanceKort.add(giverPenge2);
+
+        GiverPengeCO giverPenge3 = new GiverPengeCO();
+        giverPenge3.setBeskrivelse("De har solgt deres gamle klude. Modtag  20kr.");
+        giverPenge3.setPengeVerdi(20);
+        chanceKort.add(giverPenge3);
+
+        GiverPengeCO giverPenge4 = new GiverPengeCO();
+        giverPenge4.setBeskrivelse("De har rettidigt afleveret deres abonnementskort. " +
+                "Depositum 1kr udbetales dem af banken.");
+        giverPenge4.setPengeVerdi(1);
+        chanceKort.add(giverPenge4);
+
+        GiverPengeCO giverPenge5 = new GiverPengeCO();
+        giverPenge5.setBeskrivelse("Manufakturvarerne er blevet billigere og bedre, herved sparer de 50kr" +
+                "som de modtager af banken.");
+        giverPenge5.setPengeVerdi(50);
+        chanceKort.add(giverPenge5);
+
+        GiverPengeCO giverPenge6 = new GiverPengeCO();
+
+
+
+
+    //-----------------------------------Gratis ud af fængsel---------------------------------------------------------//
+
+        for (int i = 0; i < 2; i++){
+            GratisUdAfFaengselCO gratisUdAfFangsel = new GratisUdAfFaengselCO();
+            gratisUdAfFangsel.setBeskrivelse("I andledningen af Kongens fødselsdag, benådes der herved for fængsel." +
+                    "Dette kort kan opbevares, indtil de får brug for det.");
+            chanceKort.add(gratisUdAfFangsel);
+        }
+
+
+
+
+
+
+
+
         return RandomGenerator.genererChancekort(10);
     }
 

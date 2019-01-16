@@ -12,15 +12,18 @@ public class GiverPengeCO extends ChanceAktionDTO {
 
     //|----------- Metoder:--------------------
 
-    /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
+    /**@author Jacob
+     *
+     * Denne metode gør at spilleren får de penge som chancekortet fortæller at spilleren skal modtage, og det
+     * sker direkte når spilleren trækker kortet.
+     *
+     * @param spil - SpilController som leder og fordeler funktionerne i spillet
+     * @param userInterfaceKontrakt - Så det kan ske i GUI
      */
     public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         userInterfaceKontrakt.printChanceKortDirekte(this);
         Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
-        spillerMedTur.setPenge(spillerMedTur.getPenge()+getPengeVerdi());
+        spillerMedTur.setPenge(spillerMedTur.getPenge()+ getPengeVerdi());
         userInterfaceKontrakt.updateSpillere(spil.getSpil().getSpillerMedTur());
     }
     public void BetingetAktion(){ }
