@@ -35,6 +35,7 @@ public class TagerPengeCO extends Chancekort {
      * Indsæt beskrivelse
      */
     public TagerPengeCO(){
+        super( "", true );
         int potentiellePenge = ra.nextInt(499)+1;
         int valgAfGrund = ra.nextInt(getNegativeGrunde().length);
         String startBeskrivelse = "Du mister: ";

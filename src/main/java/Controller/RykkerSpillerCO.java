@@ -37,6 +37,7 @@ public class RykkerSpillerCO extends Chancekort {
 
     //|--------- Constructor:-----------------
     public RykkerSpillerCO(){
+        super("", true );
         int valgAfGrund = ra.nextInt(getPositiveGrunde().length);
         String startBeskrivelse = "Du for lov til at tage en TaxiCO, fordi ";
         String grund = getPositiveGrunde()[valgAfGrund];

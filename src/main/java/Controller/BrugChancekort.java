@@ -5,6 +5,8 @@ import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.chancekort.JustererPenge;
+import ModelEnteties.chancekort.RykTilBestemtFelt;
+import ModelEnteties.felter.Felt;
 
 public class BrugChancekort {
 
@@ -23,8 +25,12 @@ public class BrugChancekort {
         }else if( chancekort instanceof TagerPengeCO ) {
             tagerPenge(chancekort, spiller, ui);
 
-        }else if( chancekort instanceof JustererPenge){
-            justererPenge( (JustererPenge) chancekort, spiller, ui);
+        }else if( chancekort instanceof JustererPenge) {
+            justererPenge((JustererPenge) chancekort, spiller, ui);
+
+        }else if( chancekort instanceof RykTilBestemtFelt ){
+            rykTilBestemtFelt( (RykTilBestemtFelt) chancekort, spiller, spilController, ui );
+
         }
 
         // Fjerner chancekortet fra spilleren, og lægger det i bunken.
@@ -61,6 +67,11 @@ public class BrugChancekort {
     public void justererPenge( JustererPenge chancekort, Spiller spiller, UserInterfaceKontrakt ui ){
         spiller.addPenge( chancekort.getPengeVaerdi() );
         ui.updateSpillere( spiller );
+    }
+
+    public void rykTilBestemtFelt( RykTilBestemtFelt chancekort, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
+        Felt felt = spilController.getSpil().getFelter()[ chancekort.getFeltNummer() ];
+        spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
     }
 
 

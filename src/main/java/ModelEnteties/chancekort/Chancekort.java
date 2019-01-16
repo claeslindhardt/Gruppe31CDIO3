@@ -27,14 +27,17 @@ import ModelEnteties.singletoner.RandomSingleton;
  */
 public abstract class Chancekort {
 
-    Chancekort( String beskrivelse ){
+    public Chancekort( String beskrivelse, boolean direkteAktion ){
         this.beskrivelse = beskrivelse;
+        this.direkteAktion = direkteAktion;
     }
 
     //|--------- Variabler:----------------------
     private String beskrivelse;
     private int pengeVerdi;
     private String kortBeskrivelse;
+
+    private boolean direkteAktion;
 
     private final String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
             " Du har penge udbetalt på aktier", " Doctor Who kidnappede dig"," Du fik gratis rosengin. Yaiiiii :)",

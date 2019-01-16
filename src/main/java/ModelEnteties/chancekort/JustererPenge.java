@@ -9,7 +9,7 @@ public class JustererPenge extends Chancekort {
     }
 
     public JustererPenge( double pengeVaerdi, String beskrivelse ){
-        super(beskrivelse);
+        super( beskrivelse, true );
         this.pengeVaerdi = pengeVaerdi;
     }
 
