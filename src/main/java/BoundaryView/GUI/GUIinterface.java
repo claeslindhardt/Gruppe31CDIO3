@@ -604,6 +604,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void saelgHotel(EjendomCO ejendom){
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHotel(false);
+        husSkalPaa.setHouses(ejendom.getAntalHuse());
     }
 
     @Override
@@ -742,6 +743,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void byggeHotel(EjendomCO ejendom) {
         GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
             hotelSkalPaa.setHotel(ejendom.harHotel());
+
     }
 
     public void friParkering(){

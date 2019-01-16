@@ -94,7 +94,6 @@ public class Handel {
         spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
         ejendom.saelgHotel(false);
         ejendom.setAntalHuse(4);
-        userInterfaceKontrakt.byggetHus(ejendom);
 
         userInterfaceKontrakt.updateSpillere( spiller );
 
