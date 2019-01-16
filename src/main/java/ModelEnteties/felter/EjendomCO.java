@@ -142,59 +142,6 @@ public class EjendomCO extends EjeligtFeltDTO {
         this.lejeHotel = lejeHotel;
     }
 
-
-    //|----------- Metoder:------------------
-
-    /**
-     * Denne metode er linket til UserInterfaceKontrakt (interface). Den giver så enten GUI eller TUI mulighed for at
-     * skrive noget kode til den, så metoden bliver sat i brug i enten GUI eller TUi
-     * @param userInterfaceKontrakt
-     */
-    public void printInfo(UserInterfaceKontrakt userInterfaceKontrakt){
-        userInterfaceKontrakt.ejendomsInfo(this);
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     * @param spil
-     * @param userInterfaceKontrakt
-     */
-    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        Spiller spillerMedTur = spil.getSpil().getSpillerMedTur();
-
-        if(this.getEjer()==null){
-            this.printInfo(userInterfaceKontrakt);
-
-
-            int kobsBeslutning = userInterfaceKontrakt.ejendomsBud();
-            switch (kobsBeslutning){
-                case 0:
-                    spil.getKoebFelt().koebEjendom(this, spillerMedTur, userInterfaceKontrakt);
-                    break;
-                case 1:
-                    userInterfaceKontrakt.forsetTur();
-
-                    break;
-                default:
-                    userInterfaceKontrakt.ikkeMuligt();
-            }
-        }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
-            userInterfaceKontrakt.betalRente();
-            userInterfaceKontrakt.updateSpillere(spillerMedTur);
-            handel.indsamleLeje(spil.getSpil(),this,spillerMedTur, userInterfaceKontrakt);
-        }else if(this.getEjer() == spillerMedTur){
-            userInterfaceKontrakt.tetPaaMonopol();
-        }
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     * @param spilleren
-     * @param userInterfaceKontrakt
-     */
-
-
-
     /** @author Malte
      *  Tilføjer huse til ejendommen. Den tjekker ikke for, om der
      *  i følge reglerne kan bygges huse på ejendommen.
