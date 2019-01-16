@@ -43,7 +43,7 @@ private int leje = 0;
 
                     break;
                 default:
-                    userInterfaceKontrakt.ikkeMuligt();
+
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();

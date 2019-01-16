@@ -248,7 +248,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int velkomstMenu(int minInput, int maxInput){
         String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOLY SPILLET V1, MKIII",
-                "starte nyt spil", "aendre spil instillinger","forsaette sidste spil");
+                "starte nyt spil", "aendre spil instillinger");
         hovedmenu.showMessage(valg);
         //todo: fix this to return the right option
         return input.velkomstMenu(valg);
@@ -258,15 +258,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
         String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting");
+                "Kast terninger", "Slut din tur","Se chancekort","Giv op",
+                "Byg på ejendom", "Byg hotel");
 
         return input.TurMenu(valg);
     }
-
-    public void ikkeMuligt(){
-        gui.showMessage("Dette er ikke en mulighed endnu - prøv igen");
-    }
-
 
     /**
      * @author Jacob og Chua
@@ -341,7 +337,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
     public void ingenHeldIRetten(){
         gui.showMessage("Ingen held i retten i dag, forbliv i faengsel." +
-                "\nDu kan stadig opkraeve rente og handle med ejendomme"
+                "\nDu kan stadig opkraeve leje"
         );
     }
     public void heldIRetten(){
@@ -453,10 +449,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");
     }
 
-    public void spillerStat(Spiller spiller){
-        gui.showMessage("Navn: "+spiller.getNavn()+" ID: "+spiller.getId()+ " Position på braet: " + spiller.getSpillerPosition() +spiller.getSpillerPosition()+" Penge: "+spiller.getPenge());
-
-    }
 
     public void alleredeEjer(){
         gui.showMessage("Du er allerede ejer");

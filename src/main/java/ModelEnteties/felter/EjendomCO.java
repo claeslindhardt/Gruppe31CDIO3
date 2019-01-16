@@ -176,7 +176,7 @@ public class EjendomCO extends EjeligtFeltDTO {
 
                     break;
                 default:
-                    userInterfaceKontrakt.ikkeMuligt();
+
             }
         }else if(this.getEjer() != null && this.getEjer() != spillerMedTur){
             userInterfaceKontrakt.betalRente();
