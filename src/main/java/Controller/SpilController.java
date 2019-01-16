@@ -281,7 +281,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public void turMenu() {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 11);
+        int input = ui.TurMenu(spil.getSpillerTur(), 1, 12);
 
         switch (input) {
             case 1:
@@ -318,6 +318,10 @@ public class SpilController{
                 break;
             case 10:
                 //spil.getSpillerMedTur().handelMedEjendomme();
+                break;
+            case 11: handel.saelgHusPaaEjendom(this,spil.getSpillerMedTur(), ui);
+                break;
+            case 12: handel.saelgHotelPaaEjendom(this,spil.getSpillerMedTur(), ui);
                 break;
             default:
                 ui.ikkeMuligt();

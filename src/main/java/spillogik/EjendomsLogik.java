@@ -37,6 +37,7 @@ public class EjendomsLogik {
         return true;
     }
 
+
     /**
      * @author Jacob
      *
@@ -104,6 +105,23 @@ public class EjendomsLogik {
     }
 
 
+    public static boolean kanSaelgeHus(Spiller spiller, EjendomCO ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+
+        return      spiller.ejerEjendom( ejendom )
+                &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
+                &&  huseErFordeltIGruppe( ejendom )
+                &&  ejendom.getAntalHuse() > 1
+                ||  ejendom.harHotel();
+    }
+
+    public static double beregnSalgsPrisHus(EjendomCO ejendom, int antalHuse){
+
+        if(ejendom.harHotel()){
+            return ((ejendom.getHotelPris())/2);
+        }else {
+            return ((ejendom.getHusPris() * antalHuse) / 2);
+        }
+    }
     /**
      * Henter information for, hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
      * og om man ejer alle i Ejendomsgruppen.

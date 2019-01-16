@@ -353,6 +353,8 @@ public class TUI implements UserInterfaceKontrakt {
         System.out.println("Du har bygget et hus paa "+ejendom.getNavn());
     }
 
+    public void saelgHotel(EjendomCO ejendom){};
+
     @Override
     public void tillykkeMedHotel() {
 
@@ -362,6 +364,10 @@ public class TUI implements UserInterfaceKontrakt {
     public int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme) {
         return 0;
     }
+
+    public int input_EjendomAtSaelgeFra(ArrayList<EjendomCO> ejendomme){return 0;};
+
+    public void saelgHus(EjendomCO ejendom){};
 
     public void ejerIngenEjendomme() {
         System.out.println("Du ejer ingen ejendomme");

@@ -76,6 +76,27 @@ public class Handel {
         }
     }
 
+    public void saelgHus(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+        if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())) ;
+
+        ejendom.saelgHus(1);
+
+
+        spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
+        userInterfaceKontrakt.updateSpillere( spiller );
+
+        userInterfaceKontrakt.saelgHus(ejendom);
+    }
+
+    public void saelgHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+
+        spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
+        ejendom.saelgHotel(false);
+
+        userInterfaceKontrakt.updateSpillere( spiller );
+
+        userInterfaceKontrakt.saelgHus(ejendom);
+    }
     /**
      * @author Malte
      * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
@@ -113,6 +134,34 @@ public class Handel {
         }
     }
 
+
+    public void saelgHusPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
+        ArrayList<EjendomCO> kartotek = opretEjendomsKartotek(spiller);
+
+        if(kartotek.size() > 0){
+            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+            if (ejendomsIndex == kartotek.size()) {
+                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
+                spil.turMenu();}
+            saelgHus(spiller,  kartotek.get(ejendomsIndex), ui);
+            ui.saelgHus(kartotek.get(ejendomsIndex));
+        }
+
+    }
+
+    public void saelgHotelPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
+        ArrayList<EjendomCO> kartotek = opretHotelKartotek(spiller);
+
+        if(kartotek.size() > 0){
+            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+            if (ejendomsIndex == kartotek.size()) {
+                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
+                spil.turMenu( );}
+            saelgHotel(spiller,  kartotek.get(ejendomsIndex), ui);
+            ui.saelgHotel(kartotek.get(ejendomsIndex));
+        }
+
+    }
 
     /**
      * @author Chua
@@ -171,5 +220,47 @@ public class Handel {
         }
     }
 
+
+    public ArrayList<EjendomCO> opretEjendomsKartotek(Spiller spiller){
+        int count =0;
+
+        EjendomCO[] ejendomme = spiller.getEjendomme();
+
+
+        for(int i = 0; i < ejendomme.length;i++){
+            if(ejendomme[i].getAntalHuse()>0||ejendomme[i].harHotel()){
+                count++;
+            }
+        }
+        ArrayList<EjendomCO> kartotek = new ArrayList<>();
+
+        for(int i = 0; i < ejendomme.length;i++){
+            if(ejendomme[i].getAntalHuse()>0||ejendomme[i].harHotel()){
+                kartotek.add(ejendomme[i]);
+            }
+        }
+        return kartotek;
+    }
+
+    public ArrayList<EjendomCO> opretHotelKartotek(Spiller spiller){
+        int count =0;
+
+        EjendomCO[] ejendomme = spiller.getEjendomme();
+
+
+        for(int i = 0; i < ejendomme.length;i++){
+            if(ejendomme[i].harHotel()){
+                count++;
+            }
+        }
+        ArrayList<EjendomCO> kartotek = new ArrayList<>();
+
+        for(int j = 0; j < ejendomme.length;j++){
+            if(ejendomme[j].harHotel()){
+                kartotek.add(ejendomme[j]);
+            }
+        }
+        return kartotek;
+    }
 
 }

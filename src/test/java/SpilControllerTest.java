@@ -28,6 +28,8 @@ class SpilControllerTest {
             }
         }
 
+
+
         Spiller spiller = spil.getSpiller(0);
 
         Bryggeri Tuborg = new Bryggeri("Tuborg",3);
