@@ -37,6 +37,26 @@ public class EjendomsLogik {
         return true;
     }
 
+    /**
+     * @author Andreas
+     *
+     * Anvendes for at man kan se, hvilke ejendommen man kan sælge huse på.
+     * @param ejendomsUdgangspunkt
+     * @return
+     */
+    public static boolean fordelingAfHuseVedSalg( EjendomCO ejendomsUdgangspunkt ){
+
+        for (int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
+            EjendomCO ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
+
+            if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()){
+
+                return false;
+
+            }
+        }
+        return true;
+    }
 
     /**
      * @author Jacob
@@ -109,9 +129,10 @@ public class EjendomsLogik {
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
-                &&  huseErFordeltIGruppe( ejendom )
-                &&  ejendom.getAntalHuse() > 1
-                ||  ejendom.harHotel();
+                &&  fordelingAfHuseVedSalg( ejendom )
+                &&  ejendom.getAntalHuse() > 0
+                &&  !ejendom.harHotel();
+
     }
 
     public static double beregnSalgsPrisHus(EjendomCO ejendom, int antalHuse){

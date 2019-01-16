@@ -77,25 +77,28 @@ public class Handel {
     }
 
     public void saelgHus(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
-        if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())) ;
+        if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())){
 
-        ejendom.saelgHus(1);
+            ejendom.saelgHus(1);
 
 
-        spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
-        userInterfaceKontrakt.updateSpillere( spiller );
+            spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom, 1));
+            userInterfaceKontrakt.updateSpillere(spiller);
 
-        userInterfaceKontrakt.saelgHus(ejendom);
+            userInterfaceKontrakt.saelgHus(ejendom);
+        }
     }
 
     public void saelgHotel(Spiller spiller, EjendomCO ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
 
         spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
         ejendom.saelgHotel(false);
+        ejendom.setAntalHuse(4);
+        userInterfaceKontrakt.byggetHus(ejendom);
 
         userInterfaceKontrakt.updateSpillere( spiller );
 
-        userInterfaceKontrakt.saelgHus(ejendom);
+        //userInterfaceKontrakt.saelgHus(ejendom);
     }
     /**
      * @author Malte
@@ -140,6 +143,9 @@ public class Handel {
 
         if(kartotek.size() > 0){
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+
+
+
             if (ejendomsIndex == kartotek.size()) {
                 //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
                 spil.turMenu();}
@@ -154,9 +160,9 @@ public class Handel {
 
         if(kartotek.size() > 0){
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
-            if (ejendomsIndex == kartotek.size()) {
-                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu( );}
+                if (ejendomsIndex == kartotek.size()) {
+                    //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
+                    spil.turMenu( );}
             saelgHotel(spiller,  kartotek.get(ejendomsIndex), ui);
             ui.saelgHotel(kartotek.get(ejendomsIndex));
         }
@@ -226,16 +232,10 @@ public class Handel {
 
         EjendomCO[] ejendomme = spiller.getEjendomme();
 
-
-        for(int i = 0; i < ejendomme.length;i++){
-            if(ejendomme[i].getAntalHuse()>0||ejendomme[i].harHotel()){
-                count++;
-            }
-        }
         ArrayList<EjendomCO> kartotek = new ArrayList<>();
 
         for(int i = 0; i < ejendomme.length;i++){
-            if(ejendomme[i].getAntalHuse()>0||ejendomme[i].harHotel()){
+            if(EjendomsLogik.kanSaelgeHus(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
                 kartotek.add(ejendomme[i]);
             }
         }

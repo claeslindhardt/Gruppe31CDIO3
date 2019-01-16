@@ -109,12 +109,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 gui_felt = new GUI_Street();
                 gui_felt.setTitle(felt.getNavn());
                 gui_felt.setSubText(felt.getFeltType());
+
             }
             gui_felter[i] = gui_felt;
 
             if( felt.getFeltType().equals("Ejendom") ){
                 EjendomCO ejendom = (EjendomCO) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
+                ((GUI_Street) gui_felt).setHouses(((EjendomCO) felt).getAntalHuse());
                 gui_felt.setDescription("Grundpris: "+((EjendomCO) felt).getPris() + " / "
                         + "Grundleje: " + ((EjendomCO) felt).getLeje() + " / "
                         + "Huspris: " + ((EjendomCO) felt).getHusPris() + " / "
@@ -483,11 +485,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void updateSpillere(Spiller spiller){
-        for(int i = 0; i < spillere.size();i++){
+
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
 
-        }
+
     }
 
     /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
@@ -654,14 +656,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public int input_EjendomAtSaelgeFra(ArrayList<EjendomCO> ejendomme) {
-        String[] ejendomsListe = new String[ejendomme.size()];
+        String[] ejendomsListe = new String[ejendomme.size()+1];
 
         //Arraylist converteres til et array
         for(int i = 0; i < ejendomme.size();i++){
             ejendomsListe[i] = ejendomme.get(i).getNavn();
         }
 
-
+        ejendomsListe[ejendomme.size()] = "Tilbage";
         String valg = gui.getUserSelection("Hvilken ejendom vil du saelge på? ",ejendomsListe);
         int indexRetur = 0;
 
@@ -684,12 +686,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public int input_EjendomAtByggeHotelPaa(ArrayList<EjendomCO> ejendomme) {
 
-        String[] ejendomsListe = new String[ejendomme.size()];
+        String[] ejendomsListe = new String[ejendomme.size()+1];
 
-        for (int i = 0; i < ejendomsListe.length; i++){
+        for (int i = 0; i < ejendomme.size(); i++){
             ejendomsListe[i] = ejendomme.get(i).getNavn();
         }
-
+        ejendomsListe[ejendomme.size()] = "Tilbage";
         String valg = gui.getUserSelection("Hvilken ejendom vil du bygge hotel paa? ",ejendomsListe);
         int indexRetur = 0;
 
