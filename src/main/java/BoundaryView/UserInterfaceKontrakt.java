@@ -96,6 +96,7 @@ public interface UserInterfaceKontrakt {
     void friParkering();
     String skatteBetaling();
     void skatteBesked(int valg);
+    void trækEtChancekort();
 
     //===================================================
     //===================================================

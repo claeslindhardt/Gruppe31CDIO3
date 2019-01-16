@@ -24,6 +24,7 @@ public class RykkerSpillerCO extends ChanceAktionDTO {
         spil.getChanceKort().remove(this); // Fjerner kortet fra bunken
         spiller.addChancekort(  this );
 
+        userInterfaceKontrakt.trækEtChancekort();
         userInterfaceKontrakt.printChanceKortDirekte(this);
         userInterfaceKontrakt.chanceKortTilføjet();
     }
