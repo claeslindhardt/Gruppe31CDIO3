@@ -2,11 +2,11 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.EjeligtFeltDTO;
+import ModelEnteties.felter.EjeligtFelt;
 
 import java.util.ArrayList;
 
-public class JernbaneCO extends EjeligtFeltDTO {
+public class JernbaneCO extends EjeligtFelt {
 
     //|----------- Metoder:------------------
 

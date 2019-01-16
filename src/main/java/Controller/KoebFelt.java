@@ -3,17 +3,17 @@ package Controller;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjeligtFeltDTO;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.EjeligtFelt;
+import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
 
 public class KoebFelt {
 
 
-    public void koebFelt(EjeligtFeltDTO felt, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterfaceKontrakt ui ){
 
-        if( felt instanceof EjendomCO ){
-            koebEjendom( (EjendomCO) felt, spiller, ui);
+        if( felt instanceof Ejendom){
+            koebEjendom( (Ejendom) felt, spiller, ui);
 
         }else if( felt instanceof Bryggeri  ){
             koebBryggeri( (Bryggeri) felt, spiller, ui );
@@ -34,7 +34,7 @@ public class KoebFelt {
      * @param ejendom
      * @param ui
      */
-    public void koebEjendom(EjendomCO ejendom, Spiller spiller, UserInterfaceKontrakt ui) {
+    public void koebEjendom(Ejendom ejendom, Spiller spiller, UserInterfaceKontrakt ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( ejendom.getEjer() == spiller ) {
@@ -59,7 +59,6 @@ public class KoebFelt {
      * Indsæt beskrivelse her
      * @param jernbane
      * @param userInterfaceKontrakt
-     * @param spil
      */
     public void koebJernbane(JernbaneCO jernbane, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt){
 

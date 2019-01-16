@@ -5,7 +5,7 @@ import BoundaryView.TUI.TUI;
 import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Spiller;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import ModelEnteties.EjendomsGruppeDTO;
 import Controller.JernbaneCO;
 import gui_main.GUI;
@@ -148,11 +148,11 @@ class SpillerTest {
     @Test
     void koebEjendom() {
 
-        EjendomCO ejendom = new EjendomCO("Hajgade",100,50,0);
+        Ejendom ejendom = new Ejendom("Hajgade",100,50,0);
         Spiller spiller = new Spiller("Jacob",30,0);
         UserInterfaceKontrakt userInterfaceKontrakt = new TUI();
         double pengebeholdning = spiller.getPenge();
-        ArrayList<EjendomCO> mineEjendomme = new ArrayList<EjendomCO>();
+        ArrayList<Ejendom> mineEjendomme = new ArrayList<Ejendom>();
         spiller.koebEjendom(ejendom, userInterfaceKontrakt);
 
         assertEquals(spiller,ejendom.getEjer());
@@ -199,15 +199,15 @@ class SpillerTest {
         EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 3);
 
 
-        EjendomCO ejendom1 = new EjendomCO("Ejendom1", 0, 0, 0);
+        Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom1);
         ejendom1.setGruppe(ejendomsGruppe);
 
-        EjendomCO ejendom2 = new EjendomCO("Ejendom2", 0, 0, 0);
+        Ejendom ejendom2 = new Ejendom("Ejendom2", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom2);
         ejendom2.setGruppe(ejendomsGruppe);
 
-        EjendomCO ejendom3 = new EjendomCO("Ejendom3", 0, 0, 0);
+        Ejendom ejendom3 = new Ejendom("Ejendom3", 0, 0, 0);
         ejendomsGruppe.tilfoejEjendom(ejendom3);
         ejendom3.setGruppe(ejendomsGruppe);
 

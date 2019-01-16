@@ -3,8 +3,8 @@ package Controller;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Felt;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.felter.FeltDTO;
 import spillogik.BevaegelsesLogik;
 
 public class RykSpiller {
@@ -50,9 +50,9 @@ public class RykSpiller {
      */
     public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterfaceKontrakt ui, SpilController spilController) {
 
-        FeltDTO[] felter = spil.getFelter();
+        Felt[] felter = spil.getFelter();
 
-        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getSpillerPosition()], felterAtRykke  );
+        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getSpillerPosition()], felterAtRykke  );
 
         int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, felter.length);
 
@@ -72,7 +72,7 @@ public class RykSpiller {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt( Spiller spiller, FeltDTO felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
+    public void rykSpillerTilFelt(Spiller spiller, Felt felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() + BevaegelsesLogik.passererStartPenge(gangeOverStart));

@@ -4,7 +4,7 @@ import Controller.*;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Spiller;
 import ModelEnteties.Spil;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -109,15 +109,15 @@ class SpilCOTest {
 
 
         for (int j = 0; j < spil.getBretGeneretForSpil().getBret().size(); j++) {
-            if (spil.getBretGeneretForSpil().getBret().get(j) instanceof StartCO) {
+            if (spil.getBretGeneretForSpil().getBret().get(j) instanceof StartFelt) {
                 startfelt++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof EjendomCO) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Ejendom) {
                 ejendom++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof ChanceFeltCO) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof ProevLykken) {
                 chancefelt++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof FaengselCO) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof Faengsel) {
                 faengsel++;
-            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof GaaIFaengselCO) {
+            } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof GaaIFaengsel) {
                 gaaIFaengsel++;
             } else if (spil.getBretGeneretForSpil().getBret().get(j) instanceof JernbaneCO) {
                 jernbane++;

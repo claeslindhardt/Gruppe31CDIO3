@@ -1,9 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Felt;
 
-public class TaxiCO extends FeltDTO {
+public class TaxiCO extends Felt {
     //|----------- Metoder:------------------
 
     /**
@@ -13,7 +13,6 @@ public class TaxiCO extends FeltDTO {
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getHandlinger().tagTaxi( spil.getSpil().getSpillerMedTur(), spil, userInterfaceKontrakt );
-
     }
 
     /**

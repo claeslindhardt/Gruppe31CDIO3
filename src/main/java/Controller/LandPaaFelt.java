@@ -4,32 +4,31 @@ import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
-import com.sun.org.glassfish.external.statistics.Stats;
 
 import java.util.ArrayList;
 
 public class LandPaaFelt {
 
-    public void landPaaFelt( SpilController spilController, FeltDTO felt, Spiller spiller, UserInterfaceKontrakt ui){
+    public void landPaaFelt(SpilController spilController, Felt felt, Spiller spiller, UserInterfaceKontrakt ui){
 
         ui.duErLandetPå(felt, spiller);
 
-        if( felt instanceof EjeligtFeltDTO ) {
-            ejeligtFelt( spilController, spiller, (EjeligtFeltDTO) felt, ui );
+        if( felt instanceof EjeligtFelt) {
+            ejeligtFelt( spilController, spiller, (EjeligtFelt) felt, ui );
 
-        }else if ( felt instanceof StartCO ){
+        }else if ( felt instanceof StartFelt){
             startFelt( ui );
 
-        } else if( felt instanceof ChanceFeltCO ) {
+        } else if( felt instanceof ProevLykken) {
             proevLykken( spilController, ui );
 
         } else if( felt instanceof FriParkering ){
             friParkering( ui );
 
-        } else if( felt instanceof GaaIFaengselCO ) {
+        } else if( felt instanceof GaaIFaengsel) {
             gaaIFaengsel(spilController, ui );
 
-        } else if( felt instanceof FaengselCO){
+        } else if( felt instanceof Faengsel){
             faengsel(ui);
 
         } else if (felt instanceof IndkomstSkat){
@@ -43,7 +42,7 @@ public class LandPaaFelt {
     }
 
 
-    public void ejeligtFelt( SpilController spilController, Spiller spiller, EjeligtFeltDTO felt, UserInterfaceKontrakt ui ){
+    public void ejeligtFelt(SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterfaceKontrakt ui ){
 
         if( felt.getEjer() == null ){
 
@@ -94,7 +93,7 @@ public class LandPaaFelt {
 
     public void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
         Spiller spillerMedTur = spilController.getSpil().getSpillerMedTur();
-        FaengselCO faengsel = spilController.getSpil().getFaengsel();
+        Faengsel faengsel = spilController.getSpil().getFaengsel();
 
         spillerMedTur.setFaengselsStraf(true);
         spillerMedTur.setSpillerPosition( faengsel.getPlacering() );

@@ -1,18 +1,14 @@
 package ModelEnteties.felter;
 
-import Controller.Handel;
-import Controller.SpilController;
-import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.EjendomsGruppeDTO;
-import ModelEnteties.Spiller;
 import spillogik.EjendomsLogik;
 
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: EjendomCO
+ *  PROGRAMDOKUMENTATION: Ejendom
  *
  */
-public class EjendomCO extends EjeligtFeltDTO {
+public class Ejendom extends EjeligtFelt {
 
     private boolean harHotel = false;
     private int     antalHuse = 0;
@@ -156,7 +152,7 @@ public class EjendomCO extends EjeligtFeltDTO {
     }
 
     //|--------- Constructor:-----------------
-    public EjendomCO(String navn, int pris, int startLeje, int placering){
+    public Ejendom(String navn, int pris, int startLeje, int placering){
         super( navn, pris, placering);
         setPlacering(placering);
         setPris(pris);

@@ -192,9 +192,9 @@ public class SpilController{
      */
     /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
 
-        FeltDTO[] braet = spil.getBraet().getBretArray();
+        Felt[] braet = spil.getBraet().getBretArray();
 
-        FeltDTO endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
+        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
 
         int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
 
@@ -214,7 +214,7 @@ public class SpilController{
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    /*public void rykSpillerTilFelt( SpillerCO spiller, FeltDTO felt, int gangeOverStart){
+    /*public void rykSpillerTilFelt( SpillerCO spiller, Felt felt, int gangeOverStart){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));

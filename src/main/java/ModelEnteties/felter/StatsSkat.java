@@ -4,7 +4,7 @@ import BoundaryView.UserInterfaceKontrakt;
 import Controller.Handel;
 import Controller.SpilController;
 
-public class StatsSkat extends FeltDTO {
+public class StatsSkat extends Felt {
 
     public double getSkat() {
         return skat;
@@ -15,10 +15,5 @@ public class StatsSkat extends FeltDTO {
     public StatsSkat(int placering, double skat) {
         super( "Betal statsskat", placering );
         this.skat = skat;
-    }
-
-    @Override
-    public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt ui) {
-
     }
 }
