@@ -74,7 +74,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
                     userInterfaceKontrakt.forsetTur();
                     break;
                 default:
-                    userInterfaceKontrakt.ikkeMuligt();
+
             }
 
         }else if(this.getEjer() != spillerMedTur ){

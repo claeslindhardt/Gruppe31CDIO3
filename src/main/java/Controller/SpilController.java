@@ -320,7 +320,7 @@ public class SpilController{
                 //spil.getSpillerMedTur().handelMedEjendomme();
                 break;
             default:
-                ui.ikkeMuligt();
+
         }
 
     }
