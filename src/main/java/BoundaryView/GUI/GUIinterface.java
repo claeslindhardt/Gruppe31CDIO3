@@ -125,7 +125,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
             } else if( felt instanceof GaaIFaengselCO || felt instanceof FaengselCO ){
                 gui_felt = new GUI_Jail();
 
-            } else {
+            } else if (felt instanceof BetalSkat){ gui_felt = new GUI_Tax();
+
+            }
+
+            else {
                 gui_felt = new GUI_Street();
                 gui_felt.setTitle(felt.getNavn());
                 gui_felt.setSubText(felt.getFeltType());
