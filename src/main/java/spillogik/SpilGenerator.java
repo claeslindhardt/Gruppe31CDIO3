@@ -336,7 +336,13 @@ public class SpilGenerator {
         return felter;
     }
 
-
+    /**
+     * @author Jacob
+     *
+     * Denne metode laver alle de faste chancekort fra de klassiske Matador spil.
+     *
+     * @return De oprettede chancekort returneres
+     */
     public static ArrayList<ChanceAktionDTO> genererChancekort(){
         // TODO Implementer fastsatte chancekort
 
