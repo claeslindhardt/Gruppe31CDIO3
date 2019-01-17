@@ -16,6 +16,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static view.GUI.GUI_Generator.genererSpillere;
+
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
@@ -223,26 +225,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         this.felter = gui_felter;
         gui = new GUI( gui_felter, new Color(218,206,179));
-/*
-        // Laver spilleres grafiske elementer
-        for(int i=0;i<spillere.length;i++){
 
 
-            GUI_Car bil = new GUI_Car(); //Opret en bil
 
-            // Finder spiller farve
-            int[] farveVaerdier = SPILLERFARVER[i%SPILLERFARVER.length];
-            Color spillerFarve = new Color(farveVaerdier[0], farveVaerdier[1], farveVaerdier[2]);
-            bil.setPrimaryColor(spillerFarve); //Lad den være gul
 
-            GUI_Player spiller = new GUI_Player(spillere[i].getNavn(),(int) spillere[i].getPenge(), bil); //opret en spiller
 
-            this.spillere.add(spiller);
-            gui.addPlayer(spiller); //Sæt spilleren på
-            gui_felter[0].setCar(spiller, true);
 
-        }*/
-        //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
     }
 
@@ -286,8 +274,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
         for( int i = 0; i < antalSpillere; i++ ){
 
             boolean navnErTaget = false;
+            String indtastetNavn;
             do{
-                String indtastetNavn = gui.getUserString( "Indtast navnet paa spiller " + (i+1) + ":");
+                indtastetNavn = gui.getUserString( "Indtast navnet paa spiller " + (i+1) + ":");
 
                 for(int j = 0; j < antalSpillere; j++){
 
@@ -297,12 +286,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 }
 
             }while( navnErTaget );
+            navne[i] = indtastetNavn;
         }
 
         return navne;
     }
 
-    public void startSpil(){}
+    public void startSpil(){
+
+
+    }
 
 
     public String spillerNavne() {
@@ -866,9 +859,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public void startSpil(Spil spil) {
 
-        genererGUIBret( spil );
+        GUI_Player[] gui_spillere = genererSpillere( spil.getSpillere() );
 
-        hovedmenu = null;
+        for( GUI_Player gui_spiller : gui_spillere ){
+            gui.addPlayer( gui_spiller );
+        }
+
     }
 
     public int vaelgIndkomstSkat(){
