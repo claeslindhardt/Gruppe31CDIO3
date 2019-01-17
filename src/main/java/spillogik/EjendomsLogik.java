@@ -170,6 +170,14 @@ public class EjendomsLogik {
 
 
         }
+
+    /**
+     * @auther Andreas
+     * Beregner den leje som skal betales, når en spiller lander på en andens bryggeri.
+      * @param terningeKast
+     * @param ejer
+     * @return
+     */
     public static int beregnLejeBryggeri( int terningeKast, Spiller ejer ){
         int leje;
 
@@ -182,6 +190,12 @@ public class EjendomsLogik {
         return leje;
     }
 
+    /**
+     * @auther filip
+     * @param rederi
+     * @param spiller
+     * @return
+     */
     public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
         int leje = rederi.getLeje();
 

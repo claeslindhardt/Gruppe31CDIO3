@@ -168,8 +168,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 Ejendom ejendom = (Ejendom) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
                 ((GUI_Street) gui_felt).setHouses(((Ejendom) felt).getAntalHuse());
-                gui_felt.setDescription("Grundpris: "+((Ejendom) felt).getPris() + " / "
-                        + "Grundleje: " + ((Ejendom) felt).getLeje() + " / "
+                gui_felt.setDescription("Grundleje: " + ((Ejendom) felt).getLeje() + " / "
                         + "Huspris: " + ((Ejendom) felt).getHusPris() + " / "
                         + "Leje fra hus 1: " + ((Ejendom) felt).getLejeHus(1) + " / "
                         + "Leje fra hus 2: " + ((Ejendom) felt).getLejeHus(2) + " / "
