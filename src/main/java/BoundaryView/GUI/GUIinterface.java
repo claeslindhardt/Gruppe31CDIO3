@@ -570,7 +570,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void gennemfoertKoebRederi (Rederi rederi, Spiller spiller){
         gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
 
-        GUI_Street gui_rederi = (GUI_Street) gui.getFields()[rederi.getPlacering()];
+        GUI_Shipping gui_rederi = (GUI_Shipping) gui.getFields()[rederi.getPlacering()];
 
         gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
@@ -584,7 +584,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller){
         gui.showMessage("Du har koebt " + bryggeri.getNavn() + "!");
 
-        GUI_Street gui_bryggeri = (GUI_Street) gui.getFields()[bryggeri.getPlacering()];
+        GUI_Brewery gui_bryggeri = (GUI_Brewery) gui.getFields()[bryggeri.getPlacering()];
 
         gui_bryggeri.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
