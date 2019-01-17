@@ -48,7 +48,8 @@ public class EjendomsLogik {
 
             Ejendom ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
-            if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()){
+            if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()||ejendom.harHotel()){
+
                 return false;
             }
         }
