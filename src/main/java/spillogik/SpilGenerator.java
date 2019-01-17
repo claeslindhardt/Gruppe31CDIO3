@@ -1,11 +1,12 @@
 package spillogik;
 
-import ModelEnteties.chancekort.*;
-import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.EjendomsGruppe;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
+import TingTilRandomSpil.RandomGenerator;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -48,13 +49,13 @@ public class SpilGenerator {
         Faengsel faengsel;
         GaaIFaengsel gaaIFaengsel;
         FriParkering friParkering;
-        EjendomsGruppeDTO ejendomsGruppe;
+        EjendomsGruppe ejendomsGruppe;
 
 
         //----------------------------------------Brættet---------------------------------------//
         felter[0] = new StartFelt(0);
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.blue,2);
+        ejendomsGruppe = new EjendomsGruppe( Color.blue );
 
         ejendom = new Ejendom("Rødovrevej",60,2,1);
         ejendom.setLejeHus(10,30,90,160);
@@ -85,7 +86,7 @@ public class SpilGenerator {
         rederi.setPantsaetningsVaerdi(100);
         felter[5] = rederi;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.PINK,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.PINK );
 
         ejendom = new Ejendom("Roskildevej",100,6,6);
         ejendom.setLejeHus(30,90,270,400);
@@ -120,7 +121,7 @@ public class SpilGenerator {
         faengsel = new Faengsel("Fængsel",10);
         felter[10] = faengsel;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.green,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.green );
 
         ejendom = new Ejendom("Frederiksberg Allé",140,10,11);
         ejendom.setLejeHus(50,150,450,625);
@@ -157,7 +158,7 @@ public class SpilGenerator {
         rederi.setPantsaetningsVaerdi(100);
         felter[15] = rederi;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.GRAY,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.GRAY );
 
         ejendom = new Ejendom("Bernstorffsvej",180,14,16);
         ejendom.setLejeHus(70,200,550,750);
@@ -192,7 +193,7 @@ public class SpilGenerator {
         friParkering = new FriParkering(20);
         felter[20] = friParkering;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.red,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.red );
 
         ejendom = new Ejendom("Trianglen",220,18,21);
         ejendom.setLejeHus(90,250,700,875);
@@ -228,7 +229,7 @@ public class SpilGenerator {
         rederi.setPantsaetningsVaerdi(100);
         felter[25] = rederi;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.white,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.white );
 
         ejendom = new Ejendom("Bredgade",260,22,26);
         ejendom.setLejeHus(110,330,800,975);
@@ -265,7 +266,7 @@ public class SpilGenerator {
         gaaIFaengsel = new GaaIFaengsel(30);
         felter[30] = gaaIFaengsel;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.YELLOW,3);
+        ejendomsGruppe = new EjendomsGruppe( Color.YELLOW );
 
         ejendom = new Ejendom("Amagertorv",300,26,31);
         ejendom.setLejeHus(130,390,900,1100);
@@ -304,7 +305,7 @@ public class SpilGenerator {
         proevLykken = new ProevLykken(36);
         felter[36] = proevLykken;
 
-        ejendomsGruppe = new EjendomsGruppeDTO(Color.MAGENTA,2);
+        ejendomsGruppe = new EjendomsGruppe( Color.MAGENTA );
 
         ejendom = new Ejendom("Frederiksberggade",350,35,37);
         ejendom.setLejeHus(175,500,1100,1300);

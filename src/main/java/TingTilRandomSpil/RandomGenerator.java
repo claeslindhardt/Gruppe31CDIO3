@@ -1,11 +1,8 @@
-package spillogik;
+package TingTilRandomSpil;
 
-import Controller.*;
-import ModelEnteties.EjendomsGruppeDTO;
-import ModelEnteties.NavneGenerator;
+import ModelEnteties.EjendomsGruppe;
 import ModelEnteties.Spil;
 import ModelEnteties.chancekort.Chancekort;
-import ModelEnteties.chancekort.GratisUdAfFaengsel;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
@@ -30,19 +27,19 @@ public class RandomGenerator {
     }
 
 
-    public static EjendomsGruppeDTO[] genererEjendomsGrupper(Ejendom[] ejendomme, int gruppeStoerrelse){
-        ArrayList<EjendomsGruppeDTO> ejendomsGrupper = new ArrayList<>();
-        EjendomsGruppeCO ejendomsGruppeController = new EjendomsGruppeCO(gruppeStoerrelse);
+    public static EjendomsGruppe[] genererEjendomsGrupper(Ejendom[] ejendomme, int gruppeStoerrelse){
+        ArrayList<EjendomsGruppe> ejendomsGrupper = new ArrayList<>();
+        EjendomsGruppeGenerator ejendomsGruppeController = new EjendomsGruppeGenerator(gruppeStoerrelse);
 
         // Tilfoejer alle ejendomme til grupper
         for( Ejendom ejendom : ejendomme ){
-            EjendomsGruppeDTO gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
+            EjendomsGruppe gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
             ejendom.setGruppe(gruppe);
             ejendomsGrupper.add(gruppe);
         }
 
         // Laver listen over ejendomsgrupper om til en almindelig array og returnere den ( .toArray() ) @author Malte
-        return ejendomsGrupper.toArray(new EjendomsGruppeDTO[0]);
+        return ejendomsGrupper.toArray(new EjendomsGruppe[0]);
     }
 
 
@@ -79,7 +76,7 @@ public class RandomGenerator {
         do {
 
             felter = new Felt[antalFelter];
-            EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
+            EjendomsGruppeGenerator ejendomsGruppeCO = new EjendomsGruppeGenerator(3);
 
             felter[0] = new StartFelt(0);
 

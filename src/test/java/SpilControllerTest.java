@@ -2,7 +2,7 @@ import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
-import spillogik.RandomGenerator;
+import TingTilRandomSpil.RandomGenerator;
 
 
 class SpilControllerTest {

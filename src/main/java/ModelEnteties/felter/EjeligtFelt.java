@@ -1,9 +1,7 @@
 package ModelEnteties.felter;
 
-import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.EjendomsGruppe;
 import ModelEnteties.Spiller;
-
-import java.util.ArrayList;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: EjeligtFelt
@@ -23,7 +21,7 @@ public abstract class EjeligtFelt extends Felt {
     private double pantsaetningsVaerdi;
 
     // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
-    private EjendomsGruppeDTO gruppe;
+    private EjendomsGruppe gruppe;
 
 
     public EjeligtFelt(String navn, int pris, int placering ){
@@ -70,11 +68,11 @@ public abstract class EjeligtFelt extends Felt {
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppeDTO getGruppe() {
+    public EjendomsGruppe getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppeDTO gruppe) {
+    public void setGruppe(EjendomsGruppe gruppe) {
         this.gruppe = gruppe;
     }
 
