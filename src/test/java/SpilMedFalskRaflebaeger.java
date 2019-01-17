@@ -1,5 +1,5 @@
-import Controller.SpilController;
-import ModelEnteties.Spil;
+import controller.SpilController;
+import model.Spil;
 import spillogik.SpilGenerator;
 
 public class SpilMedFalskRaflebaeger {

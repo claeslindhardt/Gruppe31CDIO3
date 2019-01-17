@@ -1,8 +1,8 @@
 
-import BoundaryView.GUI.GUIinterface;
-import Controller.SpilController;
-import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.singletoner.ScannerSingleton;
+import view.GUI.GUIinterface;
+import controller.SpilController;
+import view.UserInterfaceKontrakt;
+import model.singletoner.ScannerSingleton;
 import java.util.InputMismatchException;
 
 public class Main {

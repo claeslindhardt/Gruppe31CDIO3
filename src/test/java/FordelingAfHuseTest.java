@@ -1,5 +1,5 @@
-import ModelEnteties.EjendomsGruppe;
-import ModelEnteties.felter.Ejendom;
+import model.Ejendomsgruppe;
+import model.felter.Ejendom;
 import org.junit.jupiter.api.Test;
 import spillogik.EjendomsLogik;
 
@@ -30,7 +30,7 @@ class FordelingAfHuseTest {
         Ejendom ejendom3 = new Ejendom("Ejendom3", 100, 100, 0);
 
         // Opretter Ejendomsgruppe
-        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe(Color.BLUE);
+        Ejendomsgruppe ejendomsGruppe = new Ejendomsgruppe(Color.BLUE);
 
         ejendomsGruppe.tilfoejEjendom(ejendom1);
         ejendomsGruppe.tilfoejEjendom(ejendom2);

@@ -1,6 +1,6 @@
-import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.raflebaeger.Terning;
-import ModelEnteties.singletoner.ScannerSingleton;
+import model.raflebaeger.RafleBaeger;
+import model.raflebaeger.Terning;
+import model.singletoner.ScannerSingleton;
 
 public class FalskRaflebaeger extends RafleBaeger {
 
