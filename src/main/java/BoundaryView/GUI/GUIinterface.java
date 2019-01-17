@@ -194,11 +194,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 else if (felt.getFeltType().equals("Gå i fængsel")){
                     gui_felt.setDescription("Du har brudt loven, i fængsel med dig!");
                 }
+                else if (felt.getFeltType().equals("Startfelt")){
+                    gui_felt.setDescription("Start");
+                }
+                else if (felt.getFeltType().equals("FriParkering")){
+                    gui_felt.setDescription("Her er der helle");
+                }
                 else if (felt.getFeltType().equals("Bryggeri")){
                     gui_felt.setDescription("Grundpris: " + ((Bryggeri) felt).getPris() + " / " + "Leje: " + ((Bryggeri) felt).getLeje());
                 }
                 else if (felt.getFeltType().equals("Rederi")){
                     gui_felt.setDescription("Grundpris: " + (((Rederi) felt).getPris()) + " / " + "Leje: " + ((Rederi) felt).getLeje());
+                }
+                else if (felt.getFeltType().equals("IndkomstSkat")){
+                    gui_felt.setDescription("Du skat betale 200 eller 10% af din formue");
+                }
+                else if (felt.getFeltType().equals("StatsSkat")){
+                    gui_felt.setDescription("Du skal betale 100 til almenvellet");
                 }
 
             }

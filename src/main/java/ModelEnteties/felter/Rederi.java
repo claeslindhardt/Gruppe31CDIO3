@@ -2,7 +2,7 @@ package ModelEnteties.felter;
 
 public class Rederi extends EjeligtFelt {
 
-    private int leje;
+    private int leje = 25;
 
     //|--------- Getters og Setters:-----------------
 
