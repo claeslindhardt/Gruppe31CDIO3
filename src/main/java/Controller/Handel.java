@@ -135,24 +135,28 @@ public class Handel {
     }
 
 
-    public void saelgHusPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
+    void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
+
+        // Finder ejendomme med sælgbare huse på
         ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
 
-        if(kartotek.size() > 0){
+        // Tjekker at der overhovedet er nogen huse man kan bygge på
+        if( kartotek.size() > 0 ) {
+
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
 
-
-
-            if (ejendomsIndex == kartotek.size()) {
-                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu();}
-            saelgHus(spiller,  kartotek.get(ejendomsIndex), ui);
-            ui.saelgHus(kartotek.get(ejendomsIndex));
+            if( ejendomsIndex < kartotek.size() ){
+                saelgHus(spiller,  kartotek.get(ejendomsIndex), ui);
+                ui.saelgHus( kartotek.get(ejendomsIndex) );
+            }
+            /* Hvis ejendomsIndex >= kartotek.size() er inputtet fra GUI
+                at man gerne vil gå tilbage. */
         }
-
     }
 
+
     public void saelgHotelPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
+
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
         if(kartotek.size() > 0){
@@ -224,20 +228,29 @@ public class Handel {
     }
 
 
-    public ArrayList<Ejendom> opretEjendomsKartotek(Spiller spiller){
-        int count =0;
+    /**
+     * Metoden der samler alle de ejendomme som en Spiller ejer, hvor
+     * der kan sælges et hus fra. Det er {@link EjendomsLogik#kanSaelgeHus}
+     * som vurderer hvorvidt der kan sælge et hus på ejendommen.
+     *
+     * @author Andreas
+     * @param spiller Hvilken spiller man ønsker et kartotek for
+     * @return Liste over de ejendomme, der kan sælges et hus fra
+     */
+    private ArrayList<Ejendom> opretEjendomsKartotek( Spiller spiller ){
 
         Ejendom[] ejendomme = spiller.getEjendomme();
 
         ArrayList<Ejendom> kartotek = new ArrayList<>();
 
-        for(int i = 0; i < ejendomme.length;i++){
-            if(EjendomsLogik.kanSaelgeHus(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
-                kartotek.add(ejendomme[i]);
+        for( int i = 0; i < ejendomme.length; i++ ){
+            if( EjendomsLogik.kanSaelgeHus( spiller, ejendomme[i], ejendomme[i].getGruppe() ) ){
+                kartotek.add( ejendomme[i] );
             }
         }
         return kartotek;
     }
+
 
     public ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
         int count =0;
