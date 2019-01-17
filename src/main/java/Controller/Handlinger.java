@@ -44,10 +44,8 @@ public class Handlinger {
             //Her er controlleren der lader en reagere på mulighederne
             int valg = userInterfaceKontrakt.chanceKortNr( spiller );
 
-            if (valg == chancekort.size()) {
-                //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                spil.turMenu( );
-            } else {
+            if (valg < chancekort.size()) {
+
                 ChanceAktionDTO valgtChancekort = chancekort.get(valg);
                 Handel handel = new Handel();
                 valgtChancekort.BetingetAktion(handel, spil, userInterfaceKontrakt);
