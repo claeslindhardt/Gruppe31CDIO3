@@ -1,7 +1,7 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 
@@ -20,7 +20,7 @@ public class LandPaaFelt {
             startFelt( ui );
 
         } else if( felt instanceof ProevLykken) {
-            proevLykken( spilController, ui );
+            proevLykken( spiller, spilController, ui );
 
         } else if( felt instanceof FriParkering ){
             friParkering( ui );
@@ -78,14 +78,20 @@ public class LandPaaFelt {
     }
 
 
-    public void proevLykken( SpilController spilController, UserInterfaceKontrakt ui ){
-        ArrayList<ChanceAktionDTO> chancekort = spilController.getSpil().getChanceKort();
+    public void proevLykken( Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
+        ArrayList<Chancekort> chancekort = spilController.getSpil().getChanceKort();
 
-        ChanceAktionDTO trukketKort = chancekort.get(0);
+        Chancekort trukketKort = chancekort.get(0);
         chancekort.remove(0);
-        chancekort.add(trukketKort);
 
-        trukketKort.DirketeAktion( spilController.getHandel(), spilController, ui );
+        ui.visChanceKort( trukketKort );
+
+        if( trukketKort.erDirekteAktion() ){
+            spilController.getBrugChancekort().brugChancekort( trukketKort, spiller, spilController.getSpil(),  ui,  spilController );
+        }else{
+            spiller.addChancekort( trukketKort );
+        }
+
     }
 
     public void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
@@ -97,8 +103,6 @@ public class LandPaaFelt {
 
         ui.iFaengselMedDig();
         ui.duErLandetPå( faengsel, spillerMedTur);
-
-        spilController.slutSpillerTur();
     }
 
     public void faengsel( UserInterfaceKontrakt ui ){

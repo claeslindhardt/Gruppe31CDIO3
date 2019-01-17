@@ -1,4 +1,4 @@
-package ModelEnteties;
+package ModelEnteties.chancekort;
 
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Handel;
@@ -6,11 +6,11 @@ import Controller.SpilController;
 import ModelEnteties.singletoner.RandomSingleton;
 
 /**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: ChanceAktionDTO
+ *  PROGRAMDOKUMENTATION: Chancekort
  *
  * @author Claes
  * Det her er objeket som essientielt er et chance kort. Fordi der er mange forskellige slags chance kort.
- * har denne forældre klasse(ChanceAktionDTO) en række børn:
+ * har denne forældre klasse(Chancekort) en række børn:
  *          1. GiverPengeCO
  *          2. TagerPengeCO
  *          3. RykkerSpillerCO
@@ -25,11 +25,19 @@ import ModelEnteties.singletoner.RandomSingleton;
  *  en grund generationer der generer ny beskrivelser til alle chance kort. Så chancen for at to chancekort noglesinde
  *  er de samme er meget lille, og har via polymorfismet en meget skalerbar antal aktioner der følger af chancekortene.
  */
-public abstract class ChanceAktionDTO {
+public abstract class Chancekort {
+
+    public Chancekort( String beskrivelse, boolean direkteAktion ){
+        this.beskrivelse = beskrivelse;
+        this.direkteAktion = direkteAktion;
+    }
+
     //|--------- Variabler:----------------------
     private String beskrivelse;
     private int pengeVerdi;
-    private String kortBeskrivelse;
+    private String kortBeskrivelse = "";
+
+    private boolean direkteAktion;
 
     private final String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
             " Du har penge udbetalt på aktier", " Doctor Who kidnappede dig"," Du fik gratis rosengin. Yaiiiii :)",
@@ -39,17 +47,15 @@ public abstract class ChanceAktionDTO {
             " Du blev straffet for finans fusk", " Der kom en elefant og trådte på dit hus",
             " Din mor besluttede hun ville være russisk operasanger"
     };
-    //Singleton Variabler;
-    private RandomSingleton randomTal = RandomSingleton.getInstance();
 
     //|--------- Getters og Setters:-------------
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public boolean erDirekteAktion(){
+        return direkteAktion;
     }
 
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
+    public String getBeskrivelse() {
+        return beskrivelse;
     }
 
     public void setKortBeskrivelse(String kortBeskrivelse){
@@ -58,23 +64,4 @@ public abstract class ChanceAktionDTO {
 
     public String getKortBeskrivelse(){return kortBeskrivelse;}
 
-    public int getPengeVerdi() {
-        return pengeVerdi;
-    }
-
-    public void setPengeVerdi(int pengeVerdi) {
-        this.pengeVerdi = pengeVerdi;
-    }
-
-    public String[] getPositiveGrunde() {
-        return positiveGrunde;
-    }
-
-    public String[] getNegativeGrunde() {
-        return negativeGrunde;
-    }
-
-    //|----------- Metoder:----------------------
-    public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
-    public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
 }

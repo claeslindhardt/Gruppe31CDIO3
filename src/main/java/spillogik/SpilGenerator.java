@@ -1,6 +1,6 @@
 package spillogik;
 
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
@@ -329,14 +329,8 @@ public class SpilGenerator {
         return felter;
     }
 
-    /**
-     * @author Jacob
-     *
-     * Denne metode laver alle de faste chancekort fra de klassiske Matador spil.
-     *
-     * @return De oprettede chancekort returneres
-     */
-    public static ArrayList<ChanceAktionDTO> genererChancekort(){
+
+    public static ArrayList<Chancekort> genererChancekort(){
         // TODO Implementer fastsatte chancekort
 
         /*

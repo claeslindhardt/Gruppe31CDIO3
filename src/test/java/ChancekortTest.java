@@ -1,6 +1,5 @@
-import Controller.RykkerSpillerCO;
+import ModelEnteties.chancekort.*;
 import Controller.SpilController;
-import ModelEnteties.ChanceAktionDTO;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import spillogik.SpilGenerator;
@@ -29,14 +28,27 @@ public class ChancekortTest {
 
         Spiller spiller = spil.getSpiller(0);
 
-        ChanceAktionDTO chancekort = new RykkerSpillerCO();
-        chancekort.setBeskrivelse("Chancekort 1");
-        chancekort.setPengeVerdi(200);
-
-        spiller.addChancekort(chancekort);
+        ArrayList<Chancekort> alleChancekort = new ArrayList<>();
+        Chancekort chancekort;
 
 
-        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<>();
+        chancekort = new GratisUdAfFaengsel("Gå ud af fængsel gratis");
+        alleChancekort.add(chancekort);
+
+        chancekort = new RykTilBestemtFelt(39, "Ryk til rådhuspladsen");
+        alleChancekort.add(chancekort);
+
+        chancekort = new JustererPenge(-100,"Trækker 100 kr. fra");
+        alleChancekort.add(chancekort);
+
+        chancekort = new JustererPenge(100,"Giver 100 kr.");
+        alleChancekort.add(chancekort);
+
+        chancekort = new SmidIFaengsel("Du skal gå i faengsel");
+        alleChancekort.add(chancekort);
+
+
+
 
         spil.setChanceKort(alleChancekort);
 

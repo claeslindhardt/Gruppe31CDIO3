@@ -1,8 +1,8 @@
 package ModelEnteties;
 
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.Ejendom;
-import Controller.JernbaneCO;
 import ModelEnteties.felter.Rederi;
 
 import java.util.ArrayList;
@@ -22,11 +22,10 @@ public class Spiller {
     private String navn = "?";
     // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
     ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
-    ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
 
-    ArrayList<ChanceAktionDTO> chancekort = new ArrayList<ChanceAktionDTO>();
+    ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
     protected double penge = 1500;
     protected boolean faengselsStraf = false;
@@ -62,12 +61,18 @@ public class Spiller {
     }
 
 
-    public ArrayList<ChanceAktionDTO> getChancekort() {
+    public ArrayList<Chancekort> getChancekort() {
         return chancekort;
     }
 
-    public void addChancekort( ChanceAktionDTO chancekort) {
+    public void addChancekort( Chancekort chancekort) {
         this.chancekort.add(chancekort);
+    }
+
+    public void fjernChancekort( Chancekort chancekort ){ this.chancekort.remove(chancekort); }
+
+    public boolean harChancekort( Chancekort chancekort ){
+        return this.chancekort.contains( chancekort );
     }
 
     /**
@@ -89,11 +94,6 @@ public class Spiller {
             return null;
         }
     }
-
-    public ArrayList<JernbaneCO> getSpillerJernbaner() {
-        return spillerJernbaner;
-    }
-
     public ArrayList<Bryggeri> getSpillerBryggerier() {
         return spillerBryggeri;
     }
@@ -104,10 +104,6 @@ public class Spiller {
 
     public void addRederi(Rederi rederi){
         spillerRederier.add(rederi);
-    }
-
-    public void setSpillerJernbaner(ArrayList<JernbaneCO> spillerJernbaner) {
-        this.spillerJernbaner = spillerJernbaner;
     }
 
     public ArrayList<Rederi> getSpillerRederier(){ return spillerRederier;}
