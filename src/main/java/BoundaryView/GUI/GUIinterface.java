@@ -559,9 +559,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void duErLandetPå(Felt felt, Spiller spiller ){
-        gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
         GUI_Player guiSpiller = spillere.get(spiller.getId());
         rykBil( guiSpiller, felt.getPlacering() );
+        gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
+
+
     }
 
     public void landetPaaStart(){

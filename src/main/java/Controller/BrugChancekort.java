@@ -26,7 +26,7 @@ public class BrugChancekort {
             smidIFaengsel( spiller , spil, ui );
 
         }else if( chancekort instanceof RykAntalFelter ){
-            rykAntalFelter( chancekort, spiller, spil, ui);
+            rykAntalFelter( (RykAntalFelter) chancekort, spiller, spil, spilController, ui);
 
         }
 
@@ -57,7 +57,15 @@ public class BrugChancekort {
 
     public void rykTilBestemtFelt( RykTilBestemtFelt chancekort, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
         Felt felt = spilController.getSpil().getFelter()[ chancekort.getFeltNummer() ];
-        spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
+
+        int feltNr = chancekort.getFeltNummer();
+        int spillerPosition = spiller.getSpillerPosition();
+
+        if( feltNr < spillerPosition ){
+            spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
+        } else {
+            spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 0, ui, spilController );
+        }
     }
 
     public void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
@@ -71,8 +79,8 @@ public class BrugChancekort {
     }
 
 
-    public void rykAntalFelter( Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui){
-
+    public void rykAntalFelter( RykAntalFelter chancekort, Spiller spiller, Spil spil, SpilController spilController, UserInterfaceKontrakt ui){
+        spilController.getRykSpiller().rykSpillerAntalFelter( spil, spiller, chancekort.getAntalFelterAtRykke(), ui, spilController );
     }
 
 }
