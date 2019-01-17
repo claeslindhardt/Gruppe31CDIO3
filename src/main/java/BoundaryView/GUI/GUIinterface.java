@@ -575,7 +575,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public int ejendomsBud(){
-        return input.binaertValg("Ingen ejer denne. Ønsker du at købe den?", gui);
+        return input.binaertValg("Ingen ejer denne. Ønsker du at købe den?", "Ja", "Nej", gui);
     }
 
     public void spillerEjendele(Spiller spiller){
@@ -640,9 +640,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void skatteBesked(int valg){
-
         if(valg == 1) {
-            gui.showMessage("Du skal betale ekstraordinær statsskat. Derfor bliver vi all 100 kr rigere");
+            gui.showMessage("");
         }else {gui.showMessage("Du skal betale indkomstskat");}
     }
 
@@ -749,6 +748,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         hovedmenu = null;
 
+    }
+
+    public int vaelgIndkomstSkat(){
+        return input.binaertValg("Du skal betale skat!\nDu kan enten betale 200 kr. eller 10% af din samlede pengebeholdning \nHvad vælger du? ", "200 kr.", "10%", gui);
+    }
+
+    public void statsSkat( int skat ){
+        gui.showMessage("Du skal betale ekstraordinær statsskat. Derfor bliver vi all " + skat + " kr. rigere!");
     }
 
     /**

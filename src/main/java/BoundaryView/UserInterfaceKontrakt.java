@@ -90,6 +90,8 @@ public interface UserInterfaceKontrakt {
     void friParkering();
     String skatteBetaling();
     void skatteBesked(int valg);
+    int vaelgIndkomstSkat();
+    void statsSkat( int skat );
     void trækEtChancekort();
     void landetPaaStart();
     void visChanceKort( Chancekort chancekort );

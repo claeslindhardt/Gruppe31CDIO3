@@ -53,11 +53,11 @@ public class IndputHaanteringGUI {
     }
 
 
-    public int binaertValg( String besked, GUI gui ){
+    public int binaertValg( String besked, String valg1, String valg2, GUI gui ){
         String valg = gui.getUserButtonPressed( besked,
-                "Ja", "Nej");
+                valg1, valg2);
 
-        if( valg.equals("Ja") ){
+        if( valg.equals(valg1) ){
             return 0;
         }else {
             return 1;

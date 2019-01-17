@@ -15,14 +15,13 @@ package ModelEnteties.chancekort;
  *  atraktiv ting meget varation og skalerbar kode. Har vi gjort meget ud af at denne del blev netop det. Ved at lave
  *  en grund generationer der generer ny beskrivelser til alle chance kort. Så chancen for at to chancekort noglesinde
  *  er de samme er meget lille, og har via polymorfismet en meget skalerbar antal aktioner der følger af chancekortene.
+ *
  */
 public abstract class Chancekort {
 
-    //|--------- Variabler:----------------------
-    private String beskrivelse;
-    private String kortBeskrivelse = "";
-
-    private boolean direkteAktion;
+    private String beskrivelse;             // Beskrivelsen der bruges, når man bruger / trækker kortet
+    private String kortBeskrivelse = "";    // Beskrivelsen der bruges i lister
+    private boolean direkteAktion;          // True: Kortet bruges når det trækkes, False: kortet tages op på hånden
 
 
     // --------- Constructor --------------------

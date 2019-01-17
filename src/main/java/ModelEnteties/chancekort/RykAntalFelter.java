@@ -2,7 +2,7 @@ package ModelEnteties.chancekort;
 
 public class RykAntalFelter extends Chancekort {
 
-    private int antalFelterAtRykke;
+    private int antalFelterAtRykke; // Hvor mange felter man skal rykke (negativ = rykke tilbage)
 
     public int getAntalFelterAtRykke(){
         return antalFelterAtRykke;

@@ -22,8 +22,6 @@ public class KoebFelt {
             koebRederi( (Rederi) felt, spiller, ui);
 
         }
-
-
     }
 
 

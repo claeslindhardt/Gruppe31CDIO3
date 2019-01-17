@@ -30,6 +30,7 @@ public class EjendomsGruppeCO {
         }
     }
 
+
     /**
      * @author Malte
      * Henter størrelsen på de grupper, som manageren opretter.
@@ -38,6 +39,7 @@ public class EjendomsGruppeCO {
     public int getGruppeStoerelser() {
         return gruppeStoerelser;
     }
+
 
     /**
      * @author Malte.
@@ -50,6 +52,7 @@ public class EjendomsGruppeCO {
         EjendomsGruppeDTO nyGruppe = new EjendomsGruppeDTO(farve, gruppeStoerelser);
         return nyGruppe;
     }
+
 
     /**
      * Tilfoejer en ejendom til den nuværende ledige gruppe.

@@ -22,9 +22,6 @@ public class Handel {
     /**
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
-     * @param felt
-     * @param spilleren
-     * @param userInterfaceKontrakt
      */
     public void indsamleLeje(Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
         Spiller ejeren = felt.getEjer();
@@ -129,7 +126,6 @@ public class Handel {
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
             spiller.addPenge(-ejendom.getHotelPris());
             userInterfaceKontrakt.updateSpillere( spiller );
-
         }
     }
 
