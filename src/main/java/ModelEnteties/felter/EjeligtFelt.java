@@ -1,6 +1,5 @@
 package ModelEnteties.felter;
 
-import Controller.JernbaneCO;
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
 
@@ -16,11 +15,6 @@ import java.util.ArrayList;
  *          2. JernbaneCO
  */
 public abstract class EjeligtFelt extends Felt {
-
-    //|--------- Variabler:-----------------
-    //Statiske Variabler
-    private static ArrayList<Ejendom> alleEjendomme = new ArrayList<Ejendom>();
-    private static ArrayList<JernbaneCO> alleJernbaner = new ArrayList<JernbaneCO>();
 
     //  Dynamiske Variabler
     private Spiller ejer;
@@ -82,30 +76,6 @@ public abstract class EjeligtFelt extends Felt {
 
     public void setGruppe(EjendomsGruppeDTO gruppe) {
         this.gruppe = gruppe;
-    }
-
-    public static ArrayList<Ejendom> getAlleEjendomme() {
-        return alleEjendomme;
-    }
-
-    public static void setAlleEjendomme(ArrayList<Ejendom> alleEjendomme) {
-        EjeligtFelt.alleEjendomme = alleEjendomme;
-    }
-
-    public static void addAlleEjendomme(Ejendom enEjendom) {
-        EjeligtFelt.alleEjendomme.add(enEjendom);
-    }
-
-    public static ArrayList<JernbaneCO> getAlleJernbaner() {
-        return alleJernbaner;
-    }
-
-    public static void setAlleJernbaner(ArrayList<JernbaneCO> alleJernbaner) {
-        EjeligtFelt.alleJernbaner = alleJernbaner;
-    }
-
-    public static void addAlleJernbaner(JernbaneCO enJernbane) {
-        EjeligtFelt.alleJernbaner.add(enJernbane);
     }
 
 }

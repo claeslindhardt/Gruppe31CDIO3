@@ -430,16 +430,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du har ikke nogen chancekort.");
     }
 
-    public void jernBaneInfo(JernbaneCO station){
-        String ejer;
-        if(station.getEjer() == null){
-            ejer = "Ingen ejer endnu";
-        }else{
-            ejer = station.getEjer().getNavn();
-        }
 
-        gui.showMessage("| Placering: "+station.getPlacering()+" | Name: "+station.getNavn()+" | Pris: "+station.getPris() +" | Pantsat: "+station.isPantsat()+"| ejer:"+ejer+"|");
-    }
     public int hvorHen(int pos, int min, int max){
         gui.showMessage("Din nuvaerende position er: "+ pos+" Hvor vil de hen?: ");
         int valg = gui.getUserInteger("Intast nummeret på det felt du gerne vil hen til");
@@ -465,9 +456,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
     }
-    public void taxiInfo(TaxiCO vogn){
-        gui.showMessage("| Felt nr: " + vogn.getPlacering() +" | Felt Navn:" + vogn.getNavn()+" | Felt type:"+ vogn.getFeltType()+" |");
-    }
+
     public void overStartAnimation(){
         System.out.println("Aktion som foelger af StartFelt");
     }
@@ -592,10 +581,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spillerEjendele(Spiller spiller){
         gui.showMessage("Ejendomme: ");
         gui.showMessage("Jernbaner: ");
-        for(int i = 0; i<spiller.getSpillerJernbaner().size();i++){
-            spiller.getSpillerJernbaner().get(i).printInfo(this);
-
-        }
     }
 
     public void terminalLine(){

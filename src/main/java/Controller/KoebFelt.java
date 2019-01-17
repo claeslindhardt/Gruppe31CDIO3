@@ -21,8 +21,6 @@ public class KoebFelt {
         }else if( felt instanceof Rederi ){
             koebRederi( (Rederi) felt, spiller, ui);
 
-        }else if( felt instanceof JernbaneCO ){
-            koebJernbane( (JernbaneCO) felt, spiller, ui );
         }
 
 
@@ -54,32 +52,6 @@ public class KoebFelt {
         }
     }
 
-
-    /**
-     * Indsæt beskrivelse her
-     * @param jernbane
-     * @param userInterfaceKontrakt
-     */
-    public void koebJernbane(JernbaneCO jernbane, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt){
-
-        //Sikkerhedsforanstaltning. Vi tjekker mod dobbeltkøb
-        if ( jernbane.getEjer() == spiller ) {
-            userInterfaceKontrakt.alleredeEjer();
-
-        } else if ( spiller.getPenge() > jernbane.getPris()) {
-
-            spiller.addPenge( -jernbane.getPris() );
-            userInterfaceKontrakt.dinJernbane();
-            userInterfaceKontrakt.updateSpillere( spiller );
-
-            //skifte ejerskab
-            jernbane.setEjer( spiller );
-            spiller.getSpillerJernbaner().add(jernbane);
-
-        } else {
-            userInterfaceKontrakt.monetosMangel();
-        }
-    }
 
     public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt) {
         if ( bryggeri.getEjer() == spiller ) {

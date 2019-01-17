@@ -46,13 +46,11 @@ public interface UserInterfaceKontrakt {
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
-    void taxiInfo(TaxiCO vogn);
     void overStartAnimation();
     void startsFeltsInfo(StartFelt felt);
     void iFaengselMedDig();
     void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
-    void jernBaneInfo(JernbaneCO stadtion);
     int stationsMuligheder(int min, int max);
     void turEfterJernbane();
     void manglerJernbaner();
