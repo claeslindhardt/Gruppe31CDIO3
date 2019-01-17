@@ -11,7 +11,7 @@ public class KoebHotelTest {
 
     public static void main(String[] args) {
 
-        Spil spil = SpilGenerator.genererSpil(2);
+        Spil spil = SpilGenerator.genererSpil(3);
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
         Spiller spiller = spil.getSpiller(0);

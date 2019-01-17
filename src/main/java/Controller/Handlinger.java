@@ -3,6 +3,10 @@ package Controller;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
 import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.felter.Bryggeri;
+import ModelEnteties.felter.Ejendom;
+import ModelEnteties.felter.Rederi;
+import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
 
@@ -10,7 +14,9 @@ public class Handlinger {
 
 
     /**
-     * Indsæt beskrivelse her
+     * @auther Andreas
+     * Metoden gør at en spiller kan give op.
+     * Valget vises i UI. Ved valg 1,
      * @param spil
      * @param userInterfaceKontrakt
      */
@@ -19,12 +25,33 @@ public class Handlinger {
         svar = userInterfaceKontrakt.vilDuGiveOp();
         if(svar==1) {
            spiller.setHarGivetOp(true);
+            fjernEjerFraEjendom(spiller, userInterfaceKontrakt);
             spiller.getSpillerEjendomme().clear();
             userInterfaceKontrakt.takForSpillet();
             spil.slutSpillerTur();
         }
         else {
             userInterfaceKontrakt.duGavIkkeOp();
+        }
+
+    }
+    public void fjernEjerFraEjendom(Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt){
+
+        for(Ejendom x:spiller.getSpillerEjendomme()){
+            x.setEjer(null);
+            x.setHarHotel(false);
+            x.setAntalHuse(0);
+            userInterfaceKontrakt.byggetHus(x);
+            userInterfaceKontrakt.byggeHotel(x);
+        }
+
+
+        for(Rederi x: spiller.getSpillerRederier()){
+            x.setEjer(null);
+        }
+
+        for(Bryggeri x: spiller.getSpillerBryggerier()){
+            x.setEjer(null);
         }
 
     }

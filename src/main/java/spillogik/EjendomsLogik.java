@@ -2,6 +2,7 @@ package spillogik;
 
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjeligtFelt;
 import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
