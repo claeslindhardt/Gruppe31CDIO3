@@ -1,10 +1,10 @@
 /*
-import BoundaryView.TUI.TUI;
-import Controller.*;
-import BoundaryView.UserInterfaceKontrakt;
-import Controller.Spiller;
-import ModelEnteties.Spil;
-import ModelEnteties.felter.Ejendom;
+import view.TUI.TUI;
+import controller.*;
+import view.UserInterfaceKontrakt;
+import controller.Spiller;
+import model.Spil;
+import model.felter.Ejendom;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-import ModelEnteties.chancekort.*;
-import Controller.SpilController;
-import ModelEnteties.Spil;
-import ModelEnteties.Spiller;
+import model.chancekort.*;
+import controller.SpilController;
+import model.Spil;
 import spillogik.SpilGenerator;
 
 import java.util.ArrayList;

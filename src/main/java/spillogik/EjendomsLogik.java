@@ -1,10 +1,10 @@
 package spillogik;
 
-import ModelEnteties.EjendomsGruppe;
-import ModelEnteties.Spiller;
-import ModelEnteties.felter.EjeligtFelt;
-import ModelEnteties.felter.Ejendom;
-import ModelEnteties.felter.Rederi;
+import model.Ejendomsgruppe;
+import model.Spiller;
+import model.felter.EjeligtFelt;
+import model.felter.Ejendom;
+import model.felter.Rederi;
 
 public class EjendomsLogik {
 
@@ -86,7 +86,7 @@ public class EjendomsLogik {
      * @param ejendomsGruppe
      * @return
      */
-    public static boolean kanKoebeHotel(Spiller spiller, Ejendom ejendom, EjendomsGruppe ejendomsGruppe){
+    public static boolean kanKoebeHotel(Spiller spiller, Ejendom ejendom, Ejendomsgruppe ejendomsGruppe){
         return spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
                 &&  huseErFordeltIGruppe( ejendom )
@@ -112,7 +112,7 @@ public class EjendomsLogik {
      * @param ejendomsGruppe    Ejendomsgruppen som Ejendommen tilhoerer
      * @return  Om man kan koebe hus eller ej.
      */
-    public static boolean kanKoebeHus(Spiller spiller, Ejendom ejendom, EjendomsGruppe ejendomsGruppe ){
+    public static boolean kanKoebeHus(Spiller spiller, Ejendom ejendom, Ejendomsgruppe ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
@@ -123,7 +123,7 @@ public class EjendomsLogik {
     }
 
 
-    public static boolean kanSaelgeHus( Spiller spiller, Ejendom ejendom, EjendomsGruppe ejendomsGruppe ){
+    public static boolean kanSaelgeHus( Spiller spiller, Ejendom ejendom, Ejendomsgruppe ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )

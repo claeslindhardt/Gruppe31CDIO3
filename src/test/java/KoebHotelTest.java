@@ -1,8 +1,8 @@
-import Controller.SpilController;
-import ModelEnteties.Spil;
-import ModelEnteties.Spiller;
-import ModelEnteties.felter.Ejendom;
-import ModelEnteties.felter.Felt;
+import controller.SpilController;
+import model.Spil;
+import model.Spiller;
+import model.felter.Ejendom;
+import model.felter.Felt;
 import spillogik.SpilGenerator;
 
 public class KoebHotelTest {

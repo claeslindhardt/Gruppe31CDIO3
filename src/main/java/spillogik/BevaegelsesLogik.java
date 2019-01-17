@@ -1,6 +1,6 @@
 package spillogik;
 
-import ModelEnteties.felter.Felt;
+import model.felter.Felt;
 
 public class BevaegelsesLogik {
 
