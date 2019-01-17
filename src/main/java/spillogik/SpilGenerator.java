@@ -497,11 +497,15 @@ public class SpilGenerator {
 
     public static Spil genererSpil(){
 
+        Random random = new Random();
+
         Spil spil = new Spil();
 
         spil.setFelter( genererFelter() );
         spil.setChanceKort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
+
+        spil.setSpillerTur( random.nextInt() + 1 );
 
         return spil;
     }

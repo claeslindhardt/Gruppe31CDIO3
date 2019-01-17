@@ -129,7 +129,7 @@ class LandPaaFelt {
         Faengsel faengsel = spilController.getSpil().getFaengsel();
 
         // Flytter spilleren
-        spillerMedTur.setFaengselsStraf(true);
+        spillerMedTur.setErIFaengsel( true );
         spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
         ui.iFaengselMedDig();

@@ -1,5 +1,6 @@
 package view.GUI;
 
+import model.raflebaeger.Terning;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import model.Spiller;
@@ -301,12 +302,24 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public String spillerNavne() {
         String spillernavn = hovedmenu.getUserString("Indtast et navn");
-
-
-
-
         return spillernavn;
     }
+
+    public void anketDomResultat( boolean loesladt ){
+
+        if( loesladt ){
+            gui.showMessage( "Du havde held i retten i dag og slog ens terninger! Du må derfor slå med terningerne og rykke igen med det samme.");
+        }else{
+            gui.showMessage("Du havde desværre ikke held i retten i dag. Prøv igen i næste runde.");
+        }
+    }
+
+    public void ankerDom(){
+        gui.showMessage("Du anker din dom, og får et forsøg til at komme ud af faengslet." +
+                "\nDu skal blot slå ens med terningerne." );
+    }
+
+
 
     public int velkomstMenu(int minInput, int maxInput){
         String valg = hovedmenu.getUserButtonPressed("|=========| MONOPOLY SPILLET V1, MKIII",
@@ -372,6 +385,25 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
     }
 
+    public void terningerResultat( RafleBaeger raflebaeger ){
+        Terning[] terninger = raflebaeger.getTerninger();
+        String resultat = "";
+
+        for( int i = 0; i < terninger.length; i++ ){
+
+            if( i == terninger.length - 1 ){
+                resultat += ( "og " + terninger[i].getVaerdi() );
+
+            }else if( i == terninger.length - 2){
+                resultat += terninger[i].getVaerdi() + " ";
+
+            }else
+                resultat += terninger[i].getVaerdi() + ", ";
+        }
+
+        gui.showMessage("Du slog " + resultat + ".");
+    }
+
 
     public void bankeRaadtGrundetLikviditet(int getBankeraadGraense){
         gui.showMessage("Woops du har mindre end "+getBankeraadGraense+" penge, " +
@@ -407,9 +439,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void retsTerninger(int domsAfsigelseDel1, int domsAfsigelseDel2){
         gui.showMessage("Du slog "+domsAfsigelseDel1+" og "+domsAfsigelseDel2);
     }
-    public void spilletErSlut(){
-        System.out.println("Spillet er slut.");
+
+
+
+
+    public void spilletErSlut( Spiller vinder ){
+        gui.showMessage("Hurra! " + vinder.getNavn() + " har vunder spillet!");
+        gui.showMessage("Tak, fordi I spillede med!");
     }
+
+
     public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
         ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
         //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
@@ -440,19 +479,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void paaBesoegIFaengsel(){
         gui.showMessage("Du er nu på besoeg i faengslet.");
     }
+
     public int vilDuGiveOp(){
-        String valg = gui.getUserSelection("|--|Er du sikker på at du vil give op?",
-                "ja", "nej");
-        gui.showMessage(valg);
-       return input.binartValg(valg);
+       return input.binaertValg("Er du sikker på, at du vil give op?", "Ja", "Nej",gui);
     }
 
-    public void takForSpillet(){
-        gui.showMessage("Tak for spillet:)\nDine penge vil gå til skattefar");
+    public void harGivetOp(){
+        gui.showMessage("Tak for spillet!\nDine penge vil gå til skattefar.");
     }
-    public void duGavIkkeOp(){
-        gui.showMessage("Du valgte ikke at give op. ");
-    }
+
+
     public void passeringAfStart(int gangeOverStart){
         gui.showMessage("Tillykke du har passeret StartFelt "+gangeOverStart+" gang(e) og modtager "+200*gangeOverStart);
     }

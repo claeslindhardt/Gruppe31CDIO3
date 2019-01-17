@@ -1,13 +1,16 @@
 package controller;
 
+import model.Spiller;
+import model.chancekort.Chancekort;
+import model.felter.Ejendom;
 import view.GUI.GUIinterface;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import spillogik.SpilGenerator;
 
-import java.util.Random;
-
 import static spillogik.SpilGenerator.genererSpil;
+import static spillogik.VinderLogik.getVinder;
+import static spillogik.VinderLogik.vinderFindes;
 
 public class SpilController{
 
@@ -38,8 +41,6 @@ public class SpilController{
     }
 
     private KoebFelt    KoebFelt    = new KoebFelt();
-
-
 
     public Spil getSpil(){return spil;}
 
@@ -74,51 +75,29 @@ public class SpilController{
         ui.startSpil( spil );
 
         do{
-            tjekForVinder();
-            tjekOmGivetOp();
-            tjekForFeangselsStraf();
+            Spiller spillerMedTur = spil.getSpillerMedTur();
 
-            if( !spil.getVinderFindes() ){
-                turMenu();
+            startSpillerTur( spillerMedTur );
 
-            }else{
-                break;
-            }
+            slutSpillerTur( spillerMedTur );
 
-        }while( true );
+        }while( ! vinderFindes( spil ) );
 
-        ui.spilletErSlut();
+        ui.spilletErSlut( getVinder( spil ) );
     }
 
-
-    /**
-     * @author Filip
-     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
-     */
-    public void anketDomsigelse() {
-        Random ra = new Random();
-        int domsAfsigelseDel1 = ra.nextInt(5) + 1;
-        int domsAfsigelseDel2 = ra.nextInt(5) + 1;
-        ui.retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
-        if (domsAfsigelseDel1 == domsAfsigelseDel2) {
-            ui.heldIRetten();
-            spil.getSpillerMedTur().setFaengselsStraf(false);
-            //Har udkemmenteret denne da jeg ikke syntes at det giver mening at have den.
-            //getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
-        } else {
-            spil.getSpillerMedTur().setFaengselsStraf(true);
-            ui.ingenHeldIRetten();
-        }
-
-    }
 
     /**
      * Indsæt beskrivelse her
      */
-    public void slutSpillerTur() {
-        spil.getSpillerMedTur().setHarSlaaetForTuren(false);
-        spil.getSpillerMedTur().setHarAnketDomDenneRunde(false);
-        tjekForBankeRaadt();
+    public void slutSpillerTur( Spiller spiller ) {
+
+        spiller.setHarSlaaetForTuren(false);
+
+        if( spiller.getPenge() < 0  ){
+            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
+            spillerUdgaar( spiller );
+        }
 
         if ( spil.getSpillerTur() >= spil.getAntalSpillere() ) {
             spil.setSpillerTur(1);
@@ -126,85 +105,44 @@ public class SpilController{
         } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
             spil.setSpillerTur(spil.getSpillerTur() + 1);
         }
-
-
     }
 
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForBankeRaadt() {
 
-        if (spil.getSpillerMedTur().getPenge() < 0) {
-            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
-            spil.getSpillerMedTur().setHarGivetOp(true);
-            spil.getSpillerMedTur().getSpillerEjendomme().clear();
-            int udgaaetSpiller = spil.getSpillerMedTur().getId() + 1;
-            ui.spillerUdgår(udgaaetSpiller);
+    public void spillerUdgaar( Spiller spiller ){
+        spiller.setErUdgaaet( true );
+
+        for( Chancekort chancekort : spiller.getChancekort() ){
+            spil.addChancekort( chancekort );
+        }
+        spiller.clearChancekort();
+
+        for( Ejendom ejendom : spiller.getEjendomme() ){
+            ejendom.setEjer(null);
+        }
+        spiller.clearEjendomme();
+
+        spiller.setErUdgaaet( true );
+    }
+
+
+
+    public void startSpillerTur( Spiller spiller ){
+
+
+        if( spiller.erIFaengsel() ){
+            handlinger.ankerDom( spiller, spil.getRaflebaeger(), ui );
         }
 
+        boolean turErSlut = false;
+
+        do{
+
+            turErSlut = turMenu( spiller );
+
+        }while( !turErSlut );
+
     }
 
-
-    //_____________________________________
-    //Tjekkere:
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForFeangselsStraf(){
-        if (spil.getSpillerMedTur().isFaengselsStraf()) {
-            if (!spil.getSpillerMedTur().isHarAnketDomDenneRunde()) {
-                ui.anketStraffeDom(spil.getSpillerTur());
-                anketDomsigelse();
-                spil.getSpillerMedTur().setHarAnketDomDenneRunde(true);
-            }
-
-        }
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekOmGivetOp() {
-        if (spil.getSpillerMedTur().isHarGivetOp()) {
-            if (spil.getSpillerTur() == spil.getAntalSpillere()) {
-                spil.setSpillerTur(1);
-            } else {
-                spil.setSpillerTur(spil.getSpillerTur() + 1);
-            }
-        }
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForVinder() {
-        if (spil.getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
-            //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
-            if (!spil.getSpillerMedTur().isHarGivetOp()) {
-                //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
-                spil.setVinder(spil.getSpillerMedTur().getId() + 1);
-                spil.setVinderFindes(true);
-                ui.vinder(spil.getSpillerMedTur().getId() + 1);
-            }
-        }
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     * @return
-     */
-    public int tjekAntalSpillereISpil() {
-        int UdgaetSpillere = 0;
-        for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
-            if (spil.getSpillereArrayList().get(i).isHarGivetOp()) {
-                UdgaetSpillere++;
-            }
-        }
-
-        return UdgaetSpillere;
-    }
 
 
     /**
@@ -212,54 +150,56 @@ public class SpilController{
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
      */
-    public void turMenu() {
-        int input = ui.TurMenu( spil.getSpillerMedTur(), 1, 12);
+    public boolean turMenu( Spiller spiller ) {
+        int valg = ui.TurMenu( spil.getSpillerMedTur(), 1, 12 );
 
-        switch (input) {
+        boolean slutTur = false;
+
+        switch( valg ){
+
             case 1:
 
-                if (!spil.getSpillerMedTur().isFaengselsStraf()) {
+                if ( !spiller.erIFaengsel() ) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
 
-                } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
+                } else{
                     ui.kanIkkeSlaaFaengsel();
+
                 }
 
                 break;
-            case 2:
-                slutSpillerTur();
-                break;
-            case 3:
-                handlinger.chanceKortMuligheder(spil.getSpillerMedTur(), this, ui);
-                break;
-            case 4:
-                ui.spillerEjendele(spil.getSpillerMedTur());
-                break;
-            case 5:
-                /*spilleBret.printBret(ui);*/
-                break;
-            case 6:
-                //printSpilleresInfo();
-                break;
-            case 7:
-                handlinger.givOp(spil.getSpillerMedTur(), this, ui);
-                break;
-            case 8:
-                handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
-                break;
-            case 9:
-                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
-                break;
-            case 10:
-                //spil.getSpillerMedTur().handelMedEjendomme();
-                break;
-            case 11: handel.saelgHusPaaEjendom( spil.getSpillerMedTur(), ui );
-                break;
-            case 12: handel.saelgHotelPaaEjendom(this,spil.getSpillerMedTur(), ui);
-                break;
-            default:
 
+            case 2:
+                slutTur = true;
+                break;
+
+            case 3:
+                handlinger.chanceKortMuligheder( spiller, this, ui);
+                break;
+
+            case 7:
+                if( handlinger.givOp( ui ) ){
+                    slutTur = true;
+                    spillerUdgaar( spiller );
+                }
+                break;
+
+            case 8:
+                handel.koebHusPaaEjendom( spiller, ui);
+                break;
+
+            case 9:
+                handel.koebHotelPaaEjendom( spiller, ui);
+                break;
+
+            case 11: handel.saelgHusPaaEjendom( spiller, ui );
+                break;
+
+            case 12: handel.saelgHotelPaaEjendom(this, spiller, ui);
+                break;
         }
+
+        return slutTur;
 
     }
 

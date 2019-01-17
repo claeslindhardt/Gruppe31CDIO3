@@ -61,7 +61,7 @@ class BrugChancekort {
      * @param spiller   Spilleren der bruger det
      */
     private void gratisUdAfFaengsel( Spiller spiller, UserInterfaceKontrakt ui ){
-        spiller.setFaengselsStraf(false);
+        spiller.setErIFaengsel(false);
         spiller.setHarSlaaetForTuren(false);
         ui.brugtUdAfFaengsel();
     }
@@ -104,7 +104,7 @@ class BrugChancekort {
     private void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
         Faengsel faengsel = spil.getFaengsel();
 
-        spiller.setFaengselsStraf(true);
+        spiller.setErIFaengsel(true);
         spiller.setSpillerPosition( faengsel.getPlacering() );
 
         ui.iFaengselMedDig();

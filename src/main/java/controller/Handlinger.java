@@ -1,5 +1,6 @@
 package controller;
 
+import model.raflebaeger.RafleBaeger;
 import view.UserInterfaceKontrakt;
 import model.Spiller;
 import model.chancekort.Chancekort;
@@ -13,27 +14,25 @@ public class Handlinger {
 
 
     /**
-     * @auther Andreas
+     * @author Andreas
      * Metoden gør at en spiller kan give op.
      * Valget vises i UI. Ved valg 1,
-     * @param spil
      * @param userInterfaceKontrakt
      */
-    public void givOp(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
+    public boolean givOp( UserInterfaceKontrakt userInterfaceKontrakt ){
         int svar;
         svar = userInterfaceKontrakt.vilDuGiveOp();
-        if(svar==1) {
-           spiller.setHarGivetOp(true);
-            fjernEjerFraEjendom(spiller, userInterfaceKontrakt);
-            spiller.getSpillerEjendomme().clear();
-            userInterfaceKontrakt.takForSpillet();
-            spil.slutSpillerTur();
+
+        if(svar == 0) {
+            userInterfaceKontrakt.harGivetOp();
+            return true;
+
         }
         else {
-            userInterfaceKontrakt.duGavIkkeOp();
+            return false;
         }
-
     }
+
     public void fjernEjerFraEjendom(Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt){
 
         for(Ejendom x:spiller.getSpillerEjendomme()){
@@ -54,6 +53,7 @@ public class Handlinger {
         }
 
     }
+
 
     /**
      * @auther Andreas
@@ -86,24 +86,21 @@ public class Handlinger {
 
     /**
      * @author Filip
-     * Når spilleren lander på et taxifelt, kan vedkommende rykke til et felt efter deres valg
-     * (bortset fra selve taxifeltet).
-     * @param spil SpilController objekt, der der giver adgang til dens metoder, bl.a. rykSpillerTilFelt
-     * @param userInterfaceKontrakt Forbindelse til UI, så metoden kan modtage input og give output tilbage
+     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
-    public void tagTaxi( Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
-        int destination;
-        //Spiller relavantSpiller = SpilData.getSpillerMedTur();
+    public void ankerDom( Spiller spiller, RafleBaeger raflebaeger, UserInterfaceKontrakt ui ) {
 
-        destination = userInterfaceKontrakt.hvorHen( spiller.getSpillerPosition(),1, spil.getSpil().getAntalFelter() );
-        if(destination>spil.getSpil().getAntalFelter() || destination< 1 ){
-            userInterfaceKontrakt.holdDigPaaBrettet();
-        }
-        else if (destination == spiller.getSpillerPosition() ){
-            userInterfaceKontrakt.ikkeTaxiTilTaxi();
-            tagTaxi(spiller, spil, userInterfaceKontrakt);
-        }else{
-            spil.getRykSpiller().rykSpillerTilFelt( spiller, spil.getSpil().getFelter()[destination], 1, userInterfaceKontrakt, spil );
+        ui.ankerDom();
+
+        raflebaeger.slaa();
+        ui.terningerResultat( raflebaeger );
+
+        boolean loesladt = raflebaeger.erEns();
+
+        ui.anketDomResultat( loesladt );
+
+        if( loesladt ) {
+            spiller.setErIFaengsel(false);
         }
     }
 

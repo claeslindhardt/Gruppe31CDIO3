@@ -28,13 +28,44 @@ public class Spiller {
     ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
     protected double penge = 1500;
-    protected boolean faengselsStraf = false;
     protected boolean harGivetOp=false;
     protected boolean harAnketDomDenneRunde = false;
     protected boolean harSlaaetForTuren = false;
 
+    private boolean erUdgaaet = false;
+
+    private boolean erIFaengsel = false;
+    private boolean harSlaaet = false;
+
 
     //|--------- Getters og Setters:-----------------
+
+    public boolean erIFaengsel(){
+        return erIFaengsel;
+    }
+
+
+    public boolean erUdgaaet() {
+        return erUdgaaet;
+    }
+
+    public void setErUdgaaet( boolean erUdgaaet ) {
+        this.erUdgaaet = erUdgaaet;
+    }
+
+    public void setErIFaengsel(boolean erIFaengsel) {
+        this.erIFaengsel = erIFaengsel;
+    }
+
+    public void setHarSlaaet(boolean harSlaaet) {
+        this.harSlaaet = harSlaaet;
+    }
+
+    public boolean harSlaaet(){
+        return harSlaaet;
+
+    }
+
 
     public int getSpillerPosition() {
         return spillerPosition;
@@ -42,14 +73,6 @@ public class Spiller {
 
     public void setSpillerPosition(int spillerPosition) {
         this.spillerPosition = spillerPosition;
-    }
-
-    public boolean isFaengselsStraf() {
-        return faengselsStraf;
-    }
-
-    public void setFaengselsStraf(boolean faengselsStraf) {
-        this.faengselsStraf = faengselsStraf;
     }
 
     public ArrayList<Ejendom> getSpillerEjendomme() {
@@ -94,6 +117,15 @@ public class Spiller {
             return null;
         }
     }
+
+    public void clearEjendomme(){
+        spillerEjendomme.clear();
+    }
+
+    public void clearChancekort(){
+        chancekort.clear();
+    }
+
     public ArrayList<Bryggeri> getSpillerBryggerier() {
         return spillerBryggeri;
     }
