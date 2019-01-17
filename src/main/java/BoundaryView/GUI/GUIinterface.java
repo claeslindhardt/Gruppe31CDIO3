@@ -201,10 +201,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                     gui_felt.setDescription("Her er der helle");
                 }
                 else if (felt.getFeltType().equals("Bryggeri")){
-                    gui_felt.setDescription("Grundpris: " + ((Bryggeri) felt).getPris() + " / " + "Leje: " + ((Bryggeri) felt).getLeje());
+                    gui_felt.setDescription("Leje hvis 1 bryggeri ejes: 4 gange terningernes værdi" + " "
+                             + "Leje hvis 2 bryggerier ejes: 10 gange terningernes værdi");
                 }
                 else if (felt.getFeltType().equals("Rederi")){
-                    gui_felt.setDescription("Grundpris: " + (((Rederi) felt).getPris()) + " / " + "Leje: " + ((Rederi) felt).getLeje());
+                    gui_felt.setDescription("Grundleje: " + ((Rederi) felt).getLeje() + " / " +
+                             "Leje hvis 2 rederier ejes: " + ((Rederi) felt).getLeje() * 2 + " / " +
+                             "Leje hvis 3 rederier ejes: " + ((Rederi) felt).getLeje() * 2 * 2 + " / " +
+                             "Leje hvis 4 rederier ejes: " + ((Rederi) felt).getLeje() * 2 * 2 * 2);
                 }
                 else if (felt.getFeltType().equals("IndkomstSkat")){
                     gui_felt.setDescription("Du skat betale 200 eller 10% af din formue");
