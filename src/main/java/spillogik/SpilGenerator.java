@@ -1,7 +1,7 @@
 package spillogik;
 
 import ModelEnteties.EjendomsGruppe;
-import ModelEnteties.chancekort.Chancekort;
+import ModelEnteties.chancekort.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
