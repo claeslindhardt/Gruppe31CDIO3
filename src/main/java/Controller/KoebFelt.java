@@ -108,7 +108,7 @@ public class KoebFelt {
             ui.tetPaaMonopol();
         }
         else if (spiller.getPenge() > rederi.getPris()) {
-            ui.ditRederi(rederi, spiller);
+            ui.gennemfoertKoebRederi(rederi, spiller);
             spiller.addPenge( - rederi.getPris() );
             ui.updateSpillere(spiller);
 

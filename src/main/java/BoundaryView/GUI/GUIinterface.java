@@ -565,6 +565,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" Ejer: "+ejer+"|");
     }
 
+    public void gennemfoertKoebRederi (Rederi rederi, Spiller spiller){
+        gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
+
+        GUI_Street gui_rederi = (GUI_Street) gui.getFields()[rederi.getPlacering()];
+
+        gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
+    }
+
     public void betalRente(){
         gui.showMessage("En anden spiller ejer dette felt, du betaler derfor rente til ham:");
     }
@@ -748,8 +756,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
-
-    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit.");}
 
     @Override
     public void startSpil(Spil spil) {
