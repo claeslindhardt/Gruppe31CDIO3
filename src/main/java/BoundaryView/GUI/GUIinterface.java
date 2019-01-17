@@ -561,6 +561,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" Ejer: "+ejer+"|");
     }
 
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param rederi Rederier der kan købes
+     * @param spiller Spilleren der køber rederiet
+     */
     public void gennemfoertKoebRederi (Rederi rederi, Spiller spiller){
         gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
 
@@ -569,6 +575,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
 
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param bryggeri Bryggerier der kan købes
+     * @param spiller Spilleren der køber bryggeriet
+     */
     public void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller){
         gui.showMessage("Du har koebt " + bryggeri.getNavn() + "!");
 
