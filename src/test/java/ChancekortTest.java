@@ -32,7 +32,7 @@ public class ChancekortTest {
         chancekort = new RykAntalFelter(-4, "Testkort");
         alleChancekort.add(chancekort);
 
-        spil.setChanceKort(alleChancekort);
+        spil.setChancekort(alleChancekort);
 
         SpilController spilController = new SpilController();
 

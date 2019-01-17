@@ -481,7 +481,7 @@ public class SpilGenerator {
 
         Spil spil = new Spil();
         spil.setFelter( genererFelter() );
-        spil.setChanceKort( genererChancekort() );
+        spil.setChancekort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
 
         String[] spillerNavne = new String[antalSpillere];
@@ -502,7 +502,7 @@ public class SpilGenerator {
         Spil spil = new Spil();
 
         spil.setFelter( genererFelter() );
-        spil.setChanceKort( genererChancekort() );
+        spil.setChancekort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
 
         spil.setSpillerTur( random.nextInt() + 1 );
