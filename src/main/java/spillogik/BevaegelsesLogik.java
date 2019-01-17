@@ -65,10 +65,18 @@ public class BevaegelsesLogik {
      * @return              Det felt man ender paa efter at rykke antalFelter
      */
     public static Felt beregnEndeligtFelt(Felt[] braet, Felt startFelt, int antalFelter ){
-
+        int endeligtFeltNr = 0;
         int totalAntalFelter = braet.length;
         int startFeltNr = startFelt.getPlacering();
-        int endeligtFeltNr = ( startFeltNr + antalFelter ) % totalAntalFelter;
+
+        if((startFeltNr+antalFelter)*-1>totalAntalFelter) {
+            endeligtFeltNr = ((((startFeltNr+antalFelter)+braet.length)%totalAntalFelter)*-1)-totalAntalFelter;
+        }
+        else if(startFeltNr+antalFelter<0){endeligtFeltNr = (((startFeltNr+antalFelter)+braet.length)+totalAntalFelter);}
+
+        else {
+            endeligtFeltNr = (startFeltNr + antalFelter) % totalAntalFelter;
+        }
 
         return braet[endeligtFeltNr];
     }
