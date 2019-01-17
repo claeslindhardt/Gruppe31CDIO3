@@ -17,7 +17,6 @@ public class GUI_Generator {
 
         GUI_Player[] gui_spillere = new GUI_Player[ spillere.length ];
 
-        // Laver spilleres grafiske elementer
         for( int i=0; i < spillere.length; i++ ){
 
             GUI_Car bil = new GUI_Car();
@@ -31,8 +30,6 @@ public class GUI_Generator {
             gui_spillere[i] = gui_spiller;
 
         }
-        //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
-
 
         return gui_spillere;
     }
