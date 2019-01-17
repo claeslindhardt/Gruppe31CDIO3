@@ -1,3 +1,25 @@
+import controller.SpilController;
+
+public class Main {
+
+    public static void main(String[] args) {
+        new SpilController().koerSpil();
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 import view.GUI.GUIinterface;
 import controller.SpilController;
@@ -9,7 +31,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        /**
+        */
+/**
          * @author Claes Lindhardt
          * main klassen har til formål at lade java vide hvor den skal starte.
          * den gør brug af parameteret
@@ -21,7 +44,8 @@ public class Main {
          * @param Ui                angiver hvilket UserInterface der ønskes at gøre brug af.
          * @param SpilController    alle de obejekter der skal til for at spille spillet(brettet, spillerne osv.)
          *
-         */
+         *//*
+
 
         int startArgument = HaanterStartArgument(args.length, args);
         UserInterfaceKontrakt Ui = valgAfUI(startArgument);
@@ -29,7 +53,8 @@ public class Main {
         SpilController spilController = new SpilController(Ui);
         spilController.start();
 
-        /**
+        */
+/**
          * ==========================================
          *          Typsik forløb i main
          * ==========================================
@@ -42,21 +67,24 @@ public class Main {
          *    alle process bliver lukket rigtigt.
          * __________________________________________
          * (se evt. Use-Casen i bunden For uddybelse)
-         */
+         *//*
+
 
     }
 
 
 
     public static int HaanterStartArgument(int arglength, Object[] args){
-        /**
+        */
+/**
          * @author Claes Lindhardt
          * Kører  man programmet (f.eks. gennem .bat-filen) kan man give den startargumenter,
          * som havner i en String array. Med udgangspunkt i den liste kan man så få programmet til
          * at gøre noget bestemt afhængigt af argumenterne. Så man kan starte programmet med nogle
          * bestemte indstillinger.
          * @param startArgument     Så man som start argument kan angive hvilken UI man vil bruge
-         */
+         *//*
+
         // Håndterer startargument
 
         int startArgument = 0;
@@ -76,7 +104,8 @@ public class Main {
 
 
     public static UserInterfaceKontrakt valgAfUI(int startArgument){
-        /**
+        */
+/**
          * @author Claes Lindhardt
          * Funktion tager et input fra brugeren og implementere, med udgangspunkt i det
          * den relevante interface af brugerinteraktiosnfladen.
@@ -84,7 +113,8 @@ public class Main {
          *                          sted på forhånd har angivet hvilke UI man ønsker.
          *                          bruges dette parameter til at springe valget over
          * @return Ui               Den valgte UI enten en TUI eller en GUI
-         */
+         *//*
+
         // Efterspørger start argument
         if( startArgument == 0) {
 
@@ -116,14 +146,17 @@ public class Main {
         if(startArgument == 1) {
             System.out.println("Starter med GUI");
             Ui = new GUIinterface();
-        } /*else if (startArgument == 2){
+        } */
+/*else if (startArgument == 2){
             System.out.println("Starter med TUI");
             Ui = new TUI();
-        }*/
+        }*//*
+
         return Ui;
     }
 
 }
+*/
 /*
     ______________________________________________
     |Et standard exempel spil forløber(USE-Case):|
@@ -154,5 +187,7 @@ public class Main {
     9. hvis der kun er en spiller tilbage vil han blive erkleret vinder!!!!!
     10. ellers vil turen blive givet videre til den næste i række følgen.
     |============================================|
-     */
+     *//*
 
+
+*/

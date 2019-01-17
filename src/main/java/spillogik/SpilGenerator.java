@@ -481,7 +481,7 @@ public class SpilGenerator {
 
         Spil spil = new Spil();
 
-        spil.setSpillere(  genererSpillere( antalSpillere, 1500 )  );
+        spil.setSpillere(  genererSpillere( "Spiller 1", "Spiller 2", "Spiller 3" )  );
         spil.setFelter( genererFelter() );
         spil.setChanceKort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );

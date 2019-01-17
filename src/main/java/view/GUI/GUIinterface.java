@@ -30,7 +30,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     GUI_Center gui_center = GUI_Center.getInstance();
     private GUI gui;
-    private GUI hovedmenu = new GUI(new GUI_Field[0]);
+    private GUI hovedmenu;//= new GUI(new GUI_Field[0]);
     IndputHaanteringGUI input = new IndputHaanteringGUI();
     private ArrayList<GUI_Player> spillere = new ArrayList<>();
     GUI_Field[] felter;
@@ -223,7 +223,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         this.felter = gui_felter;
         gui = new GUI( gui_felter, new Color(218,206,179));
-
+/*
         // Laver spilleres grafiske elementer
         for(int i=0;i<spillere.length;i++){
 
@@ -241,7 +241,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             gui.addPlayer(spiller); //Sæt spilleren på
             gui_felter[0].setCar(spiller, true);
 
-        }
+        }*/
         //Få Spiller objekterne til at rykke sig på planden når objekterne rykker sig
 
     }
@@ -263,22 +263,43 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void aabenSpil( Spil spil ){
 
+        genererGUIBret( spil );
+
     }
+
 
     public String[] opretSpillere( int min, int max ){
 
-        int antalSpillere =
+        int antalSpillere;
+        do{
+            antalSpillere = gui.getUserInteger("Indtast antal spillere:");
 
+            if ( antalSpillere >= min && antalSpillere <= max ) {
 
-        /* for(int i = 0; i < spil.getSpillere().length; i++){
-            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
-                return true;
+                break;
             }
+            gui.showMessage("I skal være mellem " + min + " og " + max + " spillere.");
+        }while(true);
+
+        String[] navne = new String[antalSpillere];
+
+        for( int i = 0; i < antalSpillere; i++ ){
+
+            boolean navnErTaget = false;
+            do{
+                String indtastetNavn = gui.getUserString( "Indtast navnet paa spiller " + (i+1) + ":");
+
+                for(int j = 0; j < antalSpillere; j++){
+
+                    if( navne[j] != null && navne[j].equalsIgnoreCase( indtastetNavn )) {
+                        navnErTaget = true;
+                    }
+                }
+
+            }while( navnErTaget );
         }
-        return false;*/
 
-
-        return null;
+        return navne;
     }
 
     public void startSpil(){}
@@ -302,9 +323,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
 
-    public int TurMenu(int getSpillerTur, int minInput, int maxInput){
+    public int TurMenu( Spiller spiller, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("Det er "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+        String valg = gui.getUserButtonPressed("Det er "+ spiller.getNavn()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hotel");
 
         return input.TurMenu(valg);

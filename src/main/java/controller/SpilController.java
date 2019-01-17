@@ -7,6 +7,8 @@ import spillogik.SpilGenerator;
 
 import java.util.Random;
 
+import static spillogik.SpilGenerator.genererSpil;
+
 public class SpilController{
 
     private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
@@ -55,7 +57,7 @@ public class SpilController{
     /** Laver en ny SpilController med en GUI */
     public SpilController(){
         ui = new GUIinterface();
-        spil = new Spil();
+        spil = genererSpil();
     }
 
 
@@ -182,7 +184,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public void turMenu() {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 12);
+        int input = ui.TurMenu( spil.getSpillerMedTur(), 1, 12);
 
         switch (input) {
             case 1:
@@ -208,7 +210,7 @@ public class SpilController{
                 /*spilleBret.printBret(ui);*/
                 break;
             case 6:
-                printSpilleresInfo();
+                //printSpilleresInfo();
                 break;
             case 7:
                 handlinger.givOp(spil.getSpillerMedTur(), this, ui);

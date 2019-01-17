@@ -18,7 +18,7 @@ public interface UserInterfaceKontrakt {
 
 
 
-    int TurMenu(int getSpillerTur, int minInput, int maxInput);
+    int TurMenu( Spiller spiller, int minInput, int maxInput);
     int velkomstMenu(int minInput, int maxInput);
     int instilingsSporgsmaal0(int minInput, int maxInput);
     int instilingsSporgsmaall(int minInput, int maxInput);
