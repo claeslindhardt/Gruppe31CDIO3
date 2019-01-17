@@ -38,7 +38,10 @@ public class IndputHaanteringGUI {
             beslutning = 9;
         } else if (valg == "Handel med Ejede ting") {
             beslutning = 10;
-        }
+        } else if (valg == "Sælg hus på ejendommen") {
+            beslutning = 11;
+        }else if (valg == "Sælg Hotel på ejendommen") {
+            beslutning = 12;}
         return beslutning;
     }
 

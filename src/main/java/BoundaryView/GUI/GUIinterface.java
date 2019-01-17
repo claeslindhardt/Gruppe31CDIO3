@@ -167,8 +167,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
             if( felt.getFeltType().equals("Ejendom") ){
                 Ejendom ejendom = (Ejendom) felt;
                 gui_felt.setBackGroundColor( ejendom.getGruppe().getFarve() );
-                gui_felt.setDescription("Grundpris: "+((Ejendom) felt).getPris() + " / "
-                        + "Grundleje: " + ((Ejendom) felt).getLeje() + " / "
+                ((GUI_Street) gui_felt).setHouses(((Ejendom) felt).getAntalHuse());
+                gui_felt.setDescription("Grundleje: " + ((Ejendom) felt).getLeje() + " / "
                         + "Huspris: " + ((Ejendom) felt).getHusPris() + " / "
                         + "Leje fra hus 1: " + ((Ejendom) felt).getLejeHus(1) + " / "
                         + "Leje fra hus 2: " + ((Ejendom) felt).getLejeHus(2) + " / "
@@ -258,8 +258,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
         String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Giv op",
-                "Byg på ejendom", "Byg hotel");
+                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting", "Sælg hus på ejendommen","Sælg Hotel på ejendommen");
 
         return input.TurMenu(valg);
     }
@@ -449,10 +448,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Jernbanen er nu din!");
     }
 
-    public void ditBryggeri(){
-        gui.showMessage("Bryggeriet er nu dit!");
-    }
-
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
     }
@@ -516,11 +511,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void updateSpillere(Spiller spiller){
-        for(int i = 0; i < spillere.size();i++){
+
             double balance = spiller.getPenge();
             spillere.get(spiller.getId()).setBalance((int) balance);
 
-        }
+
     }
 
     /** Gennemføre købet ift. GUI; dvs ændrer feltets border til spillerens farve.
@@ -552,6 +547,34 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\n| Pris: "+ej.getPris()+ " | Leje: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
                 " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" Ejer: "+ejer+"|");
+    }
+
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param rederi Rederier der kan købes
+     * @param spiller Spilleren der køber rederiet
+     */
+    public void gennemfoertKoebRederi (Rederi rederi, Spiller spiller){
+        gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
+
+        GUI_Shipping gui_rederi = (GUI_Shipping) gui.getFields()[rederi.getPlacering()];
+
+        gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
+    }
+
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param bryggeri Bryggerier der kan købes
+     * @param spiller Spilleren der køber bryggeriet
+     */
+    public void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller){
+        gui.showMessage("Du har koebt " + bryggeri.getNavn() + "!");
+
+        GUI_Brewery gui_bryggeri = (GUI_Brewery) gui.getFields()[bryggeri.getPlacering()];
+
+        gui_bryggeri.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
 
     public void betalRente(){
@@ -634,6 +657,17 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     }
 
+    public  void saelgHus(Ejendom ejendom){
+        GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
+        husSkalPaa.setHouses(ejendom.getAntalHuse());
+    }
+
+    public void saelgHotel(Ejendom ejendom){
+        GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
+        husSkalPaa.setHotel(false);
+        husSkalPaa.setHouses(ejendom.getAntalHuse());
+    }
+
     public String skatteBetaling(){
         String betal =     gui.getUserSelection("Du skla betale skat!\n Du kan enten betale 200 eller 10% af din samlede pengebeholdning\n Hvad vælger du? ", "At betale 200","At betale 10%");
               return betal;
@@ -694,6 +728,28 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return indexRetur;
     }
 
+    public int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme) {
+        String[] ejendomsListe = new String[ejendomme.size()+1];
+
+        //Arraylist converteres til et array
+        for(int i = 0; i < ejendomme.size();i++){
+            ejendomsListe[i] = ejendomme.get(i).getNavn();
+        }
+
+        ejendomsListe[ejendomme.size()] = "Tilbage";
+        String valg = gui.getUserSelection("Hvilken ejendom vil du saelge på? ",ejendomsListe);
+        int indexRetur = 0;
+
+        for (int i = 0; i < ejendomsListe.length; i++){
+            if (valg == ejendomsListe[i]){
+                indexRetur = i;
+            }
+        }
+        return indexRetur;
+    }
+
+
+
     /**
      * @author Chua
      * Generere en liste af ejendomme som den nuværende spiller ejer, som man kan bygge hotel på.
@@ -703,12 +759,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
     @Override
     public int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme) {
 
-        String[] ejendomsListe = new String[ejendomme.size()];
+        String[] ejendomsListe = new String[ejendomme.size()+1];
 
-        for (int i = 0; i < ejendomsListe.length; i++){
+        for (int i = 0; i < ejendomme.size(); i++){
             ejendomsListe[i] = ejendomme.get(i).getNavn();
         }
-
+        ejendomsListe[ejendomme.size()] = "Tilbage";
         String valg = gui.getUserSelection("Hvilken ejendom vil du bygge hotel paa? ",ejendomsListe);
         int indexRetur = 0;
 
@@ -738,8 +794,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
-
-    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit.");}
 
     @Override
     public void startSpil(Spil spil) {
