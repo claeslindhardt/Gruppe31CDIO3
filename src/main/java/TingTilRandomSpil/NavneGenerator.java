@@ -1,4 +1,4 @@
-package ModelEnteties;
+package TingTilRandomSpil;
 
 import ModelEnteties.singletoner.RandomSingleton;
 

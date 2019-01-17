@@ -57,18 +57,28 @@ public class BevaegelsesLogik {
 
     /**
      * @author Malte
-     * Beregner hvilket felt man lander på hvis man rykker 'antalFelter'.     *
+     * Beregner hvilket felt man lander på hvis man rykker 'antalFelter'.
      *
      * @param braet         Liste over alle felterne
      * @param startFelt     Feltet man start paa
-     * @param antalFelter   Hvor mange felter man rykker
+     * @param antalFelter   Hvor mange felter man rykker. Man kan både rykke forlæns (positiv antalFelter) og baglæns (negativ antal felter)
      * @return              Det felt man ender paa efter at rykke antalFelter
      */
-    public static Felt beregnEndeligtFelt(Felt[] braet, Felt startFelt, int antalFelter ){
-
+    public static Felt beregnEndeligtFelt( Felt[] braet, Felt startFelt, int antalFelter ){
+        int endeligtFeltNr;
         int totalAntalFelter = braet.length;
         int startFeltNr = startFelt.getPlacering();
-        int endeligtFeltNr = ( startFeltNr + antalFelter ) % totalAntalFelter;
+
+        // Beregninger
+        int totalFelt = startFeltNr + antalFelter;
+
+        int reduceret = totalFelt % totalAntalFelter; // Reducerer hvis man når hele vejen rundt om pladen.
+
+        if( reduceret < 0 ){
+            endeligtFeltNr = totalAntalFelter + reduceret;
+        } else {
+            endeligtFeltNr = reduceret;
+        }
 
         return braet[endeligtFeltNr];
     }

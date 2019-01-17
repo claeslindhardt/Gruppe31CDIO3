@@ -22,9 +22,6 @@ public class Handel {
     /**
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
-     * @param felt
-     * @param spilleren
-     * @param userInterfaceKontrakt
      */
     public void indsamleLeje(Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
         Spiller ejeren = felt.getEjer();
@@ -74,6 +71,33 @@ public class Handel {
         }
     }
 
+    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+        if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())){
+
+            ejendom.saelgHus(1);
+
+            spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom, 1));
+            userInterfaceKontrakt.updateSpillere(spiller);
+
+            userInterfaceKontrakt.saelgHus(ejendom);
+        }
+    }
+
+
+
+    public void saelgHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+
+        spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
+        ejendom.saelgHotel(false);
+        ejendom.setAntalHuse(4);
+
+        userInterfaceKontrakt.updateSpillere( spiller );
+
+        //userInterfaceKontrakt.saelgHus(ejendom);
+    }
+
+
+
     /**
      * @author Malte
      * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
@@ -111,6 +135,59 @@ public class Handel {
         }
     }
 
+    /**
+     * @auther Andreas
+     * Metoder der sælger et hus på en ejendom.
+     * Metoden taler først sammen med en metoden opretEjendomskartotek, hvor der laves en ArrayList med alle de ejendomme der
+     * har et hus på sig.
+     * Så vises listen i UI.
+     * Og man vælger den ejendom, hvorfra der skal sælges et hus.
+     * @param spiller
+     * @param ui
+     */
+    void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
+
+        // Finder ejendomme med sælgbare huse på
+        ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
+
+        // Tjekker at der overhovedet er nogen huse man kan bygge på
+        if( kartotek.size() > 0 ) {
+
+            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+
+            if( ejendomsIndex < kartotek.size() ){
+                saelgHus(spiller,  kartotek.get(ejendomsIndex), ui);
+                ui.saelgHus( kartotek.get(ejendomsIndex) );
+            }
+            /* Hvis ejendomsIndex >= kartotek.size() er inputtet fra GUI
+                at man gerne vil gå tilbage. */
+        }
+    }
+
+    /**
+     * @auther Andreas
+     * Metoder der sælger et hotel på en ejendom.
+     * Metoden taler først sammen med en metoden opretHotlekartotek, hvor der laves en ArrayList med alle de ejendomme der
+     * har et hotel på sig.
+     * Så vises listen i UI.
+     * Og man vælger den ejendom, hvorfra der skal sælges et hus.
+     * @param spiller
+     * @param ui
+     */
+    public void saelgHotelPaaEjendom( SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
+
+        ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
+
+        if(kartotek.size() > 0){
+            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+
+            if( ejendomsIndex < kartotek.size() ) {
+                saelgHotel(spiller, kartotek.get(ejendomsIndex), ui);
+                ui.saelgHotel(kartotek.get(ejendomsIndex));
+            }
+        }
+
+    }
 
     /**
      * @author Chua
@@ -129,7 +206,6 @@ public class Handel {
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
             spiller.addPenge(-ejendom.getHotelPris());
             userInterfaceKontrakt.updateSpillere( spiller );
-
         }
     }
 
@@ -169,5 +245,43 @@ public class Handel {
         }
     }
 
+
+    /**
+     * Metoden der samler alle de ejendomme som en Spiller ejer, hvor
+     * der kan sælges et hus fra. Det er {@link EjendomsLogik#kanSaelgeHus}
+     * som vurderer hvorvidt der kan sælge et hus på ejendommen.
+     *
+     * @author Andreas
+     * @param spiller Hvilken spiller man ønsker et kartotek for
+     * @return Liste over de ejendomme, der kan sælges et hus fra
+     */
+    private ArrayList<Ejendom> opretEjendomsKartotek( Spiller spiller ){
+
+        Ejendom[] ejendomme = spiller.getEjendomme();
+
+        ArrayList<Ejendom> kartotek = new ArrayList<>();
+
+        for( int i = 0; i < ejendomme.length; i++ ){
+            if( EjendomsLogik.kanSaelgeHus( spiller, ejendomme[i], ejendomme[i].getGruppe() ) ){
+                kartotek.add( ejendomme[i] );
+            }
+        }
+        return kartotek;
+    }
+
+
+    private ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
+
+        Ejendom[] ejendomme = spiller.getEjendomme();
+
+        ArrayList<Ejendom> kartotek = new ArrayList<>();
+
+        for( int j = 0; j < ejendomme.length; j++ ){
+            if( ejendomme[j].harHotel() ){
+                kartotek.add( ejendomme[j] );
+            }
+        }
+        return kartotek;
+    }
 
 }

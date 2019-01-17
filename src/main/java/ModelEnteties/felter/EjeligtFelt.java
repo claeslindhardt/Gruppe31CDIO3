@@ -1,10 +1,7 @@
 package ModelEnteties.felter;
 
-import Controller.JernbaneCO;
-import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.EjendomsGruppe;
 import ModelEnteties.Spiller;
-
-import java.util.ArrayList;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: EjeligtFelt
@@ -17,11 +14,6 @@ import java.util.ArrayList;
  */
 public abstract class EjeligtFelt extends Felt {
 
-    //|--------- Variabler:-----------------
-    //Statiske Variabler
-    private static ArrayList<Ejendom> alleEjendomme = new ArrayList<Ejendom>();
-    private static ArrayList<JernbaneCO> alleJernbaner = new ArrayList<JernbaneCO>();
-
     //  Dynamiske Variabler
     private Spiller ejer;
     private int pris;
@@ -29,7 +21,7 @@ public abstract class EjeligtFelt extends Felt {
     private double pantsaetningsVaerdi;
 
     // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
-    private EjendomsGruppeDTO gruppe;
+    private EjendomsGruppe gruppe;
 
 
     public EjeligtFelt(String navn, int pris, int placering ){
@@ -76,36 +68,12 @@ public abstract class EjeligtFelt extends Felt {
         this.pantsat = pantsat;
     }
 
-    public EjendomsGruppeDTO getGruppe() {
+    public EjendomsGruppe getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppeDTO gruppe) {
+    public void setGruppe(EjendomsGruppe gruppe) {
         this.gruppe = gruppe;
-    }
-
-    public static ArrayList<Ejendom> getAlleEjendomme() {
-        return alleEjendomme;
-    }
-
-    public static void setAlleEjendomme(ArrayList<Ejendom> alleEjendomme) {
-        EjeligtFelt.alleEjendomme = alleEjendomme;
-    }
-
-    public static void addAlleEjendomme(Ejendom enEjendom) {
-        EjeligtFelt.alleEjendomme.add(enEjendom);
-    }
-
-    public static ArrayList<JernbaneCO> getAlleJernbaner() {
-        return alleJernbaner;
-    }
-
-    public static void setAlleJernbaner(ArrayList<JernbaneCO> alleJernbaner) {
-        EjeligtFelt.alleJernbaner = alleJernbaner;
-    }
-
-    public static void addAlleJernbaner(JernbaneCO enJernbane) {
-        EjeligtFelt.alleJernbaner.add(enJernbane);
     }
 
 }

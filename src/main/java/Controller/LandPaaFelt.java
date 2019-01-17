@@ -1,15 +1,32 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
-
 import java.util.ArrayList;
 
-public class LandPaaFelt {
 
-    public void landPaaFelt(SpilController spilController, Felt felt, Spiller spiller, UserInterfaceKontrakt ui){
+/**
+ *  Controller-klassen der håndterer hvad der skal ske, når man lander paa et felt.
+ *  Den tilgås udelukkende via metoden {@link #landPaaFelt}.
+ *
+ *  @author Malte
+ */
+class LandPaaFelt {
+
+
+    /**
+     * Vurderer typen af feltet man lander paa, og kalder den korrekte
+     * controller metode ift. feltet. Alle metoderne der kan kaldes
+     * befinder sig i klassen her.
+     *
+     * @author Malte
+     *
+     * @param felt      Feltet der landes paa
+     * @param spiller   Spilleren der lander paa feltet
+     */
+    void landPaaFelt( Felt felt, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui){
 
         ui.duErLandetPå(felt, spiller);
 
@@ -20,7 +37,7 @@ public class LandPaaFelt {
             startFelt( ui );
 
         } else if( felt instanceof ProevLykken) {
-            proevLykken( spilController, ui );
+            proevLykken( spiller, spilController, ui );
 
         } else if( felt instanceof FriParkering ){
             friParkering( ui );
@@ -36,29 +53,28 @@ public class LandPaaFelt {
 
         } else if( felt instanceof StatsSkat) {
             statsSkat( (StatsSkat) felt, spiller, ui);
-
         }
-
     }
 
 
-    public void ejeligtFelt(SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterfaceKontrakt ui ){
+    // ---------------------------------------------------------------------------------------------------------------------
+
+
+    /**
+     * Forløbet i at lande paa et felt af typen {@link EjeligtFelt}. Det er ens
+     * hvad der sker, når man lander paa et ejeligt felt, uanset hvilket
+     * felt det er - derfor er de samlet i denne ene metode.
+     *
+     * @author Malte
+     */
+    private void ejeligtFelt( SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterfaceKontrakt ui ){
 
         if( felt.getEjer() == null ){
 
-            int kobsBeslutning = ui.ejendomsBud();
+            int koebsBeslutning = ui.ejendomsBud();
 
-            switch (kobsBeslutning){
-
-                case 0:
-
-                    spilController.getKoebFelt().koebFelt( felt, spiller, ui );
-                    break;
-
-                case 1:
-                    ui.forsetTur();
-                    break;
-
+            if( koebsBeslutning == 0 ){
+                spilController.getKoebFelt().koebFelt( felt, spiller, ui );
             }
 
         }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
@@ -68,89 +84,107 @@ public class LandPaaFelt {
 
         }else if( felt.getEjer() == spiller ){
             ui.tetPaaMonopol();
-
         }
-
     }
 
-    public void startFelt( UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i at lande paa et felt af typen {@link StartFelt}.
+     * @author Malte
+     */
+    private void startFelt( UserInterfaceKontrakt ui ){
         ui.landetPaaStart();
     }
 
 
-    public void proevLykken( SpilController spilController, UserInterfaceKontrakt ui ){
-        ArrayList<ChanceAktionDTO> chancekort = spilController.getSpil().getChanceKort();
+    /**
+     * Forløbet i at lande paa et {@link ProevLykken} felt.
+     * @author Malte
+     */
+    private void proevLykken( Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
+        ArrayList<Chancekort> chancekort = spilController.getSpil().getChanceKort();
 
-        ChanceAktionDTO trukketKort = chancekort.get(0);
+        // Trækker kort
+        Chancekort trukketKort = chancekort.get(0);
         chancekort.remove(0);
-        chancekort.add(trukketKort);
 
-        trukketKort.DirketeAktion( spilController.getHandel(), spilController, ui );
+        ui.visChanceKort( trukketKort );
+
+        if( trukketKort.erDirekteAktion() ){
+            // Bruger kortet med det samme
+            spilController.getBrugChancekort().brugChancekort( trukketKort, spiller, spilController.getSpil(),  ui,  spilController );
+        }else{
+            // Giver det til spilleren.
+            spiller.addChancekort( trukketKort );
+        }
     }
 
-    public void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i at lande paa et {@link GaaIFaengsel} felt.
+     * @author Malte
+     */
+    private void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
         Spiller spillerMedTur = spilController.getSpil().getSpillerMedTur();
         Faengsel faengsel = spilController.getSpil().getFaengsel();
 
+        // Flytter spilleren
         spillerMedTur.setFaengselsStraf(true);
         spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
         ui.iFaengselMedDig();
         ui.duErLandetPå( faengsel, spillerMedTur);
-
-        spilController.slutSpillerTur();
     }
 
-    public void faengsel( UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i at lande paa et {@link Faengsel} felt.
+     * @author Malte
+     */
+    private void faengsel( UserInterfaceKontrakt ui ){
         ui.paaBesoegIFaengsel();
     }
 
-    public void indkomstSkat( Spiller spiller, UserInterfaceKontrakt ui ){
 
-        double nuvPengebeholdning = spiller.getPenge();
-        //Her vurderer aktionPåfelt om spilleren befinder sig på felt 4, hvor der skatten der skal betales er specifik.
+    /**
+     * Forløbet i at lande paa et {@link IndkomstSkat} felt.
+     * @author Malte
+     */
+    private void indkomstSkat( Spiller spiller, UserInterfaceKontrakt ui ){
 
-        ui.skatteBesked(2);
+        int valg = ui.vaelgIndkomstSkat();
 
-        double skat;
-        int valg = 0;
-
-        /*HEr vælges det om spilleren vil beltale 200 ell er 10 %
-         * */
-        String betalingsValg = ui.skatteBetaling();
-
-        if (betalingsValg == "At betale 200") {
-            valg = 1;
-        } else {
-            valg = 2;
-        }
         switch (valg) {
-            case 1:{ skat = 200;
-                spiller.setPenge(nuvPengebeholdning - skat);
-                break;}
+            case 0:
+                spiller.addPenge(-200);
+                break;
 
-            case 2:{ spiller.setPenge(nuvPengebeholdning * 0.9);
-                break;}
-
+            case 1:
+                spiller.addPenge( -spiller.getPenge() * 0.1);
+                break;
         }
-
         ui.updateSpillere( spiller );
-
     }
 
-    public void statsSkat( StatsSkat felt,  Spiller spiller, UserInterfaceKontrakt ui ){
 
-        double nuvPengebeholdning = spiller.getPenge();
+    /**
+     * Forløbet i at lande paa et felt af typen {@link StatsSkat}.
+     * @author Malte
+     */
+    private void statsSkat( StatsSkat felt,  Spiller spiller, UserInterfaceKontrakt ui ){
 
-        // Her vurderer aktionPåfelt om spilleren befinder sig på felt 4, hvor der skatten der skal betales er specifik.
-
-        ui.skatteBesked(1);
-        spiller.setPenge(nuvPengebeholdning - felt.getSkat() );
+        ui.statsSkat( (int) felt.getSkat() );
+        spiller.addPenge( -felt.getSkat() );
 
         ui.updateSpillere(spiller);
     }
 
-    public void friParkering(UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i at lande paa et felt af typen {@link FriParkering}.
+     * @author Malte
+     */
+    private void friParkering(UserInterfaceKontrakt ui ){
         ui.friParkering();
     }
 

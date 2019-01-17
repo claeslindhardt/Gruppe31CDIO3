@@ -1,5 +1,7 @@
 package BoundaryView.GUI;
 
+import gui_main.GUI;
+
 /**
  * Indsæt beskrivelse her
  */
@@ -36,7 +38,10 @@ public class IndputHaanteringGUI {
             beslutning = 9;
         } else if (valg == "Handel med Ejede ting") {
             beslutning = 10;
-        }
+        } else if (valg == "Sælg hus på ejendommen") {
+            beslutning = 11;
+        }else if (valg == "Sælg Hotel på ejendommen") {
+            beslutning = 12;}
         return beslutning;
     }
 
@@ -48,6 +53,18 @@ public class IndputHaanteringGUI {
             beslutning = 2;
         }
         return beslutning;
+    }
+
+
+    public int binaertValg( String besked, String valg1, String valg2, GUI gui ){
+        String valg = gui.getUserButtonPressed( besked,
+                valg1, valg2);
+
+        if( valg.equals(valg1) ){
+            return 0;
+        }else {
+            return 1;
+        }
     }
 
 }

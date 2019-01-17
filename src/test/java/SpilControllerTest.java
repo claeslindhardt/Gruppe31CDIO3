@@ -2,7 +2,7 @@ import Controller.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
-import spillogik.RandomGenerator;
+import TingTilRandomSpil.RandomGenerator;
 
 
 class SpilControllerTest {
@@ -21,6 +21,8 @@ class SpilControllerTest {
                 spil.getSpiller(0).tilføjEjendom( (Ejendom) felt );
             }
         }
+
+
 
         Spiller spiller = spil.getSpiller(0);
 

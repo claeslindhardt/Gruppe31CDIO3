@@ -1,8 +1,7 @@
-package Controller;
+package TingTilRandomSpil;
 
-
+import ModelEnteties.EjendomsGruppe;
 import ModelEnteties.felter.Ejendom;
-import ModelEnteties.EjendomsGruppeDTO;
 
 import java.awt.*;
 
@@ -12,16 +11,15 @@ import java.awt.*;
  * Den gør det ved at fylde en gruppe op først, og opretter kun en ny gruppe,
  * når den tidligere gruppe er fyldt.
  */
-
-public class EjendomsGruppeCO {
+public class EjendomsGruppeGenerator {
 
     private int gruppeStoerelser;
     private Color[] farveListe = {Color.red, Color.green,Color.BLUE,Color.YELLOW ,Color.ORANGE,Color.PINK,Color.GRAY,Color.MAGENTA};
     private int antalGrupper = 0; // Hvor mange grupper der er blevet lavet.
-    private EjendomsGruppeDTO klarGruppe;
+    private EjendomsGruppe klarGruppe;
 
 
-    public EjendomsGruppeCO(int gruppeStoerelser){
+    public EjendomsGruppeGenerator(int gruppeStoerelser){
         // Sikrer at man ikke har grupper der er mindre end de kan være.
         if(gruppeStoerelser < 1 ){
             this.gruppeStoerelser = 1;
@@ -29,6 +27,7 @@ public class EjendomsGruppeCO {
             this.gruppeStoerelser = gruppeStoerelser;
         }
     }
+
 
     /**
      * @author Malte
@@ -39,26 +38,28 @@ public class EjendomsGruppeCO {
         return gruppeStoerelser;
     }
 
+
     /**
      * @author Malte.
      * Opretter en ny Ejendomsgruppe, ved at give den specifik farve, og en stoerrelse med udgangspunkt i EGManageren.
      * @return Den nyopprettede gruppe.
      */
-    private EjendomsGruppeDTO opretGruppe(){
+    private EjendomsGruppe opretGruppe(){
         antalGrupper++;
         Color farve = farveListe[antalGrupper%farveListe.length];
-        EjendomsGruppeDTO nyGruppe = new EjendomsGruppeDTO(farve, gruppeStoerelser);
+        EjendomsGruppe nyGruppe = new EjendomsGruppe(farve);
         return nyGruppe;
     }
+
 
     /**
      * Tilfoejer en ejendom til den nuværende ledige gruppe.
      * @param ejendom Hvilken ejendom man gerne vil tilfoeje til en gruppe.
      * @return Ejendommen som gruppen er blevet tilfoejet til.
      */
-    public EjendomsGruppeDTO tilfoejTilGruppe(Ejendom ejendom){
+    public EjendomsGruppe tilfoejTilGruppe(Ejendom ejendom){
         // Undersøger om den 'klarGruppe' faktisk er klar, eller om der skal oprettes en ny.
-        if( klarGruppe == null || klarGruppe.erFuld() ){
+        if( klarGruppe == null || klarGruppe.getAntalEjendomme() >= gruppeStoerelser ){
             klarGruppe = opretGruppe();
             // ... laver ny gruppe
         }
@@ -66,7 +67,4 @@ public class EjendomsGruppeCO {
         ejendom.setGruppe(klarGruppe);
         return klarGruppe;
     }
-
-    public void clearKlarGruppe(){klarGruppe = null;}
-
 }

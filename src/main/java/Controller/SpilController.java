@@ -4,7 +4,7 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import spillogik.RandomGenerator;
+import TingTilRandomSpil.RandomGenerator;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -19,6 +19,8 @@ public class SpilController{
     private RykSpiller  rykSpiller  = new RykSpiller();
     private Handlinger  handlinger  = new Handlinger();
     private Handel      handel      = new Handel();
+    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+    private BrugChancekort brugChancekort = new BrugChancekort();
 
 
 
@@ -27,11 +29,9 @@ public class SpilController{
         return landPaaFelt;
     }
 
-    public void setLandPaaFelt(LandPaaFelt landPaaFelt) {
-        this.landPaaFelt = landPaaFelt;
-    }
+    public BrugChancekort getBrugChancekort(){ return brugChancekort; }
 
-    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+
 
 
 
@@ -298,7 +298,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public void turMenu() {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 11);
+        int input = ui.TurMenu(spil.getSpillerTur(), 1, 12);
 
         switch (input) {
             case 1:
@@ -337,6 +337,10 @@ public class SpilController{
                 break;
             case 10:
                 //spil.getSpillerMedTur().handelMedEjendomme();
+                break;
+            case 11: handel.saelgHusPaaEjendom( spil.getSpillerMedTur(), ui );
+                break;
+            case 12: handel.saelgHotelPaaEjendom(this,spil.getSpillerMedTur(), ui);
                 break;
             default:
 

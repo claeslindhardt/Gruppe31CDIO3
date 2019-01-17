@@ -2,10 +2,10 @@ package BoundaryView;
 
 import Controller.*;
 import ModelEnteties.Spil;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.*;
 import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
-import ModelEnteties.ChanceAktionDTO;
 
 import java.util.ArrayList;
 
@@ -46,13 +46,11 @@ public interface UserInterfaceKontrakt {
     void alleredeEjer();
     void dinJernbane();
     void monetosMangel();
-    void taxiInfo(TaxiCO vogn);
     void overStartAnimation();
     void startsFeltsInfo(StartFelt felt);
     void iFaengselMedDig();
     void faengselInfo(GaaIFaengsel Faengsel);
     void muligeDestinationer();
-    void jernBaneInfo(JernbaneCO stadtion);
     int stationsMuligheder(int min, int max);
     void turEfterJernbane();
     void manglerJernbaner();
@@ -70,13 +68,14 @@ public interface UserInterfaceKontrakt {
     void badErrorMessage();
     int ejendomsBud();
     void spillerEjendele(Spiller spiller);
-    void printChanceKortDirekte(ChanceAktionDTO di);
+    void printChanceKortDirekte(Chancekort di);
     void chanceKortTilføjet();
     void chanceKortBrugt();
     void brugtUdAfFaengsel();
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
+    int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(Spiller spiller);
@@ -84,6 +83,8 @@ public interface UserInterfaceKontrakt {
     void startSpil(Spil spil);
     void byggeHotel(Ejendom ejendom);
     void byggetHus(Ejendom ejendom);
+    void saelgHus(Ejendom ejendom);
+    void saelgHotel(Ejendom ejendom);
     void tillykkeMedHotel();
     int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme);
     void kanIkkeKøbeHotel();
@@ -92,8 +93,11 @@ public interface UserInterfaceKontrakt {
     void friParkering();
     String skatteBetaling();
     void skatteBesked(int valg);
+    int vaelgIndkomstSkat();
+    void statsSkat( int skat );
     void trækEtChancekort();
     void landetPaaStart();
+    void visChanceKort( Chancekort chancekort );
 
 
     //===================================================

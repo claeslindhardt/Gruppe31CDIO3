@@ -1,10 +1,8 @@
-package spillogik;
+package TingTilRandomSpil;
 
-import Controller.*;
-import ModelEnteties.EjendomsGruppeDTO;
-import ModelEnteties.NavneGenerator;
+import ModelEnteties.EjendomsGruppe;
 import ModelEnteties.Spil;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
@@ -29,19 +27,19 @@ public class RandomGenerator {
     }
 
 
-    public static EjendomsGruppeDTO[] genererEjendomsGrupper(Ejendom[] ejendomme, int gruppeStoerrelse){
-        ArrayList<EjendomsGruppeDTO> ejendomsGrupper = new ArrayList<>();
-        EjendomsGruppeCO ejendomsGruppeController = new EjendomsGruppeCO(gruppeStoerrelse);
+    public static EjendomsGruppe[] genererEjendomsGrupper(Ejendom[] ejendomme, int gruppeStoerrelse){
+        ArrayList<EjendomsGruppe> ejendomsGrupper = new ArrayList<>();
+        EjendomsGruppeGenerator ejendomsGruppeController = new EjendomsGruppeGenerator(gruppeStoerrelse);
 
         // Tilfoejer alle ejendomme til grupper
         for( Ejendom ejendom : ejendomme ){
-            EjendomsGruppeDTO gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
+            EjendomsGruppe gruppe = ejendomsGruppeController.tilfoejTilGruppe( ejendom );
             ejendom.setGruppe(gruppe);
             ejendomsGrupper.add(gruppe);
         }
 
         // Laver listen over ejendomsgrupper om til en almindelig array og returnere den ( .toArray() ) @author Malte
-        return ejendomsGrupper.toArray(new EjendomsGruppeDTO[0]);
+        return ejendomsGrupper.toArray(new EjendomsGruppe[0]);
     }
 
 
@@ -78,7 +76,7 @@ public class RandomGenerator {
         do {
 
             felter = new Felt[antalFelter];
-            EjendomsGruppeCO ejendomsGruppeCO = new EjendomsGruppeCO(3);
+            EjendomsGruppeGenerator ejendomsGruppeCO = new EjendomsGruppeGenerator(3);
 
             felter[0] = new StartFelt(0);
 
@@ -87,9 +85,6 @@ public class RandomGenerator {
 
             placering = getRandomLedigFeltPlads(felter);
             felter[placering] = new Faengsel("Faengsel", placering);
-
-            placering = getRandomLedigFeltPlads(felter);
-            felter[placering] = new TaxiCO(placering);
 
             placering = getRandomLedigFeltPlads(felter);
             felter[placering] = new GaaIFaengsel(placering);
@@ -115,13 +110,8 @@ public class RandomGenerator {
 
                         antalEjendomme++;
 
-                        // Jernbane
-                    } else if (feltType <= 7) {
-                        felter[i] = new JernbaneCO( navneGenerator.getJernbaneNavn(), (int) feltPris, i );
-                        antalJernbaner++;
-
                         // Proev lykken
-                    } else if (feltType == 8) {
+                    } else {
                         // TODO: Fix det her med chancekort - Malte
                         felter[i] = new ProevLykken( i );
                         antalChancefelter++;
@@ -141,14 +131,16 @@ public class RandomGenerator {
         return felter;
     }
 
-    public static ArrayList<ChanceAktionDTO> genererChancekort(int antalChancekort ){
+
+
+    public static ArrayList<Chancekort> genererChancekort(int antalChancekort ){
 
         Random random = new Random();
-        ArrayList<ChanceAktionDTO> alleChancekort = new ArrayList<ChanceAktionDTO>();
+        ArrayList<Chancekort> alleChancekort = new ArrayList<Chancekort>();
 
         for( int i = 0; i<antalChancekort; i++){
 
-            ChanceAktionDTO chancekort = null;
+            Chancekort chancekort = null;
             int kortType = random.nextInt(4);
 
             switch (kortType){
@@ -156,25 +148,25 @@ public class RandomGenerator {
                 //_______________________________________________
                 // Giver penge
                 case 0:
-                    chancekort = new GiverPengeCO();
+                    //chancekort = new GiverPengeCO();
                     break;
 
                 //_______________________________________________
                 // Tager penge fra dig
                 case 1:
-                    chancekort = new TagerPengeCO();
+                    //chancekort = new TagerPengeCO();
                     break;
 
                 //_______________________________________________
                 // Du må rykke som du ønsker
                 case 2:
-                    chancekort = new RykkerSpillerCO();
+                    //chancekort = new RykkerSpillerCO();
                     break;
 
                 //_______________________________________________
                 // Du kan slippe for fængsel
                 case 3:
-                    chancekort = new GratisUdAfFaengselCO();
+                    //chancekort = new GratisUdAfFaengsel();
                     break;
             }
             alleChancekort.add(chancekort);
