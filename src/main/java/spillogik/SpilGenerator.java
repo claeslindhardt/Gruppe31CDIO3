@@ -1,6 +1,6 @@
 package spillogik;
 
-import model.EjendomsGruppe;
+import model.Ejendomsgruppe;
 import model.chancekort.*;
 import model.Spil;
 import model.Spiller;
