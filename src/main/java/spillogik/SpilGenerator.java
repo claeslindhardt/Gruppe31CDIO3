@@ -9,6 +9,7 @@ import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SpilGenerator {
 
@@ -461,6 +462,16 @@ public class SpilGenerator {
 
         rykTilBestemtFelt = new RykTilBestemtFelt(0,"Ryk frem til start.");
         chanceKort.add(rykTilBestemtFelt);
+
+        // Blander kortene
+        Random random = new Random();
+
+        for( int i = 0; i < 1000; i++ ){
+            int kortIndeks = random.nextInt(chanceKort.size());
+            Chancekort udvalgtKort = chanceKort.get(kortIndeks);
+            chanceKort.remove( udvalgtKort );
+            chanceKort.add( udvalgtKort );
+        }
 
         return chanceKort;
     }
