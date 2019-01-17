@@ -5,6 +5,7 @@ import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.NavneGenerator;
 import ModelEnteties.Spil;
 import ModelEnteties.chancekort.Chancekort;
+import ModelEnteties.chancekort.GratisUdAfFaengsel;
 import ModelEnteties.felter.*;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
@@ -89,9 +90,6 @@ public class RandomGenerator {
             felter[placering] = new Faengsel("Faengsel", placering);
 
             placering = getRandomLedigFeltPlads(felter);
-            felter[placering] = new TaxiCO(placering);
-
-            placering = getRandomLedigFeltPlads(felter);
             felter[placering] = new GaaIFaengsel(placering);
 
             // Genererer random felter
@@ -115,13 +113,8 @@ public class RandomGenerator {
 
                         antalEjendomme++;
 
-                        // Jernbane
-                    } else if (feltType <= 7) {
-                        felter[i] = new JernbaneCO( navneGenerator.getJernbaneNavn(), (int) feltPris, i );
-                        antalJernbaner++;
-
                         // Proev lykken
-                    } else if (feltType == 8) {
+                    } else {
                         // TODO: Fix det her med chancekort - Malte
                         felter[i] = new ProevLykken( i );
                         antalChancefelter++;
@@ -141,6 +134,8 @@ public class RandomGenerator {
         return felter;
     }
 
+
+
     public static ArrayList<Chancekort> genererChancekort(int antalChancekort ){
 
         Random random = new Random();
@@ -156,25 +151,25 @@ public class RandomGenerator {
                 //_______________________________________________
                 // Giver penge
                 case 0:
-                    chancekort = new GiverPengeCO();
+                    //chancekort = new GiverPengeCO();
                     break;
 
                 //_______________________________________________
                 // Tager penge fra dig
                 case 1:
-                    chancekort = new TagerPengeCO();
+                    //chancekort = new TagerPengeCO();
                     break;
 
                 //_______________________________________________
                 // Du må rykke som du ønsker
                 case 2:
-                    chancekort = new RykkerSpillerCO();
+                    //chancekort = new RykkerSpillerCO();
                     break;
 
                 //_______________________________________________
                 // Du kan slippe for fængsel
                 case 3:
-                    chancekort = new GratisUdAfFaengselCO();
+                    //chancekort = new GratisUdAfFaengsel();
                     break;
             }
             alleChancekort.add(chancekort);

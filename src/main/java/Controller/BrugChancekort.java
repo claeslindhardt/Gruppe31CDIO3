@@ -1,12 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.chancekort.Chancekort;
+import ModelEnteties.chancekort.*;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import ModelEnteties.chancekort.JustererPenge;
-import ModelEnteties.chancekort.RykTilBestemtFelt;
-import ModelEnteties.chancekort.SmidIFaengsel;
 import ModelEnteties.felter.Faengsel;
 import ModelEnteties.felter.Felt;
 
@@ -15,17 +12,9 @@ public class BrugChancekort {
 
     public void brugChancekort(Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui, SpilController spilController ){
 
-        if( chancekort instanceof RykkerSpillerCO ){
-            rykkerSpiller( spiller, ui, spilController );
 
-        }else if( chancekort instanceof GratisUdAfFaengselCO){
+        if( chancekort instanceof GratisUdAfFaengsel){
             gratisUdAfFaengsel( spiller, ui );
-
-        }else if( chancekort instanceof GiverPengeCO ){
-            giverPenge( chancekort, spiller, ui );
-
-        }else if( chancekort instanceof TagerPengeCO ) {
-            tagerPenge(chancekort, spiller, ui);
 
         }else if( chancekort instanceof JustererPenge) {
             justererPenge((JustererPenge) chancekort, spiller, ui);
@@ -35,6 +24,9 @@ public class BrugChancekort {
 
         }else if( chancekort instanceof SmidIFaengsel ){
             smidIFaengsel( spiller , spil, ui );
+
+        }else if( chancekort instanceof RykAntalFelter ){
+            rykAntalFelter( chancekort, spiller, spil, ui);
 
         }
 
@@ -46,21 +38,10 @@ public class BrugChancekort {
 
     }
 
-
-    public void giverPenge(Chancekort chancekort, Spiller spiller, UserInterfaceKontrakt ui ){
-        spiller.addPenge( chancekort.getPengeVerdi() );
-        ui.updateSpillere( spiller );
-    }
-
     public void gratisUdAfFaengsel( Spiller spiller, UserInterfaceKontrakt ui ){
         spiller.setFaengselsStraf(false);
         spiller.setHarSlaaetForTuren(false);
         ui.brugtUdAfFaengsel();
-    }
-
-    public void tagerPenge(Chancekort chancekort, Spiller spiller, UserInterfaceKontrakt ui){
-        spiller.addPenge( -chancekort.getPengeVerdi() );
-        ui.updateSpillere( spiller );
     }
 
 
@@ -89,5 +70,9 @@ public class BrugChancekort {
         ui.duErLandetPå( faengsel, spiller);
     }
 
+
+    public void rykAntalFelter( Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui){
+
+    }
 
 }

@@ -49,8 +49,7 @@ public class Handlinger {
                 spil.turMenu( );
             } else {
                 Chancekort valgtChancekort = chancekort.get(valg);
-                Handel handel = new Handel();
-                valgtChancekort.BetingetAktion(handel, spil, userInterfaceKontrakt);
+                spil.getBrugChancekort().brugChancekort( valgtChancekort, spiller, spil.getSpil(), userInterfaceKontrakt, spil );
                 chancekort.remove(valgtChancekort);
                 spil.getSpil().addChancekort(valgtChancekort);
             }

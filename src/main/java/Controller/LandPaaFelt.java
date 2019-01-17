@@ -86,10 +86,10 @@ public class LandPaaFelt {
 
         ui.visChanceKort( trukketKort );
 
-        if( trukketKort instanceof GratisUdAfFaengselCO || trukketKort instanceof RykkerSpillerCO ){
-            spiller.addChancekort( trukketKort );
-        }else{
+        if( trukketKort.erDirekteAktion() ){
             spilController.getBrugChancekort().brugChancekort( trukketKort, spiller, spilController.getSpil(),  ui,  spilController );
+        }else{
+            spiller.addChancekort( trukketKort );
         }
 
     }

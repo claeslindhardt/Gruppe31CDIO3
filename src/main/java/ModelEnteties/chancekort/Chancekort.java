@@ -35,7 +35,7 @@ public abstract class Chancekort {
     //|--------- Variabler:----------------------
     private String beskrivelse;
     private int pengeVerdi;
-    private String kortBeskrivelse;
+    private String kortBeskrivelse = "";
 
     private boolean direkteAktion;
 
@@ -47,17 +47,15 @@ public abstract class Chancekort {
             " Du blev straffet for finans fusk", " Der kom en elefant og trådte på dit hus",
             " Din mor besluttede hun ville være russisk operasanger"
     };
-    //Singleton Variabler;
-    private RandomSingleton randomTal = RandomSingleton.getInstance();
 
     //|--------- Getters og Setters:-------------
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public boolean erDirekteAktion(){
+        return direkteAktion;
     }
 
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
+    public String getBeskrivelse() {
+        return beskrivelse;
     }
 
     public void setKortBeskrivelse(String kortBeskrivelse){
@@ -66,23 +64,4 @@ public abstract class Chancekort {
 
     public String getKortBeskrivelse(){return kortBeskrivelse;}
 
-    public int getPengeVerdi() {
-        return pengeVerdi;
-    }
-
-    public void setPengeVerdi(int pengeVerdi) {
-        this.pengeVerdi = pengeVerdi;
-    }
-
-    public String[] getPositiveGrunde() {
-        return positiveGrunde;
-    }
-
-    public String[] getNegativeGrunde() {
-        return negativeGrunde;
-    }
-
-    //|----------- Metoder:----------------------
-    public void DirketeAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
-    public void BetingetAktion(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){ }
 }
