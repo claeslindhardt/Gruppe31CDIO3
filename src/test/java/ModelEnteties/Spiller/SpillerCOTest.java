@@ -6,7 +6,7 @@ import Controller.SpilController;
 import BoundaryView.UserInterfaceKontrakt;
 import Controller.Spiller;
 import ModelEnteties.felter.Ejendom;
-import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.EjendomsGruppe;
 import Controller.JernbaneCO;
 import gui_main.GUI;
 import org.junit.jupiter.api.Test;
@@ -196,7 +196,7 @@ class SpillerTest {
         UserInterfaceKontrakt userInterface = new TUI();
 
         Spiller spiller = new Spiller("Test", 0, 0);
-        EjendomsGruppeDTO ejendomsGruppe = new EjendomsGruppeDTO(Color.BLUE, 3);
+        EjendomsGruppe ejendomsGruppe = new EjendomsGruppe(Color.BLUE, 3);
 
 
         Ejendom ejendom1 = new Ejendom("Ejendom1", 0, 0, 0);

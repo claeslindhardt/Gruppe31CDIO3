@@ -181,7 +181,7 @@ public class Spiller {
      * @param ejendomsGruppe Hvilken ejendomsgruppe man vil undersoege.
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
-    public boolean ejerEjendomsGruppe( EjendomsGruppeDTO ejendomsGruppe ){
+    public boolean ejerEjendomsGruppe( EjendomsGruppe ejendomsGruppe ){
         for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this ){
                 return false;

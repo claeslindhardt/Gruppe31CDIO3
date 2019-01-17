@@ -4,7 +4,7 @@ import BoundaryView.GUI.GUIinterface;
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
-import spillogik.RandomGenerator;
+import TingTilRandomSpil.RandomGenerator;
 import spillogik.SpilGenerator;
 
 import java.util.Random;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *  Dette er klassen der holder styr på grupper af ejendomme. En Ejendomsgruppe er et objekt, som identificeres
  *  ved sin farve.
  */
-public class EjendomsGruppeDTO {
+public class EjendomsGruppe {
 
     private Color   farve;
     private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
@@ -22,7 +22,7 @@ public class EjendomsGruppeDTO {
      * @param farve Farven som skal kendetegne gruppen (givet kun en visuel sammenligning af gruppen,
      *              og har ingen betydning for hvordan Ejendommene vurderes om de er i samme gruppe.
      */
-    public EjendomsGruppeDTO(Color farve) {
+    public EjendomsGruppe(Color farve) {
         this.farve = farve;
     }
 

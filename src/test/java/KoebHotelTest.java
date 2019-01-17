@@ -3,7 +3,6 @@ import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Felt;
-import spillogik.RandomGenerator;
 import spillogik.SpilGenerator;
 
 public class KoebHotelTest {

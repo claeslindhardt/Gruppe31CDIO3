@@ -1,6 +1,6 @@
 package ModelEnteties.felter;
 
-import ModelEnteties.EjendomsGruppeDTO;
+import ModelEnteties.EjendomsGruppe;
 import spillogik.EjendomsLogik;
 
 
@@ -15,7 +15,7 @@ public class Ejendom extends EjeligtFelt {
     private double  husPris = 50;
     private double  hotelPris = 100;
     private int     leje = 0;
-    private EjendomsGruppeDTO gruppe;
+    private EjendomsGruppe gruppe;
     private int lejeHotel = 0;
     private int lejeStart = 0;
     private int[] lejeHus = {0,0,0,0};
@@ -52,11 +52,11 @@ public class Ejendom extends EjeligtFelt {
         this.husPris = husPris;
     }
 
-    public EjendomsGruppeDTO getGruppe() {
+    public EjendomsGruppe getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(EjendomsGruppeDTO gruppe) {
+    public void setGruppe(EjendomsGruppe gruppe) {
         this.gruppe = gruppe;
     }
 
