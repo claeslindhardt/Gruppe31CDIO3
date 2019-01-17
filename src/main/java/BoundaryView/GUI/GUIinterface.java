@@ -257,8 +257,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting", "Sælg hus på ejendommen","Sælg Hotel på ejendommen");
+        String valg = gui.getUserButtonPressed("Det er "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+                "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hus");
 
         return input.TurMenu(valg);
     }
