@@ -1,6 +1,6 @@
 package ModelEnteties.braet.controllerKlasser;
 
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +27,7 @@ class EjendomCOTest {
         int forventetLeje;
         int faktiskLeje;
         int[] forventetLejeMedHus = {150, 200, 250, 300};
-        EjendomCO ejendom = new EjendomCO("ejendom", 100, basisLeje, 0);
+        Ejendom ejendom = new Ejendom("ejendom", 100, basisLeje, 0);
 
         // Basis
         forventetLeje = basisLeje;

@@ -1,6 +1,6 @@
 package BoundaryView.TUI;
 
-import Controller.ChanceFeltCO;
+import ModelEnteties.felter.ProevLykken;
 import ModelEnteties.Spiller;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.singletoner.ScannerSingleton;
@@ -241,7 +241,7 @@ public class IndputHaanteringTUI {
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }
 
-    public void chanceFeltsInfo(ChanceFeltCO felt){
+    public void chanceFeltsInfo(ProevLykken felt){
         System.out.println("_________________________________________________________________");
         System.out.println("|--|Dette indput kan ikke hånteres endnu");
     }

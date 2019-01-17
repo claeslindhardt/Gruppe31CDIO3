@@ -2,11 +2,11 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.felter.EjeligtFeltDTO;
+import ModelEnteties.felter.EjeligtFelt;
 
 import java.util.ArrayList;
 
-public class JernbaneCO extends EjeligtFeltDTO {
+public class JernbaneCO extends EjeligtFelt {
 
     //|----------- Metoder:------------------
 
@@ -68,13 +68,13 @@ public class JernbaneCO extends EjeligtFeltDTO {
             int kobsBeslutning = userInterfaceKontrakt.jernBaneTilbud();
             switch (kobsBeslutning) {
                 case 1:
-                    spil.getKoebFelt().koebJernbane(this, spillerMedTur, userInterfaceKontrakt,spil);
+                    spil.getKoebFelt().koebJernbane(this, spillerMedTur, userInterfaceKontrakt);
                     break;
                 case 2:
                     userInterfaceKontrakt.forsetTur();
                     break;
                 default:
-                    userInterfaceKontrakt.ikkeMuligt();
+
             }
 
         }else if(this.getEjer() != spillerMedTur ){
@@ -88,6 +88,7 @@ public class JernbaneCO extends EjeligtFeltDTO {
 
     //|--------- Constructor:-----------------
     public JernbaneCO(String whatName, int whatPrice, int placering){
+        super(whatName, whatPrice, placering);
         setPlacering(placering);
         setPris(whatPrice);
         setNavn(whatName);

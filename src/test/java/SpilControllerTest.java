@@ -3,9 +3,6 @@ import ModelEnteties.Spil;
 import ModelEnteties.Spiller;
 import ModelEnteties.felter.*;
 import spillogik.RandomGenerator;
-import spillogik.SpilGenerator;
-
-import java.util.Random;
 
 
 class SpilControllerTest {
@@ -17,11 +14,11 @@ class SpilControllerTest {
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
 
-        for( FeltDTO felt : spil.getFelter() ){
-            if( felt instanceof EjendomCO ){
+        for( Felt felt : spil.getFelter() ){
+            if( felt instanceof Ejendom){
                 System.out.println("fundet   felt");
-                ((EjendomCO)  felt).setEjer(spil.getSpiller(0));
-                spil.getSpiller(0).tilføjEjendom( (EjendomCO) felt );
+                ((Ejendom)  felt).setEjer(spil.getSpiller(0));
+                spil.getSpiller(0).tilføjEjendom( (Ejendom) felt );
             }
         }
 
@@ -33,13 +30,11 @@ class SpilControllerTest {
 
 
 
-        Rederi ØK = new Rederi("Ø.K.",20,7);
-        ØK.setLeje(25);
+        Rederi ØK = new Rederi("Ø.K.",20,7,7);
         spiller.addRederi(ØK);
         ØK.setEjer(spiller);
 
-        Rederi DFDS = new Rederi("D.F.D.S.",20,8);
-        DFDS.setLeje(25);
+        Rederi DFDS = new Rederi("D.F.D.S.",20,8,8);
         spiller.addRederi(DFDS);
         DFDS.setEjer(spiller);
 

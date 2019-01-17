@@ -1,9 +1,9 @@
 package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
-import ModelEnteties.felter.AktionsFelterDTO;
+import ModelEnteties.felter.Felt;
 
-public class TaxiCO extends AktionsFelterDTO {
+public class TaxiCO extends Felt {
     //|----------- Metoder:------------------
 
     /**
@@ -13,7 +13,6 @@ public class TaxiCO extends AktionsFelterDTO {
      */
     public void aktionPaaFelt(Handel handel, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt){
         spil.getHandlinger().tagTaxi( spil.getSpil().getSpillerMedTur(), spil, userInterfaceKontrakt );
-
     }
 
     /**
@@ -26,9 +25,7 @@ public class TaxiCO extends AktionsFelterDTO {
     }
     //|--------- Constructor:-----------------
     public TaxiCO(int placering){
-        setFeltType("TaxiCO");
-        setNavn("TaxiCO FeltDTO");
-        setPlacering(placering);
+        super( "Taxi", placering );
     }
 
 }

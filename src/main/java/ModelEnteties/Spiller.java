@@ -1,7 +1,7 @@
 package ModelEnteties;
 
 import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import Controller.JernbaneCO;
 import ModelEnteties.felter.Rederi;
 
@@ -21,7 +21,7 @@ public class Spiller {
     private int id;
     private String navn = "?";
     // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
-    ArrayList<EjendomCO> spillerEjendomme = new ArrayList<EjendomCO>();
+    ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
     ArrayList<JernbaneCO> spillerJernbaner = new ArrayList<JernbaneCO>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
@@ -53,11 +53,11 @@ public class Spiller {
         this.faengselsStraf = faengselsStraf;
     }
 
-    public ArrayList<EjendomCO> getSpillerEjendomme() {
+    public ArrayList<Ejendom> getSpillerEjendomme() {
         return spillerEjendomme;
     }
 
-    public void setSpillerEjendomme(ArrayList<EjendomCO> spillerEjendomme) {
+    public void setSpillerEjendomme(ArrayList<Ejendom> spillerEjendomme) {
         this.spillerEjendomme = spillerEjendomme;
     }
 
@@ -73,12 +73,12 @@ public class Spiller {
     /**
      * @author Malte
      * Henter liste over spillerens ejendomme.
-     * @return Listen over spillerens ejendomme som en EjendomCO array. Er tom, hvis der ikke er nogen i listen.
+     * @return Listen over spillerens ejendomme som en Ejendom array. Er tom, hvis der ikke er nogen i listen.
      */
-    public EjendomCO[] getEjendomme() {
+    public Ejendom[] getEjendomme() {
         if(spillerEjendomme != null){
 
-            EjendomCO[] ejendomme = new EjendomCO[spillerEjendomme.size()];
+            Ejendom[] ejendomme = new Ejendom[spillerEjendomme.size()];
 
             for( int i = 0; i < ejendomme.length; i++){
                 ejendomme[i] = spillerEjendomme.get(i);
@@ -174,7 +174,7 @@ public class Spiller {
      *
      * @param ejendom den ejendom der skal tilføjes
      */
-    public void tilføjEjendom(EjendomCO ejendom) {
+    public void tilføjEjendom(Ejendom ejendom) {
         spillerEjendomme.add(ejendom);
     }
 
@@ -186,7 +186,7 @@ public class Spiller {
      * @return true: spilleren ejer alle i gruppen, false: spillere ejer ikke alle i gruppen
      */
     public boolean ejerEjendomsGruppe( EjendomsGruppeDTO ejendomsGruppe ){
-        for( EjendomCO ejendom : ejendomsGruppe.getEjendomme()){
+        for( Ejendom ejendom : ejendomsGruppe.getEjendomme()){
             if( ejendom.getEjer() != this ){
                 return false;
             }
@@ -202,7 +202,7 @@ public class Spiller {
      * @param ejendom Ejendommen man oensker at undersoege.
      * @return True: spilleren ejer den, False: spilleren ejer den ikke.
      */
-    public boolean ejerEjendom(EjendomCO ejendom){
+    public boolean ejerEjendom(Ejendom ejendom){
         return ejendom.getEjer() == this;
     }
 

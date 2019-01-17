@@ -1,7 +1,7 @@
 package Controller;
 
 
-import ModelEnteties.felter.EjendomCO;
+import ModelEnteties.felter.Ejendom;
 import ModelEnteties.EjendomsGruppeDTO;
 
 import java.awt.*;
@@ -56,7 +56,7 @@ public class EjendomsGruppeCO {
      * @param ejendom Hvilken ejendom man gerne vil tilfoeje til en gruppe.
      * @return Ejendommen som gruppen er blevet tilfoejet til.
      */
-    public EjendomsGruppeDTO tilfoejTilGruppe(EjendomCO ejendom){
+    public EjendomsGruppeDTO tilfoejTilGruppe(Ejendom ejendom){
         // Undersøger om den 'klarGruppe' faktisk er klar, eller om der skal oprettes en ny.
         if( klarGruppe == null || klarGruppe.erFuld() ){
             klarGruppe = opretGruppe();

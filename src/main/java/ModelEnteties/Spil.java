@@ -1,8 +1,8 @@
 package ModelEnteties;
 
 import BoundaryView.UserInterfaceKontrakt;
-import Controller.FaengselCO;
-import ModelEnteties.felter.FeltDTO;
+import ModelEnteties.felter.Faengsel;
+import ModelEnteties.felter.Felt;
 import ModelEnteties.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Spil {
     private RafleBaeger rafleBaeger;
     private boolean vinderFindes;
 
-    private FeltDTO[] felter;
+    private Felt[] felter;
 
     private ArrayList<ChanceAktionDTO> chanceKort;
 
@@ -83,11 +83,11 @@ public class Spil {
     }
 
 
-    public FeltDTO[] getFelter() {
+    public Felt[] getFelter() {
         return felter;
     }
 
-    public void setFelter(FeltDTO[] felter) {
+    public void setFelter(Felt[] felter) {
         this.felter = felter;
     }
 
@@ -131,11 +131,11 @@ public class Spil {
      * @author Malte
      * @return Faengselfeltet på gui'en.
      */
-    public FaengselCO getFaengsel(){
-        for( FeltDTO felt : felter ){
+    public Faengsel getFaengsel(){
+        for( Felt felt : felter ){
 
-            if(  felt instanceof FaengselCO ){
-                return (FaengselCO) felt;
+            if(  felt instanceof Faengsel){
+                return (Faengsel) felt;
             }
         }
         return null;
