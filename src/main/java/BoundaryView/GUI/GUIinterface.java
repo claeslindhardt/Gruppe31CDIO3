@@ -176,12 +176,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                         + "Leje fra hus 4: " + ((Ejendom) felt).getLejeHus(4) + " / "
                         + "Leje fra hotel: " + ((Ejendom) felt).getLejeHotel());
 
-            }else if(felt.getFeltType().equals("Bryggeri")) {
-                gui_felt.setDescription("Grundpris: "+((Bryggeri) felt).getPris() +" "+ ((Bryggeri) felt).getPris() + " / "
-                        + "Huspris: ");
-
             }
-
 
             else{
                 if (felt.getFeltType().equals("JernbaneCO")){
@@ -198,6 +193,12 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 }
                 else if (felt.getFeltType().equals("Gå i fængsel")){
                     gui_felt.setDescription("Du har brudt loven, i fængsel med dig!");
+                }
+                else if (felt.getFeltType().equals("Bryggeri")){
+                    gui_felt.setDescription("Grundpris: " + ((Bryggeri) felt).getPris() + " / " + "Leje: " + ((Bryggeri) felt).getLeje());
+                }
+                else if (felt.getFeltType().equals("Rederi")){
+                    gui_felt.setDescription("Grundpris: " + (((Rederi) felt).getPris()) + " / " + "Leje: " + ((Rederi) felt).getLeje());
                 }
 
             }
