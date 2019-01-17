@@ -147,9 +147,15 @@ public class Ejendom extends EjeligtFelt {
         setAntalHuse(getAntalHuse()+antalHuse);
     }
 
+    public void saelgHus(int antalHus){
+        setAntalHuse(getAntalHuse()-antalHus);
+    }
+
     public void bygHotel(boolean harHotel){
         setHarHotel(harHotel);
     }
+
+    public void saelgHotel(boolean harHotel){setHarHotel(harHotel);}
 
     //|--------- Constructor:-----------------
     public Ejendom(String navn, int pris, int startLeje, int placering){

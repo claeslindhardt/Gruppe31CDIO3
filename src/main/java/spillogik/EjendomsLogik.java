@@ -2,6 +2,7 @@ package spillogik;
 
 import ModelEnteties.EjendomsGruppeDTO;
 import ModelEnteties.Spiller;
+import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.EjeligtFelt;
 import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
@@ -29,6 +30,27 @@ public class EjendomsLogik {
                 if ( ejendom.harHotel()){
                     return true;
                 }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @author Andreas
+     *
+     * Anvendes for at man kan se, hvilke ejendommen man kan sælge huse på.
+     * @param ejendomsUdgangspunkt
+     * @return
+     */
+    public static boolean fordelingAfHuseVedSalg( Ejendom ejendomsUdgangspunkt ){
+
+        for( int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++ ){
+
+            Ejendom ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
+
+            if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()||ejendom.harHotel()){
+
                 return false;
             }
         }
@@ -102,6 +124,24 @@ public class EjendomsLogik {
     }
 
 
+    public static boolean kanSaelgeHus( Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+
+        return      spiller.ejerEjendom( ejendom )
+                &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
+                &&  fordelingAfHuseVedSalg(ejendom)
+                &&  ejendom.getAntalHuse() > 0
+                &&  !ejendom.harHotel();
+
+    }
+
+    public static double beregnSalgsPrisHus(Ejendom ejendom, int antalHuse){
+
+        if(ejendom.harHotel()){
+            return ((ejendom.getHotelPris())/2);
+        }else {
+            return ((ejendom.getHusPris() * antalHuse) / 2);
+        }
+    }
     /**
      * Henter information for, hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
      * og om man ejer alle i Ejendomsgruppen.
@@ -130,6 +170,14 @@ public class EjendomsLogik {
 
 
         }
+
+    /**
+     * @auther Andreas
+     * Beregner den leje som skal betales, når en spiller lander på en andens bryggeri.
+      * @param terningeKast
+     * @param ejer
+     * @return
+     */
     public static int beregnLejeBryggeri( int terningeKast, Spiller ejer ){
         int leje;
 
@@ -142,6 +190,12 @@ public class EjendomsLogik {
         return leje;
     }
 
+    /**
+     * @auther filip
+     * @param rederi
+     * @param spiller
+     * @return
+     */
     public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
         int leje = rederi.getLeje();
 

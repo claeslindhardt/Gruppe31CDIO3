@@ -77,6 +77,7 @@ public interface UserInterfaceKontrakt {
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
     int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
+    int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme);
     String spillerNavne();
     void rejseBekraeftelse(String jernbane);
     void updateSpillere(Spiller spiller);
@@ -84,6 +85,8 @@ public interface UserInterfaceKontrakt {
     void startSpil(Spil spil);
     void byggeHotel(Ejendom ejendom);
     void byggetHus(Ejendom ejendom);
+    void saelgHus(Ejendom ejendom);
+    void saelgHotel(Ejendom ejendom);
     void tillykkeMedHotel();
     int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme);
     void kanIkkeKøbeHotel();
