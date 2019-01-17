@@ -30,7 +30,8 @@ public class Handlinger {
     }
 
     /**
-     * Indsæt beskrivelse her
+     * @auther Andreas
+     * Vælger og eksekverer et chancekort fra en liste der bliver vist i UI.
      * @param userInterfaceKontrakt
      */
     public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
@@ -41,7 +42,7 @@ public class Handlinger {
             //Her printes de forskellige muligher:
             userInterfaceKontrakt.chanceKortHar();
 
-            //Her er controlleren der lader en reagere på mulighederne
+
             int valg = userInterfaceKontrakt.chanceKortNr( spiller );
 
             if (valg < chancekort.size()) {
