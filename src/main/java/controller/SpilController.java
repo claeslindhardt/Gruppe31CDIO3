@@ -3,7 +3,6 @@ package controller;
 import view.GUI.GUIinterface;
 import view.UserInterfaceKontrakt;
 import model.Spil;
-import model.Spiller;
 import spillogik.SpilGenerator;
 
 import java.util.Random;
@@ -22,19 +21,11 @@ public class SpilController{
     private BrugChancekort brugChancekort = new BrugChancekort();
 
 
-
-
     public LandPaaFelt getLandPaaFelt() {
         return landPaaFelt;
     }
 
     public BrugChancekort getBrugChancekort(){ return brugChancekort; }
-
-
-
-
-
-
 
     public Handel getHandel() {
         return handel;
@@ -61,45 +52,13 @@ public class SpilController{
     public Handlinger getHandlinger(){ return handlinger;  }
 
 
-    /** Laver en ny SpilController med en vilkårlig UI */
-    public SpilController(UserInterfaceKontrakt ui){
-        this.ui = ui;
-    }
-
     /** Laver en ny SpilController med en GUI */
     public SpilController(){
         ui = new GUIinterface();
+        spil = new Spil();
     }
 
 
-
-    //_____________________________________
-    // Diverse:
-
-    /**
-     * @author Andreas
-     * Metoden gennemgår listen af spillere og undersøger om en spiller i listen har det samme navn.
-     * @param navn
-     * @return boolean
-     */
-    public boolean kontrollerNavn(String navn){
-
-        for(int i = 0; i < spil.getSpillere().length; i++){
-            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void printSpilleresInfo() {
-        /*for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
-            spil.getSpiller(i).printSpillerStats(ui);
-        }*/
-    }
 
     /**
      * @author Filip
@@ -154,80 +113,6 @@ public class SpilController{
         }
 
     }
-
-    /**
-     * Indsæt beskrivelse her
-     * @param terningsKrus
-     */
-    /*public void kastTerninger(RafleBaeger terningsKrus) {
-        if (!spil.getSpillerMedTur().isHarSlaaetForTuren()) {
-
-            terningsKrus.slaa();
-
-            ui.spillerRykkerGrundetTerningslag(terningsKrus, spil.getSpillerTur());
-
-            if (terningsKrus.erEns()) {
-                ui.ensTerninger();
-                spil.getSpillerMedTur().setHarSlaaetForTuren(false);
-            } else {
-                spil.getSpillerMedTur().setHarSlaaetForTuren(true);
-            }
-
-            rykSpillerAntalFelter( spil.getSpillerMedTur(), spil.getRaflebaeger().getTotalVaerdi());
-
-        } else {
-            ui.harSlaaetMedTerningfor();
-        }
-    }*/
-
-
-    /**
-     * @author Malte
-     * Rykker spilleren et bestemt antal felter fremad. Den beregner hvor mange
-     * gange over start man bevæger sig, og udløser metoden {@link #rykSpillerTilFelt}.
-     *
-     * @param spiller       Spilleren der skal rykkes
-     * @param felterAtRykke Hvor mange felter fremad spilleren rykker
-     */
-    /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
-
-        Felt[] braet = spil.getBraet().getBretArray();
-
-        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
-
-        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
-
-        rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
-    }*/
-
-
-    /**
-     * @author Malte
-     * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
-     * ift. feltet, samt UI-metoder ifm. at flytte felt.
-     * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
-     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
-     * 'gangeOverStart'
-     *
-     * @param spiller Spiller der skal rykkes
-     * @param felt Feltet spilleren skal rykke til
-     * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
-     */
-    /*public void rykSpillerTilFelt( SpillerCO spiller, Felt felt, int gangeOverStart){
-
-        if( gangeOverStart > 0 ) {
-            spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
-            ui.passeringAfStart(gangeOverStart);
-            ui.updateSpillere(spiller);
-
-        }
-
-        spiller.setSpillerPosition(felt.getPlacering());
-
-        ui.duErLandetPå(felt, spiller);
-        Handel handel = new Handel();
-        felt.aktionPaaFelt(handel, this, ui);
-    }*/
 
 
     //_____________________________________
@@ -348,83 +233,15 @@ public class SpilController{
     }
 
 
-    public void start(){
-
-        int input = ui.velkomstMenu(1,3);
-
-        switch( input ){
-
-            case 1:
-                int antalSpillere = ui.instilingsSporgsmaall(2, 6);
-                spil = SpilGenerator.genererSpil(antalSpillere);
-                break;
-
-            case 2:
-                spil = spilIndstillinger();
-                break;
-        }
-
-        indtastSpillerNavne();
-
-        koerSpil();
-    }
-
-
-    /**
-     * Efterspørger brugerdefineret indstillinger til et spil,
-     * og generer derefter spillet.
-     * @author Malte
-     * @return Det generet spil med brugerdefineret indstillinger
-     */
-    private Spil spilIndstillinger(){
-
-        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
-        int antalSpillere = ui.instilingsSporgsmaall(2,11);
-        // TODO: Implementer disse i UI v
-        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
-        double startPenge = 2000; // ui.startpenge
-
-        return null; //.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
-
-    }
-
-
-    /**
-     * Beder UI om at efterspørge spillernavne, på spillerne i det nuvaerende
-     * spil.
-     * Det er ikke nødvendigt, at køre denne for at kunne køre spillet.
-     * @author Malte
-     */
-    private void indtastSpillerNavne() {
-
-        // Et for-each loop der kører i gennem alle spillere.
-        for( Spiller spiller : spil.getSpillere() ){
-
-            String navn = ui.spillerNavne();
-
-            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
-            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
-            boolean harNavn = kontrollerNavn(navn);
-
-            while(harNavn){
-                ui.spillerMaaIkkeEns();
-                navn =  ui.spillerNavne();
-                //Her undersøges det om en allerede genereret spiller har det samme navn.
-                if(!kontrollerNavn(navn)){
-                    harNavn = kontrollerNavn(navn);
-                }
-            }
-            spiller.setNavn(navn);
-
-        }
-    }
-
-
-    /**
-     * Kører det spil som SpilControlleren er blevet givet (spil variablen).
-     * @author Malte
-     */
     public void koerSpil(){
+
+        ui.aabenSpil( spil );
+
+        // Tjekker om spillerne er blevet lavet, ellers laves de
+        if( spil.getSpillere() == null ){
+            String[] navne = ui.opretSpillere( 2, 6);
+            spil.setSpillere( SpilGenerator.genererSpillere( navne) );
+        }
 
         ui.startSpil( spil );
 
@@ -444,6 +261,9 @@ public class SpilController{
 
 
         ui.spilletErSlut();
+
+
+
     }
 
 

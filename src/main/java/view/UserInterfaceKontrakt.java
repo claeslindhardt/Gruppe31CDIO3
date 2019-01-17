@@ -11,6 +11,13 @@ import java.util.ArrayList;
 
 public interface UserInterfaceKontrakt {
 
+
+    void aabenSpil( Spil spil );
+    String[] opretSpillere( int min, int max );
+    void startSpil();
+
+
+
     int TurMenu(int getSpillerTur, int minInput, int maxInput);
     int velkomstMenu(int minInput, int maxInput);
     int instilingsSporgsmaal0(int minInput, int maxInput);
@@ -72,5 +79,6 @@ public interface UserInterfaceKontrakt {
     void statsSkat( int skat );
     void landetPaaStart();
     void visChanceKort( Chancekort chancekort );
+
 
 }

@@ -17,6 +17,7 @@ public class Spil {
     private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
     private boolean vinderFindes;
+    private boolean spillereErOprettet = false;
 
     private Felt[] felter;
 

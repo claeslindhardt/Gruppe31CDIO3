@@ -91,6 +91,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
     }
 
+
+
     public void genererGUIBret( Spil spil ){
         Felt[] felter = spil.getFelter();
         Spiller[] spillere = spil.getSpillere();
@@ -257,8 +259,37 @@ public class GUIinterface implements UserInterfaceKontrakt {
     //Funktioner som Bruges af alle UserInterfaces:
     //_______________________________________________________________
 
+
+
+    public void aabenSpil( Spil spil ){
+
+    }
+
+    public String[] opretSpillere( int min, int max ){
+
+        int antalSpillere =
+
+
+        /* for(int i = 0; i < spil.getSpillere().length; i++){
+            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
+                return true;
+            }
+        }
+        return false;*/
+
+
+        return null;
+    }
+
+    public void startSpil(){}
+
+
     public String spillerNavne() {
         String spillernavn = hovedmenu.getUserString("Indtast et navn");
+
+
+
+
         return spillernavn;
     }
 
@@ -274,7 +305,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
         String valg = gui.getUserButtonPressed("Det er "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hus");
+                "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hotel");
 
         return input.TurMenu(valg);
     }
@@ -817,7 +848,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         genererGUIBret( spil );
 
         hovedmenu = null;
-
     }
 
     public int vaelgIndkomstSkat(){
