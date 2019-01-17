@@ -329,9 +329,14 @@ public class SpilGenerator {
         return felter;
     }
 
-
+    /**
+     * @author Jacob
+     *
+     * Denne metode laver alle de klassiske chancekort, og putter dem ind i en ArrayList.
+     *
+     * @return - ArrayList Chancekort.
+     */
     public static ArrayList<Chancekort> genererChancekort(){
-        // TODO Implementer fastsatte chancekort
 
         /*
         Disse Chancekort er IKKE blevet implementeret:
