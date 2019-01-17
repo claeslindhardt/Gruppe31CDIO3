@@ -2,7 +2,7 @@ package Controller;
 
 import BoundaryView.UserInterfaceKontrakt;
 import ModelEnteties.Spiller;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.felter.Bryggeri;
 import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
@@ -62,7 +62,7 @@ public class Handlinger {
      * @param userInterfaceKontrakt
      */
     public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
-        ArrayList<ChanceAktionDTO> chancekort = spiller.getChancekort();
+        ArrayList<Chancekort> chancekort = spiller.getChancekort();
 
         if ( chancekort.size() > 0 ) {
 
@@ -74,12 +74,11 @@ public class Handlinger {
 
             if (valg < chancekort.size()) {
 
-                ChanceAktionDTO valgtChancekort = chancekort.get(valg);
-                Handel handel = new Handel();
-                valgtChancekort.BetingetAktion(handel, spil, userInterfaceKontrakt);
+                Chancekort valgtChancekort = chancekort.get(valg);
+                spil.getBrugChancekort().brugChancekort( valgtChancekort, spiller, spil.getSpil(), userInterfaceKontrakt, spil );
                 chancekort.remove(valgtChancekort);
-                spil.getSpil().addChancekort(valgtChancekort);
-            }
+                spil.getSpil().addChancekort(valgtChancekort);}
+
         } else {
             userInterfaceKontrakt.ingenChanceKort();
         }

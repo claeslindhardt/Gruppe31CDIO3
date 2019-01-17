@@ -9,7 +9,7 @@ import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Rederi;
 import ModelEnteties.raflebaeger.RafleBaeger;
 import ModelEnteties.felter.Felt;
-import ModelEnteties.ChanceAktionDTO;
+import ModelEnteties.chancekort.Chancekort;
 import ModelEnteties.singletoner.ScannerSingleton;
 
 import java.util.ArrayList;
@@ -335,7 +335,7 @@ public class TUI implements UserInterfaceKontrakt {
 
     public void trækEtChancekort(){}
 
-    public void printChanceKortDirekte(ChanceAktionDTO di){
+    public void printChanceKortDirekte(Chancekort di){
         System.out.println(di.getBeskrivelse());
 
     }

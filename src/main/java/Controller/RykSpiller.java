@@ -82,7 +82,7 @@ public class RykSpiller {
         }
 
         spiller.setSpillerPosition(felt.getPlacering());
-        spilController.getLandPaaFelt().landPaaFelt( spilController, felt, spiller, ui);
+        spilController.getLandPaaFelt().landPaaFelt( felt,  spiller, spilController, ui);
     }
 
 

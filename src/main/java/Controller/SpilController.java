@@ -19,6 +19,8 @@ public class SpilController{
     private RykSpiller  rykSpiller  = new RykSpiller();
     private Handlinger  handlinger  = new Handlinger();
     private Handel      handel      = new Handel();
+    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+    private BrugChancekort brugChancekort = new BrugChancekort();
 
 
 
@@ -27,11 +29,9 @@ public class SpilController{
         return landPaaFelt;
     }
 
-    public void setLandPaaFelt(LandPaaFelt landPaaFelt) {
-        this.landPaaFelt = landPaaFelt;
-    }
+    public BrugChancekort getBrugChancekort(){ return brugChancekort; }
 
-    private LandPaaFelt landPaaFelt = new LandPaaFelt();
+
 
 
 
