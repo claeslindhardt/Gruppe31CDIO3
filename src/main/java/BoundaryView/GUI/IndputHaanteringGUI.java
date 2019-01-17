@@ -1,5 +1,7 @@
 package BoundaryView.GUI;
 
+import gui_main.GUI;
+
 /**
  * Indsæt beskrivelse her
  */
@@ -48,6 +50,18 @@ public class IndputHaanteringGUI {
             beslutning = 2;
         }
         return beslutning;
+    }
+
+
+    public int binaertValg( String besked, GUI gui ){
+        String valg = gui.getUserButtonPressed( besked,
+                "Ja", "Nej");
+
+        if( valg.equals("Ja") ){
+            return 0;
+        }else {
+            return 1;
+        }
     }
 
 }

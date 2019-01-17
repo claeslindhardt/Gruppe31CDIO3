@@ -573,13 +573,11 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void badErrorMessage(){
         gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
     }
-    public int ejendomsBud(){
-        String valg = gui.getUserSelection("|--|Dette er en ejendom, kunne du tænkte dig at købe den?",
-                "Ja", "Nej");
-        gui.showMessage(valg);
 
-        return input.binartValg(valg);
+    public int ejendomsBud(){
+        return input.binaertValg("Ingen ejer denne. Ønsker du at købe den?", gui);
     }
+
     public void spillerEjendele(Spiller spiller){
         gui.showMessage("Ejendomme: ");
         gui.showMessage("Jernbaner: ");
