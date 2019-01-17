@@ -679,9 +679,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void saelgHotel(Ejendom ejendom){
-        GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
-        husSkalPaa.setHotel(false);
-        husSkalPaa.setHouses(ejendom.getAntalHuse());
+        GUI_Street hotelSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
+        hotelSkalPaa.setHotel(false);
+        hotelSkalPaa.setHouses(ejendom.getAntalHuse());
     }
 
     public String skatteBetaling(){
