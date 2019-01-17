@@ -62,6 +62,8 @@ public interface UserInterfaceKontrakt {
     void tetPaaMonopol();
     void chanceFeltsInfo(ProevLykken felt);
     void gennemfoertKoeb(Ejendom ejendom, Spiller spiller);
+    void gennemfoertKoebRederi (Rederi rederi, Spiller spiller);
+    void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller);
     void ejendomsInfo(Ejendom ej);
     void betalRente();
     void duErLandetPå(Felt felt, Spiller spiller);
@@ -87,8 +89,6 @@ public interface UserInterfaceKontrakt {
     void kanIkkeKøbeHotel();
     void spillerMaaIkkeEns();
     void ikkeTaxiTilTaxi();
-    void ditRederi(Rederi rederi, Spiller spiller);
-    void ditBryggeri();
     void friParkering();
     String skatteBetaling();
     void skatteBesked(int valg);

@@ -458,10 +458,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Jernbanen er nu din!");
     }
 
-    public void ditBryggeri(){
-        gui.showMessage("Bryggeriet er nu dit!");
-    }
-
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
     }
@@ -563,6 +559,34 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\n| Pris: "+ej.getPris()+ " | Leje: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
                 " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.harHotel() +"|"+
                 "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" Ejer: "+ejer+"|");
+    }
+
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param rederi Rederier der kan købes
+     * @param spiller Spilleren der køber rederiet
+     */
+    public void gennemfoertKoebRederi (Rederi rederi, Spiller spiller){
+        gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
+
+        GUI_Shipping gui_rederi = (GUI_Shipping) gui.getFields()[rederi.getPlacering()];
+
+        gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
+    }
+
+    /**
+     * @author Filip
+     * Samme som med gennemfoertKoeb
+     * @param bryggeri Bryggerier der kan købes
+     * @param spiller Spilleren der køber bryggeriet
+     */
+    public void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller){
+        gui.showMessage("Du har koebt " + bryggeri.getNavn() + "!");
+
+        GUI_Brewery gui_bryggeri = (GUI_Brewery) gui.getFields()[bryggeri.getPlacering()];
+
+        gui_bryggeri.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
 
     public void betalRente(){
@@ -748,8 +772,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
-
-    public void ditRederi(Rederi rederi, Spiller spiller){gui.showMessage("Rederiet er nu dit.");}
 
     @Override
     public void startSpil(Spil spil) {
