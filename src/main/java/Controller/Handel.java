@@ -138,7 +138,16 @@ public class Handel {
         }
     }
 
-
+    /**
+     * @auther Andreas
+     * Metoder der sælger et hus på en ejendom.
+     * Metoden taler først sammen med en metoden opretEjendomskartotek, hvor der laves en ArrayList med alle de ejendomme der
+     * har et hus på sig.
+     * Så vises listen i UI.
+     * Og man vælger den ejendom, hvorfra der skal sælges et hus.
+     * @param spiller
+     * @param ui
+     */
     void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
 
         // Finder ejendomme med sælgbare huse på
@@ -158,7 +167,16 @@ public class Handel {
         }
     }
 
-
+    /**
+     * @auther Andreas
+     * Metoder der sælger et hotel på en ejendom.
+     * Metoden taler først sammen med en metoden opretHotlekartotek, hvor der laves en ArrayList med alle de ejendomme der
+     * har et hotel på sig.
+     * Så vises listen i UI.
+     * Og man vælger den ejendom, hvorfra der skal sælges et hus.
+     * @param spiller
+     * @param ui
+     */
     public void saelgHotelPaaEjendom( SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
 
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
