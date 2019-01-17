@@ -175,12 +175,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                         + "Leje fra hus 4: " + ((Ejendom) felt).getLejeHus(4) + " / "
                         + "Leje fra hotel: " + ((Ejendom) felt).getLejeHotel());
 
-            }else if(felt.getFeltType().equals("Bryggeri")) {
-                gui_felt.setDescription("Grundpris: "+((Bryggeri) felt).getPris() +" "+ ((Bryggeri) felt).getPris() + " / "
-                        + "Huspris: ");
-
             }
-
 
             else{
                 if (felt.getFeltType().equals("JernbaneCO")){
@@ -197,6 +192,28 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 }
                 else if (felt.getFeltType().equals("Gå i fængsel")){
                     gui_felt.setDescription("Du har brudt loven, i fængsel med dig!");
+                }
+                else if (felt.getFeltType().equals("Startfelt")){
+                    gui_felt.setDescription("Start");
+                }
+                else if (felt.getFeltType().equals("FriParkering")){
+                    gui_felt.setDescription("Her er der helle");
+                }
+                else if (felt.getFeltType().equals("Bryggeri")){
+                    gui_felt.setDescription("Leje hvis 1 bryggeri ejes: 4 gange terningernes værdi" + " "
+                             + "Leje hvis 2 bryggerier ejes: 10 gange terningernes værdi");
+                }
+                else if (felt.getFeltType().equals("Rederi")){
+                    gui_felt.setDescription("Grundleje: " + ((Rederi) felt).getLeje() + " / " +
+                             "Leje hvis 2 rederier ejes: " + ((Rederi) felt).getLeje() * 2 + " / " +
+                             "Leje hvis 3 rederier ejes: " + ((Rederi) felt).getLeje() * 2 * 2 + " / " +
+                             "Leje hvis 4 rederier ejes: " + ((Rederi) felt).getLeje() * 2 * 2 * 2);
+                }
+                else if (felt.getFeltType().equals("IndkomstSkat")){
+                    gui_felt.setDescription("Du skal betale 200 eller 10% af din formue");
+                }
+                else if (felt.getFeltType().equals("StatsSkat")){
+                    gui_felt.setDescription("Du skal betale 100 til almenvellet");
                 }
 
             }
@@ -256,8 +273,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public int TurMenu(int getSpillerTur, int minInput, int maxInput){
 
-        String valg = gui.getUserButtonPressed("Det er spiller "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
-                "Kast terninger", "Slut din tur","Se chancekort","Se hvad du ejer","Se spiller stats","Giv op", "Byg på ejendom", "Byg hotel","Handel med Ejede ting", "Sælg hus på ejendommen","Sælg Hotel på ejendommen");
+        String valg = gui.getUserButtonPressed("Det er "+ getSpillere().get(getSpillerTur-1).getName()+"'s tur.",
+                "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hus");
 
         return input.TurMenu(valg);
     }
