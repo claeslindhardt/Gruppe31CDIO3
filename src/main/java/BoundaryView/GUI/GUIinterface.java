@@ -458,10 +458,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Jernbanen er nu din!");
     }
 
-    public void ditBryggeri(){
-        gui.showMessage("Bryggeriet er nu dit!");
-    }
-
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
     }
@@ -571,6 +567,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street gui_rederi = (GUI_Street) gui.getFields()[rederi.getPlacering()];
 
         gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
+    }
+
+    public void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller){
+        gui.showMessage("Du har koebt " + bryggeri.getNavn() + "!");
+
+        GUI_Street gui_bryggeri = (GUI_Street) gui.getFields()[bryggeri.getPlacering()];
+
+        gui_bryggeri.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
 
     public void betalRente(){
