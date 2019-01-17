@@ -7,11 +7,27 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Faengsel;
 import ModelEnteties.felter.Felt;
 
-public class BrugChancekort {
+
+/**
+ * Controller-klassen, der sørger for at bruge chancekort,
+ * og lægge dem tilbage i bunken.
+ * Den kan kun tilgås via {@link #brugChancekort }
+ *
+ * @author Malte
+ */
+class BrugChancekort {
 
 
-    public void brugChancekort(Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui, SpilController spilController ){
-
+    /**
+     * Vurderer typen af chancekort og kalder den korrekte controller metode ift.
+     * kortet. Alle metoderne der kan kaldes befinder sig i klassen her.
+     * Derudover putter den også chancekortet tilbage i spillet.
+     * @author Malte
+     *
+     * @param chancekort    Chancekortet man bruger
+     * @param spiller       Spilleren der bruger chancekortet
+     */
+    void brugChancekort(Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui, SpilController spilController ){
 
         if( chancekort instanceof GratisUdAfFaengsel){
             gratisUdAfFaengsel( spiller, ui );
@@ -26,8 +42,7 @@ public class BrugChancekort {
             smidIFaengsel( spiller , spil, ui );
 
         }else if( chancekort instanceof RykAntalFelter ){
-            rykAntalFelter( chancekort, spiller, spil, ui);
-
+            rykAntalFelter( (RykAntalFelter) chancekort, spiller, spil, spilController, ui);
         }
 
         // Fjerner chancekortet fra spilleren, og lægger det i bunken.
@@ -35,32 +50,58 @@ public class BrugChancekort {
             spiller.fjernChancekort( chancekort );
         }
         spil.addChancekort( chancekort );
-
     }
 
-    public void gratisUdAfFaengsel( Spiller spiller, UserInterfaceKontrakt ui ){
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+
+    /**
+     * Forløbet i når man bruger et GratisUdAfFaengslet chancekort.
+     * @param spiller   Spilleren der bruger det
+     */
+    private void gratisUdAfFaengsel( Spiller spiller, UserInterfaceKontrakt ui ){
         spiller.setFaengselsStraf(false);
         spiller.setHarSlaaetForTuren(false);
         ui.brugtUdAfFaengsel();
     }
 
 
-    public void rykkerSpiller( Spiller spiller, UserInterfaceKontrakt ui, SpilController spilController ){
-        spilController.getHandlinger().tagTaxi( spiller, spilController, ui );
-        ui.chanceKortBrugt();
-    }
-
-    public void justererPenge( JustererPenge chancekort, Spiller spiller, UserInterfaceKontrakt ui ){
+    /**
+     * Forløbet i når man bruger et JustererPenge-chancekort.
+     * @param chancekort    Chancekortet der bruges
+     * @param spiller       Spilleren der bruget det
+     */
+    private void justererPenge( JustererPenge chancekort, Spiller spiller, UserInterfaceKontrakt ui ){
         spiller.addPenge( chancekort.getPengeVaerdi() );
         ui.updateSpillere( spiller );
     }
 
-    public void rykTilBestemtFelt( RykTilBestemtFelt chancekort, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i når man bruger et RykTilBestemtFelt-chancekort.
+     * @param chancekort    Chancekortet der bruges
+     * @param spiller       Spilleren der bruget det
+     */
+    private void rykTilBestemtFelt( RykTilBestemtFelt chancekort, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
         Felt felt = spilController.getSpil().getFelter()[ chancekort.getFeltNummer() ];
-        spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
+
+        int feltNr = chancekort.getFeltNummer();
+        int spillerPosition = spiller.getSpillerPosition();
+
+        if( feltNr < spillerPosition ){
+            spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
+        } else {
+            spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 0, ui, spilController );
+        }
     }
 
-    public void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
+
+    /**
+     * Forløbet i når man bruger SmidIFaengsel-kort
+     * @param spiller       Spilleren der bruget det
+     */
+    private void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
         Faengsel faengsel = spil.getFaengsel();
 
         spiller.setFaengselsStraf(true);
@@ -71,8 +112,12 @@ public class BrugChancekort {
     }
 
 
-    public void rykAntalFelter( Chancekort chancekort, Spiller spiller, Spil spil, UserInterfaceKontrakt ui){
-
+    /**
+     * Forløbet i at bruge et RykAntalFelter-chancekort
+     * @param chancekort    Chancekortet der bruges
+     * @param spiller       Spilleren der bruger det
+     */
+    private void rykAntalFelter( RykAntalFelter chancekort, Spiller spiller, Spil spil, SpilController spilController, UserInterfaceKontrakt ui){
+        spilController.getRykSpiller().rykSpillerAntalFelter( spil, spiller, chancekort.getAntalFelterAtRykke(), ui, spilController );
     }
-
 }

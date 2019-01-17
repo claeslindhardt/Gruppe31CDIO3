@@ -1,20 +1,11 @@
 package ModelEnteties.chancekort;
 
-import BoundaryView.UserInterfaceKontrakt;
-import Controller.Handel;
-import Controller.SpilController;
-import ModelEnteties.singletoner.RandomSingleton;
-
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: Chancekort
  *
- * @author Claes
- * Det her er objeket som essientielt er et chance kort. Fordi der er mange forskellige slags chance kort.
- * har denne forældre klasse(Chancekort) en række børn:
- *          1. GiverPengeCO
- *          2. TagerPengeCO
- *          3. RykkerSpillerCO
- *          4. GratisUdafFeangsel
+ *  @author Claes & Malte
+ *
+ *  Denne klasse er det generelle chancekort, som alle chancekorts typer nedarver fra. *
  *  Her er altså tale om et polymorfisme(se programdokumentationen til felt.java for yderligere forklaring af dette),
  *  dette kan godt virke tricky. Eftersom dette polymorfisme ligger inden i et andet polymorfisme. Derfor har vi lavet
  *  Design Class Diagrammet som burde give et overblik over sammenspillet mellem alle klasserne. Grunden til vi har
@@ -24,29 +15,20 @@ import ModelEnteties.singletoner.RandomSingleton;
  *  atraktiv ting meget varation og skalerbar kode. Har vi gjort meget ud af at denne del blev netop det. Ved at lave
  *  en grund generationer der generer ny beskrivelser til alle chance kort. Så chancen for at to chancekort noglesinde
  *  er de samme er meget lille, og har via polymorfismet en meget skalerbar antal aktioner der følger af chancekortene.
+ *
  */
 public abstract class Chancekort {
 
+    private String beskrivelse;             // Beskrivelsen der bruges, når man bruger / trækker kortet
+    private String kortBeskrivelse = "";    // Beskrivelsen der bruges i lister
+    private boolean direkteAktion;          // True: Kortet bruges når det trækkes, False: kortet tages op på hånden
+
+
+    // --------- Constructor --------------------
     public Chancekort( String beskrivelse, boolean direkteAktion ){
         this.beskrivelse = beskrivelse;
         this.direkteAktion = direkteAktion;
     }
-
-    //|--------- Variabler:----------------------
-    private String beskrivelse;
-    private int pengeVerdi;
-    private String kortBeskrivelse = "";
-
-    private boolean direkteAktion;
-
-    private final String[] positiveGrunde= {" Det er din fødselsdag"," der var en skatte beregning fejl",
-            " Du har penge udbetalt på aktier", " Doctor Who kidnappede dig"," Du fik gratis rosengin. Yaiiiii :)",
-            " Dorthe Jørgensen synes du er sej", " Du har printet organer!!! You saved the wooorld"
-    };
-    private final String[] negativeGrunde= {" der var en skatte beregning fejl"," Der blev indført en ny miljø afgift",
-            " Du blev straffet for finans fusk", " Der kom en elefant og trådte på dit hus",
-            " Din mor besluttede hun ville være russisk operasanger"
-    };
 
     //|--------- Getters og Setters:-------------
 

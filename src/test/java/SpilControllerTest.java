@@ -22,6 +22,8 @@ class SpilControllerTest {
             }
         }
 
+
+
         Spiller spiller = spil.getSpiller(0);
 
 

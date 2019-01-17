@@ -2,7 +2,7 @@ package ModelEnteties.chancekort;
 
 public class RykTilBestemtFelt extends Chancekort {
 
-    private int feltNummer;
+    private int feltNummer; // Feltets placering paa braettet
 
     public int getFeltNummer() {
         return feltNummer;

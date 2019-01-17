@@ -4,13 +4,14 @@ import ModelEnteties.Spiller;
 import ModelEnteties.felter.Ejendom;
 import ModelEnteties.felter.Felt;
 import spillogik.RandomGenerator;
+import spillogik.SpilGenerator;
 
 public class KoebHotelTest {
 
 
     public static void main(String[] args) {
 
-        Spil spil = RandomGenerator.genererSpil(3, 40,40,1500);
+        Spil spil = SpilGenerator.genererSpil(3);
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
         Spiller spiller = spil.getSpiller(0);

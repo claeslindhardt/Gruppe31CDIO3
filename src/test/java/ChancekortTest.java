@@ -26,29 +26,12 @@ public class ChancekortTest {
         Spil spil = SpilGenerator.genererSpil(2);
         spil.setRaflebaeger(new FalskRaflebaeger(2));
 
-        Spiller spiller = spil.getSpiller(0);
 
         ArrayList<Chancekort> alleChancekort = new ArrayList<>();
         Chancekort chancekort;
 
-
-        chancekort = new GratisUdAfFaengsel("Gå ud af fængsel gratis");
+        chancekort = new RykAntalFelter(-4, "Testkort");
         alleChancekort.add(chancekort);
-
-        chancekort = new RykTilBestemtFelt(39, "Ryk til rådhuspladsen");
-        alleChancekort.add(chancekort);
-
-        chancekort = new JustererPenge(-100,"Trækker 100 kr. fra");
-        alleChancekort.add(chancekort);
-
-        chancekort = new JustererPenge(100,"Giver 100 kr.");
-        alleChancekort.add(chancekort);
-
-        chancekort = new SmidIFaengsel("Du skal gå i faengsel");
-        alleChancekort.add(chancekort);
-
-
-
 
         spil.setChanceKort(alleChancekort);
 

@@ -2,7 +2,7 @@ package ModelEnteties.chancekort;
 
 public class JustererPenge extends Chancekort {
 
-    private double pengeVaerdi; // Kan være negativ
+    private double pengeVaerdi; // Hvor mange penge man justerer med (negativ = man trækker penge fra spilleren)
 
     public double getPengeVaerdi(){
         return pengeVaerdi;
