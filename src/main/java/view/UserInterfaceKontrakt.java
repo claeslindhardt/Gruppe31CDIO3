@@ -14,14 +14,10 @@ public interface UserInterfaceKontrakt {
 
     void aabenSpil( Spil spil );
     String[] opretSpillere( int min, int max );
-    void startSpil();
 
 
 
     int TurMenu( Spiller spiller, int minInput, int maxInput);
-    int velkomstMenu(int minInput, int maxInput);
-    int instilingsSporgsmaal0(int minInput, int maxInput);
-    int instilingsSporgsmaall(int minInput, int maxInput);
     void bankeRaadtGrundetLikviditet(int getBankeraadGraense);
     void spillerUdgår(int udgaaetSpiller);
     void vinder(int vinder);

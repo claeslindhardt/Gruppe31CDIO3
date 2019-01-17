@@ -97,11 +97,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void genererGUIBret( Spil spil ){
         Felt[] felter = spil.getFelter();
-        Spiller[] spillere = spil.getSpillere();
         int antalFelter =  felter.length;
-
-
-
 
         GUI_Field[] gui_felter = new GUI_Field[ antalFelter ];
 
@@ -250,23 +246,33 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     public void aabenSpil( Spil spil ){
-
         genererGUIBret( spil );
+        gui.showMessage("Hjerteligt velkommen til Matador!");
+    }
 
+
+    public void startSpil( Spil spil ) {
+
+        gui.showMessage("Lad os spille!");
+
+        GUI_Player[] gui_spillere = genererSpillere( spil.getSpillere() );
+
+        for( GUI_Player gui_spiller : gui_spillere ){
+            gui.addPlayer( gui_spiller );
+        }
     }
 
 
     public String[] opretSpillere( int min, int max ){
 
-        int antalSpillere;
+        int antalSpillere = 0;
         do{
-            antalSpillere = gui.getUserInteger("Indtast antal spillere:");
-
             if ( antalSpillere >= min && antalSpillere <= max ) {
 
                 break;
             }
             gui.showMessage("I skal være mellem " + min + " og " + max + " spillere.");
+
         }while(true);
 
         String[] navne = new String[antalSpillere];
@@ -290,11 +296,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
 
         return navne;
-    }
-
-    public void startSpil(){
-
-
     }
 
 
@@ -428,8 +429,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du slog: "+terning+
                 "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter."
         );
-
-        //Todo:Ryk spilleren her xxxxxxxxxxxxxxxx
 
     }
 
@@ -856,16 +855,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
 
-    @Override
-    public void startSpil(Spil spil) {
 
-        GUI_Player[] gui_spillere = genererSpillere( spil.getSpillere() );
-
-        for( GUI_Player gui_spiller : gui_spillere ){
-            gui.addPlayer( gui_spiller );
-        }
-
-    }
 
     public int vaelgIndkomstSkat(){
         return input.binaertValg("Du skal betale skat!\nDu kan enten betale 200 kr. eller 10% af din samlede pengebeholdning \nHvad vælger du? ", "200 kr.", "10%", gui);

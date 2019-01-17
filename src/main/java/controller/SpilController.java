@@ -61,6 +61,35 @@ public class SpilController{
     }
 
 
+    public void koerSpil(){
+
+        ui.aabenSpil( spil );
+
+        // Tjekker om spillerne er blevet lavet, ellers laves de
+        if( spil.getSpillere() == null ){
+            String[] navne = ui.opretSpillere( 2, 6);
+            spil.setSpillere( SpilGenerator.genererSpillere( navne) );
+        }
+
+        ui.startSpil( spil );
+
+        do{
+            tjekForVinder();
+            tjekOmGivetOp();
+            tjekForFeangselsStraf();
+
+            if( !spil.getVinderFindes() ){
+                turMenu();
+
+            }else{
+                break;
+            }
+
+        }while( true );
+
+        ui.spilletErSlut();
+    }
+
 
     /**
      * @author Filip
@@ -235,38 +264,7 @@ public class SpilController{
     }
 
 
-    public void koerSpil(){
 
-        ui.aabenSpil( spil );
-
-        // Tjekker om spillerne er blevet lavet, ellers laves de
-        if( spil.getSpillere() == null ){
-            String[] navne = ui.opretSpillere( 2, 6);
-            spil.setSpillere( SpilGenerator.genererSpillere( navne) );
-        }
-
-        ui.startSpil( spil );
-
-        do{
-            tjekForVinder();
-            tjekOmGivetOp();
-            tjekForFeangselsStraf();
-
-            if( !spil.getVinderFindes() ){
-                turMenu();
-
-            }else{
-                break;
-            }
-
-        }while( true );
-
-
-        ui.spilletErSlut();
-
-
-
-    }
 
 
 

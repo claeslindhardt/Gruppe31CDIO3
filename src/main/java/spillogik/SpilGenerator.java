@@ -480,11 +480,15 @@ public class SpilGenerator {
     public static Spil genererSpil( int antalSpillere ){
 
         Spil spil = new Spil();
-
-        spil.setSpillere(  genererSpillere( "Spiller 1", "Spiller 2", "Spiller 3" )  );
         spil.setFelter( genererFelter() );
         spil.setChanceKort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
+
+        String[] spillerNavne = new String[antalSpillere];
+        for( int i = 0; i < antalSpillere; i++ ){
+            spillerNavne[i] = "Spiller " + (i+1);
+        }
+        spil.setSpillere(  genererSpillere( spillerNavne )  );
 
         return spil;
     }
