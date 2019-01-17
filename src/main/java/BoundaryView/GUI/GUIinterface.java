@@ -211,7 +211,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                              "Leje hvis 4 rederier ejes: " + ((Rederi) felt).getLeje() * 2 * 2 * 2);
                 }
                 else if (felt.getFeltType().equals("IndkomstSkat")){
-                    gui_felt.setDescription("Du skat betale 200 eller 10% af din formue");
+                    gui_felt.setDescription("Du skal betale 200 eller 10% af din formue");
                 }
                 else if (felt.getFeltType().equals("StatsSkat")){
                     gui_felt.setDescription("Du skal betale 100 til almenvellet");
