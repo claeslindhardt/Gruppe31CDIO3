@@ -79,13 +79,14 @@ public class Handel {
 
             ejendom.saelgHus(1);
 
-
             spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom, 1));
             userInterfaceKontrakt.updateSpillere(spiller);
 
             userInterfaceKontrakt.saelgHus(ejendom);
         }
     }
+
+
 
     public void saelgHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
 
@@ -97,6 +98,9 @@ public class Handel {
 
         //userInterfaceKontrakt.saelgHus(ejendom);
     }
+
+
+
     /**
      * @author Malte
      * FORLØBET i at købe et hus på en ejendom. Dvs. den der sørger beder UI
@@ -155,17 +159,17 @@ public class Handel {
     }
 
 
-    public void saelgHotelPaaEjendom(SpilController spil,Spiller spiller, UserInterfaceKontrakt ui){
+    public void saelgHotelPaaEjendom( SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
 
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
         if(kartotek.size() > 0){
             int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
-                if (ejendomsIndex == kartotek.size()) {
-                    //Der lægges en til for at er det stadig er den samme spilleres tur. I TurMenu bliver der nemlig udskrevet spillerens tur.
-                    spil.turMenu( );}
-            saelgHotel(spiller,  kartotek.get(ejendomsIndex), ui);
-            ui.saelgHotel(kartotek.get(ejendomsIndex));
+
+            if( ejendomsIndex < kartotek.size() ) {
+                saelgHotel(spiller, kartotek.get(ejendomsIndex), ui);
+                ui.saelgHotel(kartotek.get(ejendomsIndex));
+            }
         }
 
     }
@@ -252,22 +256,15 @@ public class Handel {
     }
 
 
-    public ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
-        int count =0;
+    private ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
 
         Ejendom[] ejendomme = spiller.getEjendomme();
 
-
-        for(int i = 0; i < ejendomme.length;i++){
-            if(ejendomme[i].harHotel()){
-                count++;
-            }
-        }
         ArrayList<Ejendom> kartotek = new ArrayList<>();
 
-        for(int j = 0; j < ejendomme.length;j++){
-            if(ejendomme[j].harHotel()){
-                kartotek.add(ejendomme[j]);
+        for( int j = 0; j < ejendomme.length; j++ ){
+            if( ejendomme[j].harHotel() ){
+                kartotek.add( ejendomme[j] );
             }
         }
         return kartotek;

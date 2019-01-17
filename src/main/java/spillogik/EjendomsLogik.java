@@ -44,13 +44,12 @@ public class EjendomsLogik {
      */
     public static boolean fordelingAfHuseVedSalg( Ejendom ejendomsUdgangspunkt ){
 
-        for (int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
+        for( int i = 0; i < ejendomsUdgangspunkt.getGruppe().getAntalEjendomme(); i++ ){
+
             Ejendom ejendom = ejendomsUdgangspunkt.getGruppe().getEjendomme().get(i);
 
             if( ejendom.getAntalHuse() > ejendomsUdgangspunkt.getAntalHuse()){
-
                 return false;
-
             }
         }
         return true;
@@ -123,7 +122,7 @@ public class EjendomsLogik {
     }
 
 
-    public static boolean kanSaelgeHus(Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe ){
+    public static boolean kanSaelgeHus( Spiller spiller, Ejendom ejendom, EjendomsGruppeDTO ejendomsGruppe ){
 
         return      spiller.ejerEjendom( ejendom )
                 &&  spiller.ejerEjendomsGruppe( ejendomsGruppe )
