@@ -124,9 +124,12 @@ public class Handel {
             if(bebyggeligeEjendomme.size() > 0){
 
                 int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
-                koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
 
-                ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                if( ejendomsIndex < bebyggeligeEjendomme.size() ){
+                    koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
+                    ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                }
+
 
             }else {
                 ui.ejerIngenBebyggeligeEjendomme(); }
@@ -232,10 +235,12 @@ public class Handel {
             if(grundeMedMulighedForHotel.size() > 0){
 
                 int ejendomsIndex = ui.input_EjendomAtByggeHotelPaa(grundeMedMulighedForHotel);
-                koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
+                if( ejendomsIndex < grundeMedMulighedForHotel.size() ){
+                    koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
 
-                ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
-                ui.tillykkeMedHotel();
+                    ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
+                    ui.tillykkeMedHotel();
+                }
 
             }else {
                 ui.kanIkkeKøbeHotel();
