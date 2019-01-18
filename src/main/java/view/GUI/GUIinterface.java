@@ -459,10 +459,10 @@ public class GUIinterface implements UserInterfaceKontrakt {
         int terning2=tern.get(1);
         Random rand = new Random();
         //Angiver, position af terningerne
-        int x1 = rand.nextInt(8)+2;
-        int y1 = rand.nextInt(8)+2;
-        int x2 = rand.nextInt(8)+2;
-        int y2 = rand.nextInt(8)+2;
+        int x1 = rand.nextInt(6)+1;
+        int y1 = rand.nextInt(2)+7;
+        int x2 = rand.nextInt(6)+1;
+        int y2 = rand.nextInt(2)+7;
         gui.setDice(terning1,x1,y1,terning2,x2,y2);
         String terning="";
         for(int i =0; i<tern.size();i++) {
