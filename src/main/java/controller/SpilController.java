@@ -3,10 +3,13 @@ package controller;
 import model.Spiller;
 import model.chancekort.Chancekort;
 import model.felter.Ejendom;
+import model.singletoner.RandomSingleton;
 import view.GUI.GUIinterface;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import spillogik.SpilGenerator;
+
+import java.util.Random;
 
 import static spillogik.SpilGenerator.genererSpil;
 import static spillogik.VinderLogik.getVinder;
@@ -64,6 +67,7 @@ public class SpilController{
 
     public void koerSpil(){
 
+
         ui.aabenSpil( spil );
 
         // Tjekker om spillerne er blevet lavet, ellers laves de
@@ -72,6 +76,7 @@ public class SpilController{
             spil.setSpillere( SpilGenerator.genererSpillere( navne) );
         }
 
+        spil.setSpillerTur( RandomSingleton.getInstance().nextInt( spil.getAntalSpillere() ) + 1 );
         ui.startSpil( spil );
 
         do{

@@ -266,8 +266,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public String[] opretSpillere( int min, int max ){
 
-        int antalSpillere = 0;
+        int antalSpillere;
         do{
+            antalSpillere = gui.getUserInteger( "Indtast antallet spillere:", 2, 6 );
             if ( antalSpillere >= min && antalSpillere <= max ) {
 
                 break;

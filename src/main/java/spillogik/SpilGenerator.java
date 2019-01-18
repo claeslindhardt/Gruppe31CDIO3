@@ -505,8 +505,6 @@ public class SpilGenerator {
         spil.setChancekort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
 
-        spil.setSpillerTur( random.nextInt() + 1 );
-
         return spil;
     }
 

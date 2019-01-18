@@ -82,7 +82,7 @@ public class Spil {
 
 
     public Spiller getSpillerMedTur(){
-        return spillere[spillerTur-1];
+        return spillere[ spillerTur-1 ];
     }
 
 
