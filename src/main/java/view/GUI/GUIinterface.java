@@ -1,9 +1,7 @@
 package view.GUI;
 
-import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
-import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.Terning;
 import view.UserInterfaceKontrakt;
 import model.Spil;
@@ -11,9 +9,7 @@ import model.Spiller;
 import model.chancekort.Chancekort;
 import model.raflebaeger.RafleBaeger;
 import model.felter.Felt;
-import gui_codebehind.GUI_Center;
-import gui_fields.*;
-import gui_main.GUI;
+
 import java.util.ArrayList;
 
 import static view.GUI.GUI_Generator.genererGUI;
@@ -107,7 +103,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
 
-    public int TurMenu( Spiller spiller, int minInput, int maxInput){
+    public int turMenu(Spiller spiller, int minInput, int maxInput){
 
         return gui.vaelgKnap("Det er "+ spiller.getNavn()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hotel");
@@ -131,65 +127,24 @@ public class GUIinterface implements UserInterfaceKontrakt {
         }
 
         gui.visTekst("Du slog " + resultat + ".");
-        //TODO: Opdater terninger
+        gui.opdaterTerninger(raflebaeger);
     }
 
 
-    public void bankeRaadtGrundetLikviditet(int getBankeraadGraense){
-        gui.visTekst("Woops du har mindre end "+getBankeraadGraense+" penge, " +
-                "\nog du har derfor ikke høj nok likviditet til at forsætte Spillet."
-        );
+    public void spillerErBankerot( Spiller spiller ){
+        gui.visTekst("Woops du har er gået bankerot! - Tak for spillet " + spiller.getNavn() );
+        gui.opdaterSpillere( spiller );
     }
 
-    public void spillerUdgår(int udgaaetSpiller){
-        gui.visTekst("Spiller "+udgaaetSpiller+" er nu udgået");
-    }
-
-    public void vinder(int vinder){
-        gui.visTekst("Hurra vi har en vinder! Vinderen blev spiller "+(vinder));
-
-    }
-
-    public void anketStraffeDom(int spillerTur){
-        gui.visTekst("Tillykke spiller "+spillerTur +", din straffedom er blevet anket, og du får nu et forsøg til at komme ud af faengslet." +
-                "\nDu skal blot slå to ens med terningerne"
-        );
-    }
-    public void harSlaaetMedTerningfor(){
+    public void harSlaaetMedTerning(){
         gui.visTekst("Du har allerede slaeet alle de terninger du maa i denne tur.");
     }
-    public void ingenHeldIRetten(){
-        gui.visTekst("Ingen held i retten i dag, forbliv i faengsel." +
-                "\nDu kan stadig opkraeve leje"
-        );
-    }
-    public void heldIRetten(){
-        gui.visTekst("Du havde held i retten i dag, og må derfor slå med terningerne og rykke igen med det samme.");
-    }
-    public void retsTerninger(int domsAfsigelseDel1, int domsAfsigelseDel2){
-        gui.visTekst("Du slog "+domsAfsigelseDel1+" og "+domsAfsigelseDel2);
-    }
-
 
 
 
     public void spilletErSlut( Spiller vinder ){
         gui.visTekst("Hurra! " + vinder.getNavn() + " har vunder spillet!");
         gui.visTekst("Tak, fordi I spillede med!");
-    }
-
-
-    public void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur){
-        ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
-
-        String terning="";
-        for(int i =0; i<tern.size();i++) {
-            terning = terning.concat(tern.get(i)+ ", ");
-        }
-        gui.visTekst("Du slog: "+terning+
-                "\nog rykker derfor " + terningsKrus.getTotalVaerdi() + " felter."
-        );
-
     }
 
 
@@ -205,18 +160,16 @@ public class GUIinterface implements UserInterfaceKontrakt {
        return gui.vaelgJaNej("Er du sikker på, at du vil give op?");
     }
 
-    public void harGivetOp(){
+    public void harGivetOp( Spiller spiller ){
         gui.visTekst("Tak for spillet!\nDine penge vil gå til skattefar.");
-        // TODO: opdater spiller, bil og navn
+        gui.opdaterSpillere( spiller );
     }
 
 
     public void passeringAfStart(int gangeOverStart){
         gui.visTekst("Tillykke du har passeret StartFelt "+gangeOverStart+" gang(e) og modtager "+200*gangeOverStart);
     }
-    public void chanceKortHar(){
-        gui.visTekst("Du har foelgende Chancekort:");
-    }
+
     public int chanceKortNr(Spiller spiller){
 
         ArrayList<Chancekort> chancekort = spiller.getChancekort();
@@ -239,54 +192,44 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.visTekst("Du har ikke nogen chancekort.");
     }
 
-
-
-    public void alleredeEjer(){
-        gui.visTekst("Du er allerede ejer");
+    public void manglerPenge(){
+        gui.visTekst("Du har ikke raad lige nu.");
     }
 
-
-    public void monetosMangel(){
-        gui.visTekst("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
-    }
-
-    public void iFaengselMedDig(){
+    public void gaaIFaengsel(){
         gui.visTekst("HOV HOV HOV, meget kan man boeje, men ikke loven! Bandit!"+
         "\nFordi du er landet på et felt, hvor man bliver kriminel "+
         "\nskal du nu en tur i kashotten.");
     }
-    public void tetPaaMonopol(){
+
+
+    public void ejerAlleredeFelt(){
         gui.visTekst("Du er landet på et sted du ejer, naermer du dig et monopol?");
     }
 
-
-
     public void gennemfoertKoeb( EjeligtFelt felt, Spiller spiller ){
-
         gui.visTekst("Du har koebt " + felt.getNavn() + "!");
+        gui.opdaterSpillere( spiller );
     }
 
-    public void betalRente(){
-        gui.visTekst("En anden spiller ejer dette felt, du betaler derfor rente til ham:");
+    public void betalerLeje(int leje, Spiller betaler, Spiller modtager){
+        gui.visTekst( modtager.getNavn() + " ejer dette felt, og du betaler derfor " + leje + ".");
+        gui.opdaterSpillere( betaler, modtager );
     }
 
-    public void duErLandetPå(Felt felt, Spiller spiller ){
+    public void duErLandetPaa(Felt felt, Spiller spiller ){
         gui.visTekst( "Du er landet på " + felt.getNavn()+"." );
         gui.opdaterSpillere( spiller );
     }
 
-    public void landetPaaStart(){
-        gui.visTekst("Tag du dig bare en pause.");
-    }
-
-
-    public int ejendomsBud(){
+    public int koebsBeslutning(){
         return gui.vaelgJaNej("Ingen ejer denne. Ønsker du at købe den?");
     }
 
 
-    public void visChanceKort( Chancekort chancekort ){
+    public void visChanceKort(Spiller spiller, Chancekort chancekort){
         gui.visChancekort(chancekort);
+        gui.opdaterSpillere( spiller );
     }
 
 
@@ -295,36 +238,19 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 "\nog hvis du ikke var, faar du så lov til at slå med terningerne igen.");
     }
 
-    /**
-     * @author Jacob og Andreas
-     *
-     * Denne metode sætter et hus på den ejendom som man har valgt at bygge den på.
-     *
-     * @param ejendom den Ejendom man vil bygge på
-     */
-    @Override
-    public void byggetHus( Ejendom ejendom ) {
-        gui.visTekst( "Du har bygget et hus paa " + ejendom.getNavn() );
+
+    public void byggetPaaEjendom( Ejendom ejendom, Spiller spiller ){
+        gui.visTekst( "Du har bygget paa " + ejendom.getNavn() + "." );
+        gui.opdaterSpillere(spiller);
         gui.opdaterFelt( ejendom );
     }
 
-    public  void saelgHus(Ejendom ejendom){
+    public void solgtPaaEjendom(Ejendom ejendom, Spiller spiller ){
+        gui.visTekst( "Du har solgt paa " + ejendom.getNavn() + "." );
+        gui.opdaterSpillere(spiller);
         gui.opdaterFelt( ejendom );
     }
 
-    public void saelgHotel( Ejendom ejendom ){
-        gui.opdaterFelt( ejendom );
-    }
-
-    @Override
-    public void ejerIngenEjendomme() {
-
-    }
-
-    @Override
-    public void ejerIngenBebyggeligeEjendomme() {
-
-    }
 
     /**
      * @author Jacob og Andreas
@@ -340,7 +266,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
      * @return den ejendom fra listen med bebyggelige ejendomme, som man har valgt at bygge på
      */
     @Override
-    public int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme) {
+    public int vaelgEjendom( ArrayList<Ejendom> ejendomme ) {
 
         String[] ejendomsListe = new String[ejendomme.size()];
 
@@ -351,38 +277,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         return gui.vaelgListe("Hvilken ejendom vil du bygge paa? ",ejendomsListe);
     }
 
-    public int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme) {
-        String[] ejendomsListe = new String[ejendomme.size()+1];
-
-        //Arraylist converteres til et array
-        for(int i = 0; i < ejendomme.size();i++){
-            ejendomsListe[i] = ejendomme.get(i).getNavn();
-        }
-
-        ejendomsListe[ejendomme.size()] = "Tilbage";
-        return gui.vaelgListe("Hvilken ejendom vil du saelge på? ", ejendomsListe);
-    }
-
-
-
-    /**
-     * @author Chua
-     * Generere en liste af ejendomme som den nuværende spiller ejer, som man kan bygge hotel på.
-     * @param ejendomme
-     * @return
-     */
-    @Override
-    public int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme) {
-
-        String[] ejendomsListe = new String[ejendomme.size()+1];
-
-        for (int i = 0; i < ejendomme.size(); i++){
-            ejendomsListe[i] = ejendomme.get(i).getNavn();
-        }
-        ejendomsListe[ejendomme.size()] = "Tilbage";
-        return gui.vaelgListe("Hvilken ejendom vil du bygge hotel paa? ",ejendomsListe);
-
-    }
 
 
     /**
@@ -393,31 +287,46 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.visTekst("Du kan ikke slaa terningerne, da du stadig er i faengsel");
     }
 
-    public void kanIkkeKøbeHotel(){
-        gui.visTekst("Du har desvaerre ikke mulighed for at købe et hotel endnu");};
+    public void kanIkkeKoebeHotel(){
+        gui.visTekst("Du har desvaerre ikke mulighed for at bygge et hotel endnu");
+    }
+
+
+    public void kanIkkeKoebeHus(){
+        gui.visTekst("Du har desvarre ikke mulighed for at bygge et hus endnu.");
+    }
+
+    public void kanIkkeSaelgeHotel(){
+        gui.visTekst("Du kan ikke saelge et hotel lige nu.");
+    }
+
+    public void kanIkkeSaelgeHus(){
+        gui.visTekst("Du kan ikke saelge et hus lige nu.");
+    }
+
+
+
 
 
     public int vaelgIndkomstSkat(){
         return gui.binaertValg("Du skal betale skat!\nDu kan enten betale 200 kr. eller 10% af din samlede pengebeholdning \nHvad vælger du? ", "200 kr.", "10%" );
     }
 
+    public void betaltIndkomstSkat( Spiller spiller, int skat){
+        gui.opdaterSpillere(spiller);
+        gui.visTekst( "Du har betalt "+skat+" kr. i indkomstskat.");
+    }
+
     public void statsSkat( int skat ){
         gui.visTekst("Du skal betale ekstraordinær statsskat. Derfor bliver vi all " + skat + " kr. rigere!");
     }
 
-    /**
-     * @author Chua
-     * Generere et hotel på den grund man ejer.
-     * @param ejendom - Den grund man vil lave et hotel på
-     */
-    @Override
-    public void byggetHotel( Ejendom ejendom ) {
-        gui.opdaterFelt( ejendom );
-    }
-
-
     public void friParkering(){
         gui.visTekst("Velkommen til fristedet, også kendt som parkerings pladsen.");
+    }
+
+    public void landetPaaStart(){
+        gui.visTekst("Tag du dig bare en pause.");
     }
 
 

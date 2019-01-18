@@ -15,15 +15,15 @@ public class RykSpiller {
      * Indsæt beskrivelse her
      */
     public void kastTerninger(Spil spil, Spiller spiller, UserInterfaceKontrakt ui, SpilController spilController) {
-        RafleBaeger rafleBaeger = spil.getRaflebaeger();
+        RafleBaeger raflebaeger = spil.getRaflebaeger();
 
         if ( !spiller.isHarSlaaetForTuren() ) {
 
-            rafleBaeger.slaa();
+            raflebaeger.slaa();
 
-            ui.spillerRykkerGrundetTerningslag( rafleBaeger, spil.getSpillerTur() );
+            ui.terningerResultat( raflebaeger );
 
-            if ( rafleBaeger.erEns() ) {
+            if ( raflebaeger.erEns() ) {
                 ui.ensTerninger();
                 spil.getSpillerMedTur().setHarSlaaetForTuren(false);
 
@@ -32,10 +32,10 @@ public class RykSpiller {
 
             }
 
-            rykSpillerAntalFelter( spil, spiller, rafleBaeger.getTotalVaerdi(), ui, spilController );
+            rykSpillerAntalFelter( spil, spiller, raflebaeger.getTotalVaerdi(), ui, spilController );
 
         } else {
-            ui.harSlaaetMedTerningfor();
+            ui.harSlaaetMedTerning();
 
         }
     }
@@ -78,8 +78,6 @@ public class RykSpiller {
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() + BevaegelsesLogik.passererStartPenge(gangeOverStart));
             ui.passeringAfStart(gangeOverStart);
-            ui.updateSpillere(spiller);
-
         }
 
         spiller.setSpillerPosition(felt.getPlacering());

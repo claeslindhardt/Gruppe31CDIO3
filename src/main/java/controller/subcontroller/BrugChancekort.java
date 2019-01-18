@@ -75,7 +75,6 @@ public class BrugChancekort {
      */
     private void justererPenge( JustererPenge chancekort, Spiller spiller, UserInterfaceKontrakt ui ){
         spiller.addPenge( chancekort.getPengeVaerdi() );
-        ui.updateSpillere( spiller );
     }
 
 
@@ -108,8 +107,8 @@ public class BrugChancekort {
         spiller.setErIFaengsel(true);
         spiller.setSpillerPosition( faengsel.getPlacering() );
 
-        ui.iFaengselMedDig();
-        ui.duErLandetPå( faengsel, spiller);
+        ui.gaaIFaengsel();
+        ui.duErLandetPaa( faengsel, spiller);
     }
 
 

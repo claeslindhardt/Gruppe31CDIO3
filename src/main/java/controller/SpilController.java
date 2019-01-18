@@ -99,8 +99,8 @@ public class SpilController{
         spiller.setHarSlaaetForTuren(false);
 
         if( spiller.getPenge() < 0  ){
-            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
             spillerUdgaar( spiller );
+            ui.spillerErBankerot( spiller );
         }
 
         do {
@@ -156,7 +156,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public boolean turMenu( Spiller spiller ) {
-        int valg = ui.TurMenu( spiller, 1, 12 );
+        int valg = ui.turMenu( spiller, 1, 12 );
 
         boolean slutTur = false;
 
@@ -185,6 +185,7 @@ public class SpilController{
                 if( handlinger.givOp( ui ) ){
                     slutTur = true;
                     spillerUdgaar( spiller );
+                    ui.harGivetOp( spiller );
                 }
                 break;
 

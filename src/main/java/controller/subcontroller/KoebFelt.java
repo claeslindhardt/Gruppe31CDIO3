@@ -34,40 +34,38 @@ public class KoebFelt {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( ejendom.getEjer() == spiller ) {
-            ui.tetPaaMonopol();
+            ui.ejerAlleredeFelt();
         }
         else if (spiller.getPenge() > ejendom.getPris()) {
-            ui.gennemfoertKoeb( ejendom, spiller);
             spiller.addPenge( - ejendom.getPris() );
-            ui.updateSpillere(spiller);
 
             //skifte ejerskab
             ejendom.setEjer(spiller);
             spiller.getSpillerEjendomme().add(ejendom);
 
+            ui.gennemfoertKoeb( ejendom, spiller);
+
         } else {
-            ui.monetosMangel();
+            ui.manglerPenge();
         }
     }
 
 
     public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt) {
-        if ( bryggeri.getEjer() == spiller ) {
-            userInterfaceKontrakt.alleredeEjer();
 
-        } else if ( spiller.getPenge() > bryggeri.getPris()) {
+        if ( spiller.getPenge() > bryggeri.getPris()) {
 
             spiller.addPenge( - bryggeri.getPris() );
-            userInterfaceKontrakt.gennemfoertKoeb( bryggeri, spiller );
-            userInterfaceKontrakt.updateSpillere( spiller );
 
             //skifte ejerskab
             bryggeri.setEjer( spiller );
             spiller.addBryggeri(bryggeri);
 
+            userInterfaceKontrakt.gennemfoertKoeb( bryggeri, spiller );
+
 
         } else {
-            userInterfaceKontrakt.monetosMangel();
+            userInterfaceKontrakt.manglerPenge();
         }
     }
 
@@ -75,19 +73,19 @@ public class KoebFelt {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( rederi.getEjer() == spiller ) {
-            ui.tetPaaMonopol();
+            ui.ejerAlleredeFelt();
         }
         else if (spiller.getPenge() > rederi.getPris()) {
-            ui.gennemfoertKoeb(rederi, spiller);
             spiller.addPenge( - rederi.getPris() );
-            ui.updateSpillere(spiller);
 
             //skifte ejerskab
             rederi.setEjer(spiller);
             spiller.getSpillerRederier().add(rederi);
 
+            ui.gennemfoertKoeb(rederi, spiller);
+
         } else {
-            ui.monetosMangel();
+            ui.manglerPenge();
         }
     }
 

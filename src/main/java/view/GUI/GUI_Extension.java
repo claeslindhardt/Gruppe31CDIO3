@@ -64,10 +64,6 @@ public class GUI_Extension {
         gui.showMessage( besked );
     }
 
-    public void addSpiller( Spiller spiller ){
-
-    }
-
 
     public void visChancekort( Chancekort chancekort ){
         GUI_Center.getInstance().setChanceCard( chancekort.getBeskrivelse() );
@@ -142,7 +138,7 @@ public class GUI_Extension {
 
         for( int i = 0; i < spillere.length; i++ ){
             Spiller spiller = spillere[i];
-            GUI_Player gui_spiller = gui_spillere[i];
+            GUI_Player gui_spiller = gui_spillere[ spiller.getId() ];
 
             fjernBil( gui_spiller );
 
@@ -155,6 +151,7 @@ public class GUI_Extension {
                 }
             } else {
                 gui_felter[ spiller.getSpillerPosition() ].setCar( gui_spiller, true );
+                gui_spiller.setBalance( (int) spiller.getPenge() );
             }
         }
     }
@@ -164,7 +161,7 @@ public class GUI_Extension {
         GUI_Ownable gui_felt = (GUI_Ownable) gui_felter[felt.getPlacering()];
 
         if( ejer == null ){
-            gui_felt.setBorder( Color.black );
+            gui_felt.setBorder(Color.black);
         }else{
             gui_felt.setBorder( gui_spillere[ejer.getId()].getPrimaryColor() );
         }
@@ -200,7 +197,5 @@ public class GUI_Extension {
 
         gui.setDice(terning1,x1,y1,terning2,x2,y2);
     }
-
-
 
 }

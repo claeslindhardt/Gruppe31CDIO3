@@ -25,7 +25,6 @@ public class Handlinger {
         svar = userInterfaceKontrakt.vilDuGiveOp();
 
         if(svar == 0) {
-            userInterfaceKontrakt.harGivetOp();
             return true;
         }
         else {
@@ -33,24 +32,6 @@ public class Handlinger {
         }
     }
 
-    public void fjernEjerFraEjendom(Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt){
-
-        for(Ejendom x:spiller.getSpillerEjendomme()){
-            x.setEjer(null);
-            x.setHarHotel(false);
-            x.setAntalHuse(0);
-            userInterfaceKontrakt.byggetHotel(x);
-        }
-
-        for(Rederi x: spiller.getSpillerRederier()){
-            x.setEjer(null);
-        }
-
-        for(Bryggeri x: spiller.getSpillerBryggerier()){
-            x.setEjer(null);
-        }
-
-    }
 
 
     /**

@@ -4,10 +4,8 @@ import model.Spil;
 import model.chancekort.Chancekort;
 import model.felter.*;
 import model.Spiller;
-import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
-import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
 
 import java.util.ArrayList;
@@ -18,60 +16,43 @@ public interface UserInterfaceKontrakt {
 
     void aabenSpil( Spil spil );
     String[] opretSpillere( int min, int max );
-    int TurMenu( Spiller spiller, int minInput, int maxInput);
-    void bankeRaadtGrundetLikviditet(int getBankeraadGraense);
-
+    void startSpil(Spil spil);
+    int turMenu(Spiller spiller, int minInput, int maxInput);
+    void spillerErBankerot( Spiller spiller);
+    void terningerResultat( RafleBaeger rafleBaeger );
+    void harSlaaetMedTerning();
+    void spilletErSlut( Spiller vinder );
+    void ensTerninger();
+    int  vilDuGiveOp();
+    void harGivetOp( Spiller spiller );
+    int chanceKortNr(Spiller spiller);
+    void ingenChanceKort();
+    void manglerPenge();
+    void ejerAlleredeFelt();
     void ankerDom();
     void anketDomResultat( boolean loesladt );
-    void terningerResultat( RafleBaeger rafleBaeger );
-
-    void harSlaaetMedTerningfor();
-    void spilletErSlut( Spiller vinder );
-    void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur);
-    void ensTerninger();
-    void paaBesoegIFaengsel();
-    int  vilDuGiveOp();
-    void harGivetOp();
-    void passeringAfStart(int gangeOverStart);
-
-    int chanceKortNr(Spiller spiller);
-
-    void ingenChanceKort();
-
-    void alleredeEjer();
-
-    void monetosMangel();
-
-    void iFaengselMedDig();
-
-    void tetPaaMonopol();
-
-    void gennemfoertKoeb(EjeligtFelt felt, Spiller spiller );
-
-    void betalRente();
-
-    void duErLandetPå(Felt felt, Spiller spiller);
-
-    int ejendomsBud();
-
-    void brugtUdAfFaengsel();
-    void ejerIngenEjendomme();
-    void ejerIngenBebyggeligeEjendomme();
-    int input_EjendomAtByggePaa(ArrayList<Ejendom> ejendomme);
-    int input_EjendomAtSaelgeFra(ArrayList<Ejendom> ejendomme);
     void kanIkkeSlaaFaengsel();
-    void startSpil(Spil spil);
-    void byggetHotel( Ejendom ejendom );
-    void byggetHus(Ejendom ejendom );
-    void saelgHus(Ejendom ejendom);
-    void saelgHotel(Ejendom ejendom);
-    int input_EjendomAtByggeHotelPaa(ArrayList<Ejendom> ejendomme);
-    void kanIkkeKøbeHotel();
+    void brugtUdAfFaengsel();
+    void passeringAfStart(int gangeOverStart);
+    void duErLandetPaa(Felt felt, Spiller spiller);
     void friParkering();
     int vaelgIndkomstSkat();
+    void betaltIndkomstSkat( Spiller spiller, int skat );
     void statsSkat( int skat );
     void landetPaaStart();
-    void visChanceKort( Chancekort chancekort );
+    void paaBesoegIFaengsel();
+    void gaaIFaengsel();
+    void betalerLeje(int leje, Spiller betaler, Spiller modtager);
+    void visChanceKort(Spiller spiller, Chancekort chancekort);
+    int koebsBeslutning();
+    void gennemfoertKoeb(EjeligtFelt felt, Spiller spiller );
+    int vaelgEjendom(ArrayList<Ejendom> ejendomme);
+    void byggetPaaEjendom( Ejendom ejendom, Spiller spiller );
+    void solgtPaaEjendom(Ejendom ejendom, Spiller spiller );
+    void kanIkkeKoebeHotel();
+    void kanIkkeKoebeHus();
+    void kanIkkeSaelgeHus();
+    void kanIkkeSaelgeHotel();
 
 
 }

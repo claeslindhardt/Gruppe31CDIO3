@@ -24,7 +24,7 @@ public class Handel {
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
      */
-    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren ){
+    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt ui ){
         Spiller ejeren = felt.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
@@ -44,6 +44,7 @@ public class Handel {
 
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
+            ui.betalerLeje( lejeForFelt, spilleren, ejeren );
         }
     }
 
@@ -63,34 +64,28 @@ public class Handel {
 
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
             spiller.addPenge(-ejendom.getHusPris());
-            userInterfaceKontrakt.updateSpillere( spiller );
 
         }
     }
 
-    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt ui) {
         if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())){
 
             ejendom.saelgHus(1);
 
             spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom, 1));
-            userInterfaceKontrakt.updateSpillere(spiller);
 
-            userInterfaceKontrakt.saelgHus(ejendom);
+            ui.solgtPaaEjendom(ejendom, spiller);
         }
     }
 
 
 
-    public void saelgHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void saelgHotel(Spiller spiller, Ejendom ejendom){
 
         spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(ejendom,1));
         ejendom.saelgHotel(false);
         ejendom.setAntalHuse(4);
-
-        userInterfaceKontrakt.updateSpillere( spiller );
-
-        //userInterfaceKontrakt.saelgHus(ejendom);
     }
 
 
@@ -119,19 +114,19 @@ public class Handel {
 
             if(bebyggeligeEjendomme.size() > 0){
 
-                int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
+                int ejendomsIndex = ui.vaelgEjendom(bebyggeligeEjendomme);
 
                 if( ejendomsIndex < bebyggeligeEjendomme.size() ){
                     koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
-                    ui.byggetHus( bebyggeligeEjendomme.get(ejendomsIndex) );
+                    ui.byggetPaaEjendom( bebyggeligeEjendomme.get(ejendomsIndex), spiller );
                 }
 
 
             }else {
-                ui.ejerIngenBebyggeligeEjendomme(); }
+                ui.kanIkkeKoebeHus(); }
 
         }else{
-            ui.ejerIngenEjendomme();
+            ui.kanIkkeKoebeHus();
         }
     }
 
@@ -153,14 +148,14 @@ public class Handel {
         // Tjekker at der overhovedet er nogen huse man kan bygge på
         if( kartotek.size() > 0 ) {
 
-            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+            int ejendomsIndex = ui.vaelgEjendom(kartotek);
 
             if( ejendomsIndex < kartotek.size() ){
                 saelgHus(spiller,  kartotek.get(ejendomsIndex), ui);
-                ui.saelgHus( kartotek.get(ejendomsIndex) );
+                ui.solgtPaaEjendom( kartotek.get(ejendomsIndex), spiller );
             }
-            /* Hvis ejendomsIndex >= kartotek.size() er inputtet fra GUI
-                at man gerne vil gå tilbage. */
+        }else{
+            ui.kanIkkeSaelgeHus();
         }
     }
 
@@ -179,12 +174,14 @@ public class Handel {
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
         if(kartotek.size() > 0){
-            int ejendomsIndex = ui.input_EjendomAtSaelgeFra(kartotek);
+            int ejendomsIndex = ui.vaelgEjendom(kartotek);
 
             if( ejendomsIndex < kartotek.size() ) {
-                saelgHotel(spiller, kartotek.get(ejendomsIndex), ui);
-                ui.saelgHotel(kartotek.get(ejendomsIndex));
+                saelgHotel(spiller, kartotek.get(ejendomsIndex) );
+                ui.solgtPaaEjendom(kartotek.get(ejendomsIndex), spiller );
             }
+        }else{
+            ui.kanIkkeSaelgeHotel();
         }
 
     }
@@ -205,7 +202,6 @@ public class Handel {
 
             ejendom.setLeje(EjendomsLogik.beregnLejeTotal(ejendom, spiller.ejerEjendomsGruppe( ejendom.getGruppe() )));
             spiller.addPenge(-ejendom.getHotelPris());
-            userInterfaceKontrakt.updateSpillere( spiller );
         }
     }
 
@@ -230,19 +226,19 @@ public class Handel {
 
             if(grundeMedMulighedForHotel.size() > 0){
 
-                int ejendomsIndex = ui.input_EjendomAtByggeHotelPaa(grundeMedMulighedForHotel);
+                int ejendomsIndex = ui.vaelgEjendom( grundeMedMulighedForHotel );
                 if( ejendomsIndex < grundeMedMulighedForHotel.size() ){
                     koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
 
-                    ui.byggetHotel( grundeMedMulighedForHotel.get(ejendomsIndex) );
+                    ui.byggetPaaEjendom( grundeMedMulighedForHotel.get(ejendomsIndex), spiller );
                 }
 
             }else {
-                ui.kanIkkeKøbeHotel();
+                ui.kanIkkeKoebeHotel();
             }
 
         }else{
-            ui.kanIkkeKøbeHotel();
+            ui.kanIkkeKoebeHotel();
         }
     }
 

@@ -32,15 +32,5 @@ public class FalskRaflebaeger extends RafleBaeger {
         return true;
     }
 
-   /* @Override
-    public boolean erEns() {
-                return false;
-    }
-
-
-    public int getVaerdi() {
-        return totalVaerdi; }
-*/
-
 }
 

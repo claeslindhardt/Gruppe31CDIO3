@@ -31,7 +31,7 @@ public class LandPaaFelt {
      */
     void landPaaFelt(Felt felt, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui){
 
-        ui.duErLandetPå(felt, spiller);
+        ui.duErLandetPaa(felt, spiller);
 
         if( felt instanceof EjeligtFelt) {
             ejeligtFelt( spilController, spiller, (EjeligtFelt) felt, ui );
@@ -74,19 +74,17 @@ public class LandPaaFelt {
 
         if( felt.getEjer() == null ){
 
-            int koebsBeslutning = ui.ejendomsBud();
+            int koebsBeslutning = ui.koebsBeslutning();
 
             if( koebsBeslutning == 0 ){
                 spilController.getKoebFelt().koebFelt( felt, spiller, ui );
             }
 
         }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
-
-            spilController.getHandel().indsamleLeje( spilController.getSpil(),felt, spiller);
-            ui.betalRente();
+            spilController.getHandel().indsamleLeje( spilController.getSpil(),felt, spiller, ui);
 
         }else if( felt.getEjer() == spiller ){
-            ui.tetPaaMonopol();
+            ui.ejerAlleredeFelt();
         }
     }
 
@@ -111,8 +109,6 @@ public class LandPaaFelt {
         Chancekort trukketKort = chancekort.get(0);
         chancekort.remove(0);
 
-        ui.visChanceKort( trukketKort );
-
         if( trukketKort.erDirekteAktion() ){
             // Bruger kortet med det samme
             spilController.getBrugChancekort().brugChancekort( trukketKort, spiller, spilController.getSpil(),  ui,  spilController );
@@ -120,6 +116,8 @@ public class LandPaaFelt {
             // Giver det til spilleren.
             spiller.addChancekort( trukketKort );
         }
+
+        ui.visChanceKort( spiller, trukketKort );
     }
 
 
@@ -135,8 +133,8 @@ public class LandPaaFelt {
         spillerMedTur.setErIFaengsel( true );
         spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
-        ui.iFaengselMedDig();
-        ui.duErLandetPå( faengsel, spillerMedTur);
+        ui.gaaIFaengsel();
+        ui.duErLandetPaa( faengsel, spillerMedTur);
     }
 
 
@@ -154,19 +152,21 @@ public class LandPaaFelt {
      * @author Malte
      */
     private void indkomstSkat( Spiller spiller, UserInterfaceKontrakt ui ){
-
         int valg = ui.vaelgIndkomstSkat();
+        int skat = 0;
 
         switch (valg) {
             case 0:
-                spiller.addPenge(-200);
+                skat = -200;
                 break;
 
             case 1:
-                spiller.addPenge( -spiller.getPenge() * 0.1);
+                skat = (int) (-spiller.getPenge() * 0.1);
                 break;
         }
-        ui.updateSpillere( spiller );
+
+        spiller.addPenge(skat);
+        ui.betaltIndkomstSkat( spiller, skat);
     }
 
 
@@ -175,11 +175,8 @@ public class LandPaaFelt {
      * @author Malte
      */
     private void statsSkat( StatsSkat felt,  Spiller spiller, UserInterfaceKontrakt ui ){
-
-        ui.statsSkat( (int) felt.getSkat() );
         spiller.addPenge( -felt.getSkat() );
-
-        ui.updateSpillere(spiller);
+        ui.statsSkat( (int) felt.getSkat() );
     }
 
 

@@ -35,7 +35,7 @@ public class GUI_Generator {
 
             // Finder spiller farve
             Color spillerFarve = SPILLERFARVER[i % SPILLERFARVER.length];
-            bil.setPrimaryColor(spillerFarve);
+            bil.setPrimaryColor( spillerFarve );
 
             GUI_Player gui_spiller = new GUI_Player( spillere[i].getNavn(), (int) spillere[i].getPenge(), bil );
 
