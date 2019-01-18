@@ -25,11 +25,19 @@ public class ChancekortTest {
         Spil spil = SpilGenerator.genererSpil(2);
         spil.setRaflebaeger(new FalskRaflebaeger(2));
 
-
         ArrayList<Chancekort> alleChancekort = new ArrayList<>();
         Chancekort chancekort;
 
-        chancekort = new RykAntalFelter(-4, "Testkort");
+        chancekort = new RykAntalFelter(-4, "Du skal rykke fire felter tilbage");
+        alleChancekort.add(chancekort);
+
+        chancekort = new RykTilBestemtFelt(10, "Du skal på besøg i fængslet");
+        alleChancekort.add(chancekort);
+
+        chancekort = new JustererPenge(-100, "Du skal betale 100kr");
+        alleChancekort.add(chancekort);
+
+        chancekort = new JustererPenge(+100, "Du modtager 100kr");
         alleChancekort.add(chancekort);
 
         spil.setChancekort(alleChancekort);
