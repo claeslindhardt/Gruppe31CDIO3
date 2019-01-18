@@ -1,6 +1,5 @@
 package view.GUI;
 
-import model.felter.aktionsfelter.*;
 import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
@@ -15,9 +14,6 @@ import model.felter.Felt;
 import gui_codebehind.GUI_Center;
 import gui_fields.*;
 import gui_main.GUI;
-
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,10 +38,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public GUI_Field[] getFelter(){return felter;}
 
-    /**
-     * Genererer det grafiske braet til spillet (GUI), med spillere, felter og biler.
-     *
-     */
+
+
     //---------Metoder : -------------
 
     //===================================================
@@ -277,6 +271,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void harGivetOp(){
         gui.showMessage("Tak for spillet!\nDine penge vil gå til skattefar.");
+        // TODO: opdater spiller, bil og navn
     }
 
 
@@ -400,8 +395,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Player guiSpiller = spillere.get( spiller.getId() );
         rykBil( guiSpiller, felt.getPlacering() );
         gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
-
-
     }
 
     public void landetPaaStart(){

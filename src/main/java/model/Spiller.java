@@ -1,10 +1,7 @@
 package model;
 
 import model.chancekort.Chancekort;
-import model.felter.ejeligefelter.Ejendomsgruppe;
-import model.felter.ejeligefelter.Bryggeri;
-import model.felter.ejeligefelter.Ejendom;
-import model.felter.ejeligefelter.Rederi;
+import model.felter.ejeligefelter.*;
 
 import java.util.ArrayList;
 
@@ -25,8 +22,9 @@ public class Spiller {
     ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
     ArrayList<Rederi> spillerRederier = new ArrayList<>();
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
-
     ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
+
+    private ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
 
     protected double penge = 1500;
     protected boolean harGivetOp=false;
@@ -67,6 +65,18 @@ public class Spiller {
 
     }
 
+
+    public ArrayList<EjeligtFelt> getEjedeFelter(){
+
+        ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
+
+        ejedeFelter.addAll( spillerBryggeri );
+        ejedeFelter.addAll( spillerRederier );
+        ejedeFelter.addAll( spillerEjendomme );
+
+
+
+    }
 
     public int getSpillerPosition() {
         return spillerPosition;

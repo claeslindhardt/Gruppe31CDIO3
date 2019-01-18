@@ -1,24 +1,30 @@
 package view.GUI;
 
 import gui_fields.GUI_Player;
+import gui_main.GUI;
 import model.Spil;
+import model.Spiller;
 
 public class GUI_Opdater {
 
 
-    public static void opdaterFelter( ){
+
+
+
+    public void opdaterFelter( ){
 
     }
 
-    public static void opdaterSpiller( GUI_Player spiller ){
+    public  void opdaterSpillere( Spiller ... spillere ){
+
 
     }
 
-    public static void opdaterSpillere( Spil spil ){
+    public void opdaterSpillere( Spil spil ){
 
     }
 
-    public static void opdaterSpil( Spil spil ){
+    public void opdaterSpil( Spil spil ){
 
     }
 
