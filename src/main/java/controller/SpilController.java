@@ -5,8 +5,8 @@ import model.Spiller;
 import model.chancekort.Chancekort;
 import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
-import view.GUI.GUIinterface;
-import view.UserInterfaceKontrakt;
+import view.GUI.GraphicalUserInterface;
+import view.UserInterface;
 import model.Spil;
 import spillogik.SpilGenerator;
 
@@ -16,7 +16,7 @@ import static spillogik.VinderLogik.vinderFindes;
 
 public class SpilController{
 
-    private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
+    private UserInterface ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
 
@@ -59,7 +59,7 @@ public class SpilController{
 
     /** Laver en ny SpilController med en GUI */
     public SpilController(){
-        ui = new GUIinterface();
+        ui = new GraphicalUserInterface();
         spil = genererSpil();
     }
 
@@ -96,11 +96,11 @@ public class SpilController{
      */
     public void slutSpillerTur( Spiller spiller ) {
 
-        spiller.setHarSlaaetForTuren(false);
+        spiller.setHarSlaaet(false);
 
         if( spiller.getPenge() < 0  ){
-            ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
             spillerUdgaar( spiller );
+            ui.spillerErBankerot( spiller );
         }
 
         do {
@@ -123,7 +123,7 @@ public class SpilController{
         }
         spiller.clearChancekort();
 
-        for( Ejendom ejendom : spiller.getEjendomme() ){
+        for( Ejendom ejendom : spiller.getEjendommeArray() ){
             ejendom.setEjer(null);
         }
         spiller.clearEjendomme();
@@ -156,7 +156,7 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public boolean turMenu( Spiller spiller ) {
-        int valg = ui.TurMenu( spiller, 1, 12 );
+        int valg = ui.turMenu( spiller, 1, 12 );
 
         boolean slutTur = false;
 
@@ -185,6 +185,7 @@ public class SpilController{
                 if( handlinger.givOp( ui ) ){
                     slutTur = true;
                     spillerUdgaar( spiller );
+                    ui.harGivetOp( spiller );
                 }
                 break;
 

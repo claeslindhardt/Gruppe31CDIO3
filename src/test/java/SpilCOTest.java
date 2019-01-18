@@ -1,7 +1,7 @@
 /*
 import view.TUI.TUI;
 import controller.*;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import controller.Spiller;
 import model.Spil;
 import model.felter.ejeligefelter.Ejendom;
@@ -28,7 +28,7 @@ class SpilCOTest {
 
         int spillerTur = 1;
 
-        UserInterfaceKontrakt pan = new TUI();
+        UserInterface pan = new TUI();
         Spil spil = new SpilController(1, 4, 2, 0, pan);
 
 
@@ -36,7 +36,7 @@ class SpilCOTest {
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         int forventetSpillerPosition = 1;
-        int aktuelSpillerPosition = spil.getSpillerMedTur().getSpillerPosition();
+        int aktuelSpillerPosition = spil.getSpillerMedTur().getPosition();
         assertEquals(aktuelSpillerPosition, forventetSpillerPosition);
     }
 
@@ -51,7 +51,7 @@ class SpilCOTest {
     @Test
     void tjekForVinder() {
 
-        UserInterfaceKontrakt pan = new TUI();
+        UserInterface pan = new TUI();
         SpilController spil = new SpilController(3, 4, 2, 0, pan);
 
         spil.getSpillerObjekter().get(0).setHarGivetOp(true);
@@ -76,7 +76,7 @@ class SpilCOTest {
 
     @Test
     void Spilcontroller() {
-        UserInterfaceKontrakt pan = new TUI();
+        UserInterface pan = new TUI();
 
         SpilController spil = new SpilController(3, 20, 2, 0, pan);
         //Her bliver det testet at der bliver oprettet spiller objekter i en liste.
@@ -103,7 +103,7 @@ class SpilCOTest {
         // Her testes det at der bliver genereret forskellige feltertyper
 @Test
         void alleFeltTyper(){
-        UserInterfaceKontrakt pan = new TUI();
+        UserInterface pan = new TUI();
         SpilController spil = new SpilController(3, 20, 2, 0, pan);
         int startfelt = 0, ejendom = 0, chancefelt = 0, faengsel = 0, gaaIFaengsel = 0, jernbane = 0, taxi = 0;
 
@@ -140,7 +140,7 @@ class SpilCOTest {
 /*@Test
     public void genererSpillere(int antalSpillere) {
 
-        UserInterfaceKontrakt pan = new TUI();
+        UserInterface pan = new TUI();
         SpilController spil = new SpilController(2, 10, 2, 0, pan);
 
 

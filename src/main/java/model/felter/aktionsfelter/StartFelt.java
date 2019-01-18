@@ -5,7 +5,7 @@ import model.felter.Felt;
 public class StartFelt extends Felt {
 
     public StartFelt(int placering ){
-        super( "StartFelt", placering );
+        super( "Start", placering );
 
         setFeltType("Startfelt");
     }

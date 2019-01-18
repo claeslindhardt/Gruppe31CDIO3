@@ -1,6 +1,6 @@
 package controller.subcontroller;
 
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spiller;
 import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
@@ -10,7 +10,7 @@ import model.felter.ejeligefelter.Rederi;
 public class KoebFelt {
 
 
-    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterface ui ){
 
         if( felt instanceof Ejendom){
             koebEjendom( (Ejendom) felt, spiller, ui);
@@ -30,64 +30,62 @@ public class KoebFelt {
      * @param ejendom
      * @param ui
      */
-    public void koebEjendom(Ejendom ejendom, Spiller spiller, UserInterfaceKontrakt ui) {
+    public void koebEjendom(Ejendom ejendom, Spiller spiller, UserInterface ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( ejendom.getEjer() == spiller ) {
-            ui.tetPaaMonopol();
+            ui.ejerAlleredeFelt();
         }
         else if (spiller.getPenge() > ejendom.getPris()) {
-            ui.gennemfoertKoeb(ejendom, spiller);
             spiller.addPenge( - ejendom.getPris() );
-            ui.updateSpillere(spiller);
 
             //skifte ejerskab
             ejendom.setEjer(spiller);
-            spiller.getSpillerEjendomme().add(ejendom);
+            spiller.getEjendomme().add(ejendom);
+
+            ui.gennemfoertKoeb( ejendom, spiller);
 
         } else {
-            ui.monetosMangel();
+            ui.manglerPenge();
         }
     }
 
 
-    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt) {
-        if ( bryggeri.getEjer() == spiller ) {
-            userInterfaceKontrakt.alleredeEjer();
+    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterface userInterface) {
 
-        } else if ( spiller.getPenge() > bryggeri.getPris()) {
+        if ( spiller.getPenge() > bryggeri.getPris()) {
 
             spiller.addPenge( - bryggeri.getPris() );
-            userInterfaceKontrakt.gennemfoertKoebBryggeri(bryggeri, spiller);
-            userInterfaceKontrakt.updateSpillere( spiller );
 
             //skifte ejerskab
             bryggeri.setEjer( spiller );
             spiller.addBryggeri(bryggeri);
 
+            userInterface.gennemfoertKoeb( bryggeri, spiller );
+
 
         } else {
-            userInterfaceKontrakt.monetosMangel();
+            userInterface.manglerPenge();
         }
     }
 
-    public void koebRederi(Rederi rederi, Spiller spiller, UserInterfaceKontrakt ui) {
+    public void koebRederi(Rederi rederi, Spiller spiller, UserInterface ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( rederi.getEjer() == spiller ) {
-            ui.tetPaaMonopol();
+            ui.ejerAlleredeFelt();
         }
         else if (spiller.getPenge() > rederi.getPris()) {
-            ui.gennemfoertKoebRederi(rederi, spiller);
             spiller.addPenge( - rederi.getPris() );
-            ui.updateSpillere(spiller);
 
             //skifte ejerskab
             rederi.setEjer(spiller);
-            spiller.getSpillerRederier().add(rederi);
+            spiller.getRederier().add(rederi);
+
+            ui.gennemfoertKoeb(rederi, spiller);
 
         } else {
-            ui.monetosMangel();
+            ui.manglerPenge();
         }
     }
 

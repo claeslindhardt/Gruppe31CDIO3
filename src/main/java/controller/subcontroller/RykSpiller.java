@@ -1,7 +1,7 @@
 package controller.subcontroller;
 
 import controller.SpilController;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spil;
 import model.Spiller;
 import model.felter.Felt;
@@ -14,28 +14,28 @@ public class RykSpiller {
     /**
      * Indsæt beskrivelse her
      */
-    public void kastTerninger(Spil spil, Spiller spiller, UserInterfaceKontrakt ui, SpilController spilController) {
-        RafleBaeger rafleBaeger = spil.getRaflebaeger();
+    public void kastTerninger(Spil spil, Spiller spiller, UserInterface ui, SpilController spilController) {
+        RafleBaeger raflebaeger = spil.getRaflebaeger();
 
-        if ( !spiller.isHarSlaaetForTuren() ) {
+        if ( !spiller.harSlaaet() ) {
 
-            rafleBaeger.slaa();
+            raflebaeger.slaa();
 
-            ui.spillerRykkerGrundetTerningslag( rafleBaeger, spil.getSpillerTur() );
+            ui.terningerResultat( raflebaeger );
 
-            if ( rafleBaeger.erEns() ) {
+            if ( raflebaeger.erEns() ) {
                 ui.ensTerninger();
-                spil.getSpillerMedTur().setHarSlaaetForTuren(false);
+                spil.getSpillerMedTur().setHarSlaaet(false);
 
             } else {
-                spil.getSpillerMedTur().setHarSlaaetForTuren(true);
+                spil.getSpillerMedTur().setHarSlaaet(true);
 
             }
 
-            rykSpillerAntalFelter( spil, spiller, rafleBaeger.getTotalVaerdi(), ui, spilController );
+            rykSpillerAntalFelter( spil, spiller, raflebaeger.getTotalVaerdi(), ui, spilController );
 
         } else {
-            ui.harSlaaetMedTerningfor();
+            ui.harSlaaetMedTerning();
 
         }
     }
@@ -49,13 +49,13 @@ public class RykSpiller {
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterfaceKontrakt ui, SpilController spilController) {
+    public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterface ui, SpilController spilController) {
 
         Felt[] felter = spil.getFelter();
 
-        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getSpillerPosition()], felterAtRykke  );
+        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getPosition()], felterAtRykke  );
 
-        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, felter.length);
+        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getPosition(), felterAtRykke, felter.length);
 
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart, ui, spilController);
     }
@@ -73,16 +73,14 @@ public class RykSpiller {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt(Spiller spiller, Felt felt, int gangeOverStart, UserInterfaceKontrakt ui, SpilController spilController){
+    public void rykSpillerTilFelt(Spiller spiller, Felt felt, int gangeOverStart, UserInterface ui, SpilController spilController){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() + BevaegelsesLogik.passererStartPenge(gangeOverStart));
             ui.passeringAfStart(gangeOverStart);
-            ui.updateSpillere(spiller);
-
         }
 
-        spiller.setSpillerPosition(felt.getPlacering());
+        spiller.setPosition(felt.getPlacering());
         spilController.getLandPaaFelt().landPaaFelt( felt,  spiller, spilController, ui);
     }
 

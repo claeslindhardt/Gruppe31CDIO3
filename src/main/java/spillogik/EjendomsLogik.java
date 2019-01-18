@@ -68,7 +68,7 @@ public class EjendomsLogik {
     /**public static boolean kanManSaelgeEtHus(Ejendom ejendomUdgangspunkt){
 
         for (int i = 0; i < ejendomUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
-            Ejendom ejendom = ejendomUdgangspunkt.getGruppe().getEjendomme().get(i);
+            Ejendom ejendom = ejendomUdgangspunkt.getGruppe().getEjendommeArray().get(i);
 
             if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
                 return false;
@@ -198,13 +198,13 @@ public class EjendomsLogik {
     public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
         int leje = rederi.getLeje();
 
-        if (spiller.getSpillerRederier().size() == 2){
+        if (spiller.getRederier().size() == 2){
             leje = leje * 2;
         }
-        else if (spiller.getSpillerRederier().size() == 3){
+        else if (spiller.getRederier().size() == 3){
             leje = leje * 2 * 2;
         }
-        else if (spiller.getSpillerRederier().size() == 4){
+        else if (spiller.getRederier().size() == 4){
             leje = leje * 2 * 2 * 2;
         }
 
