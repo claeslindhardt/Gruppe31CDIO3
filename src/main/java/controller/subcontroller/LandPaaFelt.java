@@ -3,7 +3,7 @@ package controller.subcontroller;
 import controller.SpilController;
 import model.felter.aktionsfelter.*;
 import model.felter.ejeligefelter.EjeligtFelt;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.chancekort.Chancekort;
 import model.Spiller;
 import model.felter.*;
@@ -29,7 +29,7 @@ public class LandPaaFelt {
      * @param felt      Feltet der landes paa
      * @param spiller   Spilleren der lander paa feltet
      */
-    void landPaaFelt(Felt felt, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui){
+    void landPaaFelt(Felt felt, Spiller spiller, SpilController spilController, UserInterface ui){
 
         ui.duErLandetPaa(felt, spiller);
 
@@ -70,7 +70,7 @@ public class LandPaaFelt {
      *
      * @author Malte
      */
-    private void ejeligtFelt( SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterfaceKontrakt ui ){
+    private void ejeligtFelt( SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterface ui ){
 
         if( felt.getEjer() == null ){
 
@@ -93,7 +93,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et felt af typen {@link StartFelt}.
      * @author Malte
      */
-    private void startFelt( UserInterfaceKontrakt ui ){
+    private void startFelt( UserInterface ui ){
         ui.landetPaaStart();
     }
 
@@ -102,7 +102,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et {@link ProevLykken} felt.
      * @author Malte
      */
-    private void proevLykken( Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui ){
+    private void proevLykken( Spiller spiller, SpilController spilController, UserInterface ui ){
         ArrayList<Chancekort> chancekort = spilController.getSpil().getChanceKort();
 
         // Trækker kort
@@ -125,7 +125,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et {@link GaaIFaengsel} felt.
      * @author Malte
      */
-    private void gaaIFaengsel( SpilController spilController, UserInterfaceKontrakt ui ){
+    private void gaaIFaengsel( SpilController spilController, UserInterface ui ){
         Spiller spillerMedTur = spilController.getSpil().getSpillerMedTur();
         Faengsel faengsel = spilController.getSpil().getFaengsel();
 
@@ -142,7 +142,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et {@link Faengsel} felt.
      * @author Malte
      */
-    private void faengsel( UserInterfaceKontrakt ui ){
+    private void faengsel( UserInterface ui ){
         ui.paaBesoegIFaengsel();
     }
 
@@ -151,7 +151,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et {@link IndkomstSkat} felt.
      * @author Malte
      */
-    private void indkomstSkat( Spiller spiller, UserInterfaceKontrakt ui ){
+    private void indkomstSkat( Spiller spiller, UserInterface ui ){
         int valg = ui.vaelgIndkomstSkat();
         int skat = 0;
 
@@ -174,7 +174,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et felt af typen {@link StatsSkat}.
      * @author Malte
      */
-    private void statsSkat( StatsSkat felt,  Spiller spiller, UserInterfaceKontrakt ui ){
+    private void statsSkat( StatsSkat felt,  Spiller spiller, UserInterface ui ){
         spiller.addPenge( -felt.getSkat() );
         ui.statsSkat( (int) felt.getSkat() );
     }
@@ -184,7 +184,7 @@ public class LandPaaFelt {
      * Forløbet i at lande paa et felt af typen {@link FriParkering}.
      * @author Malte
      */
-    private void friParkering(UserInterfaceKontrakt ui ){
+    private void friParkering(UserInterface ui ){
         ui.friParkering();
     }
 

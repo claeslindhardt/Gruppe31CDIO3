@@ -11,8 +11,7 @@ import model.raflebaeger.RafleBaeger;
 import java.util.ArrayList;
 
 
-public interface UserInterfaceKontrakt {
-
+public interface UserInterface {
 
     void aabenSpil( Spil spil );
     String[] opretSpillere( int min, int max );

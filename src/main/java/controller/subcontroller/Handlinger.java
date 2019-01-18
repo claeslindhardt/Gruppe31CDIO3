@@ -2,12 +2,9 @@ package controller.subcontroller;
 
 import controller.SpilController;
 import model.raflebaeger.RafleBaeger;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spiller;
 import model.chancekort.Chancekort;
-import model.felter.ejeligefelter.Bryggeri;
-import model.felter.ejeligefelter.Ejendom;
-import model.felter.ejeligefelter.Rederi;
 
 import java.util.ArrayList;
 
@@ -18,11 +15,11 @@ public class Handlinger {
      * @author Andreas
      * Metoden gør at en spiller kan give op.
      * Valget vises i UI. Ved valg 1,
-     * @param userInterfaceKontrakt
+     * @param userInterface
      */
-    public boolean givOp( UserInterfaceKontrakt userInterfaceKontrakt ){
+    public boolean givOp( UserInterface userInterface){
         int svar;
-        svar = userInterfaceKontrakt.vilDuGiveOp();
+        svar = userInterface.vilDuGiveOp();
 
         if(svar == 0) {
             return true;
@@ -37,24 +34,24 @@ public class Handlinger {
     /**
      * @auther Andreas
      * Vælger og eksekverer et chancekort fra en liste der bliver vist i UI.
-     * @param userInterfaceKontrakt
+     * @param userInterface
      */
-    public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void chanceKortMuligheder(Spiller spiller, SpilController spil, UserInterface userInterface) {
         ArrayList<Chancekort> chancekort = spiller.getChancekort();
 
         if ( chancekort.size() > 0 ) {
 
-            int valg = userInterfaceKontrakt.chanceKortNr( spiller );
+            int valg = userInterface.chanceKortNr( spiller );
 
             if (valg < chancekort.size()) {
 
                 Chancekort valgtChancekort = chancekort.get(valg);
-                spil.getBrugChancekort().brugChancekort( valgtChancekort, spiller, spil.getSpil(), userInterfaceKontrakt, spil );
+                spil.getBrugChancekort().brugChancekort( valgtChancekort, spiller, spil.getSpil(), userInterface, spil );
                 chancekort.remove(valgtChancekort);
                 spil.getSpil().addChancekort(valgtChancekort);}
 
         } else {
-            userInterfaceKontrakt.ingenChanceKort();
+            userInterface.ingenChanceKort();
         }
     }
 
@@ -63,7 +60,7 @@ public class Handlinger {
      * @author Filip
      * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
      */
-    public void ankerDom( Spiller spiller, RafleBaeger raflebaeger, UserInterfaceKontrakt ui ) {
+    public void ankerDom( Spiller spiller, RafleBaeger raflebaeger, UserInterface ui ) {
 
         ui.ankerDom();
 

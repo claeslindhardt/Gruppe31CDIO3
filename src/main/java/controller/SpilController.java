@@ -5,8 +5,8 @@ import model.Spiller;
 import model.chancekort.Chancekort;
 import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
-import view.GUI.GUIinterface;
-import view.UserInterfaceKontrakt;
+import view.GUI.GraphicalUserInterface;
+import view.UserInterface;
 import model.Spil;
 import spillogik.SpilGenerator;
 
@@ -16,7 +16,7 @@ import static spillogik.VinderLogik.vinderFindes;
 
 public class SpilController{
 
-    private UserInterfaceKontrakt ui; // Den UI, som SpilControlleren bruger
+    private UserInterface ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
 
@@ -59,7 +59,7 @@ public class SpilController{
 
     /** Laver en ny SpilController med en GUI */
     public SpilController(){
-        ui = new GUIinterface();
+        ui = new GraphicalUserInterface();
         spil = genererSpil();
     }
 

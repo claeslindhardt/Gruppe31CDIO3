@@ -1,6 +1,6 @@
 package controller.subcontroller;
 
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spiller;
 import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
@@ -10,7 +10,7 @@ import model.felter.ejeligefelter.Rederi;
 public class KoebFelt {
 
 
-    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterface ui ){
 
         if( felt instanceof Ejendom){
             koebEjendom( (Ejendom) felt, spiller, ui);
@@ -30,7 +30,7 @@ public class KoebFelt {
      * @param ejendom
      * @param ui
      */
-    public void koebEjendom(Ejendom ejendom, Spiller spiller, UserInterfaceKontrakt ui) {
+    public void koebEjendom(Ejendom ejendom, Spiller spiller, UserInterface ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( ejendom.getEjer() == spiller ) {
@@ -51,7 +51,7 @@ public class KoebFelt {
     }
 
 
-    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterfaceKontrakt userInterfaceKontrakt) {
+    public void koebBryggeri(Bryggeri bryggeri, Spiller spiller, UserInterface userInterface) {
 
         if ( spiller.getPenge() > bryggeri.getPris()) {
 
@@ -61,15 +61,15 @@ public class KoebFelt {
             bryggeri.setEjer( spiller );
             spiller.addBryggeri(bryggeri);
 
-            userInterfaceKontrakt.gennemfoertKoeb( bryggeri, spiller );
+            userInterface.gennemfoertKoeb( bryggeri, spiller );
 
 
         } else {
-            userInterfaceKontrakt.manglerPenge();
+            userInterface.manglerPenge();
         }
     }
 
-    public void koebRederi(Rederi rederi, Spiller spiller, UserInterfaceKontrakt ui) {
+    public void koebRederi(Rederi rederi, Spiller spiller, UserInterface ui) {
 
         //Sikkerheds Foranstaltning: Vi tjekker mod dobbeltkøb
         if ( rederi.getEjer() == spiller ) {

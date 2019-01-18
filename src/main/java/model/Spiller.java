@@ -24,12 +24,10 @@ public class Spiller {
     ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
     ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
-    private ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
-
-    protected double penge = 1500;
-    protected boolean harGivetOp=false;
-    protected boolean harAnketDomDenneRunde = false;
-    protected boolean harSlaaetForTuren = false;
+    private double penge = 1500;
+    private boolean harGivetOp=false;
+    private boolean harAnketDomDenneRunde = false;
+    private boolean harSlaaetForTuren = false;
 
     private boolean erUdgaaet = false;
 
@@ -243,10 +241,6 @@ public class Spiller {
     public boolean ejerEjendom(Ejendom ejendom){
         return ejendom.getEjer() == this;
     }
-
-
-
-
 
 
 }

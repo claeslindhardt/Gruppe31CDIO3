@@ -1,7 +1,7 @@
 package controller.subcontroller;
 
 import controller.SpilController;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spil;
 import model.Spiller;
 import model.felter.ejeligefelter.Bryggeri;
@@ -24,7 +24,7 @@ public class Handel {
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
      */
-    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt ui ){
+    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterface ui ){
         Spiller ejeren = felt.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
@@ -58,7 +58,7 @@ public class Handel {
      *
      * @param ejendom: hvilken ejendom man vil bygge et hus paa.
      */
-    public void koebHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void koebHus(Spiller spiller, Ejendom ejendom, UserInterface userInterface){
         if( EjendomsLogik.kanKoebeHus( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHuse(1);
 
@@ -68,7 +68,7 @@ public class Handel {
         }
     }
 
-    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt ui) {
+    public void saelgHus(Spiller spiller, Ejendom ejendom, UserInterface ui) {
         if (EjendomsLogik.kanSaelgeHus(spiller, ejendom, ejendom.getGruppe())){
 
             ejendom.saelgHus(1);
@@ -96,7 +96,7 @@ public class Handel {
      * om at vise ting og tage i mod inputs.
      * @param ui: hvilket UserInterface der skal bruges.
      */
-    public void koebHusPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
+    public void koebHusPaaEjendom(Spiller spiller, UserInterface ui){
         Ejendom[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){
@@ -140,7 +140,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    public void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHusPaaEjendom( Spiller spiller, UserInterface ui ){
 
         // Finder ejendomme med sælgbare huse på
         ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
@@ -169,7 +169,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    public void saelgHotelPaaEjendom(SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHotelPaaEjendom(SpilController spil, Spiller spiller, UserInterface ui ){
 
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
@@ -193,9 +193,9 @@ public class Handel {
      * og trække penge fra spilleren.
      * @param spiller
      * @param ejendom
-     * @param userInterfaceKontrakt
+     * @param userInterface
      */
-    public void koebHotel(Spiller spiller, Ejendom ejendom, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void koebHotel(Spiller spiller, Ejendom ejendom, UserInterface userInterface){
         if( EjendomsLogik.kanKoebeHotel( spiller, ejendom, ejendom.getGruppe()) ){
             ejendom.bygHotel(true);
             ejendom.setAntalHuse(0);
@@ -211,7 +211,7 @@ public class Handel {
      * om at vise ting og tage imod inputs.
      * @param ui : hvilket UserInterface der skal bruges.
      */
-    public void koebHotelPaaEjendom(Spiller spiller, UserInterfaceKontrakt ui){
+    public void koebHotelPaaEjendom(Spiller spiller, UserInterface ui){
         Ejendom[] ejendomme = spiller.getEjendomme();
 
         if( ejendomme.length > 0 ){

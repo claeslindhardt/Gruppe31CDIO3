@@ -3,7 +3,7 @@ package view.GUI;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.raflebaeger.Terning;
-import view.UserInterfaceKontrakt;
+import view.UserInterface;
 import model.Spil;
 import model.Spiller;
 import model.chancekort.Chancekort;
@@ -18,11 +18,11 @@ import static view.GUI.GUI_Generator.genererSpillere;
 
 /**
  * __________________________________________________________________________________________________________________________________________________________
- * PROGRAMDOKUMENTATION: GUIinterface.
+ * PROGRAMDOKUMENTATION: GraphicalUserInterface.
  *
  *
  */
-public class GUIinterface implements UserInterfaceKontrakt {
+public class GraphicalUserInterface implements UserInterface {
 
     private GUI_Extension gui;
 
