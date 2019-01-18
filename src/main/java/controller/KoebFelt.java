@@ -37,7 +37,7 @@ public class KoebFelt {
             ui.tetPaaMonopol();
         }
         else if (spiller.getPenge() > ejendom.getPris()) {
-            ui.gennemfoertKoeb(ejendom, spiller);
+            ui.gennemfoertKoeb( ejendom, spiller);
             spiller.addPenge( - ejendom.getPris() );
             ui.updateSpillere(spiller);
 
@@ -58,7 +58,7 @@ public class KoebFelt {
         } else if ( spiller.getPenge() > bryggeri.getPris()) {
 
             spiller.addPenge( - bryggeri.getPris() );
-            userInterfaceKontrakt.gennemfoertKoebBryggeri(bryggeri, spiller);
+            userInterfaceKontrakt.gennemfoertKoeb( bryggeri, spiller );
             userInterfaceKontrakt.updateSpillere( spiller );
 
             //skifte ejerskab
@@ -78,7 +78,7 @@ public class KoebFelt {
             ui.tetPaaMonopol();
         }
         else if (spiller.getPenge() > rederi.getPris()) {
-            ui.gennemfoertKoebRederi(rederi, spiller);
+            ui.gennemfoertKoeb(rederi, spiller);
             spiller.addPenge( - rederi.getPris() );
             ui.updateSpillere(spiller);
 

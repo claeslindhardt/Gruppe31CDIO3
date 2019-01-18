@@ -65,10 +65,6 @@ public class Handlinger {
 
         if ( chancekort.size() > 0 ) {
 
-            //Her printes de forskellige muligher:
-            userInterfaceKontrakt.chanceKortHar();
-
-
             int valg = userInterfaceKontrakt.chanceKortNr( spiller );
 
             if (valg < chancekort.size()) {

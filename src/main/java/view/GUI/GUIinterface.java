@@ -526,84 +526,23 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
 
-    public int hvorHen(int pos, int min, int max){
-        gui.showMessage("Din nuvaerende position er: "+ pos+" Hvor vil de hen?: ");
-        int valg = gui.getUserInteger("Intast nummeret på det felt du gerne vil hen til");
-        return valg;
-    }
-    public void holdDigPaaBrettet(){
-        gui.showMessage("Den gaar ikke, du skulle have valgt noget der ligger inden for braettets antal felter");
-    }
-
 
     public void alleredeEjer(){
         gui.showMessage("Du er allerede ejer");
     }
 
-    public void dinJernbane(){
-        gui.showMessage("Jernbanen er nu din!");
-    }
 
     public void monetosMangel(){
         gui.showMessage("Du har ikke raad på nuvaerende tidspunkt. Vi vil dog stadig gerne bevare dig som kunde.");
     }
 
-    public void overStartAnimation(){
-        System.out.println("Aktion som foelger af StartFelt");
-    }
-    public void startsFeltsInfo(StartFelt felt){
-        gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |");
-    }
     public void iFaengselMedDig(){
         gui.showMessage("HOV HOV HOV, meget kan man boeje, men ikke loven! Bandit!"+
         "\nFordi du er landet på et felt, hvor man bliver kriminel "+
         "\nskal du nu en tur i kashotten.");
     }
-    public void faengselInfo(GaaIFaengsel Faengsel){
-        gui.showMessage("| Felt nr: " + Faengsel.getPlacering() +" | Felt Navn:" + Faengsel.getNavn()+" | Felt type:"+ Faengsel.getFeltType()+" |");
-
-    }
-    public void muligeDestinationer(){
-        gui.showMessage("Du kan rejse til ");
-    }
-    public int stationsMuligheder(int min, int max){
-        int valg = gui.getUserInteger("Hvis du ikke oensker at rejse, tast 0, " +
-                "\nellers intast den destination du ønsker at rejse til:");
-        return valg;
-    }
-    public void turEfterJernbane(){
-        gui.showMessage("Du kan nu fortsaette din tur, men får ikke muligheden for at tage jernbanen igen i denne tur," +
-                "\n det tog er koert!");
-    }
-    public void manglerJernbaner(){
-        gui.showMessage("Du ejer ikke nok jernbaner til at rejse:");
-
-    }
-    public int jernBaneTilbud(){
-        String valg = gui.getUserSelection("|--|Dette er en Jernbane, kunne du tænke dig at købe den?",
-                "Ja", "Nej");
-        gui.showMessage(valg);
-
-        return input.binartValg(valg);
-    }
-    public void forsetTur(){
-        gui.showMessage("Fortsaet din tur");
-    }
-    public void ejetAfEnAnden(){
-        gui.showMessage("En anden spiller ejer dette felt, du kan derfor ikke koebe det");
-    }
     public void tetPaaMonopol(){
         gui.showMessage("Du er landet på et sted du ejer, naermer du dig et monopol?");
-    }
-
-    public void chanceFeltsInfo(ProevLykken felt){
-        /*gui.showMessage("| Felt nr: " + felt.getPlacering() +" | Felt navn:" + felt.getNavn()+" | Felt type:"+ felt.getFeltType()+" |"
-                +"\nKort på felt:");
-        for(int i = 0; i< felt.getKortPaaFelt().size();i++ ){
-            gui.showMessage(felt.getKortPaaFelt().get(i).getBeskrivelse()+"|-| ");
-        }
-        System.out.print(" |");
-        System.out.println(" ");*/
     }
 
     public void updateSpillere(Spiller spiller){
@@ -628,21 +567,14 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         // Ændrer borderen på feltet til spillerens bils farve
         gui_ejendom.setBorder(spillere.get( spiller.getId()).getCar().getPrimaryColor() );
-
     }
-    public void ejendomsInfo(Ejendom ej){
-        String ejer;
-        if(ej.getEjer() == null){
-            ejer = "Ingen ejer endnu";
-        }else{
-            ejer = ej.getEjer().getNavn();
-        }
+
+    public void gennemfoertKoeb( EjeligtFelt felt, Spiller spiller ){
+
+        gui.showMessage("Du har koebt " + felt.getNavn() + "!");
 
 
-        gui.showMessage("| Felt nr: " + ej.getPlacering() +" | Feltnavn:" + ej.getNavn()+" | Felttype:"+ ej.getFeltType()+" |"+
-                "\n| Pris: "+ej.getPris()+ " | Leje: "+ej.getLeje()+" | Antal Huse: "+ej.getAntalHuse()+
-                " | Huspris: "+ej.getHusPris()+" | Antal hoteller: "+ej.harHotel() +"|"+
-                "\n| Pantsat: "+ej.isPantsat() +" | Group: "+ej.getGruppe().getFarve()+ "|"+" Ejer: "+ejer+"|");
+
     }
 
     /**
@@ -655,7 +587,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Du har koebt " + rederi.getNavn() + "!");
 
         GUI_Shipping gui_rederi = (GUI_Shipping) gui.getFields()[rederi.getPlacering()];
-
         gui_rederi.setBorder(spillere.get(spiller.getId()).getCar().getPrimaryColor());
     }
 
@@ -689,50 +620,18 @@ public class GUIinterface implements UserInterfaceKontrakt {
         gui.showMessage("Tag du dig bare en pause.");
     }
 
-    public void badErrorMessage(){
-        gui.showMessage("ERROR: WOOPS, TRIED TO COLLECTRENT WHEN PLAYER OBJECT WAS EMPTY!");
-    }
 
     public int ejendomsBud(){
         return input.binaertValg("Ingen ejer denne. Ønsker du at købe den?", "Ja", "Nej", gui);
     }
 
-    public void spillerEjendele(Spiller spiller){
-        gui.showMessage("Ejendomme: ");
-        gui.showMessage("Jernbaner: ");
-    }
-
-    public void terminalLine(){
-        System.out.println("______________________________________________________________________________");
-    }
-
-    public void landPaaStart(){
-        gui.showMessage("Du er landet på start, så du kan bare tage dig en pause.");
-    }
-
-    public void trækEtChancekort(){
-        gui.showMessage("Du må trække et chancekort, fra bunken i midten");
-    }
-
-    public void printChanceKortDirekte(Chancekort di){
-
-        gui_center.setChanceCard(di.getBeskrivelse());
-        gui_center.displayChanceCard();
-    }
 
     public void visChanceKort( Chancekort chancekort ){
         gui_center.setChanceCard( chancekort.getBeskrivelse() );
         gui_center.displayChanceCard();
     }
 
-    public void chanceKortTilføjet(){
-        gui.showMessage("Dette kort vil blive tilfoejet til dine Chancekort," +
-                "\ndu kan nu bruge det når du oensker."
-        );
-    }
-    public void chanceKortBrugt(){
-        System.out.println("Du har nu brugt dit Taxi Chancekort");
-    }
+
     public void brugtUdAfFaengsel(){
         gui.showMessage("Du har brugt dit 'Gratis ud af feangsel' Chancekort. Var du bag traemmer, er du nu fri," +
                 "\nog hvis du ikke var, faar du så lov til at slå med terningerne igen.");
@@ -762,17 +661,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
         GUI_Street husSkalPaa = (GUI_Street) (getFelter()[ejendom.getPlacering()]);
         husSkalPaa.setHotel(false);
         husSkalPaa.setHouses(ejendom.getAntalHuse());
-    }
-
-    public String skatteBetaling(){
-        String betal =     gui.getUserSelection("Du skla betale skat!\n Du kan enten betale 200 eller 10% af din samlede pengebeholdning\n Hvad vælger du? ", "At betale 200","At betale 10%");
-              return betal;
-    }
-
-    public void skatteBesked(int valg){
-        if(valg == 1) {
-            gui.showMessage("");
-        }else {gui.showMessage("Du skal betale indkomstskat");}
     }
 
     @Override
@@ -873,10 +761,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
 
-    public void rejseBekraeftelse(String jernbane){
-        gui.showMessage("Du er rejst til "+jernbane);
-    }
-
     /**
      * @ Filip
      * Printer en besked i GUI'en, hvis man vælger at slå terninger fra turmenu, mens man er i fængsel.
@@ -886,11 +770,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void kanIkkeKøbeHotel(){gui.showMessage("Du har desvaerre ikke mulighed for at købe et hotel endnu");};
-
-    public void spillerMaaIkkeEns(){ hovedmenu.showMessage("To spillere kan ikke hedde det samme. \n Indtast et nyt navn.");}
-
-    public void ikkeTaxiTilTaxi(){ gui.showMessage("Du kan ikke tage en taxi til en taxi, det ville være snyd!"); }
-
 
 
     public int vaelgIndkomstSkat(){
@@ -918,77 +797,6 @@ public class GUIinterface implements UserInterfaceKontrakt {
     public void friParkering(){
         gui.showMessage("Velkommen til fristedet, også kendt som parkerings pladsen.");
     }
-    //===================================================
-    //===================================================
-    //      KODEN TIL SKALERING OG VELIGEHOLDELSE:
-    //===================================================
-    //===================================================
-    public void startSpilGrundFejl(){
-        gui.showMessage("Wooops ikke en mulighed endnu, spillet starter" +
-                "\nmed standard instillinger");
-    }
-    /*
-    /**
-     * @author Jacob og Chua
-     *
-     * Denne metode skriver først en tekst i GUI om hvad der skal ske nu, og derefter kan man skrive et input om'
-     * hvor stor en bankerot graense der skal være (min - 0 og max - 1000).
-     * metoden {@link GUI#getUserInteger} er omkranset af en try / catch for at forhindre at man kan indtaste forkerte
-     * input. En if/else i while loopet sørger for at det indtastede bliver indenfor parametrene.
-     *
-     * @param minInput - Denne parameter bliver kun brugt i TUI
-     * @param maxInput - Denne parameter bliver kun brugt i TUI
-     * @return - Der bliver returneret en indstilling af hvor bankerot graensen skal ligge.
-     */
-    /*
-    public int instilingsSporgsmaal3(int minInput, int maxInput){
-        hovedmenu.showMessage("Hvor skal bankerot graensen ligge?: " +
-                "\nNB Bankerot graensen skal ligge mellem 0 og 1000");
-        while (true) {
-            try {
-                int valg = hovedmenu.getUserInteger("Indtast bankerotgraensen!");
 
-                if (valg <= 1000 && valg >= 0) {
-                    return valg;
-                }
-                hovedmenu.showMessage("Bankerotgraensen kan være fra 0 til 1000, vælg en ny bankerotgraense!");
-            } catch (Exception i) {
-                hovedmenu.showMessage("Dette er ikke et gyldigt input, proev igen!");
-            }
-        }
-    }
-    public void opretteInstillinger(int getAntalSpillere,int getAntalFelter,int getAntalTerninger,int getSpillerTur,int getBankeraadGraense){
-        hovedmenu.showMessage("I er: " + getAntalSpillere + " spillere." +
-                "\nBraettet har "+(getAntalFelter+1)+" Felter," +
-                "\nmed "+getAntalTerninger+" terninger på braettet." +
-                "\nSpiller "+getSpillerTur + " Starter!" +
-                "\nMan går bankerot og taber dermed hvis man har mindre end: "+getBankeraadGraense+" penge. ");
-    }
-    /**
-     * @author Jacob og Chua
-     *
-     * Denne metode returnerer bare 2 terninger, da det er det antal terninger som der ALTID skal være. Der bliver
-     * skrevet en besked i GUI med den oplysning.
-     *
-     * @param minInput - Bliver KUN brugt i TUI
-     * @param maxInput - Bliver KUN brugt i TUI
-     * @return 2 terninger
-     *//*
-    public int instilingsSporgsmaal2(int minInput, int maxInput){
-        hovedmenu.showMessage("Spillet starter med 2 terninger");
-        return 2;
-    }
-
-    public void printTerninger(RafleBaeger terningsKrus){
-        ArrayList<Integer> tern = terningsKrus.FaaTerningVærdier();
-        for(int i =0; i<tern.size();i++) {
-            gui.showMessage(tern.get(i)+ ", ");
-        }
-    }
-
-    public void chanceKortGenereringsFejl(){
-        gui.showMessage("Der var et problem med generering af ChanceKort, på et specifikt felt.");
-    }
-    */
 
 }

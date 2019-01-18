@@ -45,8 +45,6 @@ public class Handel {
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
             userInterfaceKontrakt.updateSpillere(spilleren);
             userInterfaceKontrakt.updateSpillere(ejeren);
-        }else{
-            userInterfaceKontrakt.badErrorMessage();
         }
     }
 

@@ -26,24 +26,30 @@ public interface UserInterfaceKontrakt {
     void spillerRykkerGrundetTerningslag(RafleBaeger terningsKrus, int spillerTur);
     void ensTerninger();
     void paaBesoegIFaengsel();
-    int vilDuGiveOp();
+    int  vilDuGiveOp();
     void harGivetOp();
     void passeringAfStart(int gangeOverStart);
-    void chanceKortHar();
+
     int chanceKortNr(Spiller spiller);
+
     void ingenChanceKort();
+
     void alleredeEjer();
+
     void monetosMangel();
+
     void iFaengselMedDig();
 
     void tetPaaMonopol();
-    void gennemfoertKoeb(Ejendom ejendom, Spiller spiller);
-    void gennemfoertKoebRederi (Rederi rederi, Spiller spiller);
-    void gennemfoertKoebBryggeri (Bryggeri bryggeri, Spiller spiller);
+
+    void gennemfoertKoeb( EjeligtFelt felt, Spiller spiller );
+
     void betalRente();
+
     void duErLandetPå(Felt felt, Spiller spiller);
-    void badErrorMessage();
+
     int ejendomsBud();
+
     void brugtUdAfFaengsel();
     void ejerIngenEjendomme();
     void ejerIngenBebyggeligeEjendomme();
