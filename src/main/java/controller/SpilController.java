@@ -85,7 +85,7 @@ public class SpilController{
 
             slutSpillerTur( spillerMedTur );
 
-        }while( ! vinderFindes( spil ) );
+        }while( !vinderFindes( spil ) );
 
         ui.spilletErSlut( getVinder( spil ) );
     }
@@ -103,12 +103,15 @@ public class SpilController{
             spillerUdgaar( spiller );
         }
 
-        if ( spil.getSpillerTur() >= spil.getAntalSpillere() ) {
-            spil.setSpillerTur(1);
+        do {
 
-        } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
-            spil.setSpillerTur(spil.getSpillerTur() + 1);
-        }
+            if (spil.getSpillerTur() >= spil.getAntalSpillere()) {
+                spil.setSpillerTur(1);
+
+            } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
+                spil.setSpillerTur(spil.getSpillerTur() + 1);
+            }
+        }while( spil.getSpillerMedTur().erUdgaaet() );
     }
 
 
@@ -137,12 +140,10 @@ public class SpilController{
             handlinger.ankerDom( spiller, spil.getRaflebaeger(), ui );
         }
 
-        boolean turErSlut = false;
+        boolean turErSlut;
 
         do{
-
             turErSlut = turMenu( spiller );
-
         }while( !turErSlut );
 
     }
@@ -155,13 +156,13 @@ public class SpilController{
      * sørger for at tilhørende metoder udføres
      */
     public boolean turMenu( Spiller spiller ) {
-        int valg = ui.TurMenu( spil.getSpillerMedTur(), 1, 12 );
+        int valg = ui.TurMenu( spiller, 1, 12 );
 
         boolean slutTur = false;
 
         switch( valg ){
 
-            case 1:
+            case 0:
 
                 if ( !spiller.erIFaengsel() ) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
@@ -170,36 +171,35 @@ public class SpilController{
                     ui.kanIkkeSlaaFaengsel();
 
                 }
-
                 break;
 
-            case 2:
+            case 1:
                 slutTur = true;
                 break;
 
-            case 3:
+            case 2:
                 handlinger.chanceKortMuligheder( spiller, this, ui);
                 break;
 
-            case 7:
+            case 3:
                 if( handlinger.givOp( ui ) ){
                     slutTur = true;
                     spillerUdgaar( spiller );
                 }
                 break;
 
-            case 8:
+            case 4:
                 handel.koebHusPaaEjendom( spiller, ui);
                 break;
 
-            case 9:
+            case 5:
                 handel.koebHotelPaaEjendom( spiller, ui);
                 break;
 
-            case 11: handel.saelgHusPaaEjendom( spiller, ui );
+            case 6: handel.saelgHusPaaEjendom( spiller, ui );
                 break;
 
-            case 12: handel.saelgHotelPaaEjendom(this, spiller, ui);
+            case 7: handel.saelgHotelPaaEjendom(this, spiller, ui);
                 break;
         }
 

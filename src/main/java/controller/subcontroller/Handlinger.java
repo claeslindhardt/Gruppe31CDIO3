@@ -27,7 +27,6 @@ public class Handlinger {
         if(svar == 0) {
             userInterfaceKontrakt.harGivetOp();
             return true;
-
         }
         else {
             return false;
@@ -43,7 +42,6 @@ public class Handlinger {
             userInterfaceKontrakt.byggetHus(x);
             userInterfaceKontrakt.byggeHotel(x);
         }
-
 
         for(Rederi x: spiller.getSpillerRederier()){
             x.setEjer(null);
