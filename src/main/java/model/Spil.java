@@ -1,8 +1,7 @@
 package model;
 
-import view.UserInterfaceKontrakt;
 import model.chancekort.Chancekort;
-import model.felter.Faengsel;
+import model.felter.aktionsfelter.Faengsel;
 import model.felter.Felt;
 import model.raflebaeger.RafleBaeger;
 
@@ -82,7 +81,7 @@ public class Spil {
 
 
     public Spiller getSpillerMedTur(){
-        return spillere[spillerTur-1];
+        return spillere[ spillerTur-1 ];
     }
 
 

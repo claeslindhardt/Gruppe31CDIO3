@@ -1,10 +1,10 @@
 package spillogik;
 
-import model.Ejendomsgruppe;
+import model.felter.ejeligefelter.Ejendomsgruppe;
 import model.Spiller;
-import model.felter.EjeligtFelt;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 
 public class EjendomsLogik {
 

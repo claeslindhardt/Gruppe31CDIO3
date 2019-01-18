@@ -12,7 +12,7 @@ public class VinderLogik {
         int antalSpillereISpil = 0;
 
         for( Spiller spiller : spil.getSpillere() ){
-            if( spiller.erUdgaaet() ){
+            if( !spiller.erUdgaaet() ){
                 antalSpillereISpil++;
             }
         }

@@ -1,7 +1,7 @@
-package model.felter;
+package model.felter.ejeligefelter;
 
-import model.Ejendomsgruppe;
 import model.Spiller;
+import model.felter.Felt;
 
 /**__________________________________________________________________________________________________________________________________________________________
  *  PROGRAMDOKUMENTATION: EjeligtFelt

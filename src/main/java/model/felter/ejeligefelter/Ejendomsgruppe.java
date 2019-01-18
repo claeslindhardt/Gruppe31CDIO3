@@ -1,6 +1,6 @@
-package model;
+package model.felter.ejeligefelter;
 
-import model.felter.Ejendom;
+import model.felter.ejeligefelter.Ejendom;
 import java.awt.*;
 import java.util.ArrayList;
 

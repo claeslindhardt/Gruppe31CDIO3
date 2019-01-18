@@ -1,11 +1,15 @@
 package view.GUI;
 
+import model.felter.aktionsfelter.*;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.Terning;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import model.Spiller;
 import model.chancekort.Chancekort;
-import model.felter.*;
 import model.raflebaeger.RafleBaeger;
 import model.felter.Felt;
 import gui_codebehind.GUI_Center;
@@ -119,7 +123,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
                 } else if (ejeligtFeltDTO instanceof Bryggeri) {
                     gui_felt = new GUI_Brewery();
 
-                } else if ( ejeligtFeltDTO instanceof Rederi ) {
+                } else if ( ejeligtFeltDTO instanceof Rederi) {
                     gui_felt = new GUI_Shipping();
                     gui_felt.setBackGroundColor(Color.white);
                 }
@@ -136,7 +140,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
             } else if( felt instanceof ProevLykken) {
                 gui_felt = new GUI_Chance();
 
-            } else if( felt instanceof FriParkering ){
+            } else if( felt instanceof FriParkering){
                 gui_felt = new GUI_Refuge();
                 gui_felt.setBackGroundColor(Color.white);
                 gui_felt.setSubText("Fri parkering");
@@ -254,7 +258,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void startSpil( Spil spil ) {
 
-        gui.showMessage("Lad os spille!");
+        gui.showMessage("Lad os spille! - " + spil.getSpillerMedTur().getNavn() + " starter.");
 
         GUI_Player[] gui_spillere = genererSpillere( spil.getSpillere() );
 
@@ -267,8 +271,9 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public String[] opretSpillere( int min, int max ){
 
-        int antalSpillere = 0;
+        int antalSpillere;
         do{
+            antalSpillere = gui.getUserInteger( "Indtast antallet spillere:", 2, 6 );
             if ( antalSpillere >= min && antalSpillere <= max ) {
 
                 break;
@@ -332,11 +337,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
 
     public int TurMenu( Spiller spiller, int minInput, int maxInput){
-
-        String valg = gui.getUserButtonPressed("Det er "+ spiller.getNavn()+"'s tur.",
+        return input.valg(gui, "Det er "+ spiller.getNavn()+"'s tur.",
                 "Kast terninger", "Slut din tur","Se chancekort","Giv op", "Byg hus", "Byg hotel","Sælg hus","Sælg hotel");
-
-        return input.TurMenu(valg);
     }
 
     /**
@@ -610,7 +612,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
     }
 
     public void duErLandetPå(Felt felt, Spiller spiller ){
-        GUI_Player guiSpiller = spillere.get(spiller.getId());
+        GUI_Player guiSpiller = spillere.get( spiller.getId() );
         rykBil( guiSpiller, felt.getPlacering() );
         gui.showMessage( "Du er landet på " + felt.getNavn()+"." );
 

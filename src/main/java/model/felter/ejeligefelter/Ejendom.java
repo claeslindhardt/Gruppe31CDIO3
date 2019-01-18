@@ -1,6 +1,5 @@
-package model.felter;
+package model.felter.ejeligefelter;
 
-import model.Ejendomsgruppe;
 import spillogik.EjendomsLogik;
 
 
