@@ -146,7 +146,7 @@ public class Spiller {
      *
      * @param ejendom den ejendom der skal tilføjes
      */
-    public void tilføjEjendom(Ejendom ejendom) {
+    public void tilfoejEjendom(Ejendom ejendom) {
         ejendomme.add(ejendom);
     }
 

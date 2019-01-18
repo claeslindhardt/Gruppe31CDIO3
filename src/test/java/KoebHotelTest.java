@@ -23,7 +23,7 @@ public class KoebHotelTest {
                 Ejendom ejendom = (Ejendom) felt;
 
                 ejendom.setEjer(spiller);
-                spiller.tilføjEjendom(ejendom);
+                spiller.tilfoejEjendom(ejendom);
                 ejendom.setAntalHuse(4);
             }
         }
