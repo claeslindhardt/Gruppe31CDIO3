@@ -39,8 +39,7 @@ public class Handlinger {
             x.setEjer(null);
             x.setHarHotel(false);
             x.setAntalHuse(0);
-            userInterfaceKontrakt.byggetHus(x);
-            userInterfaceKontrakt.byggeHotel(x);
+            userInterfaceKontrakt.byggetHotel(x);
         }
 
         for(Rederi x: spiller.getSpillerRederier()){

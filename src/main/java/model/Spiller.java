@@ -74,8 +74,7 @@ public class Spiller {
         ejedeFelter.addAll( spillerRederier );
         ejedeFelter.addAll( spillerEjendomme );
 
-
-
+        return ejedeFelter;
     }
 
     public int getSpillerPosition() {

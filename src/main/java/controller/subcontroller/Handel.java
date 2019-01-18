@@ -24,7 +24,7 @@ public class Handel {
      * @author Andreas
      * Metoder der indsamlere leje for når man lander på et ejeligt felt.
      */
-    public void indsamleLeje(Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterfaceKontrakt userInterfaceKontrakt){
+    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren ){
         Spiller ejeren = felt.getEjer();
         if( ejeren != null && spilleren != null) {
             //todo: enkapsuler dette på en ordenligt måde
@@ -44,8 +44,6 @@ public class Handel {
 
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
             ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
-            userInterfaceKontrakt.updateSpillere(spilleren);
-            userInterfaceKontrakt.updateSpillere(ejeren);
         }
     }
 
@@ -125,7 +123,7 @@ public class Handel {
 
                 if( ejendomsIndex < bebyggeligeEjendomme.size() ){
                     koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
-                    ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                    ui.byggetHus( bebyggeligeEjendomme.get(ejendomsIndex) );
                 }
 
 
@@ -236,8 +234,7 @@ public class Handel {
                 if( ejendomsIndex < grundeMedMulighedForHotel.size() ){
                     koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
 
-                    ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
-                    ui.tillykkeMedHotel();
+                    ui.byggetHotel( grundeMedMulighedForHotel.get(ejendomsIndex) );
                 }
 
             }else {

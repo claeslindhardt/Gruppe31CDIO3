@@ -81,9 +81,9 @@ public class LandPaaFelt {
             }
 
         }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
+
+            spilController.getHandel().indsamleLeje( spilController.getSpil(),felt, spiller);
             ui.betalRente();
-            ui.updateSpillere( spiller );
-            spilController.getHandel().indsamleLeje( spilController.getSpil(),felt, spiller, ui);
 
         }else if( felt.getEjer() == spiller ){
             ui.tetPaaMonopol();
