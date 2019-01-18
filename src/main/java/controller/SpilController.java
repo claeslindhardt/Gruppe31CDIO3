@@ -96,7 +96,7 @@ public class SpilController{
      */
     public void slutSpillerTur( Spiller spiller ) {
 
-        spiller.setHarSlaaetForTuren(false);
+        spiller.setHarSlaaet(false);
 
         if( spiller.getPenge() < 0  ){
             spillerUdgaar( spiller );
@@ -123,7 +123,7 @@ public class SpilController{
         }
         spiller.clearChancekort();
 
-        for( Ejendom ejendom : spiller.getEjendomme() ){
+        for( Ejendom ejendom : spiller.getEjendommeArray() ){
             ejendom.setEjer(null);
         }
         spiller.clearEjendomme();

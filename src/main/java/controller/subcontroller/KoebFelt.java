@@ -41,7 +41,7 @@ public class KoebFelt {
 
             //skifte ejerskab
             ejendom.setEjer(spiller);
-            spiller.getSpillerEjendomme().add(ejendom);
+            spiller.getEjendomme().add(ejendom);
 
             ui.gennemfoertKoeb( ejendom, spiller);
 
@@ -80,7 +80,7 @@ public class KoebFelt {
 
             //skifte ejerskab
             rederi.setEjer(spiller);
-            spiller.getSpillerRederier().add(rederi);
+            spiller.getRederier().add(rederi);
 
             ui.gennemfoertKoeb(rederi, spiller);
 

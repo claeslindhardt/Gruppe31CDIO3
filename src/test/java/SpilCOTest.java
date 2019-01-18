@@ -36,7 +36,7 @@ class SpilCOTest {
         spil.tjekForPasseringAfStartOgRykSpiller(spil.getTerningeKrus());
 
         int forventetSpillerPosition = 1;
-        int aktuelSpillerPosition = spil.getSpillerMedTur().getSpillerPosition();
+        int aktuelSpillerPosition = spil.getSpillerMedTur().getPosition();
         assertEquals(aktuelSpillerPosition, forventetSpillerPosition);
     }
 

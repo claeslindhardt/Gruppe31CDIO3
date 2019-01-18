@@ -8,13 +8,11 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 import model.Spiller;
 import model.chancekort.Chancekort;
-import model.felter.Felt;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.raflebaeger.RafleBaeger;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class GUI_Extension {
@@ -150,7 +148,7 @@ public class GUI_Extension {
                     opdaterFeltEjer( felt, null );
                 }
             } else {
-                gui_felter[ spiller.getSpillerPosition() ].setCar( gui_spiller, true );
+                gui_felter[ spiller.getPosition() ].setCar( gui_spiller, true );
                 gui_spiller.setBalance( (int) spiller.getPenge() );
             }
         }

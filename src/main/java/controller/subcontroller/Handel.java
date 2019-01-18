@@ -97,7 +97,7 @@ public class Handel {
      * @param ui: hvilket UserInterface der skal bruges.
      */
     public void koebHusPaaEjendom(Spiller spiller, UserInterface ui){
-        Ejendom[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendommeArray();
 
         if( ejendomme.length > 0 ){
             ArrayList<Ejendom> bebyggeligeEjendomme = new ArrayList<Ejendom>();
@@ -212,7 +212,7 @@ public class Handel {
      * @param ui : hvilket UserInterface der skal bruges.
      */
     public void koebHotelPaaEjendom(Spiller spiller, UserInterface ui){
-        Ejendom[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendommeArray();
 
         if( ejendomme.length > 0 ){
             ArrayList<Ejendom> grundeMedMulighedForHotel = new ArrayList<Ejendom>();
@@ -254,7 +254,7 @@ public class Handel {
      */
     private ArrayList<Ejendom> opretEjendomsKartotek( Spiller spiller ){
 
-        Ejendom[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendommeArray();
 
         ArrayList<Ejendom> kartotek = new ArrayList<>();
 
@@ -269,7 +269,7 @@ public class Handel {
 
     private ArrayList<Ejendom> opretHotelKartotek(Spiller spiller){
 
-        Ejendom[] ejendomme = spiller.getEjendomme();
+        Ejendom[] ejendomme = spiller.getEjendommeArray();
 
         ArrayList<Ejendom> kartotek = new ArrayList<>();
 

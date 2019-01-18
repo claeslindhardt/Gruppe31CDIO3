@@ -15,22 +15,18 @@ import java.util.ArrayList;
  */
 public class Spiller {
     //|--------- Variabler:-----------------
-    private int spillerPosition=0;
     private int id;
     private String navn = "?";
-    // TODO: find en løsning på dette, vi har både en liste af spiller ejendom i spillerData og en ejer på ejendom. Det er High copleing modsat af de vi ønsker lav enentuellt en registre løsning
-    ArrayList<Ejendom> spillerEjendomme = new ArrayList<Ejendom>();
-    ArrayList<Rederi> spillerRederier = new ArrayList<>();
-    ArrayList<Bryggeri> spillerBryggeri = new ArrayList<Bryggeri>();
-    ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
+    private int position =0;
     private double penge = 1500;
-    private boolean harGivetOp=false;
-    private boolean harAnketDomDenneRunde = false;
-    private boolean harSlaaetForTuren = false;
+
+    private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
+    private ArrayList<Rederi> rederier = new ArrayList<>();
+    private ArrayList<Bryggeri> bryggerier = new ArrayList<Bryggeri>();
+    private ArrayList<Chancekort> chancekort = new ArrayList<Chancekort>();
 
     private boolean erUdgaaet = false;
-
     private boolean erIFaengsel = false;
     private boolean harSlaaet = false;
 
@@ -40,7 +36,6 @@ public class Spiller {
     public boolean erIFaengsel(){
         return erIFaengsel;
     }
-
 
     public boolean erUdgaaet() {
         return erUdgaaet;
@@ -54,43 +49,19 @@ public class Spiller {
         this.erIFaengsel = erIFaengsel;
     }
 
-    public void setHarSlaaet(boolean harSlaaet) {
-        this.harSlaaet = harSlaaet;
+
+
+    public int getPosition() {
+        return position;
     }
 
-    public boolean harSlaaet(){
-        return harSlaaet;
-
+    public void setPosition(int position) {
+        this.position = position;
     }
 
-
-    public ArrayList<EjeligtFelt> getEjedeFelter(){
-
-        ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
-
-        ejedeFelter.addAll( spillerBryggeri );
-        ejedeFelter.addAll( spillerRederier );
-        ejedeFelter.addAll( spillerEjendomme );
-
-        return ejedeFelter;
+    public ArrayList<Ejendom> getEjendomme() {
+        return ejendomme;
     }
-
-    public int getSpillerPosition() {
-        return spillerPosition;
-    }
-
-    public void setSpillerPosition(int spillerPosition) {
-        this.spillerPosition = spillerPosition;
-    }
-
-    public ArrayList<Ejendom> getSpillerEjendomme() {
-        return spillerEjendomme;
-    }
-
-    public void setSpillerEjendomme(ArrayList<Ejendom> spillerEjendomme) {
-        this.spillerEjendomme = spillerEjendomme;
-    }
-
 
     public ArrayList<Chancekort> getChancekort() {
         return chancekort;
@@ -111,23 +82,12 @@ public class Spiller {
      * Henter liste over spillerens ejendomme.
      * @return Listen over spillerens ejendomme som en Ejendom array. Er tom, hvis der ikke er nogen i listen.
      */
-    public Ejendom[] getEjendomme() {
-        if(spillerEjendomme != null){
-
-            Ejendom[] ejendomme = new Ejendom[spillerEjendomme.size()];
-
-            for( int i = 0; i < ejendomme.length; i++){
-                ejendomme[i] = spillerEjendomme.get(i);
-            }
-
-            return ejendomme;
-        }else{
-            return null;
-        }
+    public Ejendom[] getEjendommeArray() {
+        return ejendomme.toArray( new Ejendom[0] );
     }
 
     public void clearEjendomme(){
-        spillerEjendomme.clear();
+        ejendomme.clear();
     }
 
     public void clearChancekort(){
@@ -135,23 +95,14 @@ public class Spiller {
     }
 
     public ArrayList<Bryggeri> getSpillerBryggerier() {
-        return spillerBryggeri;
+        return bryggerier;
     }
     
     public void addBryggeri(Bryggeri bryggeri){
-        spillerBryggeri.add(bryggeri);
+        bryggerier.add(bryggeri);
     }
 
-    public void addRederi(Rederi rederi){
-        spillerRederier.add(rederi);
-    }
-
-    public ArrayList<Rederi> getSpillerRederier(){ return spillerRederier;}
-
-    public void setSpillerRederier (ArrayList<Rederi> spillerRederier){
-        this.spillerRederier = spillerRederier;
-    }
-
+    public ArrayList<Rederi> getRederier(){ return rederier;}
 
     public double getPenge() {
         return penge;
@@ -169,14 +120,6 @@ public class Spiller {
         this.id = id;
     }
 
-    public boolean isHarGivetOp() {
-        return harGivetOp;
-    }
-
-    public void setHarGivetOp(boolean harGivetOp) {
-        this.harGivetOp = harGivetOp;
-    }
-
     public String getNavn() {
         return navn;
     }
@@ -184,21 +127,14 @@ public class Spiller {
     public void setNavn(String navn) {
         this.navn = navn;
     }
-    public boolean isHarSlaaetForTuren() {
-        return harSlaaetForTuren;
+    public boolean harSlaaet() {
+        return harSlaaet;
     }
 
-    public void setHarSlaaetForTuren(boolean harSlaaetForTuren) {
-        this.harSlaaetForTuren = harSlaaetForTuren;
+    public void setHarSlaaet(boolean harSlaaetForTuren) {
+        this.harSlaaet = harSlaaetForTuren;
     }
 
-    public boolean isHarAnketDomDenneRunde() {
-        return harAnketDomDenneRunde;
-    }
-
-    public void setHarAnketDomDenneRunde(boolean harAnketDomDenneRunde) {
-        this.harAnketDomDenneRunde = harAnketDomDenneRunde;
-    }
     public void addPenge(double beloeb) {
         this.penge+=beloeb;
     }
@@ -211,7 +147,7 @@ public class Spiller {
      * @param ejendom den ejendom der skal tilføjes
      */
     public void tilføjEjendom(Ejendom ejendom) {
-        spillerEjendomme.add(ejendom);
+        ejendomme.add(ejendom);
     }
 
     /**
@@ -240,6 +176,18 @@ public class Spiller {
      */
     public boolean ejerEjendom(Ejendom ejendom){
         return ejendom.getEjer() == this;
+    }
+
+
+    public ArrayList<EjeligtFelt> getEjedeFelter(){
+
+        ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
+
+        ejedeFelter.addAll(bryggerier);
+        ejedeFelter.addAll(rederier);
+        ejedeFelter.addAll(ejendomme);
+
+        return ejedeFelter;
     }
 
 

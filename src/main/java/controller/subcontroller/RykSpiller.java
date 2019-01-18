@@ -17,7 +17,7 @@ public class RykSpiller {
     public void kastTerninger(Spil spil, Spiller spiller, UserInterface ui, SpilController spilController) {
         RafleBaeger raflebaeger = spil.getRaflebaeger();
 
-        if ( !spiller.isHarSlaaetForTuren() ) {
+        if ( !spiller.harSlaaet() ) {
 
             raflebaeger.slaa();
 
@@ -25,10 +25,10 @@ public class RykSpiller {
 
             if ( raflebaeger.erEns() ) {
                 ui.ensTerninger();
-                spil.getSpillerMedTur().setHarSlaaetForTuren(false);
+                spil.getSpillerMedTur().setHarSlaaet(false);
 
             } else {
-                spil.getSpillerMedTur().setHarSlaaetForTuren(true);
+                spil.getSpillerMedTur().setHarSlaaet(true);
 
             }
 
@@ -53,9 +53,9 @@ public class RykSpiller {
 
         Felt[] felter = spil.getFelter();
 
-        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getSpillerPosition()], felterAtRykke  );
+        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getPosition()], felterAtRykke  );
 
-        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, felter.length);
+        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getPosition(), felterAtRykke, felter.length);
 
         rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart, ui, spilController);
     }
@@ -80,7 +80,7 @@ public class RykSpiller {
             ui.passeringAfStart(gangeOverStart);
         }
 
-        spiller.setSpillerPosition(felt.getPlacering());
+        spiller.setPosition(felt.getPlacering());
         spilController.getLandPaaFelt().landPaaFelt( felt,  spiller, spilController, ui);
     }
 

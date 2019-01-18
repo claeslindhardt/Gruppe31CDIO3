@@ -63,7 +63,7 @@ public class BrugChancekort {
      */
     private void gratisUdAfFaengsel( Spiller spiller, UserInterface ui ){
         spiller.setErIFaengsel(false);
-        spiller.setHarSlaaetForTuren(false);
+        spiller.setHarSlaaet(false);
         ui.brugtUdAfFaengsel();
     }
 
@@ -87,7 +87,7 @@ public class BrugChancekort {
         Felt felt = spilController.getSpil().getFelter()[ chancekort.getFeltNummer() ];
 
         int feltNr = chancekort.getFeltNummer();
-        int spillerPosition = spiller.getSpillerPosition();
+        int spillerPosition = spiller.getPosition();
 
         if( feltNr < spillerPosition ){
             spilController.getRykSpiller().rykSpillerTilFelt(spiller, felt, 1, ui, spilController );
@@ -105,7 +105,7 @@ public class BrugChancekort {
         Faengsel faengsel = spil.getFaengsel();
 
         spiller.setErIFaengsel(true);
-        spiller.setSpillerPosition( faengsel.getPlacering() );
+        spiller.setPosition( faengsel.getPlacering() );
 
         ui.gaaIFaengsel();
         ui.duErLandetPaa( faengsel, spiller);

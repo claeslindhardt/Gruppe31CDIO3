@@ -131,7 +131,7 @@ public class LandPaaFelt {
 
         // Flytter spilleren
         spillerMedTur.setErIFaengsel( true );
-        spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
+        spillerMedTur.setPosition( faengsel.getPlacering() );
 
         ui.gaaIFaengsel();
         ui.duErLandetPaa( faengsel, spillerMedTur);
