@@ -1,11 +1,11 @@
-package controller;
+package controller.subcontroller;
 
 import view.UserInterfaceKontrakt;
 import model.Spiller;
-import model.felter.Bryggeri;
-import model.felter.EjeligtFelt;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 
 public class KoebFelt {
 

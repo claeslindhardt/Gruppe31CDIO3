@@ -1,5 +1,8 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
+import model.felter.aktionsfelter.*;
+import model.felter.ejeligefelter.EjeligtFelt;
 import view.UserInterfaceKontrakt;
 import model.chancekort.Chancekort;
 import model.Spiller;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
  *
  *  @author Malte
  */
-class LandPaaFelt {
+public class LandPaaFelt {
 
 
     /**
@@ -26,7 +29,7 @@ class LandPaaFelt {
      * @param felt      Feltet der landes paa
      * @param spiller   Spilleren der lander paa feltet
      */
-    void landPaaFelt( Felt felt, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui){
+    void landPaaFelt(Felt felt, Spiller spiller, SpilController spilController, UserInterfaceKontrakt ui){
 
         ui.duErLandetPå(felt, spiller);
 
@@ -39,7 +42,7 @@ class LandPaaFelt {
         } else if( felt instanceof ProevLykken) {
             proevLykken( spiller, spilController, ui );
 
-        } else if( felt instanceof FriParkering ){
+        } else if( felt instanceof FriParkering){
             friParkering( ui );
 
         } else if( felt instanceof GaaIFaengsel) {
@@ -129,7 +132,7 @@ class LandPaaFelt {
         Faengsel faengsel = spilController.getSpil().getFaengsel();
 
         // Flytter spilleren
-        spillerMedTur.setFaengselsStraf(true);
+        spillerMedTur.setErIFaengsel( true );
         spillerMedTur.setSpillerPosition( faengsel.getPlacering() );
 
         ui.iFaengselMedDig();

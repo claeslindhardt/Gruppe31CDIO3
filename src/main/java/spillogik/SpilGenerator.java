@@ -1,10 +1,14 @@
 package spillogik;
 
-import model.Ejendomsgruppe;
+import model.felter.ejeligefelter.Ejendomsgruppe;
 import model.chancekort.*;
 import model.Spil;
 import model.Spiller;
 import model.felter.*;
+import model.felter.aktionsfelter.*;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
 
 import java.awt.*;
@@ -14,13 +18,14 @@ import java.util.Random;
 public class SpilGenerator {
 
 
-    public static Spiller[] genererSpillere(int antalSpillere, double startPenge) {
+    public static Spiller[] genererSpillere(  String ... navne ) {
+        int antalSpillere = navne.length;
         Spiller[] spillere = new Spiller[antalSpillere];
 
         for (int i = 0; i < antalSpillere; i++) {
             Spiller spiller = new Spiller();
-            spiller.setPenge(startPenge);
-            spiller.setNavn("spiller" + (i + 1));
+            spiller.setPenge(1500);
+            spiller.setNavn( navne[i] );
             spiller.setId(i);
             spillere[i] = spiller;
         }
@@ -479,12 +484,29 @@ public class SpilGenerator {
     public static Spil genererSpil( int antalSpillere ){
 
         Spil spil = new Spil();
-
-        spil.setSpillere(  genererSpillere( antalSpillere, 1500 )  );
-        // TODO: Implementer standard generering af felter
         spil.setFelter( genererFelter() );
-        //spil.setFelter( genererRandomFelter(40, 100, 25) );
-        spil.setChanceKort( genererChancekort() );
+        spil.setChancekort( genererChancekort() );
+        spil.setRaflebaeger( new RafleBaeger(2) );
+
+        String[] spillerNavne = new String[antalSpillere];
+        for( int i = 0; i < antalSpillere; i++ ){
+            spillerNavne[i] = "Spiller " + (i+1);
+        }
+        spil.setSpillere(  genererSpillere( spillerNavne )  );
+
+        return spil;
+    }
+
+
+
+    public static Spil genererSpil(){
+
+        Random random = new Random();
+
+        Spil spil = new Spil();
+
+        spil.setFelter( genererFelter() );
+        spil.setChancekort( genererChancekort() );
         spil.setRaflebaeger( new RafleBaeger(2) );
 
         return spil;

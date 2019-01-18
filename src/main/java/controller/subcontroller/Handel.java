@@ -1,12 +1,13 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import model.Spiller;
-import model.felter.Bryggeri;
-import model.felter.EjeligtFelt;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
@@ -123,9 +124,12 @@ public class Handel {
             if(bebyggeligeEjendomme.size() > 0){
 
                 int ejendomsIndex = ui.input_EjendomAtByggePaa(bebyggeligeEjendomme);
-                koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
 
-                ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                if( ejendomsIndex < bebyggeligeEjendomme.size() ){
+                    koebHus( spiller,  bebyggeligeEjendomme.get(ejendomsIndex), ui );
+                    ui.byggetHus(bebyggeligeEjendomme.get(ejendomsIndex));
+                }
+
 
             }else {
                 ui.ejerIngenBebyggeligeEjendomme(); }
@@ -145,7 +149,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
 
         // Finder ejendomme med sælgbare huse på
         ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
@@ -174,7 +178,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    public void saelgHotelPaaEjendom( SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHotelPaaEjendom(SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
 
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 
@@ -231,10 +235,12 @@ public class Handel {
             if(grundeMedMulighedForHotel.size() > 0){
 
                 int ejendomsIndex = ui.input_EjendomAtByggeHotelPaa(grundeMedMulighedForHotel);
-                koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
+                if( ejendomsIndex < grundeMedMulighedForHotel.size() ){
+                    koebHotel( spiller,  grundeMedMulighedForHotel.get(ejendomsIndex), ui );
 
-                ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
-                ui.tillykkeMedHotel();
+                    ui.byggeHotel(grundeMedMulighedForHotel.get(ejendomsIndex));
+                    ui.tillykkeMedHotel();
+                }
 
             }else {
                 ui.kanIkkeKøbeHotel();

@@ -40,7 +40,7 @@ public class ChancekortTest {
         chancekort = new JustererPenge(+100, "Du modtager 100kr");
         alleChancekort.add(chancekort);
 
-        spil.setChanceKort(alleChancekort);
+        spil.setChancekort(alleChancekort);
 
         SpilController spilController = new SpilController();
 

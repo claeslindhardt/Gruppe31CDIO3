@@ -1,10 +1,11 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import view.UserInterfaceKontrakt;
 import model.chancekort.*;
 import model.Spil;
 import model.Spiller;
-import model.felter.Faengsel;
+import model.felter.aktionsfelter.Faengsel;
 import model.felter.Felt;
 
 
@@ -15,7 +16,7 @@ import model.felter.Felt;
  *
  * @author Malte
  */
-class BrugChancekort {
+public class BrugChancekort {
 
 
     /**
@@ -61,7 +62,7 @@ class BrugChancekort {
      * @param spiller   Spilleren der bruger det
      */
     private void gratisUdAfFaengsel( Spiller spiller, UserInterfaceKontrakt ui ){
-        spiller.setFaengselsStraf(false);
+        spiller.setErIFaengsel(false);
         spiller.setHarSlaaetForTuren(false);
         ui.brugtUdAfFaengsel();
     }
@@ -104,7 +105,7 @@ class BrugChancekort {
     private void smidIFaengsel( Spiller spiller, Spil spil, UserInterfaceKontrakt ui ){
         Faengsel faengsel = spil.getFaengsel();
 
-        spiller.setFaengselsStraf(true);
+        spiller.setErIFaengsel(true);
         spiller.setSpillerPosition( faengsel.getPlacering() );
 
         ui.iFaengselMedDig();

@@ -1,12 +1,18 @@
 package controller;
 
+import controller.subcontroller.*;
+import model.Spiller;
+import model.chancekort.Chancekort;
+import model.felter.ejeligefelter.Ejendom;
+import model.singletoner.RandomSingleton;
 import view.GUI.GUIinterface;
 import view.UserInterfaceKontrakt;
 import model.Spil;
-import model.Spiller;
 import spillogik.SpilGenerator;
 
-import java.util.Random;
+import static spillogik.SpilGenerator.genererSpil;
+import static spillogik.VinderLogik.getVinder;
+import static spillogik.VinderLogik.vinderFindes;
 
 public class SpilController{
 
@@ -15,13 +21,11 @@ public class SpilController{
 
 
     // Controlllere
-    private RykSpiller  rykSpiller  = new RykSpiller();
-    private Handlinger  handlinger  = new Handlinger();
-    private Handel      handel      = new Handel();
+    private RykSpiller rykSpiller  = new RykSpiller();
+    private Handlinger handlinger  = new Handlinger();
+    private Handel handel      = new Handel();
     private LandPaaFelt landPaaFelt = new LandPaaFelt();
     private BrugChancekort brugChancekort = new BrugChancekort();
-
-
 
 
     public LandPaaFelt getLandPaaFelt() {
@@ -30,23 +34,15 @@ public class SpilController{
 
     public BrugChancekort getBrugChancekort(){ return brugChancekort; }
 
-
-
-
-
-
-
     public Handel getHandel() {
         return handel;
     }
 
-    public controller.KoebFelt getKoebFelt() {
+    public controller.subcontroller.KoebFelt getKoebFelt() {
         return KoebFelt;
     }
 
     private KoebFelt    KoebFelt    = new KoebFelt();
-
-
 
     public Spil getSpil(){return spil;}
 
@@ -61,234 +57,97 @@ public class SpilController{
     public Handlinger getHandlinger(){ return handlinger;  }
 
 
-    /** Laver en ny SpilController med en vilkårlig UI */
-    public SpilController(UserInterfaceKontrakt ui){
-        this.ui = ui;
-    }
-
     /** Laver en ny SpilController med en GUI */
     public SpilController(){
         ui = new GUIinterface();
+        spil = genererSpil();
     }
 
 
+    public void koerSpil(){
 
-    //_____________________________________
-    // Diverse:
 
-    /**
-     * @author Andreas
-     * Metoden gennemgår listen af spillere og undersøger om en spiller i listen har det samme navn.
-     * @param navn
-     * @return boolean
-     */
-    public boolean kontrollerNavn(String navn){
+        ui.aabenSpil( spil );
 
-        for(int i = 0; i < spil.getSpillere().length; i++){
-            if(spil.getSpillere()[i].getNavn().equalsIgnoreCase( navn )) {
-                return true;
-            }
+        // Tjekker om spillerne er blevet lavet, ellers laves de
+        if( spil.getSpillere() == null ){
+            String[] navne = ui.opretSpillere( 2, 6);
+            spil.setSpillere( SpilGenerator.genererSpillere( navne) );
         }
-        return false;
+
+        spil.setSpillerTur( RandomSingleton.getInstance().nextInt( spil.getAntalSpillere() ) + 1 );
+        ui.startSpil( spil );
+
+        do{
+            Spiller spillerMedTur = spil.getSpillerMedTur();
+
+            startSpillerTur( spillerMedTur );
+
+            slutSpillerTur( spillerMedTur );
+
+        }while( !vinderFindes( spil ) );
+
+        ui.spilletErSlut( getVinder( spil ) );
     }
+
 
     /**
      * Indsæt beskrivelse her
      */
-    public void printSpilleresInfo() {
-        /*for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
-            spil.getSpiller(i).printSpillerStats(ui);
-        }*/
-    }
+    public void slutSpillerTur( Spiller spiller ) {
 
-    /**
-     * @author Filip
-     * Metode, der afgør om en faengslet spiller løslades eller skal blive i faengsel.
-     */
-    public void anketDomsigelse() {
-        Random ra = new Random();
-        int domsAfsigelseDel1 = ra.nextInt(5) + 1;
-        int domsAfsigelseDel2 = ra.nextInt(5) + 1;
-        ui.retsTerninger(domsAfsigelseDel1, domsAfsigelseDel2);
-        if (domsAfsigelseDel1 == domsAfsigelseDel2) {
-            ui.heldIRetten();
-            spil.getSpillerMedTur().setFaengselsStraf(false);
-            //Har udkemmenteret denne da jeg ikke syntes at det giver mening at have den.
-            //getSpillerMedTur().setSpillerPosition(domsAfsigelseDel1 + domsAfsigelseDel2);
-        } else {
-            spil.getSpillerMedTur().setFaengselsStraf(true);
-            ui.ingenHeldIRetten();
-        }
+        spiller.setHarSlaaetForTuren(false);
 
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void slutSpillerTur() {
-        spil.getSpillerMedTur().setHarSlaaetForTuren(false);
-        spil.getSpillerMedTur().setHarAnketDomDenneRunde(false);
-        tjekForBankeRaadt();
-
-        if ( spil.getSpillerTur() >= spil.getAntalSpillere() ) {
-            spil.setSpillerTur(1);
-
-        } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
-            spil.setSpillerTur(spil.getSpillerTur() + 1);
-        }
-
-
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForBankeRaadt() {
-
-        if (spil.getSpillerMedTur().getPenge() < 0) {
+        if( spiller.getPenge() < 0  ){
             ui.bankeRaadtGrundetLikviditet(spil.getBankeraadGraense());
-            spil.getSpillerMedTur().setHarGivetOp(true);
-            spil.getSpillerMedTur().getSpillerEjendomme().clear();
-            int udgaaetSpiller = spil.getSpillerMedTur().getId() + 1;
-            ui.spillerUdgår(udgaaetSpiller);
+            spillerUdgaar( spiller );
         }
 
-    }
+        do {
 
-    /**
-     * Indsæt beskrivelse her
-     * @param terningsKrus
-     */
-    /*public void kastTerninger(RafleBaeger terningsKrus) {
-        if (!spil.getSpillerMedTur().isHarSlaaetForTuren()) {
-
-            terningsKrus.slaa();
-
-            ui.spillerRykkerGrundetTerningslag(terningsKrus, spil.getSpillerTur());
-
-            if (terningsKrus.erEns()) {
-                ui.ensTerninger();
-                spil.getSpillerMedTur().setHarSlaaetForTuren(false);
-            } else {
-                spil.getSpillerMedTur().setHarSlaaetForTuren(true);
-            }
-
-            rykSpillerAntalFelter( spil.getSpillerMedTur(), spil.getRaflebaeger().getTotalVaerdi());
-
-        } else {
-            ui.harSlaaetMedTerningfor();
-        }
-    }*/
-
-
-    /**
-     * @author Malte
-     * Rykker spilleren et bestemt antal felter fremad. Den beregner hvor mange
-     * gange over start man bevæger sig, og udløser metoden {@link #rykSpillerTilFelt}.
-     *
-     * @param spiller       Spilleren der skal rykkes
-     * @param felterAtRykke Hvor mange felter fremad spilleren rykker
-     */
-    /*public void rykSpillerAntalFelter( SpillerCO spiller, int felterAtRykke ) {
-
-        Felt[] braet = spil.getBraet().getBretArray();
-
-        Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( braet, braet[spiller.getSpillerPosition()], felterAtRykke  );
-
-        int gangeOverStart  = BevaegelsesLogik.antalGangeOverStart(spiller.getSpillerPosition(), felterAtRykke, braet.length);
-
-        rykSpillerTilFelt( spiller, endeligtFelt, gangeOverStart);
-    }*/
-
-
-    /**
-     * @author Malte
-     * Rykker spilleren til et specifikt felt på brættet, og udløser aktioner
-     * ift. feltet, samt UI-metoder ifm. at flytte felt.
-     * Beregner ikke selv, hvor mange gange spilleren bevæger sig over start,
-     * men den udløser metoden passererStart() i SpillerCO med udgangspunkt i
-     * 'gangeOverStart'
-     *
-     * @param spiller Spiller der skal rykkes
-     * @param felt Feltet spilleren skal rykke til
-     * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
-     */
-    /*public void rykSpillerTilFelt( SpillerCO spiller, Felt felt, int gangeOverStart){
-
-        if( gangeOverStart > 0 ) {
-            spiller.setPenge(spiller.getPenge() - BevaegelsesLogik.passererStartPenge(gangeOverStart));
-            ui.passeringAfStart(gangeOverStart);
-            ui.updateSpillere(spiller);
-
-        }
-
-        spiller.setSpillerPosition(felt.getPlacering());
-
-        ui.duErLandetPå(felt, spiller);
-        Handel handel = new Handel();
-        felt.aktionPaaFelt(handel, this, ui);
-    }*/
-
-
-    //_____________________________________
-    //Tjekkere:
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForFeangselsStraf(){
-        if (spil.getSpillerMedTur().isFaengselsStraf()) {
-            if (!spil.getSpillerMedTur().isHarAnketDomDenneRunde()) {
-                ui.anketStraffeDom(spil.getSpillerTur());
-                anketDomsigelse();
-                spil.getSpillerMedTur().setHarAnketDomDenneRunde(true);
-            }
-
-        }
-    }
-
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekOmGivetOp() {
-        if (spil.getSpillerMedTur().isHarGivetOp()) {
-            if (spil.getSpillerTur() == spil.getAntalSpillere()) {
+            if (spil.getSpillerTur() >= spil.getAntalSpillere()) {
                 spil.setSpillerTur(1);
-            } else {
+
+            } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
                 spil.setSpillerTur(spil.getSpillerTur() + 1);
             }
-        }
+        }while( spil.getSpillerMedTur().erUdgaaet() );
     }
 
-    /**
-     * Indsæt beskrivelse her
-     */
-    public void tjekForVinder() {
-        if (spil.getAntalSpillere() - tjekAntalSpillereISpil() == 1) {
-            //SpillerCO spillerMedTur = spillerObjekter.get(spillerTur - 1);
-            if (!spil.getSpillerMedTur().isHarGivetOp()) {
-                //Der ligger en til for at da det er den spiller i rækken, der ligger forud for vinderen, der giver op.
-                spil.setVinder(spil.getSpillerMedTur().getId() + 1);
-                spil.setVinderFindes(true);
-                ui.vinder(spil.getSpillerMedTur().getId() + 1);
-            }
+
+    public void spillerUdgaar( Spiller spiller ){
+        spiller.setErUdgaaet( true );
+
+        for( Chancekort chancekort : spiller.getChancekort() ){
+            spil.addChancekort( chancekort );
         }
+        spiller.clearChancekort();
+
+        for( Ejendom ejendom : spiller.getEjendomme() ){
+            ejendom.setEjer(null);
+        }
+        spiller.clearEjendomme();
+
+        spiller.setErUdgaaet( true );
     }
 
-    /**
-     * Indsæt beskrivelse her
-     * @return
-     */
-    public int tjekAntalSpillereISpil() {
-        int UdgaetSpillere = 0;
-        for (int i = 0; i < spil.getSpillereArrayList().size(); i++) {
-            if (spil.getSpillereArrayList().get(i).isHarGivetOp()) {
-                UdgaetSpillere++;
-            }
+
+
+    public void startSpillerTur( Spiller spiller ){
+
+
+        if( spiller.erIFaengsel() ){
+            handlinger.ankerDom( spiller, spil.getRaflebaeger(), ui );
         }
 
-        return UdgaetSpillere;
+        boolean turErSlut;
+
+        do{
+            turErSlut = turMenu( spiller );
+        }while( !turErSlut );
+
     }
+
 
 
     /**
@@ -296,155 +155,60 @@ public class SpilController{
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
      */
-    public void turMenu() {
-        int input = ui.TurMenu(spil.getSpillerTur(), 1, 12);
+    public boolean turMenu( Spiller spiller ) {
+        int valg = ui.TurMenu( spiller, 1, 12 );
 
-        switch (input) {
-            case 1:
+        boolean slutTur = false;
 
-                if (!spil.getSpillerMedTur().isFaengselsStraf()) {
+        switch( valg ){
+
+            case 0:
+
+                if ( !spiller.erIFaengsel() ) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
 
-                } else if (spil.getSpillerMedTur().isFaengselsStraf()) {
+                } else{
                     ui.kanIkkeSlaaFaengsel();
+
                 }
-
                 break;
-            case 2:
-                slutSpillerTur();
-                break;
-            case 3:
-                handlinger.chanceKortMuligheder(spil.getSpillerMedTur(), this, ui);
-                break;
-            case 4:
-                ui.spillerEjendele(spil.getSpillerMedTur());
-                break;
-            case 5:
-                /*spilleBret.printBret(ui);*/
-                break;
-            case 6:
-                printSpilleresInfo();
-                break;
-            case 7:
-                handlinger.givOp(spil.getSpillerMedTur(), this, ui);
-                break;
-            case 8:
-                handel.koebHusPaaEjendom(spil.getSpillerMedTur(), ui);
-                break;
-            case 9:
-                handel.koebHotelPaaEjendom(spil.getSpillerMedTur(), ui);
-                break;
-            case 10:
-                //spil.getSpillerMedTur().handelMedEjendomme();
-                break;
-            case 11: handel.saelgHusPaaEjendom( spil.getSpillerMedTur(), ui );
-                break;
-            case 12: handel.saelgHotelPaaEjendom(this,spil.getSpillerMedTur(), ui);
-                break;
-            default:
-
-        }
-
-    }
-
-
-    public void start(){
-
-        int input = ui.velkomstMenu(1,3);
-
-        switch( input ){
 
             case 1:
-                int antalSpillere = ui.instilingsSporgsmaall(2, 6);
-                spil = SpilGenerator.genererSpil(antalSpillere);
+                slutTur = true;
                 break;
 
             case 2:
-                spil = spilIndstillinger();
+                handlinger.chanceKortMuligheder( spiller, this, ui);
                 break;
-        }
 
-        indtastSpillerNavne();
-
-        koerSpil();
-    }
-
-
-    /**
-     * Efterspørger brugerdefineret indstillinger til et spil,
-     * og generer derefter spillet.
-     * @author Malte
-     * @return Det generet spil med brugerdefineret indstillinger
-     */
-    private Spil spilIndstillinger(){
-
-        int antalFelter = ui.instilingsSporgsmaal0(9, 21);
-        int antalSpillere = ui.instilingsSporgsmaall(2,11);
-        // TODO: Implementer disse i UI v
-        int antalChancekort = 20; // ui.indstillingsSpørgsmål, antalchancekort
-        double startPenge = 2000; // ui.startpenge
-
-        return null; //.genererSpil( antalSpillere, antalFelter, antalChancekort, startPenge );
-
-    }
-
-
-    /**
-     * Beder UI om at efterspørge spillernavne, på spillerne i det nuvaerende
-     * spil.
-     * Det er ikke nødvendigt, at køre denne for at kunne køre spillet.
-     * @author Malte
-     */
-    private void indtastSpillerNavne() {
-
-        // Et for-each loop der kører i gennem alle spillere.
-        for( Spiller spiller : spil.getSpillere() ){
-
-            String navn = ui.spillerNavne();
-
-            /*Det er ikke muligt for GUI'en at vise to spillere med det samme navn. Derfor er det ikke heller ikke muligt for to spillere at hedde det samme.
-            Derfor er der lavet denne kode der sikrer at to spillere ikke kan hedde det samme.*/
-            boolean harNavn = kontrollerNavn(navn);
-
-            while(harNavn){
-                ui.spillerMaaIkkeEns();
-                navn =  ui.spillerNavne();
-                //Her undersøges det om en allerede genereret spiller har det samme navn.
-                if(!kontrollerNavn(navn)){
-                    harNavn = kontrollerNavn(navn);
+            case 3:
+                if( handlinger.givOp( ui ) ){
+                    slutTur = true;
+                    spillerUdgaar( spiller );
                 }
-            }
-            spiller.setNavn(navn);
-
-        }
-    }
-
-
-    /**
-     * Kører det spil som SpilControlleren er blevet givet (spil variablen).
-     * @author Malte
-     */
-    public void koerSpil(){
-
-        ui.startSpil( spil );
-
-        do{
-            tjekForVinder();
-            tjekOmGivetOp();
-            tjekForFeangselsStraf();
-
-            if( !spil.getVinderFindes() ){
-                turMenu();
-
-            }else{
                 break;
-            }
 
-        }while( true );
+            case 4:
+                handel.koebHusPaaEjendom( spiller, ui);
+                break;
 
+            case 5:
+                handel.koebHotelPaaEjendom( spiller, ui);
+                break;
 
-        ui.spilletErSlut();
+            case 6: handel.saelgHusPaaEjendom( spiller, ui );
+                break;
+
+            case 7: handel.saelgHotelPaaEjendom(this, spiller, ui);
+                break;
+        }
+
+        return slutTur;
+
     }
+
+
+
 
 
 

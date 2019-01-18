@@ -1,5 +1,7 @@
-package model.felter;
+package model.felter.aktionsfelter;
 //Ekstra Commit
+
+import model.felter.Felt;
 
 public class StatsSkat extends Felt {
 

@@ -1,5 +1,7 @@
-package model.felter;
+package model.felter.aktionsfelter;
 
+
+import model.felter.Felt;
 
 public class ProevLykken extends Felt {
 

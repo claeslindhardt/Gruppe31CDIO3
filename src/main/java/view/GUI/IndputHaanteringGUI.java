@@ -26,23 +26,29 @@ public class IndputHaanteringGUI {
             beslutning = 2;
         } else if (valg == "Se chancekort") {
             beslutning = 3;
-        } else if (valg == "Se hvad du ejer") {
-            beslutning = 4;
-        } else if (valg == "Se spiller stats") {
-            beslutning = 6;
         } else if (valg == "Giv op") {
-            beslutning = 7;
+            beslutning = 4;
         } else if (valg == "Byg på ejendom") {
-            beslutning = 8;
+            beslutning = 6;
         } else if (valg == "Byg hotel") {
-            beslutning = 9;
-        } else if (valg == "Handel med Ejede ting") {
-            beslutning = 10;
+            beslutning = 7;
         } else if (valg == "Sælg hus på ejendommen") {
-            beslutning = 11;
+            beslutning = 8;
         }else if (valg == "Sælg Hotel på ejendommen") {
-            beslutning = 12;}
+            beslutning = 9;}
         return beslutning;
+    }
+
+
+    public int valg( GUI gui, String besked, String ... muligeValg ){
+        String valg = gui.getUserButtonPressed( besked, muligeValg);
+
+        for( int i = 0; i < muligeValg.length; i++ ){
+            if( valg == muligeValg[i] ){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int binartValg(String valg) {

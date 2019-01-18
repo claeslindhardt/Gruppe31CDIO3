@@ -1,8 +1,7 @@
 package model;
 
-import view.UserInterfaceKontrakt;
 import model.chancekort.Chancekort;
-import model.felter.Faengsel;
+import model.felter.aktionsfelter.Faengsel;
 import model.felter.Felt;
 import model.raflebaeger.RafleBaeger;
 
@@ -14,19 +13,17 @@ public class Spil {
     private int spillerTur = 1;
 
     private Spiller[] spillere;
-    private UserInterfaceKontrakt ui;
     private RafleBaeger rafleBaeger;
-    private boolean vinderFindes;
-
     private Felt[] felter;
-
     private ArrayList<Chancekort> chanceKort = new ArrayList<>();
+
+
 
     public ArrayList<Chancekort> getChanceKort() {
         return chanceKort;
     }
 
-    public void setChanceKort(ArrayList<Chancekort> chanceKort) {
+    public void setChancekort(ArrayList<Chancekort> chanceKort) {
         this.chanceKort = chanceKort;
     }
 
@@ -35,8 +32,6 @@ public class Spil {
     }
 
 
-
-    private  boolean kør = true;
 
     public int getSpillerTur() {
         return spillerTur;
@@ -55,32 +50,12 @@ public class Spil {
     }
 
 
-    public UserInterfaceKontrakt getUi() {
-        return ui;
-    }
-
-    public void setUi(UserInterfaceKontrakt ui) {
-        this.ui = ui;
-    }
-
     public RafleBaeger getRaflebaeger() {
         return rafleBaeger;
     }
 
     public void setRaflebaeger(RafleBaeger rafleBaeger) {
         this.rafleBaeger = rafleBaeger;
-    }
-
-    public boolean isKør() {
-        return kør;
-    }
-
-
-    public void setKør(boolean kør) {
-        this.kør = kør;
-    }
-
-    public void setChanceKort(){
     }
 
 
@@ -100,32 +75,15 @@ public class Spil {
         return spillere.length;
     }
 
-
-    public int getAntalFelter(){ return felter.length;}
-
     public Spiller getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
     }
 
 
     public Spiller getSpillerMedTur(){
-        return spillere[spillerTur-1];
+        return spillere[ spillerTur-1 ];
     }
 
-    // TODO: Fjern denne
-    public void setVinder(int i){}
-
-    // TODO: Fjern denne!
-    public ArrayList<Spiller> getSpillereArrayList(){
-
-        ArrayList<Spiller> spillere = new ArrayList<>();
-
-        for( Spiller spiller : this.spillere ){
-            spillere.add(spiller);
-        }
-
-        return spillere;
-    }
 
     /**
      * Finder fængsel feltet i listen over felter, og returnere det.
@@ -140,14 +98,6 @@ public class Spil {
             }
         }
         return null;
-    }
-
-    public void setVinderFindes(boolean vinderFindes) {
-        this.vinderFindes = vinderFindes;
-    }
-
-    public boolean getVinderFindes() {
-        return vinderFindes;
     }
 
 }
