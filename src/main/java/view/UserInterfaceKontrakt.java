@@ -5,6 +5,7 @@ import model.chancekort.Chancekort;
 import model.felter.*;
 import model.Spiller;
 import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
@@ -45,7 +46,7 @@ public interface UserInterfaceKontrakt {
 
     void tetPaaMonopol();
 
-    void gennemfoertKoeb( EjeligtFelt felt, Spiller spiller );
+    void gennemfoertKoeb(EjeligtFelt felt, Spiller spiller );
 
     void betalRente();
 
