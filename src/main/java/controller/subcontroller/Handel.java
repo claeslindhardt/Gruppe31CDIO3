@@ -1,12 +1,13 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import model.Spiller;
-import model.felter.Bryggeri;
-import model.felter.EjeligtFelt;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 import spillogik.EjendomsLogik;
 
 import java.util.ArrayList;
@@ -145,7 +146,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHusPaaEjendom( Spiller spiller, UserInterfaceKontrakt ui ){
 
         // Finder ejendomme med sælgbare huse på
         ArrayList<Ejendom> kartotek = opretEjendomsKartotek(spiller);
@@ -174,7 +175,7 @@ public class Handel {
      * @param spiller
      * @param ui
      */
-    public void saelgHotelPaaEjendom( SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
+    public void saelgHotelPaaEjendom(SpilController spil, Spiller spiller, UserInterfaceKontrakt ui ){
 
         ArrayList<Ejendom> kartotek = opretHotelKartotek(spiller);
 

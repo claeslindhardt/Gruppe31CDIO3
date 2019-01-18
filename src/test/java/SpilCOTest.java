@@ -4,7 +4,7 @@ import controller.*;
 import view.UserInterfaceKontrakt;
 import controller.Spiller;
 import model.Spil;
-import model.felter.Ejendom;
+import model.felter.ejeligefelter.Ejendom;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

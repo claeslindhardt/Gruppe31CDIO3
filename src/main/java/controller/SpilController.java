@@ -1,15 +1,14 @@
 package controller;
 
+import controller.subcontroller.*;
 import model.Spiller;
 import model.chancekort.Chancekort;
-import model.felter.Ejendom;
+import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
 import view.GUI.GUIinterface;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import spillogik.SpilGenerator;
-
-import java.util.Random;
 
 import static spillogik.SpilGenerator.genererSpil;
 import static spillogik.VinderLogik.getVinder;
@@ -22,9 +21,9 @@ public class SpilController{
 
 
     // Controlllere
-    private RykSpiller  rykSpiller  = new RykSpiller();
-    private Handlinger  handlinger  = new Handlinger();
-    private Handel      handel      = new Handel();
+    private RykSpiller rykSpiller  = new RykSpiller();
+    private Handlinger handlinger  = new Handlinger();
+    private Handel handel      = new Handel();
     private LandPaaFelt landPaaFelt = new LandPaaFelt();
     private BrugChancekort brugChancekort = new BrugChancekort();
 
@@ -39,7 +38,7 @@ public class SpilController{
         return handel;
     }
 
-    public controller.KoebFelt getKoebFelt() {
+    public controller.subcontroller.KoebFelt getKoebFelt() {
         return KoebFelt;
     }
 

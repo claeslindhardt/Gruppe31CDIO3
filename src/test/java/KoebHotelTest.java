@@ -1,7 +1,7 @@
 import controller.SpilController;
 import model.Spil;
 import model.Spiller;
-import model.felter.Ejendom;
+import model.felter.ejeligefelter.Ejendom;
 import model.felter.Felt;
 import spillogik.SpilGenerator;
 

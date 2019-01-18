@@ -1,12 +1,13 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import model.raflebaeger.RafleBaeger;
 import view.UserInterfaceKontrakt;
 import model.Spiller;
 import model.chancekort.Chancekort;
-import model.felter.Bryggeri;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,5 @@
-import model.Ejendomsgruppe;
-import model.felter.Ejendom;
+import model.felter.ejeligefelter.Ejendomsgruppe;
+import model.felter.ejeligefelter.Ejendom;
 import org.junit.jupiter.api.Test;
 import spillogik.EjendomsLogik;
 

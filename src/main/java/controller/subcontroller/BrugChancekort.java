@@ -1,10 +1,11 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import view.UserInterfaceKontrakt;
 import model.chancekort.*;
 import model.Spil;
 import model.Spiller;
-import model.felter.Faengsel;
+import model.felter.aktionsfelter.Faengsel;
 import model.felter.Felt;
 
 
@@ -15,7 +16,7 @@ import model.felter.Felt;
  *
  * @author Malte
  */
-class BrugChancekort {
+public class BrugChancekort {
 
 
     /**

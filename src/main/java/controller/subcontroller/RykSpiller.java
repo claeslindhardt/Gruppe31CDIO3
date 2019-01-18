@@ -1,5 +1,6 @@
-package controller;
+package controller.subcontroller;
 
+import controller.SpilController;
 import view.UserInterfaceKontrakt;
 import model.Spil;
 import model.Spiller;

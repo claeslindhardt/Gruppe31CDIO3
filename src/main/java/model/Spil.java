@@ -1,8 +1,7 @@
 package model;
 
-import view.UserInterfaceKontrakt;
 import model.chancekort.Chancekort;
-import model.felter.Faengsel;
+import model.felter.aktionsfelter.Faengsel;
 import model.felter.Felt;
 import model.raflebaeger.RafleBaeger;
 

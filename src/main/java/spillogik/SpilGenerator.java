@@ -1,10 +1,14 @@
 package spillogik;
 
-import model.Ejendomsgruppe;
+import model.felter.ejeligefelter.Ejendomsgruppe;
 import model.chancekort.*;
 import model.Spil;
 import model.Spiller;
 import model.felter.*;
+import model.felter.aktionsfelter.*;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
 
 import java.awt.*;

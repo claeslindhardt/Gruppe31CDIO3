@@ -1,9 +1,10 @@
 package model;
 
 import model.chancekort.Chancekort;
-import model.felter.Bryggeri;
-import model.felter.Ejendom;
-import model.felter.Rederi;
+import model.felter.ejeligefelter.Ejendomsgruppe;
+import model.felter.ejeligefelter.Bryggeri;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Rederi;
 
 import java.util.ArrayList;
 

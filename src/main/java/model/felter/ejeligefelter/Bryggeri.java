@@ -1,4 +1,6 @@
-package model.felter;
+package model.felter.ejeligefelter;
+
+import model.felter.ejeligefelter.EjeligtFelt;
 
 public class Bryggeri extends EjeligtFelt {
 
