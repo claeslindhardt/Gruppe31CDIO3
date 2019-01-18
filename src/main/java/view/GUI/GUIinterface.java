@@ -260,6 +260,7 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
         for( GUI_Player gui_spiller : gui_spillere ){
             gui.addPlayer( gui_spiller );
+            spillere.add( gui_spiller );
         }
     }
 
