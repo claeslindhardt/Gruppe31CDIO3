@@ -254,7 +254,8 @@ public class GUIinterface implements UserInterfaceKontrakt {
 
     public void startSpil( Spil spil ) {
 
-        gui.showMessage("Lad os spille!");
+
+        gui.showMessage("Lad os spille! - " + spil.getSpillerMedTur().getNavn() + " starter.");
 
         GUI_Player[] gui_spillere = genererSpillere( spil.getSpillere() );
 
