@@ -51,6 +51,7 @@ public class Spiller {
 
 
 
+
     public int getPosition() {
         return position;
     }
@@ -190,5 +191,26 @@ public class Spiller {
         return ejedeFelter;
     }
 
+
+
+    /**
+     * Tilfoejer et ejeligt felt til Spilleren. Den finder ud af
+     * hvilken liste den skal ligge i (ejendomme, rederier, bryggerier)
+     * og tilfoejer den til den rigtige liste.
+     *
+     * @author Malte
+     * @param ejeligtFelt Feltet der skal tilfoejes til spilleren
+     */
+    public void addEjeligtFelt( EjeligtFelt ejeligtFelt ){
+        if( ejeligtFelt instanceof Ejendom ){
+            ejendomme.add( (Ejendom) ejeligtFelt );
+        }
+        if( ejeligtFelt instanceof Bryggeri ){
+            bryggerier.add( (Bryggeri) ejeligtFelt );
+        }
+        if( ejeligtFelt instanceof Rederi ){
+            rederier.add( (Rederi) ejeligtFelt );
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ import model.Spiller;
 import model.chancekort.Chancekort;
 import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
+import spillogik.VinderLogik;
 import view.GUI.GraphicalUserInterface;
 import view.UserInterface;
 import model.Spil;
@@ -97,7 +98,7 @@ public class SpilController{
 
         spiller.setHarSlaaet(false);
 
-        if( spiller.getPenge() < 0  ){
+        if( VinderLogik.erBankerot(spiller) ){
 
 
             spillerUdgaar( spiller );

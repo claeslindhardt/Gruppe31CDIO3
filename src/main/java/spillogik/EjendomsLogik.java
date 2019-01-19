@@ -35,6 +35,7 @@ public class EjendomsLogik {
         return true;
     }
 
+
     /**
      * @author Andreas
      *
@@ -56,26 +57,6 @@ public class EjendomsLogik {
         return true;
     }
 
-    /**
-     * @author Jacob
-     *
-     * Denne metode ser på inddelingen af huse. Hvis den ejendom, som man tager udgangspunkt i har et mindre antal
-     * huse end andre ejendomme i gruppen returneres den som false og man kan derfor ikke sælge et hus.
-     *
-     * @param ejendomUdgangspunkt Udgangspunkt for undersøgelsen
-     * @return om huse er ligeligt fordelt i ejendomsgruppen, og om den er i et mode, hvor man kan sælge huset.
-     */
-    /**public static boolean kanManSaelgeEtHus(Ejendom ejendomUdgangspunkt){
-
-        for (int i = 0; i < ejendomUdgangspunkt.getGruppe().getAntalEjendomme(); i++){
-            Ejendom ejendom = ejendomUdgangspunkt.getGruppe().getEjendommeArray().get(i);
-
-            if ( ejendom.getAntalHuse() > ejendomUdgangspunkt.getAntalHuse() ){
-                return false;
-            }
-        }
-        return true;
-    }*/
 
 
     /**
