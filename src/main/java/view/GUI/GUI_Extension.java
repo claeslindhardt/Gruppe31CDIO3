@@ -44,7 +44,7 @@ public class GUI_Extension {
         do{
 
             input = gui.getUserString( besked );
-            if( input != "" ){
+            if( !input.isEmpty() ){
                 break;
             }
             gui.showMessage("Hov, du indtastede vist ikke noget.");
