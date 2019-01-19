@@ -210,6 +210,7 @@ public class GraphicalUserInterface implements UserInterface {
     public void gennemfoertKoeb( EjeligtFelt felt, Spiller spiller ){
         gui.visTekst("Du har koebt " + felt.getNavn() + "!");
         gui.opdaterSpillere( spiller );
+        gui.opdaterFelt( felt );
     }
 
     public void betalerLeje(int leje, Spiller betaler, Spiller modtager){
