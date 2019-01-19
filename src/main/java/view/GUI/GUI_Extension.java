@@ -143,13 +143,15 @@ public class GUI_Extension {
             if( spiller.erUdgaaet() ){
                 gui_spiller.setName( spiller.getNavn() + " (Udgaaet)");
                 gui_spiller.setBalance(0);
-
                 for( EjeligtFelt felt : spiller.getEjedeFelter() ){
-                    setFeltEjer( felt, null );
+                    opdaterFelt(felt);
                 }
+
             } else {
                 gui_felter[ spiller.getPosition() ].setCar( gui_spiller, true );
                 gui_spiller.setBalance( (int) spiller.getPenge() );
+
+
             }
         }
     }
@@ -176,7 +178,6 @@ public class GUI_Extension {
 
             if( ejendom.harHotel() ){
                 gui_felt.setHotel(true);
-                gui_felt.setHouses(0);
             }else{
                 gui_felt.setHouses(ejendom.getAntalHuse());
             }

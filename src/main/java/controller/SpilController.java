@@ -99,9 +99,9 @@ public class SpilController{
 
         if( spiller.getPenge() < 0  ){
 
-            spiller.setErUdgaaet(true);
-            ui.spillerErBankerot( spiller );
+
             spillerUdgaar( spiller );
+            ui.spillerErBankerot( spiller );
 
         }
 
@@ -118,6 +118,8 @@ public class SpilController{
 
 
     public void spillerUdgaar( Spiller spiller ){
+        spiller.setErUdgaaet(true);
+
         for( Chancekort chancekort : spiller.getChancekort() ){
             spil.addChancekort( chancekort );
         }
@@ -125,8 +127,9 @@ public class SpilController{
 
         for( Ejendom ejendom : spiller.getEjendommeArray() ){
             ejendom.setEjer(null);
+            ejendom.setHarHotel(false);
+            ejendom.setAntalHuse(0);
         }
-        spiller.clearEjendomme();
 
     }
 
@@ -183,9 +186,8 @@ public class SpilController{
             case 3:
                 if( handlinger.givOp( ui ) ){
                     slutTur = true;
-                    spiller.setErUdgaaet(true);
-                    ui.harGivetOp( spiller );
                     spillerUdgaar( spiller );
+                    ui.harGivetOp( spiller );
                 }
                 break;
 
