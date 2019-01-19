@@ -18,15 +18,15 @@ import java.util.ArrayList;
  */
 public class LandPaaFelt {
 
+
     // Controller
     private LandPaaEjeligtFelt landPaaEjeligtFelt = new LandPaaEjeligtFelt();
+
 
     /**
      * Vurderer typen af feltet man lander paa, og kalder den korrekte
      * controller metode ift. feltet. Alle metoderne der kan kaldes
      * befinder sig i klassen her.
-     *
-     * @author Malte
      *
      * @param felt      Feltet der landes paa
      * @param spiller   Spilleren der lander paa feltet

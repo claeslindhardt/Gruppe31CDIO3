@@ -62,9 +62,11 @@ public class BrugChancekort {
      * @param spiller   Spilleren der bruger det
      */
     private void gratisUdAfFaengsel( Spiller spiller, UserInterface ui ){
-        spiller.setErIFaengsel(false);
-        spiller.setHarSlaaet(false);
-        ui.brugtUdAfFaengsel();
+        if( spiller.erIFaengsel() ) {
+            spiller.setErIFaengsel(false);
+            spiller.setHarSlaaet(false);
+            ui.brugtUdAfFaengsel();
+        }
     }
 
 

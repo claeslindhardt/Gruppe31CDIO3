@@ -10,8 +10,6 @@ import static spillogik.BeregnLeje.beregnLejeTotal;
 import static spillogik.BeregnLeje.beregnSalgsPrisHus;
 
 
-
-
 public class HandelHus {
 
 
@@ -44,7 +42,6 @@ public class HandelHus {
                 if( ejendomsIndex < bebyggeligeEjendomme.size() ){
                     Ejendom valgtEjendom = bebyggeligeEjendomme.get( ejendomsIndex );
                     valgtEjendom.bygHuse(1);
-                    valgtEjendom.setLeje( beregnLejeTotal(valgtEjendom, spiller.ejerEjendomsGruppe( valgtEjendom.getGruppe() )));
                     spiller.addPenge(-valgtEjendom.getHusPris());
                     ui.byggetPaaEjendom( bebyggeligeEjendomme.get(ejendomsIndex), spiller );
                 }

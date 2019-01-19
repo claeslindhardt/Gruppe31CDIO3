@@ -1,7 +1,6 @@
 package controller.subcontroller;
 
 import controller.SpilController;
-import model.felter.ejeligefelter.EjeligtFelt;
 import model.raflebaeger.RafleBaeger;
 import view.UserInterface;
 import model.Spiller;
@@ -24,9 +23,6 @@ public class Handlinger {
 
         return svar == 0;
     }
-
-
-
 
 
     /**

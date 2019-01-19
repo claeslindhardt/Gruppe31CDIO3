@@ -1,14 +1,14 @@
 package model.felter.ejeligefelter;
 
-import spillogik.HusHotelLogik;
 
 import static spillogik.BeregnLeje.beregnLejeVedHotel;
 import static spillogik.BeregnLeje.beregnLejeVedHus;
 
 
-/**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: Ejendom
- *
+/**
+ * Klassen der repræsentere ejendomme. Ejendommen har forskellige
+ * prisniveauet ved forskelligt antal huse / hotel, og den gemmer
+ * alle disse informationer.
  */
 public class Ejendom extends EjeligtFelt {
 
@@ -16,11 +16,28 @@ public class Ejendom extends EjeligtFelt {
     private int     antalHuse = 0;
     private double  husPris = 50;
     private double  hotelPris = 100;
-    private int     leje = 0;
     private Ejendomsgruppe gruppe;
     private int lejeHotel = 0;
     private int lejeStart = 0;
     private int[] lejeHus = {0,0,0,0};
+
+
+
+    public Ejendom(String navn, int pris, int startLeje, int placering){
+        super( navn, pris, placering);
+        setPlacering(placering);
+        setPris(pris);
+        setNavn(navn);
+
+        setLejeStart(startLeje);
+
+        setLejeHus( beregnLejeVedHus(this, 1),
+                beregnLejeVedHus(this, 2),
+                beregnLejeVedHus(this, 3),
+                beregnLejeVedHus(this, 4) );
+
+        setLejeHotel( beregnLejeVedHotel(this) );
+    }
 
 
     //|--------- Getters og Setters:-----------------
@@ -65,6 +82,64 @@ public class Ejendom extends EjeligtFelt {
 
     /**
      * @author Malte
+     * @return Grundens leje hvis der står et hotel.
+     */
+    public int getLejeHotel(){
+        return lejeHotel;
+    }
+
+    /**
+     * @author Malte
+     * @return Grundens leje når der hverken er hotel eller huse på.
+     */
+    public int getLejeStart(){
+        return lejeStart;
+    }
+
+
+    /**
+     * @param lejeStart Lejen på grunden, når der står hverken hotel eller huse på.
+     */
+    public void setLejeStart(int lejeStart){
+        this.lejeStart = lejeStart;
+    }
+
+
+    /**
+     * @param lejeHotel Lejen af grunden, når der står et hotel på.
+     */
+    public void setLejeHotel(int lejeHotel){
+        this.lejeHotel = lejeHotel;
+    }
+
+
+    /** @author Malte
+     *  Tilføjer huse til ejendommen. Den tjekker ikke for, om der
+     *  i følge reglerne kan bygges huse på ejendommen.
+     * @param antalHuse: Hvor mange huse, der skal bygges.
+     */
+    public void bygHuse(int antalHuse){
+        setAntalHuse(getAntalHuse()+antalHuse);
+    }
+
+
+    /** @author Malte
+     *  Fjerner et hus fra ejendommen.
+     * @param antalHuse: Hvor mange huse, der skal bygges.
+     */
+    public void saelgHus(int antalHuse){
+        setAntalHuse(getAntalHuse()-antalHuse);
+    }
+
+    public void bygHotel(boolean harHotel){
+        setHarHotel(harHotel);
+    }
+
+    public void saelgHotel(boolean harHotel){setHarHotel(harHotel);}
+
+
+    /**
+     * @author Malte
      * Henter hvad lejen er på grunden, ved et bestemt antal huse.
      *
      * @param antalHuse Antallet aPf huse man ønsker at kende lejen ved. Skal ligge mellem 1 og 4 (begge inklusiv).
@@ -86,34 +161,6 @@ public class Ejendom extends EjeligtFelt {
 
 
     /**
-     * @author Malte
-     * @return Grundens leje hvis der står et hotel.
-     */
-    public int getLejeHotel(){
-        return lejeHotel;
-    }
-
-    /**
-     * @author Malte
-     * @return Grundens leje når der hverken er hotel eller huse på.
-     */
-    public int getLejeStart(){
-        return lejeStart;
-    }
-
-
-    /**
-     * @author Malte
-     */
-    public int getLeje() {
-        return leje;
-    }
-
-    public void setLeje(int leje) {
-        this.leje = leje;
-    }
-
-    /**
      * @param etHus     Lejen på grunden, når der står ét hus på.
      * @param toHuse    Lejen på grunden, når der står to huse på.
      * @param treHuse   Lejen på grunden, når der står tre huse på.
@@ -126,57 +173,4 @@ public class Ejendom extends EjeligtFelt {
         lejeHus[3] = fireHuse;
     }
 
-    /**
-     * @param lejeStart Lejen på grunden, når der står hverken hotel eller huse på.
-     */
-    public void setLejeStart(int lejeStart){
-        this.lejeStart = lejeStart;
-    }
-
-    /**
-     * @param lejeHotel Lejen af grunden, når der står et hotel på.
-     */
-    public void setLejeHotel(int lejeHotel){
-        this.lejeHotel = lejeHotel;
-    }
-
-    /** @author Malte
-     *  Tilføjer huse til ejendommen. Den tjekker ikke for, om der
-     *  i følge reglerne kan bygges huse på ejendommen.
-     * @param antalHuse: Hvor mange huse, der skal bygges.
-     */
-    public void bygHuse(int antalHuse){
-        setAntalHuse(getAntalHuse()+antalHuse);
-    }
-
-    public void saelgHus(int antalHus){
-        setAntalHuse(getAntalHuse()-antalHus);
-    }
-
-    public void bygHotel(boolean harHotel){
-        setHarHotel(harHotel);
-    }
-
-    public void saelgHotel(boolean harHotel){setHarHotel(harHotel);}
-
-    //|--------- Constructor:-----------------
-    public Ejendom(String navn, int pris, int startLeje, int placering){
-        super( navn, pris, placering);
-        setPlacering(placering);
-        setPris(pris);
-        setNavn(navn);
-
-        setLejeStart(startLeje);
-
-        setLejeHus( beregnLejeVedHus(this, 1),
-                    beregnLejeVedHus(this, 2),
-                    beregnLejeVedHus(this, 3),
-                    beregnLejeVedHus(this, 4) );
-
-        setLejeHotel( beregnLejeVedHotel(this) );
-
-        setLeje(startLeje);
-
-        setFeltType("Ejendom");
-    }
 }

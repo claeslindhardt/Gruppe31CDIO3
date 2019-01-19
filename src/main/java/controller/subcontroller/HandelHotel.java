@@ -89,6 +89,10 @@ public class HandelHotel {
     }
 
 
+    /**
+     * Sorterer ejendomme der kan saelges et hotel paa, ved at vurdere
+     * om der allerede staar et hotel.
+     */
     private ArrayList<Ejendom> sorterMuligeEjendomme( Spiller spiller ){
 
         Ejendom[] ejendomme = spiller.getEjendommeArray();

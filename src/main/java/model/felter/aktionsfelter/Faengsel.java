@@ -4,9 +4,7 @@ import model.felter.Felt;
 
 public class Faengsel extends Felt {
 
-    public Faengsel(String navn, int placering){
+    public Faengsel(int placering){
         super("Fængsel", placering );
-
-        setFeltType("Fængsel");
     }
 }

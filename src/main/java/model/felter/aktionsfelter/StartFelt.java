@@ -6,8 +6,6 @@ public class StartFelt extends Felt {
 
     public StartFelt(int placering ){
         super( "Start", placering );
-
-        setFeltType("Startfelt");
     }
 
 }

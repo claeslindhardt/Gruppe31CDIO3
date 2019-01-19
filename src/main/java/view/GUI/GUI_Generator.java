@@ -13,16 +13,31 @@ import model.felter.ejeligefelter.Rederi;
 
 import java.awt.*;
 
-public class GUI_Generator {
+
+/**
+ * Klassen der indeholder metoder, som generer "GUI-spillet" -
+ * det vil sige alle de grafiske elementer til spillet.
+ */
+class GUI_Generator {
 
 
-    public static GUI genererGUI( Spil spil ){
-        GUI gui = new GUI( genererFelter(spil.getFelter()), new Color(218,206,179));
-        return gui;
+    /**
+     * Generer selve GUI-objektet, som er det visuelle
+     * del af spillet.
+     * @param spil  Spillet som der skal generes en GUI ud fra.
+     */
+    static GUI genererGUI( Spil spil ){
+        return new GUI( genererFelter(spil.getFelter()), new Color(218,206,179));
     }
 
 
-    public static GUI_Player[] genererSpillere( Spiller[] spillere ){
+    /**
+     * Generer de grafiske spillerobjekter, herunder spillerbilerne.
+     *
+     * @param spillere De relle Spillerobjekter der generes ud fra.
+     * @return
+     */
+    static GUI_Player[] genererSpillere( Spiller[] spillere ){
 
         final Color[] SPILLERFARVER = { new Color(0,204,0), new Color(255,51,51), new Color(10,30,201),
                                         new Color(255,128,0), new Color(50,255,240), new Color(135,245,36), };
@@ -42,12 +57,19 @@ public class GUI_Generator {
             gui_spillere[i] = gui_spiller;
 
         }
-
         return gui_spillere;
     }
 
 
-    public static GUI_Field[] genererFelter( Felt[] felter ){
+    /**
+     * Generer alle de grafiske felter. Her vurderes hvilken
+     * type feltet er, og ansvaret uddelegeres videre til de
+     * korrekte metoder.
+     *
+     * @param felter    De reelle felter der skal tages udgangs-
+     *                  punkt i.
+     */
+    private static GUI_Field[] genererFelter( Felt[] felter ){
 
 
         GUI_Field[] gui_felter = new GUI_Field[ felter.length ];
@@ -87,7 +109,13 @@ public class GUI_Generator {
     }
 
 
-    public static GUI_Ownable genererEjeligtFelt( EjeligtFelt ejeligtFelt ){
+    /**
+     * Generer et ejeligt felt, ved at vurdere feltets type og uddelegere
+     * ansvaret videre.
+     * Derudover indstiller den nogle generelle ting ved de ejelige felt
+     * som alle ejelige felter skal have.
+     */
+    private static GUI_Ownable genererEjeligtFelt( EjeligtFelt ejeligtFelt ){
 
         GUI_Ownable gui_felt = null;
 
@@ -107,24 +135,28 @@ public class GUI_Generator {
         return gui_felt;
     }
 
-    public static GUI_Street genererEjendom( Ejendom ejendom ){
+
+
+    private static GUI_Street genererEjendom( Ejendom ejendom ){
 
         GUI_Street gui_ejendom = new GUI_Street();
 
         gui_ejendom.setBackGroundColor( ejendom.getGruppe().getFarve() );
         gui_ejendom.setHouses( ejendom.getAntalHuse() );
-        gui_ejendom.setDescription("Grundleje: " + ( ejendom).getLeje() + " / "
-                + "Huspris: " + ( ejendom).getHusPris() + " / "
-                + "Leje fra hus 1: " + ( ejendom).getLejeHus(1) + " / "
-                + "Leje fra hus 2: " + ( ejendom).getLejeHus(2) + " / "
-                + "Leje fra hus 3: " + ( ejendom).getLejeHus(3) + " / "
-                + "Leje fra hus 4: " + ( ejendom).getLejeHus(4) + " / "
-                + "Leje fra hotel: " + ( ejendom).getLejeHotel());
+        gui_ejendom.setDescription("Grundleje: " + ejendom.getLejeStart() + " / "
+                + "Huspris: " + ejendom.getHusPris() + " / "
+                + "Leje fra hus 1: " + ejendom.getLejeHus(1) + " / "
+                + "Leje fra hus 2: " + ejendom.getLejeHus(2) + " / "
+                + "Leje fra hus 3: " + ejendom.getLejeHus(3) + " / "
+                + "Leje fra hus 4: " + ejendom.getLejeHus(4) + " / "
+                + "Leje fra hotel: " + ejendom.getLejeHotel());
 
         return gui_ejendom;
     }
 
-    public static GUI_Brewery genererBryggeri(){
+
+
+    private static GUI_Brewery genererBryggeri(){
 
         GUI_Brewery gui_bryggeri = new GUI_Brewery();
 
@@ -134,7 +166,9 @@ public class GUI_Generator {
         return gui_bryggeri;
     }
 
-    public static GUI_Shipping genererRederi( Rederi rederi ){
+
+
+    private static GUI_Shipping genererRederi( Rederi rederi ){
 
         GUI_Shipping gui_rederi = new GUI_Shipping();
         gui_rederi.setBackGroundColor(Color.white);
@@ -147,7 +181,9 @@ public class GUI_Generator {
         return gui_rederi;
     }
 
-    public static GUI_Start genererStartFelt( StartFelt start  ){
+
+
+    private static GUI_Start genererStartFelt( StartFelt start  ){
 
         GUI_Start gui_start = new GUI_Start();
         gui_start.setTitle( start.getNavn() );
@@ -159,7 +195,8 @@ public class GUI_Generator {
     }
 
 
-    public static GUI_Refuge genererFriParkering(){
+
+    private static GUI_Refuge genererFriParkering(){
 
         GUI_Refuge gui_friParkering = new GUI_Refuge();
 
@@ -170,7 +207,12 @@ public class GUI_Generator {
         return gui_friParkering;
     }
 
-    public static GUI_Tax genererSkatteFelt( Felt skatteFelt ){
+
+    /**
+     * Genererer begge typer af skattefelter, da de er samme
+     * grafiske felt type, blot med forskellige beskrivelser.
+     */
+    private static GUI_Tax genererSkatteFelt( Felt skatteFelt ){
 
         GUI_Tax gui_skatteFelt = new GUI_Tax();
 
@@ -186,15 +228,16 @@ public class GUI_Generator {
         return gui_skatteFelt;
     }
 
-    public static GUI_Jail genererFaengsel() {
 
+    private static GUI_Jail genererFaengsel() {
         GUI_Jail gui_faengsel = new GUI_Jail();
         gui_faengsel.setSubText("Faengsel");
         gui_faengsel.setDescription("Du er paa besoeg i faengslet.");
         return gui_faengsel;
     }
 
-    public static GUI_Jail genererGaaIFaengsel() {
+
+    private static GUI_Jail genererGaaIFaengsel() {
         GUI_Jail gui_faengsel = new GUI_Jail();
         gui_faengsel.setSubText("Gaa I faengsel");
         gui_faengsel.setDescription("I faengsel med dig!");

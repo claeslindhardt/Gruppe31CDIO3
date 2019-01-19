@@ -1,6 +1,5 @@
 package model.felter.ejeligefelter;
 
-import model.felter.ejeligefelter.Ejendom;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -15,9 +14,6 @@ public class Ejendomsgruppe {
     private ArrayList<Ejendom> ejendomme = new ArrayList<Ejendom>();
 
     /**
-     * @author Malte
-     * Laver en ny tom ejendomsgruppe, der kan indeholde 'stoerrelse' antal ejendomme i sig.
-     * Gruppen kendetegnes derudover ved sin farve.
      *
      * @param farve Farven som skal kendetegne gruppen (givet kun en visuel sammenligning af gruppen,
      *              og har ingen betydning for hvordan Ejendommene vurderes om de er i samme gruppe.
@@ -25,6 +21,7 @@ public class Ejendomsgruppe {
     public Ejendomsgruppe(Color farve) {
         this.farve = farve;
     }
+
 
     //--------- Getters og Setters:-----------------
 

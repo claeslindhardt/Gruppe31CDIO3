@@ -11,24 +11,33 @@ import model.chancekort.Chancekort;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.raflebaeger.RafleBaeger;
+import model.singletoner.RandomSingleton;
 
 import java.awt.*;
 import java.util.Random;
 
-public class GUI_Extension {
+
+/**
+ * Klasse der samler informationerne i GUI-objektet til noget mere
+ * brugbart til dette projekt, samt udvider dets funktionalitet.
+ * Denne bruges som "GUI" af GraphicalUserInterface i stedet
+ * for den udleverede matadorgui.
+ */
+class GUI_Extension {
+
 
     private GUI gui;
     private GUI_Field[] gui_felter;
     private GUI_Player[] gui_spillere;
 
 
-
-    public GUI_Extension( GUI gui ){
+    GUI_Extension( GUI gui ){
         this.gui = gui;
         this.gui_felter = gui.getFields();
     }
 
-    public void setSpillere( GUI_Player[] gui_spillere ){
+
+    void setSpillere( GUI_Player[] gui_spillere ){
         this.gui_spillere = gui_spillere;
 
         for( GUI_Player gui_spiller : gui_spillere ){
@@ -37,10 +46,13 @@ public class GUI_Extension {
     }
 
 
-    public String indtastTekst( String besked ) {
+    /**
+     * Udvider den orignale GUI's tekstinput ved
+     * sikre at man ikke kan indtaste en tom besked.
+     */
+    String indtastTekst( String besked ) {
 
         String input;
-
         do{
 
             input = gui.getUserString( besked );
@@ -49,27 +61,32 @@ public class GUI_Extension {
             }
             gui.showMessage("Hov, du indtastede vist ikke noget.");
         }while(true);
-
         return input;
     }
 
 
-    public int indtastTal( String besked, int min, int max ) {
+
+    int indtastTal( String besked, int min, int max ) {
         return gui.getUserInteger( besked, min, max);
     }
 
-    public void visTekst( String besked ){
+
+    void visTekst( String besked ){
         gui.showMessage( besked );
     }
 
 
-    public void visChancekort( Chancekort chancekort ){
+    void visChancekort( Chancekort chancekort ){
         GUI_Center.getInstance().setChanceCard( chancekort.getBeskrivelse() );
         GUI_Center.getInstance().displayChanceCard();
     }
 
 
-    public int vaelgKnap( String besked, String ... valgMuligheder ){
+    /** Udvider funktionaliteten i den orginale GUI's knap mulighed
+     *  ved at returnere et tal frem for teksten paa det felt der
+     *  trykkets paa.
+     */
+    int vaelgKnap( String besked, String ... valgMuligheder ){
         String tekstValg = gui.getUserButtonPressed( besked, valgMuligheder );
         for( int i = 0; i < valgMuligheder.length; i++ ){
             if( tekstValg == valgMuligheder[i] ){
@@ -80,7 +97,11 @@ public class GUI_Extension {
     }
 
 
-    public int vaelgListe( String besked, String ... valgMuligheder ){
+    /** Udvider funktionaliteten i den orginale GUI's liste mulighed
+     *  ved at returnere et tal frem for teksten paa det felt der
+     *  trykkets paa.
+     */
+    int vaelgListe( String besked, String ... valgMuligheder ){
 
         String valg = gui.getUserSelection( besked, valgMuligheder );
 
@@ -94,7 +115,12 @@ public class GUI_Extension {
     }
 
 
-    public int binaertValg( String besked, String valg1, String valg2 ){
+    /**
+     * Udvider funktionaliteten i den orginale GUI's binare knap mulighed
+     *  ved at returnere et tal frem for teksten paa det felt der
+     *  trykkets paa.
+     */
+    int binaertValg( String besked, String valg1, String valg2 ){
         String valg = gui.getUserButtonPressed( besked,
                 valg1, valg2);
 
@@ -105,23 +131,42 @@ public class GUI_Extension {
         }
     }
 
-    public int vaelgJaNej( String besked ){
+
+    /**
+     * Stiller SPilleren et sporgsmaal med et ja/nej mulighed
+     * som svar.
+     *
+     * @param besked    Beskeden der vises
+     * @return 0 = Ja, 1 = Nej
+     */
+    int vaelgJaNej( String besked ){
         return binaertValg(besked, "Ja", "Nej");
     }
 
+
+    /**
+     * Fjerner en spillers bil fra braettet. Dette bruges
+     * til at flytte spillerens bil, samt fjerne spillerens
+     * bil naar spiller udgaar fra spillet.
+     */
     private void fjernBil( GUI_Player spiller ){
+
+        // Finder spillerens bil ved at gennemgaa alle felter
         for( GUI_Field felt : gui_felter ){
 
             if( felt.hasCar(spiller) ){
 
                 boolean[] harBil = new boolean[ gui_spillere.length];
 
+                // Tjekker hvilke spillere der har biler paa feltet
                 for(int i=0; i <  gui_spillere.length; i++){
                     harBil[i] = felt.hasCar( gui_spillere[i]);
                 }
 
                 felt.removeAllCars();
 
+                /* Tilfoejere alle andre spillers biler end den spiller
+                    der er parametren i metoden */
                 for( int i=0; i< gui_spillere.length; i++){
                     if( harBil[i] &&  gui_spillere[i] != spiller ){
                         felt.setCar( gui_spillere[i], true);
@@ -132,7 +177,13 @@ public class GUI_Extension {
     }
 
 
-    public void opdaterSpillere( Spiller ... spillere ){
+    /**
+     * Opdater de grafiske spillere med udgangspunkt
+     * i deres reelle spillerobjektet.
+     *
+     * @param spillere  Spillerne der skal opdateres.
+     */
+    void opdaterSpillere( Spiller ... spillere ){
 
         for( int i = 0; i < spillere.length; i++ ){
             Spiller spiller = spillere[i];
@@ -150,14 +201,17 @@ public class GUI_Extension {
             } else {
                 gui_felter[ spiller.getPosition() ].setCar( gui_spiller, true );
                 gui_spiller.setBalance( (int) spiller.getPenge() );
-
-
             }
         }
     }
 
 
-    public void setFeltEjer(EjeligtFelt felt, Spiller ejer ){
+    /**
+     * Saetter ejeren af et felt til at vaere en specifk spiller
+     * frem for at vurdere det ud fra det reelles felt ejer
+     *
+     */
+    private void setFeltEjer(EjeligtFelt felt, Spiller ejer ){
         GUI_Ownable gui_felt = (GUI_Ownable) gui_felter[felt.getPlacering()];
 
         if( ejer == null ){
@@ -168,7 +222,11 @@ public class GUI_Extension {
     }
 
 
-    public void opdaterFelt( EjeligtFelt felt ){
+    /**
+     * Opdaterer et felt ift. ejeren af feltet samt antallet af
+     * huse og hoteller paa feltet.
+     */
+    void opdaterFelt( EjeligtFelt felt ){
 
         setFeltEjer( felt, felt.getEjer() );
 
@@ -185,18 +243,25 @@ public class GUI_Extension {
 
     }
 
-    public void opdaterTerninger( RafleBaeger rafleBaeger ){
-        //lav dette til et forloop hvis vi finder en måde at display mere end to terninger på.
-        int terning1= rafleBaeger.getTerning(0).getVaerdi();
-        int terning2= rafleBaeger.getTerning(1).getVaerdi();
 
-        Random rand = new Random();
+    /**
+     * Opdaterer terningerne paa braettet med udgangspunkt i Raflebaegeret
+     * der indeholder de reelle terninger.
+     * Det sikres at terningerne ligger inden for et bestemt areal paa
+     * braettet for ikke at overlappe med andre grafiske elementer.
+     */
+    void opdaterTerninger( RafleBaeger rafleBaeger ){
+
+        int terning1 = rafleBaeger.getTerning(0).getVaerdi();
+        int terning2 = rafleBaeger.getTerning(1).getVaerdi();
+
+        RandomSingleton rand = RandomSingleton.getInstance();
 
         //Angiver, position af terningerne (Grid system - Andreas)
-        int x1 = rand.nextInt(6)+1;
-        int y1 = rand.nextInt(2)+7;
-        int x2 = rand.nextInt(6)+1;
-        int y2 = rand.nextInt(2)+7;
+        int x1 = rand.nextInt(6) + 1;
+        int y1 = rand.nextInt(2) + 7;
+        int x2 = rand.nextInt(6) + 1;
+        int y2 = rand.nextInt(2) + 7;
 
         gui.setDice(terning1,x1,y1,terning2,x2,y2);
     }

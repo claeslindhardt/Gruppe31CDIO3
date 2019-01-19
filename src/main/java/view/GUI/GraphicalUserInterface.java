@@ -16,29 +16,35 @@ import static view.GUI.GUI_Generator.genererGUI;
 import static view.GUI.GUI_Generator.genererSpillere;
 
 
-/**
- * __________________________________________________________________________________________________________________________________________________________
- * PROGRAMDOKUMENTATION: GraphicalUserInterface.
- *
- *
- */
+
 public class GraphicalUserInterface implements UserInterface {
 
     private GUI_Extension gui;
 
 
+    /**
+     * Aabne GUI'en. Den allerfoerste metode der bliver kaldt i gui'en.
+     */
     public void aabenSpil( Spil spil ){
         gui = new GUI_Extension( genererGUI(spil) );
         gui.visTekst( "Hjerteligt velkommen til Matador!" );
     }
 
 
+    /**
+     * Starter spillet (efter oprettelsen af spillerne).
+     */
     public void startSpil( Spil spil ) {
+
+        // Generer de grafiske spillere
         gui.setSpillere( genererSpillere( spil.getSpillere() ) );
 
+        // Opdaterer spillerne
         for( Spiller spiller : spil.getSpillere() ){
             gui.opdaterSpillere( spiller );
         }
+
+        // Opdaterer alle felter (primaert ift. test, saa man kan starte med at eje ting)
         for( Felt felt : spil.getFelter() ){
             if( felt instanceof EjeligtFelt ){
                 gui.opdaterFelt( (EjeligtFelt) felt );
@@ -49,9 +55,16 @@ public class GraphicalUserInterface implements UserInterface {
     }
 
 
-    // Indtast antal spillere og spillernavne
+    /**
+     * Forespoerger antallet af spillere i spillet, samt et navn for
+     * hver af disse spillere.
+     * @param min Min antallet af spillere (inklusiv)
+     * @param max Max antallet af spillere (inklusiv)
+     * @return En liste over alle navnene paa de oprettede spillere.
+     */
     public String[] opretSpillere( int min, int max ){
 
+        // Indtast antallet af spilelre
         int antalSpillere;
         do{
             antalSpillere = gui.indtastTal( "Indtast antallet spillere:", 2, 6 );
@@ -63,13 +76,17 @@ public class GraphicalUserInterface implements UserInterface {
 
         }while(true);
 
+
+        // Indtast navnene paa alle spillere. Her tjekkes for om navne er taget.
         String[] navne = new String[antalSpillere];
 
+        // Loop der koerer for alle spisllere
         for( int i = 0; i < antalSpillere; i++ ){
-
 
             String indtastetNavn;
             boolean navnErTaget;
+
+            // Loop der korer saa laenge man ikke har indtastet et navn, som ikke er taget.
             do{
                 indtastetNavn = gui.indtastTekst( "Indtast navnet paa spiller " + (i+1) + ":");
 
@@ -86,13 +103,11 @@ public class GraphicalUserInterface implements UserInterface {
             }while( navnErTaget );
             navne[i] = indtastetNavn;
         }
-
         return navne;
     }
 
 
     public void anketDomResultat( boolean loesladt ){
-
         if( loesladt ){
             gui.visTekst( "Du havde held i retten i dag og slog ens terninger! Du må derfor slå med terningerne og rykke igen med det samme.");
         }else{
@@ -114,10 +129,17 @@ public class GraphicalUserInterface implements UserInterface {
     }
 
 
+    /**
+     * Viser resultat af terningerne paa skrift, samt
+     * opdaterer de grafiske terninger.
+     */
     public void terningerResultat( RafleBaeger raflebaeger ){
         Terning[] terninger = raflebaeger.getTerninger();
         String resultat = "";
 
+        /* Teksten er gjort skalerbar ift. antallet af
+            terninger (ift. kommaer og "og")
+         */
         for( int i = 0; i < terninger.length; i++ ){
 
             if( i == terninger.length - 1 ){
@@ -171,9 +193,13 @@ public class GraphicalUserInterface implements UserInterface {
 
 
     public void passeringAfStart(int gangeOverStart){
-        gui.visTekst("Tillykke du har passeret StartFelt "+gangeOverStart+" gang(e) og modtager "+200*gangeOverStart);
+        gui.visTekst("Tillykke du har passeret start " + gangeOverStart + " gang og modtager " + (200*gangeOverStart) );
     }
 
+
+    /**
+     * Viser en liste over alle chancekort en spiller har til spilleren.
+     */
     public int chanceKortNr(Spiller spiller){
 
         ArrayList<Chancekort> chancekort = spiller.getChancekort();
@@ -182,11 +208,10 @@ public class GraphicalUserInterface implements UserInterface {
 
         String[] alias = new String[laengde];
 
-
+        // Tilfoejer en 'tilbage' mulighed til listen.
         for(int j = 0; j < chancekort.size();j++) {
             alias[j] = chancekort.get(j).getKortBeskrivelse();
         }
-
         alias[ chancekort.size()] = "Tilbage";
 
         return gui.vaelgListe("Liste af dine Chancekort: ",alias);
@@ -223,8 +248,8 @@ public class GraphicalUserInterface implements UserInterface {
     }
 
     public void duErLandetPaa(Felt felt, Spiller spiller ){
-        gui.visTekst( "Du er landet på " + felt.getNavn()+"." );
         gui.opdaterSpillere( spiller );
+        gui.visTekst( "Du er landet på " + felt.getNavn()+"." );
     }
 
     public int koebsBeslutning(){
@@ -308,8 +333,6 @@ public class GraphicalUserInterface implements UserInterface {
     public void kanIkkeSaelgeHus(){
         gui.visTekst("Du kan ikke saelge et hus lige nu.");
     }
-
-
 
 
 

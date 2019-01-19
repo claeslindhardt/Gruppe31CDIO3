@@ -1,21 +1,25 @@
 package model.felter;
 
-/**__________________________________________________________________________________________________________________________________________________________
- *  PROGRAMDOKUMENTATION: Felt
- * @author Claes
- * |-- HVORFOR ABSTRACT?
+/**
+ * @author Claes & Malte
+ *
+ * Klassen der repræsentere et felt, som alle felttyper nedarver fra.
+ *
+ * HVORFOR ABSTRACT?
  * abstrackt er noget man kan gøre ved en klasse for at sikre at  man ikke kan lave instanser af den.
- * Dette er en fordel for forældre klasser/super klasser altså klasser der kun holder data som ikke
- * holder nogen controller funktion. Så disse klasser er kun til for datastrukturen skyld. De gør ikke
- * noget selvstændigt.
- *  */
+ * I dette tilfaelde skal man ikke bare kunne lave et felt, men kun et felt af en bestemt type *
+ */
 public abstract class Felt {
-    //|--------- Variabler:-----------------
-    private int placering;
+    private int placering; // Placering paa braettet.
     private String navn;
-    private String feltType = "?";
 
-    //|--------- Getters og Setters:-----------------
+
+    public Felt(String navn, int placering ){
+        this.navn = navn;
+        this.placering = placering;
+    }
+
+
     public int getPlacering() {
         return placering;
     }
@@ -32,17 +36,4 @@ public abstract class Felt {
         this.navn = navn;
     }
 
-    public String getFeltType() {
-        return feltType;
-    }
-
-    public void setFeltType(String feltType) {
-        this.feltType = feltType;
-    }
-
-
-    public Felt(String navn, int placering ){
-        this.navn = navn;
-        this.placering = placering;
-    }
 }

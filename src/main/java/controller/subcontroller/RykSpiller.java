@@ -12,13 +12,12 @@ public class RykSpiller {
 
 
     /**
-     * Indsæt beskrivelse her
+     * Forloebet i at spilleren kaster med terningerne.
      */
     public void kastTerninger(Spil spil, Spiller spiller, UserInterface ui, SpilController spilController) {
         RafleBaeger raflebaeger = spil.getRaflebaeger();
 
         if ( !spiller.harSlaaet() ) {
-
             raflebaeger.slaa();
 
             ui.terningerResultat( raflebaeger );
@@ -26,17 +25,14 @@ public class RykSpiller {
             if ( raflebaeger.erEns() ) {
                 ui.ensTerninger();
                 spil.getSpillerMedTur().setHarSlaaet(false);
-
             } else {
                 spil.getSpillerMedTur().setHarSlaaet(true);
-
             }
 
             rykSpillerAntalFelter( spil, spiller, raflebaeger.getTotalVaerdi(), ui, spilController );
 
         } else {
             ui.harSlaaetMedTerning();
-
         }
     }
 
@@ -49,8 +45,7 @@ public class RykSpiller {
      * @param spiller       Spilleren der skal rykkes
      * @param felterAtRykke Hvor mange felter fremad spilleren rykker
      */
-    public void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterface ui, SpilController spilController) {
-
+    void rykSpillerAntalFelter(Spil spil, Spiller spiller, int felterAtRykke, UserInterface ui, SpilController spilController) {
         Felt[] felter = spil.getFelter();
 
         Felt endeligtFelt = BevaegelsesLogik.beregnEndeligtFelt( felter, felter[spiller.getPosition()], felterAtRykke  );
@@ -73,7 +68,7 @@ public class RykSpiller {
      * @param felt Feltet spilleren skal rykke til
      * @param gangeOverStart Hvor mange gange over start spilleren kommer. Hvis =0 sker der ikke noget.
      */
-    public void rykSpillerTilFelt(Spiller spiller, Felt felt, int gangeOverStart, UserInterface ui, SpilController spilController){
+    void rykSpillerTilFelt(Spiller spiller, Felt felt, int gangeOverStart, UserInterface ui, SpilController spilController){
 
         if( gangeOverStart > 0 ) {
             spiller.setPenge(spiller.getPenge() + BevaegelsesLogik.passererStartPenge(gangeOverStart));
@@ -83,13 +78,5 @@ public class RykSpiller {
         spiller.setPosition(felt.getPlacering());
         spilController.getLandPaaFelt().landPaaFelt( felt,  spiller, spilController, ui);
     }
-
-
-
-
-
-
-
-
 
 }

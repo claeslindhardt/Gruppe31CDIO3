@@ -60,7 +60,7 @@ class LandPaaEjeligtFelt {
             int lejeForFelt = 0;
 
             if (felt instanceof Ejendom) {
-                lejeForFelt = beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
+                lejeForFelt = beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe( ((Ejendom) felt).getGruppe() ));
 
             } else if (felt instanceof Bryggeri){
                 lejeForFelt = beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
