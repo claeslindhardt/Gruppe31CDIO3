@@ -67,16 +67,19 @@ public class GraphicalUserInterface implements UserInterface {
 
         for( int i = 0; i < antalSpillere; i++ ){
 
-            boolean navnErTaget = false;
+
             String indtastetNavn;
+            boolean navnErTaget;
             do{
                 indtastetNavn = gui.indtastTekst( "Indtast navnet paa spiller " + (i+1) + ":");
 
+                navnErTaget = false;
                 for(int j = 0; j < antalSpillere; j++){
 
                     if( navne[j] != null && navne[j].equalsIgnoreCase( indtastetNavn )) {
                         navnErTaget = true;
                         gui.visTekst("Det navn er allerede taget");
+                    }else{
                     }
                 }
 
