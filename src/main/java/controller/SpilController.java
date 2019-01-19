@@ -39,11 +39,6 @@ public class SpilController{
         return handel;
     }
 
-    public controller.subcontroller.KoebFelt getKoebFelt() {
-        return KoebFelt;
-    }
-
-    private KoebFelt    KoebFelt    = new KoebFelt();
 
     public Spil getSpil(){return spil;}
 

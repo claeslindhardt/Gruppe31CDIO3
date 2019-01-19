@@ -77,7 +77,7 @@ public class LandPaaFelt {
             int koebsBeslutning = ui.koebsBeslutning();
 
             if( koebsBeslutning == 0 ){
-                spilController.getKoebFelt().koebFelt( felt, spiller, ui );
+                spilController.getHandlinger().koebFelt( felt, spiller, ui );
             }
 
         }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
