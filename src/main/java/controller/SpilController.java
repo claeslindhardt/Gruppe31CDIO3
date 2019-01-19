@@ -24,7 +24,8 @@ public class SpilController{
     // Controlllere
     private RykSpiller rykSpiller  = new RykSpiller();
     private Handlinger handlinger  = new Handlinger();
-    private Handel handel      = new Handel();
+    private HandelHotel handelHotel = new HandelHotel();
+    private HandelHus handelHus = new HandelHus();
     private LandPaaFelt landPaaFelt = new LandPaaFelt();
     private BrugChancekort brugChancekort = new BrugChancekort();
 
@@ -35,11 +36,6 @@ public class SpilController{
 
     public BrugChancekort getBrugChancekort(){ return brugChancekort; }
 
-    public Handel getHandel() {
-        return handel;
-    }
-
-
     public Spil getSpil(){return spil;}
 
     public void setSpil(Spil spil){
@@ -49,8 +45,6 @@ public class SpilController{
     public RykSpiller getRykSpiller() {
         return rykSpiller;
     }
-
-    public Handlinger getHandlinger(){ return handlinger;  }
 
 
     /** Laver en ny SpilController med en GUI */
@@ -188,17 +182,19 @@ public class SpilController{
                 break;
 
             case 4:
-                handel.koebHusPaaEjendom( spiller, ui);
+                handelHus.koebHusForloeb( spiller, ui );
                 break;
 
             case 5:
-                handel.koebHotelPaaEjendom( spiller, ui);
+                handelHotel.koebHotelForloeb( spiller, ui );
                 break;
 
-            case 6: handel.saelgHusPaaEjendom( spiller, ui );
+            case 6:
+                handelHus.saelgHusForloeb( spiller, ui );
                 break;
 
-            case 7: handel.saelgHotelPaaEjendom(this, spiller, ui);
+            case 7:
+                handelHotel.saelgHotelForloeb( spiller, ui );
                 break;
         }
 

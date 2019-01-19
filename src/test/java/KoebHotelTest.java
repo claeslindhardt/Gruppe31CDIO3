@@ -15,7 +15,7 @@ public class KoebHotelTest {
 
         Spiller spiller = spil.getSpiller(0);
 
-        spiller.setNavn("Malte");
+        spiller.    setNavn("Malte");
         spiller.setPenge(9999999);
 
         for( Felt felt : spil.getFelter() ){
