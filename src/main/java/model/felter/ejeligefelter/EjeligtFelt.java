@@ -20,7 +20,6 @@ public abstract class EjeligtFelt extends Felt {
     private boolean pantsat = false;
     private double pantsaetningsVaerdi;
 
-    // TODO: Flyt gruppe ud af EjeligtFelt og over i Ejendom - det er det eneste sted den bruges.
     private Ejendomsgruppe gruppe;
 
 

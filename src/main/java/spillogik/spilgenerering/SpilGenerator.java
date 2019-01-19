@@ -1,26 +1,23 @@
 package spillogik.spilgenerering;
 
-import model.felter.ejeligefelter.Ejendomsgruppe;
-import model.chancekort.*;
+
+
 import model.Spil;
 import model.Spiller;
-import model.felter.*;
-import model.felter.aktionsfelter.*;
-import model.felter.ejeligefelter.Bryggeri;
-import model.felter.ejeligefelter.Ejendom;
-import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
-import model.singletoner.RandomSingleton;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
-
 import static spillogik.spilgenerering.ChancekortGenerator.genererChancekort;
 import static spillogik.spilgenerering.FeltGenerator.genererFelter;
 
+
 public class SpilGenerator {
 
+    /**
+     * Generer et klassisk matadorspil.
+     * Her generes ikke spillerne for spillet, da dette gøres
+     * ved spilstart.
+     *
+     * @return Et Matador spil med generet felter, chancekort og raflebaeger.
+     */
     public static Spil genererSpil(){
 
         Spil spil = new Spil();
@@ -33,6 +30,13 @@ public class SpilGenerator {
     }
 
 
+    /**
+     * Et klassisk Matadorspil med forgenerede spillere med
+     * navnene "Spiller 1", "Spiller 2" osv.
+     * Bruges til test.
+     *
+     * @return Et Matador spil med generet felter, chancekort og raflebaeger.
+     */
     public static Spil genererSpil( int antalSpillere ){
 
         Spil spil = new Spil();
@@ -50,7 +54,17 @@ public class SpilGenerator {
     }
 
 
-
+    /**
+     * @author Malte
+     * Generer en række spillere med udgangspunkt i en liste
+     * af navne. Der blivere genereret lige så mange spillere
+     * som listen er lang.
+     * Navnene bliver ikke vurderet her (om de er tomme eller
+     * om de forekommer dobbelt).
+     *
+     * @param navne     Et liste af vilkårlige navne
+     * @return En liste af spillerobjekter.
+     */
     public static Spiller[] genererSpillere(String ... navne ) {
         int antalSpillere = navne.length;
         Spiller[] spillere = new Spiller[antalSpillere];

@@ -13,7 +13,7 @@ public class FalskRaflebaeger extends RafleBaeger {
     }
 
     @Override
-    public int slaa(){
+    public void slaa(){
 
         int tern1 = scanner.nextInt();
         int tern2 = scanner.nextInt();
@@ -23,8 +23,6 @@ public class FalskRaflebaeger extends RafleBaeger {
         terninger[1].setVaerdi(tern2);
 
         setTotalVaerdi(tern1+tern2);
-
-        return getTotalVaerdi();
     }
 
     @Override

@@ -8,9 +8,14 @@ import model.felter.ejeligefelter.Rederi;
 public class BeregnLeje {
 
 
-
-
-    public static double beregnSalgsPrisHus(Ejendom ejendom, int antalHuse){
+    /**
+     * Beregner hvor meget man skal have tilbage ved salg af hus
+     * paa en ejendom
+     *
+     * @param ejendom   Ejendommen man saelger paa
+     * @param antalHuse Antallet af huse man saelger
+     */
+    public static double beregnSalgsPrisHus( Ejendom ejendom, int antalHuse ){
 
         if(ejendom.harHotel()){
             return ((ejendom.getHotelPris())/2);
@@ -18,6 +23,9 @@ public class BeregnLeje {
             return ((ejendom.getHusPris() * antalHuse) / 2);
         }
     }
+
+
+
     /**
      * Henter information for, hvad en Ejendoms leje skal være med udgangspunkt i antallet af huse / hoteller
      * og om man ejer alle i Ejendomsgruppen.
@@ -47,8 +55,9 @@ public class BeregnLeje {
 
     }
 
+
     /**
-     * @auther Andreas
+     * @author Andreas
      * Beregner den leje som skal betales, når en spiller lander på en andens bryggeri.
      * @param terningeKast
      * @param ejer
@@ -66,11 +75,13 @@ public class BeregnLeje {
         return leje;
     }
 
+
     /**
-     * @auther filip
-     * @param rederi
-     * @param spiller
-     * @return
+     * @author filip
+     * Beregner lejen for et rederi.
+     *
+     * @param rederi    Rederiet der skal beregnes leje for
+     * @param spiller   Spilleren, der ejer rederiet.
      */
     public static int beregnLejeRederi(Rederi rederi, Spiller spiller){
         int leje = rederi.getLeje();

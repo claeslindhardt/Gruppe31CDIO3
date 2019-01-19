@@ -54,10 +54,10 @@ public class BevaegelsesLogik {
 
         // Beregninger
         int totalFelt = startFeltNr + antalFelter;
-
         int reduceret = totalFelt % totalAntalFelter; // Reducerer hvis man når hele vejen rundt om pladen.
 
         if( reduceret < 0 ){
+            // Man er rykket så langt tilbage at man er gået baglæns over start
             endeligtFeltNr = totalAntalFelter + reduceret;
         } else {
             endeligtFeltNr = reduceret;
