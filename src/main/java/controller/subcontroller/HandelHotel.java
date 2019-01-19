@@ -2,10 +2,12 @@ package controller.subcontroller;
 
 import model.Spiller;
 import model.felter.ejeligefelter.Ejendom;
-import spillogik.EjendomsLogik;
+import spillogik.HusHotelLogik;
 import view.UserInterface;
 
 import java.util.ArrayList;
+
+import static spillogik.BeregnLeje.beregnSalgsPrisHus;
 
 public class HandelHotel {
 
@@ -24,7 +26,7 @@ public class HandelHotel {
 
 
             for(int i = 0; i < ejendomme.length; i++){
-                if( EjendomsLogik.kanKoebeHotel(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
+                if( HusHotelLogik.kanKoebeHotel(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
                     muligeEjendomme.add(ejendomme[i]);
                 }
             }
@@ -75,7 +77,7 @@ public class HandelHotel {
 
             if( ejendomsIndex < kartotek.size() ) {
                 Ejendom valgtEjendom = kartotek.get( ejendomsIndex );
-                spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(valgtEjendom,1));
+                spiller.addPenge( beregnSalgsPrisHus(valgtEjendom,1) );
                 valgtEjendom.saelgHotel(false);
                 valgtEjendom.setAntalHuse(4);
                 ui.solgtPaaEjendom(kartotek.get(ejendomsIndex), spiller );

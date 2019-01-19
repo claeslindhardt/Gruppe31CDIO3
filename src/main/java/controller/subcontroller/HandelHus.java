@@ -2,11 +2,12 @@ package controller.subcontroller;
 
 import model.Spiller;
 import model.felter.ejeligefelter.Ejendom;
-import spillogik.EjendomsLogik;
+import spillogik.HusHotelLogik;
 import view.UserInterface;
 import java.util.ArrayList;
 
-import static spillogik.EjendomsLogik.beregnLejeTotal;
+import static spillogik.BeregnLeje.beregnLejeTotal;
+import static spillogik.BeregnLeje.beregnSalgsPrisHus;
 
 
 
@@ -31,7 +32,7 @@ public class HandelHus {
                bygge et hus paa en ejendom.
              */
             for(int i = 0; i < ejendomme.length; i++){
-                if( EjendomsLogik.kanKoebeHus(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
+                if( HusHotelLogik.kanKoebeHus(spiller, ejendomme[i], ejendomme[i].getGruppe()) ){
                     bebyggeligeEjendomme.add(ejendomme[i]);
                 }
             }
@@ -81,7 +82,7 @@ public class HandelHus {
             if( ejendomsIndex < kartotek.size() ){
                 Ejendom valgtEjendom = kartotek.get( ejendomsIndex );
                 valgtEjendom.saelgHus(1);
-                spiller.addPenge(EjendomsLogik.beregnSalgsPrisHus(valgtEjendom, 1));
+                spiller.addPenge( beregnSalgsPrisHus(valgtEjendom, 1));
                 ui.solgtPaaEjendom( kartotek.get(ejendomsIndex), spiller );
             }
         }else{
@@ -92,7 +93,7 @@ public class HandelHus {
 
     /**
      * Metoden der samler alle de ejendomme som en Spiller ejer, hvor
-     * der kan sælges et hus fra. Det er {@link EjendomsLogik#kanSaelgeHus}
+     * der kan sælges et hus fra. Det er {@link HusHotelLogik#kanSaelgeHus}
      * som vurderer hvorvidt der kan sælge et hus på ejendommen.
      *
      * @author Andreas
@@ -106,7 +107,7 @@ public class HandelHus {
         ArrayList<Ejendom> kartotek = new ArrayList<>();
 
         for( int i = 0; i < ejendomme.length; i++ ){
-            if( EjendomsLogik.kanSaelgeHus( spiller, ejendomme[i], ejendomme[i].getGruppe() ) ){
+            if( HusHotelLogik.kanSaelgeHus( spiller, ejendomme[i], ejendomme[i].getGruppe() ) ){
                 kartotek.add( ejendomme[i] );
             }
         }

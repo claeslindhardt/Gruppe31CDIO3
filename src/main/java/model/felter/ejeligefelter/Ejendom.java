@@ -1,6 +1,9 @@
 package model.felter.ejeligefelter;
 
-import spillogik.EjendomsLogik;
+import spillogik.HusHotelLogik;
+
+import static spillogik.BeregnLeje.beregnLejeVedHotel;
+import static spillogik.BeregnLeje.beregnLejeVedHus;
 
 
 /**__________________________________________________________________________________________________________________________________________________________
@@ -165,12 +168,12 @@ public class Ejendom extends EjeligtFelt {
 
         setLejeStart(startLeje);
 
-        setLejeHus( EjendomsLogik.beregnLejeVedHus(this, 1),
-                    EjendomsLogik.beregnLejeVedHus(this, 2),
-                    EjendomsLogik.beregnLejeVedHus(this, 3),
-                    EjendomsLogik.beregnLejeVedHus(this, 4) );
+        setLejeHus( beregnLejeVedHus(this, 1),
+                    beregnLejeVedHus(this, 2),
+                    beregnLejeVedHus(this, 3),
+                    beregnLejeVedHus(this, 4) );
 
-        setLejeHotel( EjendomsLogik.beregnLejeVedHotel(this) );
+        setLejeHotel( beregnLejeVedHotel(this) );
 
         setLeje(startLeje);
 

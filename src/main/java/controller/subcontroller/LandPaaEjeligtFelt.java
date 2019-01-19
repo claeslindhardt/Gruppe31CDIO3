@@ -7,8 +7,12 @@ import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.felter.ejeligefelter.Rederi;
-import spillogik.EjendomsLogik;
+import spillogik.HusHotelLogik;
 import view.UserInterface;
+
+import static spillogik.BeregnLeje.beregnLejeBryggeri;
+import static spillogik.BeregnLeje.beregnLejeRederi;
+import static spillogik.BeregnLeje.beregnLejeTotal;
 
 
 /**
@@ -56,14 +60,14 @@ class LandPaaEjeligtFelt {
             int lejeForFelt = 0;
 
             if (felt instanceof Ejendom) {
-                lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
+                lejeForFelt = beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
 
             } else if (felt instanceof Bryggeri){
-                lejeForFelt = EjendomsLogik.beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
+                lejeForFelt = beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
 
             }
             else if (felt instanceof Rederi){
-                lejeForFelt = EjendomsLogik.beregnLejeRederi((Rederi) felt, ejeren);
+                lejeForFelt = beregnLejeRederi((Rederi) felt, ejeren);
             }
 
             spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
