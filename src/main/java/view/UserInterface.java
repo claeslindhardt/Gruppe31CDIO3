@@ -37,7 +37,7 @@ public interface UserInterface {
     void friParkering();
     int vaelgIndkomstSkat();
     void betaltIndkomstSkat( Spiller spiller, int skat );
-    void statsSkat( int skat );
+    void statsSkat( Spiller spiller, int skat );
     void landetPaaStart();
     void paaBesoegIFaengsel();
     void gaaIFaengsel();

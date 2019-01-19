@@ -176,7 +176,7 @@ public class LandPaaFelt {
      */
     private void statsSkat( StatsSkat felt,  Spiller spiller, UserInterface ui ){
         spiller.addPenge( -felt.getSkat() );
-        ui.statsSkat( (int) felt.getSkat() );
+        ui.statsSkat( spiller, (int) felt.getSkat() );
     }
 
 

@@ -322,8 +322,9 @@ public class GraphicalUserInterface implements UserInterface {
         gui.visTekst( "Du har betalt "+skat+" kr. i indkomstskat.");
     }
 
-    public void statsSkat( int skat ){
+    public void statsSkat( Spiller spiller, int skat ){
         gui.visTekst("Du skal betale ekstraordinær statsskat. Derfor bliver vi all " + skat + " kr. rigere!");
+        gui.opdaterSpillere( spiller );
     }
 
     public void friParkering(){
