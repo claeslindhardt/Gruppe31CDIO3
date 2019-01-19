@@ -76,6 +76,7 @@ public class GraphicalUserInterface implements UserInterface {
 
                     if( navne[j] != null && navne[j].equalsIgnoreCase( indtastetNavn )) {
                         navnErTaget = true;
+                        gui.visTekst("Det navn er allerede taget");
                     }
                 }
 

@@ -39,7 +39,7 @@ public class GUI_Extension {
 
     public String indtastTekst( String besked ) {
 
-        String input = "";
+        String input;
 
         do{
 
