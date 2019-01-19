@@ -10,6 +10,7 @@ import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.Ejendom;
 import model.felter.ejeligefelter.Rederi;
 import model.raflebaeger.RafleBaeger;
+import model.singletoner.RandomSingleton;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,8 +18,7 @@ import java.util.Random;
 
 public class SpilGenerator {
 
-
-    public static Spiller[] genererSpillere(  String ... navne ) {
+    public static Spiller[] genererSpillere(String ... navne ) {
         int antalSpillere = navne.length;
         Spiller[] spillere = new Spiller[antalSpillere];
 
@@ -468,11 +468,10 @@ public class SpilGenerator {
         rykTilBestemtFelt = new RykTilBestemtFelt(0,"Ryk frem til start.");
         chanceKort.add(rykTilBestemtFelt);
 
-        // Blander kortene
-        Random random = new Random();
+
 
         for( int i = 0; i < 1000; i++ ){
-            int kortIndeks = random.nextInt(chanceKort.size());
+            int kortIndeks = RandomSingleton.getInstance().nextInt(chanceKort.size());
             Chancekort udvalgtKort = chanceKort.get(kortIndeks);
             chanceKort.remove( udvalgtKort );
             chanceKort.add( udvalgtKort );
@@ -500,8 +499,6 @@ public class SpilGenerator {
 
 
     public static Spil genererSpil(){
-
-        Random random = new Random();
 
         Spil spil = new Spil();
 

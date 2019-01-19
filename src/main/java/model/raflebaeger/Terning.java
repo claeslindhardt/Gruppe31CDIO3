@@ -8,11 +8,8 @@ import model.singletoner.RandomSingleton;
  * som kan ændre sig(inden for en ramme) når man bruger dens slaa funktion.
  */
 public class Terning {
-    //|--------- Variabler:-----------------
-    private int vaerdi=1;
-    //Singleton Variabler;
-    private RandomSingleton randomTal = RandomSingleton.getInstance();
-    //|--------- Getters og Setters:--------
+    private int vaerdi = 1;
+
     public int getVaerdi() {
         return vaerdi; }
 
@@ -20,9 +17,9 @@ public class Terning {
         this.vaerdi = vaerdi;
     }
 
-    //|----------- Metoder:-----------------
     public int slaa(){
-        vaerdi = randomTal.nextInt(6)+1;
+        vaerdi = RandomSingleton.getInstance().nextInt(6)+1;
         return vaerdi;
     }
+
 }
