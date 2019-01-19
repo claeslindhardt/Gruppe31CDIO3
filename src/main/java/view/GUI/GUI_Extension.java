@@ -145,7 +145,7 @@ public class GUI_Extension {
                 gui_spiller.setBalance(0);
 
                 for( EjeligtFelt felt : spiller.getEjedeFelter() ){
-                    opdaterFeltEjer( felt, null );
+                    setFeltEjer( felt, null );
                 }
             } else {
                 gui_felter[ spiller.getPosition() ].setCar( gui_spiller, true );
@@ -155,7 +155,7 @@ public class GUI_Extension {
     }
 
 
-    public void opdaterFeltEjer( EjeligtFelt felt, Spiller ejer ){
+    public void setFeltEjer(EjeligtFelt felt, Spiller ejer ){
         GUI_Ownable gui_felt = (GUI_Ownable) gui_felter[felt.getPlacering()];
 
         if( ejer == null ){
@@ -168,14 +168,18 @@ public class GUI_Extension {
 
     public void opdaterFelt( EjeligtFelt felt ){
 
-        opdaterFeltEjer( felt, felt.getEjer() );
+        setFeltEjer( felt, felt.getEjer() );
 
         if( felt instanceof Ejendom){
             Ejendom ejendom = (Ejendom) felt;
             GUI_Street gui_felt = (GUI_Street) gui_felter[felt.getPlacering()];
 
-            gui_felt.setHouses( ejendom.getAntalHuse() );
-            gui_felt.setHotel( ejendom.harHotel() );
+            if( ejendom.harHotel() ){
+                gui_felt.setHotel(true);
+                gui_felt.setHouses(0);
+            }else{
+                gui_felt.setHouses(ejendom.getAntalHuse());
+            }
         }
 
     }

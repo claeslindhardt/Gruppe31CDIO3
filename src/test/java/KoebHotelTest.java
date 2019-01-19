@@ -24,7 +24,7 @@ public class KoebHotelTest {
 
                 ejendom.setEjer(spiller);
                 spiller.tilfoejEjendom(ejendom);
-                ejendom.setAntalHuse(4);
+                //ejendom.setAntalHuse(4);
             }
         }
 
