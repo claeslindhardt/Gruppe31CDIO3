@@ -20,33 +20,7 @@ import java.util.ArrayList;
 public class Handel {
 
 
-    /**
-     * @author Andreas
-     * Metoder der indsamlere leje for når man lander på et ejeligt felt.
-     */
-    public void indsamleLeje( Spil spil, EjeligtFelt felt, Spiller spilleren, UserInterface ui ){
-        Spiller ejeren = felt.getEjer();
-        if( ejeren != null && spilleren != null) {
-            //todo: enkapsuler dette på en ordenligt måde
 
-            int lejeForFelt = 0;
-
-            if (felt instanceof Ejendom) {
-                lejeForFelt = EjendomsLogik.beregnLejeTotal(felt,spilleren.ejerEjendomsGruppe(felt.getGruppe()));
-
-            } else if (felt instanceof Bryggeri){
-                lejeForFelt = EjendomsLogik.beregnLejeBryggeri( spil.getRaflebaeger().getTotalVaerdi(), felt.getEjer() );
-
-            }
-            else if (felt instanceof Rederi){
-                lejeForFelt = EjendomsLogik.beregnLejeRederi((Rederi) felt, ejeren);
-            }
-
-            spilleren.setPenge(spilleren.getPenge()-lejeForFelt);
-            ejeren.addPenge(lejeForFelt);  // hvis Spiller ikke har nok penge til at betale skal den have mulighed for at pantsætte
-            ui.betalerLeje( lejeForFelt, spilleren, ejeren );
-        }
-    }
 
 
 

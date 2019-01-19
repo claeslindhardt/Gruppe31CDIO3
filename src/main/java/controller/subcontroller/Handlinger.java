@@ -31,20 +31,7 @@ public class Handlinger {
     }
 
 
-    public void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterface ui ){
 
-        if (spiller.getPenge() >  felt.getPris()) {
-
-            spiller.addPenge( -  felt.getPris() );
-            felt.setEjer(spiller);
-            spiller.addEjeligtFelt( felt );
-
-            ui.gennemfoertKoeb(  felt, spiller);
-
-        } else {
-            ui.manglerPenge();
-        }
-    }
 
 
     /**
