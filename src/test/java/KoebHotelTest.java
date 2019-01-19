@@ -3,7 +3,7 @@ import model.Spil;
 import model.Spiller;
 import model.felter.ejeligefelter.Ejendom;
 import model.felter.Felt;
-import spillogik.SpilGenerator;
+import spillogik.spilgenerering.SpilGenerator;
 
 public class KoebHotelTest {
 

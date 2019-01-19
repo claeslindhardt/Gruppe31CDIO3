@@ -9,9 +9,9 @@ import spillogik.VinderLogik;
 import view.GUI.GraphicalUserInterface;
 import view.UserInterface;
 import model.Spil;
-import spillogik.SpilGenerator;
+import spillogik.spilgenerering.SpilGenerator;
 
-import static spillogik.SpilGenerator.genererSpil;
+import static spillogik.spilgenerering.SpilGenerator.genererSpil;
 import static spillogik.VinderLogik.getVinder;
 import static spillogik.VinderLogik.vinderFindes;
 

@@ -1,45 +1,17 @@
-package spillogik;
+package spillogik.spilgenerering;
 
-import model.felter.ejeligefelter.Ejendomsgruppe;
-import model.chancekort.*;
-import model.Spil;
-import model.Spiller;
-import model.felter.*;
+import model.felter.Felt;
 import model.felter.aktionsfelter.*;
 import model.felter.ejeligefelter.Bryggeri;
 import model.felter.ejeligefelter.Ejendom;
+import model.felter.ejeligefelter.Ejendomsgruppe;
 import model.felter.ejeligefelter.Rederi;
-import model.raflebaeger.RafleBaeger;
-import model.singletoner.RandomSingleton;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
 
-public class SpilGenerator {
+public class FeltGenerator {
 
-    public static Spiller[] genererSpillere(String ... navne ) {
-        int antalSpillere = navne.length;
-        Spiller[] spillere = new Spiller[antalSpillere];
 
-        for (int i = 0; i < antalSpillere; i++) {
-            Spiller spiller = new Spiller();
-            spiller.setPenge(1500);
-            spiller.setNavn( navne[i] );
-            spiller.setId(i);
-            spillere[i] = spiller;
-        }
-
-        return spillere;
-    }
-
-    /**
-     * @author Jacob
-     *
-     * Denne metode genererer det klassiske Matador bræt.
-     *
-     * @return Matador brættet returneres.
-     */
     public static Felt[] genererFelter(){
 
         Felt[] felter = new Felt[40];
@@ -334,181 +306,5 @@ public class SpilGenerator {
 
         return felter;
     }
-
-    /**
-     * @author Jacob
-     *
-     * Denne metode laver alle de klassiske chancekort, og putter dem ind i en ArrayList.
-     *
-     * @return - ArrayList Chancekort.
-     */
-    public static ArrayList<Chancekort> genererChancekort(){
-
-        /*
-        Disse Chancekort er IKKE blevet implementeret:
-
-        Kul og kokos priserne er steget, og de skal betale 25kr pr. hus og 125kr pr. hotel.
-
-        Ejendomsskatterne  er steget, og ekstraudgifterne er: 50kr pr. hus og  125kr pr. hotel.
-
-        De har lagt penge ud til sammenskudsgilde. Mærkværdigvis betaler alle straks. Modtag 25kr fra hver medspiller.
-
-        Ryk brikken frem til det nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget
-        til. Hvis selskabet  ikke ejes  af nogen kan de købe det af banken. * 2
-         */
-
-        ArrayList<Chancekort> chanceKort = new ArrayList<Chancekort>();
-
-        JustererPenge giverPenge;
-        JustererPenge tagerPenge;
-        GratisUdAfFaengsel gratisUdAfFaengsel;
-        SmidIFaengsel smidIFaengsel;
-        RykAntalFelter rykAntalFelter;
-        RykTilBestemtFelt rykTilBestemtFelt;
-
-    //-----------------------------------Giver spilleren penge - chancekort-------------------------------------------//
-
-        giverPenge = new JustererPenge(+2000,"De modtager Matador legatet. Byens bogmester " +
-                "overdrager dem en chack på 2000kr");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+50,"Modtag udbytte af deres aktier. Modtag 50kr.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+200,"Værdien af egen avl fra nyttehaven udgør 200kr, " +
-                "som de modtager af banken.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+25,"Grundet på dyrtiden har de fået gageforhøjelse. " +
-                "Modtag 25kr. ");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+20,"De har solgt deres gamle klude. Modtag  20kr.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+1,"De har rettidigt afleveret deres abonnementskort. " +
-                "Depositum 1kr udbetales dem af banken.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+50,"Manufakturvarerne er blevet billigere og bedre, " +
-                "herved sparer de 50kr, som de modtager af banken.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+108,"Efter auktionen på Assistenshuset, " +
-                "hvor de havde pantsat deres tøj, modtager de ekstra 108kr.");
-        chanceKort.add(giverPenge);
-
-        giverPenge = new JustererPenge(+100,"Deres præmieobligation er kommet ud. " +
-                "De modtager 100kr af banken.");
-        chanceKort.add(giverPenge);
-
-    //-----------------------------------Gratis ud af fængsel - Chancekort--------------------------------------------//
-
-        for (int i = 0; i < 2; i++){
-            gratisUdAfFaengsel = new GratisUdAfFaengsel("I andledningen af Kongens fødselsdag, " +
-                    "benådes der herved for fængsel. Dette kort kan opbevares, indtil de får brug for det.");
-            chanceKort.add(gratisUdAfFaengsel);
-        }
-
-    //------------------------------------Gå i fængsel - Chancekort---------------------------------------------------//
-
-        for (int i = 0; i < 3; i++){
-            smidIFaengsel = new SmidIFaengsel("Gå i fængsel. Ryk direkte til fængslet. " +
-                    "Selvom de passerer start, indkasserer de ikke 200kr");
-            chanceKort.add(smidIFaengsel);
-        }
-
-    //------------------------------------Tager penge fra spilleren - Chancekort--------------------------------------//
-
-        tagerPenge = new JustererPenge(-100,"De har anskaffet et nyt dæk til deres vogn. " +
-                "Indbetal 100kr.");
-        chanceKort.add(tagerPenge);
-
-        tagerPenge = new JustererPenge(-100,"De har kørt frem for Fuld Stop. Betal 100kr i bøde.");
-        chanceKort.add(tagerPenge);
-
-        for (int i = 0; i < 2; i++){
-            tagerPenge = new JustererPenge(-10,"Betal for vognvask og smøring. 10kr.");
-            chanceKort.add(tagerPenge);
-        }
-
-        tagerPenge = new JustererPenge(-20,"De har været en tur i udlandet og haft for mange" +
-                " cigaretter med hjem. Betal 20kr i told.");
-        chanceKort.add(tagerPenge);
-
-        tagerPenge = new JustererPenge(-20,"De har måttet vedtage en parkeringsbøde. " +
-                "Betal 20kr til banken.");
-        chanceKort.add(tagerPenge);
-
-    //-------------------------------------Ryk antal felter - Chancekort----------------------------------------------//
-
-        for (int i = 0; i < 2; i++){
-            rykAntalFelter = new RykAntalFelter(+3,"Ryk tre felter frem");
-            chanceKort.add(rykAntalFelter);
-        }
-
-        for (int i = 0; i < 2; i++){
-            rykAntalFelter = new RykAntalFelter(-3,"Ryk tre felter tilbage");
-            chanceKort.add(rykAntalFelter);
-        }
-
-    //-------------------------------------Ryk til et bestemt felt - Chancekort---------------------------------------//
-
-        rykTilBestemtFelt = new RykTilBestemtFelt(39,"Tag ind på Rådhuspladsen");
-        chanceKort.add(rykTilBestemtFelt);
-
-        rykTilBestemtFelt = new RykTilBestemtFelt(24,"Ryk fem til Grønningen, " +
-                "hvis du passerer start, modtag 200kr");
-        chanceKort.add(rykTilBestemtFelt);
-
-        rykTilBestemtFelt = new RykTilBestemtFelt(5,"Tag med Øresundsbåden, " +
-                "hvis du passerer start modtag  200kr.");
-        chanceKort.add(rykTilBestemtFelt);
-
-        rykTilBestemtFelt = new RykTilBestemtFelt(0,"Ryk frem til start.");
-        chanceKort.add(rykTilBestemtFelt);
-
-
-
-        for( int i = 0; i < 1000; i++ ){
-            int kortIndeks = RandomSingleton.getInstance().nextInt(chanceKort.size());
-            Chancekort udvalgtKort = chanceKort.get(kortIndeks);
-            chanceKort.remove( udvalgtKort );
-            chanceKort.add( udvalgtKort );
-        }
-
-        return chanceKort;
-    }
-
-    public static Spil genererSpil( int antalSpillere ){
-
-        Spil spil = new Spil();
-        spil.setFelter( genererFelter() );
-        spil.setChancekort( genererChancekort() );
-        spil.setRaflebaeger( new RafleBaeger(2) );
-
-        String[] spillerNavne = new String[antalSpillere];
-        for( int i = 0; i < antalSpillere; i++ ){
-            spillerNavne[i] = "Spiller " + (i+1);
-        }
-        spil.setSpillere(  genererSpillere( spillerNavne )  );
-
-        return spil;
-    }
-
-
-
-    public static Spil genererSpil(){
-
-        Spil spil = new Spil();
-
-        spil.setFelter( genererFelter() );
-        spil.setChancekort( genererChancekort() );
-        spil.setRaflebaeger( new RafleBaeger(2) );
-
-        return spil;
-    }
-
-
 
 }
