@@ -3,6 +3,7 @@ package controller;
 import controller.subcontroller.*;
 import model.Spiller;
 import model.chancekort.Chancekort;
+import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
 import spillogik.VinderLogik;
@@ -208,10 +209,14 @@ public class SpilController{
         spiller.clearChancekort();
 
         // Rydder ejendomme
-        for( Ejendom ejendom : spiller.getEjendommeArray() ){
-            ejendom.setEjer(null);
-            ejendom.setHarHotel(false);
-            ejendom.setAntalHuse(0);
+        for( EjeligtFelt ejeligtFelt : spiller.getEjedeFelter() ){
+            ejeligtFelt.setEjer(null);
+
+            if( ejeligtFelt instanceof Ejendom ){
+                Ejendom ejendom = (Ejendom) ejeligtFelt;
+                ejendom.setHarHotel(false);
+                ejendom.setAntalHuse(0);
+            }
         }
     }
 

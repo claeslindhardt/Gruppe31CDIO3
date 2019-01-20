@@ -79,9 +79,9 @@ class LandPaaEjeligtFelt {
 
     private void koebFelt(EjeligtFelt felt, Spiller spiller, UserInterface ui ){
 
-        if (spiller.getPenge() >  felt.getPris()) {
+        if (spiller.getPenge() > felt.getPris()) {
 
-            spiller.addPenge( -  felt.getPris() );
+            spiller.addPenge( -felt.getPris() );
             felt.setEjer(spiller);
             spiller.addEjeligtFelt( felt );
 
