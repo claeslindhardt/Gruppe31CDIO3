@@ -21,14 +21,8 @@ public class Handlinger {
         int svar;
         svar = userInterface.vilDuGiveOp();
 
-        if(svar == 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return svar == 0;
     }
-
 
 
     /**

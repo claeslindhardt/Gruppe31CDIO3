@@ -3,29 +3,42 @@ package controller;
 import controller.subcontroller.*;
 import model.Spiller;
 import model.chancekort.Chancekort;
+import model.felter.ejeligefelter.EjeligtFelt;
 import model.felter.ejeligefelter.Ejendom;
 import model.singletoner.RandomSingleton;
+import spillogik.VinderLogik;
 import view.GUI.GraphicalUserInterface;
 import view.UserInterface;
 import model.Spil;
-import spillogik.SpilGenerator;
+import spillogik.spilgenerering.SpilGenerator;
 
-import static spillogik.SpilGenerator.genererSpil;
+import static spillogik.spilgenerering.SpilGenerator.genererSpil;
 import static spillogik.VinderLogik.getVinder;
 import static spillogik.VinderLogik.vinderFindes;
 
+/**
+ * Controlleren der styrer spillet ved at sætte det i gang og slutte det,
+ * samt styre hovedmenuen, og give ture til spillerne.
+ */
 public class SpilController{
 
     private UserInterface ui; // Den UI, som SpilControlleren bruger
     private Spil spil;
 
-
-    // Controlllere
+    // Controllere
     private RykSpiller rykSpiller  = new RykSpiller();
     private Handlinger handlinger  = new Handlinger();
-    private Handel handel      = new Handel();
+    private HandelHotel handelHotel = new HandelHotel();
+    private HandelHus handelHus = new HandelHus();
     private LandPaaFelt landPaaFelt = new LandPaaFelt();
     private BrugChancekort brugChancekort = new BrugChancekort();
+
+
+    /** Laver en ny SpilController med en GUI */
+    public SpilController(){
+        ui = new GraphicalUserInterface();
+        spil = genererSpil();
+    }
 
 
     public LandPaaFelt getLandPaaFelt() {
@@ -33,16 +46,6 @@ public class SpilController{
     }
 
     public BrugChancekort getBrugChancekort(){ return brugChancekort; }
-
-    public Handel getHandel() {
-        return handel;
-    }
-
-    public controller.subcontroller.KoebFelt getKoebFelt() {
-        return KoebFelt;
-    }
-
-    private KoebFelt    KoebFelt    = new KoebFelt();
 
     public Spil getSpil(){return spil;}
 
@@ -54,16 +57,10 @@ public class SpilController{
         return rykSpiller;
     }
 
-    public Handlinger getHandlinger(){ return handlinger;  }
 
-
-    /** Laver en ny SpilController med en GUI */
-    public SpilController(){
-        ui = new GraphicalUserInterface();
-        spil = genererSpil();
-    }
-
-
+    /**
+     * Metoden der starter spillet, som SpilControllerne er indstillet til.
+     */
     public void koerSpil(){
 
         ui.aabenSpil( spil );
@@ -77,6 +74,7 @@ public class SpilController{
         spil.setSpillerTur( RandomSingleton.getInstance().nextInt( spil.getAntalSpillere() ) + 1 );
         ui.startSpil( spil );
 
+        // Primære Spil loop
         do{
             Spiller spillerMedTur = spil.getSpillerMedTur();
 
@@ -91,65 +89,24 @@ public class SpilController{
 
 
     /**
-     * Indsæt beskrivelse her
+     * Giver spilleren turen. Det er loopet der "controller"
+     * spillerens tur, og vurdere om turen skal slutte
+     * eller fortsaette.
      */
-    public void slutSpillerTur( Spiller spiller ) {
+    private void startSpillerTur( Spiller spiller ){
 
-        spiller.setHarSlaaet(false);
-
-        if( spiller.getPenge() < 0  ){
-
-
-            spillerUdgaar( spiller );
-            ui.spillerErBankerot( spiller );
-
-        }
-
-        do {
-
-            if (spil.getSpillerTur() >= spil.getAntalSpillere()) {
-                spil.setSpillerTur(1);
-
-            } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
-                spil.setSpillerTur(spil.getSpillerTur() + 1);
-            }
-        }while( spil.getSpillerMedTur().erUdgaaet() );
-    }
-
-
-    public void spillerUdgaar( Spiller spiller ){
-        spiller.setErUdgaaet(true);
-
-        for( Chancekort chancekort : spiller.getChancekort() ){
-            spil.addChancekort( chancekort );
-        }
-        spiller.clearChancekort();
-
-        for( Ejendom ejendom : spiller.getEjendommeArray() ){
-            ejendom.setEjer(null);
-            ejendom.setHarHotel(false);
-            ejendom.setAntalHuse(0);
-        }
-
-    }
-
-
-
-    public void startSpillerTur( Spiller spiller ){
-
-
+        // Tjekker om spilleren skal anke dom (slaa for at komme ud af faengsel)
         if( spiller.erIFaengsel() ){
             handlinger.ankerDom( spiller, spil.getRaflebaeger(), ui );
         }
 
+        // Koerer turen
         boolean turErSlut;
 
         do{
             turErSlut = turMenu( spiller );
         }while( !turErSlut );
-
     }
-
 
 
     /**
@@ -157,15 +114,14 @@ public class SpilController{
      * Gør det muligt for spillerne at vælge de forskellige funktioner i turmenuen og
      * sørger for at tilhørende metoder udføres
      */
-    public boolean turMenu( Spiller spiller ) {
-        int valg = ui.turMenu( spiller, 1, 12 );
+    private boolean turMenu( Spiller spiller ) {
+        int valg = ui.turMenu( spiller, 1, 8 );
 
         boolean slutTur = false;
 
         switch( valg ){
 
-            case 0:
-
+            case 0: // Slaa med Terninger
                 if ( !spiller.erIFaengsel() ) {
                     rykSpiller.kastTerninger(spil, spil.getSpillerMedTur(), ui, this);
 
@@ -175,15 +131,15 @@ public class SpilController{
                 }
                 break;
 
-            case 1:
+            case 1: // Slutter turen
                 slutTur = true;
                 break;
 
-            case 2:
+            case 2: // Viser chancekort paa handen
                 handlinger.chanceKortMuligheder( spiller, this, ui);
                 break;
 
-            case 3:
+            case 3: // Giver op
                 if( handlinger.givOp( ui ) ){
                     slutTur = true;
                     spillerUdgaar( spiller );
@@ -191,24 +147,86 @@ public class SpilController{
                 }
                 break;
 
-            case 4:
-                handel.koebHusPaaEjendom( spiller, ui);
+            case 4: // Koeber hus
+                handelHus.koebHus( spiller, ui );
                 break;
 
-            case 5:
-                handel.koebHotelPaaEjendom( spiller, ui);
+            case 5: // Koeb Hotel
+                handelHotel.koebHotelForloeb( spiller, ui );
                 break;
 
-            case 6: handel.saelgHusPaaEjendom( spiller, ui );
+            case 6: // Saelg hus
+                handelHus.saelgHus( spiller, ui );
                 break;
 
-            case 7: handel.saelgHotelPaaEjendom(this, spiller, ui);
+            case 7: // Saelg hotel
+                handelHotel.saelgHotelForloeb( spiller, ui );
                 break;
         }
 
         return slutTur;
-
     }
+
+
+    /**
+     * Slutter spillerens tur, og vaelger den naeste spiller.
+     */
+    private void slutSpillerTur( Spiller spiller ) {
+
+        spiller.setHarSlaaet(false);
+
+        // Tjekker for bankerot
+        if( VinderLogik.erBankerot(spiller) ){
+            spillerUdgaar( spiller );
+            ui.spillerErBankerot( spiller );
+        }
+
+        // Finder naeste spiller
+        do {
+            if (spil.getSpillerTur() >= spil.getAntalSpillere()) {
+                spil.setSpillerTur(1);
+            } else if (spil.getSpillerTur() <= spil.getAntalSpillere()) {
+                spil.setSpillerTur(spil.getSpillerTur() + 1);
+            }
+        }while( spil.getSpillerMedTur().erUdgaaet() );
+    }
+
+
+
+    /**
+     * Registrerer at spilleren udgaar fra spillet (dvs.
+     * enten er gaaet bankerot eller har givet op).
+     * Dette resetter alle spillerens ejendomme, samt
+     * chancekort.
+     */
+    private void spillerUdgaar( Spiller spiller ){
+        spiller.setErUdgaaet(true);
+
+        // Rydder chancekort
+        for( Chancekort chancekort : spiller.getChancekort() ){
+            spil.addChancekort( chancekort );
+        }
+        spiller.clearChancekort();
+
+        // Rydder ejendomme
+        for( EjeligtFelt ejeligtFelt : spiller.getEjedeFelter() ){
+            ejeligtFelt.setEjer(null);
+
+            if( ejeligtFelt instanceof Ejendom ){
+                Ejendom ejendom = (Ejendom) ejeligtFelt;
+                ejendom.setHarHotel(false);
+                ejendom.setAntalHuse(0);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
 
 

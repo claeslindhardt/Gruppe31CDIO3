@@ -2,7 +2,7 @@ import controller.SpilController;
 import model.Spil;
 import model.felter.ejeligefelter.Ejendom;
 
-import static spillogik.SpilGenerator.genererSpil;
+import static spillogik.spilgenerering.SpilGenerator.genererSpil;
 
 public class BankerotTest {
 

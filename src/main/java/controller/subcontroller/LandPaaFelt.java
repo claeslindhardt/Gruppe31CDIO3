@@ -19,22 +19,24 @@ import java.util.ArrayList;
 public class LandPaaFelt {
 
 
+    // Controller
+    private LandPaaEjeligtFelt landPaaEjeligtFelt = new LandPaaEjeligtFelt();
+
+
     /**
      * Vurderer typen af feltet man lander paa, og kalder den korrekte
      * controller metode ift. feltet. Alle metoderne der kan kaldes
      * befinder sig i klassen her.
      *
-     * @author Malte
-     *
      * @param felt      Feltet der landes paa
      * @param spiller   Spilleren der lander paa feltet
      */
-    void landPaaFelt(Felt felt, Spiller spiller, SpilController spilController, UserInterface ui){
+    void landPaaFelt( Felt felt, Spiller spiller, SpilController spilController, UserInterface ui ){
 
         ui.duErLandetPaa(felt, spiller);
 
         if( felt instanceof EjeligtFelt) {
-            ejeligtFelt( spilController, spiller, (EjeligtFelt) felt, ui );
+            landPaaEjeligtFelt.landPaaFelt( (EjeligtFelt) felt, spiller, spilController.getSpil(), ui );
 
         }else if ( felt instanceof StartFelt){
             startFelt( ui );
@@ -61,32 +63,6 @@ public class LandPaaFelt {
 
 
     // ---------------------------------------------------------------------------------------------------------------------
-
-
-    /**
-     * Forløbet i at lande paa et felt af typen {@link EjeligtFelt}. Det er ens
-     * hvad der sker, når man lander paa et ejeligt felt, uanset hvilket
-     * felt det er - derfor er de samlet i denne ene metode.
-     *
-     * @author Malte
-     */
-    private void ejeligtFelt( SpilController spilController, Spiller spiller, EjeligtFelt felt, UserInterface ui ){
-
-        if( felt.getEjer() == null ){
-
-            int koebsBeslutning = ui.koebsBeslutning();
-
-            if( koebsBeslutning == 0 ){
-                spilController.getKoebFelt().koebFelt( felt, spiller, ui );
-            }
-
-        }else if( felt.getEjer() != null  &&  felt.getEjer() != spiller ){
-            spilController.getHandel().indsamleLeje( spilController.getSpil(),felt, spiller, ui);
-
-        }else if( felt.getEjer() == spiller ){
-            ui.ejerAlleredeFelt();
-        }
-    }
 
 
     /**

@@ -1,7 +1,7 @@
 import model.chancekort.*;
 import controller.SpilController;
 import model.Spil;
-import spillogik.SpilGenerator;
+import spillogik.spilgenerering.SpilGenerator;
 
 import java.util.ArrayList;
 

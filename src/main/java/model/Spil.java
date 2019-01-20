@@ -8,15 +8,19 @@ import model.raflebaeger.RafleBaeger;
 import java.util.ArrayList;
 
 
+/**
+ * Klassen der indeholder alle informationer omkring et spil.
+ */
 public class Spil {
 
-    private int spillerTur = 1;
+
 
     private Spiller[] spillere;
     private RafleBaeger rafleBaeger;
     private Felt[] felter;
     private ArrayList<Chancekort> chanceKort = new ArrayList<>();
 
+    private int spillerTur = 1;
 
 
     public ArrayList<Chancekort> getChanceKort() {
@@ -30,8 +34,6 @@ public class Spil {
     public void addChancekort(Chancekort chancekort ){
         this.chanceKort.add(chancekort);
     }
-
-
 
     public int getSpillerTur() {
         return spillerTur;
@@ -68,9 +70,6 @@ public class Spil {
     }
 
 
-    public int getBankeraadGraense(){return 0;}
-
-
     public int getAntalSpillere(){
         return spillere.length;
     }
@@ -78,7 +77,6 @@ public class Spil {
     public Spiller getSpiller( int spillerIndex ){
         return spillere[spillerIndex];
     }
-
 
     public Spiller getSpillerMedTur(){
         return spillere[ spillerTur-1 ];

@@ -14,7 +14,5 @@ public class StatsSkat extends Felt {
     public StatsSkat(int placering, double skat) {
         super( "Betal statsskat", placering );
         this.skat = skat;
-
-        setFeltType("StatsSkat");
     }
 }

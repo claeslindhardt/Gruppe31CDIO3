@@ -51,16 +51,13 @@ public class Spiller {
 
 
 
+
     public int getPosition() {
         return position;
     }
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public ArrayList<Ejendom> getEjendomme() {
-        return ejendomme;
     }
 
     public ArrayList<Chancekort> getChancekort() {
@@ -86,9 +83,6 @@ public class Spiller {
         return ejendomme.toArray( new Ejendom[0] );
     }
 
-    public void clearEjendomme(){
-        ejendomme.clear();
-    }
 
     public void clearChancekort(){
         chancekort.clear();
@@ -96,10 +90,6 @@ public class Spiller {
 
     public ArrayList<Bryggeri> getSpillerBryggerier() {
         return bryggerier;
-    }
-    
-    public void addBryggeri(Bryggeri bryggeri){
-        bryggerier.add(bryggeri);
     }
 
     public ArrayList<Rederi> getRederier(){ return rederier;}
@@ -139,16 +129,6 @@ public class Spiller {
         this.penge+=beloeb;
     }
 
-    /**
-     * @author Jacob og Andreas
-     * tilføjer ejendomme til en spillers ejendomme.
-     * Denne metode bliver brugt i vores test spil.
-     *
-     * @param ejendom den ejendom der skal tilføjes
-     */
-    public void tilfoejEjendom(Ejendom ejendom) {
-        ejendomme.add(ejendom);
-    }
 
     /**
      * @author Malte
@@ -168,17 +148,8 @@ public class Spiller {
 
 
     /**
-     * @author Malte
-     * Undersoege om man ejer en specifik ejendom, ved at sammenligne
-     * ejeren af ejendommen med spilleren.
-     * @param ejendom Ejendommen man oensker at undersoege.
-     * @return True: spilleren ejer den, False: spilleren ejer den ikke.
+     * Samler alle ejedefelter til en liste og returnerer den.
      */
-    public boolean ejerEjendom(Ejendom ejendom){
-        return ejendom.getEjer() == this;
-    }
-
-
     public ArrayList<EjeligtFelt> getEjedeFelter(){
 
         ArrayList<EjeligtFelt> ejedeFelter = new ArrayList<>();
@@ -190,5 +161,24 @@ public class Spiller {
         return ejedeFelter;
     }
 
+    /**
+     * Tilfoejer et ejeligt felt til Spilleren. Den finder ud af
+     * hvilken liste den skal ligge i (ejendomme, rederier, bryggerier)
+     * og tilfoejer den til den rigtige liste.
+     *
+     * @author Malte
+     * @param ejeligtFelt Feltet der skal tilfoejes til spilleren
+     */
+    public void addEjeligtFelt( EjeligtFelt ejeligtFelt ){
+        if( ejeligtFelt instanceof Ejendom ){
+            ejendomme.add( (Ejendom) ejeligtFelt );
+        }
+        if( ejeligtFelt instanceof Bryggeri ){
+            bryggerier.add( (Bryggeri) ejeligtFelt );
+        }
+        if( ejeligtFelt instanceof Rederi ){
+            rederier.add( (Rederi) ejeligtFelt );
+        }
+    }
 
 }

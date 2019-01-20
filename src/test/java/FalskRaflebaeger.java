@@ -1,10 +1,11 @@
 import model.raflebaeger.RafleBaeger;
 import model.raflebaeger.Terning;
-import model.singletoner.ScannerSingleton;
+
+import java.util.Scanner;
 
 public class FalskRaflebaeger extends RafleBaeger {
 
-
+    private Scanner scanner = new Scanner( System.in );
 
     public FalskRaflebaeger(int antalTerninger){
         super(antalTerninger);
@@ -12,19 +13,16 @@ public class FalskRaflebaeger extends RafleBaeger {
     }
 
     @Override
-    public int slaa(){
-        ScannerSingleton scan = ScannerSingleton.getInstance();
+    public void slaa(){
 
-        int tern1 = scan.nextInt();
-        int tern2 = scan.nextInt();
+        int tern1 = scanner.nextInt();
+        int tern2 = scanner.nextInt();
 
         Terning[] terninger = getTerninger();
         terninger[0].setVaerdi(tern1);
         terninger[1].setVaerdi(tern2);
 
         setTotalVaerdi(tern1+tern2);
-
-        return getTotalVaerdi();
     }
 
     @Override
