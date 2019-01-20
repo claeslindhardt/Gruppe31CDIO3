@@ -19,7 +19,7 @@ public class HandelHus {
      * om at vise ting og tage i mod inputs.
      * @param ui: hvilket UserInterface der skal bruges.
      */
-    public void koebHusForloeb(Spiller spiller, UserInterface ui ){
+    public void koebHus(Spiller spiller, UserInterface ui ){
         Ejendom[] ejendomme = spiller.getEjendommeArray();
 
         if( ejendomme.length > 0 ){
@@ -66,7 +66,7 @@ public class HandelHus {
      * @param spiller   Spilleren der ønsker at koebe et hus
      * @param ui        Den UI, der skal bruges
      */
-    public void saelgHusForloeb(Spiller spiller, UserInterface ui ){
+    public void saelgHus(Spiller spiller, UserInterface ui ){
 
         // Finder ejendomme med sælgbare huse på
         ArrayList<Ejendom> kartotek = sorterEjendomme(spiller);

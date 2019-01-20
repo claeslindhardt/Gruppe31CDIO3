@@ -147,7 +147,7 @@ public class SpilController{
                 break;
 
             case 4: // Koeber hus
-                handelHus.koebHusForloeb( spiller, ui );
+                handelHus.koebHus( spiller, ui );
                 break;
 
             case 5: // Koeb Hotel
@@ -155,7 +155,7 @@ public class SpilController{
                 break;
 
             case 6: // Saelg hus
-                handelHus.saelgHusForloeb( spiller, ui );
+                handelHus.saelgHus( spiller, ui );
                 break;
 
             case 7: // Saelg hotel
