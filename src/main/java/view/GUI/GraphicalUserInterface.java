@@ -120,6 +120,14 @@ public class GraphicalUserInterface implements UserInterface {
                 "\nDu skal blot slå ens med terningerne." );
     }
 
+public int kauktion(){
+        int valg =gui.vaelgJaNej("VIl du betale kauktion på 500 for at komme ud af fængslet?");
+        return valg;
+}
+
+public void betaltKauktion(Spiller spiller){gui.visTekst("Det var den rigtige beslutning. Liver er for kort til at sidde der og kuggelure");
+    gui.opdaterSpillere(spiller);
+    }
 
 
     public int turMenu(Spiller spiller, int minInput, int maxInput){

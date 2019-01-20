@@ -67,7 +67,22 @@ public class Handlinger {
 
         if( loesladt ) {
             spiller.setErIFaengsel(false);
-        }
+        }else{betalKauktion(spiller,ui);}
     }
 
+    public void betalKauktion(Spiller spillerMedTur, UserInterface ui) {
+
+        int valg = ui.kauktion();
+
+        if (valg == 0) {
+            double nuvPengebeholdning = spillerMedTur.getPenge();
+            double kauktio = 500;
+            spillerMedTur.setPenge(nuvPengebeholdning - kauktio);
+
+            spillerMedTur.setErIFaengsel(false);
+
+            ui.betaltKauktion(spillerMedTur);
+        }
+
+    }
 }

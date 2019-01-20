@@ -52,6 +52,8 @@ public interface UserInterface {
     void kanIkkeKoebeHus();
     void kanIkkeSaelgeHus();
     void kanIkkeSaelgeHotel();
+    int kauktion();
+    void betaltKauktion(Spiller spiller);
 
 
 }

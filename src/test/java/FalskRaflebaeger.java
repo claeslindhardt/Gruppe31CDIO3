@@ -27,7 +27,7 @@ public class FalskRaflebaeger extends RafleBaeger {
 
     @Override
     public boolean erEns(){
-        return true;
+        return false;
     }
 
 }
