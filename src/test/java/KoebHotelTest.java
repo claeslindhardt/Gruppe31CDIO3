@@ -1,32 +1,36 @@
-import Controller.SpilController;
-import ModelEnteties.Spil;
-import ModelEnteties.Spiller;
-import ModelEnteties.felter.Bryggeri;
-import ModelEnteties.felter.EjendomCO;
-import ModelEnteties.felter.FeltDTO;
-import spillogik.RandomGenerator;
-import spillogik.SpilGenerator;
+import controller.SpilController;
+import model.Spil;
+import model.Spiller;
+import model.felter.ejeligefelter.EjeligtFelt;
+import model.felter.ejeligefelter.Ejendom;
+import model.felter.Felt;
+import spillogik.spilgenerering.SpilGenerator;
 
 public class KoebHotelTest {
 
 
     public static void main(String[] args) {
 
-        Spil spil = RandomGenerator.genererSpil(3, 40,40,1500);
+        Spil spil = SpilGenerator.genererSpil(3);
         spil.setRaflebaeger( new FalskRaflebaeger(2) );
 
         Spiller spiller = spil.getSpiller(0);
 
-        spiller.setNavn("Malte");
+        spiller.    setNavn("Malte");
         spiller.setPenge(9999999);
 
-        for( FeltDTO felt : spil.getFelter() ){
-            if( felt instanceof EjendomCO){
-                EjendomCO ejendom = (EjendomCO) felt;
+        for( Felt felt : spil.getFelter() ){
+            if( felt instanceof EjeligtFelt){
 
-                ejendom.setEjer(spiller);
-                spiller.tilføjEjendom(ejendom);
-                ejendom.setAntalHuse(4);
+                EjeligtFelt ejeligtFelt = (EjeligtFelt) felt;
+
+                ejeligtFelt.setEjer(spiller);
+                spiller.addEjeligtFelt(ejeligtFelt);
+
+                if( felt instanceof Ejendom ){
+                    Ejendom ejendom = (Ejendom) felt;
+                    ejendom.setAntalHuse(4);
+                }
             }
         }
 
@@ -35,6 +39,4 @@ public class KoebHotelTest {
         spilController.koerSpil();
 
     }
-
-
 }

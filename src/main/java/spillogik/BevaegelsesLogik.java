@@ -1,28 +1,11 @@
 package spillogik;
 
-import ModelEnteties.felter.FeltDTO;
+import model.felter.Felt;
 
 public class BevaegelsesLogik {
 
     /** Private constructor sikrer at man ikke kan lave objekter af klassen. */
     private BevaegelsesLogik(){}
-
-
-    /**
-     * @author Malte
-     * Undersøger om spilleren passerer start, hvis spilleren rykker 'antalFelter'.
-     * Den giver ikke noget output om hvor mange gange man passerer start
-     * (se i stedet {@link #antalGangeOverStart}), eller
-     * hvor meget der udbetales ( se {@link #passererStartPenge(int)}.
-     *
-     * @param startFelt         Spillerens start position
-     * @param antalFelter       Hvor mange felter spilleren rykker frem
-     * @param totalAntalFelter  Hvor mange felter der paa braettet i alt
-     * @return Om spilleren passerer start eller ej.
-     */
-    public static boolean passererSpillerStart( int startFelt, int antalFelter, int totalAntalFelter){
-        return antalGangeOverStart(startFelt, antalFelter, totalAntalFelter) > 0;
-    }
 
 
     /**
@@ -57,21 +40,32 @@ public class BevaegelsesLogik {
 
     /**
      * @author Malte
-     * Beregner hvilket felt man lander på hvis man rykker 'antalFelter'.     *
+     * Beregner hvilket felt man lander på hvis man rykker 'antalFelter'.
      *
      * @param braet         Liste over alle felterne
      * @param startFelt     Feltet man start paa
-     * @param antalFelter   Hvor mange felter man rykker
+     * @param antalFelter   Hvor mange felter man rykker. Man kan både rykke forlæns (positiv antalFelter) og baglæns (negativ antal felter)
      * @return              Det felt man ender paa efter at rykke antalFelter
      */
-    public static FeltDTO beregnEndeligtFelt( FeltDTO[] braet, FeltDTO startFelt, int antalFelter ){
-
+    public static Felt beregnEndeligtFelt( Felt[] braet, Felt startFelt, int antalFelter ){
+        int endeligtFeltNr;
         int totalAntalFelter = braet.length;
         int startFeltNr = startFelt.getPlacering();
-        int endeligtFeltNr = ( startFeltNr + antalFelter ) % totalAntalFelter;
+
+        // Beregninger
+        int totalFelt = startFeltNr + antalFelter;
+        int reduceret = totalFelt % totalAntalFelter; // Reducerer hvis man når hele vejen rundt om pladen.
+
+        if( reduceret < 0 ){
+            // Man er rykket så langt tilbage at man er gået baglæns over start
+            endeligtFeltNr = totalAntalFelter + reduceret;
+        } else {
+            endeligtFeltNr = reduceret;
+        }
 
         return braet[endeligtFeltNr];
     }
+
 
 
 
