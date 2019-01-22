@@ -58,7 +58,8 @@ public class BeregnLeje {
 
     /**
      * @author Andreas
-     * Beregner den leje som skal betales, når en spiller lander på en andens bryggeri.
+     * Beregner den leje som skal betales, når en spiller lander på en andens bryggeri. Bryggeri er ikke en parameter
+     * da lejenn alene afhænger af terningekastet.
      * @param terningeKast
      * @param ejer
      * @return
