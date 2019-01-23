@@ -31,7 +31,7 @@ public class FeltGenerator {
         //----------------------------------------Brættet---------------------------------------//
         felter[0] = new StartFelt(0);
 
-        ejendomsGruppe = new Ejendomsgruppe( Color.blue );
+        ejendomsGruppe = new Ejendomsgruppe( new Color(100,100,255) );
 
         ejendom = new Ejendom("Rødovrevej",60,2,1);
         ejendom.setLejeHus(10,30,90,160);

@@ -306,13 +306,14 @@ public void betaltKauktion(Spiller spiller){gui.visTekst("Det var den rigtige be
     @Override
     public int vaelgEjendom( ArrayList<Ejendom> ejendomme ) {
 
-        String[] ejendomsListe = new String[ejendomme.size()];
+        String[] ejendomsListe = new String[ejendomme.size()+1];
 
-        for (int i = 0; i < ejendomsListe.length; i++){
+        for (int i = 0; i < ejendomme.size(); i++){
             ejendomsListe[i] = ejendomme.get(i).getNavn();
         }
 
-        return gui.vaelgListe("Hvilken ejendom vil du bygge paa? ",ejendomsListe);
+        ejendomsListe[ejendomme.size()] = "Tilbage";
+        return gui.vaelgListe("Vælg ejendom? ",ejendomsListe);
     }
 
 
